@@ -1,0 +1,28 @@
+RewriteEngine on
+
+# Some redirects
+Redirect /fb http://www.facebook.com/daaniel
+Redirect /ms http://www.myspace.com/daniel_1515
+# Shortened URLs
+Redirect /ldr http://dan.cx/blog/2009/12/the-story-of-a-long-distance-relationship/
+
+# Blog short URLs - http://dan.cx/b[id]
+RewriteRule ^b([a-z0-9]+)$ blog-redirect.php?id=$1
+RewriteRule ^B([A-Za-z0-9\-_]+)$ blog-redirect.php?ver=2&id=$1
+
+# Make sure we're using the correct domain
+RewriteCond %{HTTP_HOST}   !^dan\.cx [NC]
+RewriteCond %{HTTP_HOST}   !^dev\.dan\.cx [NC]
+RewriteCond %{HTTP_HOST}   !^ss\.dan\.cx [NC]
+RewriteCond %{HTTP_HOST}   !^localhost [NC]
+RewriteCond %{HTTP_HOST}   !^dev\.dan\.cx [NC]
+RewriteCond %{HTTP_HOST}   !^$
+# This can't be redirected.
+RewriteCond %{REQUEST_FILENAME} !google61623b5951d83a31.html
+RewriteRule ^(.*)         http://dan.cx/$1 [L,R=permanent]
+
+# Allow any files or directories that exist to be displayed directly
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Otherwise, we're going to the CMS
+RewriteRule ^(.+).htm$ index.php/$1 [L]
