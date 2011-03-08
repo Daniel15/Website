@@ -1,0 +1,22 @@
+/* Daniel15 v4
+ * Show column on right-hand side
+ *
+ * (c) 2008 Daniel15.
+ * Some portions based off http://www.maxdesign.com.au/presentation/two-columns/index.htm
+ */
+ 
+div#main-container
+{
+	background-position: right;
+}
+
+div#sidebar
+{
+	float: right;
+	margin-right: 10px;
+}
+
+div#content
+{
+	margin: 0 210px 0 1em;
+}

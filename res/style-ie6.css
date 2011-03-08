@@ -1,0 +1,71 @@
+/* Daniel15 v4
+ * Internet Explorer 6 hacks >_<
+ * Death to IE6! If you're using IE6, get Opera from http://www.opera.com/ !
+ *
+ * (c) 2008 Daniel15.
+ */
+ 
+
+/* Span used for glossy overlay */
+h2 span
+{
+	background: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy.png', sizingMethod='scale');
+}
+
+div#sidebar h2 span
+{
+	background: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy-sidebar.png', sizingMethod='scale');
+}
+
+div#header
+{
+	position: relative;
+}
+
+div#header h1
+{
+	position: absolute;
+	left: 0;
+	right: 0;
+	
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/header_fade.png', sizingMethod='scale');
+	background: none;
+}
+
+ul#nav
+{
+	right: 0;
+}
+
+div#footer
+{
+	background: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/footer_fade.png', sizingMethod='scale');
+	height: 40px;
+}
+
+/*
+ * Below are OLD HACKS 
+ * TODO: Check if these are still needed.
+ */
+
+ 
+/* I couldn't figure this out... IE6 seems to be screwing up the paddings for some reason */
+div#sidebar
+{
+	margin-left: 5px;
+}
+
+/* Not sure if this bug has a name... I call it the "IE6 makes lis way too big" bug. :P */
+div#sidebar ul li
+{
+	height: 1%;
+}
+
+/* This will do, I guess... Stupid IE6 */
+div#sidebar ul li a
+{
+	width: 90%;
+}

@@ -1,0 +1,12 @@
+/* Daniel15 v4 revision 2.1
+ * Internet Explorer 7 hacks
+ *
+ * (c) 2010 Daniel15.
+ */
+
+/* This is needed because otherwise, the header wraps to the next line and doesn't display. */
+ul#nav
+{
+	position: absolute;
+	right: 5%;
+}

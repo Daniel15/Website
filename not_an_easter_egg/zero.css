@@ -1,0 +1,53 @@
+/**
+ * Aha, you found it. You nostalgia, you lose.
+ * In case you don't know, this is a theme that was included in Frontpage 2000.
+ * :D
+ */
+@import url(zero/zero1111.css);
+
+div#content:before
+{
+	content: '<blink>FRONTPAGE IS AWESOME</blink>';
+	text-decoration: blink;
+}
+
+h1
+{
+	position: relative;
+	top: -80px;
+	text-align: center;
+	background: url(zero/zerbana.gif);
+	height: 60px;
+	line-height: 60px;
+	color: white;
+	font-weight: bold;
+}
+
+ul#nav
+{
+	list-style-type: none;
+	position: relative;
+	top: 60px;
+}
+
+ul#nav li
+{
+	display: inline-block;
+	background: url(zero/zernavha.gif);
+	width: 140px;
+	height: 60px;
+	line-height: 60px;
+	text-align: center;
+}
+
+ul#nav li:hover
+{
+	background: url(zero/zernavhh.gif);
+}
+
+ul#nav li a
+{
+	color: white;
+	text-decoration: none;
+	display: block;
+}

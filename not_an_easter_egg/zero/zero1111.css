@@ -1,0 +1,83 @@
+.mstheme     { nav-banner-image: url(zerbana.gif); separator-image: url(zerrulea.gif); 
+               list-image-1: url(zerbul1a.gif); list-image-2: 
+               url(zerbul2a.gif); list-image-3: url(zerbul3a.gif); 
+               navbutton-horiz-pushed: url(zernavhe.gif); 
+               navbutton-horiz-normal: url(zernavha.gif); 
+               navbutton-horiz-hovered: url(zernavhh.gif); 
+               navbutton-vert-pushed: url(zernavve.gif); 
+               navbutton-vert-normal: url(zernavva.gif); 
+               navbutton-vert-hovered: url(zernavvh.gif); 
+               navbutton-home-normal: url(zerhoma.gif); 
+               navbutton-home-hovered: url(zerhomh.gif); 
+               navbutton-home-pushed: url(zerhoma.gif); navbutton-up-normal: 
+               url(zerupa.gif); navbutton-up-hovered: url(zeruph.gif); 
+               navbutton-up-pushed: url(zerupa.gif); navbutton-prev-normal: 
+               url(zerprea.gif); navbutton-prev-hovered: url(zerpreh.gif); 
+               navbutton-prev-pushed: url(zerprea.gif); 
+               navbutton-next-normal: url(zernxta.gif); 
+               navbutton-next-hovered: url(zernxth.gif); 
+               navbutton-next-pushed: url(zernxta.gif) }
+.mstheme-bannertxt { font-family: Arial, Arial, Helvetica; font-size: 6; font-weight: bold; 
+               vertical-align: bottom; color: rgb(255,255,255) }
+.mstheme-horiz-navtxt { font-family: Arial, Arial, Helvetica; font-size: 2; color: rgb(255,255,255) }
+.mstheme-vert-navtxt { font-family: Arial, Arial, Helvetica; font-size: 2; color: rgb(255,255,255) }
+.mstheme-navtxthome { font-family: Arial, Arial, Helvetica; font-size: 1; color: rgb(255,255,255) }
+.mstheme-navtxtup { font-family: Arial, Arial, Helvetica; font-size: 1; color: rgb(255,255,255) }
+.mstheme-navtxtprev { font-family: Arial, Arial, Helvetica; font-size: 1; color: rgb(255,255,255) }
+.mstheme-navtxtnext { font-family: Arial, Arial, Helvetica; font-size: 1; color: rgb(255,255,255) }
+ul           { list-style-image: url('zerbul1a.gif') }
+ul ul        { list-style-image: url('zerbul2a.gif') }
+ul ul ul     { list-style-image: url('zerbul3a.gif') }
+a:link       { color: rgb(102,153,102) }
+a:visited    { color: rgb(102,153,204) }
+a:active     { color: rgb(153,153,153) }
+body         { color: rgb(255,255,255); background-color: rgb(0,0,0) }
+h1           { color: rgb(102,153,204) }
+h2, marquee  { color: rgb(102,153,204) }
+h3           { color: rgb(102,153,204) }
+h4           { color: rgb(102,153,204) }
+h5           { color: rgb(102,153,204) }
+h6           { color: rgb(102,153,204) }
+button       { background-color: rgb(102,153,204); color: white; border-color: 
+               rgb(204,204,204) }
+label, .MSTHEME-LABEL { color: rgb(255,255,255) }
+textarea     { color: black; border-color: rgb(102,102,102) }
+fieldset     { color: white; border-color: rgb(102,102,102) }
+legend       { color: rgb(102,153,204) }
+select       { color: black; border-color: rgb(102,102,102) }
+table        { table-border-color-light: rgb(204,204,204); table-border-color-dark: 
+               rgb(102,102,102); color: rgb(255,255,255); border-color: 
+               rgb(102,102,102) }
+caption      { color: rgb(102,153,204) }
+th           { color: rgb(255,255,255) }
+hr           { color: rgb(102,153,204) }
+td           { border-color: rgb(102,102,102) }
+.mstheme     { navbutton-background-color: rgb(0,0,0); top-bar-button: url(zerglobd.gif) }
+.mstheme-topbar-font { font-family: Arial, Arial, Helvetica; font-size: 1; color: rgb(255,255,255) }
+body         { font-family: Arial, Arial, Helvetica; background-image: url('zertxtr.gif') }
+h1           { font-family: Arial, Arial, Helvetica; font-weight: normal; font-style: normal; 
+               font-size: 24pt }
+h2           { font-family: Arial, Arial, Helvetica; font-weight: normal; font-style: normal; 
+               font-size: 18pt }
+h3           { font-family: Arial, Arial, Helvetica; font-weight: normal; font-style: normal; 
+               font-size: 14pt }
+h4           { font-family: Arial, Arial, Helvetica; font-weight: normal; font-style: normal; 
+               font-size: 12pt }
+h5           { font-family: Arial, Arial, Helvetica; font-weight: normal; font-style: normal; 
+               font-size: 10pt }
+h6           { font-family: Arial, Arial, Helvetica; font-weight: normal; font-style: normal; 
+               font-size: 8pt }
+button       { font-size: 8pt; font-family: Arial, Arial, Helvetica; font-style: normal; 
+               border-style: solid; border-width: 1pt }
+label, .MSTHEME-LABEL { font-size: 8pt; font-family: Arial, Arial, Helvetica; font-style: normal }
+textarea     { font-size: 8pt; font-family: Arial, Arial, Helvetica; font-style: normal; 
+               border-style: solid; border-width: 1pt }
+fieldset     { font-size: 8pt; font-family: Arial, Arial, Helvetica; font-style: normal; 
+               border-style: solid; border-width: 1pt }
+legend       { font-size: 8pt; font-family: Arial, Arial, Helvetica; font-style: normal }
+select       { font-size: 8pt; font-family: Arial, Arial, Helvetica; font-style: normal; 
+               border-style: solid; border-width: 1pt }
+table        { font-family: Arial, Arial, Helvetica; font-style: normal }
+caption      { font-size: 14pt; font-family: Arial, Arial, Helvetica; font-style: normal }
+th           { font-family: Arial, Arial, Helvetica; font-style: normal }
+marquee      { font-size: 14pt; font-family: Arial, Arial, Helvetica }

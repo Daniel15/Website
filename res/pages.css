@@ -1,0 +1,190 @@
+/******************************** Index page **********************************/
+div#sidebar ul#minifeed li
+{
+	border-bottom: 1px solid #D2E8F7;
+	font-size: 0.8em;
+	margin-bottom: 0.2em;
+}
+
+div#sidebar ul#minifeed li a
+{
+	display: inline;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+div#sidebar ul#minifeed .meta
+{
+	height: 0;
+	overflow: hidden;
+}
+
+div#sidebar ul#minifeed .meta li
+{
+	display: inline;
+	font-size: 1em;
+	color: #888;
+	/*border-right: 1px solid;
+	padding: 0 0.5em;*/
+	border-bottom: 0;
+}
+
+div#sidebar ul#minifeed .meta .subtext 
+{
+	display: none;
+}
+
+ul#blog-posts 
+{
+	padding: 0;
+}
+
+ul#blog-posts li
+{
+	list-style-type: none;
+}
+
+ul#blog-posts span.date
+{
+	float: left;
+	width: 9em;
+	text-align: right;
+	padding-right: 1em;
+}
+
+/********************************* Feed page **********************************/
+ul#socialfeed, ul#socialfeed ul
+{
+	margin: 0;
+	padding: 0;	
+}
+
+ul#socialfeed li
+{
+	border-bottom: 1px solid #D2E8F7;
+	margin-bottom: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+ul#socialfeed ul.meta
+{
+	color: #666;
+	font-size: 0.9em;
+	/*margin-top: 0.6em;*/
+}
+
+ul#socialfeed ul.meta li
+{
+	border-bottom: 0;
+	display: inline;
+}
+
+ul#socialfeed ul.meta li:after, ul#minifeed ul.meta li:after
+{
+	content: " - ";
+}
+
+ul#socialfeed ul.meta li:last-child:after, ul#minifeed ul.meta li:last-child:after
+{
+	content: "";
+}
+
+ul#socialfeed .meta/*, ul#minifeed .meta*/
+{
+	padding-left: 20px;
+	background-repeat: no-repeat;
+	background-position: left middle;
+}
+
+ul#minifeed li.feeditem
+{
+	text-indent: 20px;
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+
+ul#minifeed .meta
+{
+	margin-left: -20px;
+}
+
+/* TODO: Clean this up! It's ugly :( */
+ul#socialfeed li.source-twitter .meta, ul#minifeed li.source-twitter { background-image: url(icons/social/twitter.gif); }
+ul#socialfeed li.source-pinboard .meta, ul#minifeed li.source-pinboard { background-image: url(icons/social/pinboard.gif); }
+ul#socialfeed li.source-rss .meta, ul#minifeed li.source-rss { background-image: url(icons/social/rss.png); }
+ul#socialfeed li.source-lastfm .meta, ul#minifeed li.source-lastfm { background-image: url(icons/social/lastfm.png); }
+ul#socialfeed li.source-youtube .meta, ul#minifeed li.source-youtube { background-image: url(icons/social/youtube.png); }
+ul#socialfeed li.source-foursquare .meta, ul#minifeed li.source-foursquare { background-image: url(icons/social/foursquare.png); }
+ul#socialfeed li.source-stumbleupon .meta, ul#minifeed li.source-stumbleupon { background-image: url(icons/social/stumbleupon.png); }
+
+
+/****************************** Projects page *********************************/
+ul.projects
+{
+	list-style-type: none;
+	padding: 0;
+}
+
+ul.projects li
+{
+	/* Clear the thumbnail float */
+	overflow: auto; 
+	padding-bottom: 1em;
+	border-bottom: 1px dashed #CCC;
+}
+
+ul.projects h3
+{
+	margin: 0;
+}
+
+ul.projects img.thumb
+{
+	float: right;
+	border: 1px solid #999;
+	margin: 0.5em;
+	padding: 2px;
+}
+
+div#tech-info
+{
+	display: none;
+}
+
+div#sidebar ul li.active
+{
+	font-weight: bold;
+}
+
+
+/*ul.projects li:nth-child(odd) img.thumb
+{
+	float: left;
+}*/
+
+
+/******************************************************************************/
+/* Tips */
+div.tip-wrap
+{
+	/* Hide by default */
+	display: none;
+}
+
+div.tip
+{
+	background: white;
+	border: 1px solid black;
+	padding: 0.5em;
+}
+
+div.tip-title
+{
+	font-weight: bold;
+}
+
+div.tip-text
+{
+	font-size: x-small;
+}
