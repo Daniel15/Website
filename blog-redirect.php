@@ -1,7 +1,7 @@
 <?php
 if (isset($_GET['ver']) && $_GET['ver'] == 2)
 {
-	require('lib/shortener.php');
+	require_once('lib/shortener.php');
 	$id = Shortener::alias_to_id($_GET['id']);
 }
 else

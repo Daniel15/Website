@@ -111,8 +111,7 @@ div#content
 	margin: 0 15px 0 215px;
 	overflow: hidden;
 	/*padding-top: 1em;*/
-	/* Bug fix: Stuff was getting chopped off slightly on the blog 
-*/
+	/* Bug fix: Stuff was getting chopped off slightly on the blog */
 	padding-right: 8px;
 }
 

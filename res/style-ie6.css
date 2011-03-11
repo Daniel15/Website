@@ -1,11 +1,10 @@
 /* Daniel15 v4
  * Internet Explorer 6 hacks >_<
- * Death to IE6! If you're using IE6, get Opera from http://www.opera.com/ !
+ * Death to IE6! If you're using IE6, get Opera from http://www.opera.com/!
  *
  * (c) 2008 Daniel15.
  */
  
-
 /* Span used for glossy overlay */
 h2 span
 {
@@ -13,10 +12,21 @@ h2 span
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy.png', sizingMethod='scale');
 }
 
+h3 span
+{
+	background: none;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy2.png', sizingMethod='scale');
+}
+
 div#sidebar h2 span
 {
 	background: none;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy-sidebar.png', sizingMethod='scale');
+}
+
+ul.projects h3 span
+{
+	width: 400px;
 }
 
 div#header
