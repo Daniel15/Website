@@ -1,5 +1,5 @@
 <?php
-$output_filename = '/home/daniel15/cms/data/blog_posts';
+$output_filename = 'cms/data/blog_posts';
 $xml = simplexml_load_file('http://feeds.d15.biz/daniel15');
 $output = array();
 

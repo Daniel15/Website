@@ -15,7 +15,7 @@ RewriteCond %{HTTP_HOST}   !^dan\.cx [NC]
 RewriteCond %{HTTP_HOST}   !^dev\.dan\.cx [NC]
 RewriteCond %{HTTP_HOST}   !^ss\.dan\.cx [NC]
 RewriteCond %{HTTP_HOST}   !^localhost [NC]
-RewriteCond %{HTTP_HOST}   !^dev\.dan\.cx [NC]
+RewriteCond %{HTTP_HOST}   !^staging\.dan\.cx [NC]
 RewriteCond %{HTTP_HOST}   !^$
 # This can't be redirected.
 RewriteCond %{REQUEST_FILENAME} !google61623b5951d83a31.html
