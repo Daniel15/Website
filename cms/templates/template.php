@@ -41,8 +41,12 @@ if ($this->lastModified != 0)
 ?>
 	
 	<!-- Some general stylesheets for d15.biz -->
+<?php if ($this->enableCompression) : ?>
+	<link title="dan.cx combined stylesheet" rel="stylesheet" href="res/<?php echo $this->cssFile ?>" type="text/css" media="screen" id="default-stylesheet" />
+<?php else : ?>
 	<link title="d15.biz stylesheet" rel="stylesheet" href="res/style_r2.css?v=2.2" type="text/css" media="screen" id="default-stylesheet" />
 	<link rel="stylesheet" href="res/pages.css?v=3.0.1" type="text/css" />
+<?php endif; ?>
 	<link rel="stylesheet" href="res/print.css" type="text/css" media="print"  />
 	<!--[if lt IE 8]><link rel="stylesheet" href="res/style-ie7.css" type="text/css" /><![endif]-->
 	<!--[if lt IE 7]><link rel="stylesheet" href="res/style-ie6.css" type="text/css" /><![endif]-->
@@ -111,8 +115,12 @@ if ($this->lastModified != 0)
 	</div>
 	<!-- Now for the JS -->
 	<script src="http://ajax.googleapis.com/ajax/libs/mootools/1.3.0/mootools-yui-compressed.js" type="text/javascript"></script>
+<?php if ($this->enableCompression) : ?>
+	<script src="res/<?php echo $this->jsFile ?>" type="text/javascript"></script>
+<?php else: ?>
 	<script src="res/mootools-more-1.3.0.1.js" type="text/javascript"></script>
 	<script src="res/scripts_r1.js" type="text/javascript"></script>
+<?php endif; ?>
 <?php
 if (!empty($this->js))
 	echo '

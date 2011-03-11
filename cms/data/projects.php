@@ -11,7 +11,7 @@ $techs = array(
 		'name' => 'CMS Made Simple',
 		'icon' => 'cmsms',
 		'url' => 'http://www.cmsmadesimple.org/',
-		'desc' => '<p><a href="http://cmsmadesimple.org/">CMS Made Simple</a> is a reasonably simple CMS (Content Management System) that works very well for small to medium websites. I\'ve used it in the past for a few of my sites, and also for people I\\\'ve created websites for.</p>',
+		'desc' => '<p><a href="http://cmsmadesimple.org/">CMS Made Simple</a> is a reasonably simple CMS (Content Management System) that works very well for small to medium websites. I\'ve used it in the past for a few of my sites, and also for people I\'ve created websites for.</p>',
 	),
 	'css' => array(
 		'name' => 'CSS',
