@@ -117,6 +117,7 @@ ul#socialfeed li.source-lastfm .meta, ul#minifeed li.source-lastfm { background-
 ul#socialfeed li.source-youtube .meta, ul#minifeed li.source-youtube { background-image: url(icons/social/youtube.png); }
 ul#socialfeed li.source-foursquare .meta, ul#minifeed li.source-foursquare { background-image: url(icons/social/foursquare.png); }
 ul#socialfeed li.source-stumbleupon .meta, ul#minifeed li.source-stumbleupon { background-image: url(icons/social/stumbleupon.png); }
+ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit { background-image: url(icons/social/reddit.png); }
 
 
 /****************************** Projects page *********************************/
