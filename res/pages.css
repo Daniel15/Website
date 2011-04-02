@@ -53,6 +53,46 @@ ul#blog-posts span.date
 	padding-right: 1em;
 }
 
+/* Social networking links */
+.social strong:first-child
+{
+	float: left;
+}
+
+.social ul
+{
+	margin: 0 0 0 0.5em;
+	padding: 0;
+	float: left;
+}
+.social li
+{
+	/*display: inline-block;
+	width: 16px;
+	height: 16px;*/
+	display: inline;
+	overflow: hidden;
+}
+
+.social li a
+{
+	background-repeat: none;
+	text-indent: -9999px;
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+}
+
+/*
+.social a
+{
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+	text-indent: -9999px;
+}
+*/
+
 /********************************* Feed page **********************************/
 ul#socialfeed, ul#socialfeed ul
 {
@@ -71,7 +111,7 @@ ul#socialfeed ul.meta
 {
 	color: #666;
 	font-size: 0.9em;
-	/*margin-top: 0.6em;*/
+	height: 16px;
 }
 
 ul#socialfeed ul.meta li
@@ -99,26 +139,17 @@ ul#socialfeed .meta/*, ul#minifeed .meta*/
 
 ul#minifeed li.feeditem
 {
-	text-indent: 20px;
 	background-repeat: no-repeat;
 	background-position: left top;
 }
 
-ul#minifeed .meta
+ul#minifeed .icon
 {
-	margin-left: -20px;
+	width: 16px;
+	height: 16px;
+	float: left;
+	margin-right: 4px;
 }
-
-/* TODO: Clean this up! It's ugly :( */
-ul#socialfeed li.source-twitter .meta, ul#minifeed li.source-twitter { background-image: url(icons/social/twitter.gif); }
-ul#socialfeed li.source-pinboard .meta, ul#minifeed li.source-pinboard { background-image: url(icons/social/pinboard.gif); }
-ul#socialfeed li.source-rss .meta, ul#minifeed li.source-rss { background-image: url(icons/social/rss.png); }
-ul#socialfeed li.source-lastfm .meta, ul#minifeed li.source-lastfm { background-image: url(icons/social/lastfm.png); }
-ul#socialfeed li.source-youtube .meta, ul#minifeed li.source-youtube { background-image: url(icons/social/youtube.png); }
-ul#socialfeed li.source-foursquare .meta, ul#minifeed li.source-foursquare { background-image: url(icons/social/foursquare.png); }
-ul#socialfeed li.source-stumbleupon .meta, ul#minifeed li.source-stumbleupon { background-image: url(icons/social/stumbleupon.png); }
-ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit { background-image: url(icons/social/reddit.png); }
-
 
 /****************************** Projects page *********************************/
 ul.projects

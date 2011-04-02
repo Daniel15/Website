@@ -438,6 +438,8 @@ var SocialFeed = new Class(
 			
 			//itemEl.store('date', item.date);
 			
+			new Element('div', {'class': 'icon'}).inject(itemEl, 'top');
+			
 			// Are we showing the description?
 			if (this.options.showDescription && item.description)
 			{

@@ -8,6 +8,8 @@
  * Some portions based off http://www.maxdesign.com.au/presentation/two-columns/index.htm and http://matthewjamestaylor.com/blog/ultimate-2-column-left-menu-pixels.htm
  */
  
+@media screen
+{
 /* General styles */
 body
 {
@@ -428,4 +430,5 @@ body.col-none div#content_wrap
 body.col-none div#colright
 {
 	left: 0;
+}
 }

@@ -37,12 +37,14 @@ $this->sidebar = '
 					<!--li><strong>Yahoo! Messenger</strong> &mdash; dan15@y7mail.com</li>
 					<li><strong>AIM</strong> &mdash; daniel15au</li-->
 					<li class="social">
-						<strong>Social networking sites:</strong>
-						<a href="http://www.facebook.com/daaniel" title="Facebook"><img src="http://dan.cx/blog/wp-content/plugins/sociable/images/facebook.png" alt="Facebook" /></a>
-						<a href="http://www.myspace.com/daniel_1515" title="MySpace"><img src="http://dan.cx/blog/wp-content/plugins/sociable/images/myspace.png" alt="MySpace" /></a>
-						<a href="http://www.twitter.com/daniel15" title="Twitter"><img src="http://dan.cx/blog/wp-content/plugins/sociable/images/twitter.png" alt="Twitter" /></a>
-						<a href="http://www.digg.com/daniel15" title="Digg"><img src="http://dan.cx/blog/wp-content/plugins/sociable/images/digg.png" alt="Digg" /></a>
-						<a href="http://last.fm/user/daniel_1515" title="Last.fm"><img src="images/social_icons/lastfm.png" alt="Last.fm" /></a>
+						<strong>Social networking (and other) sites:</strong>
+						
+						<ul>
+							<li class="facebook"><a title="Facebook" href="http://www.facebook.com/daaniel">Facebook</a></li>
+							<li class="twitter"><a title="Twitter" href="http://www.twitter.com/daniel15">Twitter</a></li>
+							<li class="reddit"><a title="Reddit" href="http://reddit.com/user/daniel15">Reddit</a></li>
+							<li class="lastfm"><a title="Last.fm" href="http://last.fm/user/daniel_1515">Last.fm</a></li>
+						</ul>
 					</li>
 				</ul>
 

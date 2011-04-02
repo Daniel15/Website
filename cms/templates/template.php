@@ -14,7 +14,7 @@ $menu = array(
 	'blog/category/microblog/' => 'Thoughts',
 );
 $dirname = dirname($_SERVER['SCRIPT_NAME']);
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en" lang="en">
 <head>
 	<title><?php echo (empty($this->title) ? '' : $this->title . ' &mdash; '); ?>Daniel15</title>
@@ -42,12 +42,13 @@ if ($this->lastModified != 0)
 	
 	<!-- Some general stylesheets for d15.biz -->
 <?php if ($this->enableCompression) : ?>
-	<link title="dan.cx combined stylesheet" rel="stylesheet" href="res/<?php echo $this->cssFile ?>" type="text/css" media="screen" id="default-stylesheet" />
+	<link title="dan.cx combined stylesheet" rel="stylesheet" href="res/<?php echo $this->cssFile ?>" type="text/css" id="default-stylesheet" />
 <?php else : ?>
 	<link title="d15.biz stylesheet" rel="stylesheet" href="res/style_r2.css?v=2.2" type="text/css" media="screen" id="default-stylesheet" />
 	<link rel="stylesheet" href="res/pages.css?v=3.0.1" type="text/css" />
-<?php endif; ?>
+	<link rel="stylesheet" href="res/sprites-processed.css" type="text/css" />
 	<link rel="stylesheet" href="res/print.css" type="text/css" media="print"  />
+<?php endif; ?>
 	<!--[if lt IE 8]><link rel="stylesheet" href="res/style-ie7.css" type="text/css" /><![endif]-->
 	<!--[if lt IE 7]><link rel="stylesheet" href="res/style-ie6.css" type="text/css" /><![endif]-->
 	<!-- Other stuff -->

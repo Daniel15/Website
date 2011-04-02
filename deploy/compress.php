@@ -1,6 +1,13 @@
 <?php
 abstract class Compressor
 {
+	protected $_inputDir;
+	
+	public function __construct($inputDir)
+	{
+		$this->_inputDir = $inputDir;
+	}
+	
 	abstract public function compress($file);
 	public function compressFiles($files)
 	{
@@ -10,9 +17,10 @@ abstract class Compressor
 		
 		foreach ($files as $file)
 		{
-			$output .= "\n\n/* Begin " . pathinfo($file, PATHINFO_BASENAME) . ', modified '
-				. date('Y-m-d G:i', filemtime($file)) . ' (md5=' . md5_file($file) . ") */\n";
-			$output .= $this->compress($file);
+			$fullPath = $this->_inputDir . $file;
+			$output .= "\n\n/* Begin " . $file . ', modified '
+				. date('Y-m-d G:i', filemtime($fullPath)) . ' (md5=' . md5_file($fullPath) . ") */\n";
+			$output .= $this->compress($fullPath);
 		}
 		
 		return $output;
@@ -71,13 +79,13 @@ $outputDir = $directory . $outputDirBase;
 
 @mkdir($outputDir, null, true);
 
-$jsFiles = array($directory . 'mootools-more-1.3.0.1.js', $directory . 'scripts_r1.js');
-$cssFiles = array($directory . 'style_r2.css', $directory . 'pages.css');
+$jsFiles = array('mootools-more-1.3.0.1.js', 'scripts_r1.js');
+$cssFiles = array('style_r2.css', 'pages.css', 'sprites-processed.css', 'print.css');
 
-$jsCompress = new Compressor_JS();
+$jsCompress = new Compressor_JS($directory);
 file_put_contents($outputDir . $basename . '.js', $jsCompress->compressFiles($jsFiles));
 
-$cssCompress = new Compressor_CSS();
+$cssCompress = new Compressor_CSS($directory);
 file_put_contents($outputDir . $basename . '.css', $cssCompress->compressFiles($cssFiles));
 
 if (empty($siteData))
