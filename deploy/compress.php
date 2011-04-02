@@ -64,7 +64,7 @@ class Compressor_CSS extends Compressor
 		);
 		
 		$file = $this->webRequest('http://vps.dan.cx/compress.php', $postData);
-		$file = str_replace('url(', 'url(../../../', $file);
+		$file = preg_replace('~url\(([\'"]?)~', 'url($1../../../', $file);
 		return $file;
 	}
 }
@@ -80,7 +80,14 @@ $outputDir = $directory . $outputDirBase;
 @mkdir($outputDir, null, true);
 
 $jsFiles = array('mootools-more-1.3.0.1.js', 'scripts_r1.js');
-$cssFiles = array('style_r2.css', 'pages.css', 'sprites-processed.css', 'print.css');
+$cssFiles = array(
+	// Main stylesheets
+	'style_r2.css', 'pages.css', 'sprites-processed.css', 
+	// Print stylesheets
+	'print.css',
+	// IE hacks
+	'style-ie6.css', 'style-ie7.css', 'style-ie8.css'
+);
 
 $jsCompress = new Compressor_JS($directory);
 file_put_contents($outputDir . $basename . '.js', $jsCompress->compressFiles($jsFiles));

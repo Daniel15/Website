@@ -14,8 +14,13 @@ $menu = array(
 	'blog/category/microblog/' => 'Thoughts',
 );
 $dirname = dirname($_SERVER['SCRIPT_NAME']);
+//<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en" lang="en">
 ?><!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="en" lang="en">
+<!--[if lt IE 7 ]> <html lang="en" class="ie ie6 ielt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie ie7 ielt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="non-ie"> <!--<![endif]-->
 <head>
 	<title><?php echo (empty($this->title) ? '' : $this->title . ' &mdash; '); ?>Daniel15</title>
 	<base href="http://<?php echo $_SERVER['HTTP_HOST']; ?><?php echo $dirname, $dirname == '/' ? '' : '/'; ?>" />
@@ -40,17 +45,17 @@ if ($this->lastModified != 0)
 }
 ?>
 	
-	<!-- Some general stylesheets for d15.biz -->
 <?php if ($this->enableCompression) : ?>
 	<link title="dan.cx combined stylesheet" rel="stylesheet" href="res/<?php echo $this->cssFile ?>" type="text/css" id="default-stylesheet" />
 <?php else : ?>
+	<!-- Some general stylesheets for d15.biz -->
 	<link title="d15.biz stylesheet" rel="stylesheet" href="res/style_r2.css?v=2.2" type="text/css" media="screen" id="default-stylesheet" />
 	<link rel="stylesheet" href="res/pages.css?v=3.0.1" type="text/css" />
 	<link rel="stylesheet" href="res/sprites-processed.css" type="text/css" />
 	<link rel="stylesheet" href="res/print.css" type="text/css" media="print"  />
-<?php endif; ?>
 	<!--[if lt IE 8]><link rel="stylesheet" href="res/style-ie7.css" type="text/css" /><![endif]-->
 	<!--[if lt IE 7]><link rel="stylesheet" href="res/style-ie6.css" type="text/css" /><![endif]-->
+<?php endif; ?>
 	<!-- Other stuff -->
 	<link rel="start" href="/" title="Home" />
 <?php

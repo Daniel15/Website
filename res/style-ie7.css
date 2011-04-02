@@ -5,8 +5,35 @@
  */
 
 /* This is needed because otherwise, the header wraps to the next line and doesn't display. */
-ul#nav
+.ie7 ul#nav
 {
 	position: absolute;
 	right: 5%;
+}
+
+/* Hacks for social networking links. I can't seem to get the nice inline icons
+ * working in IE 6 and 7, so they'll have to be a normal list for now.
+ */
+.ielt8 #site-home .social strong:first-child
+{
+	float: none;
+}
+
+.ielt8 #site-home .social ul
+{
+	float: none;
+	margin: 0 0 0 2em;
+}
+
+.ielt8 #site-home .social li
+{
+	float: none;
+	display: block;
+}
+
+.ielt8 #site-home .social li a
+{
+	width: 90%;
+	background: none !important;
+	text-indent: 0;
 }

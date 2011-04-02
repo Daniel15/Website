@@ -6,35 +6,35 @@
  */
  
 /* Span used for glossy overlay */
-h2 span
+.ie6 h2 span
 {
 	background: none;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy.png', sizingMethod='scale');
 }
 
-h3 span
+.ie6 h3 span
 {
 	background: none;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy2.png', sizingMethod='scale');
 }
 
-div#sidebar h2 span
+.ie6 div#sidebar h2 span
 {
 	background: none;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy-sidebar.png', sizingMethod='scale');
 }
 
-ul.projects h3 span
+.ie6 ul.projects h3 span
 {
 	width: 400px;
 }
 
-div#header
+.ie6 div#header
 {
 	position: relative;
 }
 
-div#header h1
+.ie6 div#header h1
 {
 	position: absolute;
 	left: 0;
@@ -44,12 +44,12 @@ div#header h1
 	background: none;
 }
 
-ul#nav
+.ie6 ul#nav
 {
 	right: 0;
 }
 
-div#footer
+.ie6 div#footer
 {
 	background: none;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/footer_fade.png', sizingMethod='scale');
@@ -63,19 +63,19 @@ div#footer
 
  
 /* I couldn't figure this out... IE6 seems to be screwing up the paddings for some reason */
-div#sidebar
+.ie6 div#sidebar
 {
 	margin-left: 5px;
 }
 
 /* Not sure if this bug has a name... I call it the "IE6 makes lis way too big" bug. :P */
-div#sidebar ul li
+.ie6 div#sidebar ul li
 {
 	height: 1%;
 }
 
 /* This will do, I guess... Stupid IE6 */
-div#sidebar ul li a
+.ie6 div#sidebar ul li a
 {
 	width: 90%;
 }

@@ -54,27 +54,30 @@ ul#blog-posts span.date
 }
 
 /* Social networking links */
-.social strong:first-child
+#site-home .social
+{
+	overflow: hidden;
+	list-style-type: none;
+}
+
+#site-home .social strong:first-child
 {
 	float: left;
 }
 
-.social ul
+#site-home .social ul
 {
 	margin: 0 0 0 0.5em;
 	padding: 0;
 	float: left;
 }
-.social li
+#site-home .social li
 {
-	/*display: inline-block;
-	width: 16px;
-	height: 16px;*/
 	display: inline;
 	overflow: hidden;
 }
 
-.social li a
+#site-home .social li a
 {
 	background-repeat: none;
 	text-indent: -9999px;
@@ -82,16 +85,6 @@ ul#blog-posts span.date
 	height: 16px;
 	display: inline-block;
 }
-
-/*
-.social a
-{
-	width: 16px;
-	height: 16px;
-	display: inline-block;
-	text-indent: -9999px;
-}
-*/
 
 /********************************* Feed page **********************************/
 ul#socialfeed, ul#socialfeed ul
