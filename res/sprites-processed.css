@@ -5,48 +5,48 @@
 
 .social .facebook a
 {
-  background-image: url('combined/sprites/mainsprite.gif?1301740478323');
+  background-image: url('combined/sprites/mainsprite-673e54e55b1a4e9eb5cd1faa2037c60c.gif');
   background-position: left -0px;
 } 
 
 ul#socialfeed li.source-twitter .meta, ul#minifeed li.source-twitter .icon, .social .twitter a
 {
-  background-image: url('combined/sprites/mainsprite.gif?1301740478323');
+  background-image: url('combined/sprites/mainsprite-673e54e55b1a4e9eb5cd1faa2037c60c.gif');
   background-position: left -16px;
 } 
 
 ul#socialfeed li.source-pinboard .meta, ul#minifeed li.source-pinboard 
 {
-  background-image: url('combined/sprites/mainsprite.gif?1301740478323');
+  background-image: url('combined/sprites/mainsprite-673e54e55b1a4e9eb5cd1faa2037c60c.gif');
   background-position: left -32px;
 }
 ul#socialfeed li.source-rss .meta, ul#minifeed li.source-rss 
 {
-  background-image: url('combined/sprites/mainsprite.gif?1301740478323');
+  background-image: url('combined/sprites/mainsprite-673e54e55b1a4e9eb5cd1faa2037c60c.gif');
   background-position: left -48px;
 }
 ul#socialfeed li.source-lastfm .meta, ul#minifeed li.source-lastfm, .social .lastfm a 
 {
-  background-image: url('combined/sprites/mainsprite.gif?1301740478323');
+  background-image: url('combined/sprites/mainsprite-673e54e55b1a4e9eb5cd1faa2037c60c.gif');
   background-position: left -64px;
 }
 ul#socialfeed li.source-youtube .meta, ul#minifeed li.source-youtube 
 {
-  background-image: url('combined/sprites/mainsprite.gif?1301740478323');
+  background-image: url('combined/sprites/mainsprite-673e54e55b1a4e9eb5cd1faa2037c60c.gif');
   background-position: left -80px;
 }
 ul#socialfeed li.source-foursquare .meta, ul#minifeed li.source-foursquare 
 {
-  background-image: url('combined/sprites/mainsprite.gif?1301740478323');
+  background-image: url('combined/sprites/mainsprite-673e54e55b1a4e9eb5cd1faa2037c60c.gif');
   background-position: left -96px;
 }
 ul#socialfeed li.source-stumbleupon .meta, ul#minifeed li.source-stumbleupon 
 {
-  background-image: url('combined/sprites/mainsprite.gif?1301740478323');
+  background-image: url('combined/sprites/mainsprite-673e54e55b1a4e9eb5cd1faa2037c60c.gif');
   background-position: left -112px;
 }
 ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit, .social .reddit a 
 {
-  background-image: url('combined/sprites/mainsprite.gif?1301740478323');
+  background-image: url('combined/sprites/mainsprite-673e54e55b1a4e9eb5cd1faa2037c60c.gif');
   background-position: left -128px;
 }

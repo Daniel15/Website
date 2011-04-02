@@ -2,7 +2,7 @@
  * Sprites
  */
  
-/** sprite: mainsprite; sprite-image: url('combined/sprites/mainsprite.gif?${date}'); sprite-layout: vertical */
+/** sprite: mainsprite; sprite-image: url('combined/sprites/mainsprite-${md5}.gif'); sprite-layout: vertical */
 
 .social .facebook a
 {
