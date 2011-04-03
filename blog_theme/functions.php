@@ -41,7 +41,9 @@ class Daniel15Blog
 		// Remove combined JS files
 		wp_dequeue_script('soundmanager');
 		wp_dequeue_script('wpaudio');
-		wp_dequeue_script('l10n');
+		//wp_dequeue_script('l10n');
+		wp_dequeue_script('comment-reply');
+		wp_deregister_script('l10n');
 		//wp_enqueue_script('daniel15_combined', '/res/' . self::$siteData->latestBlogJS, null, null); 
 		
 		// Remove combined CSS files

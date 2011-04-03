@@ -91,6 +91,7 @@ $cssFiles = array(
 
 $blogJSFiles = array(
 	'../blog/wp-includes/js/l10n.js',
+	'../blog/wp-includes/js/comment-reply.js',
 	'../blog/wp-content/plugins/wpaudio-mp3-player/sm2/soundmanager2-nodebug-jsmin.js',
 	'../blog/wp-content/plugins/wpaudio-mp3-player/wpaudio-mootools.js',
 );
