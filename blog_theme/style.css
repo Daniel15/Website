@@ -1,0 +1,422 @@
+/*   
+Theme Name: Daniel15
+Theme URI: http://dan.cx/
+Description: Theme for Dan.cx
+Author: Daniel Lo Nigro <daniel at d15 dot biz>
+Author URI: http://dan.cx/
+Version: 4 revision 2
+*/
+
+/*
+	Only WordPress-specific stuff is in here. The bulk of the layout is in the 
+	/res/style.css file.
+	
+	TODO: Clean up the mess :(
+*/
+
+
+/* Begin Comments*/
+.alt {
+	margin: 0;
+	padding: 10px;
+	}
+	
+
+.commentlist {
+	padding: 0;
+	text-align: justify;
+	}
+
+.commentlist li {
+	margin: 15px 0 3px;
+	padding: 5px 10px 3px;
+	list-style: none;
+	}
+	
+.commentlist li .avatar { 
+	float: left;
+	border: 1px solid #eee;
+	padding: 2px;
+	margin-right: 3px;
+	background: #fff;
+	}
+
+.commentlist p {
+	margin: 10px 5px 10px 0;
+	}
+
+#commentform p {
+	margin: 5px 0;
+	}
+	
+.comment,
+.alt
+{
+	border: 1px solid #B3C0FF;
+}
+	
+.odd,
+.alt
+{
+	background-color: #f2f6fb;
+}
+
+.even {
+    background-color: white;
+}
+
+
+
+.nocomments {
+	text-align: center;
+	margin: 0;
+	padding: 0;
+	}
+
+.commentmetadata {
+	margin: 0;
+	display: block;
+	}
+/* End Comments */
+
+/* Begin Various Tags & Classes */
+acronym, abbr, span.caps {
+	cursor: help;
+	}
+
+acronym, abbr {
+	border-bottom: 1px dashed #999;
+	}
+
+blockquote {
+	margin: 15px 30px 0 10px;
+	padding-left: 20px;
+	border-left: 5px solid #ddd;
+	}
+
+blockquote cite {
+	margin: 5px 0 0;
+	display: block;
+	}
+
+.center {
+	text-align: center;
+	}
+
+hr {
+	display: none;
+	}
+
+a img {
+	border: none;
+	}
+
+.navigation {
+	display: block;
+	/*text-align: center;*/
+	/*margin-top: 10px;
+	margin-bottom: 60px;*/
+	margin-bottom: 5px;
+	}
+/* End Various Tags & Classes*/
+
+/* Begin Images */
+p img {
+	max-width: 100%;
+	/*border: 1px solid #999;*/
+	padding: 1px;
+}
+
+/*	Using 'class="alignright"' on an image will (who would've
+	thought?!) align the image to the right. And using 'class="centered',
+	will of course center the image. This is much better than using
+	align="center", being much more futureproof (and valid) */
+
+img.centered {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	}
+
+img.alignright {
+	padding: 4px;
+	margin: 0 0 2px 7px;
+	display: inline;
+	float: right;
+	}
+
+img.alignleft {
+	padding: 4px;
+	margin: 0 7px 2px 0;
+	display: inline;
+	float: left
+	}
+
+/*.alignright {
+	float: right;
+	}
+
+.alignleft {
+	float: left
+	}*/
+/* End Images */
+
+
+
+textarea#comment
+{
+	width: 100%;
+}
+
+/* Post meta data */
+div.post h2
+{
+	z-index: 2;
+	background-color: white;
+}
+
+ul.postmetadata
+{
+	margin: -10px 0 0.5em 0.5em;
+	padding: 0;
+	z-index: 1;
+}
+
+ul.postmetadata li
+{
+	list-style-type: none;
+	display: inline;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+	border-style: solid;
+	border-color: #B3C0FF;
+	border-width: 0 1px 1px 1px;
+	padding: 0.7em 0.6em 0.7em 25px;
+	margin: 0 0.1em;
+	font-size: x-small;
+	
+	background-repeat: no-repeat;
+	background-position: 5px 6px;
+}
+
+/* Icons for meta data */
+ul.postmetadata li.date { background-image: url(/res/icons/calendar_view_day.png); }
+ul.postmetadata li.comments { background-image: url(/res/icons/comments.png); }
+ul.postmetadata li.category { background-image: url(/res/icons/folder_page.png); }
+ul.postmetadata li.permalink { background-image: url(/res/icons/link.png); }
+
+.postmetadata img
+{
+	vertical-align: middle;
+}
+
+/* AddThis button */
+div.addthis_container
+{
+	float: left;
+	padding-right: 1em;
+	/* Line up with Facebook "Like" button */
+	line-height: 35px;
+}
+
+p.postmetadata
+{
+	clear: left;
+}
+
+p.tags
+{
+	clear: left;
+}
+
+/* Microblog stuff */
+/* Hide some stuff for microblogs */
+div.category-microblog h2,
+div.category-microblog span.category,
+div.category-microblog iframe,
+div.category-microblog div.addthis_container,
+div.category-microblog ul.postmetadata
+{
+	display: none;
+}
+
+div.category-microblog
+{
+	border-top: 1px solid #B3C0FF;
+}
+
+div#content div:first-child
+{
+	border-top: 0;
+}
+
+/* Microblog widget */
+li.widget_daniel15microblog li
+{
+	border-bottom: 1px solid #D2E8F7;
+	font-size: 0.8em;
+	margin-bottom: 0.2em;
+}
+
+li.widget_daniel15microblog li p
+{
+	margin: 0;
+}
+
+li.widget_daniel15microblog li span
+{
+	color: #888;
+	display: block;
+	overflow: hidden;
+	/* Hide these by default - They slide in via JS */
+	height: 0px;
+	-webkit-transition: 400ms ease;
+	-o-transition: 400ms ease;
+	-moz-transition: 400ms ease;
+	transition: 400ms ease;
+}
+
+li.widget_daniel15microblog li:hover span
+{
+	height: 1.6em;
+}
+
+div#sidebar li.widget_daniel15microblog li a
+{
+	display: inline;
+	border: 0;
+	padding: 0;
+	margin: 0;
+}
+
+img.has-image
+{
+	float: left;
+	margin-right: 0.2em;
+}
+
+/* Share links */
+/* Links with JS disabled */
+div.post .share ul
+{
+	padding: 0;
+	margin: 0;
+	float: left;
+} 
+
+div.post .share span
+{
+	float: left;
+	margin-right: 0.2em;
+}
+
+div.post .share li
+{
+	display: inline;
+}
+
+div.post .share li:after
+{
+	content: ", ";
+}
+
+/* Links with JS enabled */
+body.js div.post .share span,
+body.js div.post .share li:after
+{
+	display: none;
+}
+
+body.js .share li.twitter iframe
+{
+	overflow: hidden;
+	width: 100px;
+	height: 20px;
+}
+
+body.js .share li.facebook iframe
+{
+	overflow: hidden;
+	width: 450px;
+	height: 24px;
+}
+
+/* Comments */
+form#commentform label
+{
+	font-size: x-small;
+}
+
+form#commentform input
+{
+	width: 100%;
+}
+
+form#commentform input#submit
+{
+	width: auto;
+}
+
+/*********** Begin plugins **************/
+
+/* Syntax highlighting */
+.wp_syntax {
+  color: #100;
+  background-color: #f2f6fb;/*#f9f9f9;*/
+  border: 1px solid #B3C0FF; /*silver;*/
+  margin: 0 0 1.5em 0;
+  overflow: auto;
+}
+
+/* IE FIX */
+.wp_syntax {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: expression(this.scrollWidth > this.offsetWidth ? 15 : 0);
+  width: 100%;
+}
+
+.wp_syntax table {
+  border-collapse: collapse;
+}
+
+.wp_syntax div, .wp_syntax td {
+  vertical-align: top;
+  padding: 2px 4px;
+}
+
+.wp_syntax .line_numbers {
+  text-align: right;
+  background-color: #def;
+  color: gray;
+  overflow: visible;
+}
+
+/* potential overrides for other styles */
+.wp_syntax pre {
+  margin: 0;
+  width: auto;
+  float: none;
+  clear: none;
+  overflow: visible;
+}
+
+/* WPAudio */
+.wpa_container {display: inline-block; vertical-align: top; text-align: left; color: inherit;}
+* html .wpa_container { display: inline; }
+.wpa_container a {text-decoration: none; color: #24f;}
+.wpa_container a:hover {text-decoration: none; color: #02f;}
+.wpa_container, .wpa_container div, .wpa_container span, .wpa_container a {margin: 0; border: 0; padding: 0; font-weight: normal; letter-spacing: normal; line-height: normal;}
+.wpa_container img.wpa_play {width: 16px; height: 14px; margin: 0 5px 0 0; border: 0; padding: 0; vertical-align: baseline; background: #888;}
+.wpa_container span.wpa_text {font-family: Arial, Sans-serif; font-size: 18px; font-weight: bold; letter-spacing: -1px;}
+.wpa_container div.wpa_bar, .wpa_container div.wpa_bar div {height: 5px; font-size: 1px; line-height: 1px; overflow: hidden;}
+.wpa_container div.wpa_bar {display: none; position: relative; margin: 0 0 0 21px; background: #eee;}
+.wpa_container div.wpa_bar div {position: absolute; top: 0px; left: 0px;}
+.wpa_container div.wpa_bar div.wpa_bar_load {width: 0; z-index: 10; background: #ccc;}
+.wpa_container div.wpa_bar div.wpa_bar_position {width: 0; z-index: 11; background: #46f;}
+.wpa_container div.wpa_bar div.wpa_bar_click {width: 100%; z-index: 12; background: transparent; cursor: pointer;}
+.wpa_container div.wpa_sub {display: none; position: relative; margin: 0 0 0 22px; color: #aaa;}
+.wpa_container div.wpa_sub, .wpa_container div.wpa_sub span.wpa_time, .wpa_container div.wpa_sub span.wpa_dl {font-family: Arial, Sans-serif; font-size: 11px;}
+.wpa_container div.wpa_sub a.wpa_dl {position: absolute; top: 0; right: 0;}
+.wpa_container div.wpa_sub span.wpa_dl_info {display: none; position: absolute; top: -130%; left: 105%; border: 1px solid #ddf; padding: 5px; background: #f2f2ff;}
