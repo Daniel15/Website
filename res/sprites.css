@@ -42,3 +42,21 @@ ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit, .social .red
 {
 	background-image: url(icons/social/reddit.png); /** sprite-ref: mainsprite; */
 }
+
+/* Icons for blog meta data */
+ul.postmetadata li.date
+{
+	background-image: url(icons/calendar_view_day.png); /** sprite-ref: mainsprite; sprite-margin-left: 5px; sprite-margin-top: 6px; sprite-margin-bottom: 5px; */
+}
+ul.postmetadata li.comments
+{
+	background-image: url(icons/comments.png); /** sprite-ref: mainsprite; sprite-margin-left: 5px; sprite-margin-top: 6px; sprite-margin-bottom: 5px; */
+}
+ul.postmetadata li.category
+{
+	background-image: url(icons/folder_page.png); /** sprite-ref: mainsprite; sprite-margin-left: 5px; sprite-margin-top: 6px; sprite-margin-bottom: 5px; */
+}
+ul.postmetadata li.permalink
+{
+	background-image: url(icons/link.png); /** sprite-ref: mainsprite; sprite-margin-left: 5px; sprite-margin-top: 6px; sprite-margin-bottom: 5px; */
+}

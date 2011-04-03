@@ -2,7 +2,7 @@
 Theme Name: Daniel15
 Theme URI: http://dan.cx/
 Description: Theme for Dan.cx
-Author: Daniel Lo Nigro <daniel at d15 dot biz>
+Author: Daniel Lo Nigro <daniel@dan.cx>
 Author URI: http://dan.cx/
 Version: 4 revision 2
 */
@@ -199,12 +199,6 @@ ul.postmetadata li
 	background-repeat: no-repeat;
 	background-position: 5px 6px;
 }
-
-/* Icons for meta data */
-ul.postmetadata li.date { background-image: url(/res/icons/calendar_view_day.png); }
-ul.postmetadata li.comments { background-image: url(/res/icons/comments.png); }
-ul.postmetadata li.category { background-image: url(/res/icons/folder_page.png); }
-ul.postmetadata li.permalink { background-image: url(/res/icons/link.png); }
 
 .postmetadata img
 {
