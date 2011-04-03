@@ -64,7 +64,7 @@ class Compressor_CSS extends Compressor
 		);
 		
 		$file = $this->webRequest('http://vps.dan.cx/compress.php', $postData);
-		$file = preg_replace('~url\(([\'"]?)~', 'url($1../../../', $file);
+		$file = preg_replace('~url\(([\'"]?)([^/])~', 'url($1../../../$2', $file);
 		return $file;
 	}
 }
@@ -95,6 +95,9 @@ $blogJSFiles = array(
 );
 $blogCSSFiles = array(
 	'../blog/wp-content/themes/Daniel15v4r2/style.css',
+	'../blog/wp-content/plugins/wp-pagenavi/pagenavi-css.css',
+	'../blog/wp-content/plugins/comment-info-detector/comment-info-detector.css',
+	'../blog/wp-content/plugins/wp-syntax/wp-syntax.css',
 );
 
 $jsCompress = new Compressor_JS($directory);

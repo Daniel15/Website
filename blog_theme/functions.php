@@ -7,7 +7,7 @@ Daniel15Blog::init();
 class Daniel15Blog
 {
 	const MICROBLOG_CAT = 123;
-	public static $enableCompression = false;
+	public static $enableCompression = true;
 	public static $siteData;
 	
 	public static function init()
@@ -26,7 +26,7 @@ class Daniel15Blog
 		if (self::$enableCompression)
 		{
 			self::init_compression();
-			add_action('wp_loaded',			'Daniel15Blog::post_init_compression');
+			add_action('wp_print_styles',	'Daniel15Blog::post_init_compression');
 		}
 	}
 	
@@ -41,8 +41,12 @@ class Daniel15Blog
 		// Remove combined JS files
 		wp_dequeue_script('soundmanager');
 		wp_dequeue_script('wpaudio');
-		
 		//wp_enqueue_script('daniel15_combined', '/res/' . self::$siteData->latestBlogJS, null, null); 
+		
+		// Remove combined CSS files
+		wp_dequeue_style('wp-pagenavi');
+		wp_dequeue_style('comment-info-detector');
+		wp_dequeue_style('wp-syntax');
 	}
 	
 	/**
