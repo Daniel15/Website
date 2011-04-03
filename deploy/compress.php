@@ -89,17 +89,29 @@ $cssFiles = array(
 	'style-ie6.css', 'style-ie7.css', 'style-ie8.css'
 );
 
+$blogJSFiles = array(
+	'../blog/wp-content/plugins/wpaudio-mp3-player/sm2/soundmanager2-nodebug-jsmin.js',
+	'../blog/wp-content/plugins/wpaudio-mp3-player/wpaudio-mootools.js',
+);
+$blogCSSFiles = array(
+	'../blog/wp-content/themes/Daniel15v4r2/style.css',
+);
+
 $jsCompress = new Compressor_JS($directory);
 file_put_contents($outputDir . $basename . '.js', $jsCompress->compressFiles($jsFiles));
+file_put_contents($outputDir . $basename . '_blog.js', $jsCompress->compressFiles($blogJSFiles));
 
 $cssCompress = new Compressor_CSS($directory);
 file_put_contents($outputDir . $basename . '.css', $cssCompress->compressFiles($cssFiles));
+file_put_contents($outputDir . $basename . '_blog.css', $cssCompress->compressFiles($blogCSSFiles));
 
 if (empty($siteData))
 	$siteData = array();
 	
 $siteData['latestJS'] = $outputDirBase . $basename . '.js';
 $siteData['latestCSS'] = $outputDirBase . $basename . '.css';
+$siteData['latestBlogJS'] = $outputDirBase . $basename . '_blog.js';
+$siteData['latestBlogCSS'] = $outputDirBase . $basename . '_blog.css';
 
 file_put_contents('../cms/data/site-data.php', '<?' . 'php $siteData = ' . var_export($siteData, true) . '; ?' . '>');
 

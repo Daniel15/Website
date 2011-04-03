@@ -7,7 +7,8 @@ Daniel15Blog::init();
 class Daniel15Blog
 {
 	const MICROBLOG_CAT = 123;
-	const ENABLE_COMPRESSION = true;
+	public static $enableCompression = false;
+	public static $siteData;
 	
 	public static function init()
 	{
@@ -21,6 +22,27 @@ class Daniel15Blog
 		add_filter('pre_get_posts', 		'Daniel15Blog::exclude_microblog');
 		// Actions
 		add_action('widgets_init', 			'Daniel15Blog::load_widgets');
+		
+		if (self::$enableCompression)
+		{
+			self::init_compression();
+			add_action('wp_loaded',			'Daniel15Blog::post_init_compression');
+		}
+	}
+	
+	public static function init_compression()
+	{
+		require(__DIR__ . '/../cms/data/site-data.php');
+		self::$siteData = (object)$siteData;
+	}
+	
+	public static function post_init_compression()
+	{
+		// Remove combined JS files
+		wp_dequeue_script('soundmanager');
+		wp_dequeue_script('wpaudio');
+		
+		//wp_enqueue_script('daniel15_combined', '/res/' . self::$siteData->latestBlogJS, null, null); 
 	}
 	
 	/**
@@ -57,21 +79,6 @@ class Daniel15Blog
 			// "Fix" for WordPress 3.1. http://wordpress.org/support/topic/wp-31-breaks-rss-customization-via-exclude_category
 			$query->set('category__not_in', array(self::MICROBLOG_CAT));
 		return $query;
-	}
-	
-	public static function is_compression_enabled()
-	{
-		return ENABLE_COMPRESSION;
-	}
-	
-	public static function get_compression_info()
-	{
-		//require(__DIR__ . '/../../../../cms/data/site-data.php');
-		require(__DIR__ . '/../cms/data/site-data.php');
-		return (object)array(
-			'latestJS' => $siteData['latestJS'],
-			'latestCSS' => $siteData['latestCSS']
-		);
 	}
 }
 

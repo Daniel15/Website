@@ -5,7 +5,7 @@ if (empty($this->pageID))
 // Do we have a column type?
 if (empty($this->sidebarType))
 	$this->sidebarType = 'none';
-
+	
 // Pages we have on the site (for the nav menu)
 $menu = array(
 	'index.htm' => 'Home',
