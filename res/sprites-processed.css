@@ -15,37 +15,37 @@ ul#socialfeed li.source-twitter .meta, ul#minifeed li.source-twitter .icon, .soc
   background-position: left -16px;
 } 
 
-ul#socialfeed li.source-pinboard .meta, ul#minifeed li.source-pinboard 
+ul#socialfeed li.source-pinboard .meta, ul#minifeed li.source-pinboard  .icon
 {
   background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
   background-position: left -32px;
 }
-ul#socialfeed li.source-rss .meta, ul#minifeed li.source-rss 
+ul#socialfeed li.source-rss .meta, ul#minifeed li.source-rss .icon
 {
   background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
   background-position: left -48px;
 }
-ul#socialfeed li.source-lastfm .meta, ul#minifeed li.source-lastfm, .social .lastfm a 
+ul#socialfeed li.source-lastfm .meta, ul#minifeed li.source-lastfm .icon, .social .lastfm a 
 {
   background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
   background-position: left -64px;
 }
-ul#socialfeed li.source-youtube .meta, ul#minifeed li.source-youtube 
+ul#socialfeed li.source-youtube .meta, ul#minifeed li.source-youtube  .icon
 {
   background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
   background-position: left -80px;
 }
-ul#socialfeed li.source-foursquare .meta, ul#minifeed li.source-foursquare 
+ul#socialfeed li.source-foursquare .meta, ul#minifeed li.source-foursquare .icon
 {
   background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
   background-position: left -96px;
 }
-ul#socialfeed li.source-stumbleupon .meta, ul#minifeed li.source-stumbleupon 
+ul#socialfeed li.source-stumbleupon .meta, ul#minifeed li.source-stumbleupon .icon
 {
   background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
   background-position: left -112px;
 }
-ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit, .social .reddit a 
+ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit .icon, .social .reddit a 
 {
   background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
   background-position: left -128px;

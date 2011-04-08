@@ -14,31 +14,31 @@ ul#socialfeed li.source-twitter .meta, ul#minifeed li.source-twitter .icon, .soc
 	background-image: url(icons/social/twitter.gif); /** sprite-ref: mainsprite; */
 } 
 
-ul#socialfeed li.source-pinboard .meta, ul#minifeed li.source-pinboard 
+ul#socialfeed li.source-pinboard .meta, ul#minifeed li.source-pinboard  .icon
 {
 	background-image: url(icons/social/pinboard.gif); /** sprite-ref: mainsprite; */
 }
-ul#socialfeed li.source-rss .meta, ul#minifeed li.source-rss 
+ul#socialfeed li.source-rss .meta, ul#minifeed li.source-rss .icon
 {
 	background-image: url(icons/social/rss.png); /** sprite-ref: mainsprite; */
 }
-ul#socialfeed li.source-lastfm .meta, ul#minifeed li.source-lastfm, .social .lastfm a 
+ul#socialfeed li.source-lastfm .meta, ul#minifeed li.source-lastfm .icon, .social .lastfm a 
 {
 	background-image: url(icons/social/lastfm.png); /** sprite-ref: mainsprite; */
 }
-ul#socialfeed li.source-youtube .meta, ul#minifeed li.source-youtube 
+ul#socialfeed li.source-youtube .meta, ul#minifeed li.source-youtube  .icon
 {
 	background-image: url(icons/social/youtube.gif); /** sprite-ref: mainsprite; */
 }
-ul#socialfeed li.source-foursquare .meta, ul#minifeed li.source-foursquare 
+ul#socialfeed li.source-foursquare .meta, ul#minifeed li.source-foursquare .icon
 {
 	background-image: url(icons/social/foursquare.png); /** sprite-ref: mainsprite; */
 }
-ul#socialfeed li.source-stumbleupon .meta, ul#minifeed li.source-stumbleupon 
+ul#socialfeed li.source-stumbleupon .meta, ul#minifeed li.source-stumbleupon .icon
 {
 	background-image: url(icons/social/stumbleupon.png); /** sprite-ref: mainsprite; */
 }
-ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit, .social .reddit a 
+ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit .icon, .social .reddit a 
 {
 	background-image: url(icons/social/reddit.png); /** sprite-ref: mainsprite; */
 }
