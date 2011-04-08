@@ -76,13 +76,11 @@ h3 span
 h2 span
 {
 	height: 18px;
-	background: url(gradient-glossy2.png);
 }
 
 h3 span
 {
 	height: 14px;
-	background: url(gradient-glossy2.png);
 }
 
 blockquote
@@ -221,7 +219,6 @@ div#sidebar h2
 div#sidebar h2 span
 {
 	height: 14px;
-	background: url(gradient-glossy-sidebar.png);
 }
 
 div#sidebar ul

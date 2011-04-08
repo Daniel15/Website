@@ -2,7 +2,7 @@
  * Sprites
  */
  
-/** sprite: mainsprite; sprite-image: url('combined/sprites/mainsprite-${md5}.gif'); sprite-layout: vertical */
+/** sprite: mainsprite; sprite-image: url('combined/sprites/mainsprite-${md5}.png'); sprite-layout: vertical */
 
 .social .facebook a
 {
@@ -41,6 +41,23 @@ ul#socialfeed li.source-stumbleupon .meta, ul#minifeed li.source-stumbleupon
 ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit, .social .reddit a 
 {
 	background-image: url(icons/social/reddit.png); /** sprite-ref: mainsprite; */
+}
+
+/* Glossy overlay thingies for headings */
+/* TODO: See if these can be done with CSS3 instead */
+h2 span
+{
+	background-image: url(gradient-glossy2.png); /** sprite-ref: mainsprite; sprite-alignment: repeat; */
+}
+
+h3 span
+{
+	background-image: url(gradient-glossy2.png); /** sprite-ref: mainsprite; sprite-alignment: repeat; */
+}
+
+div#sidebar h2 span
+{
+	background-image: url(gradient-glossy-sidebar.png); /** sprite-ref: mainsprite; sprite-alignment: repeat; */
 }
 
 /* Icons for blog meta data */
