@@ -45,6 +45,7 @@ class CMS
 		
 		$page->enableCompression = $this->enableCompression;
 		
+		header('Content-Type: text/html; charset=utf-8');
 		// Render the page.
 		$output = $page->Render();
 		// Only send this if we actually have it

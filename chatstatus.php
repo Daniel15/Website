@@ -34,6 +34,9 @@ if ($data['status'] == 'Online')
 	$data['chatURL'] = sprintf($chat_url, $tk);
 }
 
-header('Content-Type: application/json');
+header('Content-Type: text/javascript');
+header('Cache-Control: max-age=0, no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: Fri, 01 Jun 1990 00:00:00 GMT');
 echo json_encode($data);
 ?>
