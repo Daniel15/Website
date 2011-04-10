@@ -3,51 +3,52 @@
  */
  
 
+/* Social feed links */
 .social .facebook a
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -0px;
 } 
 
 ul#socialfeed li.source-twitter .meta, ul#minifeed li.source-twitter .icon, .social .twitter a
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -16px;
 } 
 
 ul#socialfeed li.source-pinboard .meta, ul#minifeed li.source-pinboard  .icon
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -32px;
 }
 ul#socialfeed li.source-rss .meta, ul#minifeed li.source-rss .icon
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -48px;
 }
 ul#socialfeed li.source-lastfm .meta, ul#minifeed li.source-lastfm .icon, .social .lastfm a 
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -64px;
 }
 ul#socialfeed li.source-youtube .meta, ul#minifeed li.source-youtube  .icon
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -80px;
 }
 ul#socialfeed li.source-foursquare .meta, ul#minifeed li.source-foursquare .icon
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -96px;
 }
 ul#socialfeed li.source-stumbleupon .meta, ul#minifeed li.source-stumbleupon .icon
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -112px;
 }
 ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit .icon, .social .reddit a 
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -128px;
 }
 
@@ -55,40 +56,59 @@ ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit .icon, .socia
 /* TODO: See if these can be done with CSS3 instead */
 h2 span
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -144px;
 }
 
 h3 span
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -144px;
 }
 
 div#sidebar h2 span
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -168px;
 }
 
 /* Icons for blog meta data */
 ul.postmetadata li.date
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -192px;
 }
 ul.postmetadata li.comments
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -219px;
 }
 ul.postmetadata li.category
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -246px;
 }
 ul.postmetadata li.permalink
 {
-  background-image: url('combined/sprites/mainsprite-748d895bbecdaa9abac9711d6b0b5a58.png');
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
   background-position: left -273px;
+}
+
+/* Google Talk chat status */
+#gtalk.offline #gtalk_address
+{
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
+  background-position: left -300px;
+}
+
+#gtalk.online #gtalk_address
+{
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
+  background-position: left -318px;
+}
+
+#gtalk.busy #gtalk_address
+{
+  background-image: url('combined/sprites/mainsprite-4a3f38c61ca0cf5de9c930fca02b0249.png');
+  background-position: left -336px;
 }

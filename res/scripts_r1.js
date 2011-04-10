@@ -97,24 +97,26 @@ Site.Home =
 	init: function()
 	{
 		// Put the email addresses into the spans. This is done here for spam prevention.
-		$('email_address').set('html', '&#100;&#097;&#110;&#105;&#101;&#108;&#049;&#053;&#110;&#101;&#116;&#064;&#100;&#049;&#053;&#046;&#098;&#105;&#122;');
+		$('email_address').set('html', '&#100;&#097;&#110;&#105;&#101;&#108;&#049;&#053;&#115;&#105;&#116;&#101;&#064;&#100;&#097;&#110;&#046;&#099;&#120;');
 		$('messenger_address').set('html', '&#x6D;&#x73;&#x6E;&#64;&#100;&#x61;&#110;&#x69;&#x65;&#x6C;&#49;&#53;&#x2E;&#x63;&#111;&#x6D;');
+		$('gtalk_address').set('html', '&#100;&#097;&#110;&#105;&#101;&#108;&#064;&#100;&#049;&#053;&#046;&#098;&#105;&#122;');
 		
 		this.tips = new Tips('li.social a', {fixed: true});
 		// Make the "start conversation" link open in a new window
-		$('start_convo').addEvent('click', function()
+		/*$('start_convo').addEvent('click', function()
 		{
 			window.open(this.href, '_blank', 'height=400px,width=300px');
 			// Cancel the event
 			return false;
-		});
+		});*/
 		// Get our awesome stuff
 		this.socialfeed = new SocialFeed($('minifeed'), 
 		{
 			count: 10,
 			loadOnInit: true
 		});
-		this.WLM.get();
+		//this.WLM.get();
+		this.initGoogleTalk();
 		
 		// Add the social feed hover thingies						
 		$('sidebar').addEvents(
@@ -127,6 +129,40 @@ Site.Home =
 			{
 				el.getElement('ul.meta').tween('height', null, 0);
 			}
+		});
+	},
+	
+	initGoogleTalk: function()
+	{
+		new Request.JSON({
+			url: 'chatstatus.php',
+			onRequest: function()
+			{
+				// TODO: Loading indicator
+			},
+			onSuccess: function(data)
+			{
+				$('gtalk').removeClass('offline').addClass(data.status.toLowerCase());
+				$('gtalk_address').set('title', data.status);
+				
+				var status = data.status;
+				if (data.statusText != data.status)
+					status += ' (' + data.statusText + ')';
+				$('gtalk_status').set('html', status);
+				
+				// If status is not Online, we can't start a new conversation (even Busy!)
+				if (data.status == 'Online')
+					$('start_gtalk_chat').setStyle('display', 'inline');
+				
+			}
+		}).send();
+		
+		// Make the "start conversation" link open in a new window
+		$('start_gtalk_chat').addEvent('click', function()
+		{
+			window.open(this.href, '_blank', 'height=500px,width=300px');
+			// Cancel the event
+			return false;
 		});
 	},
 	

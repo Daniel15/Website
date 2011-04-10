@@ -28,14 +28,18 @@ $this->sidebar = '
 				<ul>
 					<!-- Yeah, this is ugly, but it's a really simple method for spambot prevention >_< -->
 					<li><strong>Email</strong> &mdash; <span id="email_address"></span></li>
-					<li>
+					<!--li>
 						<strong>Windows Live Messenger / MSN Messenger</strong> &mdash; <span id="display_name"></span>
 						[<span id="messenger_address"></span>].
 						I'm currently <img id="status_img" width="16" height="16" src="http://www.wlmessenger.net/static/img/presence/Offline.gif" alt="Messenger Status" title="Messenger Status" /><span id="status">Offline</span>.
 						<a id="start_convo" href="http://settings.messenger.live.com/Conversation/IMMe.aspx?invitee=135148d074926a0d@apps.messenger.live.com&amp;mkt=en-AU">Start a conversation with me</a>
+					</li-->
+					<li><strong>Windows Live Messenger / MSN Messenger</strong> &mdash; <span id="messenger_address"></span></li>
+					<li id="gtalk" class="offline">
+						<strong>Google Talk / Jabber</strong> &mdash; <span id="gtalk_address"></span>.
+						I'm currently <span id="gtalk_status">Offline</span>.
+						<a id="start_gtalk_chat" href="http://www.google.com/talk/service/badge/Start?tk=z01q6amlqaf80ct0iuvnq226055735i723g9omh9525cu7ce7onoqd5vm7quktkdlts0i5d6c8nr113mhh7e06mlu92gmbv1506gcp26fdn3c45cpqlu652rb6ksdsodpjb95s019nqarbqo">Chat with me</a>
 					</li>
-					<!--li><strong>Yahoo! Messenger</strong> &mdash; dan15@y7mail.com</li>
-					<li><strong>AIM</strong> &mdash; daniel15au</li-->
 					<li class="social">
 						<strong>Social networking (and other) sites:</strong>
 						

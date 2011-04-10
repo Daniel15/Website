@@ -86,6 +86,19 @@ ul#blog-posts span.date
 	display: inline-block;
 }
 
+/* Google Talk */
+#gtalk_address
+{
+	padding-left: 12px;
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+#start_gtalk_chat
+{
+	display: none;
+}
+
 /********************************* Feed page **********************************/
 ul#socialfeed, ul#socialfeed ul
 {

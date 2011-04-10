@@ -4,6 +4,7 @@
  
 /** sprite: mainsprite; sprite-image: url('combined/sprites/mainsprite-${md5}.png'); sprite-layout: vertical */
 
+/* Social feed links */
 .social .facebook a
 {
 	background-image: url(icons/social/facebook.png); /** sprite-ref: mainsprite; */
@@ -76,4 +77,20 @@ ul.postmetadata li.category
 ul.postmetadata li.permalink
 {
 	background-image: url(icons/link.png); /** sprite-ref: mainsprite; sprite-margin-left: 5px; sprite-margin-top: 6px; sprite-margin-bottom: 5px; */
+}
+
+/* Google Talk chat status */
+#gtalk.offline #gtalk_address
+{
+	background-image: url(icons/chat/offline.gif); /** sprite-ref: mainsprite; sprite-margin-top: 4px; sprite-margin-bottom: 5px; */
+}
+
+#gtalk.online #gtalk_address
+{
+	background-image: url(icons/chat/online.gif); /** sprite-ref: mainsprite; sprite-margin-top: 4px; sprite-margin-bottom: 5px; */
+}
+
+#gtalk.busy #gtalk_address
+{
+	background-image: url(icons/chat/busy.gif); /** sprite-ref: mainsprite; sprite-margin-top: 4px; sprite-margin-bottom: 5px; */
 }
