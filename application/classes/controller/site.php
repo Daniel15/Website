@@ -40,12 +40,12 @@ class Controller_Site extends Controller_Template
 			->set('title', 'Projects')
 			->set('sidebarType', 'right');
 			
-		$projects = View::factory('includes/projectList')
+		$projects = View::factory('includes/projectlist')
 			->set('projects', $model->getProjects())
 			->set('techs', $techs)
 			->set('techs2', $techs2);
 			
-		$prevProjects = View::factory('includes/projectList')
+		$prevProjects = View::factory('includes/projectlist')
 			->set('projects', $model->getPrevProjects())
 			->set('techs', $techs)
 			->set('techs2', $techs2);
