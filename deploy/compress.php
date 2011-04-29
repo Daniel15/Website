@@ -70,7 +70,7 @@ class Compressor_CSS extends Compressor
 }
 
 echo 'Compressing JS and CSS... ';
-include '../cms/data/site-data.php';
+$siteConfig = include '../application/config/site.php';
 
 $directory = '../res/';
 $basename = date('d_Hi');
@@ -110,15 +110,15 @@ $cssCompress = new Compressor_CSS($directory);
 file_put_contents($outputDir . $basename . '.css', $cssCompress->compressFiles($cssFiles));
 file_put_contents($outputDir . $basename . '_blog.css', $cssCompress->compressFiles($blogCSSFiles));
 
-if (empty($siteData))
-	$siteData = array();
+if (empty($siteConfig))
+	$siteConfig = array();
 	
-$siteData['latestJS'] = $outputDirBase . $basename . '.js';
-$siteData['latestCSS'] = $outputDirBase . $basename . '.css';
-$siteData['latestBlogJS'] = $outputDirBase . $basename . '_blog.js';
-$siteData['latestBlogCSS'] = $outputDirBase . $basename . '_blog.css';
+$siteConfig['latestJS'] = $outputDirBase . $basename . '.js';
+$siteConfig['latestCSS'] = $outputDirBase . $basename . '.css';
+$siteConfig['latestBlogJS'] = $outputDirBase . $basename . '_blog.js';
+$siteConfig['latestBlogCSS'] = $outputDirBase . $basename . '_blog.css';
 
-file_put_contents('../cms/data/site-data.php', '<?' . 'php $siteData = ' . var_export($siteData, true) . '; ?' . '>');
+file_put_contents('../application/config/site.php', '<?' . 'php return ' . var_export($siteConfig, true) . '; ?' . '>');
 
 echo 'Done, ', $outputDir, $basename, "\n";
 ?>

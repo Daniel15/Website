@@ -1,22 +1,4 @@
-<?php
-$this->title = '';
-$this->meta = array(
-	'Description' => 'Website of Daniel15 (Daniel Lo Nigro), a 20-year-old guy from Melbourne Australia. Here I blog about things important to me, and also link to the various other projects I\'m working on.',
-);
-$this->pageID = 'home';
-
-//$this->js = 'window.addEvent(\'domready\', Home.init);';
-$this->sidebarType = 'right';
-$this->sidebar = '
-				<h2><a href="feed.htm">What I\'ve Been Doing</a></h2>
-				<ul id="minifeed">
-					<li class="loading">Loading...</li>
-				</ul>
-				<ul>
-					<li><a href="feed.htm">See more...</a></li>
-				</ul>';
-
-?>
+<?php defined('SYSPATH') or die('No direct script access.'); ?>
 				<h2>Welcome</h2>
 				<p>At the moment, this site is being redesigned, recoded, rewritten, and generally re-everything'd. Stuff may be broken.</p>
 				<p>Hi, I'm Daniel! I'm a 20-year-old web developer, living in Melbourne, Australia. <!--I'm a second-year student at Swinburne University of Technology, studying for a Bachelor of Science (Professional Software Development).-->I'm currently a <a href="http://swin.edu.au/">Swinburne University</a> student, doing my <a href="http://www.swinburne.edu.au/spl/ibl/">Industry Based Learning (IBL)</a> year at <a href="http://www.pageuppeople.com/">PageUp People</a> (as a Junior Developer). I enjoy web development (especially using PHP). I love exploring new technologies, and creating websites or applications implementing these technologies. This should really have a better introduction on who I am... I'll complete it one day. For now you can add me on Facebook, I guess.</p>
@@ -55,9 +37,7 @@ $this->sidebar = '
 				<h2><a href="/blog/">Recent Blog Posts</a></h2>
 				<ul id="blog-posts">
 <?php
-// Load the recent blog posts data
-$posts = unserialize(file_get_contents($this->dir . 'data/blog_posts'));
-foreach ($posts as $post)
+foreach ($blogPosts as $post)
 {
 	echo '
 					<li title="', $post['desc'], '"><span class="date">', date('jS M Y', $post['date']), '</span> <a href="', $post['url'], '">', $post['title'], '</a></li>';
