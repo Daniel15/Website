@@ -32,8 +32,7 @@ class Daniel15Blog
 	
 	public static function init_compression()
 	{
-		require(__DIR__ . '/../cms/data/site-data.php');
-		self::$siteData = (object)$siteData;
+		self::$siteData = (object)(require __DIR__ . '/../application/config/site.php');
 	}
 	
 	public static function post_init_compression()
