@@ -89,7 +89,7 @@ var Site = {};
  * TODO: 
  *  - Abstract the common stuff out to classes
  */
-Site.Home = 
+Site.Index = 
 {
 	/**
 	 * Initialise the homepage
@@ -214,7 +214,7 @@ Site.Home =
  */
 function wlm_cb(data)
 {
-	Site.Home.WLM.callback(data);
+	Site.Index.WLM.callback(data);
 }
 
 /**

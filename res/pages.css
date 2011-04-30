@@ -54,30 +54,30 @@ ul#blog-posts span.date
 }
 
 /* Social networking links */
-#site-home .social
+#site-index .social
 {
 	overflow: hidden;
 	list-style-type: none;
 }
 
-#site-home .social strong:first-child
+#site-index .social strong:first-child
 {
 	float: left;
 }
 
-#site-home .social ul
+#site-index .social ul
 {
 	margin: 0 0 0 0.5em;
 	padding: 0;
 	float: left;
 }
-#site-home .social li
+#site-index .social li
 {
 	display: inline;
 	overflow: hidden;
 }
 
-#site-home .social li a
+#site-index .social li a
 {
 	background-repeat: none;
 	text-indent: -9999px;

@@ -2,7 +2,7 @@
 
 class Controller_Site extends Controller_Template
 {	
-	public function action_home()
+	public function action_index()
 	{
 		// Load the most recent blog posts
 		$posts = unserialize(file_get_contents('cms/data/blog_posts'));

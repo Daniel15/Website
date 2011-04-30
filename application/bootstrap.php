@@ -149,7 +149,7 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 	Route::set('default', '(<controller>(/<action>(/<id>)))')
 		->defaults(array(
 			'controller' => 'site',
-			'action'     => 'home',
+			'action'     => 'index',
 		));
 		
 	// Only cache on staging or production
