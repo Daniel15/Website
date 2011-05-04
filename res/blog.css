@@ -149,3 +149,15 @@ ul.postmetadata li
 {
 	padding-left: 2em;
 }
+
+/* Hide "cancel reply" by default */
+.blog #cancel-reply
+{
+	display: none;
+}
+
+/* When replying to a comment and the form is "inside" a comment */
+.blog article #leave-comment
+{
+	margin-right: 1em;
+}

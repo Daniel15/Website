@@ -77,13 +77,13 @@ $basename = date('d_Hi');
 $outputDirBase = 'combined/' . date('Y') . '/' . date('m') . '/';
 $outputDir = $directory . $outputDirBase;
 
-@mkdir($outputDir, null, true);
+@mkdir($outputDir, 0777, true);
 
 $jsFiles = array(
 	// MooTools More (MooTools included via Google AJAX API)
 	'mootools-more-1.3.0.1.js', 
 	// Syntax highligher
-	'../lib/syntaxhighlighter/shCore.js', '../lib/syntaxhighlighter/shBrushJScript.js', '../lib/syntaxhighlighter/shBrushPhp.js', '../lib/syntaxhighlighter/shBrushCSharp.js', '../lib/syntaxhighlighter/shBrushXml.js', '../lib/syntaxhighlighter/shBrushPlain.js',
+	'../lib/syntaxhighlighter/shCore.js', '../lib/syntaxhighlighter/shBrushJScript.js', '../lib/syntaxhighlighter/shBrushPhp.js', '../lib/syntaxhighlighter/shBrushCSharp.js', '../lib/syntaxhighlighter/shBrushXml.js', '../lib/syntaxhighlighter/shBrushPlain.js', '../lib/syntaxhighlighter/shBrushDelphi.js',
 	// Generic scripts
 	'scripts_r1.js'
 );

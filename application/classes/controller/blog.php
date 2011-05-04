@@ -86,7 +86,7 @@ class Controller_Blog extends Controller_Template
 	// Viewing a post
 	public function action_view($year, $month, $slug)
 	{
-		$post = ORM::factory('Blog_Post', array('slug' => $slug));	
+		$post = ORM::factory('Blog_Post', array('slug' => $slug));
 
 		// Check the URL was actually correct (year and month), redirect if not.
 		if ($year != date('Y', $post->date) || $month != date('m', $post->date))
@@ -101,10 +101,55 @@ class Controller_Blog extends Controller_Template
 		$page = View::factory('blog/post')
 			->bind('post', $post)
 			->set('comments', $post->comments());
+		
+		// If the page was POSTed, it's a comment
+		if ($_POST)
+		{
+			try
+			{
+				$this->comment($post);
+				$this->template
+					->set('top_message', 'Your comment has been added and will appear on the site as soon as it is approved')
+					->set('top_message_type', 'success');
+			}
+			catch (ORM_Validation_Exception $ex)
+			{
+				//$page->set('errors', $ex->errors('models'));
+				$errors = $ex->errors('models');
+				$this->template
+					->set('top_message_type', 'error')
+					->set('top_message', 'There were some errors with your comment. Please <a href="' . $post->url() . '#leave-comment">correct them</a> and try again:
+<ul>
+	<li>' . implode('</li>
+	<li>', $errors) . '</li>
+</ul>');			
+			}
+		}
 			
 		$this->template
 			->set('title', $post->title)
 			->bind('content', $page);
+	}
+	
+	public function comment($post)
+	{		
+		$comment = ORM::factory('Blog_Comment');
+		$comment->post = $post;
+		$comment->author = Arr::get($_POST, 'author');
+		$comment->url = Arr::get($_POST, 'url');
+		$comment->email = Arr::get($_POST, 'email');
+		$comment->content = Arr::get($_POST, 'content');
+		$comment->ip = $_SERVER['REMOTE_ADDR'];
+		$comment->ip2 = Arr::get($_SERVER, 'HTTP_X_FORWARDED_FOR');
+		$comment->date = time();
+		$comment->parent_comment_id = Arr::get($_POST, 'parent_comment_id');
+		$comment->user_agent = Arr::get($_SERVER, 'HTTP_USER_AGENT');
+		// TODO
+		$comment->status = 'pending';
+	
+		$comment->save();
+			
+		return $comment->id;
 	}
 }
 ?>

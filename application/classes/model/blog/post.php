@@ -57,18 +57,19 @@ class Model_Blog_Post extends ORM
 	public function intro()
 	{
 		$content = $this->content();
-		if (($more_pos = strpos($content, '<!-- more -->')) === false)
+		if (($more_pos = strpos($content, '<span id="read-more"></span>')) === false)
 			return $content;
 			
 		// Get the content before the "more" tag
 		// TODO: Clean up HTML (unclosed tags?)
 		$content = substr($content, 0, $more_pos);
-		$content .= View::factory('blog/post/read-more-link')->set('url', $this->url());
+		$content .= View::factory('blog/post/read-more-link')->set('url', $this->url() . '#read-more');
 		return $content;
 	}
 	
 	public function content()
 	{
+		$content = str_replace('<!--more-->', '<span id="read-more"></span>', $this->content);
 		// HTML encode everything in <pre> tags
 		return preg_replace_callback(
 			'~<pre([^>]+)>([\S\s]+?)</pre>~',
@@ -80,7 +81,7 @@ class Model_Blog_Post extends ORM
 					
 				return '<pre' . $match[1] . '>' . htmlspecialchars($match[2]) . '</pre>';
 			},
-			$this->content
+			$content
 		);
 	}
 	

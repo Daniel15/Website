@@ -367,6 +367,27 @@ input.placeholder
 	color: #777;
 }
 
+/* Message at the top of the page */
+#top_message 
+{
+	border: 1px solid;
+	margin-top: 1em;
+	padding: 0.8em;
+}
+
+#top_message.success
+{
+	background-color: #F0FFF0;
+	border-color: lightgreen;
+}
+
+#top_message.error
+{
+	background-color: #FFF0F0;
+	border-color: red;
+}
+
+
 
 /*************************** Showing column on right **************************/
 body.col-right div#colright

@@ -17,14 +17,14 @@ foreach ($comments as $comment)
 			</header>
 			', nl2br(htmlspecialchars($comment->content)), '
 			<footer>
-				<p><a href="#">Reply</a></p>
+				<p><a href="', $post->url(), 'TODO?reply_to=', $comment->id, '#leave-comment" class="reply-to">Reply</a></p>
 			</footer>
 		</article>';
 		
 	// Any children?
 	if (!empty($comment->children))
 	{
-		echo View::factory('blog/comments')->bind('comments', $comment->children);
+		echo View::factory('blog/comments')->bind('comments', $comment->children)->bind('post', $post);
 	}
 	echo '
 	</li>

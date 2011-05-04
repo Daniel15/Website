@@ -78,7 +78,10 @@ var Global =
 		CheatCode.init();
 		// If we've got SyntaxHighlighter, initialise it
 		if (SyntaxHighlighter && SyntaxHighlighter.all)
+		{
+			SyntaxHighlighter.defaults['toolbar'] = false;
 			SyntaxHighlighter.all();
+		}
 	}
 };
 
@@ -363,9 +366,18 @@ var Blog =
 Blog.View = 
 {
 	init: function()
-	{			
+	{		
+		// Attach "reply to comment" links
+		$$('#comments .reply-to').addEvent('click', Blog.View.replyToComment.bind(Blog.View));
+		$('cancel-reply').addEvent('click', Blog.View.cancelReply.bind(Blog.View));
+		
+		// Do the placeholders
+		Blog.View.initPlaceholders();
+	},
+	
+	initPlaceholders: function()
+	{
 		var comment_form = $('leave-comment-form');
-			
 		['author', 'email', 'url'].each(function(field_name)
 		{
 			var field = $(field_name);				
@@ -386,6 +398,29 @@ Blog.View =
 			
 			Blog.View.fieldBlur.apply(field);
 		});
+		// On submit, remove placeholders
+		comment_form.addEvent('submit', Blog.View.removePlaceholders);
+	},
+	
+	replyToComment: function(e)
+	{
+		// Find the footer and stick the comments form in it
+		var comment_footer = $(e.target).getParent('footer');
+		var comment_id = $(e.target).getParent('li').id.split('-')[1];
+		var comment_form = $('leave-comment');
+		comment_footer.grab(comment_form, 'bottom');
+		$('cancel-reply').setStyle('display', 'block');
+		$('parent_comment_id').value = comment_id;
+		return false;
+	},
+	
+	cancelReply: function()
+	{
+		// Put the comment form back where it belongs
+		$('content').grab('leave-comment');
+		$('cancel-reply').setStyle('display', 'none');
+		$('parent_comment_id').value = '';
+		return false;
 	},
 	
 	fieldFocus: function()
@@ -408,6 +443,16 @@ Blog.View =
 		}
 		else
 			this.removeClass('placeholder');
+	},
+	
+	removePlaceholders: function()
+	{
+		['author', 'email', 'url'].each(function(field_name)
+		{
+			var field = $(field_name);
+			if (field.value == field.retrieve('placeholder'))
+				field.value = '';
+		});
 	}
 }
 

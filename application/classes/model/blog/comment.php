@@ -33,6 +33,7 @@ class Model_Blog_Comment extends ORM
 		
 		$comments = $post->comments
 			->order_by('date')
+			->where('status', '=', 'visible')
 			->find_all();
 			
 		if (Kohana::$profiling === TRUE)
@@ -58,6 +59,33 @@ class Model_Blog_Comment extends ORM
 			Profiler::stop($benchmark);
 		
 		return $root_comments;
+	}
+	
+	/**
+	 * Validation rules
+	 */
+	public function rules()
+	{
+		return array(
+			'author' => array(
+				array('not_empty'),
+				//array('max_length', array(':value' => 255)),
+			),
+			'email' => array(
+				array('not_empty'),
+				//array('max_length', array(':value' => 255)),
+				array('email'),
+			),
+			'url' => array(
+				array('url'),
+				//array('max_length', array(':value' => 255)),
+			),
+			'content' => array(
+				array('not_empty'),
+				//array('min_length', array(':value' => 4)),
+			),
+			
+		);
 	}
 }
 ?>

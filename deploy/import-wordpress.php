@@ -171,11 +171,11 @@ class WordpressImporter
 					'lang="text"',
 					'lang="pascal"',
 				), array(
-					'class="brush: js"',
+					'class="brush: javascript"',
 					'class="brush: html"',
 					'class="brush: php"',
 					'class="brush: csharp"',
-					'',
+					'class="brush: plain"',
 					'class="brush: pascal"',
 				), $code);
 				

@@ -61,7 +61,13 @@ if ($siteConfig->enableCompression) : ?>
 		</div>
 		<div id="colmask"><div id="colright">
 			<div id="content_wrap"><div id="content" role="main">
-<?php echo $content; ?>
+<?php
+if (!empty($top_message))
+{
+	echo '
+				<div id="top_message" class="', empty($top_message_type) ? 'success' : $top_message_type, '">', $top_message, '</div>';
+}
+echo $content; ?>
 
 			</div></div>
 			
@@ -98,6 +104,7 @@ if (!empty($lastModified) && $lastModified != 0)
 	<script src="lib/syntaxhighlighter/shBrushPhp.js"></script>
 	<script src="lib/syntaxhighlighter/shBrushCSharp.js"></script>
 	<script src="lib/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="lib/syntaxhighlighter/shBrushDelphi.js"></script>
 	<script src="lib/syntaxhighlighter/shBrushPlain.js"></script>
 	
 	<!-- General scripts -->
