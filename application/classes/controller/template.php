@@ -29,6 +29,16 @@ class Controller_Template extends Kohana_Controller_Template
 		if (!empty($this->template->lastModified))
 			header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $this->template->lastModified) . ' GMT');
 			
+		// Set the <h1> tag
+		// Is it in the blog?
+		if (substr($this->template->controller, 0, 4) == 'blog')
+			$this->template->h1 = 'Daniel15\'s Blog';
+		// Otherwise, is there a page title?
+		elseif (!empty($this->template->title))
+			$this->template->h1 = $this->template->title;
+		else
+			$this->template->h1 = 'Daniel15';
+			
 		parent::after();
 	}
 	

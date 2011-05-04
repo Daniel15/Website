@@ -1,0 +1,63 @@
+<?php defined('SYSPATH') or die('No direct script access.');
+
+class Model_Blog_Comment extends ORM
+{
+	// Used when loading comments for a post
+	public $children;
+	
+	protected $_belongs_to = array(
+		'post' => array(
+			'model' => 'Blog_Post'
+		),
+	);
+	
+	public function avatar_url()
+	{
+		$md5 = md5(strtolower(trim($this->email)));
+		
+		return 'http://www.gravatar.com/avatar/' . $md5 . '?s=' . Kohana::config('blog.gravatar_size') . '&d=monsterid&r=PG';
+	}
+	
+	public function author_link()
+	{
+		if (!empty($this->url))
+			return '<a rel="nofollow" href="' . htmlspecialchars($this->url) . '">' . htmlspecialchars($this->author) . '</a>';
+			
+		return htmlspecialchars($this->author);
+	}
+	
+	public static function for_post(Model_Blog_Post $post)
+	{
+		$all_comments = array();
+		$root_comments = array();
+		
+		$comments = $post->comments
+			->order_by('date')
+			->find_all();
+			
+		if (Kohana::$profiling === TRUE)
+			$benchmark = Profiler::start('Blog', 'Building comments heirarchy');
+			
+		foreach ($comments as $comment)
+		{
+			// Add it to the "all comments" array
+			$all_comments[$comment->id] = $comment;
+			$all_comments[$comment->id]->children = array();
+			// Does it have a parent?
+			if (!empty($comment->parent_comment_id))
+			{
+				$all_comments[$comment->parent_comment_id]->children[] = &$all_comments[$comment->id];
+			}
+			else
+			{
+				$root_comments[] = &$all_comments[$comment->id];
+			}
+		}
+		
+		if (isset($benchmark))
+			Profiler::stop($benchmark);
+		
+		return $root_comments;
+	}
+}
+?>

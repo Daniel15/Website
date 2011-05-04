@@ -113,11 +113,13 @@ Kohana::modules(array(
 	// 'auth'       => MODPATH.'auth',       // Basic authentication
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	// 'database'   => MODPATH.'database',   // Database access
+	'database'   => MODPATH.'database',   // Database access
 	// 'image'      => MODPATH.'image',      // Image manipulation
-	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
+	'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	'pagination' => MODPATH.'pagination',
+	'dispatcher' => MODPATH.'dispatcher',
 	));
 
 /**
@@ -139,6 +141,42 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 		->defaults(array(
 			'controller' => 'site'
 		));
+		
+	// TODO: Change "newblog" to "blog"
+	Route::set('blog_view', 'newblog/<year>/<month>/<slug>', array('year' => '\d{4}', 'month' => '\d{2}'))
+		->defaults(array(
+			'controller' => 'blog',
+			'action'     => 'view',
+		));
+	Route::set('blog_category', 'newblog/category/<slug>')
+		->defaults(array(
+			'controller' => 'blog',
+			'action'     => 'category',
+		));
+	Route::set('blog_tag', 'newblog/tag/<slug>')
+		->defaults(array(
+			'controller' => 'blog',
+			'action'     => 'tag',
+		));
+	/*Route::set('blog_page', 'newblog/page/<page>', array('page' => '\d+'))
+		->defaults(array(
+			'controller' => 'blog',
+			'action'     => 'index',
+		));*/
+		
+	// Temporary blog route for testing, while the old blog is in use.
+	Route::set('blog', 'newblog/<action>(/<id>)')
+		->defaults(array(
+			'controller' => 'blog',
+			'action'     => 'index',
+		));	
+		
+	Route::set('blog_home', 'newblog')
+		->defaults(array(
+			'controller' => 'blog',
+			'action'     => 'index',
+		));	
+	
 		
 	// Errors
 	Route::set('error', 'error/<action>(/<message>)', array('action' => '[0-9]++', 'message' => '.+'))

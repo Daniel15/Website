@@ -2,7 +2,7 @@
 
 class Model_Projects extends Model
 {
-	public function getTechs()
+	public function get_techs()
 	{
 		return array(
 			'csharp' => array(
@@ -106,9 +106,9 @@ class Model_Projects extends Model
 		);
 	}
 	
-	public function getTechDescs()
+	public function get_tech_descs()
 	{
-		$techs = $this->getTechs();
+		$techs = $this->get_techs();
 		$output = array();
 		foreach ($techs as $key => $tech)
 		{
@@ -118,7 +118,7 @@ class Model_Projects extends Model
 		return $output;
 	}
 	
-	public function getOtherTechs()
+	public function get_other_techs()
 	{
 		return array(
 			'kohana_orm' => '<a href="http://kohanaphp.com/">Kohana ORM</a>',
@@ -129,7 +129,7 @@ class Model_Projects extends Model
 		);
 	}
 	
-	public function getProjects()
+	public function get_projects()
 	{
 		return array(
 			array(
@@ -189,7 +189,7 @@ class Model_Projects extends Model
 		
 	}
 	
-	public function getPrevProjects()
+	public function get_prev_projects()
 	{
 		return array(
 			array(

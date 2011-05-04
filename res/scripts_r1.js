@@ -76,6 +76,9 @@ var Global =
 		});
 		
 		CheatCode.init();
+		// If we've got SyntaxHighlighter, initialise it
+		if (SyntaxHighlighter && SyntaxHighlighter.all)
+			SyntaxHighlighter.all();
 	}
 };
 
@@ -317,8 +320,6 @@ var Blog =
 	init: function()
 	{
 		this.initShareLinks();
-		if ($(document.body).hasClass('single'))
-			Blog.Comments.init();
 	},
 	
 	initShareLinks: function()
@@ -359,11 +360,11 @@ var Blog =
 	}
 };
 
-Blog.Comments = 
+Blog.View = 
 {
 	init: function()
 	{			
-		var comment_form = $('commentform');
+		var comment_form = $('leave-comment-form');
 			
 		['author', 'email', 'url'].each(function(field_name)
 		{
@@ -372,14 +373,18 @@ Blog.Comments =
 			if (!field || !label)
 				return;
 				
-			var label_value = label.get('html');
+			var label_value = label.get('html').replace(':', '');
+			// Check if there's any extra info after the field
+			var extra_info = $$('#' + field_name + ' + small');
+			if (extra_info && extra_info[0])
+				label_value += ' ' + extra_info[0].get('html');
 			
-			field.addEvent('focus', Blog.Comments.fieldFocus);
-			field.addEvent('blur', Blog.Comments.fieldBlur);
-			field.store('placeholder', label.get('html'));
+			field.addEvent('focus', Blog.View.fieldFocus);
+			field.addEvent('blur', Blog.View.fieldBlur);
+			field.store('placeholder', label_value);
 			label.setStyle('display', 'none');
 			
-			Blog.Comments.fieldBlur.apply(field);
+			Blog.View.fieldBlur.apply(field);
 		});
 	},
 	

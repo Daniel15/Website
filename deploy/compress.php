@@ -79,17 +79,27 @@ $outputDir = $directory . $outputDirBase;
 
 @mkdir($outputDir, null, true);
 
-$jsFiles = array('mootools-more-1.3.0.1.js', 'scripts_r1.js');
+$jsFiles = array(
+	// MooTools More (MooTools included via Google AJAX API)
+	'mootools-more-1.3.0.1.js', 
+	// Syntax highligher
+	'../lib/syntaxhighlighter/shCore.js', '../lib/syntaxhighlighter/shBrushJScript.js', '../lib/syntaxhighlighter/shBrushPhp.js', '../lib/syntaxhighlighter/shBrushCSharp.js', '../lib/syntaxhighlighter/shBrushXml.js', '../lib/syntaxhighlighter/shBrushPlain.js',
+	// Generic scripts
+	'scripts_r1.js'
+);
+
 $cssFiles = array(
 	// Main stylesheets
-	'style_r2.css', 'pages.css', 'sprites-processed.css', 
+	'style_r2.css', 'pages.css', 'sprites-processed.css', 'blog.css',
 	// Print stylesheets
 	'print.css',
 	// IE hacks
-	'style-ie6.css', 'style-ie7.css', 'style-ie8.css'
+	'style-ie6.css', 'style-ie7.css', 'style-ie8.css',
+	// Syntax highlighter
+	'../lib/syntaxhighlighter/shCore.css', '../lib/syntaxhighlighter/shThemeDefault.css',
 );
 
-$blogJSFiles = array(
+/*$blogJSFiles = array(
 	'../blog/wp-includes/js/l10n.js',
 	'../blog/wp-includes/js/comment-reply.js',
 	'../blog/wp-content/plugins/wpaudio-mp3-player/sm2/soundmanager2-nodebug-jsmin.js',
@@ -100,23 +110,23 @@ $blogCSSFiles = array(
 	'../blog/wp-content/plugins/wp-pagenavi/pagenavi-css.css',
 	'../blog/wp-content/plugins/comment-info-detector/comment-info-detector.css',
 	'../blog/wp-content/plugins/wp-syntax/wp-syntax.css',
-);
+);*/
 
 $jsCompress = new Compressor_JS($directory);
 file_put_contents($outputDir . $basename . '.js', $jsCompress->compressFiles($jsFiles));
-file_put_contents($outputDir . $basename . '_blog.js', $jsCompress->compressFiles($blogJSFiles));
+//file_put_contents($outputDir . $basename . '_blog.js', $jsCompress->compressFiles($blogJSFiles));
 
 $cssCompress = new Compressor_CSS($directory);
 file_put_contents($outputDir . $basename . '.css', $cssCompress->compressFiles($cssFiles));
-file_put_contents($outputDir . $basename . '_blog.css', $cssCompress->compressFiles($blogCSSFiles));
+//file_put_contents($outputDir . $basename . '_blog.css', $cssCompress->compressFiles($blogCSSFiles));
 
 if (empty($siteConfig))
 	$siteConfig = array();
 	
 $siteConfig['latestJS'] = $outputDirBase . $basename . '.js';
 $siteConfig['latestCSS'] = $outputDirBase . $basename . '.css';
-$siteConfig['latestBlogJS'] = $outputDirBase . $basename . '_blog.js';
-$siteConfig['latestBlogCSS'] = $outputDirBase . $basename . '_blog.css';
+//$siteConfig['latestBlogJS'] = $outputDirBase . $basename . '_blog.js';
+//$siteConfig['latestBlogCSS'] = $outputDirBase . $basename . '_blog.css';
 
 file_put_contents('../application/config/site.php', '<?' . 'php return ' . var_export($siteConfig, true) . '; ?' . '>');
 

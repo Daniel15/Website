@@ -30,6 +30,17 @@ RewriteCond %{HTTP_HOST}   !^$
 RewriteCond %{REQUEST_FILENAME} !google61623b5951d83a31.html
 RewriteRule ^(.*)         http://dan.cx/$1 [L,R=permanent]
 
+# Redirect pages from old WordPress blog
+RewriteCond %{HTTP_HOST} (.+)
+RewriteRule ^newblog/page/([0-9]+)/$ http://%1/newblog?page=$1 [L,R=permanent]
+
+# Redirect old WordPress blog URLs (categories, posts) to new ones (no trailing slash)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} newblog/(.*)/$
+RewriteCond %{HTTP_HOST} (.+)
+RewriteRule ^newblog/(.*)/$ http://%1/newblog/$1 [L,R=permanent] 
+
 # Allow any files or directories that exist to be displayed directly
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

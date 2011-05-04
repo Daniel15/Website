@@ -33,28 +33,28 @@ class Controller_Site extends Controller_Template
 	public function action_projects()
 	{
 		$model = Model::factory('projects');
-		$techs = $model->getTechs();
-		$techs2 = $model->getOtherTechs();
+		$techs = $model->get_techs();
+		$techs2 = $model->get_other_techs();
 		
 		$this->template
 			->set('title', 'Projects')
 			->set('sidebarType', 'right');
 			
 		$projects = View::factory('includes/projectlist')
-			->set('projects', $model->getProjects())
+			->set('projects', $model->get_projects())
 			->set('techs', $techs)
 			->set('techs2', $techs2);
 			
-		$prevProjects = View::factory('includes/projectlist')
-			->set('projects', $model->getPrevProjects())
+		$prev_projects = View::factory('includes/projectlist')
+			->set('projects', $model->get_prev_projects())
 			->set('techs', $techs)
 			->set('techs2', $techs2);
 			
 		$this->template->content = View::factory('projects')
 			->bind('techs', $techs)
 			->bind('projects', $projects)
-			->bind('prevProjects', $prevProjects)
-			->set('techDescs', $model->getTechDescs());
+			->bind('prevProjects', $prev_projects)
+			->set('techDescs', $model->get_tech_descs());
 			
 		$this->template->sidebar = View::factory('sidebars/projects')
 			->bind('techs', $techs);

@@ -1,0 +1,151 @@
+/* Home page */
+/*.blog .pagination
+{
+	margin: 0;
+	padding: 0;
+}
+
+.blog .pagination li
+{
+	list-style-type: none;
+	display: inline;
+	border: 1px solid #CCC;
+	padding: 0.5em;
+	margin-right: 0.5em;
+}*/
+
+.blog .pagination a, 
+.blog .pagination strong
+{
+	padding: 3px 5px;
+	border: 1px solid #CCC;
+}
+
+/* Posts */
+.blog #content > article footer
+{
+	margin-top: 1em;
+}
+
+#blog-view #content > article footer
+{
+	clear: left;
+	border: 1px solid #B3C0FF;
+	background-color: #F2F6FB;
+	padding: 1em;
+	font-size: x-small;
+}
+
+/* Post meta data */
+.blog article h2
+{
+	z-index: 2;
+	background-color: white;
+}
+
+ul.postmetadata
+{
+	margin: -10px 0 0.5em 0.5em;
+	padding: 0;
+	z-index: 1;
+}
+
+ul.postmetadata li
+{
+	list-style-type: none;
+	display: inline;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	border-radius: 0 0 5px 5px;
+	border-style: solid;
+	border-color: #B3C0FF;
+	border-width: 0 1px 1px 1px;
+	padding: 0.7em 0.6em 0.7em 25px;
+	margin: 0 0.1em;
+	font-size: x-small;
+	
+	background-repeat: no-repeat;
+	background-position: 5px 6px;
+}
+
+.postmetadata img
+{
+	vertical-align: middle;
+}
+
+.blog p.tags
+{
+	clear: left;
+}
+
+/* Comments */
+.blog #leave-comment label
+{
+	width: 5em;
+	display: inline-block;
+}
+
+.blog #leave-comment textarea
+{
+	width: 100%;
+}
+
+.blog #leave-comment #submit
+{
+	width: auto;
+}
+
+.js #leave-comment-form label,
+.js #leave-comment-form small
+{
+	display: none;
+}
+
+.js #leave-comment-form input
+{
+	width: 100%;
+}
+
+.blog #comments ol
+{
+	padding: 0;
+}
+
+.blog #comments li
+{
+	border: 1px solid #B3C0FF;
+	padding: 0.5em 0.5em 0.5em 1em;
+	list-style-type: none;
+	margin-bottom: 1em;
+	background: #FFF;
+}
+
+
+.blog #comments ol li:nth-child(even)
+{
+	background: #F2F6FB;
+}
+
+.blog #comments img.avatar
+{
+	float: left;
+	margin-right: 0.5em;
+}
+
+.blog #comments li header
+{
+	height: 32px;
+	line-height: 32px;
+	margin-bottom: 0.5em;
+}
+
+.blog #comments li header time
+{
+	float: right;
+}
+
+/* Comment replies */
+.blog #comments ol ol
+{
+	padding-left: 2em;
+}
