@@ -48,6 +48,9 @@ if ($siteConfig->enableCompression) : ?>
 	<link rel="stylesheet" href="lib/syntaxhighlighter/shThemeDefault.css" type="text/css" />
 <?php endif; ?>
 
+	<!-- IE! -->
+	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
 	<!-- Other stuff -->
 	<link rel="start" href="/" title="Home" />
 	<?php if (!empty($extraHead)) echo $extraHead; ?>

@@ -120,6 +120,7 @@ Kohana::modules(array(
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	'pagination' => MODPATH.'pagination',
 	'dispatcher' => MODPATH.'dispatcher',
+	'akismet'	 => MODPATH.'akismet',
 	));
 
 /**

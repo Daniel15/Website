@@ -108,6 +108,7 @@ ul.postmetadata li
 
 .blog #comments ol
 {
+	margin: 0;
 	padding: 0;
 }
 

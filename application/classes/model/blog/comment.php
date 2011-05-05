@@ -37,7 +37,7 @@ class Model_Blog_Comment extends ORM
 			->find_all();
 			
 		if (Kohana::$profiling === TRUE)
-			$benchmark = Profiler::start('Blog', 'Building comments heirarchy');
+			$benchmark = Profiler::start('Blog', 'Building comments hierarchy');
 			
 		foreach ($comments as $comment)
 		{
@@ -46,13 +46,9 @@ class Model_Blog_Comment extends ORM
 			$all_comments[$comment->id]->children = array();
 			// Does it have a parent?
 			if (!empty($comment->parent_comment_id))
-			{
 				$all_comments[$comment->parent_comment_id]->children[] = &$all_comments[$comment->id];
-			}
 			else
-			{
 				$root_comments[] = &$all_comments[$comment->id];
-			}
 		}
 		
 		if (isset($benchmark))

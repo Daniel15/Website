@@ -104,9 +104,7 @@ class Model_Blog_Post extends ORM
 			->find_all();
 		
 		foreach ($categories as $category)
-		{
 			$category_links[] = '<a href="' . $category->url() . '">' . $category->title . '</a>';
-		}
 		
 		return implode(', ', $category_links);
 	}

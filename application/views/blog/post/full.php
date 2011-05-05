@@ -15,7 +15,7 @@ if (!empty($tag_links))
 		
 echo '
 		<footer>
-			Short URL for sharing: ', $post->short_url(), '. This entry was posted on ', date($config->full_date_format, $post->date), ' and is filed under ', $post->category_links(), '. You can <a href="#leave-comment">leave a comment</a> if you\'d like to, or subscribe to the RSS feed to keep up-to-date with all my latest blog posts! 
+			Short URL for sharing: ', $post->short_url(), '. This entry was posted on ', date($config->full_date_format, $post->date), ' and is filed under ', $post->category_links(), '. You can <a href="', $post->url(), '#leave-comment">leave a comment</a> if you\'d like to, or subscribe to the RSS feed to keep up-to-date with all my latest blog posts! 
 		</footer>
 	</article>';
 ?>

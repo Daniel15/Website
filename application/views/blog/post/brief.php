@@ -5,7 +5,7 @@ echo '
 ', View::factory('blog/post/header')->set('post', $post)->set('config', $config), '
 		', $post->intro(), '
 		<footer>
-			<a href="', $post->url(), '">', ($post->comment_count == 0 ? 'No comments' : Inflector::plural($post->comment_count . ' Comment', $post->comment_count)), ' &raquo;</a></p>
+			<a href="', $post->url(), '#comments">', ($post->comment_count == 0 ? 'No comments' : Inflector::plural($post->comment_count . ' Comment', $post->comment_count)), ' &raquo;</a></p>
 		</footer>
 	</article>';
 ?>
