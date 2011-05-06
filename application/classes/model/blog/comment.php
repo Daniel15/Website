@@ -67,6 +67,11 @@ class Model_Blog_Comment extends ORM
 		return self::count_comments('spam');
 	}
 	
+	public static function count_hidden_comments()
+	{
+		return self::count_comments('spam');
+	}
+	
 	public static function count_comments($status = 'active')
 	{
 		return DB::select(DB::expr('COUNT(*) AS count'))
@@ -83,20 +88,20 @@ class Model_Blog_Comment extends ORM
 		return array(
 			'author' => array(
 				array('not_empty'),
-				array('max_length', array(':value' => 255)),
+				array('max_length', array(':value', 255)),
 			),
 			'email' => array(
 				array('not_empty'),
-				//array('max_length', array(':value' => 255)),
+				array('max_length', array(':value', 255)),
 				array('email'),
 			),
 			'url' => array(
 				array('url'),
-				//array('max_length', array(':value' => 255)),
+				array('max_length', array(':value', 255)),
 			),
 			'content' => array(
 				array('not_empty'),
-				//array('min_length', array(':value' => 4)),
+				array('min_length', array(':value', 4)),
 			),
 			
 		);

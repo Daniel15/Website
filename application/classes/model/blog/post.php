@@ -135,5 +135,17 @@ class Model_Blog_Post extends ORM
 			->from('blog_posts')
 			->execute()->get('count');
 	}
+	
+	public function recalculate_comments()
+	{
+		$count = DB::select(DB::expr('COUNT(*) AS count'))
+			->from('blog_comments')
+			->where('post_id', '=', $this->id)
+			->where('status', '=', 'visible')
+			->execute()->get('count');
+			
+		$this->comment_count = $count;
+		$this->save();
+	}
 }
 ?>

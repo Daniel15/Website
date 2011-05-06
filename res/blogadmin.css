@@ -33,13 +33,5 @@
 {
 	list-style-type: none;
 	display: inline;
-}
-
-#blogadmin-comments-index ul.actions li:after
-{
-	content: ' | ';
-}
-#blogadmin-comments-index ul.actions li:last-child:after
-{
-	content: '';
+	margin-right: 5px;
 }

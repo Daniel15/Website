@@ -28,5 +28,46 @@ class Controller_BlogAdmin_Comments extends Controller_BlogAdmin
 			->set('title', 'Comment Administration')
 			->bind('content', $page);
 	}
+	
+	public function action_action($comment_id)
+	{
+		$comment = ORM::factory('Blog_Comment', $comment_id);
+		$post = $comment->post;
+		
+		if (isset($_POST['spam']))
+		{
+			$comment->status = 'spam';
+			// TODO: Akismet
+		}
+		elseif (isset($_POST['ham']))
+		{
+			$comment->status = 'visible';
+			// TODO: Akismet
+		}
+		elseif (isset($_POST['approve']))
+		{
+			$comment->status = 'visible';
+		}
+		elseif (isset($_POST['unapprove']))
+		{
+			$comment->status = 'hidden';
+		}
+		elseif (isset($_POST['delete']))
+		{
+			$comment->delete();
+			// Go back to where they came from
+			$this->request->redirect($this->request->referrer());
+		}
+		else
+		{
+			die('Unknown action!');
+		}
+		
+		$comment->save();
+		$post->recalculate_comments();
+		
+		// Go back to where they came from
+		$this->request->redirect($this->request->referrer());
+	}
 }
 ?>
