@@ -105,28 +105,9 @@ class Controller_Blog extends Controller_Template
 			->set('tags', $post->tags->order_by('title')->find_all());
 		
 		// If the page was POSTed, it's a comment
-		// TODO: This should be FULLY pulled out into a separate action
 		if ($_POST)
 		{
-			try
-			{
-				$this->comment($post);
-				$this->template
-					->set('top_message', 'Your comment has been added and will appear on the site as soon as it is approved')
-					->set('top_message_type', 'success');
-			}
-			catch (ORM_Validation_Exception $ex)
-			{
-				//$page->set('errors', $ex->errors('models'));
-				$errors = $ex->errors('models');
-				$this->template
-					->set('top_message_type', 'error')
-					->set('top_message', 'There were some errors with your comment. Please <a href="' . $post->url() . '#leave-comment">correct them</a> and try again:
-<ul>
-	<li>' . implode('</li>
-	<li>', $errors) . '</li>
-</ul>');			
-			}
+			$this->comment($post);
 		}
 			
 		$this->template
@@ -134,25 +115,64 @@ class Controller_Blog extends Controller_Template
 			->bind('content', $page);
 	}
 	
-	public function comment($post)
-	{		
-		$comment = ORM::factory('Blog_Comment');
-		$comment->post = $post;
-		$comment->author = Arr::get($_POST, 'author');
-		$comment->url = Arr::get($_POST, 'url');
-		$comment->email = Arr::get($_POST, 'email');
-		$comment->content = Arr::get($_POST, 'content');
-		$comment->ip = $_SERVER['REMOTE_ADDR'];
-		$comment->ip2 = Arr::get($_SERVER, 'HTTP_X_FORWARDED_FOR');
-		$comment->date = time();
-		$comment->parent_comment_id = Arr::get($_POST, 'parent_comment_id');
-		$comment->user_agent = Arr::get($_SERVER, 'HTTP_USER_AGENT');
-		// TODO
-		$comment->status = 'pending';
-	
-		$comment->save();
+	protected function comment($post)
+	{
+		try
+		{	
+			$comment = ORM::factory('Blog_Comment');
+			$comment->post = $post;
+			$comment->author = Arr::get($_POST, 'author');
+			$comment->url = Arr::get($_POST, 'url');
+			$comment->email = Arr::get($_POST, 'email');
+			$comment->content = Arr::get($_POST, 'content');
+			$comment->ip = $_SERVER['REMOTE_ADDR'];
+			$comment->ip2 = Arr::get($_SERVER, 'HTTP_X_FORWARDED_FOR');
+			$comment->date = time();
+			$comment->parent_comment_id = Arr::get($_POST, 'parent_comment_id');
+			$comment->user_agent = Arr::get($_SERVER, 'HTTP_USER_AGENT');
+			$comment->status = 'pending';
+			// Check if it's all valid even before the Akismet check, so we don't call Akismet unnecessarily
+			$comment->check();
 			
-		return $comment->id;
+			// If we're here, we need to do a spam check
+			if ($this->check_for_spam($post))
+				// What an evil person! D:
+				$comment->status = 'spam';
+			else
+			{
+				// TODO: Send email notification
+			}
+		
+			$comment->save();
+			$this->template
+				->set('top_message', 'Your comment has been added and will appear on the site as soon as it is approved')
+				->set('top_message_type', 'success');
+		}
+		catch (ORM_Validation_Exception $ex)
+		{
+			//$page->set('errors', $ex->errors('models'));
+			$errors = $ex->errors('models');
+			$this->template
+				->set('top_message_type', 'error')
+				->set('top_message', 'There were some errors with your comment. Please <a href="' . $post->url() . '#leave-comment">correct them</a> and try again:
+<ul>
+<li>' . implode('</li>
+<li>', $errors) . '</li>
+</ul>');			
+		}
+	}
+	
+	protected function check_for_spam($post)
+	{
+		return Akismet::factory(array(
+			'user_ip' => $_SERVER['REMOTE_ADDR'],
+			'permalink' => $post->url(),
+			'comment_type' => 'comment',
+			'comment_author' => Arr::get($_POST, 'author'),
+			'comment_author_email' => Arr::get($_POST, 'email'),
+			'comment_author_url' => Arr::get($_POST, 'url'),
+			'comment_content' => Arr::get($_POST, 'content')
+		))->is_spam();
 	}
 }
 ?>

@@ -185,11 +185,7 @@ class Kohana_Akismet {
     public function verify_key()
     {
         $request = 'key='.$this->_config['key'].'&blog='.urlencode($this->_config['blog']);
-        $response = $this->response($request, 'verify-key');
-		
-		echo $this->_config['blog'];
-		
-		
+        $response = $this->response($request, 'verify-key');		
         return ($response == 'valid');
     }
 

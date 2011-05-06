@@ -1,4 +1,13 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
 
-<h2>Blog Administration</h2>
-<p>There are <a href="<?php echo Url::site('blogadmin/comments/index/pending'); ?>"><?php echo $pending; ?> pending comments</a>, <a href="<?php echo Url::site('blogadmin/comments/index/spam'); ?>"><?php echo $spam; ?> spam comments</a> and <a href="<?php echo Url::site('blogadmin/comments/index/hidden'); ?>"><?php echo $hidden; ?> hidden comments</a> in the queue.</p>
+<h2>Comments</h2>
+<p>There are:</p>
+<ul>
+	<li><a href="<?php echo Url::site('blogadmin/comments/index/pending'); ?>"><?php echo $pending; ?> pending comments</a></li>
+	<li><a href="<?php echo Url::site('blogadmin/comments/index/spam'); ?>"><?php echo $spam; ?> spam comments</a></li>
+	<li><a href="<?php echo Url::site('blogadmin/comments/index/hidden'); ?>"><?php echo $hidden; ?> hidden comments</a></li>
+	<li><a href="<?php echo Url::site('blogadmin/comments/index/visible'); ?>"><?php echo $visible; ?> visible comments</a></li>
+</ul>
+
+<h2>Posts</h2>
+<p>TODO</p>

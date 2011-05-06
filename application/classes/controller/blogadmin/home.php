@@ -7,7 +7,8 @@ class Controller_BlogAdmin_Home extends Controller_BlogAdmin
 		$page = View::factory('blog/admin/index')
 			->set('pending', Model_Blog_Comment::count_pending_comments())
 			->set('spam', Model_Blog_Comment::count_spam_comments())
-			->set('hidden', Model_Blog_Comment::count_hidden_comments());
+			->set('hidden', Model_Blog_Comment::count_hidden_comments())
+			->set('visible', Model_Blog_Comment::count_visible_comments());
 			
 		$this->template
 			->set('title', 'Blog Administration')

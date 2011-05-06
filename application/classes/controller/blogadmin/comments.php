@@ -37,12 +37,12 @@ class Controller_BlogAdmin_Comments extends Controller_BlogAdmin
 		if (isset($_POST['spam']))
 		{
 			$comment->status = 'spam';
-			// TODO: Akismet
+			$this->change_spam_status($comment, 'spam');
 		}
 		elseif (isset($_POST['ham']))
 		{
 			$comment->status = 'visible';
-			// TODO: Akismet
+			$this->change_spam_status($comment, 'ham');
 		}
 		elseif (isset($_POST['approve']))
 		{
@@ -68,6 +68,21 @@ class Controller_BlogAdmin_Comments extends Controller_BlogAdmin
 		
 		// Go back to where they came from
 		$this->request->redirect($this->request->referrer());
+	}
+	
+	protected function change_spam_status($comment, $status)
+	{
+		Akismet::factory(array(
+			'user_ip' => $comment->ip,
+			'user_agent' => $comment->user_agent,
+			'referrer' => $comment->post->url(),
+			'permalink' => $comment->post->url(),
+			'comment_type' => 'comment',
+			'comment_author' => $comment->author,
+			'comment_author_email' => $comment->email,
+			'comment_author_url' => $comment->url,
+			'comment_content' => $comment->content
+		))->{'submit_' . $status}();
 	}
 }
 ?>

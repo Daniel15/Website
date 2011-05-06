@@ -69,7 +69,12 @@ class Model_Blog_Comment extends ORM
 	
 	public static function count_hidden_comments()
 	{
-		return self::count_comments('spam');
+		return self::count_comments('hidden');
+	}
+	
+	public static function count_visible_comments()
+	{
+		return self::count_comments('visible');
 	}
 	
 	public static function count_comments($status = 'active')
