@@ -322,7 +322,35 @@ var Blog =
 {
 	init: function()
 	{
+		this.initSidebar();
 		this.initShareLinks();
+	},
+	
+	initSidebar: function()
+	{
+		var archives = $('sidebar-archives');
+		if (!archives)
+			return;
+			
+		var years = archives.getElements('> li');
+		years.each(function(year)
+		{
+			var inner = year.getElement('ul');
+			// Store the height for later
+			var height = inner.getHeight();
+			inner.store('height', height);
+			inner.setStyle('height', '0');
+			
+			year.addEvent('click', this.toggleYear.bind(this));
+		}, this);
+		
+	},
+	
+	toggleYear: function(e)
+	{
+		var inner = $(e.target).getParent().getElement('ul');
+		inner.tween('height', null, inner.getHeight() == '0' ? inner.retrieve('height') : 0);
+		return false;
 	},
 	
 	initShareLinks: function()

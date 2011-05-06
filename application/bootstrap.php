@@ -154,6 +154,11 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 			'controller' => 'blog',
 			'action'     => 'tag',
 		));
+	Route::set('blog_archive', 'newblog/<year>/<month>', array('year' => '\d{4}', 'month' => '\d{2}'))
+		->defaults(array(
+			'controller' => 'blog',
+			'action'     => 'archive',
+		));
 		
 	// Temporary blog route for testing, while the old blog is in use.
 	Route::set('blog', 'newblog/<action>(/<id>)')

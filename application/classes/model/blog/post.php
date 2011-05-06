@@ -1,5 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * The main blog model - The post
+ * Contains all post stuff
+ * @author Daniel15 <daniel at dan dot cx>
+ */
 class Model_Blog_Post extends ORM
 {
 	protected $_belongs_to = array(
@@ -67,6 +72,10 @@ class Model_Blog_Post extends ORM
 		return $content;
 	}
 	
+	/**
+	 * Get the main content of the post
+	 * TODO: Should this go elsewhere?
+	 */
 	public function content()
 	{
 		$content = str_replace('<!--more-->', '<span id="read-more"></span>', $this->content);
@@ -93,18 +102,17 @@ class Model_Blog_Post extends ORM
 		return 'TODO';
 	}
 	
+	/**
+	 * Get all the comments for this post
+	 */
 	public function comments()
 	{
 		return Model_Blog_Comment::for_post($this);
 	}
 	
-	public static function total_count()
-	{
-		return DB::select(DB::expr('COUNT(*) AS count'))
-			->from('blog_posts')
-			->execute()->get('count');
-	}
-	
+	/**
+	 * Recalculate the comment count for this post
+	 */
 	public function recalculate_comments()
 	{
 		$count = DB::select(DB::expr('COUNT(*) AS count'))
@@ -115,6 +123,79 @@ class Model_Blog_Post extends ORM
 			
 		$this->comment_count = $count;
 		$this->save();
+	}
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	// Static functions
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Get the total number of posts in the blog
+	 */
+	public static function total_count()
+	{
+		return DB::select(DB::expr('COUNT(*) AS count'))
+			->from('blog_posts')
+			->execute()->get('count');
+	}
+	
+	/**
+	 * Get the post counts for every month
+	 */
+	public static function get_month_counts()
+	{
+		$data = array();
+		
+		$results = DB::select(
+			DB::expr('MONTH(FROM_UNIXTIME(date)) AS month'),
+			DB::expr('YEAR(FROM_UNIXTIME(date)) AS year'),
+			DB::expr('COUNT(*) AS count')
+		)
+			->from('blog_posts')
+			->group_by('year')
+			->group_by('month')
+			->order_by('year', 'desc')
+			->order_by('month', 'desc')
+			->execute();
+			
+		foreach ($results as $row)
+			$data[$row['year']][$row['month']] = $row['count'];
+		
+		return $data;
+	}
+	
+	/**
+	 * Get all the posts made in a particular month
+	 * @param	int		Year
+	 * @param	int		Month
+	 */
+	public static function posts_for_month($year, $month)
+	{
+		// Find start and end of the month in UNIX timestamps
+		$start = mktime(0, 0, 0, $month, 1, $year);
+		$end = mktime(23, 59, 0, $month + 1, 0, $year);
+		
+		return ORM::factory('Blog_Post')
+			->where('date', '>=', $start)
+			->and_where('date', '<=', $end);
+	}
+	
+	/**
+	 * Get the number of posts made in a particular month
+	 * @param	int		Year
+	 * @param	int		Month
+	 */
+	public static function count_for_month($year, $month)
+	{
+		// Find start and end of the month in UNIX timestamps
+		$start = mktime(0, 0, 0, $month, 1, $year);
+		$end = mktime(23, 59, 0, $month + 1, 0, $year);
+		
+		return DB::select(DB::expr('COUNT(*) AS count'))
+			->from('blog_posts')
+			->where('date', '>=', $start)
+			->and_where('date', '<=', $end)
+			->execute()->get('count');
 	}
 }
 ?>

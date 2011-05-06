@@ -162,3 +162,9 @@ ul.postmetadata li
 {
 	margin-right: 1em;
 }
+
+/* Sidebar */
+.js #sidebar-archives ul
+{
+	overflow: hidden;
+}

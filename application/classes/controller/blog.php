@@ -1,25 +1,36 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * Main controller for the blog
+ * @author Daniel15 <daniel at dan.cx>
+ */
 class Controller_Blog extends Controller_Template
 {
 	protected $config;
 	
+	/**
+	 * Called before any controller action is performed
+	 */
 	public function before()
 	{
 		parent::before();
 		// Load blog config
 		$this->config = Kohana::config('blog');
 		$this->template->bind_global('config', $this->config);
-		
 		$this->template->is_blog = true;
 	}
 	
 	public function after()
-	{		
+	{
+		$this->template->sidebarType = 'right';
+		// TODO: Cache
+		$this->template->sidebar = Request::factory('blogsidebar')->execute()->body();
 		parent::after();
 	}
 	
-	// Listings
+	/**
+	 * Main blog listing
+	 */
 	public function action_index()
 	{		
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
@@ -36,6 +47,29 @@ class Controller_Blog extends Controller_Template
 		
 	}
 	
+	/**
+	 * Blog "archive" - Listing for a particular month
+	 * @param	int		Year of listing
+	 * @param	int		Month of listing
+	 */
+	public function action_archive($year, $month)
+	{
+		$month_name = strftime('%B', mktime(0, 0, 0, $month, 1));
+		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
+		$posts = Model_Blog_Post::posts_for_month($year, $month);
+		
+		$page = View::factory('blog/index')
+			->set('posts', $this->listing(Model_Blog_Post::count_for_month($year, $month), $posts));
+			
+		$this->template
+			->set('title', ($page_number != 1 ? 'Page ' . $page_number . ' &mdash; ' : '') . $month_name . ' ' . $year . ' &mdash; Daniel15\'s Blog')
+			->bind('content', $page);
+	}
+	
+	/**
+	 * Viewing a listing of all posts in a specific category
+	 * @param	string	Slug (URL alias) of the category
+	 */
 	public function action_category($slug)
 	{
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
@@ -49,6 +83,10 @@ class Controller_Blog extends Controller_Template
 			->bind('content', $page);
 	}
 	
+	/**
+	 * Viewing a listing of all posts in a specific tag
+	 * @param	string	Slug (URL alias) of the tag
+	 */
 	public function action_tag($slug)
 	{
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
@@ -62,6 +100,11 @@ class Controller_Blog extends Controller_Template
 			->bind('content', $page);
 	}
 	
+	/**
+	 * Core listing code shared by all blog listing actions
+	 * @param	int		Total record count for all posts in this specific category/tag/listing
+	 * @param	array	Posts that are currently visible
+	 */
 	protected function listing($total_count, $posts)
 	{
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
@@ -83,7 +126,12 @@ class Controller_Blog extends Controller_Template
 			->set('pagination', $pagination->render());
 	}
 	
-	// Viewing a post
+	/**
+	 * Viewing a post itself
+	 * @param	int		Year of the post publication
+	 * @param	int		Month of the post publication
+	 * @param	string	Slug (URL alias) of the list
+	 */
 	public function action_view($year, $month, $slug)
 	{
 		$post = ORM::factory('Blog_Post', array('slug' => $slug));
@@ -115,7 +163,11 @@ class Controller_Blog extends Controller_Template
 			->bind('content', $page);
 	}
 	
-	protected function comment($post)
+	/**
+	 * Adding a post to a comment
+	 * @param	Model_Blog_Post		Post the comment is being added to
+	 */
+	protected function comment(Model_Blog_Post $post)
 	{
 		try
 		{	
@@ -162,7 +214,11 @@ class Controller_Blog extends Controller_Template
 		}
 	}
 	
-	protected function check_for_spam($post)
+	/**
+	 * Check if a comment is a spam post, via Akismet
+	 * @param	Model_Blog_Post		Post the comment is for
+	 */
+	protected function check_for_spam(Model_Blog_Post $post)
 	{
 		return Akismet::factory(array(
 			'user_ip' => $_SERVER['REMOTE_ADDR'],
