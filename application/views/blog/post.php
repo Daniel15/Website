@@ -1,6 +1,9 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-echo View::factory('blog/post/full')->set('post', $post)->set('config', $config);
+echo View::factory('blog/post/full')
+	->set('post', $post)
+	->set('categories', $categories)
+	->set('tags', $tags);
 ?>
 <div id="comments">
 <?php if ($post->comment_count == 0): ?>

@@ -93,37 +93,6 @@ class Model_Blog_Post extends ORM
 		return 'TODO';
 	}
 	
-	/**
-	 * Get links to all the categories this post is a part of
-	 */
-	public function category_links()
-	{
-		$category_links = array();
-		$categories = $this->categories
-			->order_by('title')
-			->find_all();
-		
-		foreach ($categories as $category)
-			$category_links[] = '<a href="' . $category->url() . '">' . $category->title . '</a>';
-		
-		return implode(', ', $category_links);
-	}
-	
-	public function tag_links()
-	{
-		$tag_links = array();
-		$tags = $this->tags
-			->order_by('title')
-			->find_all();
-		
-		foreach ($tags as $tag)
-		{
-			$tag_links[] = '<a href="' . $tag->url() . '">' . $tag->title . '</a>';
-		}
-		
-		return implode(', ', $tag_links);
-	}
-	
 	public function comments()
 	{
 		return Model_Blog_Comment::for_post($this);

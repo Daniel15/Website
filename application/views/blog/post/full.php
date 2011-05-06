@@ -6,16 +6,15 @@ echo '
 		', $post->content();
 
 // Any tags?
-$tag_links = $post->tag_links();
-if (!empty($tag_links))
+if (!empty($tags))
 {
 	echo '
-		<p class="tags"><img src="/res/icons/tag_blue.png" alt="Tags" title="Tags" /> ', $tag_links, '</p>';
+		<p class="tags"><img src="/res/icons/tag_blue.png" alt="Tags" title="Tags" /> ', HTML::link_list($tags), '</p>';
 }
 		
 echo '
 		<footer>
-			Short URL for sharing: ', $post->short_url(), '. This entry was posted on ', date($config->full_date_format, $post->date), ' and is filed under ', $post->category_links(), '. You can <a href="', $post->url(), '#leave-comment">leave a comment</a> if you\'d like to, or subscribe to the RSS feed to keep up-to-date with all my latest blog posts! 
+			Short URL for sharing: ', $post->short_url(), '. This entry was posted on ', date($config->full_date_format, $post->date), ' and is filed under ', HTML::link_list($categories), '. You can <a href="', $post->url(), '#leave-comment">leave a comment</a> if you\'d like to, or subscribe to the RSS feed to keep up-to-date with all my latest blog posts! 
 		</footer>
 	</article>';
 ?>

@@ -100,9 +100,12 @@ class Controller_Blog extends Controller_Template
 		
 		$page = View::factory('blog/post')
 			->bind('post', $post)
-			->set('comments', $post->comments());
+			->set('comments', $post->comments())
+			->set('categories', $post->categories->order_by('title')->find_all())
+			->set('tags', $post->tags->order_by('title')->find_all());
 		
 		// If the page was POSTed, it's a comment
+		// TODO: This should be FULLY pulled out into a separate action
 		if ($_POST)
 		{
 			try
