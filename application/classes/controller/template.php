@@ -5,6 +5,7 @@ class Controller_Template extends Kohana_Controller_Template
 	public function before()
 	{
 		parent::before();
+		// TODO: Fix style of variables (should use underscores not camelcase)
 		$this->template->title = 'Untitled Page';
 		$this->template->content = null;
 		$this->template->sidebarType = 'none';
@@ -13,8 +14,13 @@ class Controller_Template extends Kohana_Controller_Template
 		$this->template->menu = $this->getMenu();
 		
 		$request = Request::current();
-		$this->template->pageID = $request->controller() . '-' . $request->action();
-		$this->template->controller = $request->controller();
+		// Is it a request to a subdirectory (eg. blogadmin)?
+		if ($request->directory() != '')
+			$this->template->controller = $request->directory() . '-' . $request->controller();
+		else
+			$this->template->controller = $request->controller();
+		
+		$this->template->pageID = $this->template->controller . '-' . $request->action();
 		
 		$this->template->siteConfig = $this->siteConfig = Kohana::config('site');
 	}

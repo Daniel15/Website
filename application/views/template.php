@@ -54,6 +54,7 @@ if ($siteConfig->enableCompression) : ?>
 	<!-- Other stuff -->
 	<link rel="start" href="/" title="Home" />
 	<?php if (!empty($extraHead)) echo $extraHead; ?>
+
 </head>
 <body id="<?php echo $pageID; ?>" class="<?php echo $controller; ?> col-<?php echo $sidebarType; ?> no-js">
 	<div id="main-container">
@@ -112,7 +113,15 @@ if (!empty($lastModified) && $lastModified != 0)
 	
 	<!-- General scripts -->
 	<script src="res/scripts_r1.js" type="text/javascript"></script>
-<?php endif; ?>
-	<?php echo View::factory('profiler/stats'); ?>
+<?php
+endif;
+
+if (!empty($extraFoot))
+	echo $extraFoot;
+
+if (Kohana::$environment >= Kohana::TESTING)
+	echo View::factory('profiler/stats'); 
+
+?>
 </body>
 </html>

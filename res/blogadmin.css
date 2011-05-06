@@ -1,0 +1,45 @@
+#blogadmin-comments-index ul#comments
+{
+	margin: 0;
+	padding: 0;
+}
+
+#blogadmin-comments-index ul#comments > li
+{
+	list-style-type: none;
+	border: 1px solid #B3C0FF;
+	padding: 0.5em;
+	margin: 1em 0;
+	background-color: #FFF;
+}
+
+#blogadmin-comments-index ul#comments > li:nth-child(even)
+{
+	background-color: #F2F6FB
+}
+
+#blogadmin-comments-index ul.actions
+{
+	margin: 0;
+	padding: 0;
+}
+
+#blogadmin-comments-index ul.actions:before
+{
+	content: 'Actions: ';
+}
+
+#blogadmin-comments-index ul.actions li
+{
+	list-style-type: none;
+	display: inline;
+}
+
+#blogadmin-comments-index ul.actions li:after
+{
+	content: ' | ';
+}
+#blogadmin-comments-index ul.actions li:last-child:after
+{
+	content: '';
+}

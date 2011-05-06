@@ -57,6 +57,24 @@ class Model_Blog_Comment extends ORM
 		return $root_comments;
 	}
 	
+	public static function count_pending_comments()
+	{
+		return self::count_comments('pending');
+	}
+	
+	public static function count_spam_comments()
+	{
+		return self::count_comments('spam');
+	}
+	
+	public static function count_comments($status = 'active')
+	{
+		return DB::select(DB::expr('COUNT(*) AS count'))
+			->from('blog_comments')
+			->where('status', '=', $status)
+			->execute()->get('count');
+	}
+	
 	/**
 	 * Validation rules
 	 */
@@ -65,7 +83,7 @@ class Model_Blog_Comment extends ORM
 		return array(
 			'author' => array(
 				array('not_empty'),
-				//array('max_length', array(':value' => 255)),
+				array('max_length', array(':value' => 255)),
 			),
 			'email' => array(
 				array('not_empty'),

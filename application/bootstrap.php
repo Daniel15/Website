@@ -110,7 +110,7 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	// 'auth'       => MODPATH.'auth',       // Basic authentication
+	'auth'       => MODPATH.'auth',       // Basic authentication
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	'database'   => MODPATH.'database',   // Database access
@@ -131,19 +131,14 @@ Kohana::modules(array(
  */
 if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 {
-
-	/*Route::set('indexPage', 'index.htm')
-		->defaults(array(
-			'controller' => 'site',
-			'action'     => 'home'
-		));*/
-
+	// Normal pages on the website
 	Route::set('page', '<action>.htm')
 		->defaults(array(
 			'controller' => 'site'
 		));
-		
-	// TODO: Change "newblog" to "blog"
+	
+	// Routes use "newblog" instead of "blog" as the old blog is still live at /blog/
+	// TODO: Change "newblog" to "blog" once the new blog goes live!
 	Route::set('blog_view', 'newblog/<year>/<month>/<slug>', array('year' => '\d{4}', 'month' => '\d{2}'))
 		->defaults(array(
 			'controller' => 'blog',
@@ -159,11 +154,6 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 			'controller' => 'blog',
 			'action'     => 'tag',
 		));
-	/*Route::set('blog_page', 'newblog/page/<page>', array('page' => '\d+'))
-		->defaults(array(
-			'controller' => 'blog',
-			'action'     => 'index',
-		));*/
 		
 	// Temporary blog route for testing, while the old blog is in use.
 	Route::set('blog', 'newblog/<action>(/<id>)')
@@ -177,7 +167,14 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 			'controller' => 'blog',
 			'action'     => 'index',
 		));	
-	
+		
+	// Blog administration
+	Route::set('blogadmin', 'blogadmin(/<controller>(/<action>(/<id>)))')
+		->defaults(array(
+			'directory'  => 'blogadmin',
+			'controller' => 'home',
+			'action'     => 'index',
+		));
 		
 	// Errors
 	Route::set('error', 'error/<action>(/<message>)', array('action' => '[0-9]++', 'message' => '.+'))
