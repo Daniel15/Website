@@ -5,10 +5,13 @@ class Controller_Site extends Controller_Template
 	public function action_index()
 	{
 		// Load the most recent blog posts
-		$posts = unserialize(file_get_contents('cms/data/blog_posts'));
+		$posts = ORM::factory('Blog_Post')
+			->order_by('date', 'desc')
+			->limit(10)
+			->find_all();
 		
 		$page = View::factory('index')
-			->bind('blogPosts', $posts);
+			->bind('blog_posts', $posts);
 		
 		$this->template
 			->set('title', '')

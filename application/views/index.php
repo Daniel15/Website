@@ -37,10 +37,10 @@
 				<h2><a href="/blog/">Recent Blog Posts</a></h2>
 				<ul id="blog-posts">
 <?php
-foreach ($blogPosts as $post)
+foreach ($blog_posts as $post)
 {
 	echo '
-					<li title="', $post['desc'], '"><span class="date">', date('jS M Y', $post['date']), '</span> <a href="', $post['url'], '">', $post['title'], '</a></li>';
+					<li><span class="date">', date('jS M Y', $post->date), '</span> <a href="', $post->url(), '">', $post->title, '</a></li>';
 }
 ?>
 				</ul>

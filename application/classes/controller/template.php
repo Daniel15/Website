@@ -11,7 +11,7 @@ class Controller_Template extends Kohana_Controller_Template
 		$this->template->sidebarType = 'none';
 		$this->template->sidebar = null;
 		$this->template->meta = array();
-		$this->template->menu = $this->getMenu();
+		$this->template->menu = $this->get_menu();
 		
 		$request = Request::current();
 		// Is it a request to a subdirectory (eg. blogadmin)?
@@ -48,15 +48,17 @@ class Controller_Template extends Kohana_Controller_Template
 		parent::after();
 	}
 	
-	protected function getMenu()
+	protected function get_menu()
 	{
-		$action = Request::current()->action();
+		$directory = $this->request->directory();
+		$controller = $this->request->controller();
+		$action = $this->request->action();
 		
 		// TODO: Should this be in a model?
 		$menu_content = array(
 			'' => array(
 				'title' => 'Home',
-				'active' => $action == 'home'
+				'active' => $controller == 'site' && $action == 'index',
 			),
 			'projects.htm' => array(
 				'title' => 'Projects',
@@ -64,7 +66,7 @@ class Controller_Template extends Kohana_Controller_Template
 			),
 			'blog/' => array(
 				'title' => 'Blog',
-				'active' => false
+				'active' => $controller == 'blog' || $directory == 'blog',
 			),
 			'blog/category/microblog/' => array(
 				'title' => 'Thoughts',
