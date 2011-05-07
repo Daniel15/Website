@@ -181,6 +181,8 @@ class Controller_Blog extends Controller_Template
 			$comment->ip2 = Arr::get($_SERVER, 'HTTP_X_FORWARDED_FOR');
 			$comment->date = time();
 			$comment->parent_comment_id = Arr::get($_POST, 'parent_comment_id');
+			if (empty($comment->parent_comment_id))
+				$comment->parent_comment_id = null;
 			$comment->user_agent = Arr::get($_SERVER, 'HTTP_USER_AGENT');
 			$comment->status = 'pending';
 			// Check if it's all valid even before the Akismet check, so we don't call Akismet unnecessarily
