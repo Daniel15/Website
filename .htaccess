@@ -6,10 +6,6 @@ Redirect /ms http://www.myspace.com/daniel_1515
 # Shortened URLs
 Redirect /ldr http://dan.cx/blog/2009/12/the-story-of-a-long-distance-relationship/
 
-# Blog short URLs - http://dan.cx/b[id]
-RewriteRule ^b([a-z0-9]+)$ blog-redirect.php?id=$1
-RewriteRule ^B([A-Za-z0-9\-_]+)$ blog-redirect.php?ver=2&id=$1
-
 # Protect hidden files from being viewed
 <Files .*>
 	Order Deny,Allow

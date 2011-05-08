@@ -99,7 +99,9 @@ class Model_Blog_Post extends ORM
 	 */
 	public function short_url()
 	{
-		return 'TODO';
+		return Route::url('blog_short_url', array(
+			'alias' => Shortener::id_to_alias($this->id),
+		), true);
 	}
 	
 	/**

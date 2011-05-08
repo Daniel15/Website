@@ -164,6 +164,17 @@ class Controller_Blog extends Controller_Template
 	}
 	
 	/**
+	 * Short URL redirect
+	 * @param	alias		Base-64 numeric post ID
+	 */
+	public function action_short_url($alias)
+	{
+		$id = Shortener::alias_to_id($alias);
+		$post = ORM::factory('Blog_Post', $id);
+		$this->request->redirect($post->url(), 301);
+	}
+	
+	/**
 	 * Adding a post to a comment
 	 * @param	Model_Blog_Post		Post the comment is being added to
 	 */

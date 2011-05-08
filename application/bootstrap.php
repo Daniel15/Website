@@ -171,7 +171,14 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 		->defaults(array(
 			'controller' => 'blog',
 			'action'     => 'index',
-		));	
+		));
+
+	// Blog short URLs
+	Route::set('blog_short_url', 'B<alias>')
+		->defaults(array(
+			'controller' => 'blog',
+			'action'     => 'short_url',
+		));
 		
 	// Blog administration
 	Route::set('blogadmin', 'blogadmin(/<controller>(/<action>(/<id>)))')
