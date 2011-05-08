@@ -11,9 +11,15 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="Author" content="Daniel Lo Nigro (Daniel15)" />
 	<meta property="fb:admins" content="731901032" />
-	<meta property="og:type" content="website" />
+	<meta property="og:country_name" content="Australia" />
 	<meta property="og:title" content="<?php echo (empty($title) ? 'Daniel15\'s Site' : $title); ?>" />
+<?php if (empty($is_blog)) : ?>
+	<meta property="og:type" content="website" />
 	<?php echo empty($meta['Description']) ? '' : '<meta property="og:description" content="' . $meta['Description'] . '" />'?>
+<?php else : ?>
+	<meta property="og:type" content="blog" />
+	<meta property="og:site_name" content="Daniel15\'s Blog" />
+<?php endif; ?>
 <?php
 // Here come the meta tags
 foreach ($meta as $metaName => $metaContent)

@@ -161,6 +161,11 @@ class Controller_Blog extends Controller_Template
 		$this->template
 			->set('title', $post->title)
 			->bind('content', $page);
+			
+		// Set the meta tags for Facebook
+		$this->template->extraHead .= '
+	<meta property="og:title" content="' .  htmlspecialchars($post->title) . '" />
+	<meta property="og:url" content="' . $post->url(true) . '" />';
 	}
 	
 	/**

@@ -45,14 +45,15 @@ class Model_Blog_Post extends ORM
 	
 	/**
 	 * Get the URL to the blog post
+	 * @param	bool	If true, include protocol (http://) and host name at start of URL
 	 */
-	public function url()
+	public function url($protocol = false)
 	{
 		return Route::url('blog_view', array(
 			'year' => date('Y', $this->date),
 			'month' => date('m', $this->date),
 			'slug' => $this->slug,
-		));
+		), $protocol);
 	}
 	
 	/**

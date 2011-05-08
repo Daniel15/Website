@@ -3,7 +3,8 @@
 echo '
 	<article id="post-', $post->id, '">
 ', View::factory('blog/post/header')->set('post', $post)->set('config', $config), '
-		', $post->content();
+		', $post->content(), '
+', View::factory('blog/post/share-links')->set('post', $post);
 
 // Any tags?
 if (!empty($tags))

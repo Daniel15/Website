@@ -356,7 +356,7 @@ var Blog =
 	initShareLinks: function()
 	{
 		// All the share links - Insert an <iframe> on load
-		$$('div.post .share li').each(function(el)
+		$$('article .share li').each(function(el)
 		{
 			var site = el.className;
 			var link = el.getElement('a');

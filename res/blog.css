@@ -78,6 +78,57 @@ ul.postmetadata li
 	clear: left;
 }
 
+/* Share links */
+/* Links with JS disabled */
+.blog article .share
+{
+	overflow: hidden;
+}
+
+.blog article .share ul
+{
+	padding: 0;
+	margin: 0;
+	float: left;
+} 
+
+.blog article .share span
+{
+	float: left;
+	margin-right: 0.2em;
+}
+
+.blog article .share li
+{
+	display: inline;
+}
+
+.blog article .share li:after
+{
+	content: ", ";
+}
+
+/* Links with JS enabled */
+body.js article .share span,
+body.js article .share li:after
+{
+	display: none;
+}
+
+body.js .share li.twitter iframe
+{
+	overflow: hidden;
+	width: 100px;
+	height: 20px;
+}
+
+body.js .share li.facebook iframe
+{
+	overflow: hidden;
+	width: 450px;
+	height: 24px;
+}
+
 /* Comments */
 .blog #leave-comment label
 {
