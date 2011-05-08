@@ -38,7 +38,7 @@ class Controller_Blog_Feed extends Controller
 		$channel->addChild('lastBuildDate', date('r', $posts[0]->date));
 		
 		$atom_link = $channel->addChild('link', null, 'http://www.w3.org/2005/Atom');
-		$atom_link->addAttribute('href', Url::site('blog', true));
+		$atom_link->addAttribute('href', 'http://feeds.d15.biz/daniel15');
 		$atom_link->addAttribute('rel', 'self');
 		$atom_link->addAttribute('type', 'application/rss+xml');
 		$channel->addChild('link', Url::site('blog', true));

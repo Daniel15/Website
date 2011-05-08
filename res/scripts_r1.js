@@ -21,7 +21,7 @@ String.implement(
 
 var D15 = D15 || {};
 /**
- * Onload handler for Daniel15 framework. Calls onload functions depending on  \the current page.
+ * Onload handler for Daniel15 framework. Calls onload functions depending on the current page.
  * Splits the body ID by hyphen (-), uses first piece as the main object, and other pieces as 
  * sub-objects. Non-existant init methods are ignored (no error is thrown).
  *
@@ -80,7 +80,9 @@ var Global =
 		if (SyntaxHighlighter && SyntaxHighlighter.all)
 		{
 			SyntaxHighlighter.defaults['toolbar'] = false;
-			SyntaxHighlighter.all();
+			//SyntaxHighlighter.all();
+			// .delay() to run in another "thread"
+			SyntaxHighlighter.highlight.bind(SyntaxHighlighter).delay(0);
 		}
 	}
 };
@@ -323,7 +325,8 @@ var Blog =
 	init: function()
 	{
 		this.initSidebar();
-		this.initShareLinks();
+		// .delay() to run it in another "thread", hopefully so it doesn't freeze the page when ran.
+		this.initShareLinks.bind(this).delay(25);
 	},
 	
 	initSidebar: function()
