@@ -160,6 +160,13 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 			'action'     => 'archive',
 		));
 		
+	// Blog sub-controllers (sidebar, feed)
+	Route::set('blog_sub', 'newblog/<controller>(/<action>(/<id>))', array('controller' => '(sidebar|feed)'))
+		->defaults(array(
+			'directory' => 'blog',
+			'action'    => 'index'
+		));
+		
 	// Temporary blog route for testing, while the old blog is in use.
 	Route::set('blog', 'newblog/<action>(/<id>)')
 		->defaults(array(

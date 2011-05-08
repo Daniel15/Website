@@ -4,7 +4,7 @@
  * Controller for handling blog sidebar rendering
  * @author Daniel15 <daniel at dan.cx>
  */
-class Controller_BlogSidebar extends Controller
+class Controller_Blog_Sidebar extends Controller
 {
 	public function action_index()
 	{

@@ -24,7 +24,7 @@ class Controller_Blog extends Controller_Template
 	{
 		$this->template->sidebarType = 'right';
 		// TODO: Cache
-		$this->template->sidebar = Request::factory('blogsidebar')->execute()->body();
+		$this->template->sidebar = Request::factory('newblog/sidebar')->execute()->body();
 		parent::after();
 	}
 	
