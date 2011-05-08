@@ -13,7 +13,7 @@ abstract class Compressor
 	{
 		global $siteData;
 		
-		$output = '/* Combined file generated ' . date('Y-m-d G:i') . ', based on SVN revision ' . $siteData['svnRevision'] . ' */';
+		$output = '/* Combined file generated ' . date('Y-m-d G:i') . ' */';
 		
 		foreach ($files as $file)
 		{
