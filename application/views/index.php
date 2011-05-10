@@ -40,7 +40,7 @@
 foreach ($blog_posts as $post)
 {
 	echo '
-					<li><span class="date">', date('jS M Y', $post->date), '</span> <a href="', $post->url(), '">', $post->title, '</a></li>';
+					<li><span class="date">', date('jS M Y', $post['date']), '</span> <a href="', $post['url'], '">', $post['title'], '</a></li>';
 }
 ?>
 				</ul>

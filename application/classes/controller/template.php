@@ -2,9 +2,14 @@
 
 class Controller_Template extends Kohana_Controller_Template
 {
+	protected $cache;
+	
 	public function before()
 	{
 		parent::before();
+		
+		$this->cache = Cache::instance('default');
+		
 		// TODO: Fix style of variables (should use underscores not camelcase)
 		$this->template->title = 'Untitled Page';
 		$this->template->content = null;

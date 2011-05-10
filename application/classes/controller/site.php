@@ -4,11 +4,30 @@ class Controller_Site extends Controller_Template
 {	
 	public function action_index()
 	{
-		// Load the most recent blog posts
-		$posts = ORM::factory('Blog_Post')
-			->order_by('date', 'desc')
-			->limit(10)
-			->find_all();
+		// Load the most recent blog posts (from cache if available)
+		if (!($posts = $this->cache->get('daniel15-recent-posts-summary')))
+		{
+			// No cache available, so load data from database
+			$posts = array();
+			$posts_full = ORM::factory('Blog_Post')
+				->order_by('date', 'desc')
+				->limit(10)
+				->find_all();
+				
+			// Pull the ORM objects into a very simple object array (better for caching)
+			foreach ($posts_full as $post)
+			{
+				// The post is stored in an array as XCache doesn't support caching objects
+				// TODO: Switch to another caching system (eg. APC) on live?
+				$posts[] = array(
+					'title' => $post->title,
+					'date' => $post->date,
+					'url' => $post->url()
+				);
+			}
+				
+			$this->cache->set('daniel15-recent-posts-summary', $posts, 86400);
+		}
 		
 		$page = View::factory('index')
 			->bind('blog_posts', $posts);
@@ -23,6 +42,7 @@ class Controller_Site extends Controller_Template
 		$this->template->meta['Description'] = 'Website of Daniel15 (Daniel Lo Nigro), a 20-year-old guy from Melbourne Australia. Here I blog about things important to me, and also link to the various other projects I\'m working on.';
 		
 		// Extra <head> stuff
+		// TODO: This should probably go elsewhere
 		$this->template->extraHead = '
 	<!-- OpenID -->
 	<link rel="openid.server" href="https://www.startssl.com/id.ssl" />

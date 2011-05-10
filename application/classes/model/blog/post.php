@@ -7,6 +7,10 @@
  */
 class Model_Blog_Post extends ORM
 {
+	// Don't reload data from DB when posts are loaded from cache
+	// TODO: Figure out if this causes anything wacky to happen.
+	protected $_reload_on_wakeup = false;
+	
 	protected $_belongs_to = array(
 		'maincategory' => array(
 			'model' => 'Blog_Category'

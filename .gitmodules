@@ -19,3 +19,6 @@
 [submodule "modules/akismet"]
 	path = modules/akismet
 	url = git://github.com/Daniel15/kohana3-akismet.git
+[submodule "modules/cache"]
+	path = modules/cache
+	url = https://github.com/kohana/cache.git
