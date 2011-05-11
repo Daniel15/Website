@@ -137,6 +137,13 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 			'controller' => 'site'
 		));
 	
+	// Sitemap
+	Route::set('sitemap', 'sitemap.xml')
+		->defaults(array(
+			'controller' => 'feed',
+			'action'     => 'sitemap',
+		));
+	
 	// Routes use "newblog" instead of "blog" as the old blog is still live at /blog/
 	// TODO: Change "newblog" to "blog" once the new blog goes live!
 	Route::set('blog_view', 'newblog/<year>/<month>/<slug>', array('year' => '\d{4}', 'month' => '\d{2}'))
