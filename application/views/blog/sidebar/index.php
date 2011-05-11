@@ -7,7 +7,7 @@
 		</p>
 	</li>
 	<li>
-		TODO: Search
+		<?php echo View::factory('includes/search'); ?>
 	</li>
 	<li>
 		<h2>Archives</h2>

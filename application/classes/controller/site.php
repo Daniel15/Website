@@ -5,7 +5,7 @@ class Controller_Site extends Controller_Template
 	public function action_index()
 	{
 		// Load the most recent blog posts (from cache if available)
-		if (!($posts = $this->cache->get('daniel15-recent-posts-summary')))
+		if (!Kohana::config('cache.enabled') || !($posts = $this->cache->get('daniel15-recent-posts-summary')))
 		{
 			// No cache available, so load data from database
 			$posts = array();
@@ -98,6 +98,13 @@ class Controller_Site extends Controller_Template
 		$this->template
 			->set('title', 'What I\'ve Been Doing')
 			->set('content', View::factory('socialfeed')->set('content', $content));
+	}
+	
+	public function action_search()
+	{
+		$this->template
+			->set('title', 'Search Results')
+			->set('content', View::factory('search'));
 	}
 	
 	// Old URLs

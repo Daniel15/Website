@@ -25,7 +25,7 @@ class Controller_Blog extends Controller_Template
 		$this->template->sidebarType = 'right';
 		
 		// Load sidebar from cache, if available
-		if (!($this->template->sidebar = $this->cache->get('daniel15-blog-sidebar')))
+		if (!Kohana::config('cache.enabled') || !($this->template->sidebar = $this->cache->get('daniel15-blog-sidebar')))
 		{
 			// No cache, so load via HMVC request
 			$this->template->sidebar = Request::factory('newblog/sidebar')->execute()->body();

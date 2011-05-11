@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 return array
 (
+	'enabled' => Kohana::$environment >= Kohana::TESTING,
 	'default' => array
 	(
 		'driver'             => 'file',
