@@ -70,7 +70,7 @@ class Controller_Template extends Kohana_Controller_Template
 				'title' => 'Projects',
 				'active' => $action == 'projects'
 			),
-			'blog/' => array(
+			'blog' => array(
 				'title' => 'Blog',
 				'active' => $controller == 'blog' || $directory == 'blog',
 			),

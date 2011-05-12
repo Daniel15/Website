@@ -144,44 +144,39 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 			'action'     => 'sitemap',
 		));
 	
-	// Routes use "newblog" instead of "blog" as the old blog is still live at /blog/
-	// TODO: Change "newblog" to "blog" once the new blog goes live!
-	Route::set('blog_view', 'newblog/<year>/<month>/<slug>', array('year' => '\d{4}', 'month' => '\d{2}'))
+	// Viewing a blog post
+	Route::set('blog_view', 'blog/<year>/<month>/<slug>', array('year' => '\d{4}', 'month' => '\d{2}'))
 		->defaults(array(
 			'controller' => 'blog',
 			'action'     => 'view',
 		));
-	Route::set('blog_category', 'newblog/category/<slug>')
+	// Viewing a category
+	Route::set('blog_category', 'blog/category/<slug>')
 		->defaults(array(
 			'controller' => 'blog',
 			'action'     => 'category',
 		));
-	Route::set('blog_tag', 'newblog/tag/<slug>')
+	// Viewing a tag
+	Route::set('blog_tag', 'blog/tag/<slug>')
 		->defaults(array(
 			'controller' => 'blog',
 			'action'     => 'tag',
 		));
-	Route::set('blog_archive', 'newblog/<year>/<month>', array('year' => '\d{4}', 'month' => '\d{2}'))
+	// Viewing a monthly archive
+	Route::set('blog_archive', 'blog/<year>/<month>', array('year' => '\d{4}', 'month' => '\d{2}'))
 		->defaults(array(
 			'controller' => 'blog',
 			'action'     => 'archive',
 		));
 		
 	// Blog sub-controllers (sidebar, feed)
-	Route::set('blog_sub', 'newblog/<controller>(/<action>(/<id>))', array('controller' => '(sidebar|feed)'))
+	Route::set('blog_sub', 'blog/<controller>(/<action>(/<id>))', array('controller' => '(sidebar|feed)'))
 		->defaults(array(
 			'directory' => 'blog',
 			'action'    => 'index'
 		));
 		
-	// Temporary blog route for testing, while the old blog is in use.
-	Route::set('blog', 'newblog/<action>(/<id>)')
-		->defaults(array(
-			'controller' => 'blog',
-			'action'     => 'index',
-		));	
-		
-	Route::set('blog_home', 'newblog')
+	Route::set('blog_home', 'blog')
 		->defaults(array(
 			'controller' => 'blog',
 			'action'     => 'index',
