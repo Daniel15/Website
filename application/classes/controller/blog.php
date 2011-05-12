@@ -18,6 +18,8 @@ class Controller_Blog extends Controller_Template
 		$this->config = Kohana::config('blog');
 		$this->template->bind_global('config', $this->config);
 		$this->template->is_blog = true;
+		$this->template->extraHead .= '
+	<link rel="alternate" type="application/rss+xml" title="Daniel15\'s Blog - RSS Feed" href="' . $this->config->feedburner_url . '" />';
 	}
 	
 	public function after()

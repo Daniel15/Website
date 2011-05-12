@@ -13,6 +13,7 @@ return array(
 	'gravatar_size' => 32,
 	// Length of the summary of posts (in characters), for the RSS feed
 	'summary_length' => 330,
-	
+	// URL for the FeedBurner feed
+	'feedburner_url' => 'http://feeds.d15.biz/daniel15',
 );
 ?>

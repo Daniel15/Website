@@ -10,6 +10,13 @@ class Controller_Blog_Feed extends Controller
 	 */
 	public function action_index()
 	{
+		// If the user is accessing directly, redirect to FeedBurner instead
+		if (stripos($_SERVER['HTTP_USER_AGENT'], 'feedburner') === false 
+			&& stripos($_SERVER['HTTP_USER_AGENT'], 'feedvalidator') === false
+			&& !isset($_GET['feedburner_override']))
+		{
+			$this->request->redirect(Kohana::config('blog.feedburner_url'));
+		}
 		// Get the posts
 		$posts = ORM::factory('Blog_Post')
 			->order_by('date', 'desc')
