@@ -37,6 +37,9 @@ RewriteCond %{REQUEST_URI} newblog/(.*)/$
 RewriteCond %{HTTP_HOST} (.+)
 RewriteRule ^newblog/(.*)/$ http://%1/newblog/$1 [L,R=permanent] 
 
+# Rewrite old WordPress images
+RewriteRule ^blog/wp-content/uploads/(.+)$ oldblog/wp-content/uploads/$1 [L]
+
 # Allow any files or directories that exist to be displayed directly
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
