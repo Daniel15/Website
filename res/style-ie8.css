@@ -5,7 +5,8 @@
  */
  
 .ielt9 div#main-container > header,
-.ielt9 div#main-container > footer
+.ielt9 div#main-container > footer,
+.ielt9 nav
 {
 	margin: 0;
 }

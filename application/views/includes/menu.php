@@ -1,9 +1,11 @@
-			<ul id="nav"><?php
+			<nav>
+				<ul><?php
 foreach ($items as $uri => $item)
 {
 	echo '
-				<li', $item['active'] ? ' id="selected"' : '', '><a href="', $uri, '"><span>', $item['title'], '</span></a></li>';
+					<li', $item['active'] ? ' id="selected"' : '', '><a href="', $uri, '"><span>', $item['title'], '</span></a></li>';
 }
 ?>
 
-			</ul>
+				</ul>
+			</nav>

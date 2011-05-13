@@ -283,7 +283,7 @@ div#main-container > footer a
 }
 
 /* Top-right nagivation tabs */
-ul#nav
+nav ul
 {
 	margin: 0;
 	padding: 0 2em 0 0;
@@ -291,7 +291,7 @@ ul#nav
 	margin-top: 90px;
 }
 
-ul#nav li
+nav li
 {
 	margin: 0 1em 0 0;
 	padding: 0;
@@ -303,7 +303,7 @@ ul#nav li
 }
 
 
-ul#nav li a
+nav li a
 {
 	display: block;
 	/* IE6 needed a width here */
@@ -329,13 +329,13 @@ ul#nav li a
 
 }
 
-ul#nav li a span
+nav li a span
 {
 	display: block;
 	padding-top: 10px;
 }
 
-ul#nav li#selected a
+nav li#selected a
 {
 	background: #FFF;
 	color: #333;
@@ -349,7 +349,7 @@ ul#nav li#selected a
 	box-shadow: none;
 }
 
-ul#nav li a:hover
+nav li a:hover
 {
 	text-decoration: none;
 	background: #8CD91F;

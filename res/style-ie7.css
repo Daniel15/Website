@@ -5,7 +5,7 @@
  */
 
 /* This is needed because otherwise, the header wraps to the next line and doesn't display. */
-.ie7 ul#nav
+.ie7 nav
 {
 	position: absolute;
 	right: 5%;
