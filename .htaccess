@@ -28,14 +28,14 @@ RewriteRule ^(.*)         http://dan.cx/$1 [L,R=permanent]
 
 # Redirect pages from old WordPress blog
 RewriteCond %{HTTP_HOST} (.+)
-RewriteRule ^newblog/page/([0-9]+)/$ http://%1/newblog?page=$1 [L,R=permanent]
+RewriteRule ^blog/page/([0-9]+)/$ http://%1/blog?page=$1 [L,R=permanent]
 
 # Redirect old WordPress blog URLs (categories, posts) to new ones (no trailing slash)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_URI} newblog/(.*)/$
+RewriteCond %{REQUEST_URI} blog/(.*)/$
 RewriteCond %{HTTP_HOST} (.+)
-RewriteRule ^newblog/(.*)/$ http://%1/newblog/$1 [L,R=permanent] 
+RewriteRule ^blog/(.*)/$ http://%1/blog/$1 [L,R=permanent] 
 
 # Rewrite old WordPress images
 RewriteRule ^blog/wp-content/uploads/(.+)$ oldblog/wp-content/uploads/$1 [L]

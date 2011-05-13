@@ -4,9 +4,7 @@
  * (c) 2008 Daniel15.
  */
  
-.ielt9 div#main-container > header,
-.ielt9 div#main-container > footer,
-.ielt9 nav
+.ielt9 header, .ielt9 footer, .ielt9 nav
 {
 	margin: 0;
 }
