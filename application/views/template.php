@@ -18,7 +18,7 @@
 	<?php echo empty($meta['Description']) ? '' : '<meta property="og:description" content="' . $meta['Description'] . '" />'?>
 <?php else : ?>
 	<meta property="og:type" content="blog" />
-	<meta property="og:site_name" content="Daniel15\'s Blog" />
+	<meta property="og:site_name" content="Daniel15's Blog" />
 <?php endif; ?>
 <?php
 // Here come the meta tags

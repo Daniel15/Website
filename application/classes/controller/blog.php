@@ -19,7 +19,8 @@ class Controller_Blog extends Controller_Template
 		$this->template->bind_global('config', $this->config);
 		$this->template->is_blog = true;
 		$this->template->extraHead .= '
-	<link rel="alternate" type="application/rss+xml" title="Daniel15\'s Blog - RSS Feed" href="' . $this->config->feedburner_url . '" />';
+	<link rel="alternate" type="application/rss+xml" title="Daniel15\'s Blog - RSS Feed" href="' . $this->config->feedburner_url . '" />
+	<link rel="index" title="Daniel15\'s Blog" href="' . Url::site('blog', true) . '" />';
 	}
 	
 	public function after()
@@ -174,7 +175,9 @@ class Controller_Blog extends Controller_Template
 		// Set the meta tags for Facebook
 		$this->template->extraHead .= '
 	<meta property="og:title" content="' .  htmlspecialchars($post->title) . '" />
-	<meta property="og:url" content="' . $post->url(true) . '" />';
+	<meta property="og:url" content="' . $post->url(true) . '" />
+	<link rel="canonical" href="' . $post->url(true) . '" />
+	<link rel="shortlink" href="' . $post->short_url() . '" />';
 	}
 	
 	/**
