@@ -85,6 +85,10 @@ class Controller_Blog extends Controller_Template
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
 		$category = ORM::factory('Blog_Category', array('slug' => $slug));
 		
+		// Throw a 404 if the category doesn't exist
+		if (!$category->loaded())
+			throw new HTTP_Exception_404('Category "' . $slug . '" not found.');
+		
 		$page = View::factory('blog/index')
 			->set('posts', $this->listing($category->post_count(), $category->posts));
 			
@@ -101,6 +105,10 @@ class Controller_Blog extends Controller_Template
 	{
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
 		$tag = ORM::factory('Blog_Tag', array('slug' => $slug));
+		
+		// Throw a 404 if the tag doesn't exist
+		if (!$tag->loaded())
+			throw new HTTP_Exception_404('Tag "' . $slug . '" not found.');
 		
 		$page = View::factory('blog/index')
 			->set('posts', $this->listing($tag->post_count(), $tag->posts));
@@ -145,6 +153,9 @@ class Controller_Blog extends Controller_Template
 	public function action_view($year, $month, $slug)
 	{
 		$post = ORM::factory('Blog_Post', array('slug' => $slug));
+		// Throw a 404 if the post doesn't exist
+		if (!$post->loaded())
+			throw new HTTP_Exception_404('Blog post "' . $slug . '" not found.');
 
 		// Check the URL was actually correct (year and month), redirect if not.
 		if ($year != date('Y', $post->date) || $month != date('m', $post->date))
