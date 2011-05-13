@@ -56,7 +56,7 @@ h3 span
 	background-image: url(gradient-glossy2.png); /** sprite-ref: mainsprite; sprite-alignment: repeat; */
 }
 
-div#sidebar h2 span
+#sidebar h2 span
 {
 	background-image: url(gradient-glossy-sidebar.png); /** sprite-ref: mainsprite; sprite-alignment: repeat; */
 }
