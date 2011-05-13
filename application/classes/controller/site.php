@@ -1,7 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Site extends Controller_Template
-{	
+{
+	/**
+	 * Index page for the website
+	 */
 	public function action_index()
 	{
 		// Load the most recent blog posts (from cache if available)
@@ -53,6 +56,9 @@ class Controller_Site extends Controller_Template
 ';
 	}
 	
+	/**
+	 * Projects page for the website
+	 */
 	public function action_projects()
 	{
 		$model = Model::factory('projects');
@@ -91,6 +97,9 @@ class Controller_Site extends Controller_Template
 		// TODO: Set last modified date
 	}
 	
+	/**
+	 * "Social Feed" - Latest Twitter, YouTube, Facebook, etc. posts
+	 */
 	public function action_socialfeed()
 	{
 		// TODO: Convert this to a Kohana module. This method of loading the page is a little ugly!
@@ -100,6 +109,9 @@ class Controller_Site extends Controller_Template
 			->set('content', View::factory('socialfeed')->set('content', $content));
 	}
 	
+	/**
+	 * Search page. Uses Google Custom Search
+	 */
 	public function action_search()
 	{
 		$this->template
@@ -110,6 +122,6 @@ class Controller_Site extends Controller_Template
 	// Old URLs
 	public function action_feed()
 	{
-		$this->request->redirect('socialfeed.htm', 301);
+		$this->request->redirect('socialfeed.htm' . ((!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : ''), 301);
 	}
 }

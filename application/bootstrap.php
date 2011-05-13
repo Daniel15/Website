@@ -203,6 +203,13 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 			'controller' => 'error'
 		));	
 		
+	// Latest CSS and JavaScript
+	Route::set('latest_js', 'res/combined/latest.<type>')
+		->defaults(array(
+			'controller' => 'redirect',
+			'action'     => 'latest_res',
+		));	
+		
 	Route::set('default', '(<controller>(/<action>(/<id>)))')
 		->defaults(array(
 			'controller' => 'site',
