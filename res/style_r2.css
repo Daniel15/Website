@@ -115,7 +115,7 @@ div#main-container
 }
 
 /* Header and heading h1 */
-div#header
+div#main-container > header
 {
 	height: 130px;
 	overflow: hidden;
@@ -125,7 +125,7 @@ div#header
 	/*background: #3373CD url(stripy.png);*/
 }
 
-div#header h1
+div#main-container > header h1
 {
 	width: 100%;
 	margin: 0;
@@ -147,7 +147,7 @@ div#header h1
 	/* Poor Opera, doesn't have gradients yet :( */
 }
 
-div#header h1 a
+div#main-container > header h1 a
 {
 	color: #fff;
 	text-decoration: none;
@@ -157,8 +157,8 @@ div#header h1 a
 /* This was needed otherwise the background was "poking out" from the rounded corners. Seems we have
  * to round these too. 
  */
-div#header,
-div#header h1
+div#main-container > header,
+div#main-container > header h1
 {
 	border-top-left-radius: 20px; 
 	border-top-right-radius: 20px; 
@@ -203,14 +203,14 @@ div#content
 }
 
 /* Left sidebar, headings, and links contained in lists */
-div#sidebar
+#sidebar
 {
 	width: 240px;
 	position: relative;
 	padding: 1em 0 0 0;
 }
 
-div#sidebar h2
+#sidebar h2
 {
 	margin: 15px 5px 10px 5px;
 	padding: 0;
@@ -219,23 +219,23 @@ div#sidebar h2
 
 
 /* Span used for glossy overlay */
-div#sidebar h2 span
+#sidebar h2 span
 {
 	height: 14px;
 }
 
-div#sidebar ul
+#sidebar ul
 {
 	margin: 0;
 	padding: 0;
 }
 
-div#sidebar ul li
+#sidebar ul li
 {
 	list-style-type: none;
 }
 
-div#sidebar ul li a
+#sidebar ul li a
 {
 	display: block;
 	padding: 4px 0 4px 5px;
@@ -246,14 +246,14 @@ div#sidebar ul li a
 	border-bottom: 1px solid #D2E8F7;
 }
 
-div#sidebar ul li a:hover
+#sidebar ul li a:hover
 {	
 	color: #333;
 	background-color: #D2E8F7;
 }
 
 /* Footer and links in it */
-div#footer
+div#main-container > footer
 {
 	clear: both;
 	padding: 1em;
@@ -277,7 +277,7 @@ div#footer
 	/* Poor Opera, doesn't have gradients yet :( */
 }
 
-div#footer a
+div#main-container > footer a
 {
 	color: #FFFC5C;
 }
@@ -402,7 +402,7 @@ body.col-right div#content_wrap
 	left: 50%;
 }
 
-body.col-right div#sidebar
+body.col-right #sidebar
 {
 	float: right;
 	left: 255px;
@@ -426,14 +426,14 @@ body.col-left div#content
 	right: 100%;
 }
 
-body.col-left div#sidebar
+body.col-left #sidebar
 {
 	float: left;
 	right: 260px;
 }
 
 /***************************** Not showing column *****************************/
-body.col-none div#sidebar
+body.col-none #sidebar
 {
 	display: none;
 }

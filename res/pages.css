@@ -1,12 +1,12 @@
 /******************************** Index page **********************************/
-div#sidebar ul#minifeed li
+#sidebar ul#minifeed li
 {
 	border-bottom: 1px solid #D2E8F7;
 	font-size: 0.8em;
 	margin-bottom: 0.2em;
 }
 
-div#sidebar ul#minifeed li a
+#sidebar ul#minifeed li a
 {
 	display: inline;
 	border: 0;
@@ -14,13 +14,13 @@ div#sidebar ul#minifeed li a
 	margin: 0;
 }
 
-div#sidebar ul#minifeed .meta
+#sidebar ul#minifeed .meta
 {
 	height: 0;
 	overflow: hidden;
 }
 
-div#sidebar ul#minifeed .meta li
+#sidebar ul#minifeed .meta li
 {
 	display: inline;
 	font-size: 1em;
@@ -30,7 +30,7 @@ div#sidebar ul#minifeed .meta li
 	border-bottom: 0;
 }
 
-div#sidebar ul#minifeed .meta .subtext 
+#sidebar ul#minifeed .meta .subtext 
 {
 	display: none;
 }

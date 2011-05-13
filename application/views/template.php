@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?><!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="ie ie6 ielt8"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="ie ie7 ielt8"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="ie ie8"> <![endif]-->
+<!--[if lt IE 7 ]> <html lang="en" class="ie ie6 ielt8 ielt9"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie ie7 ielt8 ielt9"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie ie8 ielt9"> <![endif]-->
 <!--[if IE 9 ]>    <html lang="en" class="ie ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="non-ie"> <!--<![endif]-->
 <head>
@@ -46,6 +46,7 @@ if ($siteConfig->enableCompression) : ?>
 	<link rel="stylesheet" href="res/sprites-processed.css" type="text/css" />
 	<link rel="stylesheet" href="res/blog.css" type="text/css" />
 	<link rel="stylesheet" href="res/print.css" type="text/css" media="print"  />
+	<!--[if lt IE 9]><link rel="stylesheet" href="res/style-ie8.css" type="text/css" /><![endif]-->
 	<!--[if lt IE 8]><link rel="stylesheet" href="res/style-ie7.css" type="text/css" /><![endif]-->
 	<!--[if lt IE 7]><link rel="stylesheet" href="res/style-ie6.css" type="text/css" /><![endif]-->
 	
@@ -63,11 +64,11 @@ if ($siteConfig->enableCompression) : ?>
 </head>
 <body id="<?php echo $pageID; ?>" class="<?php echo $controller; ?> col-<?php echo $sidebarType; ?> no-js">
 	<div id="main-container">
-		<div id="header">
+		<header>
 <?php echo $menu; ?>
 
 			<h1><a href="/" title="Daniel15 is awesome"><?php echo $h1; ?></a></h1>
-		</div>
+		</header>
 		<div id="colmask"><div id="colright">
 			<div id="content_wrap"><div id="content" role="main">
 <?php
@@ -85,21 +86,21 @@ echo $content; ?>
 if (!empty($sidebar))
 {
 	echo '
-			<div id="sidebar">
+			<aside id="sidebar">
 ', $sidebar, '
-			</div>';
+			</aside>';
 }
 ?>
 
 		</div></div>
-		<div id="footer">
+		<footer>
 			&copy;2008&ndash;2011 <a href="http://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>. <?php
 // Output a last modified date if we have one
 if (!empty($lastModified) && $lastModified != 0)
 	echo '<br />This page last modified ' . date('jS F Y', $lastModified), '.';
 ?>
 		Loaded in {execution_time}<!-- using {memory_usage} memory-->.
-		</div>
+		</footer>
 	</div>
 	<!-- Now for the JS -->
 	<script src="http://ajax.googleapis.com/ajax/libs/mootools/1.3.0/mootools-yui-compressed.js" type="text/javascript"></script>

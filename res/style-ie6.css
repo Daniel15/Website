@@ -18,7 +18,7 @@
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy2.png', sizingMethod='scale');
 }
 
-.ie6 div#sidebar h2 span
+.ie6 #sidebar h2 span
 {
 	background: none;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy-sidebar.png', sizingMethod='scale');
@@ -29,12 +29,12 @@
 	width: 400px;
 }
 
-.ie6 div#header
+.ie6 div#main-container > header
 {
 	position: relative;
 }
 
-.ie6 div#header h1
+.ie6 div#main-container > header h1
 {
 	position: absolute;
 	left: 0;
@@ -49,7 +49,7 @@
 	right: 0;
 }
 
-.ie6 div#footer
+.ie6 div#main-container > footer
 {
 	background: none;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/footer_fade.png', sizingMethod='scale');
@@ -63,19 +63,19 @@
 
  
 /* I couldn't figure this out... IE6 seems to be screwing up the paddings for some reason */
-.ie6 div#sidebar
+.ie6 #sidebar
 {
 	margin-left: 5px;
 }
 
 /* Not sure if this bug has a name... I call it the "IE6 makes lis way too big" bug. :P */
-.ie6 div#sidebar ul li
+.ie6 #sidebar ul li
 {
 	height: 1%;
 }
 
 /* This will do, I guess... Stupid IE6 */
-.ie6 div#sidebar ul li a
+.ie6 #sidebar ul li a
 {
 	width: 90%;
 }
