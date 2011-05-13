@@ -436,7 +436,9 @@ Blog.View =
 	replyToComment: function(e)
 	{
 		// Find the footer and stick the comments form in it
-		var comment_footer = $(e.target).getParent('footer');
+		// IE didn't seem to like getParent('footer') for some reason
+		//var comment_footer = $(e.target).getParent('footer');
+		var comment_footer = $(e.target).getParent().getParent().getParent();
 		var comment_id = $(e.target).getParent('li').id.split('-')[1];
 		var comment_form = $('leave-comment');
 		comment_footer.grab(comment_form, 'bottom');
