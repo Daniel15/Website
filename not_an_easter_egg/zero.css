@@ -23,14 +23,14 @@ h1
 	font-weight: bold;
 }
 
-ul#nav
+nav ul
 {
 	list-style-type: none;
 	position: relative;
 	top: 60px;
 }
 
-ul#nav li
+nav li
 {
 	display: inline-block;
 	background: url(zero/zernavha.gif);
@@ -40,12 +40,12 @@ ul#nav li
 	text-align: center;
 }
 
-ul#nav li:hover
+nav li:hover
 {
 	background: url(zero/zernavhh.gif);
 }
 
-ul#nav li a
+nav li a
 {
 	color: white;
 	text-decoration: none;
