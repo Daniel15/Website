@@ -35,6 +35,10 @@ echo View::factory('blog/post/full')
 			<label for="url">Website:</label>
 			<input type="text" name="url" id="url" value="<?php echo htmlspecialchars(Arr::get($_POST, 'website')); ?>" size="22" tabindex="3" />
 		</p>
+		<p id="subject-field">
+			<label for="subject">Ple&#65279;ase leave this field bla&#65279;nk</label>
+			<input type="text" name="subject" id="subject" size="22" tabindex="999" />
+		</p>
 		
 		<p>
 			<textarea name="content" id="content" cols="100%" rows="10" tabindex="4"><?php echo htmlspecialchars(Arr::get($_POST, 'content')); ?></textarea>

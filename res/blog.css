@@ -157,6 +157,12 @@ body.js .share li.facebook iframe
 	width: 100%;
 }
 
+/* Spam prevention field */
+#leave-comment-form #subject-field
+{
+	display: none;
+}
+
 .blog #comments ol
 {
 	margin: 0;

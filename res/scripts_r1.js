@@ -396,6 +396,8 @@ var Blog =
 
 Blog.View = 
 {
+	placeholderFields: ['author', 'email', 'url', 'subject'],
+	
 	init: function()
 	{		
 		// Attach "reply to comment" links
@@ -409,7 +411,7 @@ Blog.View =
 	initPlaceholders: function()
 	{
 		var comment_form = $('leave-comment-form');
-		['author', 'email', 'url'].each(function(field_name)
+		Blog.View.placeholderFields.each(function(field_name)
 		{
 			var field = $(field_name);				
 			var label = comment_form.getElement('label[for=' + field_name + ']');
@@ -480,7 +482,7 @@ Blog.View =
 	
 	removePlaceholders: function()
 	{
-		['author', 'email', 'url'].each(function(field_name)
+		Blog.View.placeholderFields.each(function(field_name)
 		{
 			var field = $(field_name);
 			if (field.value == field.retrieve('placeholder'))

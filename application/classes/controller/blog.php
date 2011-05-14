@@ -208,6 +208,11 @@ class Controller_Blog extends Controller_Template
 	 */
 	protected function comment(Model_Blog_Post $post)
 	{
+		// Simple spambot check - this field is hidden via CSS and clearly labelled as "Do not fill in"
+		// for non-visual browsers.
+		if (!empty($_POST['subject']))
+			die('Not today, spambot.');
+			
 		try
 		{	
 			$comment = ORM::factory('Blog_Comment');
