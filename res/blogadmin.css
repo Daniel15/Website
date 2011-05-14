@@ -35,3 +35,37 @@
 	display: inline;
 	margin-right: 5px;
 }
+
+#blogadmin-posts-edit #main
+{
+	float: left;
+	width: 60%;
+}
+
+#blogadmin-posts-edit #metadata
+{
+	float: right;
+	width: 35%;
+}
+
+#blogadmin-posts-edit textarea
+{
+	width: 99%;
+}
+
+#blogadmin-posts-edit #metadata ul
+{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	height: 150px;
+	overflow: auto;
+}
+
+#blogadmin-posts-edit #metadata ul li
+{
+	margin: 0;
+	padding: 0;
+	width: 12em;
+	float: left;
+}

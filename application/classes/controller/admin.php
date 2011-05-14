@@ -10,8 +10,7 @@ abstract class Controller_Admin extends Controller_Template
 		$this->auth = Auth::instance();
 		if (!$this->auth->logged_in())
 		{
-			echo 'Please log in first';
-			die();
+			$this->request->redirect('account/login');
 		}
 	}
 }

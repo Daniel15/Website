@@ -8,7 +8,9 @@ class Controller_BlogAdmin_Home extends Controller_BlogAdmin
 			->set('pending', Model_Blog_Comment::count_pending_comments())
 			->set('spam', Model_Blog_Comment::count_spam_comments())
 			->set('hidden', Model_Blog_Comment::count_hidden_comments())
-			->set('visible', Model_Blog_Comment::count_visible_comments());
+			->set('visible', Model_Blog_Comment::count_visible_comments())
+			->set('published_posts', Model_Blog_Post::count_posts(true))
+			->set('unpublished_posts', Model_Blog_Post::count_posts(false));
 			
 		$this->template
 			->set('title', 'Blog Administration')

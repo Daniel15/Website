@@ -45,7 +45,7 @@ class Controller_Blog extends Controller_Template
 	{		
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
 		// Get the total count of posts
-		$count = Model_Blog_post::total_count();
+		$count = Model_Blog_post::count_posts();
 		$posts = ORM::factory('Blog_Post');
 		
 		$page = View::factory('blog/index')

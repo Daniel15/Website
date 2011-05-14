@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS `blog_posts` (
   `comment_count` int(10) unsigned NOT NULL,
   `maincategory_id` int(10) unsigned NOT NULL,
   `slug` varchar(255) NOT NULL,
+  `published` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `maincategory_id` (`maincategory_id`)

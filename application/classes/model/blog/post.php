@@ -139,10 +139,11 @@ class Model_Blog_Post extends ORM
 	/**
 	 * Get the total number of posts in the blog
 	 */
-	public static function total_count()
+	public static function count_posts($published = true)
 	{
 		return DB::select(DB::expr('COUNT(*) AS count'))
 			->from('blog_posts')
+			->where('published', '=', $published)
 			->execute()->get('count');
 	}
 	

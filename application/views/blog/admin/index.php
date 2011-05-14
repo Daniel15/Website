@@ -10,4 +10,9 @@
 </ul>
 
 <h2>Posts</h2>
-<p>TODO</p>
+<p>There are:</p>
+<ul>
+	<li><a href="<?php echo Url::site('blogadmin/posts/index/1'); ?>"><?php echo $published_posts; ?> published posts</a></li>
+	<li><a href="<?php echo Url::site('blogadmin/posts/index/0'); ?>"><?php echo $unpublished_posts; ?> unpublished posts</a></li>
+</ul>
+<a href="<?php echo Url::site('blogadmin/posts/edit') ?>">Write a new post</a>
