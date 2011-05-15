@@ -24,7 +24,8 @@ class Controller_BlogAdmin_Posts extends Controller_BlogAdmin
 			->set('categories', Model_Blog_Category::aslist())
 			->set('tags', Model_Blog_Tag::aslist())
 			->bind('selected_categories', $selected_categories)
-			->bind('selected_tags', $selected_tags);
+			->bind('selected_tags', $selected_tags)
+			->set('new', !$post->loaded());
 			
 		$this->template
 			->set('title', 'Edit Post')
@@ -34,6 +35,15 @@ class Controller_BlogAdmin_Posts extends Controller_BlogAdmin
 	protected function edit($post)
 	{
 		$old_id = $post->id;
+		
+		if (!isset($_POST['tags']))
+			$_POST['tags'] = array();
+		if (!isset($_POST['categories']))
+			$_POST['categories'] = array();
+			
+		// Make sure main category is always included in categories
+		if (!in_array($_POST['maincategory'], $_POST['categories']))
+			$_POST['categories'][] = $_POST['maincategory'];
 		
 		$post->title = Arr::get($_POST, 'title');
 		$post->slug = Arr::get($_POST, 'slug');
@@ -45,16 +55,30 @@ class Controller_BlogAdmin_Posts extends Controller_BlogAdmin
 		$this->save_categories($post, $_POST['categories'], 'categories');
 		$this->save_categories($post, $_POST['tags'], 'tags');
 		
-		// If it was a new post, redirect to the "proper" edit URL
+		
+		// Post to Twitter and Facebook if enabled
+		if (!empty($_POST['twitter']))
+		{
+			$twitter = new Social_Twitter();
+			$twitter->new_post($post);
+		}
+		
+		if (!empty($_POST['facebook']))
+		{
+			$facebook = new Social_Facebook();
+			$facebook->new_post($post);
+		}
+		
+		// Was it a new post?
 		if ($old_id != $post->id)
+			// Redirect to the "correct" (with post ID) URL
 			$this->request->redirect('blogadmin/posts/edit/' . $post->id);
 	}
 	
 	protected function save_categories(&$post, $values, $type = 'categories')
 	{
-		$plural = $type;//Inflector::plural($type);
 		$current = array();
-		$current_rows = $post->{$plural}->find_all();
+		$current_rows = $post->$type->find_all();
 			
 		foreach ($current_rows as $row)
 			$current[] = $row->id;

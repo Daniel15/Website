@@ -14,7 +14,7 @@
 		
 		<p>
 			<label for="date">Date:</label>
-			<input type="text" name="date" id="date" size="35" value="<?php echo empty($post->date) ? 'now' : date(Kohana::config('blog.full_date_format'), $post->date); ?>" />
+			<input type="text" name="date" id="date" size="35" value="<?php echo empty($post->date) ? 'now' : date('jS F Y g:i A', $post->date); ?>" />
 		</p>
 		
 		<p>
@@ -22,8 +22,13 @@
 			<label for="published">Published</label>
 		
 		<p>
-			<label for="content">Post:</label><br />
+			<label for="content">Post (wrap paragraphs in &lt;p> tags):</label><br />
 			<textarea name="content" id="content" rows="15" cols="100"><?php echo HTML::chars($post->content); ?></textarea>
+		</p>
+		
+		<p>
+			<label><input type="checkbox" name="twitter" id="twitter" /> Post to Twitter</label>
+			<label><input type="checkbox" name="facebook" id="facebook" /> Post to Facebook</label>
 		</p>
 	</div>
 	
