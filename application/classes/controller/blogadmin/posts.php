@@ -1,7 +1,44 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+/**
+ * Controller for blog administration (posts). Lists all the current posts, and allows editing
+ * and deleting of posts.
+ */
 class Controller_BlogAdmin_Posts extends Controller_BlogAdmin
 {
+	/**
+	 * Post index - List all the posts
+	 * @param	bool	True to show published posts, False to show unpublished posts
+	 */
+	public function action_index($published = true)
+	{
+		$total_count = Model_Blog_Post::count_posts($published);
+		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
+		$pagination = Pagination::factory(array(
+			'total_items' => $total_count,
+			'items_per_page' => 50,
+		));
+		
+		$posts = ORM::factory('Blog_Post')
+			->where('published', '=', $published)
+			->order_by('id', 'desc')
+			->limit($pagination->items_per_page)
+			->offset($pagination->offset)
+			->find_all();
+			
+		$page = View::factory('blog/admin/posts')
+			->bind('posts', $posts)
+			->set('pagination', $pagination->render());
+			
+		$this->template
+			->set('title', 'Post Administration')
+			->bind('content', $page);
+	}
+	
+	/**
+	 * Edit a post
+	 * @param	int		ID of post (or null to create a new one)
+	 */
 	public function action_edit($id = null)
 	{
 		$post = ORM::factory('Blog_Post', $id);
@@ -32,7 +69,11 @@ class Controller_BlogAdmin_Posts extends Controller_BlogAdmin
 			->bind('content', $page);
 	}
 	
-	protected function edit($post)
+	/**
+	 * Save the edit to a post, based on POST data
+	 * @param	Model_Blog_Post		The post
+	 */
+	protected function edit(Model_Blog_Post $post)
 	{
 		$old_id = $post->id;
 		
@@ -75,7 +116,14 @@ class Controller_BlogAdmin_Posts extends Controller_BlogAdmin
 			$this->request->redirect('blogadmin/posts/edit/' . $post->id);
 	}
 	
-	protected function save_categories(&$post, $values, $type = 'categories')
+	/**
+	 * Save the categories or tags for a post. Synchronised POSTed list with the list currently in
+	 * the database, adding and removing records as needed
+	 * @param	Model_Blog_Post		The post
+	 * @param	array				The post values
+	 * @param	string				Type ("categories" or "tags")
+	 */
+	protected function save_categories(Model_Blog_Post& $post, $values, $type = 'categories')
 	{
 		$current = array();
 		$current_rows = $post->$type->find_all();
