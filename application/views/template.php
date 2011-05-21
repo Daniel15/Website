@@ -103,7 +103,7 @@ if (!empty($lastModified) && $lastModified != 0)
 		</footer>
 	</div>
 	<!-- Now for the JS -->
-	<script src="http://ajax.googleapis.com/ajax/libs/mootools/1.3.0/mootools-yui-compressed.js" type="text/javascript"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/mootools/1.3.2/mootools-yui-compressed.js" type="text/javascript"></script>
 <?php if ($siteConfig->enableCompression) : ?>
 	<script src="res/<?php echo $siteConfig->latestJS ?>" type="text/javascript"></script>
 <?php else : ?>
