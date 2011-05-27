@@ -17,7 +17,7 @@ foreach ($comments as $comment)
 			</header>
 			', nl2br(htmlspecialchars($comment->content)), '
 			<footer>
-				<p><a href="', $post->url(), 'TODO?reply_to=', $comment->id, '#leave-comment" class="reply-to">Reply</a></p>
+				<p><a href="', $post->url(), '?parent_comment_id=', $comment->id, '#leave-comment" class="reply-to">Reply</a></p>
 			</footer>
 		</article>';
 		
