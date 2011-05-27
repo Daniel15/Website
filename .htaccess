@@ -29,6 +29,12 @@ RewriteRule ^(.*)         http://dan.cx/$1 [L,R=permanent]
 # Redirect pages from old WordPress blog
 RewriteCond %{HTTP_HOST} (.+)
 RewriteRule ^blog/page/([0-9]+)/$ http://%1/blog?page=$1 [L,R=permanent]
+# Redirect old URLs with days as well as month and year
+RewriteCond %{HTTP_HOST} (.+)
+RewriteRule ^blog/(\d{4})/(\d{2})/(\d{2})/(.+)/$ http://%1/blog/$1/$2/$4 [L,R=permanent]
+# Redirect old trackback URLs
+RewriteCond %{HTTP_HOST} (.+)
+RewriteRule ^blog/(\d{4})/(\d{2})/(.+)/trackback/$ http://%1/blog/$1/$2/$3 [L,R=permanent]
 
 # Redirect old WordPress blog URLs (categories, posts) to new ones (no trailing slash)
 RewriteCond %{REQUEST_FILENAME} !-f
