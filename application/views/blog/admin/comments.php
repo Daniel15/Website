@@ -15,6 +15,7 @@ else
 		echo '
 	<li id="comment-', $comment->id, '">
 		<form action="', Url::site('blogadmin/comments/action/' . $comment->id), '" method="post">
+			<strong>Post:</strong> <a href="', $comment->post->url(), '">', $comment->post->title, '</a><br />
 			<strong>Date:</strong> ', date($config->full_date_format, $comment->date), '<br />
 			<strong>Author:</strong> ', htmlspecialchars($comment->author), '<br />
 			<strong>URL:</strong> ', htmlspecialchars($comment->url), '<br />
