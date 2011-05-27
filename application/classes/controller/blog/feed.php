@@ -38,7 +38,7 @@ class Controller_Blog_Feed extends Controller
 </rss>';
 		$feed = simplexml_load_string($feed);
 		$channel = &$feed->channel;
-		$channel->addChild('title', 'Daniel15\'s Blog');
+		$channel->addChild('title', Kohana::config('blog.name'));
 		$channel->addChild('description', 'Blog of Daniel, a slightly awesome 21-year-old web developer from Melbourne, Australia');
 		$channel->addChild('language', 'en');
 		$channel->addChild('generator', 'Daniel15\'s Website (http://dan.cx/)');

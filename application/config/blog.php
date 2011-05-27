@@ -1,6 +1,8 @@
 <?php defined('SYSPATH') or die('No direct script access.'); 
 
 return array(
+	// Name of the blog
+	'name' => 'Daniel15\'s Blog',
 	// Date format for blog post listings
 	'date_format' => 'jS F Y',
 	// Date format when viewing a blog

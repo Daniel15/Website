@@ -19,8 +19,8 @@ class Controller_Blog extends Controller_Template
 		$this->template->bind_global('config', $this->config);
 		$this->template->is_blog = true;
 		$this->template->extraHead .= '
-	<link rel="alternate" type="application/rss+xml" title="Daniel15\'s Blog - RSS Feed" href="' . $this->config->feedburner_url . '" />
-	<link rel="index" title="Daniel15\'s Blog" href="' . Url::site('blog', true) . '" />';
+	<link rel="alternate" type="application/rss+xml" title="' . $this->config->name . ' - RSS Feed" href="' . $this->config->feedburner_url . '" />
+	<link rel="index" title="' . $this->config->name . '" href="' . Url::site('blog', true) . '" />';
 	}
 	
 	public function after()
@@ -52,7 +52,7 @@ class Controller_Blog extends Controller_Template
 			->set('posts', $this->listing($count, $posts));
 			
 		$this->template
-			->set('title', ($page_number != 1 ? 'Page ' . $page_number . ' &mdash; ' : '') . 'Daniel15\'s Blog')
+			->set('title', ($page_number != 1 ? 'Page ' . $page_number . ' &mdash; ' : '') . $this->config->name)
 			->bind('content', $page);
 		
 	}
@@ -72,7 +72,7 @@ class Controller_Blog extends Controller_Template
 			->set('posts', $this->listing(Model_Blog_Post::count_for_month($year, $month), $posts));
 			
 		$this->template
-			->set('title', ($page_number != 1 ? 'Page ' . $page_number . ' &mdash; ' : '') . $month_name . ' ' . $year . ' &mdash; Daniel15\'s Blog')
+			->set('title', ($page_number != 1 ? 'Page ' . $page_number . ' &mdash; ' : '') . $month_name . ' ' . $year . ' &mdash; ' . $this->config->name)
 			->bind('content', $page);
 	}
 	
@@ -93,7 +93,7 @@ class Controller_Blog extends Controller_Template
 			->set('posts', $this->listing($category->post_count(), $category->posts));
 			
 		$this->template
-			->set('title', ($page_number != 1 ? 'Page ' . $page_number . ' &mdash; ' : '') . 'Latest posts in ' . $category->title . ' &mdash; Daniel15\'s Blog')
+			->set('title', ($page_number != 1 ? 'Page ' . $page_number . ' &mdash; ' : '') . 'Latest posts in ' . $category->title . ' &mdash; ' . $this->config->name)
 			->bind('content', $page);
 	}
 	
@@ -114,7 +114,7 @@ class Controller_Blog extends Controller_Template
 			->set('posts', $this->listing($tag->post_count(), $tag->posts));
 			
 		$this->template
-			->set('title', ($page_number != 1 ? 'Page ' . $page_number . ' &mdash; ' : '') . 'Latest posts in ' . $tag->title . ' tag &mdash; Daniel15\'s Blog')
+			->set('title', ($page_number != 1 ? 'Page ' . $page_number . ' &mdash; ' : '') . 'Latest posts in ' . $tag->title . ' tag &mdash; ' . $this->config->name)
 			->bind('content', $page);
 	}
 	
@@ -238,7 +238,10 @@ class Controller_Blog extends Controller_Template
 				$comment->status = 'spam';
 			else
 			{
-				// TODO: Send email notification
+				// Send an email notification to the admin
+				$email = View::factory('email/admin/new_comment')
+					->set('comment', $comment);
+				Email::admin_notification('New comment on "' . $post->title . '"', $email);
 			}
 		
 			$comment->save();
