@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
 				<h2>Welcome</h2>
 				<p>At the moment, this site is being redesigned, recoded, rewritten, and generally re-everything'd. Stuff may be broken.</p>
-				<p>Hi, I'm Daniel! I'm a 20-year-old web developer, living in Melbourne, Australia. I'm a final-year student at Swinburne University of Technology, studying for a Bachelor of Science (Professional Software Development). I enjoy web development (especially using PHP). I love exploring new technologies, and creating websites or applications implementing these technologies. This should really have a better introduction on who I am... I'll complete it one day. For now you can add me on Facebook, I guess.</p>
+				<p>Hi, I'm Daniel! I'm a 21-year-old web developer, living in Melbourne, Australia. I'm a final-year student at Swinburne University of Technology, studying for a Bachelor of Science (Professional Software Development). I enjoy web development (especially using PHP). I love exploring new technologies, and creating websites or applications implementing these technologies. This should really have a better introduction on who I am... I'll complete it one day. For now you can add me on Facebook, I guess.</p>
 				<p>I've also got a list of <a href="projects.htm">projects I've worked on</a>. I'm probably most well known as "the guy that wrote a lot of Simple Machines Forum modifications", or "the guy that wrote the VCE ENTER/ATAR Calculator" :-)</p>
 				
 				<h2>Contacting me</h2>
