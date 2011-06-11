@@ -401,17 +401,22 @@ Blog.View =
 	init: function()
 	{		
 		// Attach "reply to comment" links
-		$$('#comments .reply-to').addEvent('click', Blog.View.replyToComment.bind(Blog.View));
-		$('cancel-reply').addEvent('click', Blog.View.cancelReply.bind(Blog.View));
+		$$('#comments .reply-to').addEvent('click', this.replyToComment.bind(this));
+		$('cancel-reply').addEvent('click', this.cancelReply.bind(this));
+		
+		// Remembering of comment user details
+		this.storage = new LocalStorage();
+		$('leave-comment-form').addEvent('submit', this.saveCommentDetails.bind(this));
+		this.loadCommentDetails();
 		
 		// Do the placeholders
-		Blog.View.initPlaceholders();
+		this.initPlaceholders();
 	},
 	
 	initPlaceholders: function()
 	{
 		var comment_form = $('leave-comment-form');
-		Blog.View.placeholderFields.each(function(field_name)
+		this.placeholderFields.each(function(field_name)
 		{
 			var field = $(field_name);				
 			var label = comment_form.getElement('label[for=' + field_name + ']');
@@ -424,15 +429,52 @@ Blog.View =
 			if (extra_info && extra_info[0])
 				label_value += ' ' + extra_info[0].get('html');
 			
-			field.addEvent('focus', Blog.View.fieldFocus);
-			field.addEvent('blur', Blog.View.fieldBlur);
+			field.addEvent('focus', this.fieldFocus);
+			field.addEvent('blur', this.fieldBlur);
 			field.store('placeholder', label_value);
 			label.setStyle('display', 'none');
 			
-			Blog.View.fieldBlur.apply(field);
-		});
+			this.fieldBlur.apply(field);
+		}, this);
 		// On submit, remove placeholders
-		comment_form.addEvent('submit', Blog.View.removePlaceholders);
+		comment_form.addEvent('submit', this.removePlaceholders.bind(this));
+		this.checkForPlaceholderText()
+	},
+	
+	/**
+	 * Save details about the commenter (name, email, url) into local storage
+	 */
+	saveCommentDetails: function()
+	{
+		try
+		{
+			this.storage.set('comment-info',
+			{
+				'author': $('author').value,
+				'email': $('email').value,
+				'url': $('url').value
+			});
+		}
+		catch (ex) {}
+		
+	},
+	
+	/**
+	 * Retrieve the commenter details from local storage
+	 */
+	loadCommentDetails: function()
+	{
+		try
+		{
+			var info = this.storage.get('comment-info');
+			if (!info)
+				return;
+			
+			$('author').value = $('author').value || info.author || '';
+			$('email').value = $('email').value || info.email || '';
+			$('url').value = $('url').value || info.url || '';
+		}
+		catch (ex) {}
 	},
 	
 	replyToComment: function(e)
@@ -486,7 +528,21 @@ Blog.View =
 		{
 			var field = $(field_name);
 			if (field.value == field.retrieve('placeholder'))
+			{
 				field.value = '';
+			}
+		});
+	},
+	
+	checkForPlaceholderText: function()
+	{
+		this.placeholderFields.each(function(field_name)
+		{
+			var field = $(field_name);
+			if (field.value == field.retrieve('placeholder'))
+			{
+				field.addClass('placeholder');
+			}
 		});
 	}
 }

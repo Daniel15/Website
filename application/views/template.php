@@ -108,6 +108,7 @@ if (!empty($lastModified) && $lastModified != 0)
 	<script src="res/<?php echo $siteConfig->latestJS ?>" type="text/javascript"></script>
 <?php else : ?>
 	<script src="res/mootools-more-1.3.0.1.js" type="text/javascript"></script>
+	<script src="lib/LocalStorage.js" type="text/javascript"></script>
 	<!-- Syntax highlighting -->
 	<script src="lib/syntaxhighlighter/shCore.js"></script>
 	<script src="lib/syntaxhighlighter/shBrushJScript.js"></script>

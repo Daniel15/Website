@@ -82,6 +82,7 @@ $outputDir = $directory . $outputDirBase;
 $jsFiles = array(
 	// MooTools More (MooTools included via Google AJAX API)
 	'mootools-more-1.3.0.1.js', 
+	'../lib/LocalStorage.js',
 	// Syntax highligher
 	'../lib/syntaxhighlighter/shCore.js', '../lib/syntaxhighlighter/shBrushJScript.js', '../lib/syntaxhighlighter/shBrushPhp.js', '../lib/syntaxhighlighter/shBrushCSharp.js', '../lib/syntaxhighlighter/shBrushXml.js', '../lib/syntaxhighlighter/shBrushPlain.js', '../lib/syntaxhighlighter/shBrushDelphi.js',
 	// Generic scripts
