@@ -5,7 +5,7 @@ Post: <?php echo $comment->post->title ?>
 
 <?php echo $comment->post->url(true) ?>
 
-Author: <?php echo $comment->author ?>
+Author: <?php echo $comment->author ?> (<?php echo $comment->email ?>)
 
 IP: <?php echo $comment->ip, (!empty($comment->ip2) ? ' - ' . $comment->ip2 : '') ?>
 
