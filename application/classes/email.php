@@ -6,7 +6,9 @@
 class Email
 {
 	/**
-	 * Send an notification email to the administrator
+	 * Send a notification email to the administrator
+	 * @param	string		Email subject
+	 * @param	string		Message to send
 	 */
 	public static function admin_notification($subject, $message)
 	{
@@ -15,6 +17,27 @@ class Email
 			'[' . Kohana::config('blog.name') . '] ' . $subject, $message);
 	}
 	
+	/**
+	 * Send a notification email to a user
+	 * @param	string		Email address to send to
+	 * @param	string		Email subject
+	 * @param	string		Message to send
+	 */
+	public static function notification($to, $subject, $message)
+	{
+		return self::send(
+			Kohana::config('email.from_name'), Kohana::config('email.from'), $to,
+			'[' . Kohana::config('blog.name') . '] ' . $subject, $message);
+	}
+	
+	/**
+	 * Actually send an email
+	 * @param	string		Name to show email as being from
+	 * @param	string		Email address to send FROM
+	 * @param	string		Email address to send TO
+	 * @param	string		Email subject
+	 * @param	string		Message to send
+	 */
 	public static function send($from_name, $from, $to, $subject, $message)
 	{
 		// Wrap at 70 characters

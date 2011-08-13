@@ -122,6 +122,21 @@ CREATE TABLE IF NOT EXISTS `blog_tags` (
   KEY `parent_tag_id` (`parent_tag_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_subscriptions`
+--
+
+CREATE TABLE IF NOT EXISTS `blog_subscriptions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `post_id` int(10) unsigned NOT NULL,
+  `email` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `post_id` (`post_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
 --
 -- Constraints for dumped tables
 --

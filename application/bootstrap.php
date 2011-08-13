@@ -150,6 +150,12 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 			'controller' => 'blog',
 			'action'     => 'view',
 		));
+	// Unsubscribe from blog comment emails
+	Route::set('blog_unsub', 'blog/<year>/<month>/<slug>/unsub/<email>', array('year' => '\d{4}', 'month' => '\d{2}', 'email' => '.+'))
+		->defaults(array(
+			'controller' => 'blog',
+			'action'     => 'unsub',
+		));
 	// Viewing a category
 	Route::set('blog_category', 'blog/category/<slug>')
 		->defaults(array(

@@ -3,6 +3,7 @@
 /**
  * Main controller for the blog
  * @author Daniel15 <daniel at dan.cx>
+ * @todo Split all comment-related functionality into a separate controller.
  */
 class Controller_Blog extends Controller_Template
 {
@@ -203,6 +204,28 @@ class Controller_Blog extends Controller_Template
 	}
 	
 	/**
+	 * Unsubscribe from comments to a post
+	 */
+	public function action_unsub($year, $month, $slug, $email)
+	{		
+		// Load the post this subscription is for
+		$post = ORM::factory('Blog_Post', array('slug' => $slug));
+		if (!$post->loaded())
+			throw new HTTP_Exception_404('Post "' . $slug . '" not found.');
+			
+		// Remove the subscription
+		$sub = ORM::factory('Blog_Subscription', array('email' => $email, 'post_id' => $post->id));
+		if (!$sub->loaded())
+			throw new HTTP_Exception_500('Subscription for email ' . $email . ' on post ' . $slug . ' not found!');
+			
+		$sub->delete();
+		$this->template
+			->set('top_message', 'You have been unsubscribed from new comments to this post.')
+			->set('top_message_type', 'success');
+		return $this->action_view($year, $month, $slug);
+	}
+	
+	/**
 	 * Adding a post to a comment
 	 * @param	Model_Blog_Post		Post the comment is being added to
 	 */
@@ -236,15 +259,13 @@ class Controller_Blog extends Controller_Template
 			if ($this->check_for_spam($post))
 				// What an evil person! D:
 				$comment->status = 'spam';
-			else
-			{
-				// Send an email notification to the admin
-				$email = View::factory('email/admin/new_comment')
-					->set('comment', $comment);
-				Email::admin_notification('New comment on "' . $post->title . '"', $email);
-			}
 		
 			$comment->save();
+			
+			// Adding comment was successful, do post-processing (if it's not spam)
+			if ($comment->status != 'spam')
+				$this->handle_new_comment($comment, $post);
+			
 			$this->template
 				->set('top_message', 'Your comment has been added and will appear on the site as soon as it is approved')
 				->set('top_message_type', 'success');
@@ -261,6 +282,37 @@ class Controller_Blog extends Controller_Template
 <li>', $errors) . '</li>
 </ul>');			
 		}
+	}
+	
+	/**
+	 * Do all required processing when a new (valid) comment is added
+	 * @param	Model_Blog_Comment	The comment
+	 * @param	Model_Blog_Post		The post
+	 */
+	protected function handle_new_comment(Model_Blog_Comment $comment, Model_Blog_Post $post)
+	{
+		// Send an email notification to the admin
+		$email = View::factory('email/admin/new_comment')
+			->set('comment', $comment);
+		//Email::admin_notification('New comment on "' . $post->title . '"', $email);
+		
+		// Are they not subscribing to replies? We're all done!
+		if (!isset($_POST['subscribe']))
+			return;
+			
+		// Make sure they're not already subscribed
+		$sub = ORM::factory('Blog_Subscription')
+			->where('email', '=', $comment->email)
+			->where('post_id', '=', $post->id)
+			->find();
+		if ($sub->loaded())
+			return;
+			
+		// Add their subscription
+		$sub = ORM::factory('Blog_Subscription');
+		$sub->post = $post;
+		$sub->email = $comment->email;
+		$sub->save();
 	}
 	
 	/**

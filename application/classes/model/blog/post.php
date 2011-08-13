@@ -32,20 +32,11 @@ class Model_Blog_Post extends ORM
 			'model' => 'Blog_Comment',
 			'foreign_key' => 'post_id',
 		),
+		'subscriptions' => array(
+			'model' => 'Blog_Subscription',
+			'foreign_key' => 'post_id',
+		),
 	);
-	
-	/*public function __get($key)
-	{
-			//const ACCESSOR_PREFIX = 'get_';
-			
-		// Check if there's an accessor function for this property (eg. get_url(), get_intro())
-		// If not, use the default ORM accessor.
-		$accessor = self::ACCESSOR_PREFIX . $key;
-		if (method_exists($this, $accessor))
-			return $this->$accessor();
-	
-		return parent::__get($key);
-	}*/
 	
 	/**
 	 * Get the URL to the blog post
