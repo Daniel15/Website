@@ -165,7 +165,7 @@ Site.Index =
 			// Cancel the event
 			return false;
 		});
-	},
+	}
 };
 
 /**
