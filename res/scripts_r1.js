@@ -111,19 +111,12 @@ Site.Index =
 		
 		this.tips = new Tips('li.social a', {fixed: true});
 		// Make the "start conversation" link open in a new window
-		/*$('start_convo').addEvent('click', function()
-		{
-			window.open(this.href, '_blank', 'height=400px,width=300px');
-			// Cancel the event
-			return false;
-		});*/
 		// Get our awesome stuff
 		this.socialfeed = new SocialFeed($('minifeed'), 
 		{
 			count: 10,
 			loadOnInit: true
 		});
-		//this.WLM.get();
 		this.initGoogleTalk();
 		
 		// Add the social feed hover thingies						
@@ -173,57 +166,7 @@ Site.Index =
 			return false;
 		});
 	},
-	
-	/**
-	 * Windows Live Messenger stuff
-	 */
-	WLM:
-	{
-		// User ID
-		id: '135148d074926a0d@apps.messenger.live.com',
-		// URL to get data from
-		url: 'http://messenger.services.live.com/users/{id}/presence',
-		
-		/**
-		 * Get the user's WLM status
-		 */
-		get: function()
-		{
-			new Request.JSONP({
-				url: this.url.substitute({id: this.id}),
-				//callbackKey: 'cb',
-				data: {
-					'dt': '',
-					'mkt': 'en-AU',
-					// Ugly hack below
-					'cb': 'wlm_cb'
-				},
-				onComplete: this.callback
-			}).send();
-		},
-		/**
-		 * called when WLM returns data
-		 */
-		callback: function(data)
-		{
-			$('status').set('html', data.statusText);
-			$('status_img').set('src', data.icon.url);
-			$('display_name').set('html', data.displayName);
-			// Hide the "start conversation" link if offline
-			if (data.status == 'Offline')
-				$('start_convo').setStyle('display', 'none');
-		}
-	}
 };
-
-/**
- * This is an ugly hack for WLM - It seems noobish and doesn't allow dots in the
- * callback function name >___<. Only Microsoft would be stupid and do that...
- */
-function wlm_cb(data)
-{
-	Site.Index.WLM.callback(data);
-}
 
 /**
  * Projects page
