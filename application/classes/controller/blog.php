@@ -294,7 +294,7 @@ class Controller_Blog extends Controller_Template
 		// Send an email notification to the admin
 		$email = View::factory('email/admin/new_comment')
 			->set('comment', $comment);
-		//Email::admin_notification('New comment on "' . $post->title . '"', $email);
+		Email::admin_notification('New comment on "' . $post->title . '"', $email);
 		
 		// Are they not subscribing to replies? We're all done!
 		if (!isset($_POST['subscribe']))
