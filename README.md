@@ -11,6 +11,7 @@ supported are:
  - Browsing monthly archives
  - Writing comments
    - Spam protection via Akismet
+   - Subscribing to comment replies (receive emails when new comments are made)
  - Writing new posts
    - Posting new posts to Facebook and Twitter
    

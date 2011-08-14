@@ -42,7 +42,7 @@ class Controller_Site extends Controller_Template
 			->bind('content', $page)
 			->bind('sidebar', new View('sidebars/index'));
 		
-		$this->template->meta['Description'] = 'Website of Daniel15 (Daniel Lo Nigro), a 20-year-old guy from Melbourne Australia. Here I blog about things important to me, and also link to the various other projects I\'m working on.';
+		$this->template->meta['Description'] = 'Website of Daniel15 (Daniel Lo Nigro), a 21-year-old guy from Melbourne Australia. Here I blog about things important to me, and also link to the various other projects I\'m working on.';
 		
 		// Extra <head> stuff
 		// TODO: This should probably go elsewhere
@@ -88,13 +88,11 @@ class Controller_Site extends Controller_Template
 		$this->template->sidebar = View::factory('sidebars/projects')
 			->bind('techs', $techs);
 			
-		$this->template->meta['Description'] = 'A listing of projects that I\'m currently working on (including this site, the VCE ENTER Calculator, rTorrentWeb, Sharpamp, ObviousSpoilers.com, DanSoft Australia, and more)';
+		$this->template->meta['Description'] = 'A listing of projects that I\'m currently working on (including this site, the VCE ATAR Calculator, rTorrentWeb, Sharpamp, ObviousSpoilers.com, DanSoft Australia, and more)';
 		
 		// Since the data file changes this page too, the last modified date is the maximum
 		// of either this page itself, or the data file.
 		$this->template->lastModified = max(filemtime(Kohana::find_file('views', 'projects')), filemtime(Kohana::find_file('classes/model', 'projects')));
-		
-		// TODO: Set last modified date
 	}
 	
 	/**

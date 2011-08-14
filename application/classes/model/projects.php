@@ -137,21 +137,10 @@ class Model_Projects extends Model
 				'url' => 'http://dan.cx/',
 				'thumb' => 'daniel15net',
 				'type' => 'Website',
-				'description' => 'A personal site about me, listing all the current and previous projects I\'ve worked on, as well as contact information. Site was designed and coded entirely by me. It is powered by a very simple object-oriented PHP content management system (which I might blog about in the future) and some very small JavaScript snippets. It is <em>always</em> under construction, I keep changing it. :P',
-				'date' => 'January 2010',
-				'tech' => array('php', 'html', 'css', 'mootools', 'js', 'wordpress'),
-			),
-			
-			array(
-				'name' => 'rTorrentWeb',
-				'url' => 'http://rtorrentweb.com/',
-				'thumb' => 'rtorrentweb',
-				'thumb_height' => 129,
-				'type' => 'Web Application',
-				'description' => 'A web-based frontend for the high-performance command-line torrent client rTorrent. The interface is inspired by uTorrent.',
-				'date' => 'Pre-beta available from December 2009.',
-				'tech' => array('php', 'kohana', 'sqlite', 'mootools', 'js', 'html', 'css'),
-				'tech2' => array('kohana_orm', 'xmlrpc', 'ajax'),
+				'description' => 'A personal site about me, listing all the current and previous projects I\'ve worked on, as well as contact information. Site was designed and coded by me, using the Kohana PHP framework, and the MooTools JavaScript framework. The source code is <a href="http://github.com/Daniel15/Website">available on Github</a>. It is <em>always</em> under construction, I keep changing it. :P',
+				'date' => 'August 2011',
+				'tech' => array('php', 'kohana', 'html', 'css', 'mootools', 'js'),
+				'tech2' => array('kohana_orm'),
 			),
 			
 			array(
@@ -166,22 +155,12 @@ class Model_Projects extends Model
 			),
 			
 			array(
-				'name' => 'Sharpamp',
-					'url' => 'http://code.google.com/p/sharpamp/',
-				'thumb' => 'no-pic',
-				'type' => 'Library',
-				'description' => 'Sharpamp allows you to easily write Winamp plugins in C#. It provides a library for access to the Winamp API, and a Visual Studio template for creating Winamp plugins. It is open-source, licenced under the GNU Lesser General Public License.',
-				'date' => 'November 2009',
-				'tech' => array('csharp', 'cppcli'),
-			),
-			
-			array(
-				'name' => 'VCE ENTER Calculator',
-				'url' => 'http://entercalc.syte.cc/',
+				'name' => 'VCE ATAR Calculator',
+				'url' => 'http://atarcalc.com/',
 				'thumb' => 'entercalc',
 				'thumb_height' => 141,
 				'type' => 'Website',
-				'description' => 'The VCE ENTER calculator allows you to estimate what your ENTER would be, based on your study score estimates. The previous year\'s scaling report is used to estimate what these study scores would scale to, and then the aggregate to ENTER table is used to estimate the ENTER. This is one of my most popular sites to date. As shown in the screenshot, the VCE ENTER calculator uses the same design as Syte.',
+				'description' => 'The VCE ATAR calculator allows you to estimate what your ATAR would be, based on your study score estimates. The previous year\'s scaling report is used to estimate what these study scores would scale to, and then the aggregate to ATAR table is used to estimate the ATAR. This is one of my most popular sites to date. As shown in the screenshot, the VCE ATAR calculator uses the same design as Syte.',
 				'date' => 'November 2007, updated February 2010',
 				'tech' => array('php', 'mysql', 'mootools', 'js', 'html', 'css'),
 			),
@@ -192,6 +171,28 @@ class Model_Projects extends Model
 	public function get_prev_projects()
 	{
 		return array(
+			array(
+				'name' => 'rTorrentWeb',
+				'url' => 'http://rtorrentweb.com/',
+				'thumb' => 'rtorrentweb',
+				'thumb_height' => 129,
+				'type' => 'Web Application',
+				'description' => 'A web-based frontend for the high-performance command-line torrent client rTorrent. The interface is inspired by uTorrent.',
+				'date' => 'Pre-beta available from December 2009.',
+				'tech' => array('php', 'kohana', 'sqlite', 'mootools', 'js', 'html', 'css'),
+				'tech2' => array('kohana_orm', 'xmlrpc', 'ajax'),
+			),
+			
+			array(
+				'name' => 'Sharpamp',
+					'url' => 'http://code.google.com/p/sharpamp/',
+				'thumb' => 'no-pic',
+				'type' => 'Library',
+				'description' => 'Sharpamp allows you to easily write Winamp plugins in C#. It provides a library for access to the Winamp API, and a Visual Studio template for creating Winamp plugins. It is open-source, licenced under the GNU Lesser General Public License.',
+				'date' => 'November 2009',
+				'tech' => array('csharp', 'cppcli'),
+			),
+			
 			array(
 				'name' => 'Syte',
 				'url' => 'http://syte.cc/',
