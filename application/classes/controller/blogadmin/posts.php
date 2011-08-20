@@ -10,8 +10,10 @@ class Controller_BlogAdmin_Posts extends Controller_BlogAdmin
 	 * Post index - List all the posts
 	 * @param	bool	True to show published posts, False to show unpublished posts
 	 */
-	public function action_index($published = true)
+	public function action_index()
 	{
+		$published = $this->request->param('id');
+		
 		$total_count = Model_Blog_Post::count_posts($published);
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
 		$pagination = Pagination::factory(array(
@@ -39,8 +41,9 @@ class Controller_BlogAdmin_Posts extends Controller_BlogAdmin
 	 * Edit a post
 	 * @param	int		ID of post (or null to create a new one)
 	 */
-	public function action_edit($id = null)
+	public function action_edit()
 	{
+		$id = $this->request->param('id');
 		$post = ORM::factory('Blog_Post', $id);
 		
 		// Was the page posted?

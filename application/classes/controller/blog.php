@@ -63,8 +63,11 @@ class Controller_Blog extends Controller_Template
 	 * @param	int		Year of listing
 	 * @param	int		Month of listing
 	 */
-	public function action_archive($year, $month)
+	public function action_archive()
 	{
+		$year = $this->request->param('year');
+		$month = $this->request->param('month');
+		
 		$month_name = strftime('%B', mktime(0, 0, 0, $month, 1));
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
 		$posts = Model_Blog_Post::posts_for_month($year, $month);
@@ -81,8 +84,10 @@ class Controller_Blog extends Controller_Template
 	 * Viewing a listing of all posts in a specific category
 	 * @param	string	Slug (URL alias) of the category
 	 */
-	public function action_category($slug)
+	public function action_category()
 	{
+		$slug = $this->request->param('slug');
+		
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
 		$category = ORM::factory('Blog_Category', array('slug' => $slug));
 		
@@ -102,8 +107,10 @@ class Controller_Blog extends Controller_Template
 	 * Viewing a listing of all posts in a specific tag
 	 * @param	string	Slug (URL alias) of the tag
 	 */
-	public function action_tag($slug)
+	public function action_tag()
 	{
+		$slug = $this->request->param('slug');
+		
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
 		$tag = ORM::factory('Blog_Tag', array('slug' => $slug));
 		
@@ -151,8 +158,12 @@ class Controller_Blog extends Controller_Template
 	 * @param	int		Month of the post publication
 	 * @param	string	Slug (URL alias) of the list
 	 */
-	public function action_view($year, $month, $slug)
+	public function action_view()
 	{
+		$year = $this->request->param('year');
+		$month = $this->request->param('month');
+		$slug = $this->request->param('slug');
+		
 		$post = ORM::factory('Blog_Post', array('slug' => $slug));
 		// Throw a 404 if the post doesn't exist
 		if (!$post->loaded())
@@ -196,8 +207,10 @@ class Controller_Blog extends Controller_Template
 	 * Short URL redirect
 	 * @param	alias		Base-64 numeric post ID
 	 */
-	public function action_short_url($alias)
+	public function action_short_url()
 	{
+		$alias = $this->request->param('alias');
+		
 		$id = Shortener::alias_to_id($alias);
 		$post = ORM::factory('Blog_Post', $id);
 		$this->request->redirect($post->url(), 301);
@@ -206,8 +219,13 @@ class Controller_Blog extends Controller_Template
 	/**
 	 * Unsubscribe from comments to a post
 	 */
-	public function action_unsub($year, $month, $slug, $email)
-	{		
+	public function action_unsub()
+	{
+		$year = $this->request->param('year');
+		$month = $this->request->param('month');
+		$slug = $this->request->param('slug');
+		$email = $this->request->param('email');
+		
 		// Load the post this subscription is for
 		$post = ORM::factory('Blog_Post', array('slug' => $slug));
 		if (!$post->loaded())
@@ -222,7 +240,7 @@ class Controller_Blog extends Controller_Template
 		$this->template
 			->set('top_message', 'You have been unsubscribed from new comments to this post.')
 			->set('top_message_type', 'success');
-		return $this->action_view($year, $month, $slug);
+		return $this->action_view();
 	}
 	
 	/**

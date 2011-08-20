@@ -16,8 +16,13 @@ class Controller_BlogAdmin_Comments extends Controller_BlogAdmin
 	 * 
 	 * @param	string	Status to show
 	 */
-	public function action_index($comment_status = 'pending')
+	public function action_index()
 	{
+		$comment_status = $this->request->param('id');
+		// Default to pending status
+		if (empty($comment_status))
+			$comment_status = 'pending';
+			
 		$total_count = Model_Blog_Comment::count_comments($comment_status);
 		$page_number = !empty($_GET['page']) ? $_GET['page'] : 1;
 		$pagination = Pagination::factory(array(
@@ -47,8 +52,10 @@ class Controller_BlogAdmin_Comments extends Controller_BlogAdmin
 	 * Perform an action on a comment (such as marking it as spam, or approving it
 	 * @param	int		ID of the comment
 	 */
-	public function action_action($comment_id)
+	public function action_action()
 	{
+		$comment_id = $this->request->param('id');
+		
 		$comment = ORM::factory('Blog_Comment', $comment_id);
 		$post = $comment->post;
 		
