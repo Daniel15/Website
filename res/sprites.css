@@ -44,6 +44,19 @@ ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit .icon, .socia
 	background-image: url(icons/social/reddit.png); /** sprite-ref: mainsprite; */
 }
 
+.social .github a 
+{
+	background-image: url(icons/social/github.png); /** sprite-ref: mainsprite; */
+}
+.social .linkedin a 
+{
+	background-image: url(icons/social/linkedin.png); /** sprite-ref: mainsprite; */
+}
+.social .gplus a 
+{
+	background-image: url(icons/social/gplus.png); /** sprite-ref: mainsprite; */
+}
+
 /* Glossy overlay thingies for headings */
 /* TODO: See if these can be done with CSS3 instead */
 h2 span
