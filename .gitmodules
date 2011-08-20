@@ -3,7 +3,7 @@
 	url = git://github.com/kohana/core.git
 [submodule "modules/pagination"]
 	path = modules/pagination
-	url = git://github.com/kohana/pagination.git
+	url = git://github.com/kemo/kohana-pagination.git
 [submodule "modules/orm"]
 	path = modules/orm
 	url = git://github.com/kohana/orm.git
