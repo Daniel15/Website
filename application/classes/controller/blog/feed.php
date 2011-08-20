@@ -15,12 +15,12 @@ class Controller_Blog_Feed extends Controller
 			&& stripos($_SERVER['HTTP_USER_AGENT'], 'feedvalidator') === false
 			&& !isset($_GET['feedburner_override']))
 		{
-			$this->request->redirect(Kohana::config('blog.feedburner_url'));
+			$this->request->redirect(Kohana::$config->load('blog.feedburner_url'));
 		}
 		// Get the posts
 		$posts = ORM::factory('Blog_Post')
 			->order_by('date', 'desc')
-			->limit(Kohana::config('blog.posts_in_feed'))
+			->limit(Kohana::$config->load('blog.posts_in_feed'))
 			->find_all();
 			
 		// First create a basic feed that we can load into SimpleXML
@@ -38,7 +38,7 @@ class Controller_Blog_Feed extends Controller
 </rss>';
 		$feed = simplexml_load_string($feed);
 		$channel = &$feed->channel;
-		$channel->addChild('title', Kohana::config('blog.name'));
+		$channel->addChild('title', Kohana::$config->load('blog.name'));
 		$channel->addChild('description', 'Blog of Daniel, a slightly awesome 21-year-old web developer from Melbourne, Australia');
 		$channel->addChild('language', 'en');
 		$channel->addChild('generator', 'Daniel15\'s Website (http://dan.cx/)');
@@ -53,7 +53,7 @@ class Controller_Blog_Feed extends Controller
 		foreach ($posts as $post)
 		{
 			$content = str_replace('&', '&amp;', $post->content());
-			$description = Text::limit_chars(strip_tags($content), Kohana::config('blog.summary_length'), null, true);
+			$description = Text::limit_chars(strip_tags($content), Kohana::$config->load('blog.summary_length'), null, true);
 			$url = $post->url(true);
 		
 			$post_feed = $channel->addChild('item');

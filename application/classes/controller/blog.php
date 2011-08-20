@@ -16,7 +16,7 @@ class Controller_Blog extends Controller_Template
 	{
 		parent::before();
 		// Load blog config
-		$this->config = Kohana::config('blog');
+		$this->config = Kohana::$config->load('blog');
 		$this->template->bind_global('config', $this->config);
 		$this->template->is_blog = true;
 		$this->template->extraHead .= '
@@ -29,7 +29,7 @@ class Controller_Blog extends Controller_Template
 		$this->template->sidebarType = 'right';
 		
 		// Load sidebar from cache, if available
-		if (!Kohana::config('cache.enabled') || !($this->template->sidebar = $this->cache->get('daniel15-blog-sidebar')))
+		if (!Kohana::$config->load('cache.enabled') || !($this->template->sidebar = $this->cache->get('daniel15-blog-sidebar')))
 		{
 			// No cache, so load via HMVC request
 			$this->template->sidebar = Request::factory('blog/sidebar')->execute()->body();

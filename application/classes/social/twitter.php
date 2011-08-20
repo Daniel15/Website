@@ -10,7 +10,7 @@ class Social_Twitter extends Social
 	
 	public function new_post(Model_Blog_Post $post)
 	{
-		$config = Kohana::config('social.twitter');
+		$config = Kohana::$config->load('social.twitter');
 		// No configuration?
 		if (empty($config) || empty($config['consumer_key']))
 			return;

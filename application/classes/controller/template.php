@@ -28,7 +28,7 @@ class Controller_Template extends Kohana_Controller_Template
 		
 		$this->template->pageID = $this->template->controller . '-' . $request->action();
 		
-		$this->template->siteConfig = $this->siteConfig = Kohana::config('site');
+		$this->template->siteConfig = $this->siteConfig = Kohana::$config->load('site');
 	}
 	
 	public function after()
@@ -44,7 +44,7 @@ class Controller_Template extends Kohana_Controller_Template
 		// Set the <h1> tag
 		// Is it in the blog?
 		if (substr($this->template->controller, 0, 4) == 'blog')
-			$this->template->h1 = Kohana::config('blog.name');
+			$this->template->h1 = Kohana::$config->load('blog.name');
 		// Otherwise, is there a page title?
 		elseif (!empty($this->template->title))
 			$this->template->h1 = $this->template->title;

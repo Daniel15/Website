@@ -8,7 +8,7 @@ class Controller_Site extends Controller_Template
 	public function action_index()
 	{
 		// Load the most recent blog posts (from cache if available)
-		if (!Kohana::config('cache.enabled') || !($posts = $this->cache->get('daniel15-recent-posts-summary')))
+		if (!Kohana::$config->load('cache.enabled') || !($posts = $this->cache->get('daniel15-recent-posts-summary')))
 		{
 			// No cache available, so load data from database
 			$posts = array();

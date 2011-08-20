@@ -13,8 +13,8 @@ class Email
 	public static function admin_notification($subject, $message)
 	{
 		return self::send(
-			Kohana::config('email.from_name'), Kohana::config('email.from'), Kohana::config('email.to'),
-			'[' . Kohana::config('blog.name') . '] ' . $subject, $message);
+			Kohana::$config->load('email.from_name'), Kohana::$config->load('email.from'), Kohana::$config->load('email.to'),
+			'[' . Kohana::$config->load('blog.name') . '] ' . $subject, $message);
 	}
 	
 	/**
@@ -26,8 +26,8 @@ class Email
 	public static function notification($to, $subject, $message)
 	{
 		return self::send(
-			Kohana::config('email.from_name'), Kohana::config('email.from'), $to,
-			'[' . Kohana::config('blog.name') . '] ' . $subject, $message);
+			Kohana::$config->load('email.from_name'), Kohana::$config->load('email.from'), $to,
+			'[' . Kohana::$config->load('blog.name') . '] ' . $subject, $message);
 	}
 	
 	/**

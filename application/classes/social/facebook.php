@@ -10,7 +10,7 @@ class Social_Facebook extends Social
 	
 	public function new_post(Model_Blog_Post $post)
 	{
-		$config = Kohana::config('social.facebook');
+		$config = Kohana::$config->load('social.facebook');
 		// No configuration?
 		if (empty($config) || empty($config['access_token']))
 			return;

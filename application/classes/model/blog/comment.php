@@ -15,7 +15,7 @@ class Model_Blog_Comment extends ORM
 	{
 		$md5 = md5(strtolower(trim($this->email)));
 		
-		return 'http://www.gravatar.com/avatar/' . $md5 . '?s=' . Kohana::config('blog.gravatar_size') . '&d=monsterid&r=PG';
+		return 'http://www.gravatar.com/avatar/' . $md5 . '?s=' . Kohana::$config->load('blog.gravatar_size') . '&d=monsterid&r=PG';
 	}
 	
 	public function author_link()

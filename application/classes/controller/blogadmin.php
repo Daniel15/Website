@@ -15,7 +15,7 @@ abstract class Controller_BlogAdmin extends Controller_Admin
 	<!-- Blog administration -->
 	<script src="res/blogadmin.js"></script>';
 		
-		$this->config = Kohana::config('blog');
+		$this->config = Kohana::$config->load('blog');
 		// Pass blog config to view
 		$this->template->bind_global('config', $this->config);
 	}
