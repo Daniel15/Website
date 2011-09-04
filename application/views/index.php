@@ -20,11 +20,11 @@
 						<ul>
 							<li class="facebook"><a title="Facebook" href="http://www.facebook.com/daaniel">Facebook</a></li>
 							<li class="twitter"><a title="Twitter" href="http://www.twitter.com/daniel15">Twitter</a></li>
-							<li class="github"><a title="Github" href="http://github.com/Daniel15">Twitter</a></li>
+							<li class="github"><a title="Github" href="http://github.com/Daniel15">Github</a></li>
 							<li class="reddit"><a title="Reddit" href="http://reddit.com/user/daniel15">Reddit</a></li>
 							<li class="lastfm"><a title="Last.fm" href="http://last.fm/user/daniel_1515">Last.fm</a></li>
-							<li class="linkedin"><a title="LinkedIn" href="http://linkedin.com/in/Daniel15">Twitter</a></li>
-							<li class="gplus"><a title="Google+" href="http://dl.vc/gplus">Twitter</a></li>
+							<li class="linkedin"><a title="LinkedIn" href="http://linkedin.com/in/Daniel15">LinkedIn</a></li>
+							<li class="gplus"><a title="Google+" href="http://dl.vc/gplus">Google+</a></li>
 						</ul>
 					</li>
 				</ul>
