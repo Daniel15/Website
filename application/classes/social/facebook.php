@@ -83,7 +83,7 @@ class Social_Facebook extends Social implements Social_Publish, Social_Share
 		if (empty($data) || empty($data->link_stat) || empty($data->link_stat->total_count))
 			return 0;
 			
-		return $data->link_stat->total_count;
+		return (int)$data->link_stat->total_count;
 	}
 }
 ?>
