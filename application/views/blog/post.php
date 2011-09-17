@@ -3,7 +3,8 @@
 echo View::factory('blog/post/full')
 	->set('post', $post)
 	->set('categories', $categories)
-	->set('tags', $tags);
+	->set('tags', $tags)
+	->set('share_links', $share_links);
 	
 echo View::factory('blog/post/comments')
 	->set('post', $post)

@@ -183,7 +183,8 @@ class Controller_Blog extends Controller_Template
 			->bind('post', $post)
 			->set('comments', $post->comments())
 			->set('categories', $post->categories->order_by('title')->find_all())
-			->set('tags', $post->tags->order_by('title')->find_all());
+			->set('tags', $post->tags->order_by('title')->find_all())
+			->set('share_links', Social::all_share_urls($post));
 		
 		// If the page was POSTed, it's a comment
 		if ($_POST)

@@ -28,6 +28,22 @@ abstract class Social
 	}
 	
 	/**
+	 * Get all share counts (from all available social networks) for the specified post
+	 */
+	public static function all_share_urls(Model_Blog_Post $post)
+	{
+		$result = array();
+		
+		foreach (self::$can_share_with as $name)
+		{
+			$network = self::factory($name);
+			$result[$name] = $network->share_url($post);
+		}
+		
+		return $result;
+	}
+	
+	/**
 	 * Create a new instance of the specified social network class
 	 * @param	string		Name of the social network
 	 * @return Instance of the specified social network

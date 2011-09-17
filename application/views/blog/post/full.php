@@ -4,7 +4,7 @@ echo '
 	<article id="post-', $post->id, '">
 ', View::factory('blog/post/header')->set('post', $post)->set('config', $config), '
 		', $post->content(), '
-', View::factory('blog/post/share-links')->set('post', $post);
+', View::factory('blog/post/share-links')->set('post', $post)->set('share_links', $share_links);
 
 // Any tags?
 if (!empty($tags))

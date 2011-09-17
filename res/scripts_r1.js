@@ -302,7 +302,7 @@ var Blog =
 	initShareLinks: function()
 	{
 		// All the share links - Insert an <iframe> on load
-		$$('article .share li').each(function(el)
+		/*$$('article .share li').each(function(el)
 		{
 			var site = el.className;
 			var link = el.getElement('a');
@@ -317,10 +317,6 @@ var Blog =
 				// TODO: Clean this up, use a generic method of doing this.			
 				href = href.replace('http://twitter.com/share', 'http://platform.twitter.com/widgets/tweet_button.html');
 			}
-			/*else if (site == 'facebook')
-			{
-			
-			}*/
 			
 			href = href.replace(/\+/g, '%20');
 			
@@ -333,7 +329,7 @@ var Blog =
 				allowTransparency: 'true',
 				scrolling: 'no'
 			}).inject(el);
-		});
+		});*/
 	}
 };
 
