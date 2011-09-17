@@ -9,7 +9,7 @@ abstract class Social
 	 * List of all social networks that allow sharing
 	 * TODO: This is really ugly. Remove it.
 	 */
-	private static $can_share_with = array('facebook', 'twitter');
+	private static $can_share_with = array('facebook', 'twitter', 'reddit');
 	
 	/**
 	 * Get all share counts (from all available social networks) for the specified post

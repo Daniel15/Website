@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 /**
- * Support for posting blog posts to Twitter
+ * Support for posting blog posts to Facebook
  */
 class Social_Facebook extends Social implements Social_Publish, Social_Share
 {
