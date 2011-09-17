@@ -59,9 +59,10 @@ class Social_Twitter extends Social implements Social_Publish, Social_Share
 	 */
 	public function share_count(Model_Blog_Post $post)
 	{
-		$data = json_decode(file_get_contents(self::COUNT_URL . '?' . http_build_query(array(
+		$url = self::COUNT_URL . '?' . http_build_query(array(
 			'url' => $post->url(true),
-		))));
+		));
+		$data = json_decode(file_get_contents($url));
 		
 		if (empty($data) || empty($data->count))
 			return 0;

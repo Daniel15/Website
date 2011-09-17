@@ -3,10 +3,13 @@
 /**
  * Support for posting blog posts to Twitter
  */
-class Social_Facebook extends Social implements Social_Publish
+class Social_Facebook extends Social implements Social_Publish, Social_Share
 {
 	const POST_LENGTH = 300;
 	const POST_URL = 'https://graph.facebook.com/me/feed';
+	const SHARE_URL = 'https://www.facebook.com/sharer.php';
+	const QUERY_URL = 'http://api.facebook.com/method/fql.query';
+	const LINK_QUERY = 'SELECT share_count, like_count, comment_count, total_count FROM link_stat WHERE url="%s"';
 	
 	/**
 	 * Publish a new post to Facebook
@@ -50,6 +53,37 @@ class Social_Facebook extends Social implements Social_Publish
 		));
 		
 		return file_get_contents(self::POST_URL, false, $context);
+	}
+	
+	/**
+	 * Get the URL to share this post
+	 * @param	Model_Blog_Post		The post
+	 */
+	public function share_url(Model_Blog_Post $post)
+	{
+		return self::SHARE_URL . '?' . http_build_query(array(
+			'u' => $post->url(true),
+			't' => $post->title,
+		));
+	}
+	
+	/**
+	 * Get the number of times this URL has been shared
+	 * @param	Model_Blog_Post		The post
+	 */
+	public function share_count(Model_Blog_Post $post)
+	{
+		// Get the count using FQL. Returns *both* like count and share count.
+		$query = sprintf(self::LINK_QUERY, $post->url(true));
+		$url = self::QUERY_URL . '?' . http_build_query(array(
+			'query' => $query,
+		));
+		
+		$data = simplexml_load_file($url);
+		if (empty($data) || empty($data->link_stat) || empty($data->link_stat->total_count))
+			return 0;
+			
+		return $data->link_stat->total_count;
 	}
 }
 ?>
