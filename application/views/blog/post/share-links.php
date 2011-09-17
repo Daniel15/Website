@@ -7,10 +7,13 @@ foreach ($share_links as $name => $link)
 {
 	echo '
 				<li class="', $name, '">
-					<a href="', $link, '" title="Share on ', ucfirst($name), '">
+					<a class="count" href="', $link, '" title="Share on ', ucfirst($name), '">
 						<!--', ucfirst($name), '-->123
-						<img class="icon" src="res/icons/social/large/facebook.png" />
 					</a>
+					<a class="icon" href="', $link, '" title="Share on ', ucfirst($name), '">
+						<img class="icon" src="res/icons/social/large/', $name, '.png" />
+					</a>
+					
 				</li>';
 }
 ?>

@@ -83,6 +83,7 @@ ul.postmetadata li
 .blog article .share
 {
 	overflow: hidden;
+	margin-top: 5px;
 }
 
 .blog article .share ul
@@ -109,25 +110,17 @@ ul.postmetadata li
 }
 
 /* Links with JS enabled */
-body.js article .share span
+body.js article .share span,
+body.js article .share li:after
 {
 	display: none;
 }
 
 body.js article .share li
 {
-	border: 1px solid #B3C0FF;
-	background-color: #F2F6FB;
 	display: inline-block;
-	width: 40px;
-	height: 30px;
-	line-height: 30px;
 	text-align: center;
-	margin-bottom: 40px;
-	
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
+	margin-right: 5px;
 }
 
 body.js article .share li a
@@ -136,7 +129,21 @@ body.js article .share li a
 	text-decoration: none;
 }
 
-body.js article .share li:after
+body.js article .share li .count
+{
+	display: block;
+	width: 40px;
+	height: 30px;
+	line-height: 30px;
+	border: 1px solid #B3C0FF;
+	/*background-color: #F2F6FB;*/
+	
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
+body.js article .share .count:after
 {
 	content: " ";
 	/* Crazy CSS triangles! */
@@ -145,21 +152,35 @@ body.js article .share li:after
 	border-top: 4px solid #B3C0FF;
 	height: 0;
 	width: 0;
-	position: relative;
-	top: -3px;
-}
-
-body.js article .share li a
-{
 	display: block;
-	width: 100%;
-	height: 100%;
+	position: relative;
+	left: 15px;
 }
 
 body.js article .share .icon
 {
     position: relative;
-    top: 5px;
+    top: 2px;
+	margin-bottom: 10px;
+}
+
+/* Custom colours */
+body.js article .share li.twitter .count { border-color: #94e4ff; }
+body.js article .share li.twitter .count:after { border-top-color: #94e4ff; }
+body.js article .share li.reddit .count { border-color: #aeaeae; }
+body.js article .share li.reddit .count:after { border-top-color: #aeaeae; }
+body.js article .share li.facebook .count { border-color: #98a9c9; }
+body.js article .share li.facebook .count:after { border-top-color: #98a9c9; }
+
+/* Highlight on hover */
+body.js article .share li:hover .count
+{
+	border-color: black;
+}
+
+body.js article .share li:hover .count:after
+{
+	border-top-color: black;
 }
 
 /* Comments */
