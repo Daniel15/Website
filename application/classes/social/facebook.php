@@ -3,11 +3,15 @@
 /**
  * Support for posting blog posts to Twitter
  */
-class Social_Facebook extends Social
+class Social_Facebook extends Social implements Social_Publish
 {
 	const POST_LENGTH = 300;
 	const POST_URL = 'https://graph.facebook.com/me/feed';
 	
+	/**
+	 * Publish a new post to Facebook
+	 * @param	Model_Blog_Post		The post
+	 */
 	public function new_post(Model_Blog_Post $post)
 	{
 		$config = Kohana::$config->load('social.facebook');
