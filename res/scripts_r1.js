@@ -483,13 +483,7 @@ Blog.Post = new Class(
 		this.id = this.post.id.slice(5);
 		var socialCountUrl = 'social/blogpost/' + this.id;
 		
-		// Set all social network counts to "..." while they load
-		this.socialNetworks = this.post.getElements('.share ul');
-		this.socialNetworks.getElements('li').each(function(socialNetwork)
-		{
-			socialNetwork.getElement('.count').set('html', '&hellip;');
-		});
-		
+		this.socialNetworks = this.post.getElements('.share ul');		
 		this.addPopupHandler('facebook', 500, 400);
 		this.addPopupHandler('twitter', 550, 420);
 		

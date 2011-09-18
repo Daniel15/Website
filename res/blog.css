@@ -93,7 +93,7 @@ ul.postmetadata li
 	float: left;
 } 
 
-.blog article .share span
+.blog article .share > span
 {
 	float: left;
 	margin-right: 0.2em;
@@ -107,6 +107,16 @@ ul.postmetadata li
 .blog article .share li:after
 {
 	content: ", ";
+}
+
+.blog article .share li:last-child:after
+{
+	content: "";
+}
+
+.blog article .share .count
+{
+	display: none;
 }
 
 /* Links with JS enabled */
