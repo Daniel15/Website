@@ -120,20 +120,20 @@ ul.postmetadata li
 }
 
 /* Links with JS enabled */
-body.js article .share span,
-body.js article .share li:after
+.js article .share span,
+.js article .share li:after
 {
 	display: none;
 }
 
-body.js article .share li
+.js article .share li
 {
 	display: inline-block;
 	text-align: center;
 	margin-right: 5px;
 }
 
-body.js article .share li a
+.js article .share li a
 {
 	color: black;
 	text-decoration: none;
@@ -141,7 +141,7 @@ body.js article .share li a
 	width: 40px;
 }
 
-body.js article .share li .count
+.js article .share li .count
 {
 	display: block;
 	width: 100%;
@@ -155,7 +155,7 @@ body.js article .share li .count
 	border-radius: 3px;
 }
 
-body.js article .share .count:after
+.js article .share .count:after
 {
 	content: " ";
 	/* Crazy CSS triangles! */
@@ -169,7 +169,7 @@ body.js article .share .count:after
 	left: 15px;
 }
 
-body.js article .share .icon
+.js article .share .icon
 {
     position: relative;
     top: 5px;
@@ -177,20 +177,20 @@ body.js article .share .icon
 }
 
 /* Custom colours */
-body.js article .share li.twitter .count { border-color: #94e4ff; }
-body.js article .share li.twitter .count:after { border-top-color: #94e4ff; }
-body.js article .share li.reddit .count { border-color: #aeaeae; }
-body.js article .share li.reddit .count:after { border-top-color: #aeaeae; }
-body.js article .share li.facebook .count { border-color: #98a9c9; }
-body.js article .share li.facebook .count:after { border-top-color: #98a9c9; }
+.js article .share li.twitter .count { border-color: #94e4ff; }
+.js article .share li.twitter .count:after { border-top-color: #94e4ff; }
+.js article .share li.reddit .count { border-color: #aeaeae; }
+.js article .share li.reddit .count:after { border-top-color: #aeaeae; }
+.js article .share li.facebook .count { border-color: #98a9c9; }
+.js article .share li.facebook .count:after { border-top-color: #98a9c9; }
 
 /* Highlight on hover */
-body.js article .share li:hover .count
+.js article .share li:hover .count
 {
 	border-color: black;
 }
 
-body.js article .share li:hover .count:after
+.js article .share li:hover .count:after
 {
 	border-top-color: black;
 }
@@ -230,8 +230,7 @@ body.js article .share li:hover .count:after
 }
 
 /* TODO: This might need some optimisation, especially the last selector! */
-.js #leave-comment-form input[type='checkbox'] + label/*,
-.js #leave-comment-form input[type='checkbox'] + label + small*/
+#leave-comment-form input[type='checkbox'] + label
 {
 	display: inline;
 }

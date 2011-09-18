@@ -1,9 +1,9 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?><!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="ie ie6 ielt8 ielt9"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="ie ie7 ielt8 ielt9"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="ie ie8 ielt9"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="ie ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="non-ie"> <!--<![endif]-->
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie ie6 ielt8 ielt9"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie ie7 ielt8 ielt9"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie ie8 ielt9"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js non-ie"> <!--<![endif]-->
 <head>
 	<title><?php echo (empty($title) ? '' : $title . ' &mdash; '); ?>Daniel15</title>
 	<base href="<?php echo URL::base(TRUE); ?>" />
@@ -59,10 +59,11 @@ if ($siteConfig->enableCompression) : ?>
 
 	<!-- Other stuff -->
 	<link rel="start" href="/" title="Home" />
+	<script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 	<?php if (!empty($extraHead)) echo $extraHead; ?>
 
 </head>
-<body id="<?php echo $pageID; ?>" class="<?php echo $controller; ?> col-<?php echo $sidebarType; ?> no-js">
+<body id="<?php echo $pageID; ?>" class="<?php echo $controller; ?> col-<?php echo $sidebarType; ?>">
 	<div id="main-container">
 		<header>
 <?php echo $menu; ?>

@@ -678,6 +678,5 @@ var CheatCode =
 //window.addEvent('domready', D15.onload);
 //window.addEvent('domready', Global.init);
 // Since the script is at the very bottom of the page, this should be okay.
-$(document.body).removeClass('no-js').addClass('js');
 D15.onload();
 Global.init();
