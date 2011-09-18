@@ -20,8 +20,17 @@ abstract class Social
 		
 		foreach (self::$can_share_with as $name)
 		{
-			$network = self::factory($name);
-			$result[$name] = $network->share_count($post);
+			try
+			{
+				$network = self::factory($name);
+				$result[$name] = $network->share_count($post);
+			}
+			catch (Exception $e)
+			{
+				// If an error occured, just set the count to 0 and log it.
+				$result[$name] = 0;
+				Kohana::$log->add(Log::WARNING, 'Couldn\'t get social share count for ' . $post->url() . ': ' . Kohana_Exception::text($e));
+			}
 		}
 		
 		return $result;

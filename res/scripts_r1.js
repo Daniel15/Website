@@ -61,8 +61,6 @@ var Global =
 {
 	init: function()
 	{
-		$(document.body).removeClass('no-js').addClass('js');
-		
 		// Inject the spans used for the gradient over the headings
 		// TODO: Use psudeo-elements instead of this.
 		$$('h2, h3').each(function(heading)
@@ -270,11 +268,11 @@ Page.Site.Socialfeed =
  */
 Page.Blog = 
 {
+	posts: [],
 	init: function()
 	{
 		this.initSidebar();
-		// .delay() to run it in another "thread", hopefully so it doesn't freeze the page when ran.
-		this.initShareLinks.bind(this).delay(25);
+		this.initPosts();
 	},
 	
 	initSidebar: function()
@@ -304,37 +302,12 @@ Page.Blog =
 		return false;
 	},
 	
-	initShareLinks: function()
+	initPosts: function()
 	{
-		// All the share links - Insert an <iframe> on load
-		/*$$('article .share li').each(function(el)
+		$$('#content > article').each(function(post)
 		{
-			var site = el.className;
-			var link = el.getElement('a');
-			if (!link)
-				return;
-				
-			var href = link.get('href');
-			
-			if (site == 'twitter')
-			{
-				// If it's Twitter, we need to do a slight change to the URL
-				// TODO: Clean this up, use a generic method of doing this.			
-				href = href.replace('http://twitter.com/share', 'http://platform.twitter.com/widgets/tweet_button.html');
-			}
-			
-			href = href.replace(/\+/g, '%20');
-			
-			// Remove the link and use it for an iframe
-			link.dispose();
-			new Element('iframe', 
-			{
-				src: href,
-				frameborder: 0,
-				allowTransparency: 'true',
-				scrolling: 'no'
-			}).inject(el);
-		});*/
+			this.posts.push(new Blog.Post(post));
+		}, this);
 	}
 };
 
@@ -343,7 +316,7 @@ Page.Blog.View =
 	placeholderFields: ['author', 'email', 'url', 'subject'],
 	
 	init: function()
-	{		
+	{	
 		// Attach "reply to comment" links
 		$$('#comments .reply-to').addEvent('click', this.replyToComment.bind(this));
 		$('cancel-reply').addEvent('click', this.cancelReply.bind(this));
@@ -490,6 +463,66 @@ Page.Blog.View =
 		});
 	}
 }
+
+/**
+ * Classes used in the blog
+ */
+var Blog = {};
+
+/**
+ * Represents a single post in the blog. Handles the social network sharing links
+ */
+Blog.Post = new Class(
+{
+	/**
+	 * Initialise the blog post. Load all the social network sharing links and counts
+	 */
+	initialize: function(post)
+	{
+		this.post = post;
+		this.id = this.post.id.slice(5);
+		var socialCountUrl = 'social/blogpost/' + this.id;
+		
+		// Set all social network counts to "..." while they load
+		this.socialNetworks = this.post.getElements('.share ul');
+		this.socialNetworks.getElements('li').each(function(socialNetwork)
+		{
+			socialNetwork.getElement('.count').set('html', '&hellip;');
+		});
+		
+		this.addPopupHandler('facebook', 500, 400);
+		this.addPopupHandler('twitter', 550, 420);
+		
+		// Initialise data for network sharing links
+		new Request.JSON(
+		{
+			method: 'get',
+			url: socialCountUrl,
+			onSuccess: this.updateSocialCounts.bind(this)
+		}).send();
+	},
+	
+	addPopupHandler: function(name, width, height)
+	{
+		this.socialNetworks.getElement('li.' + name + ' a').addEvent('click', function()
+		{
+			// "this" refers to the link here!
+			window.open(this.href, '_blank', 'height=' + height + 'px,width=' + width + 'px');
+			return false;
+		});
+	},
+	
+	/**
+	 * Update the social network sharing counts
+	 */
+	updateSocialCounts: function(data)
+	{
+		$H(data).each(function(count, name)
+		{
+			this.socialNetworks.getElement('li.' + name + ' .count').set('html', count);
+		}, this);
+	}
+});
 
 /**
  * Social feed
@@ -651,5 +684,6 @@ var CheatCode =
 //window.addEvent('domready', D15.onload);
 //window.addEvent('domready', Global.init);
 // Since the script is at the very bottom of the page, this should be okay.
+$(document.body).removeClass('no-js').addClass('js');
 D15.onload();
 Global.init();
