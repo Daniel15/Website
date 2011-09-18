@@ -37,3 +37,16 @@
 	background: none !important;
 	text-indent: 0;
 }
+
+/* Social network sharing links */
+.ielt8.js article .share
+{
+	overflow: hidden;
+	zoom: 1;
+}
+
+.ielt8.js article .share li
+{
+	float: left;
+}
+

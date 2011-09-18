@@ -121,8 +121,14 @@ if (!empty($lastModified) && $lastModified != 0)
 	
 	<!-- General scripts -->
 	<script src="res/scripts_r1.js" type="text/javascript"></script>
+<?php endif; ?>
+
+	<!-- Prompt IE 6 and 7 users to install Chrome Frame -->
+	<!--[if lt IE 8]>
+		<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+	<![endif]-->
 <?php
-endif;
 
 if (!empty($extraFoot))
 	echo $extraFoot;
