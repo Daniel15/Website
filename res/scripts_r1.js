@@ -35,7 +35,7 @@ D15.onload = function()
 	var id_pieces = document.body.id.split('-');
 	// First piece is the main object
 	var obj_name = id_pieces.shift().ucfirst();
-	var obj = window[obj_name];
+	var obj = Page[obj_name];
 	
 	// If we don't have the object, just die
 	if (obj === undefined)
@@ -88,16 +88,21 @@ var Global =
 };
 
 /**
+ * Object containing all page-specific JavaScript
+ */
+var Page = {};
+
+/**
  * JavaScript used on the website itself
  */
-var Site = {};
+Page.Site = {};
 
 /**
  * JS for the Home page
  * TODO: 
  *  - Abstract the common stuff out to classes
  */
-Site.Index = 
+Page.Site.Index = 
 {
 	/**
 	 * Initialise the homepage
@@ -171,7 +176,7 @@ Site.Index =
 /**
  * Projects page
  */
-Site.Projects = 
+Page.Site.Projects = 
 {
 	/**
 	 * Initialise the page. Called on domready
@@ -185,7 +190,7 @@ Site.Projects =
 		techs.set('target', '_blank');
 		
 		// Attach all the sidebar click listeners
-		$$('div#sidebar li a').addEvent('click', Site.Projects.show_tech);
+		$$('#sidebar li a').addEvent('click', this.show_tech.bind(this));
 	},
 	
 	/**
@@ -196,16 +201,16 @@ Site.Projects =
 	/**
 	 * Click handler for technologies sidebar on Projects page
 	 */
-	show_tech: function()
+	show_tech: function(e)
 	{
 		// Get this tech, and the projects using it
-		var parent = this.getParent();
+		var parent = e.target.getParent();
 		var tech = parent.id.substring(5);
-		var tech_friendly = this.get('text');
+		var tech_friendly = e.target.get('text');
 		// If they're clicking the currently selected one, just unselect.
-		if (Site.Projects.current_tech == parent)
+		if (Page.Site.Projects.current_tech == parent)
 		{
-			Site.Projects.current_tech = null;
+			Page.Site.Projects.current_tech = null;
 			parent.removeClass('active');
 			$('intro').setStyle('display', '');
 			$('tech-info').setStyle('display', '');
@@ -217,10 +222,10 @@ Site.Projects =
 		
 		var projects = $$('ul.projects li.uses-' + tech);
 		// Mark this tech as active
-		if (Site.Projects.current_tech != null)
-			Site.Projects.current_tech.removeClass('active');
+		if (this.current_tech != null)
+			this.current_tech.removeClass('active');
 
-		Site.Projects.current_tech = parent;
+		this.current_tech = parent;
 		parent.addClass('active');
 		
 		// Show the tech header and some info
@@ -246,7 +251,7 @@ Site.Projects =
 	}
 };
 
-Site.Socialfeed = 
+Page.Site.Socialfeed = 
 {
 	init: function()
 	{
@@ -263,7 +268,7 @@ Site.Socialfeed =
 /**
  * JS for the blog
  */
-var Blog = 
+Page.Blog = 
 {
 	init: function()
 	{
@@ -333,7 +338,7 @@ var Blog =
 	}
 };
 
-Blog.View = 
+Page.Blog.View = 
 {
 	placeholderFields: ['author', 'email', 'url', 'subject'],
 	
@@ -463,7 +468,7 @@ Blog.View =
 	
 	removePlaceholders: function()
 	{
-		Blog.View.placeholderFields.each(function(field_name)
+		Page.Blog.View.placeholderFields.each(function(field_name)
 		{
 			var field = $(field_name);
 			if (field.value == field.retrieve('placeholder'))
