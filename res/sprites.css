@@ -43,6 +43,10 @@ ul#socialfeed li.source-reddit .meta, ul#minifeed li.source-reddit .icon, .socia
 {
 	background-image: url(icons/social/reddit.png); /** sprite-ref: mainsprite; */
 }
+ul#socialfeed li.source-stackoverflow .meta, ul#minifeed li.source-stackoverflow .icon
+{
+	background-image: url(icons/social/stackoverflow.png); /** sprite-ref: mainsprite; */
+}
 
 .social .github a 
 {

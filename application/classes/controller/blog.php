@@ -154,9 +154,7 @@ class Controller_Blog extends Controller_Template
 	
 	/**
 	 * Viewing a post itself
-	 * @param	int		Year of the post publication
-	 * @param	int		Month of the post publication
-	 * @param	string	Slug (URL alias) of the list
+	 * URL: /blog/[year]/[month]/[slug (URL alias)]
 	 */
 	public function action_view()
 	{
