@@ -100,8 +100,10 @@ class Controller_Site extends Controller_Template
 	 */
 	public function action_socialfeed()
 	{
+		$querystring = (!empty($_SERVER['QUERY_STRING'])) ? '?' . $_SERVER['QUERY_STRING'] : '';
+		
 		// TODO: Convert this to a Kohana module. This method of loading the page is a little ugly!
-		$content = Request::factory(URL::site('socialfeed/loadhtml.php', true))->execute()->body();
+		$content = Request::factory(URL::site('socialfeed/loadhtml.php' . $querystring, true))->execute()->body();
 		$this->template
 			->set('title', 'What I\'ve Been Doing')
 			->set('content', View::factory('socialfeed')->set('content', $content));
