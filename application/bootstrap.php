@@ -121,6 +121,9 @@ Kohana::modules(array(
 	'pagination' => MODPATH.'pagination',
 	'dispatcher' => MODPATH.'dispatcher',
 	'akismet'	 => MODPATH.'akismet',
+	
+	// Site components
+	'blog'       => MODPATH.'blog',
 	));
 
 /**
