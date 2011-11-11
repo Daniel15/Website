@@ -107,6 +107,7 @@ if (!empty($lastModified) && $lastModified != 0)
 <?php if ($siteConfig->enableCompression) : ?>
 	<script src="res/<?php echo $siteConfig->latestJS ?>" type="text/javascript"></script>
 <?php else : ?>
+	<!-- Uncombined JavaScript files for debugging -->
 	<!-- Syntax highlighting -->
 	<!--script src="lib/syntaxhighlighter/shCore.js"></script>
 	<script src="lib/syntaxhighlighter/shBrushJScript.js"></script>
@@ -122,8 +123,10 @@ if (!empty($lastModified) && $lastModified != 0)
 	<script src="js/framework/events.js"></script>
 	<script src="js/framework/dom.js"></script>
 	
-	<!-- General scripts -->
-	<script src="js/scripts_r2.js" type="text/javascript"></script>
+	<!-- Site scripts -->
+	<script src="js/core.js" type="text/javascript"></script>
+	<script src="js/site.js" type="text/javascript"></script>
+	<script src="js/socialfeed.js" type="text/javascript"></script>
 	<script>Events.initPage();</script>
 <?php endif; ?>
 
