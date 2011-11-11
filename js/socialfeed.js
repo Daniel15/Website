@@ -135,7 +135,7 @@ SocialFeed.prototype =
 	{
 		
 		// Get the date of the oldest item
-		var children = this.container.element.children;
+		var children = this.container.get('children');
 		var oldest = children[children.length - 1].getAttribute('data-date');
 		this.load(oldest);
 		

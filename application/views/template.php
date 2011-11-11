@@ -124,9 +124,10 @@ if (!empty($lastModified) && $lastModified != 0)
 	<script src="js/framework/dom.js"></script>
 	
 	<!-- Site scripts -->
-	<script src="js/core.js" type="text/javascript"></script>
-	<script src="js/site.js" type="text/javascript"></script>
-	<script src="js/socialfeed.js" type="text/javascript"></script>
+	<script src="js/core.js"></script>
+	<script src="js/site.js"></script>
+	<script src="js/blog.js"></script>
+	<script src="js/socialfeed.js"></script>
 	<script>Events.initPage();</script>
 <?php endif; ?>
 

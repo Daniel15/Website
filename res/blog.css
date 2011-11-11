@@ -302,4 +302,10 @@ ul.postmetadata li
 .js #sidebar-archives ul
 {
 	overflow: hidden;
+	
+	/* Animation when year is expanded */
+	-webkit-transition: 600ms ease;
+	     -o-transition: 600ms ease;
+	   -moz-transition: 600ms ease;
+	        transition: 600ms ease;
 }
