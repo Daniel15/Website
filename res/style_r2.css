@@ -69,20 +69,25 @@ h3
 }
 
 /* Span used for glossy overlay */
-h2 span,
-h3 span
+h2:before,
+h2 a:before,
+h3:before,
+h3 a:before
 {
+	content: '';
 	position: absolute;
 	display: block;
 	width: 100%;
 }
 
-h2 span
+h2:before,
+h2 a:before
 {
 	height: 18px;
 }
 
-h3 span
+h3:before, 
+h3 a:before
 {
 	height: 14px;
 }
@@ -220,7 +225,7 @@ div#content
 
 
 /* Span used for glossy overlay */
-#sidebar h2 span
+#sidebar h2:before, #sidebar h2 a:before
 {
 	height: 14px;
 }

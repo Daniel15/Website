@@ -104,23 +104,27 @@ if (!empty($lastModified) && $lastModified != 0)
 		</footer>
 	</div>
 	<!-- Now for the JS -->
-	<script src="http://ajax.googleapis.com/ajax/libs/mootools/1.3.2/mootools-yui-compressed.js" type="text/javascript"></script>
 <?php if ($siteConfig->enableCompression) : ?>
 	<script src="res/<?php echo $siteConfig->latestJS ?>" type="text/javascript"></script>
 <?php else : ?>
-	<script src="res/mootools-more-1.3.0.1.js" type="text/javascript"></script>
-	<script src="lib/LocalStorage.js" type="text/javascript"></script>
 	<!-- Syntax highlighting -->
-	<script src="lib/syntaxhighlighter/shCore.js"></script>
+	<!--script src="lib/syntaxhighlighter/shCore.js"></script>
 	<script src="lib/syntaxhighlighter/shBrushJScript.js"></script>
 	<script src="lib/syntaxhighlighter/shBrushPhp.js"></script>
 	<script src="lib/syntaxhighlighter/shBrushCSharp.js"></script>
 	<script src="lib/syntaxhighlighter/shBrushXml.js"></script>
 	<script src="lib/syntaxhighlighter/shBrushDelphi.js"></script>
-	<script src="lib/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="lib/syntaxhighlighter/shBrushPlain.js"></script-->
+	
+	<!-- Framework -->
+	<script src="js/framework/core.js"></script>
+	<script src="js/framework/ajax.js"></script>
+	<script src="js/framework/events.js"></script>
+	<script src="js/framework/dom.js"></script>
 	
 	<!-- General scripts -->
-	<script src="res/scripts_r1.js" type="text/javascript"></script>
+	<script src="js/scripts_r2.js" type="text/javascript"></script>
+	<script>Events.initPage();</script>
 <?php endif; ?>
 
 	<!-- Prompt IE 6 and 7 users to install Chrome Frame -->

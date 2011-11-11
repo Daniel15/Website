@@ -62,18 +62,17 @@ ul#socialfeed li.source-stackoverflow .meta, ul#minifeed li.source-stackoverflow
 }
 
 /* Glossy overlay thingies for headings */
-/* TODO: See if these can be done with CSS3 instead */
-h2 span
+h2:before, h2 a:before
 {
 	background-image: url(gradient-glossy2.png); /** sprite-ref: mainsprite; sprite-alignment: repeat; */
 }
 
-h3 span
+h3:before, h3 a:before
 {
 	background-image: url(gradient-glossy2.png); /** sprite-ref: mainsprite; sprite-alignment: repeat; */
 }
 
-#sidebar h2 span
+#sidebar h2:before, #sidebar h2 a:before
 {
 	background-image: url(gradient-glossy-sidebar.png); /** sprite-ref: mainsprite; sprite-alignment: repeat; */
 }

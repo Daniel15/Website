@@ -74,20 +74,19 @@ ul#socialfeed li.source-stackoverflow .meta, ul#minifeed li.source-stackoverflow
 }
 
 /* Glossy overlay thingies for headings */
-/* TODO: See if these can be done with CSS3 instead */
-h2 span
+h2:before, h2 a:before
 {
   background-image: url('combined/sprites/mainsprite-6eb51db5878fb46c0ce8fa257dcd8208.png');
   background-position: left -208px;
 }
 
-h3 span
+h3:before, h3 a:before
 {
   background-image: url('combined/sprites/mainsprite-6eb51db5878fb46c0ce8fa257dcd8208.png');
   background-position: left -208px;
 }
 
-#sidebar h2 span
+#sidebar h2:before, #sidebar h2 a:before
 {
   background-image: url('combined/sprites/mainsprite-6eb51db5878fb46c0ce8fa257dcd8208.png');
   background-position: left -232px;

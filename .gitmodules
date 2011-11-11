@@ -25,3 +25,6 @@
 [submodule "socialfeed"]
 	path = socialfeed
 	url = git://github.com/Daniel15/SocialFeeds.git
+[submodule "js/framework"]
+	path = js/framework
+	url = git://github.com/Daniel15/JSFramework.git

@@ -18,6 +18,15 @@
 {
 	height: 0;
 	overflow: hidden;
+	-webkit-transition: 400ms ease;
+	     -o-transition: 400ms ease;
+	   -moz-transition: 400ms ease;
+	        transition: 400ms ease;
+}
+
+#sidebar ul#minifeed li:hover .meta
+{
+	height: 2em;
 }
 
 #sidebar ul#minifeed .meta li
