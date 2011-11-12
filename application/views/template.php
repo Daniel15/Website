@@ -120,8 +120,8 @@ if (!empty($lastModified) && $lastModified != 0)
 	<!-- Framework -->
 	<script src="js/framework/core.js"></script>
 	<script src="js/framework/ajax.js"></script>
-	<script src="js/framework/events.js"></script>
 	<script src="js/framework/dom.js"></script>
+	<script src="js/framework/events.js"></script>
 	
 	<!-- Site scripts -->
 	<script src="js/core.js"></script>

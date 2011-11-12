@@ -92,7 +92,7 @@ SocialFeed.prototype =
 			{
 				id: 'feeditem-' + item.id,
 				innerHTML: item.text,
-				className: 'feeditem source-' + item.type,
+				className: 'feeditem source-' + item.type
 			}, true,
 			{
 				'data-date': item.date

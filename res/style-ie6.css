@@ -6,21 +6,21 @@
  */
  
 /* Span used for glossy overlay */
-.ie6 h2 span
+.ie6 h2:before
 {
-	background: none;
+	background: none !important;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy.png', sizingMethod='scale');
 }
 
-.ie6 h3 span
+.ie6 h3:before
 {
-	background: none;
+	background: none !important;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy2.png', sizingMethod='scale');
 }
 
-.ie6 #sidebar h2 span
+.ie6 #sidebar h2:before
 {
-	background: none;
+	background: none !important;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/res/gradient-glossy-sidebar.png', sizingMethod='scale');
 }
 

@@ -47,7 +47,7 @@ Page.Blog =
 	toggleYear: function(e)
 	{
 		var inner = $(e.target.parentNode).firstByTag('ul');
-		// TODO: Animate
+		// Animation is handled by the CSS
 		inner.setStyle('height', (inner.get('offsetHeight') == 0 ? inner.originalHeight : 0) + 'px');
 		Events.stop(e);
 	},
@@ -57,20 +57,44 @@ Page.Blog =
 	 */
 	initPosts: function()
 	{
-		var posts = $('content').getByTag('article');
+		var posts = $('content').getByTag('article', false);
 		for (var i = 0, count = posts.length; i < count; i++)
 		{
 			// Ensure it's a post
 			// TODO: Use descendant selector with querySelectorAll instead of this check
-			if (posts[i].get('id').slice(0, 5) == 'post-')
-				this.posts.push(new Blog.Post(posts[i]));
+			if (posts[i].id.slice(0, 5) == 'post-')
+				this.posts.push(new Blog.Post(DOM.get(posts[i])));
 		}
 	}
 };
 
+/**
+ * Viewing a blog post
+ */
 Page.Blog.View = 
 {
-	// TODO
+	/**
+	 * Initialise viewing a blog post
+	 */
+	init: function()
+	{
+		$('comments').addDelegate('click', 'a', 'reply-to', this.replyToComment);
+		
+		// TODO: Store commenter data
+		// TODO: Placeholders
+	},
+	
+	/**
+	 * Called when a reply link is clicked
+	 * @param	Event data
+	 */
+	replyToComment: function(e)
+	{
+		Events.stop(e);
+		console.log(e);
+		console.log(this);
+		alert('TODO');
+	}
 };
 
 /**
