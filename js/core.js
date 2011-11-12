@@ -7,7 +7,6 @@
  * Still to be done:
  * - Syntax highlighting (called from Page.Global.init)
  * - Projects page
- * - Konami code
  * - Blog admin
  */
  
@@ -23,5 +22,47 @@ Page.Global =
 {
 	init: function()
 	{
+		// up up down down left right left right b a enter
+		// up = 38, down = 40, left = 37, right = 39, b = 66, a = 65, enter = 13
+		var cheatCode = new CheatCode([38, 38, 40, 40, 37, 39, 37, 39, 66, 65, 13]);
+	}
+};
+
+/**
+ * This class does not exist
+ */
+var CheatCode = function(keys)
+{
+	this.keys = keys;
+	this.step = 0;
+	Events.add(window, 'keydown', this.keypress.bind(this));
+}
+
+CheatCode.prototype = 
+{
+	/**
+	 * This function does not exist
+	 */
+	keypress: function(e)
+	{
+		console.log(e);
+		// If incorrect key is pressed, start again!
+		if (e.keyCode != this.keys[this.step])
+		{
+			this.step = 0;
+			return;
+		}
+		
+		// All entered correctly?!
+		if (++this.step == this.keys.length)
+		{
+			$('default-stylesheet').set('disabled', true);
+			(document.head || document.getElementsByTagName('head')[0]).appendChild(DOM.create('link', 
+			{
+				rel: 'stylesheet',
+				href: 'not_an_easter_egg/zero.css',
+				type: 'text/css'
+			}, false));
+		}
 	}
 };
