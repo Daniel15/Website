@@ -122,6 +122,7 @@ if (!empty($lastModified) && $lastModified != 0)
 	<script src="js/framework/ajax.js"></script>
 	<script src="js/framework/dom.js"></script>
 	<script src="js/framework/events.js"></script>
+	<script src="js/framework/storage.js"></script>
 	
 	<!-- Site scripts -->
 	<script src="js/core.js"></script>

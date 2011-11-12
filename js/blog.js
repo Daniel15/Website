@@ -81,9 +81,10 @@ Page.Blog.View =
 		$('comments').addDelegate('click', 'a', 'reply-to', this.replyToComment);
 		$('cancel-reply').addEvent('click', this.cancelReply.bind(this));
 		
-		// TODO: Store commenter data
-		
 		this.initPlaceholders();
+		// Remember comment user details
+		this.loadCommentDetails();
+		$('leave-comment-form').addEvent('submit', this.saveCommentDetails.bind(this));
 	},
 	
 	/**
@@ -139,6 +140,36 @@ Page.Blog.View =
 		$('cancel-reply').setStyle('display', 'none');
 		$('parent_comment_id').set('value', '');
 		Events.stop(e);
+	},
+	
+	/**
+	 * Retrieve the commenter details from local storage
+	 */
+	loadCommentDetails: function()
+	{
+		try
+		{
+			$('author').set('value', $('author').get('value') || window.localStorage.getItem('comment-author') || '');
+			$('email').set('value', $('email').get('value') || window.localStorage.getItem('comment-email') || '');
+			$('url').set('value', $('url').get('value') || window.localStorage.getItem('comment-url') || '');
+		}
+		// Ignore any exceptions - This is not important functionality
+		catch (ex) {}
+	},
+	
+	/**
+	 * Save details about the commenter (name, email, url) into local storage
+	 */
+	saveCommentDetails: function()
+	{
+		try
+		{
+			window.localStorage.setItem('comment-author', $('author').get('value'));
+			window.localStorage.setItem('comment-email', $('email').get('value'));
+			window.localStorage.setItem('comment-url', $('url').get('value'));
+		}
+		// Ignore any exceptions - This is not important functionality
+		catch (ex) {}
 	}
 };
 
