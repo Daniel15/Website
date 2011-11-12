@@ -5,7 +5,6 @@
  
 /*
  * Still to be done:
- * - Projects page
  * - Blog admin
  */
  
@@ -44,7 +43,6 @@ CheatCode.prototype =
 	 */
 	keypress: function(e)
 	{
-		console.log(e);
 		// If incorrect key is pressed, start again!
 		if (e.keyCode != this.keys[this.step])
 		{

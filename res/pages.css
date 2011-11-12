@@ -199,7 +199,7 @@ div#tech-info
 	display: none;
 }
 
-div#sidebar ul li.active
+#sidebar ul li.active
 {
 	font-weight: bold;
 }

@@ -63,3 +63,105 @@ Page.Site.Index =
 		});
 	}
 };
+
+/**
+ * Projects page
+ */
+Page.Site.Projects = 
+{
+	/**
+	 * Initialise the page
+	 */
+	init: function()
+	{
+		$('sidebar').addDelegate('click', 'a', null, this.showTech.bind(this));
+	},
+	
+	/**
+	 * Currently selected technology
+	 */
+	currentTech: null,
+	
+	/**
+	 * Show a particular technology
+	 * TODO: Split this into multiple different functions
+	 */
+	showTech: function(e)
+	{
+		// Get this tech, and the projects using it
+		var el = $(e.target.parentNode);
+		var id = el.get('id').substring(5);
+		var name = e.target.textContent || e.target.innerText;
+		
+		if (this.currentTech == el)
+		{
+			// Unselect the currently selected technology
+			this.currentTech = null;
+			el.removeClass('active');
+			// Hide the info
+			$('intro').setStyle('display', '');
+			$('tech-info').setStyle('display', '');
+			
+			// Show all projects
+			this.toggleAllProjects(true);
+			$('active_projects').setStyle('display', '');
+			
+			Events.stop(e);
+			return;
+		}
+		
+		// TODO: Unselect the current tech
+		
+		this.currentTech = el;
+		el.addClass('active');
+		
+		// Show the tech header and some info
+		$('intro').setStyle('display', 'none');
+		var info = $('tech-info');
+		info.setStyle('display', 'block');
+		info.firstByTag('h2').set('innerHTML', 'About ' + name);
+		// tech_descs is defined in cms/pages/projects.php towards the end
+		info.firstByTag('div').set('innerHTML', tech_descs[id]);
+		
+		// Get all the projects that have used this technology
+		var techProjects = $('content').getByClass('uses-' + id);
+		$('tech-count').set('innerHTML', techProjects.length);
+		
+		this.toggleAllProjects(false);
+		
+		// Now show the relevant projects
+		for (var i = 0; i < techProjects.length; i++)
+		{
+			techProjects[i].setStyle('display', '').addClass('visible');
+		}
+		
+		// Show or hide the "active projects" section depending on if it actually contains anything.
+		var activeProjects = $('active_projects');
+		activeProjects.setStyle('display', activeProjects.firstByClass('.visible') ? '' : 'none');
+		
+		Events.stop(e);
+	},
+	
+	/**
+	 * Hide or show all the projects
+	 */
+	toggleAllProjects: function(toggle)
+	{
+		// Toggle all the projects. The "visible" class is just used by the code that
+		// hides/shows "Active projects" depending on if any are actually active
+		
+		// TODO in the framework: Make some sort of custom element list that can call setStyle 
+		// on all items (MooTools and jQuery style).
+		
+		
+		var lists = $('content').getByClass('projects');
+		for (var i = 0; i < lists.length; i++)
+		{
+			var projects = lists[i].getByTag('li');
+			for (var j = 0; j < projects.length; j++)
+			{
+				projects[j].setStyle('display', toggle ? '' : 'none')[toggle ? 'addClass': 'removeClass']('visible');
+			}
+		}
+	}
+};
