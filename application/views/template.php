@@ -107,16 +107,7 @@ if (!empty($lastModified) && $lastModified != 0)
 <?php if ($siteConfig->enableCompression) : ?>
 	<script src="res/<?php echo $siteConfig->latestJS ?>" type="text/javascript"></script>
 <?php else : ?>
-	<!-- Uncombined JavaScript files for debugging -->
-	<!-- Syntax highlighting -->
-	<!--script src="lib/syntaxhighlighter/shCore.js"></script>
-	<script src="lib/syntaxhighlighter/shBrushJScript.js"></script>
-	<script src="lib/syntaxhighlighter/shBrushPhp.js"></script>
-	<script src="lib/syntaxhighlighter/shBrushCSharp.js"></script>
-	<script src="lib/syntaxhighlighter/shBrushXml.js"></script>
-	<script src="lib/syntaxhighlighter/shBrushDelphi.js"></script>
-	<script src="lib/syntaxhighlighter/shBrushPlain.js"></script-->
-	
+	<!-- Uncombined JavaScript files for debugging -->	
 	<!-- Framework -->
 	<script src="js/framework/core.js"></script>
 	<script src="js/framework/ajax.js"></script>
@@ -130,6 +121,16 @@ if (!empty($lastModified) && $lastModified != 0)
 	<script src="js/blog.js"></script>
 	<script src="js/socialfeed.js"></script>
 	<script>Events.initPage();</script>
+	
+	<!-- Syntax highlighting -->
+	<script src="lib/syntaxhighlighter/shCore.js"></script>
+	<script src="lib/syntaxhighlighter/shBrushJScript.js"></script>
+	<script src="lib/syntaxhighlighter/shBrushPhp.js"></script>
+	<script src="lib/syntaxhighlighter/shBrushCSharp.js"></script>
+	<script src="lib/syntaxhighlighter/shBrushXml.js"></script>
+	<script src="lib/syntaxhighlighter/shBrushDelphi.js"></script>
+	<script src="lib/syntaxhighlighter/shBrushPlain.js"></script>
+	<script src="js/syntaxhighlighter.js"></script>
 <?php endif; ?>
 
 	<!-- Prompt IE 6 and 7 users to install Chrome Frame -->
