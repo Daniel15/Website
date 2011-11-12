@@ -2,10 +2,12 @@
 abstract class Compressor
 {
 	protected $_inputDir;
+	protected $_cacheDir;
 	
-	public function __construct($inputDir)
+	public function __construct($inputDir, $cacheDir)
 	{
 		$this->_inputDir = $inputDir;
+		$this->_cacheDir = $cacheDir;
 	}
 	
 	abstract public function compress($file);
@@ -18,9 +20,22 @@ abstract class Compressor
 		foreach ($files as $file)
 		{
 			$fullPath = $this->_inputDir . $file;
-			$output .= "\n\n/* Begin " . $file . ', modified '
-				. date('Y-m-d G:i', filemtime($fullPath)) . ' (md5=' . md5_file($fullPath) . ") */\n";
-			$output .= $this->compress($fullPath);
+			$md5 = md5_file($fullPath);
+			
+			$output .= "\n/* " . $file . " */\n";
+			
+			// Was this file already compressed?
+			if (file_exists($this->_cacheDir . $md5))
+			{
+				$output .= file_get_contents($this->_cacheDir . $md5);
+			}
+			else
+			{
+				$compressed = $this->compress($fullPath);
+				$output .= $compressed;
+				// Cache this result so it doesn't need to be recompressed later
+				file_put_contents($this->_cacheDir . $md5, $compressed);
+			}
 		}
 		
 		return $output;
@@ -65,69 +80,72 @@ class Compressor_CSS extends Compressor
 		
 		$file = $this->webRequest('http://vps.dan.cx/compress.php', $postData);
 		$file = preg_replace('~url\(([\'"]?)([^/])~', 'url($1../../../$2', $file);
-		return $file;
+		return $file . "\n";
 	}
 }
 
 echo 'Compressing JS and CSS... ';
 $siteConfig = include '../application/config/site.php';
-
-$directory = '../res/';
-$basename = date('d_Hi');
-$outputDirBase = 'combined/' . date('Y') . '/' . date('m') . '/';
-$outputDir = $directory . $outputDirBase;
-
-@mkdir($outputDir, 0777, true);
-
-$jsFiles = array(
-	// MooTools More (MooTools included via Google AJAX API)
-	'mootools-more-1.3.0.1.js', 
-	'../lib/LocalStorage.js',
-	// Syntax highligher
-	'../lib/syntaxhighlighter/shCore.js', '../lib/syntaxhighlighter/shBrushJScript.js', '../lib/syntaxhighlighter/shBrushPhp.js', '../lib/syntaxhighlighter/shBrushCSharp.js', '../lib/syntaxhighlighter/shBrushXml.js', '../lib/syntaxhighlighter/shBrushPlain.js', '../lib/syntaxhighlighter/shBrushDelphi.js',
-	// Generic scripts
-	'scripts_r1.js'
-);
-
-$cssFiles = array(
-	// Main stylesheets
-	'style_r2.css', 'pages.css', 'sprites-processed.css', 'blog.css',
-	// Print stylesheets
-	'print.css',
-	// IE hacks
-	'style-ie6.css', 'style-ie7.css', 'style-ie8.css',
-	// Syntax highlighter
-	'../lib/syntaxhighlighter/shCore.css', '../lib/syntaxhighlighter/shThemeDefault.css',
-);
-
-/*$blogJSFiles = array(
-	'../blog/wp-includes/js/l10n.js',
-	'../blog/wp-includes/js/comment-reply.js',
-	'../blog/wp-content/plugins/wpaudio-mp3-player/sm2/soundmanager2-nodebug-jsmin.js',
-	'../blog/wp-content/plugins/wpaudio-mp3-player/wpaudio-mootools.js',
-);
-$blogCSSFiles = array(
-	'../blog/wp-content/themes/Daniel15v4r2/style.css',
-	'../blog/wp-content/plugins/wp-pagenavi/pagenavi-css.css',
-	'../blog/wp-content/plugins/comment-info-detector/comment-info-detector.css',
-	'../blog/wp-content/plugins/wp-syntax/wp-syntax.css',
-);*/
-
-$jsCompress = new Compressor_JS($directory);
-file_put_contents($outputDir . $basename . '.js', $jsCompress->compressFiles($jsFiles));
-//file_put_contents($outputDir . $basename . '_blog.js', $jsCompress->compressFiles($blogJSFiles));
-
-$cssCompress = new Compressor_CSS($directory);
-file_put_contents($outputDir . $basename . '.css', $cssCompress->compressFiles($cssFiles));
-//file_put_contents($outputDir . $basename . '_blog.css', $cssCompress->compressFiles($blogCSSFiles));
-
 if (empty($siteConfig))
 	$siteConfig = array();
+
+$directory = dirname(__DIR__) . '/';
+$basename = date('d_Hi');
+$outputDirBase = 'res/combined/' . date('Y') . '/' . date('m') . '/';
+$outputDir = $directory . $outputDirBase;
+$cacheDir = __DIR__ . '/cache/';
+
+@mkdir($outputDir, 0777, true);
+@mkdir($cacheDir, 0777, true);
+
+
+$sets = array(
+	'latestJS' => array(
+		'type' => 'js',
+		'output' => $basename . '.js',
+		'files' => array(
+			// Framework
+			'js/framework/core.js', 'js/framework/ajax.js', 'js/framework/dom.js', 
+			'js/framework/events.js', 'js/framework/storage.js', 
+			// Site
+			'js/core.js', 'js/site.js', 'js/blog.js', 'js/socialfeed.js',
+		),
+	),
+	'latestCSS' => array(
+		'type' => 'css',
+		'output' => $basename . '.css',
+		'files' => array(
+			// Main stylesheets
+			'res/style_r2.css', 'res/pages.css', 'res/sprites-processed.css', 'res/blog.css',
+			// Print stylesheets
+			'res/print.css',
+			// IE hacks
+			'res/style-ie6.css', 'res/style-ie7.css', 'res/style-ie8.css',
+			// Syntax highlighter
+			'lib/syntaxhighlighter/shCore.css', 'lib/syntaxhighlighter/shThemeDefault.css',
+		),
+	),
+	'syntaxHighlightJS' => array(
+		'type' => 'js',
+		'output' => $basename . '_syntax.js',
+		'files' => array(
+			'lib/syntaxhighlighter/shCore.js', 'lib/syntaxhighlighter/shBrushJScript.js', 
+			'lib/syntaxhighlighter/shBrushPhp.js', 'lib/syntaxhighlighter/shBrushCSharp.js', 
+			'lib/syntaxhighlighter/shBrushXml.js', 'lib/syntaxhighlighter/shBrushPlain.js', 
+			'lib/syntaxhighlighter/shBrushDelphi.js',
+			
+			'js/syntaxhighlighter.js',
+		),
+	),
 	
-$siteConfig['latestJS'] = $outputDirBase . $basename . '.js';
-$siteConfig['latestCSS'] = $outputDirBase . $basename . '.css';
-//$siteConfig['latestBlogJS'] = $outputDirBase . $basename . '_blog.js';
-//$siteConfig['latestBlogCSS'] = $outputDirBase . $basename . '_blog.css';
+);
+
+foreach ($sets as $name => $set)
+{
+	$compressor = ($set['type'] == 'js' ? new Compressor_JS($directory, $cacheDir) : new Compressor_CSS($directory, $cacheDir));
+	file_put_contents($outputDir . $set['output'], $compressor->compressFiles($set['files']));
+	$siteConfig[$name] = $outputDirBase . $set['output'];
+}
 
 file_put_contents('../application/config/site.php', '<?' . 'php return ' . var_export($siteConfig, true) . '; ?' . '>');
 

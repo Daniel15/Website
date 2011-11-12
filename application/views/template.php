@@ -37,7 +37,7 @@ if (!empty($lastModified) && $lastModified != 0)
 // Are we combining the CSS files?
 if ($siteConfig->enableCompression) : ?>
 
-	<link title="dan.cx combined stylesheet" rel="stylesheet" href="res/<?php echo $siteConfig->latestCSS ?>" type="text/css" id="default-stylesheet" />
+	<link title="dan.cx combined stylesheet" rel="stylesheet" href="<?php echo $siteConfig->latestCSS ?>" type="text/css" id="default-stylesheet" />
 <?php else : ?>
 
 	<!-- Some general stylesheets for d15.biz -->
@@ -105,7 +105,8 @@ if (!empty($lastModified) && $lastModified != 0)
 	</div>
 	<!-- Now for the JS -->
 <?php if ($siteConfig->enableCompression) : ?>
-	<script src="res/<?php echo $siteConfig->latestJS ?>" type="text/javascript"></script>
+	<script src="<?php echo $siteConfig->latestJS ?>"></script>
+	<script src="<?php echo $siteConfig->syntaxHighlightJS ?>"></script>
 <?php else : ?>
 	<!-- Uncombined JavaScript files for debugging -->	
 	<!-- Framework -->
