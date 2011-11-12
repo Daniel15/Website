@@ -212,24 +212,23 @@ ul.postmetadata li
 	width: auto;
 }
 
-.js #leave-comment-form label,
-.js #leave-comment-form small
+.has-placeholders #leave-comment-form label,
+.has-placeholders #leave-comment-form small
 {
 	display: none;
 }
 
-.js #leave-comment-form input
+.has-placeholders #leave-comment-form input
 {
 	width: 100%;
 }
 
 /* Display checkbox fields normally */
-.js #leave-comment-form input[type='checkbox']
+.has-placeholders #leave-comment-form input[type='checkbox']
 {
 	width: auto;
 }
 
-/* TODO: This might need some optimisation, especially the last selector! */
 #leave-comment-form input[type='checkbox'] + label
 {
 	display: inline;

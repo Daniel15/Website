@@ -63,7 +63,7 @@ Page.Blog =
 			// Ensure it's a post
 			// TODO: Use descendant selector with querySelectorAll instead of this check
 			if (posts[i].id.slice(0, 5) == 'post-')
-				this.posts.push(new Blog.Post(DOM.get(posts[i])));
+				this.posts.push(new Blog.Post(DOM.wrap(posts[i])));
 		}
 	}
 };
@@ -79,9 +79,39 @@ Page.Blog.View =
 	init: function()
 	{
 		$('comments').addDelegate('click', 'a', 'reply-to', this.replyToComment);
+		$('cancel-reply').addEvent('click', this.cancelReply.bind(this));
 		
 		// TODO: Store commenter data
-		// TODO: Placeholders
+		
+		this.initPlaceholders();
+	},
+	
+	/**
+	 * Initialise placeholders for comment form, if the browser supports them
+	 */
+	initPlaceholders: function()
+	{
+		// Check if the browser supports placeholders
+		if (!('placeholder' in document.createElement('input')))
+			return;
+			
+		var fields = ['author', 'email', 'url', 'subject'];
+		for (var i = 0, count = fields.length; i < count; i++)
+		{
+			var field = $(fields[i]);
+			var label = field.previous();
+			var extraInfo = field.next();
+			
+			var placeholder = label.get('innerHTML').replace(':', '');
+			if (extraInfo)
+			{
+				placeholder += ' ' + extraInfo.get('innerHTML');
+			}
+			
+			field.set('placeholder', placeholder);
+		}
+		
+		DOM.body.addClass('has-placeholders')
 	},
 	
 	/**
@@ -89,11 +119,26 @@ Page.Blog.View =
 	 * @param	Event data
 	 */
 	replyToComment: function(e)
-	{
+	{		
+		// Find the footer and stick the comments form in it
+		var footer = $(e.target).parent('footer');
+		var comment_id = $(e.target).parent('li').get('id').split('-')[1];
+		footer.appendChild($('leave-comment'));
+		$('cancel-reply').setStyle('display', 'block');
+		$('parent_comment_id').set('value', comment_id);
 		Events.stop(e);
-		console.log(e);
-		console.log(this);
-		alert('TODO');
+	},
+	
+	/**
+	 * Called when the "cancel reply" link is clicked
+	 */
+	cancelReply: function(e)
+	{
+		// Put the comment form back where it belongs
+		$('content').appendChild($('leave-comment'));
+		$('cancel-reply').setStyle('display', 'none');
+		$('parent_comment_id').set('value', '');
+		Events.stop(e);
 	}
 };
 
