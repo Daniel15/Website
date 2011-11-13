@@ -106,6 +106,7 @@ if (!empty($lastModified) && $lastModified != 0)
 	<!-- Now for the JS -->
 <?php if ($siteConfig->enableCompression) : ?>
 	<script src="<?php echo $siteConfig->latestJS ?>"></script>
+	<script>Events.initPage();</script>
 	<script src="<?php echo $siteConfig->syntaxHighlightJS ?>"></script>
 <?php else : ?>
 	<!-- Uncombined JavaScript files for debugging -->	
