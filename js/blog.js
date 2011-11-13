@@ -198,13 +198,13 @@ Blog.Post = function(post)
 	this.addPopupHandler('twitter', 550, 420);
 	
 	// Initialise data for network sharing links
-	Ajax.load(socialCountUrl, 
+	(new Ajax(socialCountUrl, 
 	{
 		method: 'get',
 		onSuccess: this.updateSocialCounts,
 		context: this,
 		abortPrev: false
-	});
+	})).send();
 };
 
 Blog.Post.prototype = 

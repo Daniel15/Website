@@ -64,13 +64,13 @@ SocialFeed.prototype =
 		if (beforeDate)
 			data.before_date = beforeDate;
 		
-		Ajax.load(this.options.feedurl,
+		// TODO: Reuse the one AJAX object
+		(new Ajax(this.options.feedurl,
 		{
 			onSuccess: this.onSuccess,
 			context: this,
-			abortPrev: false,
 			data: data
-		});
+		})).send();
 	},
 	
 	/**

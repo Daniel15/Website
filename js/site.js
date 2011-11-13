@@ -36,7 +36,7 @@ Page.Site.Index =
 	 */
 	initGoogleTalk: function()
 	{
-		Ajax.load('chatstatus.php', 
+		(new Ajax('chatstatus.php', 
 		{
 			onSuccess: function(data)
 			{
@@ -53,7 +53,7 @@ Page.Site.Index =
 			},
 			context: this,
 			abortPrev: false
-		});
+		})).send();
 		
 		// Make the "start conversation" link open in a new window
 		$('start_gtalk_chat').addEvent('click', function(e)
