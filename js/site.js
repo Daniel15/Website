@@ -119,12 +119,8 @@ Page.Site.Projects =
 		$('tech-count').set('innerHTML', techProjects.length);
 		
 		this.toggleAllProjects(false);
-		
 		// Now show the relevant projects
-		for (var i = 0; i < techProjects.length; i++)
-		{
-			techProjects[i].setStyle('display', '').addClass('visible');
-		}
+		techProjects.setStyle('display', '').addClass('visible');
 		
 		// Show or hide the "active projects" section depending on if it actually contains anything.
 		var activeProjects = $('active_projects');
@@ -157,18 +153,10 @@ Page.Site.Projects =
 		// Toggle all the projects. The "visible" class is just used by the code that
 		// hides/shows "Active projects" depending on if any are actually active
 		
-		// TODO in the framework: Make some sort of custom element list that can call setStyle 
-		// on all items (MooTools and jQuery style).
-		
-		
 		var lists = $('content').getByClass('projects');
 		for (var i = 0; i < lists.length; i++)
 		{
-			var projects = lists[i].getByTag('li');
-			for (var j = 0; j < projects.length; j++)
-			{
-				projects[j].setStyle('display', toggle ? '' : 'none')[toggle ? 'addClass': 'removeClass']('visible');
-			}
+			lists[i].getByTag('li').setStyle('display', toggle ? '' : 'none')[toggle ? 'addClass': 'removeClass']('visible');
 		}
 	}
 };
