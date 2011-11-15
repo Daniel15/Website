@@ -84,7 +84,6 @@ Page.Site.Projects =
 	
 	/**
 	 * Show a particular technology
-	 * TODO: Split this into multiple different functions
 	 */
 	showTech: function(e)
 	{
@@ -95,23 +94,15 @@ Page.Site.Projects =
 		
 		if (this.currentTech == el)
 		{
-			// Unselect the currently selected technology
-			this.currentTech = null;
-			el.removeClass('active');
-			// Hide the info
-			$('intro').setStyle('display', '');
-			$('tech-info').setStyle('display', '');
-			
-			// Show all projects
-			this.toggleAllProjects(true);
-			$('active_projects').setStyle('display', '');
-			
+			this.unselectTech();
 			Events.stop(e);
 			return;
 		}
 		
-		// TODO: Unselect the current tech
-		
+		// Unselect any currently selected item
+		if (this.currentTech)
+			this.currentTech.removeClass('active');
+			
 		this.currentTech = el;
 		el.addClass('active');
 		
@@ -140,6 +131,22 @@ Page.Site.Projects =
 		activeProjects.setStyle('display', activeProjects.firstByClass('.visible') ? '' : 'none');
 		
 		Events.stop(e);
+	},
+	
+	/**
+	 * Unselect the currently selected technology
+	 */
+	unselectTech: function(el)
+	{
+		this.currentTech.removeClass('active');
+		this.currentTech = null;
+		// Hide the info
+		$('intro').setStyle('display', '');
+		$('tech-info').setStyle('display', '');
+		
+		// Show all projects
+		this.toggleAllProjects(true);
+		$('active_projects').setStyle('display', '');
 	},
 	
 	/**
