@@ -4,6 +4,28 @@
  * (c) 2010 Daniel15.
  */
 
+/* IE upgrade message */
+.ielt8 #ie-sucks
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 0.3em;
+	background: #F6D662;
+	border-bottom: 1px solid #C59C0B;
+}
+
+.ielt8 #ie-sucks a
+{
+	color: #0D71C3;
+}
+
+.ielt8 div#main-container
+{
+	margin-top: 2.5em;
+}
+
 /* This is needed because otherwise, the header wraps to the next line and doesn't display. */
 .ie7 nav
 {
@@ -50,3 +72,7 @@
 	float: left;
 }
 
+.ielt8 #site-projects ul.projects
+{
+	margin-left: 0;
+}
