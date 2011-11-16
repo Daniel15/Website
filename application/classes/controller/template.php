@@ -74,7 +74,7 @@ class Controller_Template extends Kohana_Controller_Template
 				'title' => 'Blog',
 				'active' => $controller == 'blog' || $directory == 'blog',
 			),
-			'http://thoughts.dan.cx/' => array(
+			'http://daaniel.com/' => array(
 				'title' => 'Thoughts',
 				'active' => false
 			),

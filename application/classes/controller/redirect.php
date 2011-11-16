@@ -10,14 +10,18 @@ class Controller_Redirect extends Controller
 	 */
 	public function action_latest_res()
 	{
+		$name = $this->request->param('name');
 		$type = $this->request->param('type');
 		
 		if ($type != 'js' && $type != 'css')
 			throw new HTTP_Exception_404('Invalid type specified for latest_res: ' . $type);
 			
-		$filename = Kohana::$config->load('site.latest' . strtoupper($type));
+		$filename = Kohana::$config->load('site.' . $name . strtoupper($type));
 		
-		$this->request->redirect('res/' . $filename);
+		if (empty($filename))
+			throw new HTTP_Exception_404('Invalid name in latest_res: ' . $name);
+		
+		$this->request->redirect($filename);
 	}
 }
 ?>
