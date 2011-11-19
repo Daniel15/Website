@@ -176,6 +176,12 @@ class Controller_Blog extends Controller_Template
 				'slug' => $slug
 			)), 301);
 		}
+
+		// If the page was POSTed, it's a comment
+		if ($_POST)
+		{
+			$this->comment($post);
+		}
 		
 		$page = View::factory('blog/post')
 			->bind('post', $post)
@@ -183,16 +189,18 @@ class Controller_Blog extends Controller_Template
 			->set('categories', $post->categories->order_by('title')->find_all())
 			->set('tags', $post->tags->order_by('title')->find_all())
 			->set('share_links', Social::all_share_urls($post));
-		
-		// If the page was POSTed, it's a comment
-		if ($_POST)
-		{
-			$this->comment($post);
-		}
 			
 		$this->template
 			->set('title', $post->title)
 			->bind('content', $page);
+			
+		// Did we come from posting a comment? Better tell the user.
+		if (!empty($_GET['comment']))
+		{
+			$this->template
+				->set('top_message', 'Your comment has been added and will appear on the site as soon as it is approved')
+				->set('top_message_type', 'success');
+		}
 			
 		// Set the meta tags for Facebook
 		$this->template->extraHead .= '
@@ -283,9 +291,8 @@ class Controller_Blog extends Controller_Template
 			if ($comment->status != 'spam')
 				$this->handle_new_comment($comment, $post);
 			
-			$this->template
-				->set('top_message', 'Your comment has been added and will appear on the site as soon as it is approved')
-				->set('top_message_type', 'success');
+			// All good, go back to the post
+			$this->request->redirect($post->url() . '?comment=' . $comment->id);
 		}
 		catch (ORM_Validation_Exception $ex)
 		{
