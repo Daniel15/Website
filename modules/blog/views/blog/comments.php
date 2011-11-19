@@ -8,16 +8,18 @@ foreach ($comments as $comment)
 	// $comment->author_link() is already escaped
 
 	echo '
-	<li id="comment-', $comment->id, '">
+	<li id="comment-', $comment->id, '" itemprop="comment" itemscope itemtype="http://schema.org/UserComments">
 		<article>
 			<header>
-				<img class="avatar" src="', $comment->avatar_url(), '" alt="Avatar for " />
-				<time datetime="', date(DATE_W3C, $comment->date), '">', date($config->full_date_format, $comment->date), '</time>
+				<img class="avatar" src="', $comment->avatar_url(), '" alt="Avatar for " itemprop="image" />
+				<time datetime="', date(DATE_W3C, $comment->date), '" itemprop="commentTime">', date($config->full_date_format, $comment->date), '</time>
 				', $comment->author_link(), ' said:
 			</header>
-			', nl2br(htmlspecialchars($comment->content)), '
+			<div itemprop="commentText">
+				', nl2br(htmlspecialchars($comment->content)), '
+			</div>
 			<footer>
-				<p><a href="', $post->url(), '?parent_comment_id=', $comment->id, '#leave-comment" class="reply-to">Reply</a></p>
+				<p><a href="', $post->url(), '?parent_comment_id=', $comment->id, '#leave-comment" class="reply-to" itemprop="replyToUrl">Reply</a></p>
 			</footer>
 		</article>';
 		
