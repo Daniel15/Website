@@ -52,8 +52,8 @@ class Controller_Cli_Gallery extends Controller_Cli
 	 */
 	private function import_pics(Model_Gallery_Album $album)
 	{
-		$path = $this->config->photo_dir . $album->slug . '/';
-		$resized_path = $this->config->photo_dir . Model_Gallery_Picture::RESIZED_SUBDIR . $album->slug . '/';
+		$path = $this->config->image_dir . $album->slug . '/';
+		$resized_path = $this->config->image_dir . $this->config->resized_subdir . $album->slug . '/';
 		
 		// Create directory for storing resized versions of photos
 		if (!file_exists($resized_path))

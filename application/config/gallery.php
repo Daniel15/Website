@@ -5,8 +5,14 @@
  */
 return array(
 	// Directory the gallery photos are stored in
-	'photo_dir' => '/var/www/gallerypics/',
+	'image_dir' => '/var/www/gallerypics/',
 	// URL corresponding to the above directory
-	'photo_url' => 'http://localhost/gallerypics/',
+	'image_url' => 'http://localhost/gallerypics/',
+	// Subdirectory for resized images
+	'resized_subdir' => 'resized/',
+	
+	// Widths
+	'thumbnail_width' => 200,
+	'normal_width' => 700,
 );
 ?>

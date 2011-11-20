@@ -154,6 +154,7 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 			'action'     => 'sitemap',
 		));
 	
+	// ---------------- Blog --------------------
 	// Viewing a blog post
 	Route::set('blog_view', 'blog/<year>/<month>/<slug>', array('year' => '\d{4}', 'month' => '\d{2}'))
 		->defaults(array(
@@ -211,6 +212,19 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 			'directory'  => 'blogadmin',
 			'controller' => 'home',
 			'action'     => 'index',
+		));
+		
+	// --------------- Gallery -----------------
+	Route::set('gallery_album', 'gallery/<album>')
+		->defaults(array(
+			'controller' => 'gallery',
+			'action'     => 'album',
+		));
+		
+	Route::set('gallery_view', 'gallery/<album>/<filename>.htm', array('filename' => '.+'))
+		->defaults(array(
+			'controller' => 'gallery',
+			'action'     => 'view',
 		));
 		
 	// Errors
