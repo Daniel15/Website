@@ -2,7 +2,7 @@
 
 <h2><?php echo $title ?></h2>
 
-<ul class="photos">
+<ul class="pictures">
 <?php
 foreach ($pictures as $picture)
 {
@@ -10,7 +10,7 @@ foreach ($pictures as $picture)
 	<li id="picture-', $picture->id, '">
 		<a href="', $picture->url(), '">
 			<img src="', $picture->thumbnail_url(), '" alt="', $picture->title, '" />
-			', $picture->title, '
+			<p>', $picture->title, '</p>
 		</a>
 	</li>';
 }

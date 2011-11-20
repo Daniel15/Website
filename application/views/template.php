@@ -45,6 +45,7 @@ if ($siteConfig->enableCompression) : ?>
 	<link rel="stylesheet" href="res/pages.css?v=3.0.1" type="text/css" />
 	<link rel="stylesheet" href="res/sprites-processed.css" type="text/css" />
 	<link rel="stylesheet" href="res/blog.css" type="text/css" />
+	<link rel="stylesheet" href="res/gallery.css" type="text/css" />
 	<link rel="stylesheet" href="res/print.css" type="text/css" media="print"  />
 	<!--[if lt IE 9]><link rel="stylesheet" href="res/style-ie8.css" type="text/css" /><![endif]-->
 	<!--[if lt IE 8]><link rel="stylesheet" href="res/style-ie7.css" type="text/css" /><![endif]-->
