@@ -136,6 +136,49 @@ CREATE TABLE IF NOT EXISTS `blog_subscriptions` (
   KEY `post_id` (`post_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gallery_albums`
+--
+
+CREATE TABLE IF NOT EXISTS `gallery_albums` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `count` int(10) unsigned NOT NULL,
+  `parent_album_id` int(10) unsigned DEFAULT NULL,
+  `created_date` int(10) unsigned NOT NULL,
+  `updated_date` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gallery_pictures`
+--
+
+CREATE TABLE IF NOT EXISTS `gallery_pictures` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `album_id` int(10) unsigned NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `filename` varchar(255) NOT NULL,
+  `width` smallint(5) unsigned NOT NULL,
+  `height` smallint(5) unsigned NOT NULL,
+  `upload_date` int(10) unsigned NOT NULL,
+  `original_date` int(10) unsigned DEFAULT NULL,
+  `camera_make` varchar(255) DEFAULT NULL,
+  `camera_model` varchar(255) DEFAULT NULL,
+  `exposure_time` float DEFAULT NULL,
+  `iso` smallint(6) DEFAULT NULL,
+  `aperture` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `album_id` (`album_id`,`filename`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
 
 --
 -- Constraints for dumped tables

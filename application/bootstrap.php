@@ -65,10 +65,15 @@ if (isset($_SERVER['KOHANA_ENV']))
 {
 	Kohana::$environment = constant('Kohana::'.strtoupper($_SERVER['KOHANA_ENV']));
 }
-else
+elseif (!empty($_SERVER['SERVER_NAME']))
 {
 	// Set the environment
 	Kohana::$environment = strpos($_SERVER['SERVER_NAME'], '.local') === false ? Kohana::PRODUCTION : Kohana::DEVELOPMENT;
+}
+else
+{
+	// When in doubt, fall back to production
+	Kohana::$environment = Kohana::PRODUCTION;
 }
 
 /**
@@ -94,7 +99,8 @@ Kohana::init(array(
 /**
  * Set the exception handler
  */
-set_exception_handler(array('ExceptionHandler', 'handle'));
+if (!Kohana::$is_cli)
+	set_exception_handler(array('ExceptionHandler', 'handle'));
 
 /**
  * Attach the file write to logging. Multiple writers are supported.
@@ -124,6 +130,7 @@ Kohana::modules(array(
 	
 	// Site components
 	'blog'       => MODPATH.'blog',
+	'gallery'    => MODPATH.'gallery',
 	));
 
 /**
@@ -217,7 +224,16 @@ if (Kohana::$environment >= Kohana::TESTING || !Route::cache())
 		->defaults(array(
 			'controller' => 'redirect',
 			'action'     => 'latest_res',
-		));	
+		));
+		
+	// CLI (Command Line) classes
+	Route::set('cli', 'cli/<controller>(/<action>(/<id>))')
+		->defaults(array(
+			'directory'  => 'cli',
+			'controller' => 'gallery',
+			'action'     => 'index',
+		));
+	
 		
 	Route::set('default', '(<controller>(/<action>(/<id>)))')
 		->defaults(array(
