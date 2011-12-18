@@ -53,6 +53,8 @@ class Controller_Site extends Controller_Template
 	<link rel="openid2.provider" href="https://www.startssl.com/id.ssl" />
 	<link rel="openid2.local_id" href="https://daniel15.startssl.com/" />
 	<meta http-equiv="X-XRDS-Location" content="https://daniel15.startssl.com/xrds/" />
+	
+	<link rel="alternate" type="application/rss+xml" title="Daniel15\'s Blog - RSS Feed" href="http://feeds.d15.biz/daniel15" />
 ';
 	}
 	
