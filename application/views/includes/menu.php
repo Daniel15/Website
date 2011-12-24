@@ -3,7 +3,7 @@
 foreach ($items as $uri => $item)
 {
 	echo '
-					<li', $item['active'] ? ' id="selected"' : '', '><a href="', $uri, '"><span>', $item['title'], '</span></a></li>';
+					<li', $item['active'] ? ' class="selected"' : '', '><a href="', $uri, '">', $item['title'], '</a></li>';
 }
 ?>
 
