@@ -194,6 +194,28 @@ ul.postmetadata li
 	background: #eeeeee;
 }
 
+/********************/
+/* LinkedIn */
+.blog article .share li.linkedin a
+{
+	background: #EEEEEE; /* Old browsers */
+	background: -moz-linear-gradient(top,  #FFFFFF 0%, #eeeeee 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* IE10+ */
+	background: linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+
+	border-color: #aeaeae;
+	color: #777777;
+}
+
+.blog article .share li.linkedin:hover a
+{
+	background: #eeeeee;
+}
+
 /* Counts are loaded via JavaScript, so hide them if JS disabled */
 .no-js .blog article .share .count
 {

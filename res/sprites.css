@@ -126,3 +126,8 @@ ul.postmetadata li.permalink
 {
 	background-image: url(icons/social/reddit.png); /** sprite-ref: mainsprite; */
 }
+
+.blog article .share li.linkedin .name
+{
+	background-image: url(icons/social/linkedin.png); /** sprite-ref: mainsprite; */
+}

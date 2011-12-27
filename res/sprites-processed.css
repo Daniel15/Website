@@ -151,3 +151,9 @@ ul.postmetadata li.permalink
   background-image: url('combined/sprites/mainsprite-b073f8354e2f4f7956038f163cddcf91.png');
   background-position: left -128px;
 }
+
+.blog article .share li.linkedin .name
+{
+  background-image: url('combined/sprites/mainsprite-b073f8354e2f4f7956038f163cddcf91.png');
+  background-position: left -176px;
+}

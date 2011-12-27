@@ -196,6 +196,7 @@ Blog.Post = function(post)
 	
 	this.addPopupHandler('facebook', 500, 400);
 	this.addPopupHandler('twitter', 550, 420);
+	this.addPopupHandler('linkedin', 520, 570);
 	
 	// Initialise data for network sharing links
 	(new Ajax(socialCountUrl, 
