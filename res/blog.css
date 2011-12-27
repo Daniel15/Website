@@ -90,109 +90,126 @@ ul.postmetadata li
 {
 	padding: 0;
 	margin: 0;
-	float: left;
 } 
-
-.blog article .share > span
-{
-	float: left;
-	margin-right: 0.2em;
-}
 
 .blog article .share li
 {
-	display: inline;
+	display: block;
+	float: left;
 }
 
-.blog article .share li:after
+.blog article .share a
 {
-	content: ", ";
-}
-
-.blog article .share li:last-child:after
-{
-	content: "";
+	display: block;
+	width: 45px;
+	height: 20px;
+	border: 1px solid #AAA;
+	margin-right: 0.4em;
+	padding: 0.2em;
+	border-radius: 5px;
+	text-decoration: none;
+	color: black;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+	position: relative;
 }
 
 .blog article .share .count
 {
-	display: none;
+	position: absolute;
+	right: 10px;
 }
 
-/* Links with JS enabled */
-.js article .share span,
-.js article .share li:after
-{
-	display: none;
-}
-
-.js article .share li
+.blog article .share .name
 {
 	display: inline-block;
-	text-align: center;
-	margin-right: 5px;
-}
-
-.js article .share li a
-{
-	color: black;
-	text-decoration: none;
-	display: block;
-	width: 40px;
-}
-
-.js article .share li .count
-{
-	display: block;
-	width: 100%;
-	height: 30px;
-	line-height: 30px;
-	border: 1px solid #B3C0FF;
-	/*background-color: #F2F6FB;*/
-	
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-}
-
-.js article .share .count:after
-{
-	content: " ";
-	/* Crazy CSS triangles! */
-	border-left: 4px solid transparent;
-	border-right: 4px solid transparent;
-	border-top: 4px solid #B3C0FF;
-	height: 0;
-	width: 0;
-	display: block;
-	position: relative;
-	left: 15px;
-}
-
-.js article .share .icon
-{
-    position: relative;
-    top: 5px;
-	margin-bottom: 10px;
+	text-indent: -9999px;
+	margin-left: 5px;
+	line-height: 15px;
+	width: 16px;
+	height: 16px;
 }
 
 /* Custom colours */
-.js article .share li.twitter .count { border-color: #94e4ff; }
-.js article .share li.twitter .count:after { border-top-color: #94e4ff; }
-.js article .share li.reddit .count { border-color: #aeaeae; }
-.js article .share li.reddit .count:after { border-top-color: #aeaeae; }
-.js article .share li.facebook .count { border-color: #98a9c9; }
-.js article .share li.facebook .count:after { border-top-color: #98a9c9; }
-
-/* Highlight on hover */
-.js article .share li:hover .count
+/* Facebook */
+.blog article .share li.facebook a
 {
-	border-color: black;
+	background: #385899; /* Old browsers */
+	background: -moz-linear-gradient(top,  #6e85b7 0%, #41609e 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6e85b7), color-stop(100%,#41609e)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #6e85b7 0%,#41609e 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #6e85b7 0%,#41609e 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #6e85b7 0%,#41609e 100%); /* IE10+ */
+	background: linear-gradient(top,  #6e85b7 0%,#41609e 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e85b7', endColorstr='#41609e',GradientType=0 ); /* IE6-9 */
+
+	border-color: #385899;
+	color: white;
 }
 
-.js article .share li:hover .count:after
+.blog article .share li.facebook:hover a
 {
-	border-top-color: black;
+	background: #385899;
+}
+
+.blog article .share li.facebook .name
+{
+	width: 8px;
+	height: 15px;
+}
+
+/********************/
+/* Twitter */
+.blog article .share li.twitter a
+{
+	background: #d6eaf6; /* Old browsers */
+	background: -moz-linear-gradient(top,  #FFFFFF 0%, #d6eaf6 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#d6eaf6)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #FFFFFF 0%,#d6eaf6 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #FFFFFF 0%,#d6eaf6 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #FFFFFF 0%,#d6eaf6 100%); /* IE10+ */
+	background: linear-gradient(top,  #FFFFFF 0%,#d6eaf6 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#d6eaf6',GradientType=0 ); /* IE6-9 */
+
+	border-color: #a3cce6;
+	color: #4887A6;
+}
+
+.blog article .share li.twitter:hover a
+{
+	background: #d6eaf6;
+}
+
+.blog article .share li.twitter .name
+{
+	height: 11px;
+}
+
+/********************/
+/* Reddit */
+.blog article .share li.reddit a
+{
+	background: #EEEEEE; /* Old browsers */
+	background: -moz-linear-gradient(top,  #FFFFFF 0%, #eeeeee 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* IE10+ */
+	background: linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+
+	border-color: #aeaeae;
+	color: #777777;
+}
+
+.blog article .share li.reddit:hover a
+{
+	background: #eeeeee;
+}
+
+/* Counts are loaded via JavaScript, so hide them if JS disabled */
+.no-js .blog article .share .count
+{
+	display: none;
 }
 
 /* Comments */

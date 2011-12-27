@@ -110,3 +110,19 @@ ul.postmetadata li.permalink
 {
 	background-image: url(icons/chat/busy.gif); /** sprite-ref: mainsprite; sprite-margin-top: 4px; sprite-margin-bottom: 5px; */
 }
+
+/* Blog share links */
+.blog article .share li.facebook .name
+{
+	background-image: url(icons/social/share/facebook.png); /** sprite-ref: mainsprite; */
+}
+
+.blog article .share li.twitter .name
+{
+	background-image: url(icons/social/share/twitter.png); /** sprite-ref: mainsprite; */
+}
+
+.blog article .share li.reddit .name
+{
+	background-image: url(icons/social/reddit.png); /** sprite-ref: mainsprite; */
+}
