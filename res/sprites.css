@@ -114,12 +114,12 @@ ul.postmetadata li.permalink
 /* Blog share links */
 .blog article .share li.facebook .name
 {
-	background-image: url(icons/social/share/facebook.png); /** sprite-ref: mainsprite; */
+	background-image: url(icons/social/share/facebook.png); /** sprite-ref: mainsprite; sprite-margin-bottom: 1px; */
 }
 
 .blog article .share li.twitter .name
 {
-	background-image: url(icons/social/share/twitter.png); /** sprite-ref: mainsprite; */
+	background-image: url(icons/social/share/twitter.png); /** sprite-ref: mainsprite; sprite-margin-top: 3px; sprite-margin-bottom: 3px; */
 }
 
 .blog article .share li.reddit .name

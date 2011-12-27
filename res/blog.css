@@ -101,7 +101,7 @@ ul.postmetadata li
 .blog article .share a
 {
 	display: block;
-	width: 45px;
+	/*width: 45px;*/
 	height: 20px;
 	border: 1px solid #AAA;
 	margin-right: 0.4em;
@@ -115,15 +115,14 @@ ul.postmetadata li
 
 .blog article .share .count
 {
-	position: absolute;
-	right: 10px;
+	margin-right: 8px;
 }
 
 .blog article .share .name
 {
 	display: inline-block;
 	text-indent: -9999px;
-	margin-left: 5px;
+	margin: 0 5px;
 	line-height: 15px;
 	width: 16px;
 	height: 16px;
@@ -151,12 +150,6 @@ ul.postmetadata li
 	background: #385899;
 }
 
-.blog article .share li.facebook .name
-{
-	width: 8px;
-	height: 15px;
-}
-
 /********************/
 /* Twitter */
 .blog article .share li.twitter a
@@ -177,11 +170,6 @@ ul.postmetadata li
 .blog article .share li.twitter:hover a
 {
 	background: #d6eaf6;
-}
-
-.blog article .share li.twitter .name
-{
-	height: 11px;
 }
 
 /********************/
