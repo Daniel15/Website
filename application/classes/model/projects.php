@@ -65,6 +65,12 @@ class Model_Projects extends Model
 				'url' => 'http://www.mysql.com/',
 				'desc' => '<p><a href="http://www.mysql.com/">MySQL</a> is one of the world\'s most popular database engines. It is used in the backend of a massive number of sites, and by a large number of web applications. My experience with MySQL includes simple things as well as advanced queries, stored procedures, etc.</p>',
 			),
+			'nodejs' => array(
+				'name' => 'Node.js',
+				'icon' => 'nodejs',
+				'url' => 'http://nodejs.org/',
+				'desc' => '<p>Node.js is a software system designed for writing highly-scalable internet applications, using event-driven, asynchronous I/O to minimize overhead and maximize scalability. It lets you write your server applications in JavaScript.</p>'
+			),
 			'php' => array(
 				'name' => 'PHP',
 				'icon' => 'php',
@@ -126,6 +132,7 @@ class Model_Projects extends Model
 			'ajax' => '<a href="http://en.wikipedia.org/wiki/XMLHttpRequest">AJAX (XMLHttpRequest)</a>',
 			'gd' => 'PHP GD (image generation) library',
 			'powerdns' => '<a href="http://www.powerdns.com/">PowerDNS</a>',
+			'highcharts' => '<a href="http://www.highcharts.com/">Highcharts</a>',
 		);
 	}
 	
@@ -138,9 +145,18 @@ class Model_Projects extends Model
 				'thumb' => 'daniel15net',
 				'type' => 'Website',
 				'description' => 'A personal site about me, listing all the current and previous projects I\'ve worked on, as well as contact information. Site was designed and coded by me, using the Kohana PHP framework, and the MooTools JavaScript framework. The source code is <a href="http://github.com/Daniel15/Website">available on Github</a>. It is <em>always</em> under construction, I keep changing it. :P',
-				'date' => 'August 2011',
-				'tech' => array('php', 'kohana', 'html', 'css', 'mootools', 'js'),
+				'date' => 'January 2012',
+				'tech' => array('php', 'kohana', 'html', 'css', 'js'),
 				'tech2' => array('kohana_orm'),
+			),
+			
+			array(
+				'name' => 'Daniel15 JavaScript Framework',
+				'url' => 'http://dl.vc/jsframework',
+				'type' => 'Library',
+				'description' => 'This is a simple JavaScript framework I started writing for when I don\'t need a big framework like MooTools or jQuery. It\'s currently in use on this site as well as a few other little sites.',
+				'date' => 'December 2011',
+				'tech' => array('js'),
 			),
 			
 			array(
@@ -171,6 +187,28 @@ class Model_Projects extends Model
 	public function get_prev_projects()
 	{
 		return array(
+			array(
+				'name' => 'NodeWhiteboard',
+				'url' => 'https://github.com/Daniel15/NodeWhiteboard',
+				'thumb' => 'nodewhiteboard',
+				'height' => 190,
+				'type' => 'Web Application',
+				'description' => 'NodeWhiteboard is a simple whiteboard app using Node.js, SVG (via Raphaël) and Socket.io. It allows users to draw stuff and see updates in real-time.',
+				'date' => 'January 2012',
+				'tech' => array('nodejs', 'js', 'html', 'css'),
+				'tech2' => array('ajax'),
+			),
+			array(
+				'name' => 'pmacct-frontend',
+				'url' => 'https://github.com/Daniel15/NodeWhiteboard',
+				'thumb' => 'pmacct',
+				'thumb_height' => 131,
+				'type' => 'Web Application',
+				'description' => 'Pmacct-frontend is a quick and ugly statistics frontend for <a href="http://www.pmacct.net/">pmacct</a> for my personal use.',
+				'date' => 'October 2011',
+				'tech' => array('php', 'mysql', 'js', 'html', 'css'),
+				'tech2' => array('highcharts'),
+			),
 			array(
 				'name' => 'rTorrentWeb',
 				'url' => 'http://rtorrentweb.com/',

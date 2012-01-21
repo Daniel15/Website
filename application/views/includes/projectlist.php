@@ -16,8 +16,16 @@ foreach ($projects as $project)
 	foreach ($project['tech'] as $tech)
 		echo 'uses-', $tech, ' ';	
 	
-	echo '">
-							', (!empty($project['url']) ? '<a href="' . $project['url'] . '">' : ''), '<img class="thumb" src="images/', $project['thumb'], '.png" alt="Thumbnail for ', $project['name'], '" height="', $project['thumb_height'], '" width="', $project['thumb_width'], '" />', (!empty($project['url']) ? '</a>' : ''), '
+	echo '">';
+	
+	// Is there a thumbnail?
+	if (!empty($project['thumb']))
+	{
+		echo '
+							', (!empty($project['url']) ? '<a href="' . $project['url'] . '">' : ''), '<img class="thumb" src="images/', $project['thumb'], '.png" alt="Thumbnail for ', $project['name'], '" height="', $project['thumb_height'], '" width="', $project['thumb_width'], '" />', (!empty($project['url']) ? '</a>' : '');
+	}
+	
+	echo '
 							<h3>', (!empty($project['url']) ? '<a href="' . $project['url'] . '">' . $project['name'] . '</a>' : $project['name']) , '</h3>
 							<strong>Type:</strong> ', $project['type'], '<br />
 							<strong>Description:</strong> ', $project['description'];
