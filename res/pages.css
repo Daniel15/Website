@@ -194,6 +194,18 @@ ul.projects img.thumb
 	padding: 2px;
 }
 
+ul.projects .techs a
+{
+	display: inline-block;
+	width: 16px;
+	height: 21px;
+	overflow: hidden;
+	text-indent: -9999px;
+	
+	position: relative;
+	top: -5px;
+}
+
 div#tech-info
 {
 	display: none;
@@ -203,6 +215,15 @@ div#tech-info
 {
 	font-weight: bold;
 }
+
+#site-projects #sidebar a
+{
+	padding-left: 20px;
+	background-repeat: no-repeat;
+	background-position: left;
+}
+
+
 
 
 /*ul.projects li:nth-child(odd) img.thumb

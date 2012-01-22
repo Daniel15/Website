@@ -157,3 +157,113 @@ ul.postmetadata li.permalink
   background-image: url('combined/sprites/mainsprite-b073f8354e2f4f7956038f163cddcf91.png');
   background-position: left -176px;
 }
+
+/* Projects page */
+#site-projects li#tech-csharp a, 
+ul.projects .techs a.csharp
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -0px;
+}
+#site-projects li#tech-css a,
+ul.projects .techs a.css
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -26px;
+}
+#site-projects li#tech-cmsms a,
+ul.projects .techs a.cmsms
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -52px;
+}
+#site-projects li#tech-codeigniter a,
+ul.projects .techs a.codeigniter
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -77px;
+}
+#site-projects li#tech-html a,
+ul.projects .techs a.html
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -103px;
+}
+#site-projects li#tech-js a,
+ul.projects .techs a.js
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -129px;
+}
+#site-projects li#tech-kohana a,
+ul.projects .techs a.kohana
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -155px;
+}
+#site-projects li#tech-mediawiki a,
+ul.projects .techs a.mediawiki
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -181px;
+}
+#site-projects li#tech-mootools a,
+ul.projects .techs a.mootools
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -207px;
+}
+#site-projects li#tech-mysql a,
+ul.projects .techs a.mysql
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -233px;
+}
+#site-projects li#tech-nodejs a,
+ul.projects .techs a.nodejs
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -259px;
+}
+#site-projects li#tech-php a,
+ul.projects .techs a.php
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -285px;
+}
+#site-projects li#tech-sqlite a,
+ul.projects .techs a.sqlite
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -311px;
+}
+#site-projects li#tech-smf a,
+ul.projects .techs a.smf
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -337px;
+}
+#site-projects li#tech-vb a,
+ul.projects .techs a.vb
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -363px;
+}
+#site-projects li#tech-vb6 a,
+ul.projects .techs a.vb6
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -389px;
+}
+#site-projects li#tech-wordpress a,
+ul.projects .techs a.wordpress
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -415px;
+}
+#site-projects li#tech-cppcli a,
+ul.projects .techs a.cppcli
+{
+  background-image: url('combined/sprites/projects-dfe64b2ff374d4901494bd9a962d5abb.png');
+  background-position: left -441px;
+}

@@ -38,14 +38,16 @@ foreach ($projects as $project)
 	if (!empty($project['tech']))
 	{
 		echo '<br />
-							<strong>Technologies used:</strong> ';
+							<span class="techs"><strong>Technologies used:</strong> ';
 						
-		foreach ($project['tech'] as $tech)
+		foreach ($project['tech'] as $techId)
 		{
-			$tech = $techs[$tech];
+			$tech = $techs[$techId];
 			echo '
-							<a class="tech" href="', $tech['url'], '" title="', $tech['name'], '"><img width="16" height="16" src="images/tech_icons/', $tech['icon'], '.png" alt="', $tech['name'], ' icon" /></a>';
+							<a href="', $tech['url'], '" title="', $tech['name'], '" class="', $techId, '">', $tech['name'], '</a>';
 		}
+		
+		echo '</span>';
 	}
 	
 	if (!empty($project['tech2']))
