@@ -287,9 +287,8 @@ class Controller_Blog extends Controller_Template
 		
 			$comment->save();
 			
-			// Adding comment was successful, do post-processing (if it's not spam)
-			if ($comment->status != 'spam')
-				$this->handle_new_comment($comment, $post);
+			// Adding comment was successful, do post-processing
+			$this->handle_new_comment($comment, $post);
 			
 			// All good, go back to the post
 			$this->request->redirect($post->url() . '?comment=' . $comment->id);
@@ -315,6 +314,18 @@ class Controller_Blog extends Controller_Template
 	 */
 	protected function handle_new_comment(Model_Blog_Comment $comment, Model_Blog_Post $post)
 	{
+		// If a user is logged in, approve the comment right away
+		if (Auth::instance()->logged_in())
+		{
+			Controller_BlogAdmin_Comments::approve_comment($comment);
+			$comment->save();
+			return;
+		}
+		
+		// Don't add them to any subscriptions or send any notification if it was spam
+		if ($comment->status == 'spam')
+			return;
+			
 		// Send an email notification to the admin
 		$email = View::factory('email/admin/new_comment')
 			->set('comment', $comment);

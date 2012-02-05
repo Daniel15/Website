@@ -71,7 +71,6 @@ class Controller_BlogAdmin_Comments extends Controller_BlogAdmin
 		}
 		elseif (isset($_POST['approve']))
 		{
-			$comment->status = 'visible';
 			$this->approve_comment($comment);
 		}
 		elseif (isset($_POST['unapprove']))
@@ -101,8 +100,10 @@ class Controller_BlogAdmin_Comments extends Controller_BlogAdmin
 	 * emails)
 	 * @param	Model_Blog_Comment		Comment
 	 */
-	protected function approve_comment(Model_Blog_Comment $comment)
+	public static function approve_comment(Model_Blog_Comment $comment)
 	{
+		$comment->status = 'visible';
+		
 		// Check if the post has any subscribers
 		$subs = $comment->post->subscriptions->find_all();
 		if (count($subs) == 0)
