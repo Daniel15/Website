@@ -160,6 +160,6 @@ if (Kohana::$environment >= Kohana::TESTING)
 	echo View::factory('profiler/stats'); 
 
 ?>
-	<!--[if lt IE 8]><div id="ie-sucks">I no longer fully support Internet Explorer 6 and 7, and stuff may be broken for you. Consider <a href="http://www.updateyourbrowser.net/en/">updating your browser</a> :)</div><![endif]-->
+	<!--[if lt IE 8]><div id="ie-sucks">I no longer fully support Internet Explorer 6 and 7, and stuff may be broken for you. Consider <a href="http://browsehappy.com/">updating your browser</a> :)</div><![endif]-->
 </body>
 </html>
