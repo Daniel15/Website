@@ -150,6 +150,7 @@ if (!empty($lastModified) && $lastModified != 0)
 	<!--[if lt IE 8]>
 		<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
 		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+		<div id="ie-sucks">I no longer fully support Internet Explorer 6 and 7, and stuff may be broken for you. Consider <a href="http://browsehappy.com/">updating your browser</a> :)</div>
 	<![endif]-->
 <?php
 
@@ -160,6 +161,5 @@ if (Kohana::$environment >= Kohana::TESTING)
 	echo View::factory('profiler/stats'); 
 
 ?>
-	<!--[if lt IE 8]><div id="ie-sucks">I no longer fully support Internet Explorer 6 and 7, and stuff may be broken for you. Consider <a href="http://browsehappy.com/">updating your browser</a> :)</div><![endif]-->
 </body>
 </html>
