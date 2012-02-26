@@ -1,0 +1,31 @@
+// CSS3
+.rounded(@radius: 5px)
+{	
+	-webkit-border-radius: 20px;
+	   -moz-border-radius: 20px;
+	        border-radius: 20px; 
+}
+
+.rounded(@topleft, @topright, @bottomright, @bottomleft)
+{
+    -webkit-border-radius: @topleft @topright @bottomright @bottomleft;
+       -moz-border-radius-topleft: @topleft;
+       -moz-border-radius-topright: @topright;
+       -moz-border-radius-bottomright: @bottomright;
+       -moz-border-radius-bottomleft: @bottomleft;
+            border-radius: @topleft @topright @bottomright @bottomleft; 
+}
+
+.box-shadow(@xoffset: 5px, @yoffset: 5px, @radius: 0px, @color: black)
+{
+	-webkit-box-shadow: @xoffset @yoffset @radius @color; // Saf3.0+, Chrome
+	   -moz-box-shadow: @xoffset @yoffset @radius @color;  //FF3.5+
+	        box-shadow: @xoffset @yoffset @radius @color; // Opera 10.5, IE9, Chrome 10+
+}
+
+.border-box()
+{
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}

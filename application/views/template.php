@@ -41,11 +41,16 @@ if ($siteConfig->enableCompression) : ?>
 <?php else : ?>
 
 	<!-- Some general stylesheets for d15.biz -->
-	<link title="d15.biz stylesheet" rel="stylesheet" href="res/style_r2.css?v=2.2" type="text/css" media="screen" id="default-stylesheet" />
+	<link rel="stylesheet/less" href="res/main.less" id="default-stylesheet" />
+	<script src="lib/less-1.2.1.min.js"></script>
+	<script>less.env = 'development'; localStorage.clear();</script>
+	
+	
+	<!--<link title="d15.biz stylesheet" rel="stylesheet" href="res/style_r2.css?v=2.2" type="text/css" media="screen" id="default-stylesheet" />
 	<link rel="stylesheet" href="res/pages.css?v=3.0.1" type="text/css" />
 	<link rel="stylesheet" href="res/sprites-processed.css" type="text/css" />
 	<link rel="stylesheet" href="res/blog.css" type="text/css" />
-	<link rel="stylesheet" href="res/print.css" type="text/css" media="print"  />
+	<link rel="stylesheet" href="res/print.css" type="text/css" media="print"  />-->
 	<!--[if lt IE 9]><link rel="stylesheet" href="res/style-ie8.css" type="text/css" /><![endif]-->
 	<!--[if lt IE 8]><link rel="stylesheet" href="res/style-ie7.css" type="text/css" /><![endif]-->
 	<!--[if lt IE 7]><link rel="stylesheet" href="res/style-ie6.css" type="text/css" /><![endif]-->

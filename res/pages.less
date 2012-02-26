@@ -1,66 +1,76 @@
 /******************************** Index page **********************************/
-#sidebar ul#minifeed li
+#sidebar
 {
-	border-bottom: 1px solid #D2E8F7;
-	font-size: 0.8em;
-	margin-bottom: 0.2em;
-}
-
-#sidebar ul#minifeed li a
-{
-	display: inline;
-	border: 0;
-	padding: 0;
-	margin: 0;
-}
-
-#sidebar ul#minifeed .meta
-{
-	height: 0;
-	overflow: hidden;
-	-webkit-transition: 400ms ease;
-	     -o-transition: 400ms ease;
-	   -moz-transition: 400ms ease;
-	        transition: 400ms ease;
-}
-
-#sidebar ul#minifeed li:hover .meta
-{
-	height: 2em;
-}
-
-#sidebar ul#minifeed .meta li
-{
-	display: inline;
-	font-size: 1em;
-	color: #888;
-	/*border-right: 1px solid;
-	padding: 0 0.5em;*/
-	border-bottom: 0;
-}
-
-#sidebar ul#minifeed .meta .subtext 
-{
-	display: none;
+	ul#minifeed
+	{
+		li
+		{
+			border-bottom: 1px solid #D2E8F7;
+			font-size: 0.8em;
+			margin-bottom: 0.2em;
+			
+			a
+			{
+				display: inline;
+				border: 0;
+				padding: 0;
+				margin: 0;
+			}
+			
+			.meta
+			{
+				height: 0;
+				overflow: hidden;
+				-webkit-transition: 400ms ease;
+					 -o-transition: 400ms ease;
+				   -moz-transition: 400ms ease;
+						transition: 400ms ease;
+						
+				li
+				{
+					display: inline;
+					font-size: 1em;
+					color: #888;
+					/*border-right: 1px solid;
+					padding: 0 0.5em;*/
+					border-bottom: 0;
+				}
+				
+				.subtext 
+				{
+					display: none;
+				}
+			}
+			
+			&:hover
+			{
+				.meta
+				{
+					height: 2em;
+				}
+			}
+		}
+	}
 }
 
 ul#blog-posts 
 {
 	padding: 0;
+	
+	li
+	{
+		list-style-type: none;
+	}
+	
+	time
+	{
+		float: left;
+		width: 9em;
+		text-align: right;
+		padding-right: 1em;
+	}
 }
 
-ul#blog-posts li
-{
-	list-style-type: none;
-}
-
-ul#blog-posts time
-{
-	float: left;
-	width: 9em;
-	text-align: right;
-	padding-right: 1em;
-}
 
 /* Social networking links */
 #site-index .social
