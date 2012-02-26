@@ -1,30 +1,105 @@
 /* Home page */
-/*.blog .pagination
+.blog
 {
-	margin: 0;
-	padding: 0;
-}
-
-.blog .pagination li
-{
-	list-style-type: none;
-	display: inline;
-	border: 1px solid #CCC;
-	padding: 0.5em;
-	margin-right: 0.5em;
-}*/
-
-.blog .pagination a, 
-.blog .pagination strong
-{
-	padding: 3px 5px;
-	border: 1px solid #CCC;
-}
-
-/* Posts */
-.blog #content > article footer
-{
-	margin-top: 1em;
+	.pagination
+	{
+		a, strong
+		{
+			padding: 3px 5px;
+			border: 1px solid #CCC;
+		}
+	}
+	#content > article footer
+	{
+		margin-top: 1em;
+	}
+	article
+	{
+		h2
+		{
+			z-index: 2;
+			background-color: white;
+		}
+		
+		/* When replying to a comment and the form is "inside" a comment */
+		#leave-comment
+		{
+			margin-right: 1em;
+		}
+	}
+	p.tags
+	{
+		clear: left;
+	}
+	
+	/* Comments */
+	#leave-comment
+	{
+		label
+		{
+			width: 5em;
+			display: inline-block;
+		}
+		
+		textarea
+		{
+			width: 100%;
+		}
+		
+		#submit
+		{
+			width: auto;
+		}
+	}
+	
+	#comments
+	{
+		ol
+		{
+			margin: 0;
+			padding: 0;
+		}
+		li
+		{
+			border: 1px solid #B3C0FF;
+			padding: 0.5em 0.5em 0.5em 1em;
+			list-style-type: none;
+			margin-bottom: 1em;
+			background: #FFF;
+			
+			header
+			{
+				height: 32px;
+				line-height: 32px;
+				margin-bottom: 0.5em;
+				
+				time
+				{
+					float: right;
+				}
+			}
+		}
+		ol li:nth-child(even)
+		{
+			background: #F2F6FB;
+		}
+		img.avatar
+		{
+			float: left;
+			margin-right: 0.5em;
+		}
+		
+		/* Comment replies */
+		ol ol
+		{
+			padding-left: 2em;
+		}
+	}
+	/* Hide "cancel reply" by default */
+	#cancel-reply
+	{
+		display: none;
+	}
 }
 
 #blog-view #content > article footer
@@ -37,35 +112,27 @@
 }
 
 /* Post meta data */
-.blog article h2
-{
-	z-index: 2;
-	background-color: white;
-}
-
 ul.postmetadata
 {
 	margin: -10px 0 0.5em 0.5em;
 	padding: 0;
 	z-index: 1;
-}
-
-ul.postmetadata li
-{
-	list-style-type: none;
-	display: inline;
-	-moz-border-radius: 0 0 5px 5px;
-	-webkit-border-radius: 0 0 5px 5px;
-	border-radius: 0 0 5px 5px;
-	border-style: solid;
-	border-color: #B3C0FF;
-	border-width: 0 1px 1px 1px;
-	padding: 0.7em 0.6em 0.7em 25px;
-	margin: 0 0.1em;
-	font-size: x-small;
-	
-	background-repeat: no-repeat;
-	background-position: 5px 6px;
+		
+	li
+	{
+		list-style-type: none;
+		display: inline;
+		.rounded(0, 0, 5px, 5px);
+		border-style: solid;
+		border-color: #B3C0FF;
+		border-width: 0 1px 1px 1px;
+		padding: 0.7em 0.6em 0.7em 25px;
+		margin: 0 0.1em;
+		font-size: x-small;
+		
+		background-repeat: no-repeat;
+		background-position: 5px 6px;
+	}
 }
 
 .postmetadata img
@@ -73,255 +140,140 @@ ul.postmetadata li
 	vertical-align: middle;
 }
 
-.blog p.tags
-{
-	clear: left;
-}
-
 /* Share links */
-/* Links with JS disabled */
 .blog article .share
 {
 	overflow: hidden;
 	margin-top: 5px;
+	
+	ul
+	{
+		padding: 0;
+		margin: 0;
+	} 
+	
+	li
+	{
+		display: block;
+		float: left;
+	}
+	
+	a
+	{
+		display: block;
+		/*width: 45px;*/
+		height: 20px;
+		border: 1px solid #AAA;
+		margin-right: 0.4em;
+		padding: 0.2em;
+		.rounded(5px);
+		text-decoration: none;
+		color: black;
+		text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+		position: relative;
+	}
+	.count
+	{
+		margin-right: 8px;
+	}
+	.name
+	{
+		display: inline-block;
+		text-indent: -9999px;
+		margin: 0 5px;
+		line-height: 15px;
+		width: 16px;
+		height: 16px;
+	}
+		
+	/* Counts are loaded via JavaScript, so hide them if JS disabled */
+	.no-js & .count
+	{
+		display: none;
+	}
+	
+	/* Custom colours */
+	/* Facebook */
+	li.facebook a
+	{
+		#gradient > .vertical(#6e85b7, #41609e, #385899);
+		border-color: #385899;
+		color: white;
+	}
+	li.facebook:hover a
+	{
+		background: #385899;
+	}
+	
+	/********************/
+	/* Twitter */
+	li.twitter a
+	{
+		#gradient > .vertical(#FFFFFF, #d6eaf6, #d6eaf6);
+		border-color: #a3cce6;
+		color: #4887A6;
+	}
+	li.twitter:hover a
+	{
+		background: #d6eaf6;
+	}
+	
+	/********************/
+	/* Reddit */
+	li.reddit a
+	{
+		#gradient > .vertical(#FFFFFF, #EEEEEE, #EEEEEE);
+		border-color: #aeaeae;
+		color: #777777;
+	}
+	li.reddit:hover a
+	{
+		background: #eeeeee;
+	}
+	
+	/********************/
+	/* LinkedIn */
+	li.linkedin a
+	{
+		#gradient > .vertical(#FFFFFF, #EEEEEE, #EEEEEE);
+		border-color: #aeaeae;
+		color: #777777;
+	}
+	li.linkedin:hover a
+	{
+		background: #eeeeee;
+	}
+}  
+
+.has-placeholders #leave-comment-form
+{
+	label, small
+	{
+		display: none;
+	}
+		
+	input
+	{
+		width: 100%;
+	}
+	/* Display checkbox fields normally */
+	input[type='checkbox']
+	{
+		width: auto;
+	}
 }
 
-.blog article .share ul
+#leave-comment-form 
 {
-	padding: 0;
-	margin: 0;
-} 
-
-.blog article .share li
-{
-	display: block;
-	float: left;
-}
-
-.blog article .share a
-{
-	display: block;
-	/*width: 45px;*/
-	height: 20px;
-	border: 1px solid #AAA;
-	margin-right: 0.4em;
-	padding: 0.2em;
-	border-radius: 5px;
-	text-decoration: none;
-	color: black;
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-	position: relative;
-}
-
-.blog article .share .count
-{
-	margin-right: 8px;
-}
-
-.blog article .share .name
-{
-	display: inline-block;
-	text-indent: -9999px;
-	margin: 0 5px;
-	line-height: 15px;
-	width: 16px;
-	height: 16px;
-}
-
-/* Custom colours */
-/* Facebook */
-.blog article .share li.facebook a
-{
-	background: #385899; /* Old browsers */
-	background: -moz-linear-gradient(top,  #6e85b7 0%, #41609e 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6e85b7), color-stop(100%,#41609e)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #6e85b7 0%,#41609e 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #6e85b7 0%,#41609e 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #6e85b7 0%,#41609e 100%); /* IE10+ */
-	background: linear-gradient(top,  #6e85b7 0%,#41609e 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e85b7', endColorstr='#41609e',GradientType=0 ); /* IE6-9 */
-
-	border-color: #385899;
-	color: white;
-}
-
-.blog article .share li.facebook:hover a
-{
-	background: #385899;
-}
-
-/********************/
-/* Twitter */
-.blog article .share li.twitter a
-{
-	background: #d6eaf6; /* Old browsers */
-	background: -moz-linear-gradient(top,  #FFFFFF 0%, #d6eaf6 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#d6eaf6)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #FFFFFF 0%,#d6eaf6 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #FFFFFF 0%,#d6eaf6 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #FFFFFF 0%,#d6eaf6 100%); /* IE10+ */
-	background: linear-gradient(top,  #FFFFFF 0%,#d6eaf6 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#d6eaf6',GradientType=0 ); /* IE6-9 */
-
-	border-color: #a3cce6;
-	color: #4887A6;
-}
-
-.blog article .share li.twitter:hover a
-{
-	background: #d6eaf6;
-}
-
-/********************/
-/* Reddit */
-.blog article .share li.reddit a
-{
-	background: #EEEEEE; /* Old browsers */
-	background: -moz-linear-gradient(top,  #FFFFFF 0%, #eeeeee 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* IE10+ */
-	background: linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
-
-	border-color: #aeaeae;
-	color: #777777;
-}
-
-.blog article .share li.reddit:hover a
-{
-	background: #eeeeee;
-}
-
-/********************/
-/* LinkedIn */
-.blog article .share li.linkedin a
-{
-	background: #EEEEEE; /* Old browsers */
-	background: -moz-linear-gradient(top,  #FFFFFF 0%, #eeeeee 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFFFF), color-stop(100%,#eeeeee)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* IE10+ */
-	background: linear-gradient(top,  #FFFFFF 0%,#eeeeee 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
-
-	border-color: #aeaeae;
-	color: #777777;
-}
-
-.blog article .share li.linkedin:hover a
-{
-	background: #eeeeee;
-}
-
-/* Counts are loaded via JavaScript, so hide them if JS disabled */
-.no-js .blog article .share .count
-{
-	display: none;
-}
-
-/* Comments */
-.blog #leave-comment label
-{
-	width: 5em;
-	display: inline-block;
-}
-
-.blog #leave-comment textarea
-{
-	width: 100%;
-}
-
-.blog #leave-comment #submit
-{
-	width: auto;
-}
-
-.has-placeholders #leave-comment-form label,
-.has-placeholders #leave-comment-form small
-{
-	display: none;
-}
-
-.has-placeholders #leave-comment-form input
-{
-	width: 100%;
-}
-
-/* Display checkbox fields normally */
-.has-placeholders #leave-comment-form input[type='checkbox']
-{
-	width: auto;
-}
-
-#leave-comment-form input[type='checkbox'] + label
-{
-	display: inline;
-}
-
-/* Spam prevention field */
-#leave-comment-form #subject-field
-{
-	display: none;
-}
-
-.blog #comments ol
-{
-	margin: 0;
-	padding: 0;
-}
-
-.blog #comments li
-{
-	border: 1px solid #B3C0FF;
-	padding: 0.5em 0.5em 0.5em 1em;
-	list-style-type: none;
-	margin-bottom: 1em;
-	background: #FFF;
-}
-
-
-.blog #comments ol li:nth-child(even)
-{
-	background: #F2F6FB;
-}
-
-.blog #comments img.avatar
-{
-	float: left;
-	margin-right: 0.5em;
-}
-
-.blog #comments li header
-{
-	height: 32px;
-	line-height: 32px;
-	margin-bottom: 0.5em;
-}
-
-.blog #comments li header time
-{
-	float: right;
-}
-
-/* Comment replies */
-.blog #comments ol ol
-{
-	padding-left: 2em;
-}
-
-/* Hide "cancel reply" by default */
-.blog #cancel-reply
-{
-	display: none;
-}
-
-/* When replying to a comment and the form is "inside" a comment */
-.blog article #leave-comment
-{
-	margin-right: 1em;
+	input[type='checkbox'] + label
+	{
+		display: inline;
+	}
+	/* Spam prevention field */
+	#subject-field
+	{
+		display: none;
+	}
 }
 
 /* Sidebar */
@@ -330,8 +282,5 @@ ul.postmetadata li
 	overflow: hidden;
 	
 	/* Animation when year is expanded */
-	-webkit-transition: 600ms ease;
-	     -o-transition: 600ms ease;
-	   -moz-transition: 600ms ease;
-	        transition: 600ms ease;
+	.transition(all, 600ms, ease);
 }

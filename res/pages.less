@@ -21,18 +21,13 @@
 			{
 				height: 0;
 				overflow: hidden;
-				-webkit-transition: 400ms ease;
-					 -o-transition: 400ms ease;
-				   -moz-transition: 400ms ease;
-						transition: 400ms ease;
+				.transition(all, 400ms, ease);
 						
 				li
 				{
 					display: inline;
 					font-size: 1em;
 					color: #888;
-					/*border-right: 1px solid;
-					padding: 0 0.5em;*/
 					border-bottom: 0;
 				}
 				
@@ -71,39 +66,43 @@ ul#blog-posts
 	}
 }
 
-
 /* Social networking links */
-#site-index .social
+#site-index 
 {
-	overflow: hidden;
-	list-style-type: none;
+	.social
+	{
+		overflow: hidden;
+		list-style-type: none;
+		
+		strong:first-child
+		{
+			float: left;
+		}
+		
+		ul
+		{
+			margin: 0 0 0 0.5em;
+			padding: 0;
+			float: left;
+		}
+		
+		li
+		{
+			display: inline;
+			overflow: hidden;
+			
+			a
+			{
+				background-repeat: none;
+				text-indent: -9999px;
+				width: 16px;
+				height: 16px;
+				display: inline-block;
+			}
+		}
+	}
 }
 
-#site-index .social strong:first-child
-{
-	float: left;
-}
-
-#site-index .social ul
-{
-	margin: 0 0 0 0.5em;
-	padding: 0;
-	float: left;
-}
-#site-index .social li
-{
-	display: inline;
-	overflow: hidden;
-}
-
-#site-index .social li a
-{
-	background-repeat: none;
-	text-indent: -9999px;
-	width: 16px;
-	height: 16px;
-	display: inline-block;
-}
 
 /* Google Talk */
 #gtalk_address
@@ -125,95 +124,108 @@ ul#socialfeed, ul#socialfeed ul
 	padding: 0;	
 }
 
-ul#socialfeed li
+ul#socialfeed
 {
-	border-bottom: 1px solid #D2E8F7;
-	margin-bottom: 0.5em;
-	padding-bottom: 0.5em;
+	li
+	{
+		border-bottom: 1px solid #D2E8F7;
+		margin-bottom: 0.5em;
+		padding-bottom: 0.5em;
+	}
+	
+	ul.meta
+	{
+		color: #666;
+		font-size: 0.9em;
+		height: 16px;
+		
+		li
+		{
+			border-bottom: 0;
+			display: inline;
+		}
+	}
+	
+	.meta
+	{
+		padding-left: 20px;
+		background-repeat: no-repeat;
+		background-position: left middle;
+	}
 }
 
-ul#socialfeed ul.meta
+ul#minifeed
 {
-	color: #666;
-	font-size: 0.9em;
-	height: 16px;
+	li.feeditem
+	{
+		background-repeat: no-repeat;
+		background-position: left top;
+	}
+	
+	.icon
+	{
+		width: 16px;
+		height: 16px;
+		float: left;
+		margin-right: 4px;
+	}
 }
 
-ul#socialfeed ul.meta li
+// Shared between socialfeed and minifeed
+ul#socialfeed, ul#minifeed
 {
-	border-bottom: 0;
-	display: inline;
+	ul.meta
+	{
+		li:after
+		{
+			content: " - ";
+		}
+		li:last-child:after
+		{
+			content: "";
+		}
+	}
 }
 
-ul#socialfeed ul.meta li:after, ul#minifeed ul.meta li:after
-{
-	content: " - ";
-}
-
-ul#socialfeed ul.meta li:last-child:after, ul#minifeed ul.meta li:last-child:after
-{
-	content: "";
-}
-
-ul#socialfeed .meta/*, ul#minifeed .meta*/
-{
-	padding-left: 20px;
-	background-repeat: no-repeat;
-	background-position: left middle;
-}
-
-ul#minifeed li.feeditem
-{
-	background-repeat: no-repeat;
-	background-position: left top;
-}
-
-ul#minifeed .icon
-{
-	width: 16px;
-	height: 16px;
-	float: left;
-	margin-right: 4px;
-}
 
 /****************************** Projects page *********************************/
 ul.projects
 {
 	list-style-type: none;
 	padding: 0;
-}
-
-ul.projects li
-{
-	/* Clear the thumbnail float */
-	overflow: auto; 
-	padding-bottom: 1em;
-	border-bottom: 1px dashed #CCC;
-}
-
-ul.projects h3
-{
-	margin: 0;
-}
-
-ul.projects img.thumb
-{
-	float: right;
-	border: 1px solid #999;
-	margin: 0.5em;
-	padding: 2px;
-}
-
-ul.projects .techs a
-{
-	display: inline-block;
-	width: 16px;
-	height: 21px;
-	overflow: hidden;
-	text-indent: -9999px;
 	
-	position: relative;
-	top: -5px;
+	li
+	{
+		/* Clear the thumbnail float */
+		overflow: auto; 
+		padding-bottom: 1em;
+		border-bottom: 1px dashed #CCC;
+	}
+	
+	h3
+	{
+		margin: 0;
+	}
+	
+	img.thumb
+	{
+		float: right;
+		border: 1px solid #999;
+		margin: 0.5em;
+		padding: 2px;
+	}
+	
+	.techs a
+	{
+		display: inline-block;
+		width: 16px;
+		height: 21px;
+		overflow: hidden;
+		text-indent: -9999px;
+		
+		position: relative;
+		top: -5px;
+	}
 }
 
 div#tech-info
@@ -232,9 +244,6 @@ div#tech-info
 	background-repeat: no-repeat;
 	background-position: left;
 }
-
-
-
 
 /*ul.projects li:nth-child(odd) img.thumb
 {

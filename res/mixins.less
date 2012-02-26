@@ -1,9 +1,9 @@
 // CSS3
 .rounded(@radius: 5px)
 {	
-	-webkit-border-radius: 20px;
-	   -moz-border-radius: 20px;
-	        border-radius: 20px; 
+	-webkit-border-radius: @radius;
+	   -moz-border-radius: @radius;
+	        border-radius: @radius; 
 }
 
 .rounded(@topleft, @topright, @bottomright, @bottomleft)
@@ -16,11 +16,11 @@
             border-radius: @topleft @topright @bottomright @bottomleft; 
 }
 
-.box-shadow(@xoffset: 5px, @yoffset: 5px, @radius: 0px, @color: black)
+.box-shadow(@xoffset: 5px, @yoffset: 5px, @radius: 0px, @colour: black)
 {
-	-webkit-box-shadow: @xoffset @yoffset @radius @color; // Saf3.0+, Chrome
-	   -moz-box-shadow: @xoffset @yoffset @radius @color;  //FF3.5+
-	        box-shadow: @xoffset @yoffset @radius @color; // Opera 10.5, IE9, Chrome 10+
+	-webkit-box-shadow: @xoffset @yoffset @radius @colour; // Saf3.0+, Chrome
+	   -moz-box-shadow: @xoffset @yoffset @radius @colour;  //FF3.5+
+	        box-shadow: @xoffset @yoffset @radius @colour; // Opera 10.5, IE9, Chrome 10+
 }
 
 .border-box()
@@ -28,4 +28,33 @@
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 	        box-sizing: border-box;
+}
+
+.transition(@property: all, @duration: 500ms, @timing_function: ease)
+{
+	-webkit-transition: @arguments;
+	   -moz-transition: @arguments;
+		 -o-transition: @arguments;
+			transition: @arguments;
+}
+
+#gradient
+{
+	.vertical(@start, @end)
+	{
+		#gradient > .vertical(@start, @end, @start);
+	}
+	
+	.vertical(@start, @end, @fallback)
+	{
+		background: @fallback; // Old browsers
+		background: -moz-linear-gradient(top, @start 0%, @end 100%); // FF3.6+
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@start), color-stop(100%,@end)); // Chrome,Safari4+
+		background: -webkit-linear-gradient(top, @start 0%, @end 100%); // Chrome10+,Safari5.1+
+		background: -o-linear-gradient(top, @start 0%, @end 100%); // Opera 11.10+
+		background: -ms-linear-gradient(top, @start 0%, @end 100%); // IE10+
+		background: linear-gradient(top, @start 0%, @end 100%); // W3C
+		
+		filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)", @start, @end)); // IE6-99
+	}
 }
