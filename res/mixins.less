@@ -1,5 +1,6 @@
 // CSS3
-.rounded(@radius: 5px)
+
+.rounded(@radius)
 {	
 	-webkit-border-radius: @radius;
 	   -moz-border-radius: @radius;
@@ -9,10 +10,7 @@
 .rounded(@topleft, @topright, @bottomright, @bottomleft)
 {
     -webkit-border-radius: @topleft @topright @bottomright @bottomleft;
-       -moz-border-radius-topleft: @topleft;
-       -moz-border-radius-topright: @topright;
-       -moz-border-radius-bottomright: @bottomright;
-       -moz-border-radius-bottomleft: @bottomleft;
+	   -moz-border-radius: @topleft @topright @bottomright @bottomleft;
             border-radius: @topleft @topright @bottomright @bottomleft; 
 }
 
@@ -48,13 +46,13 @@
 	.vertical(@start, @end, @fallback)
 	{
 		background: @fallback; // Old browsers
-		background: -moz-linear-gradient(top, @start 0%, @end 100%); // FF3.6+
+		background:    -moz-linear-gradient(top, @start 0%, @end 100%); // FF3.6+
 		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,@start), color-stop(100%,@end)); // Chrome,Safari4+
 		background: -webkit-linear-gradient(top, @start 0%, @end 100%); // Chrome10+,Safari5.1+
-		background: -o-linear-gradient(top, @start 0%, @end 100%); // Opera 11.10+
-		background: -ms-linear-gradient(top, @start 0%, @end 100%); // IE10+
-		background: linear-gradient(top, @start 0%, @end 100%); // W3C
+		background:      -o-linear-gradient(top, @start 0%, @end 100%); // Opera 11.10+
+		background:     -ms-linear-gradient(top, @start 0%, @end 100%); // IE10+
+		background:         linear-gradient(top, @start 0%, @end 100%); // W3C
 		
-		filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)", @start, @end)); // IE6-99
+		filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)", @start, @end)); // IE6-9
 	}
 }

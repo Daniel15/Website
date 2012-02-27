@@ -5,74 +5,80 @@
  */
 
 /* IE upgrade message */
-.ielt8 #ie-sucks
+.ielt8
 {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	padding: 0.3em;
-	background: #F6D662;
-	border-bottom: 1px solid #C59C0B;
+	#ie-sucks
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		padding: 0.3em;
+		background: #F6D662;
+		border-bottom: 1px solid #C59C0B;
+	}
+
+	#ie-sucks a
+	{
+		color: #0D71C3;
+	}
+
+	div#main-container
+	{
+		margin-top: 2.5em;
+	}
+
+	/* Hacks for social networking links. I can't seem to get the nice inline icons
+	 * working in IE 6 and 7, so they'll have to be a normal list for now.
+	 */
+	#site-home .social strong:first-child
+	{
+		float: none;
+	}
+
+	#site-home .social ul
+	{
+		float: none;
+		margin: 0 0 0 2em;
+	}
+
+	#site-home .social li
+	{
+		float: none;
+		display: block;
+	}
+
+	#site-home .social li a
+	{
+		width: 90%;
+		background: none !important;
+		text-indent: 0;
+	}
+
+	/* Social network sharing links */
+	&.js article .share
+	{
+		overflow: hidden;
+		zoom: 1;
+	}
+
+	&.js article .share li
+	{
+		float: left;
+	}
+
+	#site-projects ul.projects
+	{
+		margin-left: 0;
+	}
 }
 
-.ielt8 #ie-sucks a
+.ie7 
 {
-	color: #0D71C3;
-}
-
-.ielt8 div#main-container
-{
-	margin-top: 2.5em;
-}
-
-/* This is needed because otherwise, the header wraps to the next line and doesn't display. */
-.ie7 nav
-{
-	position: absolute;
-	right: 5%;
-}
-
-/* Hacks for social networking links. I can't seem to get the nice inline icons
- * working in IE 6 and 7, so they'll have to be a normal list for now.
- */
-.ielt8 #site-home .social strong:first-child
-{
-	float: none;
-}
-
-.ielt8 #site-home .social ul
-{
-	float: none;
-	margin: 0 0 0 2em;
-}
-
-.ielt8 #site-home .social li
-{
-	float: none;
-	display: block;
-}
-
-.ielt8 #site-home .social li a
-{
-	width: 90%;
-	background: none !important;
-	text-indent: 0;
-}
-
-/* Social network sharing links */
-.ielt8.js article .share
-{
-	overflow: hidden;
-	zoom: 1;
-}
-
-.ielt8.js article .share li
-{
-	float: left;
-}
-
-.ielt8 #site-projects ul.projects
-{
-	margin-left: 0;
+	/* This is needed because otherwise, the header wraps to the next line and doesn't display. */
+	nav
+	{
+		position: absolute;
+		right: 5%;
+	}
 }
