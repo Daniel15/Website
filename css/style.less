@@ -20,7 +20,7 @@ body
 	margin: 0;
 	padding: 0;
 	font-family: Verdana, sans-serif;
-	background: #caced1 url(background.png);
+	background: #caced1 url(../images/background.png);
 	color: #000;
 	
 	font-size: small;
@@ -119,9 +119,9 @@ div#main-container
 		height: 130px;
 		overflow: hidden;
 	
-		background: #3373CD url(header_bg.png);
+		background: #3373CD url(../images/header_bg.png);
 		/* TODO: Stripy transparent */
-		/*background: #3373CD url(stripy.png);*/
+		/*background: #3373CD url(../images/stripy.png);*/
 		
 		h1
 		{
@@ -137,7 +137,7 @@ div#main-container
 			text-shadow: 0 0 10px #000;
 	
 			/* This only loads the image if it's needed. Otherwise, the browser generates the gradient and doesn't load it :) */
-			background-image: url(header_fade.png);
+			background-image: url(../images/header_fade.png);
 			background-image: -moz-linear-gradient(top, rgba(14, 37, 68, 0.65), rgba(14, 37, 68, 0) 40%);
 			background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(14, 37, 68, 0.65)), to(rgba(14, 37, 68, 0)), color-stop(0.4, rgba(14, 37, 68, 0)));
 			/* Poor Opera, doesn't have gradients yet :( */
@@ -172,7 +172,7 @@ div#main-container
 		.rounded(0, 0, 20px, 20px);	
 		text-shadow: 1px 1px 0 #18345E;
 	
-		background: url(footer_fade.png) repeat-x left bottom;
+		background: url(../images/footer_fade.png) repeat-x left bottom;
 		background-image: -moz-linear-gradient(bottom, rgba(14, 37, 68, 0.65), rgba(14, 37, 68, 0) 70%);
 		background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(14, 37, 68, 0.65)), to(rgba(14, 37, 68, 0)), color-stop(0.7, rgba(14, 37, 68, 0)));
 		/* Poor Opera, doesn't have gradients yet :( */
