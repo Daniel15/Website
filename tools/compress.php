@@ -139,7 +139,6 @@ $sets = array(
 			'js/syntaxhighlighter.js',
 		),
 	),
-	
 );
 
 foreach ($sets as $name => $set)
