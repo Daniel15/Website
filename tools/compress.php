@@ -102,7 +102,7 @@ if (empty($siteConfig))
 
 $directory = dirname(__DIR__) . '/';
 $basename = date('d_Hi');
-$outputDirBase = 'res/combined/' . date('Y') . '/' . date('m') . '/';
+$outputDirBase = 'combined/' . date('Y') . '/' . date('m') . '/';
 $outputDir = $directory . $outputDirBase;
 $cacheDir = __DIR__ . '/cache/';
 
@@ -125,7 +125,7 @@ $sets = array(
 	'latestCSS' => array(
 		'type' => 'less',
 		'output' => $basename . '.css',
-		'files' => array('res/main.less'),
+		'files' => array('css/main.less'),
 	),
 	'syntaxHighlightJS' => array(
 		'type' => 'js',
