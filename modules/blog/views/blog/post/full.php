@@ -10,8 +10,9 @@ echo '
 // Any tags?
 if (!empty($tags))
 {
+	// TODO: Add icon to sprites
 	echo '
-		<p class="tags" itemprop="keywords"><img src="/res/icons/tag_blue.png" alt="Tags" title="Tags" /> ', HTML::link_list($tags), '</p>';
+		<p class="tags" itemprop="keywords"><img src="/images/icons/tag_blue.png" alt="Tags" title="Tags" /> ', HTML::link_list($tags), '</p>';
 }
 		
 echo '
