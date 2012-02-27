@@ -84,6 +84,17 @@ class Compressor_CSS extends Compressor
 	}
 }
 
+class Compressor_LESS extends Compressor
+{
+	public function compress($file)
+	{
+		$file = trim(shell_exec('lessc -x ' . escapeshellarg($file)));
+		// Replace relative URLs
+		$file = preg_replace('~url\(([\'"]?)([^/])~', 'url($1../../../$2', $file);
+		return $file . "\n";
+	}
+}
+
 echo 'Compressing JS and CSS... ';
 $siteConfig = include '../application/config/site.php';
 if (empty($siteConfig))
@@ -112,18 +123,9 @@ $sets = array(
 		),
 	),
 	'latestCSS' => array(
-		'type' => 'css',
+		'type' => 'less',
 		'output' => $basename . '.css',
-		'files' => array(
-			// Main stylesheets
-			'res/style_r2.css', 'res/pages.css', 'res/sprites-processed.css', 'res/blog.css',
-			// Print stylesheets
-			'res/print.css',
-			// IE hacks
-			'res/style-ie6.css', 'res/style-ie7.css', 'res/style-ie8.css',
-			// Syntax highlighter
-			'lib/syntaxhighlighter/shCore.css', 'lib/syntaxhighlighter/shThemeDefault.css',
-		),
+		'files' => array('res/main.less'),
 	),
 	'syntaxHighlightJS' => array(
 		'type' => 'js',
@@ -141,8 +143,10 @@ $sets = array(
 );
 
 foreach ($sets as $name => $set)
-{
-	$compressor = ($set['type'] == 'js' ? new Compressor_JS($directory, $cacheDir) : new Compressor_CSS($directory, $cacheDir));
+{	
+	$className = 'Compressor_' . strtoupper($set['type']);	
+	$compressor = new $className($directory, $cacheDir);
+	
 	file_put_contents($outputDir . $set['output'], $compressor->compressFiles($set['files']));
 	$siteConfig[$name] = $outputDirBase . $set['output'];
 }
