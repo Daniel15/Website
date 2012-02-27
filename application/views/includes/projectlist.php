@@ -22,7 +22,7 @@ foreach ($projects as $project)
 	if (!empty($project['thumb']))
 	{
 		echo '
-							', (!empty($project['url']) ? '<a href="' . $project['url'] . '">' : ''), '<img class="thumb" src="images/', $project['thumb'], '.png" alt="Thumbnail for ', $project['name'], '" height="', $project['thumb_height'], '" width="', $project['thumb_width'], '" />', (!empty($project['url']) ? '</a>' : '');
+							', (!empty($project['url']) ? '<a href="' . $project['url'] . '">' : ''), '<img class="thumb" src="images/screenshots/', $project['thumb'], '.png" alt="Thumbnail for ', $project['name'], '" height="', $project['thumb_height'], '" width="', $project['thumb_width'], '" />', (!empty($project['url']) ? '</a>' : '');
 	}
 	
 	echo '
