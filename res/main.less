@@ -15,12 +15,20 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 @import 'mixins';
 
+// Main stylesheets
 @import 'style';
 @import 'pages';
 @import 'sprites-processed';
 @import 'blog';
+
+// Print stylesheets
 @import 'print';
 
+// IE hacks
 @import 'style-ie8';
 @import 'style-ie7';
 @import 'style-ie6';
+
+// Third-party
+@import '../lib/syntaxhighlighter/shCore.less';
+@import '../lib/syntaxhighlighter/shThemeDefault.less';
