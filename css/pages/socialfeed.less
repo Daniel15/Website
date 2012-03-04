@@ -1,0 +1,69 @@
+/********************************* Feed page **********************************/
+ul#socialfeed, ul#socialfeed ul
+{
+	margin: 0;
+	padding: 0;	
+}
+
+ul#socialfeed
+{
+	li
+	{
+		border-bottom: 1px solid #D2E8F7;
+		margin-bottom: 0.5em;
+		padding-bottom: 0.5em;
+	}
+	
+	ul.meta
+	{
+		color: #666;
+		font-size: 0.9em;
+		height: 16px;
+		
+		li
+		{
+			border-bottom: 0;
+			display: inline;
+		}
+	}
+	
+	.meta
+	{
+		padding-left: 20px;
+		background-repeat: no-repeat;
+		background-position: left middle;
+	}
+}
+
+ul#minifeed
+{
+	li.feeditem
+	{
+		background-repeat: no-repeat;
+		background-position: left top;
+	}
+	
+	.icon
+	{
+		width: 16px;
+		height: 16px;
+		float: left;
+		margin-right: 4px;
+	}
+}
+
+// Shared between socialfeed and minifeed
+ul#socialfeed, ul#minifeed
+{
+	ul.meta
+	{
+		li:after
+		{
+			content: " - ";
+		}
+		li:last-child:after
+		{
+			content: "";
+		}
+	}
+}

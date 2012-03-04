@@ -1,0 +1,61 @@
+/****************************** Projects page *********************************/
+ul.projects
+{
+	list-style-type: none;
+	padding: 0;
+	
+	li
+	{
+		/* Clear the thumbnail float */
+		overflow: auto; 
+		padding-bottom: 1em;
+		border-bottom: 1px dashed #CCC;
+	}
+	
+	h3
+	{
+		margin: 0;
+	}
+	
+	img.thumb
+	{
+		float: right;
+		border: 1px solid #999;
+		margin: 0.5em;
+		padding: 2px;
+	}
+	
+	.techs a
+	{
+		display: inline-block;
+		width: 16px;
+		height: 21px;
+		overflow: hidden;
+		text-indent: -9999px;
+		
+		position: relative;
+		top: -5px;
+	}
+}
+
+div#tech-info
+{
+	display: none;
+}
+
+#sidebar ul li.active
+{
+	font-weight: bold;
+}
+
+#site-projects #sidebar a
+{
+	padding-left: 20px;
+	background-repeat: no-repeat;
+	background-position: left;
+}
+
+/*ul.projects li:nth-child(odd) img.thumb
+{
+	float: left;
+}*/
