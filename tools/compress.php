@@ -22,21 +22,21 @@ abstract class Compressor
 		foreach ($files as $file)
 		{
 			$fullPath = $this->_inputDir . $file;
-			$md5 = md5_file($fullPath);
+			$cacheFile = get_class($this) . '_' . md5_file($fullPath);
 			
 			$output .= "\n/* " . $file . " */\n";
 			
 			// Was this file already compressed?
-			if (file_exists($this->_cacheDir . $md5))
+			if (file_exists($this->_cacheDir . $cacheFile))
 			{
-				$output .= file_get_contents($this->_cacheDir . $md5);
+				$output .= file_get_contents($this->_cacheDir . $cacheFile);
 			}
 			else
 			{
 				$compressed = $this->compress($fullPath);
 				$output .= $compressed;
 				// Cache this result so it doesn't need to be recompressed later
-				file_put_contents($this->_cacheDir . $md5, $compressed);
+				file_put_contents($this->_cacheDir . $cacheFile, $compressed);
 			}
 		}
 		
