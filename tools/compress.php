@@ -1,4 +1,6 @@
 <?php
+include '../lib/lessc.inc.php';
+
 abstract class Compressor
 {
 	protected $_inputDir;
@@ -88,10 +90,11 @@ class Compressor_LESS extends Compressor
 {
 	public function compress($file)
 	{
-		$file = trim(shell_exec('lessc -x ' . escapeshellarg($file)));
+		$less = new lessc($file);
+		$css = $less->parse();
 		// Replace relative URLs
-		$file = preg_replace('~url\(([\'"]?)([^/])~', 'url($1../../../$2', $file);
-		return $file . "\n";
+		$css = preg_replace('~url\(([\'"]?)([^/])~', 'url($1../../../$2', $css);
+		return $css . "\n";
 	}
 }
 
