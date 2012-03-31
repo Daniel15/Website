@@ -94,6 +94,12 @@ class Compressor_LESS extends Compressor
 		$css = $less->parse();
 		// Replace relative URLs
 		$css = preg_replace('~url\(([\'"]?)([^/])~', 'url($1../../../$2', $css);
+		
+		// Now minify
+		$css = $this->webRequest('http://vps.dan.cx/compress.php', array(
+			'type' => 'css',
+			'file' => $css,
+		));
 		return $css . "\n";
 	}
 }
