@@ -9,6 +9,7 @@
 	<base href="<?php echo URL::base(TRUE); ?>" />
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width" />
 	<meta name="Author" content="Daniel Lo Nigro (Daniel15)" />
 	<meta property="fb:admins" content="731901032" />
 	<meta property="og:country_name" content="Australia" />

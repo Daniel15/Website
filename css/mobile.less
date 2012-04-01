@@ -1,0 +1,176 @@
+div#main-container
+{
+	min-width: 0;
+	margin: 5px;
+	
+	> header
+	{
+		height: auto;
+		
+		h1
+		{
+			padding-top: 0;
+			padding-bottom: 18px;
+			font-size: 2em;
+			letter-spacing: inherit;
+		}
+	}
+	
+	> footer
+	{
+		padding: 0 5px;
+	}
+}
+
+/* Shrink navigation */
+nav
+{
+	white-space: nowrap;
+	
+	ul
+	{
+		float: none;
+		margin-top: 0;
+		position: absolute;
+		bottom: 0;
+		left: 5px;
+	}
+	li
+	{
+		float: none;
+		height: auto;
+		margin: 0;
+
+		
+		a
+		{
+			width: auto;
+			height: auto;
+			padding: 0;
+			display: inline;
+			.rounded(0);
+			-webkit-box-shadow: none;
+			   -moz-box-shadow: none;
+			        box-shadow: none;
+			background: none;
+			text-shadow: none;
+			font-variant: normal;
+			
+			&:hover
+			{
+				background: none;
+				text-decoration: underline;
+				text-shadow: none;
+				-webkit-box-shadow: none;
+				   -moz-box-shadow: none;
+					    box-shadow: none;
+			}
+		}
+		
+		&:after
+		{
+			color: white;
+			content: ' | ';
+		}
+		&:last-child:after
+		{
+			display: none;
+		}
+	}
+	li.selected
+	{
+		a
+		{
+			background: none;
+			border: none;
+			color: white;
+		}
+	}
+}
+
+/* Sidebar */
+body.col-right,
+body.col-left,
+body.col-none
+{	
+	#sidebar
+	{
+		/*display: none;*/
+		float: none;
+		left: 0;
+		width: auto;
+		position: static;
+		margin: 0 5px;
+		
+		h2:before, h2 a:before
+		{
+			display: none;
+		}
+	}
+
+	div#content
+	{
+		margin: 0 5px;
+	}
+
+	div#content_wrap
+	{
+		right: 0;
+		left: 0;
+		float: none;
+	}
+
+	div#colright
+	{
+		left: 0;
+		margin-left: 0;
+		right: 0;
+	}
+}
+
+/* Home page */
+ul#contact-me
+{
+	padding: 0;
+}
+
+ul#blog-posts
+{
+	time
+	{
+		width: auto;
+		float: none;
+		padding-right: 0;
+		
+		&:after
+		{
+			content: ': ';
+		}
+	}
+}
+
+/* Projects page */
+ul.projects
+{
+	img.thumb
+	{
+		float: none;
+	}
+}
+
+/* Blog */
+ul.postmetadata 
+{
+	li
+	{
+		border: none;
+		padding: 3px 0 3px 25px;
+		display: block;
+	}
+}
+
+/* Social feed */
+#sidebar ul#minifeed li .meta
+{
+	height: auto !important;
+}

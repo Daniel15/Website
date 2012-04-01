@@ -6,7 +6,7 @@
 				
 				<h2>Contacting me</h2>
 				<p>You may contact me via the following methods:</p>
-				<ul>
+				<ul id="contact-me">
 					<!-- Yeah, this is ugly, but it's a really simple method for spambot prevention >_< -->
 					<li><strong>Email</strong> &mdash; <span id="email_address"></span></li>
 					<li><strong>Windows Live Messenger / MSN Messenger</strong> &mdash; <span id="messenger_address"></span></li>
