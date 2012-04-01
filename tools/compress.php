@@ -1,6 +1,4 @@
 <?php
-include '../lib/lessc.inc.php';
-
 abstract class Compressor
 {
 	protected $_inputDir;
@@ -86,7 +84,7 @@ class Compressor_CSS extends Compressor
 	}
 }
 
-class Compressor_LESS extends Compressor
+/*class Compressor_LESS extends Compressor
 {
 	public function compress($file)
 	{
@@ -101,6 +99,24 @@ class Compressor_LESS extends Compressor
 			'file' => $css,
 		));
 		return $css . "\n";
+	}
+}*/
+
+class Compressor_LESS extends Compressor
+{
+	public function compress($file)
+	{
+		//$file = trim(shell_exec('lessc -x ' . escapeshellarg($file)));
+		$file = trim(shell_exec('lessc ' . escapeshellarg($file)));
+		// Replace relative URLs
+		$file = preg_replace('~url\(([\'"]?)([^/])~', 'url($1../../../$2', $file);
+		
+		// Now minify
+		$file = $this->webRequest('http://vps.dan.cx/compress.php', array(
+			'type' => 'css',
+			'file' => $file,
+		));
+		return $file . "\n";
 	}
 }
 
