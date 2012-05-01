@@ -159,7 +159,7 @@ $sets = array(
 			'lib/syntaxhighlighter/shCore.js', 'lib/syntaxhighlighter/shBrushJScript.js', 
 			'lib/syntaxhighlighter/shBrushPhp.js', 'lib/syntaxhighlighter/shBrushCSharp.js', 
 			'lib/syntaxhighlighter/shBrushXml.js', 'lib/syntaxhighlighter/shBrushPlain.js', 
-			'lib/syntaxhighlighter/shBrushDelphi.js',
+			'lib/syntaxhighlighter/shBrushDelphi.js', 'lib/syntaxhighlighter/shBrushCss.js',
 			
 			'js/syntaxhighlighter.js',
 		),
