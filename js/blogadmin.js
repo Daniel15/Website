@@ -19,14 +19,14 @@ BlogAdmin.Posts.Edit =
 	
 	updateSlug: function()
 	{
-		var slug = $('title').value.toLowerCase()
+		var slug = $('title').get('value').toLowerCase()
 			.replace(/[^A-Za-z0-9\-]/g, '-')
 			.replace(/\s+/g, '-')
 			.replace(/\-+/g, '-');
 		// Make sure slug doesn't end with hyphen
 		if (slug.charAt(slug.length - 1) == '-')
 			slug = slug.substring(0, slug.length - 1);
-		$('slug').value = slug;
+		$('slug').set('value', slug);
 	}
 };
 

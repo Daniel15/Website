@@ -10,10 +10,10 @@ abstract class Controller_BlogAdmin extends Controller_Admin
 		// TODO: This probably doesn't belong here. Not sure where to put it though
 		$this->template->extraHead = '
 	<!-- Blog administration -->
-	<link rel="stylesheet" href="res/blogadmin.css" type="text/css" />';
+	<link rel="stylesheet" href="css/blogadmin.css" type="text/css" />';
 		$this->template->extraFoot = '
 	<!-- Blog administration -->
-	<script src="res/blogadmin.js"></script>';
+	<script src="js/blogadmin.js"></script>';
 		
 		$this->config = Kohana::$config->load('blog');
 		// Pass blog config to view
