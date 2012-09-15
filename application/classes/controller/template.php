@@ -17,6 +17,7 @@ class Controller_Template extends Kohana_Controller_Template
 		$this->template->sidebar = null;
 		$this->template->meta = array();
 		$this->template->extraHead = '';
+		$this->template->extraFoot = '';
 		$this->template->menu = $this->get_menu();
 		
 		$request = Request::current();

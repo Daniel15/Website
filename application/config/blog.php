@@ -17,5 +17,7 @@ return array(
 	'summary_length' => 330,
 	// URL for the FeedBurner feed
 	'feedburner_url' => 'http://feeds.d15.biz/daniel15',
+	
+	'disqus_shortname' => 'daniel15',
 );
 ?>

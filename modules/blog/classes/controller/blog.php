@@ -22,6 +22,8 @@ class Controller_Blog extends Controller_Template
 		$this->template->extraHead .= '
 	<link rel="alternate" type="application/rss+xml" title="' . $this->config->name . ' - RSS Feed" href="' . $this->config->feedburner_url . '" />
 	<link rel="index" title="' . $this->config->name . '" href="' . Url::site('blog', true) . '" />';
+	
+		$this->template->extraFoot .= View::factory('blog/includes/disqus_count');
 	}
 	
 	public function after()
@@ -178,14 +180,14 @@ class Controller_Blog extends Controller_Template
 		}
 
 		// If the page was POSTed, it's a comment
-		if ($_POST)
+		/*if ($_POST)
 		{
 			$this->comment($post);
-		}
+		}*/
 		
 		$page = View::factory('blog/post')
 			->bind('post', $post)
-			->set('comments', $post->comments())
+			//->set('comments', $post->comments())
 			->set('categories', $post->categories->order_by('title')->find_all())
 			->set('tags', $post->tags->order_by('title')->find_all())
 			->set('share_links', Social::all_share_urls($post));

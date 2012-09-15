@@ -8,5 +8,5 @@ echo View::factory('blog/post/full')
 	
 echo View::factory('blog/post/comments')
 	->set('post', $post)
-	->set('comments', $comments);
+	//->set('comments', $comments);
 ?>
