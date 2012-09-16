@@ -78,19 +78,19 @@ Page.Blog.View =
 	 */
 	init: function()
 	{
-		$('comments').addDelegate('click', 'a', 'reply-to', this.replyToComment);
+		/*$('comments').addDelegate('click', 'a', 'reply-to', this.replyToComment);
 		$('cancel-reply').addEvent('click', this.cancelReply.bind(this));
 		
 		this.initPlaceholders();
 		// Remember comment user details
 		this.loadCommentDetails();
-		$('leave-comment-form').addEvent('submit', this.saveCommentDetails.bind(this));
-	},
+		$('leave-comment-form').addEvent('submit', this.saveCommentDetails.bind(this));*/
+	}//,
 	
 	/**
 	 * Initialise placeholders for comment form, if the browser supports them
 	 */
-	initPlaceholders: function()
+	/*initPlaceholders: function()
 	{
 		// Check if the browser supports placeholders
 		if (!('placeholder' in document.createElement('input')))
@@ -113,13 +113,13 @@ Page.Blog.View =
 		}
 		
 		DOM.body.addClass('has-placeholders')
-	},
+	},*/
 	
 	/**
 	 * Called when a reply link is clicked
 	 * @param	Event data
 	 */
-	replyToComment: function(e)
+	/*replyToComment: function(e)
 	{		
 		// Find the footer and stick the comments form in it
 		var footer = $(e.target).parent('footer');
@@ -128,24 +128,24 @@ Page.Blog.View =
 		$('cancel-reply').setStyle('display', 'block');
 		$('parent_comment_id').set('value', comment_id);
 		Events.stop(e);
-	},
+	},*/
 	
 	/**
 	 * Called when the "cancel reply" link is clicked
 	 */
-	cancelReply: function(e)
+	/*cancelReply: function(e)
 	{
 		// Put the comment form back where it belongs
 		$('content').appendChild($('leave-comment'));
 		$('cancel-reply').setStyle('display', 'none');
 		$('parent_comment_id').set('value', '');
 		Events.stop(e);
-	},
+	},*/
 	
 	/**
 	 * Retrieve the commenter details from local storage
 	 */
-	loadCommentDetails: function()
+	/*loadCommentDetails: function()
 	{
 		try
 		{
@@ -155,12 +155,12 @@ Page.Blog.View =
 		}
 		// Ignore any exceptions - This is not important functionality
 		catch (ex) {}
-	},
+	},*/
 	
 	/**
 	 * Save details about the commenter (name, email, url) into local storage
 	 */
-	saveCommentDetails: function()
+	/*saveCommentDetails: function()
 	{
 		try
 		{
@@ -170,7 +170,7 @@ Page.Blog.View =
 		}
 		// Ignore any exceptions - This is not important functionality
 		catch (ex) {}
-	}
+	}*/
 };
 
 /**

@@ -1,16 +1,26 @@
 <?php defined('SYSPATH') or die('No direct script access.'); ?>
 
 <div id="comments">
-<?php if ($post->comment_count == 0): ?>
-	<h3>Comments</h3>
-	<p>This post currently has no comments. You can be the first!</p>
-<?php else: ?>
-	<h3><?php echo $post->comment_count, ' ', Inflector::plural('comment', $post->comment_count); ?></h3>
-	<?php echo View::factory('blog/comments')->set('comments', $comments)->set('post', $post); ?>
-<?php endif; ?>
+	<div id="disqus_thread"></div>
 </div>
 
-<div id="leave-comment">
+<script type="text/javascript">
+	var disqus_shortname = <?php echo json_encode($config->disqus_shortname); ?>,
+		disqus_title = <?php echo json_encode($post->title); ?>,
+		disqus_identifier = <?php echo $post->id; ?>,
+		disqus_url = <?php echo json_encode($post->url(true)); ?>;
+
+    (function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<!--<div id="leave-comment">
 	<h3>Leave a comment</h3>
 	<p id="cancel-reply"><a href="<?php echo $post->url(); ?>">Cancel reply</a></p>
 	<form id="leave-comment-form" method="post" action="<?php echo $post->url(); ?>">
@@ -49,4 +59,4 @@
 			<input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
 		</p>
 	</form>
-</div>
+</div>-->

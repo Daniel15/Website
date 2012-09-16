@@ -6,7 +6,7 @@ echo '
 			<ul class="postmetadata">
 				<li class="date"><time datetime="', date(DATE_W3C, $post->date), '" itemprop="datePublished">', date($config->date_format, $post->date), '</time></li>
 				<li class="category"><a href="', $post->maincategory->url(), '" itemprop="keywords">', $post->maincategory->title, '</a></li>
-				<li class="comments"><a href="', $post->url(), '#comments">', Inflector::plural($post->comment_count . ' comment', $post->comment_count), '</a></li>
+				<li class="comments"><a href="', $post->url(), '#disqus_thread" data-disqus-identifier="', $post->id, '">Comments</a></li>
 				<li class="permalink">', $post->short_url(), '</li>
 			</ul>
 		</header>
