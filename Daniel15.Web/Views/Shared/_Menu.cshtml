@@ -3,7 +3,7 @@
 	<ul>
 		@foreach (var item in Model)
 		{
-			<li@(item.Active ? " class=\"selected\"" : string.Empty)><a href="@item.Url">@item.Title</a></li>
+			<li class="@(item.Active ? "selected" : string.Empty)"><a href="@item.Url">@item.Title</a></li>
 		}
 	</ul>
 </nav>

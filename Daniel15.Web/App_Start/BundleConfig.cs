@@ -15,7 +15,7 @@ namespace Daniel15.Web.App_Start
 			RegisterCssBundles(bundles);
 			RegisterJsBundles(bundles);
 
-			BundleTable.EnableOptimizations = true;
+			//BundleTable.EnableOptimizations = true; // Forces minification even in debug builds
 		}
 
 		/// <summary>

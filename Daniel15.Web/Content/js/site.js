@@ -36,7 +36,7 @@ Page.Site.Index =
 	 */
 	initGoogleTalk: function()
 	{
-		(new Ajax('chatstatus.php', 
+		(new Ajax('Site/ChatStatus', 
 		{
 			onSuccess: function(data)
 			{
