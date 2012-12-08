@@ -1,0 +1,3 @@
+[submodule "Daniel15.Web/Content/js/framework"]
+	path = Daniel15.Web/Content/js/framework
+	url = git://github.com/Daniel15/JSFramework.git

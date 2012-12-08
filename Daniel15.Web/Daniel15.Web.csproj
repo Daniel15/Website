@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ECAA4A47-F98D-4BA1-83BA-AA5172C07FB5}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Daniel15.Web</RootNamespace>
+    <AssemblyName>Daniel15.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.3.1.7705, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.3.1.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.5.4\lib\net40\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\packages\ServiceStack.Common.3.9.28\lib\net35\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\packages\ServiceStack.Common.3.9.28\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite">
+      <HintPath>..\packages\ServiceStack.OrmLite.MySql.3.9.28\lib\ServiceStack.OrmLite.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite.MySql">
+      <HintPath>..\packages\ServiceStack.OrmLite.MySql.3.9.28\lib\ServiceStack.OrmLite.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\packages\ServiceStack.Text.3.9.29\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector">
+      <HintPath>..\packages\SimpleInjector.1.6.0.12319\lib\net35\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Extensions">
+      <HintPath>..\packages\SimpleInjector.Extensions.1.6.0.12319\lib\net35\SimpleInjector.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web, Version=1.6.0.12319, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SimpleInjector.Integration.Web.1.6.0.12319\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web.Mvc">
+      <HintPath>..\packages\SimpleInjector.MVC3.1.6.0.12319\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.XML" />
+    <Reference Include="T4MVCExtensions">
+      <HintPath>..\packages\T4MVCExtensions.3.0.3\lib\net40\T4MVCExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\IocConfig.cs" />
+    <Compile Include="T4MVC\BlogController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\BlogController.cs" />
+    <Compile Include="Controllers\SiteController.cs" />
+    <Compile Include="Extensions\DateExtensions.cs" />
+    <Compile Include="Extensions\HtmlLayoutExtensions.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\UrlHelperExtensions.cs" />
+    <Compile Include="Models\BlogPostModel.cs" />
+    <Compile Include="Models\Shared\MenuItemModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IBlogRepository.cs" />
+    <Compile Include="Repositories\IRepositoryBase.cs" />
+    <Compile Include="Repositories\OrmLite\BlogPostRepository.cs" />
+    <Compile Include="Repositories\OrmLite\RepositoryBase.cs" />
+    <Compile Include="T4MVC\SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\SiteController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Blog\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Site\IndexViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\blogadmin.css" />
+    <Content Include="Content\css\border-radius.htc" />
+    <Content Include="Content\css\csshover.htc" />
+    <Content Include="Content\images\background.png" />
+    <Content Include="Content\images\cont_bg.png" />
+    <Content Include="Content\images\footer_fade.png" />
+    <Content Include="Content\images\gradient-glossy-sidebar.png" />
+    <Content Include="Content\images\gradient-glossy.png" />
+    <Content Include="Content\images\gradient-glossy2.png" />
+    <Content Include="Content\images\gradient-glossy3.png" />
+    <Content Include="Content\images\header_bg.png" />
+    <Content Include="Content\images\header_fade.png" />
+    <Content Include="Content\images\icons\calendar_view_day.png" />
+    <Content Include="Content\images\icons\camera.png" />
+    <Content Include="Content\images\icons\chat\busy.gif" />
+    <Content Include="Content\images\icons\chat\offline.gif" />
+    <Content Include="Content\images\icons\chat\online.gif" />
+    <Content Include="Content\images\icons\comments.png" />
+    <Content Include="Content\images\icons\folder_page.png" />
+    <Content Include="Content\images\icons\image.png" />
+    <Content Include="Content\images\icons\link.png" />
+    <Content Include="Content\images\icons\picture.png" />
+    <Content Include="Content\images\icons\social\digg.png" />
+    <Content Include="Content\images\icons\social\facebook.png" />
+    <Content Include="Content\images\icons\social\foursquare.png" />
+    <Content Include="Content\images\icons\social\github.png" />
+    <Content Include="Content\images\icons\social\gplus.png" />
+    <Content Include="Content\images\icons\social\large\facebook.png" />
+    <Content Include="Content\images\icons\social\large\reddit.png" />
+    <Content Include="Content\images\icons\social\large\twitter.png" />
+    <Content Include="Content\images\icons\social\lastfm.png" />
+    <Content Include="Content\images\icons\social\linkedin.png" />
+    <Content Include="Content\images\icons\social\myspace.png" />
+    <Content Include="Content\images\icons\social\pinboard.gif" />
+    <Content Include="Content\images\icons\social\reddit.png" />
+    <Content Include="Content\images\icons\social\rss.png" />
+    <Content Include="Content\images\icons\social\share\facebook.png" />
+    <Content Include="Content\images\icons\social\share\twitter.png" />
+    <Content Include="Content\images\icons\social\stackoverflow.png" />
+    <Content Include="Content\images\icons\social\stumbleupon.png" />
+    <Content Include="Content\images\icons\social\twitter.gif" />
+    <Content Include="Content\images\icons\social\youtube.gif" />
+    <Content Include="Content\images\icons\spinner.gif" />
+    <Content Include="Content\images\icons\tag_blue.png" />
+    <Content Include="Content\images\icons\techs\cmsms.png" />
+    <Content Include="Content\images\icons\techs\codeigniter.png" />
+    <Content Include="Content\images\icons\techs\cplusplus.png" />
+    <Content Include="Content\images\icons\techs\cs.png" />
+    <Content Include="Content\images\icons\techs\csharp.png" />
+    <Content Include="Content\images\icons\techs\css.png" />
+    <Content Include="Content\images\icons\techs\database.png" />
+    <Content Include="Content\images\icons\techs\html.png" />
+    <Content Include="Content\images\icons\techs\js.png" />
+    <Content Include="Content\images\icons\techs\kohana.png" />
+    <Content Include="Content\images\icons\techs\mediawiki.png" />
+    <Content Include="Content\images\icons\techs\mootools.png" />
+    <Content Include="Content\images\icons\techs\mysql.png" />
+    <Content Include="Content\images\icons\techs\nodejs.png" />
+    <Content Include="Content\images\icons\techs\php.png" />
+    <Content Include="Content\images\icons\techs\smf.png" />
+    <Content Include="Content\images\icons\techs\sqlite.png" />
+    <Content Include="Content\images\icons\techs\vb.png" />
+    <Content Include="Content\images\icons\techs\vb6.png" />
+    <Content Include="Content\images\icons\techs\wordpress.png" />
+    <Content Include="Content\images\old\facebook.png" />
+    <Content Include="Content\images\old\myspace.png" />
+    <Content Include="Content\images\screenshots\bebo.png" />
+    <Content Include="Content\images\screenshots\daniel15.png" />
+    <Content Include="Content\images\screenshots\daniel15net-old.png" />
+    <Content Include="Content\images\screenshots\daniel15net.png" />
+    <Content Include="Content\images\screenshots\dansoft.png" />
+    <Content Include="Content\images\screenshots\digg.png" />
+    <Content Include="Content\images\screenshots\dnstools.png" />
+    <Content Include="Content\images\screenshots\dynamic.png" />
+    <Content Include="Content\images\screenshots\entercalc.png" />
+    <Content Include="Content\images\screenshots\facebook.png" />
+    <Content Include="Content\images\screenshots\friendster.png" />
+    <Content Include="Content\images\screenshots\hi5.png" />
+    <Content Include="Content\images\screenshots\lastfm.png" />
+    <Content Include="Content\images\screenshots\myspace.png" />
+    <Content Include="Content\images\screenshots\no-pic.png" />
+    <Content Include="Content\images\screenshots\nodewhiteboard.png" />
+    <Content Include="Content\images\screenshots\pmacct.png" />
+    <Content Include="Content\images\screenshots\rtorrentweb.png" />
+    <Content Include="Content\images\screenshots\Screenshot.png" />
+    <Content Include="Content\images\screenshots\site-back.png" />
+    <Content Include="Content\images\screenshots\smfmods.png" />
+    <Content Include="Content\images\screenshots\syte.png" />
+    <Content Include="Content\images\screenshots\tagworld.png" />
+    <Content Include="Content\images\screenshots\twitter.png" />
+    <Content Include="Content\images\screenshots\xanga.png" />
+    <Content Include="Content\images\screenshots\zurl-old.png" />
+    <Content Include="Content\images\screenshots\zurl.png" />
+    <Content Include="Content\images\sprites\mainsprite-b073f8354e2f4f7956038f163cddcf91.png" />
+    <Content Include="Content\images\sprites\projects-dfe64b2ff374d4901494bd9a962d5abb.png" />
+    <Content Include="Content\images\stripy.png" />
+    <Content Include="Content\js\blog.js" />
+    <Content Include="Content\js\blogadmin.js" />
+    <Content Include="Content\js\core.js" />
+    <Content Include="Content\js\framework\ajax.js" />
+    <Content Include="Content\js\framework\class.js" />
+    <Content Include="Content\js\framework\core.js" />
+    <Content Include="Content\js\framework\dom.js" />
+    <Content Include="Content\js\framework\events.js" />
+    <Content Include="Content\js\framework\storage.js" />
+    <Content Include="Content\js\framework\templating.js" />
+    <Content Include="Content\js\framework\tests\class.js" />
+    <Content Include="Content\js\framework\tests\core.js" />
+    <Content Include="Content\js\framework\tests\dom.js" />
+    <Content Include="Content\js\framework\tests\events.js" />
+    <Content Include="Content\js\framework\tests\index.htm" />
+    <Content Include="Content\js\framework\tests\jasmine\jasmine-html.js" />
+    <Content Include="Content\js\framework\tests\jasmine\jasmine.css" />
+    <Content Include="Content\js\framework\tests\jasmine\jasmine.js" />
+    <Content Include="Content\js\framework\tests\jasmine\jasmine_favicon.png" />
+    <Content Include="Content\js\framework\tests\misc\events.htm" />
+    <Content Include="Content\js\lib\html5.js" />
+    <Content Include="Content\js\lib\IE7.js" />
+    <Content Include="Content\js\lib\IE8.js" />
+    <Content Include="Content\js\lib\IE9.js" />
+    <Content Include="Content\js\lib\less-1.2.1.js" />
+    <Content Include="Content\js\lib\less-1.2.1.min.js" />
+    <Content Include="Content\js\lib\LocalStorage.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shAutoloader.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushAppleScript.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushAS3.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushBash.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushColdFusion.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushCpp.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushCSharp.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushCss.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushDelphi.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushDiff.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushErlang.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushGroovy.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushJava.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushJavaFX.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushJScript.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushPerl.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushPhp.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushPlain.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushPowerShell.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushPython.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushRuby.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushSass.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushScala.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushSql.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushVb.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shBrushXml.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shCore.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shCoreDefault.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shCoreDjango.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shCoreEclipse.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shCoreEmacs.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shCoreFadeToGrey.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shCoreMDUltra.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shCoreMidnight.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shCoreRDark.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shLegacy.js" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shThemeDjango.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shThemeEclipse.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shThemeEmacs.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shThemeFadeToGrey.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shThemeMDUltra.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shThemeMidnight.css" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shThemeRDark.css" />
+    <Content Include="Content\js\site.js" />
+    <Content Include="Content\js\socialfeed.js" />
+    <Content Include="Content\js\syntaxhighlighter.js" />
+    <Content Include="Content\not_an_easter_egg\zero.css" />
+    <Content Include="Content\not_an_easter_egg\zero\color0.css" />
+    <Content Include="Content\not_an_easter_egg\zero\color1.css" />
+    <Content Include="Content\not_an_easter_egg\zero\graph0.css" />
+    <Content Include="Content\not_an_easter_egg\zero\graph1.css" />
+    <Content Include="Content\not_an_easter_egg\zero\theme.css" />
+    <Content Include="Content\not_an_easter_egg\zero\zerbana.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerband.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerbul1a.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerbul1d.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerbul2a.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerbul2d.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerbul3a.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerbul3d.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerglobd.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerhoma.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerhomd.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerhomh.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernavha.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernavhd.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernavhe.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernavhh.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernavhs.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernavva.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernavvd.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernavve.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernavvh.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernavvs.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernxta.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernxtd.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zernxth.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zero.inf" />
+    <Content Include="Content\not_an_easter_egg\zero\zero1111.css" />
+    <Content Include="Content\not_an_easter_egg\zero\zerprea.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerpred.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerpreh.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerrulea.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerruled.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zertxtr.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerupa.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zerupd.gif" />
+    <Content Include="Content\not_an_easter_egg\zero\zeruph.gif" />
+    <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\css\blog.less" />
+    <Content Include="Content\css\main.less" />
+    <Content Include="Content\css\mixins.less" />
+    <Content Include="Content\css\mobile.less" />
+    <Content Include="Content\css\pages\index.less" />
+    <Content Include="Content\css\pages\projects.less" />
+    <Content Include="Content\css\pages\search.less" />
+    <Content Include="Content\css\pages\socialfeed.less" />
+    <Content Include="Content\css\print.less" />
+    <Content Include="Content\css\sprites-processed.less" />
+    <Content Include="Content\css\sprites.less" />
+    <Content Include="Content\css\style-ie6.less" />
+    <Content Include="Content\css\style-ie7.less" />
+    <Content Include="Content\css\style-ie8.less" />
+    <Content Include="Content\css\style.less" />
+    <None Include="Content\images\header_fade.psd" />
+    <None Include="Content\js\framework\.git\config" />
+    <None Include="Content\js\framework\.git\description" />
+    <None Include="Content\js\framework\.git\FETCH_HEAD" />
+    <None Include="Content\js\framework\.git\HEAD" />
+    <None Include="Content\js\framework\.git\hooks\applypatch-msg.sample" />
+    <None Include="Content\js\framework\.git\hooks\commit-msg.sample" />
+    <None Include="Content\js\framework\.git\hooks\post-commit.sample" />
+    <None Include="Content\js\framework\.git\hooks\post-receive.sample" />
+    <None Include="Content\js\framework\.git\hooks\post-update.sample" />
+    <None Include="Content\js\framework\.git\hooks\pre-applypatch.sample" />
+    <None Include="Content\js\framework\.git\hooks\pre-commit.sample" />
+    <None Include="Content\js\framework\.git\hooks\pre-rebase.sample" />
+    <None Include="Content\js\framework\.git\hooks\prepare-commit-msg.sample" />
+    <None Include="Content\js\framework\.git\hooks\update.sample" />
+    <None Include="Content\js\framework\.git\index" />
+    <None Include="Content\js\framework\.git\info\exclude" />
+    <None Include="Content\js\framework\.git\logs\HEAD" />
+    <None Include="Content\js\framework\.git\logs\refs\heads\master" />
+    <None Include="Content\js\framework\.git\logs\refs\remotes\origin\master" />
+    <None Include="Content\js\framework\.git\objects\13\a8ca8855c7da8508d34f04ec34dd6f7aa334f3" />
+    <None Include="Content\js\framework\.git\objects\19\d6d333b970292f2c239a493f221f69342dfe24" />
+    <None Include="Content\js\framework\.git\objects\45\074d723445453441d91f1148956e4afce59674" />
+    <None Include="Content\js\framework\.git\objects\53\0005dabdfca803684e9ce0c1e259769087ff4a" />
+    <None Include="Content\js\framework\.git\objects\63\feaf7e71b5811af669ebe6a18a8b2329c99b7c" />
+    <None Include="Content\js\framework\.git\objects\c9\b9287427b04c688fcff6b93e52be81ac970ef2" />
+    <None Include="Content\js\framework\.git\objects\e1\70fbbc55378c3ac800bcd38d5608010949a277" />
+    <None Include="Content\js\framework\.git\objects\ef\9fad0ce3ca067f95cb6bafc774d964a77f6e3c" />
+    <None Include="Content\js\framework\.git\objects\f7\930c1cfedff335a6f0288eb93cffbcce9d76f1" />
+    <None Include="Content\js\framework\.git\objects\pack\pack-5793e1c205d36194d90cf89406091b656913ef16.idx" />
+    <None Include="Content\js\framework\.git\objects\pack\pack-5793e1c205d36194d90cf89406091b656913ef16.pack" />
+    <None Include="Content\js\framework\.git\ORIG_HEAD" />
+    <None Include="Content\js\framework\.git\packed-refs" />
+    <None Include="Content\js\framework\.git\refs\heads\master" />
+    <None Include="Content\js\framework\.git\refs\remotes\origin\HEAD" />
+    <None Include="Content\js\framework\.git\refs\remotes\origin\master" />
+    <None Include="Content\js\framework\README.md" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shCore.less" />
+    <Content Include="Content\js\lib\syntaxhighlighter\shThemeDefault.less" />
+    <None Include="Content\js\framework\yuidoc.json" />
+    <None Include="Content\not_an_easter_egg\zero\zero.utf8" />
+    <None Include="T4MVC\T4MVC.tt.settings.xml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\js\framework\.git\branches\" />
+    <Folder Include="Content\js\framework\.git\objects\info\" />
+    <Folder Include="Content\js\framework\.git\refs\tags\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Site\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="T4MVC\T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </None>
+    <None Include="T4MVC\T4MVC.tt.hooks.t4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49176</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost/dan.cx/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

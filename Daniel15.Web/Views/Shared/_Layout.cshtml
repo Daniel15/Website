@@ -1,0 +1,83 @@
+﻿@model Daniel15.Web.ViewModels.ViewModelBase
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie ie6 ielt8 ielt9"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie ie7 ielt8 ielt9"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie ie8 ielt9"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js non-ie"> <!--<![endif]-->
+<head>
+	<title>@(string.IsNullOrEmpty(Model.Title) ? string.Empty : Model.Title + " — ") Daniel15</title>
+	<base href="@Url.Content("~")" />
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width" />
+	<meta name="Author" content="Daniel Lo Nigro (Daniel15)" />
+	<meta property="fb:admins" content="731901032" />
+	<meta property="og:country_name" content="Australia" />
+	
+	@Styles.Render("~/bundles/css")
+	
+	<!--[if lt IE 9]><script src="@Url.Js("lib/IE9.js")"></script><![endif]-->
+
+	<!-- Other stuff -->
+	<link rel="start" href="/" title="Home" />
+	<script>
+	    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+	    // Google Analytics
+	    @* TODO: Move the ID to config *@
+	    var _gaq = [['_setAccount', 'UA-25623237-2'], ['_trackPageview']];
+	    (function (d, t) {
+	        var g = d.createElement(t),
+	            s = d.getElementsByTagName(t)[0];
+	        g.src = '//www.google-analytics.com/ga.js';
+	        g.async = true;
+	        s.parentNode.insertBefore(g, s);
+	    } (document, 'script'));
+	</script>
+	@RenderSection("extraHead", required: false)
+
+</head>
+<body id="@Html.BodyId()" class="@Html.BodyClass()">
+	<div id="main-container">
+		<header>
+			@Html.Menu()
+
+			<h1><a href="/" title="Daniel15 is awesome">@(Model.Heading ?? Model.Title)</a></h1>
+		</header>
+		<div id="colmask"><div id="colright">
+			<div id="content_wrap"><div id="content" role="main">
+				@if (TempData["topMessage"] != null)
+				{
+					<div id="top_message" class="@(TempData["topMessageType"] ?? "success")">@TempData["topMessage"]</div>
+				}
+				@RenderBody()
+			</div></div>	  
+			@if (IsSectionDefined("sidebar"))
+			{
+				<aside id="sidebar">
+					@RenderSection("sidebar", required: false)
+				</aside>
+			}
+							  
+		</div></div>
+		<footer>
+			&copy;2008&ndash;2012 <a href="http://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.
+		</footer>
+	</div>
+	<!-- Now for the JS -->
+	@Scripts.Render("~/bundles/main")
+	<script>Events.initPage();</script>
+	@Scripts.Render("~/bundles/syntaxHighlight")
+	
+	@RenderSection("scripts", required: false)
+
+	<!-- Prompt IE 6 and 7 users to install Chrome Frame -->
+	<!--[if lt IE 8]>
+		<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+		<div id="ie-sucks">I no longer fully support Internet Explorer 6 and 7, and stuff may be broken for you. Consider <a href="http://browsehappy.com/">updating your browser</a> :)</div>
+	<![endif]-->
+	
+	@RenderSection("extraFoot", required: false)
+</body>
+</html>
