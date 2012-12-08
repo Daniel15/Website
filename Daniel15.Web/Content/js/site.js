@@ -40,15 +40,15 @@ Page.Site.Index =
 		{
 			onSuccess: function(data)
 			{
-				$('gtalk').removeClass('offline').addClass(data.status.toLowerCase());
-				$('gtalk_address').set('title', data.status);
-				var status = data.status;
-				if (data.statusText != data.status)
-					status += ' (' + data.statusText + ')';
+				$('gtalk').removeClass('offline').addClass(data.StatusString.toLowerCase());
+				$('gtalk_address').set('title', data.StatusString);
+				var status = data.StatusString;
+				if (data.StatusText != data.StatusString)
+				    status += ' (' + data.StatusText + ')';
 				$('gtalk_status').set('innerHTML', status);
 				
 				// If status is not Online, we can't start a new conversation (even Busy!)
-				if (data.status == 'Online')
+				if (data.StatusString == 'Online')
 					$('start_gtalk_chat').setStyle('display', 'inline');
 			},
 			context: this,
