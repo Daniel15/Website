@@ -11,6 +11,7 @@ namespace Daniel15.Web.App_Start
 		public static void RegisterRoutes(RouteCollection routes)
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+			routes.IgnoreRoute("elmah.axd");
 
 			// Normal pages on the website
 			routes.MapRoute(
