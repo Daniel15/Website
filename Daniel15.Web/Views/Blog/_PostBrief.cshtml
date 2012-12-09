@@ -1,0 +1,11 @@
+﻿@model Daniel15.Web.Models.BlogPostModel
+
+<article id="post-@Model.Id" itemscope itemtype="http://schema.org/BlogPosting">
+	@Html.Partial(MVC.Blog.Views._PostHeader, Model)
+	TODO: Intro
+	</div>
+	<footer>
+		@Html.Partial(MVC.Blog.Views._ShareLinks, Model)
+		<a href="@Url.Blog(Model)#disqus_comments" itemprop="discussionUrl">Comments &raquo;</a>
+	</footer>
+</article>

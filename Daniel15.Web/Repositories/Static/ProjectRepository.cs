@@ -397,6 +397,15 @@ namespace Daniel15.Web.Repositories.Static
 		}
 
 		/// <summary>
+		/// Get the total number of records in this table
+		/// </summary>
+		/// <returns>Total number of records</returns>
+		public int Count()
+		{
+			return _projects.Count;
+		}
+
+		/// <summary>
 		/// Gets a list of the main technologies used to build my sites
 		/// </summary>
 		/// <returns>A list of technologies</returns>

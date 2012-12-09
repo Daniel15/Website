@@ -10,25 +10,33 @@ namespace Daniel15.Web.Controllers
 	/// </summary>
 	public partial class BlogController : Controller
     {
-	    private readonly IBlogPostRepository _blogPostRepository;
+	    private readonly IBlogRepository _blogRepository;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BlogController" /> class.
 		/// </summary>
-		/// <param name="blogPostRepository">The blog post repository.</param>
-		public BlogController(IBlogPostRepository blogPostRepository)
+		/// <param name="blogRepository">The blog post repository.</param>
+		public BlogController(IBlogRepository blogRepository)
 		{
-			_blogPostRepository = blogPostRepository;
+			_blogRepository = blogRepository;
 		}
 
 		/// <summary>
 		/// Index page of the blog
 		/// </summary>
-		public virtual ActionResult Index()
+		public virtual ActionResult Index(int page = 1)
         {
-			var posts = _blogPostRepository.LatestPosts();
-
-			throw new NotImplementedException();
+			// TODO: need to use page number
+			// TODO: Load based on page number
+			// TODO: Set title based on page number -  ($page_number != 1 ? 'Page ' . $page_number . ' &mdash; ' : '') . $this->config->name
+			// TODO: Business layer class for getting posts - Need to join to maincategory
+			// TODO: Pagination
+			// TODO: Social media sharing URLs
+			return View(new IndexViewModel
+			{
+				Posts = _blogRepository.LatestPosts(),
+				TotalCount = _blogRepository.Count()
+			});
         }
 
 		/// <summary>

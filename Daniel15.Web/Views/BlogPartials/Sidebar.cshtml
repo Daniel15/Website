@@ -1,0 +1,31 @@
+﻿@using System.Globalization
+@model Daniel15.Web.ViewModels.Blog.SidebarViewModel
+
+<ul>
+	<li>
+		<p>
+			<a href="http://feeds.d15.biz/daniel15" style="display: inline-block"><img src="http://feeds.d15.biz/~fc/daniel15?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" style="display: inline-block" /></a>
+			<a href="http://twitter.com/Daniel15" style="display: inline-block"><img src="http://twittercounter.com/counter/?username=Daniel15" alt="TwitterCounter for Daniel15" width="88" height="26" border="0" /></a></p>
+		</p>
+	</li>
+	<li>
+		@Html.Partial(MVC.Shared.Views._Search)
+	</li>
+	<li>
+		<h2>Archives</h2>
+		<ul id="sidebar-archives">
+			@foreach (var year in Model.Counts)
+			{
+				<li>
+					<a href="">@year.Key ▼</a>
+					<ul>
+						@foreach (var month in year.Value)
+						{
+							<li><a href="@Url.Action("Archive", "Blog", new { year = year.Key, month = month.Key.ToString("00") })">@CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month.Key) @year.Key (@month.Value)</a></li>
+						}
+					</ul>
+				</li>
+			}
+		</ul>
+	</li>
+</ul>

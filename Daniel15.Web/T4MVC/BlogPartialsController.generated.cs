@@ -22,10 +22,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace Daniel15.Web.Controllers
 {
-    public partial class SiteController
+    public partial class BlogPartialsController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected SiteController(Dummy d) { }
+        protected BlogPartialsController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -43,13 +43,13 @@ namespace Daniel15.Web.Controllers
 
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SiteController Actions { get { return MVC.Site; } }
+        public BlogPartialsController Actions { get { return MVC.BlogPartials; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Site";
+        public readonly string Name = "BlogPartials";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Site";
+        public const string NameConst = "BlogPartials";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -57,21 +57,13 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = "Index";
-            public readonly string Projects = "Projects";
-            public readonly string Search = "Search";
-            public readonly string SocialFeed = "SocialFeed";
-            public readonly string ChatStatus = "ChatStatus";
+            public readonly string Sidebar = "Sidebar";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Index = "Index";
-            public const string Projects = "Projects";
-            public const string Search = "Search";
-            public const string SocialFeed = "SocialFeed";
-            public const string ChatStatus = "ChatStatus";
+            public const string Sidebar = "Sidebar";
         }
 
 
@@ -85,52 +77,20 @@ namespace Daniel15.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string _LatestPosts = "_LatestPosts";
-                public readonly string _ProjectList = "_ProjectList";
-                public readonly string Index = "Index";
-                public readonly string Projects = "Projects";
-                public readonly string Search = "Search";
+                public readonly string Sidebar = "Sidebar";
             }
-            public readonly string _LatestPosts = "~/Views/Site/_LatestPosts.cshtml";
-            public readonly string _ProjectList = "~/Views/Site/_ProjectList.cshtml";
-            public readonly string Index = "~/Views/Site/Index.cshtml";
-            public readonly string Projects = "~/Views/Site/Projects.cshtml";
-            public readonly string Search = "~/Views/Site/Search.cshtml";
+            public readonly string Sidebar = "~/Views/BlogPartials/Sidebar.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_SiteController : Daniel15.Web.Controllers.SiteController
+    public class T4MVC_BlogPartialsController : Daniel15.Web.Controllers.BlogPartialsController
     {
-        public T4MVC_SiteController() : base(Dummy.Instance) { }
+        public T4MVC_BlogPartialsController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index()
+        public override System.Web.Mvc.ActionResult Sidebar()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Projects()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Projects);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Search()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Search);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult SocialFeed()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SocialFeed);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult ChatStatus()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChatStatus);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Sidebar);
             return callInfo;
         }
 

@@ -35,6 +35,14 @@ namespace Daniel15.Web.App_Start
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
 			);
 
+			// Blog monthly archive
+			routes.MapRoute(
+				name: "BlogArchive",
+				url: "blog/{year}/{month}",
+				defaults: new { controller = "Blog", action = "Archive" },
+				constraints: new { year = @"\d{4}", month = @"\d{2}" }
+			);
+
 			// Blog home page
 			routes.MapRoute(
 				name: "BlogHome",
@@ -65,12 +73,6 @@ namespace Daniel15.Web.App_Start
 		->defaults(array(
 			'controller' => 'blog',
 			'action'     => 'tag',
-		));
-	// Viewing a monthly archive
-	Route::set('blog_archive', 'blog/<year>/<month>', array('year' => '\d{4}', 'month' => '\d{2}'))
-		->defaults(array(
-			'controller' => 'blog',
-			'action'     => 'archive',
 		));
 		
 	// Blog sub-controllers (sidebar, feed)

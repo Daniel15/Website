@@ -80,5 +80,16 @@ namespace Daniel15.Web.Extensions
 
 			return htmlHelper.Partial(MVC.Shared.Views._Menu, menuItems);
 		}
+
+		/// <summary>
+		/// Retrieves the content of the blog sidebar
+		/// </summary>
+		/// <param name="htmlHelper">HTML helper</param>
+		/// <returns>HTML for the blog sidebar</returns>
+		public static MvcHtmlString BlogSidebar(this HtmlHelper htmlHelper)
+		{
+			// TODO: Put caching here
+			return htmlHelper.Action(MVC.BlogPartials.Sidebar());
+		}
 	}
 }

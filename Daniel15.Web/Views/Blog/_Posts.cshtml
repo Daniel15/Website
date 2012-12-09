@@ -1,0 +1,6 @@
+﻿@model Daniel15.Web.ViewModels.Blog.IndexViewModel
+
+@foreach (var post in Model.Posts)
+{
+	@Html.Partial(MVC.Blog.Views._PostBrief, post)
+}

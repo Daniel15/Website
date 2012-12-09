@@ -26,5 +26,11 @@ namespace Daniel15.Web.Repositories
 		/// </summary>
 		/// <param name="entity">The entity to save</param>
 		void Save(T entity);
+
+		/// <summary>
+		/// Get the total number of records in this table
+		/// </summary>
+		/// <returns>Total number of records</returns>
+		int Count();
 	}
 }

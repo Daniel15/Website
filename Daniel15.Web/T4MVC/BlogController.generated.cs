@@ -75,6 +75,14 @@ namespace Daniel15.Web.Controllers
         }
 
 
+        static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Index
+        {
+            public readonly string page = "page";
+        }
         static readonly ActionParamsClass_View s_params_View = new ActionParamsClass_View();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_View ViewParams { get { return s_params_View; } }
@@ -95,8 +103,22 @@ namespace Daniel15.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _DisqusCount = "_DisqusCount";
+                public readonly string _Layout = "_Layout";
+                public readonly string _PostBrief = "_PostBrief";
+                public readonly string _PostHeader = "_PostHeader";
+                public readonly string _Posts = "_Posts";
+                public readonly string _ShareLinks = "_ShareLinks";
+                public readonly string _ViewStart = "_ViewStart";
                 public readonly string Index = "Index";
             }
+            public readonly string _DisqusCount = "~/Views/Blog/_DisqusCount.cshtml";
+            public readonly string _Layout = "~/Views/Blog/_Layout.cshtml";
+            public readonly string _PostBrief = "~/Views/Blog/_PostBrief.cshtml";
+            public readonly string _PostHeader = "~/Views/Blog/_PostHeader.cshtml";
+            public readonly string _Posts = "~/Views/Blog/_Posts.cshtml";
+            public readonly string _ShareLinks = "~/Views/Blog/_ShareLinks.cshtml";
+            public readonly string _ViewStart = "~/Views/Blog/_ViewStart.cshtml";
             public readonly string Index = "~/Views/Blog/Index.cshtml";
         }
     }
@@ -106,9 +128,10 @@ namespace Daniel15.Web.Controllers
     {
         public T4MVC_BlogController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index()
+        public override System.Web.Mvc.ActionResult Index(int page)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
             return callInfo;
         }
 

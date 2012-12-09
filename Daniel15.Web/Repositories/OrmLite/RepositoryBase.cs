@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using ServiceStack.DataAnnotations;
 using ServiceStack.OrmLite;
 
 namespace Daniel15.Web.Repositories.OrmLite
@@ -53,6 +54,31 @@ namespace Daniel15.Web.Repositories.OrmLite
 		public void Save(T entity)
 		{
 			Connection.Save(entity);
+		}
+
+		/// <summary>
+		/// Get the total number of records in this table
+		/// </summary>
+		/// <returns>Total number of records</returns>
+		public int Count()
+		{
+			//Connection.GetScalar<T, int>(field => Sql.Count(field))
+			// Need to do this an ugly way - Using Sql.Count like above requires an int property...
+
+			// Get the type name as it might be the table name
+			// TODO: See if OrmLite has a built-in function to get table name from entity
+			var type = typeof (T);
+			var tableName = type.Name;
+
+			// If entity has an AliasAttribute, use it for the name instead
+			var attributes = type.GetCustomAttributes(typeof(AliasAttribute), true);
+			if (attributes.Length > 0)
+			{
+				tableName = ((AliasAttribute)attributes[0]).Name;
+			}
+
+			// Actually do the query!
+			return Connection.GetScalar<int>(string.Format("SELECT COUNT(*) FROM {0}", tableName));
 		}
 	}
 }
