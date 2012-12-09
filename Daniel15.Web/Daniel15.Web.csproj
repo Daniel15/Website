@@ -135,6 +135,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\IocConfig.cs" />
     <Compile Include="Attributes\StopwatchAttribute.cs" />
+    <Compile Include="Controllers\BlogPartialsController.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
     <Compile Include="Infrastructure\T4MvcControllerConstructorResolutionBehavior.cs" />
     <Compile Include="Models\BlogPostSummaryModel.cs" />
@@ -161,6 +162,9 @@
     <Compile Include="Repositories\IRepositoryBase.cs" />
     <Compile Include="Repositories\OrmLite\BlogRepository.cs" />
     <Compile Include="Repositories\OrmLite\RepositoryBase.cs" />
+    <Compile Include="T4MVC\BlogPartialsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -173,6 +177,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Blog\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Blog\SidebarViewModel.cs" />
     <Compile Include="ViewModels\Site\IndexViewModel.cs" />
     <Compile Include="ViewModels\Site\ProjectsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
@@ -468,6 +473,10 @@
     <Content Include="Views\Site\_LatestPosts.cshtml" />
     <Content Include="Views\Site\Projects.cshtml" />
     <Content Include="Views\Site\_ProjectList.cshtml" />
+    <Content Include="Views\Blog\_Layout.cshtml" />
+    <Content Include="Views\Blog\_ViewStart.cshtml" />
+    <Content Include="Views\BlogPartials\Sidebar.cshtml" />
+    <Content Include="Views\Shared\_Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\framework\.git\branches\" />

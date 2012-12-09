@@ -51,7 +51,7 @@ namespace Daniel15.Web.App_Start
 			container.RegisterPerWebRequest<IDbConnection>(() => container.GetInstance<IDbConnectionFactory>().OpenDbConnection());
 
 			// Repositories
-			container.RegisterPerWebRequest<IBlogPostRepository, Repositories.OrmLite.BlogRepository>();
+			container.RegisterPerWebRequest<IBlogRepository, Repositories.OrmLite.BlogRepository>();
 			container.RegisterPerWebRequest<IProjectRepository, Repositories.Static.ProjectRepository>();
 		}
     }

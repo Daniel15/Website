@@ -1,0 +1,14 @@
+﻿@model ViewModelBase
+
+@{
+	// "Inherit" from the base layout
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	Model.SidebarType = SidebarType.Right;
+}
+
+@RenderBody()
+
+@section sidebar
+{
+	@Html.Action(MVC.BlogPartials.Sidebar())
+}

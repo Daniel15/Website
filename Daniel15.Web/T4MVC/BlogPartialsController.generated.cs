@@ -22,10 +22,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace Daniel15.Web.Controllers
 {
-    public partial class BlogController
+    public partial class BlogPartialsController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected BlogController(Dummy d) { }
+        protected BlogPartialsController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -41,21 +41,15 @@ namespace Daniel15.Web.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult View()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.View);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public BlogController Actions { get { return MVC.Blog; } }
+        public BlogPartialsController Actions { get { return MVC.BlogPartials; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Blog";
+        public readonly string Name = "BlogPartials";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Blog";
+        public const string NameConst = "BlogPartials";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -63,28 +57,16 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = "Index";
-            public readonly string View = "View";
+            public readonly string Sidebar = "Sidebar";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Index = "Index";
-            public const string View = "View";
+            public const string Sidebar = "Sidebar";
         }
 
 
-        static readonly ActionParamsClass_View s_params_View = new ActionParamsClass_View();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_View ViewParams { get { return s_params_View; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_View
-        {
-            public readonly string month = "month";
-            public readonly string year = "year";
-            public readonly string slug = "slug";
-        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -95,33 +77,20 @@ namespace Daniel15.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string _Layout = "_Layout";
-                public readonly string _ViewStart = "_ViewStart";
-                public readonly string Index = "Index";
+                public readonly string Sidebar = "Sidebar";
             }
-            public readonly string _Layout = "~/Views/Blog/_Layout.cshtml";
-            public readonly string _ViewStart = "~/Views/Blog/_ViewStart.cshtml";
-            public readonly string Index = "~/Views/Blog/Index.cshtml";
+            public readonly string Sidebar = "~/Views/BlogPartials/Sidebar.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_BlogController : Daniel15.Web.Controllers.BlogController
+    public class T4MVC_BlogPartialsController : Daniel15.Web.Controllers.BlogPartialsController
     {
-        public T4MVC_BlogController() : base(Dummy.Instance) { }
+        public T4MVC_BlogPartialsController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index()
+        public override System.Web.Mvc.ActionResult Sidebar()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult View(int month, int year, string slug)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.View);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "month", month);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "year", year);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Sidebar);
             return callInfo;
         }
 

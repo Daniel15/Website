@@ -1,6 +1,5 @@
 ﻿ - Last modified dates (header and possibly footer?)
  - Check HTML output - Find missing bits (like <meta> tags)
  - Update projects page
- - ELMAH on Mono - 404 on elmah.axd
  - CSS and JS redir for Tumblr
  - Revision in footer?

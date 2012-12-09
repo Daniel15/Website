@@ -6,7 +6,7 @@ namespace Daniel15.Web.Repositories
 	/// <summary>
 	/// Repository for accessing blog posts
 	/// </summary>
-	public interface IBlogPostRepository : IRepositoryBase<BlogPostModel>
+	public interface IBlogRepository : IRepositoryBase<BlogPostModel>
 	{
 		/// <summary>
 		/// Gets the latest blog posts
@@ -20,5 +20,11 @@ namespace Daniel15.Web.Repositories
 		/// <param name="posts">Number of posts to return</param>
 		/// <returns>Blog post summary</returns>
 		List<BlogPostSummaryModel> LatestPostsSummary(int posts = 10);
+
+		/// <summary>
+		/// Gets the count of blog posts for every year and every month.
+		/// </summary>
+		/// <returns>A dictionary of years, which contains a dictionary of months and counts</returns>
+		IDictionary<int, IDictionary<int, int>> MonthCounts();
 	}
 }

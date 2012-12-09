@@ -21,17 +21,17 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		private static readonly TimeSpan CACHE_POSTS_FOR = new TimeSpan(1, 0, 0);
 
-		private readonly IBlogPostRepository _blogPostRepository;
+		private readonly IBlogRepository _blogRepository;
 		private readonly IProjectRepository _projectRepository;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SiteController" /> class.
 		/// </summary>
-		/// <param name="blogPostRepository">The blog post repository.</param>
+		/// <param name="blogRepository">The blog post repository.</param>
 		/// <param name="projectRepository">The project repository</param>
-		public SiteController(IBlogPostRepository blogPostRepository, IProjectRepository projectRepository)
+		public SiteController(IBlogRepository blogRepository, IProjectRepository projectRepository)
 		{
-			_blogPostRepository = blogPostRepository;
+			_blogRepository = blogRepository;
 			_projectRepository = projectRepository;
 		}
 
@@ -43,7 +43,7 @@ namespace Daniel15.Web.Controllers
         {
 			// Load the most recent blog posts
 			var posts = HttpContext.Cache.GetOrInsert("LatestPosts", DateTime.Now + CACHE_POSTS_FOR, Cache.NoSlidingExpiration,
-			                                          () => _blogPostRepository.LatestPostsSummary());
+			                                          () => _blogRepository.LatestPostsSummary());
 			
             return View(new IndexViewModel
 	        {
