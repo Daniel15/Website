@@ -6,14 +6,27 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js non-ie"> <!--<![endif]-->
 <head>
-	<title>@(string.IsNullOrEmpty(Model.Title) ? string.Empty : Model.Title + " — ") Daniel15</title>
-	<base href="@Url.Content("~")" />
+	<title>@(string.IsNullOrEmpty(Model.Title) ? string.Empty : Model.Title + " — ")Daniel15</title>
+	<base href="@Url.ContentAbsolute("~")" />
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="viewport" content="width=device-width" />
 	<meta name="Author" content="Daniel Lo Nigro (Daniel15)" />
 	<meta property="fb:admins" content="731901032" />
 	<meta property="og:country_name" content="Australia" />
+	<meta property="og:title" content="@(Model.Title ?? "Daniel15's Site")" />
+	@if (!string.IsNullOrEmpty(Model.Description))
+	{
+		<meta name="Description" content="@Model.Description" />
+		<meta property="og:description" content="@Model.Description" />
+	}
+	
+	@if (Model.LastModified.HasValue)
+	{
+		<meta name="Date" content="@Model.LastModified.Value.ToString("yyyy-MM-dd")" />
+		<meta name="DC.Date" content="@Model.LastModified.Value.ToString("yyyy-MM-dd")" />
+	}
+	@RenderSection("extraMeta", required: false)
 	
 	@Styles.Render("~/bundles/css")
 	
@@ -22,17 +35,17 @@
 	<!-- Other stuff -->
 	<link rel="start" href="/" title="Home" />
 	<script>
-	    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-	    // Google Analytics
-	    @* TODO: Move the ID to config *@
-	    var _gaq = [['_setAccount', 'UA-25623237-2'], ['_trackPageview']];
-	    (function (d, t) {
-	        var g = d.createElement(t),
-	            s = d.getElementsByTagName(t)[0];
-	        g.src = '//www.google-analytics.com/ga.js';
-	        g.async = true;
-	        s.parentNode.insertBefore(g, s);
-	    } (document, 'script'));
+		document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+		// Google Analytics
+		var _gaq = [['_setAccount', '@Model.GoogleAnalyticsAccount'], ['_trackPageview']];
+		(function (d, t)
+		{
+			var g = d.createElement(t),
+				s = d.getElementsByTagName(t)[0];
+			g.src = '//www.google-analytics.com/ga.js';
+			g.async = true;
+			s.parentNode.insertBefore(g, s);
+		}(document, 'script'));
 	</script>
 	@RenderSection("extraHead", required: false)
 
@@ -58,10 +71,14 @@
 					@RenderSection("sidebar", required: false)
 				</aside>
 			}
-							  
+
 		</div></div>
 		<footer>
-			&copy;2008&ndash;2012 <a href="http://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.
+			&copy;2008&ndash;2012 <a href="http://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.<br />
+			@if (Model.LastModified.HasValue)
+			{
+				<text>This page last modified @Model.LastModified.Value.ToString("d MMM yyyy")</text>
+			}
 		</footer>
 	</div>
 	<!-- Now for the JS -->

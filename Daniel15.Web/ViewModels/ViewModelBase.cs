@@ -1,4 +1,7 @@
-﻿namespace Daniel15.Web.ViewModels
+﻿using System;
+using System.Configuration;
+
+namespace Daniel15.Web.ViewModels
 {
 	/// <summary>
 	/// Base class that all view models should inherit from
@@ -17,6 +20,21 @@
 		/// Type of sidebar to use
 		/// </summary>
 		public SidebarType SidebarType { get; set; }
+		/// <summary>
+		/// Description to use in the meta tag
+		/// </summary>
+		public string Description { get; set; }
+		/// <summary>
+		/// Last modified date of the page
+		/// </summary>
+		public DateTime? LastModified { get; set; }
+		/// <summary>
+		/// Gets the Google Analytics account number
+		/// </summary>
+		public string GoogleAnalyticsAccount
+		{
+			get { return ConfigurationManager.AppSettings["GoogleAnalyticsAccount"]; }
+		}
 
 		public ViewModelBase()
 		{

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Daniel15.Web.Models;
 
 namespace Daniel15.Web.Extensions
@@ -28,6 +29,20 @@ namespace Daniel15.Web.Extensions
 		public static string Image(this UrlHelper urlHelper, string filename)
 		{
 			return urlHelper.Content("~/Content/images/" + filename);
+		}
+
+		/// <summary>
+		/// Gets the absolute URL (http://..../blah) to the specified URI
+		/// </summary>
+		/// <param name="urlHelper">The URL helper</param>
+		/// <param name="uri">URI to link to</param>
+		/// <returns>The absolute URL</returns>
+		public static string ContentAbsolute(this UrlHelper urlHelper, string uri)
+		{
+			return new UriBuilder(urlHelper.RequestContext.HttpContext.Request.Url.AbsoluteUri)
+			{
+				Path = urlHelper.Content(uri)
+			}.ToString();
 		}
 
 		/// <summary>
