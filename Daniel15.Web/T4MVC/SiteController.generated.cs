@@ -58,6 +58,8 @@ namespace Daniel15.Web.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string Projects = "Projects";
+            public readonly string SocialFeed = "SocialFeed";
             public readonly string ChatStatus = "ChatStatus";
         }
 
@@ -65,6 +67,8 @@ namespace Daniel15.Web.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string Projects = "Projects";
+            public const string SocialFeed = "SocialFeed";
             public const string ChatStatus = "ChatStatus";
         }
 
@@ -80,10 +84,14 @@ namespace Daniel15.Web.Controllers
             public class _ViewNamesClass
             {
                 public readonly string _LatestPosts = "_LatestPosts";
+                public readonly string _ProjectList = "_ProjectList";
                 public readonly string Index = "Index";
+                public readonly string Projects = "Projects";
             }
             public readonly string _LatestPosts = "~/Views/Site/_LatestPosts.cshtml";
+            public readonly string _ProjectList = "~/Views/Site/_ProjectList.cshtml";
             public readonly string Index = "~/Views/Site/Index.cshtml";
+            public readonly string Projects = "~/Views/Site/Projects.cshtml";
         }
     }
 
@@ -95,6 +103,18 @@ namespace Daniel15.Web.Controllers
         public override System.Web.Mvc.ActionResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Projects()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Projects);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SocialFeed()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SocialFeed);
             return callInfo;
         }
 

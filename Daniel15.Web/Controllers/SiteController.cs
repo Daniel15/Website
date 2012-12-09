@@ -7,6 +7,7 @@ using Daniel15.Web.Models.Home;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.ViewModels.Site;
 using Daniel15.Web.Extensions;
+using System.Linq;
 
 namespace Daniel15.Web.Controllers
 {
@@ -15,15 +16,23 @@ namespace Daniel15.Web.Controllers
 	/// </summary>
 	public partial class SiteController : Controller
 	{
+		/// <summary>
+		/// How long to cache the recent blog posts for
+		/// </summary>
+		private static readonly TimeSpan CACHE_POSTS_FOR = new TimeSpan(1, 0, 0);
+
 		private readonly IBlogPostRepository _blogPostRepository;
+		private readonly IProjectRepository _projectRepository;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SiteController" /> class.
 		/// </summary>
 		/// <param name="blogPostRepository">The blog post repository.</param>
-		public SiteController(IBlogPostRepository blogPostRepository)
+		/// <param name="projectRepository">The project repository</param>
+		public SiteController(IBlogPostRepository blogPostRepository, IProjectRepository projectRepository)
 		{
 			_blogPostRepository = blogPostRepository;
+			_projectRepository = projectRepository;
 		}
 
 		/// <summary>
@@ -33,18 +42,39 @@ namespace Daniel15.Web.Controllers
 		public virtual ActionResult Index()
         {
 			// Load the most recent blog posts
-			/*var posts = HttpContext.Cache.GetOrInsert("BlogPosts", DateTime.Now.AddDays(1), Cache.NoSlidingExpiration, () =>
-			{
-				return _blogPostRepository.LatestPostsSummary();
-			});*/
-
-			var posts = _blogPostRepository.LatestPostsSummary();
+			var posts = HttpContext.Cache.GetOrInsert("LatestPosts", DateTime.Now + CACHE_POSTS_FOR, Cache.NoSlidingExpiration,
+			                                          () => _blogPostRepository.LatestPostsSummary());
 			
             return View(new IndexViewModel
 	        {
 		        LatestPosts = posts
 	        });
         }
+
+		/// <summary>
+		/// A list of all the projects I've worked on the past
+		/// </summary>
+		/// <returns></returns>
+		public virtual ActionResult Projects()
+		{
+			var projects = _projectRepository.All();
+
+			return View(MVC.Site.Views.Projects, new ProjectsViewModel
+			{
+				CurrentProjects = projects.Where(x => x.IsCurrent).ToList(),
+				PreviousProjects = projects.Where(x => !x.IsCurrent).ToList(),
+				PrimaryTechnologies = _projectRepository.PrimaryTechnologies(),
+			});
+		}
+
+		/// <summary>
+		/// A feed of all the stuff I've done on the interwebs.
+		/// </summary>
+		/// <returns></returns>
+		public virtual ActionResult SocialFeed()
+		{
+			throw new NotImplementedException();
+		}
 
 		#region Google Talk chat status
 		/// <summary>

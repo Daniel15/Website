@@ -49,6 +49,7 @@ namespace Daniel15.Web.Extensions
 			var action = htmlHelper.ViewContext.RouteData.GetRequiredString("action").ToLower();
 
 			// TODO: Where should these actually be? Probably in a model.
+			// TODO: Should these be using UrlHelper?
 			var menuItems = new List<MenuItemModel>
 			{
 				new MenuItemModel

@@ -9,7 +9,7 @@ namespace Daniel15.Web.Extensions
 	public static class UrlHelperExtensions
 	{
 		/// <summary>
-		/// Gets a JavaScrupt URL
+		/// Gets the URL to the specified JavaScript file
 		/// </summary>
 		/// <param name="urlHelper">The URL helper.</param>
 		/// <param name="filename">The filename.</param>
@@ -20,7 +20,18 @@ namespace Daniel15.Web.Extensions
 		}
 
 		/// <summary>
-		/// Returns a URL to the specified blog post
+		/// Gets the URL to the specified image
+		/// </summary>
+		/// <param name="urlHelper">The URL helper.</param>
+		/// <param name="filename">The filename.</param>
+		/// <returns>Image URL</returns>
+		public static string Image(this UrlHelper urlHelper, string filename)
+		{
+			return urlHelper.Content("~/Content/images/" + filename);
+		}
+
+		/// <summary>
+		/// Gets a URL to the specified blog post
 		/// </summary>
 		/// <param name="urlHelper">The URL helper.</param>
 		/// <param name="post">Blog post to link to</param>
