@@ -2,6 +2,7 @@ using System.Configuration;
 using System.Data;
 using System.Reflection;
 using System.Web.Mvc;
+using Daniel15.Web.Infrastructure;
 using Daniel15.Web.Repositories;
 using ServiceStack.OrmLite;
 using SimpleInjector;
@@ -17,6 +18,8 @@ namespace Daniel15.Web.App_Start
         public static void Initialize()
         {
             var container = new Container();
+	        container.Options.ConstructorResolutionBehavior =
+		        new T4MvcControllerConstructorResolutionBehavior(container.Options.ConstructorResolutionBehavior);
             
             InitializeContainer(container);
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
@@ -48,7 +51,7 @@ namespace Daniel15.Web.App_Start
 			container.RegisterPerWebRequest<IDbConnection>(() => container.GetInstance<IDbConnectionFactory>().OpenDbConnection());
 
 			// Repositories
-			container.RegisterPerWebRequest<IBlogPostRepository, Repositories.OrmLite.BlogPostRepository>();
+			container.RegisterPerWebRequest<IBlogPostRepository, Repositories.OrmLite.BlogRepository>();
 		}
     }
 }

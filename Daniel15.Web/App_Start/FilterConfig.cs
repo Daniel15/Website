@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Daniel15.Web.Attributes;
 
 namespace Daniel15.Web.App_Start
 {
@@ -10,6 +11,7 @@ namespace Daniel15.Web.App_Start
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
 			filters.Add(new HandleErrorAttribute());
+			filters.Add(new StopwatchAttribute());
 		}
 	}
 }

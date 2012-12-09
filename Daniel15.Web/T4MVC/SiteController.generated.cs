@@ -25,9 +25,6 @@ namespace Daniel15.Web.Controllers
     public partial class SiteController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SiteController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected SiteController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -61,12 +58,14 @@ namespace Daniel15.Web.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string ChatStatus = "ChatStatus";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string ChatStatus = "ChatStatus";
         }
 
 
@@ -80,8 +79,10 @@ namespace Daniel15.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _LatestPosts = "_LatestPosts";
                 public readonly string Index = "Index";
             }
+            public readonly string _LatestPosts = "~/Views/Site/_LatestPosts.cshtml";
             public readonly string Index = "~/Views/Site/Index.cshtml";
         }
     }
@@ -94,6 +95,12 @@ namespace Daniel15.Web.Controllers
         public override System.Web.Mvc.ActionResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ChatStatus()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChatStatus);
             return callInfo;
         }
 

@@ -30,5 +30,17 @@ namespace Daniel15.Web.Controllers
 
 			throw new NotImplementedException();
         }
+
+		/// <summary>
+		/// Viewing a blog post
+		/// </summary>
+		/// <param name="month">The month of the post</param>
+		/// <param name="year">The year of the post</param>
+		/// <param name="slug">The slug.</param>
+		/// <returns>Blog post page</returns>
+		public virtual ActionResult View(int month, int year, string slug)
+		{
+			throw new NotImplementedException("TODO: View " + slug);
+		}
     }
 }

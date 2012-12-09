@@ -10,15 +10,21 @@ namespace Daniel15.Web.Repositories.OrmLite
 	/// <typeparam name="T"></typeparam>
 	public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : new()
 	{
-		protected readonly IDbConnection _conn;
+		protected readonly IDbConnectionFactory _connectionFactory;
+		private IDbConnection _connection;
+
+		protected IDbConnection Connection
+		{
+			get { return _connection ?? (_connection = _connectionFactory.OpenDbConnection()); }
+		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="RepositoryBase{T}" /> class.
 		/// </summary>
 		/// <param name="conn">The conn.</param>
-		public RepositoryBase(IDbConnection conn)
+		public RepositoryBase(IDbConnectionFactory connectionFactory)
 		{
-			_conn = conn;
+			_connectionFactory = connectionFactory;
 		}
 
 		/// <summary>
@@ -27,7 +33,7 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <returns></returns>
 		public List<T> All()
 		{
-			return _conn.Select<T>();
+			return Connection.Select<T>();
 		}
 
 		/// <summary>
@@ -37,7 +43,7 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <returns>The entity</returns>
 		public T Get(int id)
 		{
-			return _conn.GetById<T>(id);
+			return Connection.GetById<T>(id);
 		}
 
 		/// <summary>
@@ -46,7 +52,7 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <param name="entity">The entity to save</param>
 		public void Save(T entity)
 		{
-			_conn.Save(entity);
+			Connection.Save(entity);
 		}
 	}
 }
