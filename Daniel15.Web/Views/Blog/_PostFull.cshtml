@@ -1,0 +1,14 @@
+﻿@model Daniel15.Web.Models.Blog.PostModel
+
+<article id="post-@Model.Id" itemscope itemtype="http://schema.org/BlogPosting">
+	@Html.Partial(MVC.Blog.Views._PostHeader, Model)
+		@Html.Raw(Model.Content())
+	</div>
+	@Html.Partial(MVC.Blog.Views._ShareLinks, Model)
+	
+	TODO: Tags
+	
+	<footer>
+		Short URL for sharing: TODO: SHORT URL. This entry was posted on TODO: DATE and is filed under TODO: CATEGORIES. You can <a href="@Url.Blog(Model)#leave-comment" itemprop="discussionUrl">leave a comment</a> if you'd like to, or subscribe to the RSS feed to keep up-to-date with all my latest blog posts! 
+	</footer>
+</article>

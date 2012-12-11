@@ -2,10 +2,10 @@
 using Daniel15.Web.Extensions;
 using ServiceStack.DataAnnotations;
 
-namespace Daniel15.Web.Models
+namespace Daniel15.Web.Models.Blog
 {
 	[Alias("blog_posts")]
-	public class BlogPostSummaryModel
+	public class PostSummaryModel
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }

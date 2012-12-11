@@ -103,23 +103,29 @@ namespace Daniel15.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _Comments = "_Comments";
                 public readonly string _DisqusCount = "_DisqusCount";
                 public readonly string _Layout = "_Layout";
                 public readonly string _PostBrief = "_PostBrief";
+                public readonly string _PostFull = "_PostFull";
                 public readonly string _PostHeader = "_PostHeader";
                 public readonly string _Posts = "_Posts";
                 public readonly string _ShareLinks = "_ShareLinks";
                 public readonly string _ViewStart = "_ViewStart";
                 public readonly string Index = "Index";
+                public readonly string View = "View";
             }
+            public readonly string _Comments = "~/Views/Blog/_Comments.cshtml";
             public readonly string _DisqusCount = "~/Views/Blog/_DisqusCount.cshtml";
             public readonly string _Layout = "~/Views/Blog/_Layout.cshtml";
             public readonly string _PostBrief = "~/Views/Blog/_PostBrief.cshtml";
+            public readonly string _PostFull = "~/Views/Blog/_PostFull.cshtml";
             public readonly string _PostHeader = "~/Views/Blog/_PostHeader.cshtml";
             public readonly string _Posts = "~/Views/Blog/_Posts.cshtml";
             public readonly string _ShareLinks = "~/Views/Blog/_ShareLinks.cshtml";
             public readonly string _ViewStart = "~/Views/Blog/_ViewStart.cshtml";
             public readonly string Index = "~/Views/Blog/Index.cshtml";
+            public readonly string View = "~/Views/Blog/View.cshtml";
         }
     }
 

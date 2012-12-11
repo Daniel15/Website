@@ -1,15 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Data;
+﻿using System;
+using System.Collections.Generic;
 using Daniel15.Web.Models;
+using Daniel15.Web.Models.Blog;
 using ServiceStack.OrmLite;
-using System.Linq;
 
 namespace Daniel15.Web.Repositories.OrmLite
 {
 	/// <summary>
 	/// Blog repository that uses OrmLite as the data access component
 	/// </summary>
-	public class BlogRepository : RepositoryBase<BlogPostModel>, IBlogRepository
+	public class BlogRepository : RepositoryBase<PostModel>, IBlogRepository
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BlogRepository" /> class.
@@ -20,12 +20,40 @@ namespace Daniel15.Web.Repositories.OrmLite
 		}
 
 		/// <summary>
+		/// Gets a post by slug.
+		/// </summary>
+		/// <param name="slug">The slug.</param>
+		/// <returns>The post</returns>
+		public PostModel GetBySlug(string slug)
+		{
+			try
+			{
+				return Connection.First<PostModel>(post => post.Slug == slug);
+			}
+			catch (ArgumentNullException)
+			{
+				// Post wasn't found
+				throw new ItemNotFoundException();
+			}
+		}
+
+		/// <summary>
+		/// Gets the categories for the specified blog post
+		/// </summary>
+		/// <param name="post">Blog post</param>
+		/// <returns>Categories for this blog post</returns>
+		public IList<CategoryModel> CategoriesForPost(PostSummaryModel post)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
 		/// Gets the latest blog posts
 		/// </summary>
 		/// <returns>Latest blog posts</returns>
-		public List<BlogPostModel> LatestPosts(int posts = 10)
+		public List<PostModel> LatestPosts(int posts = 10)
 		{
-			return Connection.Select<BlogPostModel>(query => query
+			return Connection.Select<PostModel>(query => query
 				.OrderByDescending(post => post.Date)
 				.Limit(posts)
 			);
@@ -36,9 +64,9 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// </summary>
 		/// <param name="posts">Number of posts to return</param>
 		/// <returns>Blog post summary</returns>
-		public List<BlogPostSummaryModel> LatestPostsSummary(int posts = 10)
+		public List<PostSummaryModel> LatestPostsSummary(int posts = 10)
 		{
-			return Connection.Select<BlogPostSummaryModel>(query => query
+			return Connection.Select<PostSummaryModel>(query => query
 				.OrderByDescending(post => post.Date)
 				.Limit(posts)
 			);

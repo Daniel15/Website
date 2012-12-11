@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
+using Daniel15.Web.Models;
+using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.ViewModels.Blog;
+using ServiceStack.Common.Web;
+using Daniel15.Web.Extensions;
 
 namespace Daniel15.Web.Controllers
 {
@@ -48,7 +52,28 @@ namespace Daniel15.Web.Controllers
 		/// <returns>Blog post page</returns>
 		public virtual ActionResult View(int month, int year, string slug)
 		{
-			throw new NotImplementedException("TODO: View " + slug);
+			PostModel post;
+			try
+			{
+				post = _blogRepository.GetBySlug(slug);
+			}
+			catch (ItemNotFoundException)
+			{
+				// Throw a 404 if the post doesn't exist
+				return HttpNotFound(string.Format("Blog post '{0}' not found.", slug));
+			}
+
+			// Check the URL was actually correct (year and month), redirect if not.
+			if (year != post.Date.Year || month != post.Date.Month)
+			{
+				return RedirectPermanent(Url.Blog(post));
+			}
+
+			return View(new PostViewModel
+			{
+				Post = post,
+				// TODO PostCategories = _blogRepository.CategoriesForPost(post),
+			});
 		}
     }
 }

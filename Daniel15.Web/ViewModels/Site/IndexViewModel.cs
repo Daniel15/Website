@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Daniel15.Web.Models;
+using Daniel15.Web.Models.Blog;
 
 namespace Daniel15.Web.ViewModels.Site
 {
@@ -8,6 +9,6 @@ namespace Daniel15.Web.ViewModels.Site
 	/// </summary>
 	public class IndexViewModel : ViewModelBase
 	{
-		public List<BlogPostSummaryModel> LatestPosts { get; set; }
+		public List<PostSummaryModel> LatestPosts { get; set; }
 	}
 }

@@ -1,8 +1,15 @@
-﻿@model Daniel15.Web.Models.BlogPostModel
+﻿@model Daniel15.Web.Models.Blog.PostModel
+@{
+	bool showMoreLink;
+}
 
 <article id="post-@Model.Id" itemscope itemtype="http://schema.org/BlogPosting">
 	@Html.Partial(MVC.Blog.Views._PostHeader, Model)
-	TODO: Intro
+		@Html.Raw(Model.Intro(out showMoreLink))
+		@if (showMoreLink)
+		{
+			<p><a href="@Url.Blog(Model)" class="read-more">Read more &rArr;</a></p>
+		}
 	</div>
 	<footer>
 		@Html.Partial(MVC.Blog.Views._ShareLinks, Model)

@@ -12,6 +12,46 @@ namespace Daniel15.Web.Extensions
 		private static DateTime UNIX_EPOCH = new DateTime(1970, 1, 1);
 
 		/// <summary>
+		/// Like ToString but inserts the ordinal as well (1st, 2nd, etc.). Put {0} where you want
+		/// the ordinal to appear
+		/// </summary>
+		/// <param name="dateTime">Date to format</param>
+		/// <param name="format">Format string to use</param>
+		/// <returns>Date formatted and with ordinal inserted</returns>
+		public static string ToStringWithOrdinal(this DateTime dateTime, string format = "d{0} MMMM yyyy")
+		{
+			return string.Format(dateTime.ToString(format), Ordinal(dateTime.Day));
+		}
+		
+		/// <summary>
+		/// Gets the ordinal for the specified number (ie. "st" for 1, "nd" for 2, etc.)
+		/// </summary>
+		/// <param name="num">Number</param>
+		/// <returns>The ordinal</returns>
+		public static string Ordinal(int num)
+		{
+			switch (num % 100)
+			{
+				case 11:
+				case 12:
+				case 13:
+					return "th";
+			}
+
+			switch (num % 10)
+			{
+				case 1:
+					return "st";
+				case 2:
+					return "nd";
+				case 3:
+					return "rd";
+				default:
+					return "th";
+			}
+		}
+
+		/// <summary>
 		/// Converts this <see cref="DateTime"/> into a UNIX timestamp.
 		/// </summary>
 		/// <param name="dateTime">The date to convert</param>

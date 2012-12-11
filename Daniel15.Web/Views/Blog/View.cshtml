@@ -1,0 +1,9 @@
+﻿@model Daniel15.Web.ViewModels.Blog.PostViewModel
+
+@{
+	Model.Title = Model.Post.Title;
+	Model.Heading = "Blog";
+}
+
+@Html.Partial(MVC.Blog.Views._PostFull, Model.Post)
+@Html.Partial(MVC.Blog.Views._Comments, Model.Post)

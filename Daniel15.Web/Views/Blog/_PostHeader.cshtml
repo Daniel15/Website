@@ -1,10 +1,9 @@
-﻿@model Daniel15.Web.Models.BlogPostModel
+﻿@model Daniel15.Web.Models.Blog.PostModel
 
 <header>
 	<h2 itemprop="name"><a href="@Url.Blog(Model)" rel="bookmark" title="Permanent link to @Model.Title" itemprop="url">@Model.Title</a></h2>
 	<ul class="postmetadata">
-		<!-- TODO: Proper date format -->
-		<li class="date"><time datetime="@Model.Date.ToString("s")" itemprop="datePublished">@Model.Date</time></li>
+		<li class="date"><time datetime="@Model.Date.ToString("s")" itemprop="datePublished">@Model.Date.ToStringWithOrdinal("d{0} MMMM yyyy")</time></li>
 		<li class="category"><a href="TODO" itemprop="keywords">TODO: Category</a></li>
 		<li class="comments"><a href="@Url.Blog(Model)#disqus_thread" data-disqus-identifier="@Model.Id">Comments</a></li>
 		<li class="permalink">TODO: Short URL</li>
