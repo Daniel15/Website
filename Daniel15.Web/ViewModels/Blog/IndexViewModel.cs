@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Daniel15.Web.Models;
+﻿using System;
+using System.Collections.Generic;
 using Daniel15.Web.Models.Blog;
 
 namespace Daniel15.Web.ViewModels.Blog
@@ -20,5 +20,11 @@ namespace Daniel15.Web.ViewModels.Blog
 		/// Current page number
 		/// </summary>
 		public int Page { get; set; }
+
+		/// <summary>
+		/// Function used to shorten blog URLs
+		/// TODO: Is this the best way to do this?
+		/// </summary>
+		public Func<PostModel, string> UrlShortener { get; set; }
 	}
 }

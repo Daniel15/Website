@@ -1,6 +1,7 @@
-﻿@model Daniel15.Web.ViewModels.Blog.IndexViewModel
+﻿@using Daniel15.Web.ViewModels.Blog
+@model Daniel15.Web.ViewModels.Blog.IndexViewModel
 
 @foreach (var post in Model.Posts)
 {
-	@Html.Partial(MVC.Blog.Views._PostBrief, post)
+	@Html.Partial(MVC.Blog.Views._PostBrief, new PostViewModel { Post = post, ShortUrl = Model.UrlShortener(post) })
 }

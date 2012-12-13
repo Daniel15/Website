@@ -146,6 +146,8 @@
     <Compile Include="Repositories\IProjectRepository.cs" />
     <Compile Include="Repositories\ItemNotFoundException.cs" />
     <Compile Include="Repositories\Static\ProjectRepository.cs" />
+    <Compile Include="Services\IUrlShortener.cs" />
+    <Compile Include="Services\UrlShortener.cs" />
     <Compile Include="T4MVC\BlogController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>

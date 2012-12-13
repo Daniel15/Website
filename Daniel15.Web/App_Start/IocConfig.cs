@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Web.Mvc;
 using Daniel15.Web.Infrastructure;
 using Daniel15.Web.Repositories;
+using Daniel15.Web.Services;
 using ServiceStack.OrmLite;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
@@ -53,6 +54,9 @@ namespace Daniel15.Web.App_Start
 			// Repositories
 			container.RegisterPerWebRequest<IBlogRepository, Repositories.OrmLite.BlogRepository>();
 			container.RegisterPerWebRequest<IProjectRepository, Repositories.Static.ProjectRepository>();
+
+			// Services
+			container.Register<IUrlShortener, UrlShortener>();
 		}
     }
 }

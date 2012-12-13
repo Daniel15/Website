@@ -57,6 +57,7 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <summary>
 		/// Gets the latest blog posts
 		/// </summary>
+		/// <param name="count">Number of posts to return</param>
 		/// <returns>Latest blog posts</returns>
 		public List<PostModel> LatestPosts(int count = 10)
 		{
@@ -80,7 +81,7 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <summary>
 		/// Gets a reduced DTO of the latest posts (essentially everything except content)
 		/// </summary>
-		/// <param name="posts">Number of posts to return</param>
+		/// <param name="count">Number of posts to return</param>
 		/// <returns>Blog post summary</returns>
 		public List<PostSummaryModel> LatestPostsSummary(int count = 10)
 		{

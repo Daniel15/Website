@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Web.Mvc;
-using Daniel15.Web.Models;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Repositories;
+using Daniel15.Web.Services;
 using Daniel15.Web.ViewModels.Blog;
-using ServiceStack.Common.Web;
 using Daniel15.Web.Extensions;
 
 namespace Daniel15.Web.Controllers
@@ -15,14 +14,17 @@ namespace Daniel15.Web.Controllers
 	public partial class BlogController : Controller
     {
 	    private readonly IBlogRepository _blogRepository;
+		private readonly IUrlShortener _urlShortener;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BlogController" /> class.
 		/// </summary>
 		/// <param name="blogRepository">The blog post repository.</param>
-		public BlogController(IBlogRepository blogRepository)
+		/// <param name="urlShortener">The URL shortener</param>
+		public BlogController(IBlogRepository blogRepository, IUrlShortener urlShortener)
 		{
 			_blogRepository = blogRepository;
+			_urlShortener = urlShortener;
 		}
 
 		/// <summary>
@@ -30,6 +32,8 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		public virtual ActionResult Index(int page = 1)
         {
+			Func<PostModel, string> urlShortener = post => Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http");
+
 			// TODO: need to use page number
 			// TODO: Load based on page number
 			// TODO: Set title based on page number -  ($page_number != 1 ? 'Page ' . $page_number . ' &mdash; ' : '') . $this->config->name
@@ -39,7 +43,8 @@ namespace Daniel15.Web.Controllers
 			return View(new IndexViewModel
 			{
 				Posts = _blogRepository.LatestPosts(),
-				TotalCount = _blogRepository.Count()
+				TotalCount = _blogRepository.Count(),
+				UrlShortener = urlShortener,
 			});
         }
 
@@ -73,10 +78,16 @@ namespace Daniel15.Web.Controllers
 			{
 				Post = post,
 				PostCategories = _blogRepository.CategoriesForPost(post),
+				ShortUrl = Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http")
 			});
 		}
 
 		public virtual ActionResult Category(string slug)
+		{
+			throw new NotImplementedException();
+		}
+
+		public virtual ActionResult ShortUrl(string alias)
 		{
 			throw new NotImplementedException();
 		}

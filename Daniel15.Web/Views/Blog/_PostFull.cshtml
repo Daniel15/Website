@@ -1,7 +1,7 @@
 ﻿@model Daniel15.Web.ViewModels.Blog.PostViewModel
 
 <article id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting">
-	@Html.Partial(MVC.Blog.Views._PostHeader, Model.Post)
+	@Html.Partial(MVC.Blog.Views._PostHeader, Model)
 		@Html.Raw(Model.Post.Content())
 	</div>
 	@Html.Partial(MVC.Blog.Views._ShareLinks, Model.Post)
@@ -9,7 +9,7 @@
 	TODO: Tags
 	
 	<footer>
-		Short URL for sharing: TODO: SHORT URL. This entry was posted on @Model.Post.Date.ToStringWithOrdinal("d{0} MMMM yyyy") and is filed under 
+		Short URL for sharing: @Model.ShortUrl. This entry was posted on @Model.Post.Date.ToStringWithOrdinal("d{0} MMMM yyyy") and is filed under 
 		@Html.Raw(string.Join(", ", Model.PostCategories.Select(cat => Html.ActionLink(cat.Title, MVC.Blog.Category(cat.Slug))))). 
 		You can <a href="@Url.Blog(Model.Post)#leave-comment" itemprop="discussionUrl">leave a comment</a> 
 		if you'd like to, or subscribe to the RSS feed to keep up-to-date with all my latest blog posts! 

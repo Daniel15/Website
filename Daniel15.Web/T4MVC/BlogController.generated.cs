@@ -53,6 +53,12 @@ namespace Daniel15.Web.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ShortUrl()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ShortUrl);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public BlogController Actions { get { return MVC.Blog; } }
@@ -72,6 +78,7 @@ namespace Daniel15.Web.Controllers
             public readonly string Index = "Index";
             public readonly string View = "View";
             public readonly string Category = "Category";
+            public readonly string ShortUrl = "ShortUrl";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -80,6 +87,7 @@ namespace Daniel15.Web.Controllers
             public const string Index = "Index";
             public const string View = "View";
             public const string Category = "Category";
+            public const string ShortUrl = "ShortUrl";
         }
 
 
@@ -108,6 +116,14 @@ namespace Daniel15.Web.Controllers
         public class ActionParamsClass_Category
         {
             public readonly string slug = "slug";
+        }
+        static readonly ActionParamsClass_ShortUrl s_params_ShortUrl = new ActionParamsClass_ShortUrl();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ShortUrl ShortUrlParams { get { return s_params_ShortUrl; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ShortUrl
+        {
+            public readonly string alias = "alias";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -170,6 +186,13 @@ namespace Daniel15.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ShortUrl(string alias)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ShortUrl);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "alias", alias);
             return callInfo;
         }
 

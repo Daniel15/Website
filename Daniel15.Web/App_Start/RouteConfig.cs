@@ -57,6 +57,14 @@ namespace Daniel15.Web.App_Start
 				defaults: new { controller = "Blog", action = "Index" }
 			);
 
+			// Blog short URLs
+			routes.MapRoute(
+				name: "BlogShortUrl",
+				url: "B{alias}",
+				defaults: new { controller = "Blog", action = "ShortUrl" },
+				constraints: new { alias = @"[0-9A-Za-z\-_]+" }
+			);
+
 			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
@@ -68,12 +76,6 @@ namespace Daniel15.Web.App_Start
 		->defaults(array(
 			'controller' => 'blog',
 			'action'     => 'unsub',
-		));
-	// Viewing a category
-	Route::set('blog_category', 'blog/category/<slug>')
-		->defaults(array(
-			'controller' => 'blog',
-			'action'     => 'category',
 		));
 	// Viewing a tag
 	Route::set('blog_tag', 'blog/tag/<slug>')
@@ -93,13 +95,6 @@ namespace Daniel15.Web.App_Start
 		->defaults(array(
 			'controller' => 'blog',
 			'action'     => 'index',
-		));
-
-	// Blog short URLs
-	Route::set('blog_short_url', 'B<alias>')
-		->defaults(array(
-			'controller' => 'blog',
-			'action'     => 'short_url',
 		));
 		
 	// Blog administration
