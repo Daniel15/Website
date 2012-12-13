@@ -72,8 +72,13 @@ namespace Daniel15.Web.Controllers
 			return View(new PostViewModel
 			{
 				Post = post,
-				// TODO PostCategories = _blogRepository.CategoriesForPost(post),
+				PostCategories = _blogRepository.CategoriesForPost(post),
 			});
+		}
+
+		public virtual ActionResult Category(string slug)
+		{
+			throw new NotImplementedException();
 		}
     }
 }

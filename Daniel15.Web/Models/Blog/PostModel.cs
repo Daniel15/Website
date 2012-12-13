@@ -25,8 +25,17 @@ namespace Daniel15.Web.Models.Blog
 		[Alias("content")]
 		public string RawContent { get; set; }
 
+		/// <summary>
+		/// ID of the main category for this post
+		/// </summary>
+		[Alias("maincategory_id")]
+		public int MainCategoryId { get; set; }
+
+		/// <summary>
+		/// The main category of this post
+		/// </summary>
 		[Ignore]
-		public IList<CategoryModel> Categories { get; set; }
+		public CategoryModel MainCategory { get; set; }
 
 		/// <summary>
 		/// Gets the processed content of this blog post

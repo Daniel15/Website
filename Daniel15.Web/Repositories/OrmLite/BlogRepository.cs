@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Daniel15.Web.Models;
 using Daniel15.Web.Models.Blog;
 using ServiceStack.OrmLite;
+using System.Linq;
 
 namespace Daniel15.Web.Repositories.OrmLite
 {
@@ -26,15 +27,17 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <returns>The post</returns>
 		public PostModel GetBySlug(string slug)
 		{
-			try
-			{
-				return Connection.First<PostModel>(post => post.Slug == slug);
-			}
-			catch (ArgumentNullException)
-			{
-				// Post wasn't found
+			var post = Connection.FirstOrDefault<PostModel>(x => x.Slug == slug);
+
+			// Check if post wasn't found
+			if (post == null)
 				throw new ItemNotFoundException();
-			}
+
+			// Get the main category as well
+			// TODO: Do this using a join in the above query instead
+			post.MainCategory = Connection.First<CategoryModel>(x => x.Id == post.MainCategoryId);
+
+			return post;
 		}
 
 		/// <summary>
@@ -44,19 +47,34 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <returns>Categories for this blog post</returns>
 		public IList<CategoryModel> CategoriesForPost(PostSummaryModel post)
 		{
-			throw new NotImplementedException();
+			return Connection.Select<CategoryModel>(@"
+				SELECT blog_categories.id, blog_categories.title, blog_categories.slug
+				FROM blog_post_categories
+				INNER JOIN blog_categories ON blog_categories.id = blog_post_categories.category_id
+				WHERE blog_post_categories.post_id = {0}", post.Id);
 		}
 
 		/// <summary>
 		/// Gets the latest blog posts
 		/// </summary>
 		/// <returns>Latest blog posts</returns>
-		public List<PostModel> LatestPosts(int posts = 10)
+		public List<PostModel> LatestPosts(int count = 10)
 		{
-			return Connection.Select<PostModel>(query => query
+			var posts = Connection.Select<PostModel>(query => query
 				.OrderByDescending(post => post.Date)
-				.Limit(posts)
+				.Limit(count)
 			);
+
+			// Get all the main categories as well
+			// TODO: Use a join for this!! Figure out how best to do it with OrmLite.
+			var categoryIds = posts.Select(post => post.MainCategoryId).Distinct();
+			//var categories = Connection.Select<CategoryModel>(cat => Sql.In(cat.Id, categoryIds)).ToDictionary(x => x.Id); // Sql.In() expects param array, didn't work
+			var categories = Connection.Select<CategoryModel>("id IN (" + string.Join(", ", categoryIds) + ")").ToDictionary(x => x.Id);
+
+			foreach (var post in posts)
+				post.MainCategory = categories[post.MainCategoryId];
+
+			return posts;
 		}
 
 		/// <summary>
@@ -64,11 +82,11 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// </summary>
 		/// <param name="posts">Number of posts to return</param>
 		/// <returns>Blog post summary</returns>
-		public List<PostSummaryModel> LatestPostsSummary(int posts = 10)
+		public List<PostSummaryModel> LatestPostsSummary(int count = 10)
 		{
 			return Connection.Select<PostSummaryModel>(query => query
 				.OrderByDescending(post => post.Date)
-				.Limit(posts)
+				.Limit(count)
 			);
 		}
 

@@ -43,6 +43,13 @@ namespace Daniel15.Web.App_Start
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
 			);
 
+			// Viewing a category
+			routes.MapRoute(
+				name: "BlogCategory",
+				url: "blog/category/{slug}",
+				defaults: new { controller = "Blog", action = "Category" }
+			);
+
 			// Blog home page
 			routes.MapRoute(
 				name: "BlogHome",

@@ -47,6 +47,12 @@ namespace Daniel15.Web.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.View);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Category()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public BlogController Actions { get { return MVC.Blog; } }
@@ -65,6 +71,7 @@ namespace Daniel15.Web.Controllers
         {
             public readonly string Index = "Index";
             public readonly string View = "View";
+            public readonly string Category = "Category";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -72,6 +79,7 @@ namespace Daniel15.Web.Controllers
         {
             public const string Index = "Index";
             public const string View = "View";
+            public const string Category = "Category";
         }
 
 
@@ -91,6 +99,14 @@ namespace Daniel15.Web.Controllers
         {
             public readonly string month = "month";
             public readonly string year = "year";
+            public readonly string slug = "slug";
+        }
+        static readonly ActionParamsClass_Category s_params_Category = new ActionParamsClass_Category();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Category CategoryParams { get { return s_params_Category; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Category
+        {
             public readonly string slug = "slug";
         }
         static readonly ViewsClass s_views = new ViewsClass();
@@ -146,6 +162,13 @@ namespace Daniel15.Web.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.View);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "month", month);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "year", year);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Category(string slug)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
             return callInfo;
         }

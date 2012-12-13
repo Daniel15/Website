@@ -27,14 +27,14 @@ namespace Daniel15.Web.Repositories
 		/// Gets the latest blog posts
 		/// </summary>
 		/// <returns>Latest blog posts</returns>
-		List<PostModel> LatestPosts(int posts = 10);
+		List<PostModel> LatestPosts(int count = 10);
 
 		/// <summary>
 		/// Gets a reduced DTO of the latest posts (essentially everything except content)
 		/// </summary>
 		/// <param name="posts">Number of posts to return</param>
 		/// <returns>Blog post summary</returns>
-		List<PostSummaryModel> LatestPostsSummary(int posts = 10);
+		List<PostSummaryModel> LatestPostsSummary(int count = 10);
 
 		/// <summary>
 		/// Gets the count of blog posts for every year and every month.
