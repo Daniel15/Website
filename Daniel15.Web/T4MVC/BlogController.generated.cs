@@ -116,6 +116,7 @@ namespace Daniel15.Web.Controllers
         public class ActionParamsClass_Category
         {
             public readonly string slug = "slug";
+            public readonly string page = "page";
         }
         static readonly ActionParamsClass_ShortUrl s_params_ShortUrl = new ActionParamsClass_ShortUrl();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -182,10 +183,11 @@ namespace Daniel15.Web.Controllers
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Category(string slug)
+        public override System.Web.Mvc.ActionResult Category(string slug, int page)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
             return callInfo;
         }
 

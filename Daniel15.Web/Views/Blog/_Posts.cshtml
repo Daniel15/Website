@@ -1,7 +1,10 @@
 ﻿@using Daniel15.Web.ViewModels.Blog
+@using Daniel15.Web.ViewModels.Shared
 @model Daniel15.Web.ViewModels.Blog.IndexViewModel
 
 @foreach (var post in Model.Posts)
 {
 	@Html.Partial(MVC.Blog.Views._PostBrief, new PostViewModel { Post = post, ShortUrl = Model.UrlShortener(post) })
 }
+
+@Html.Partial(MVC.Shared.Views._Pagination, new PaginationModel { CurrentPage = Model.Page, TotalPages = Model.TotalPages, UrlGenerator = page => Url.Action(MVC.Blog.Index(page)) })

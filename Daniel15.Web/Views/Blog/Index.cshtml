@@ -1,8 +1,12 @@
 ﻿@model Daniel15.Web.ViewModels.Blog.IndexViewModel
 
 @{
-	// TODO
-	Model.Title = "Blog";
+	Model.Heading = Model.BlogName;
+	
+	// Only show page number if we're not on page 1
+	Model.Title = Model.Page == 1 
+		? Model.BlogName
+		: string.Format("Page {0} — {1}", Model.Page, Model.BlogName);
 }
 
 @Html.Partial(MVC.Blog.Views._Posts, Model)

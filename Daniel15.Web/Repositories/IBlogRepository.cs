@@ -26,13 +26,15 @@ namespace Daniel15.Web.Repositories
 		/// <summary>
 		/// Gets the latest blog posts
 		/// </summary>
+		/// <param name="count">Number of posts to return</param>
+		/// <param name="offset">Post to start at</param>
 		/// <returns>Latest blog posts</returns>
-		List<PostModel> LatestPosts(int count = 10);
+		List<PostModel> LatestPosts(int count = 10, int offset = 0);
 
 		/// <summary>
 		/// Gets a reduced DTO of the latest posts (essentially everything except content)
 		/// </summary>
-		/// <param name="posts">Number of posts to return</param>
+		/// <param name="count">Number of posts to return</param>
 		/// <returns>Blog post summary</returns>
 		List<PostSummaryModel> LatestPostsSummary(int count = 10);
 

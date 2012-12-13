@@ -22,6 +22,11 @@ namespace Daniel15.Web.ViewModels.Blog
 		public int Page { get; set; }
 
 		/// <summary>
+		/// Total number of pages
+		/// </summary>
+		public int TotalPages { get; set; }
+
+		/// <summary>
 		/// Function used to shorten blog URLs
 		/// TODO: Is this the best way to do this?
 		/// </summary>

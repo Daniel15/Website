@@ -58,12 +58,13 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// Gets the latest blog posts
 		/// </summary>
 		/// <param name="count">Number of posts to return</param>
+		/// <param name="offset">Post to start at</param>
 		/// <returns>Latest blog posts</returns>
-		public List<PostModel> LatestPosts(int count = 10)
+		public List<PostModel> LatestPosts(int count = 10, int offset = 0)
 		{
 			var posts = Connection.Select<PostModel>(query => query
 				.OrderByDescending(post => post.Date)
-				.Limit(count)
+				.Limit(offset, count)
 			);
 
 			// Get all the main categories as well
