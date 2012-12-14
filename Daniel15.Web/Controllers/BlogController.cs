@@ -149,7 +149,18 @@ namespace Daniel15.Web.Controllers
 		/// <returns>Redirect to correct post</returns>
 		public virtual ActionResult ShortUrl(string alias)
 		{
-			throw new NotImplementedException();
+			var id = _urlShortener.Extend(alias);
+			PostModel post;
+			try
+			{
+				post = _blogRepository.Get(id);
+			}
+			catch (Exception)
+			{
+				return HttpNotFound(string.Format("Blog post {0} for short URL '{1}' not found.", id, alias));
+			}
+
+			return RedirectPermanent(Url.Blog(post));
 		}
 
 		/// <summary>

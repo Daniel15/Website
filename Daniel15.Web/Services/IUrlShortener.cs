@@ -10,5 +10,12 @@ namespace Daniel15.Web.Services
 		/// <param name="post">Blog post</param>
 		/// <returns>The short URL</returns>
 		string Shorten(PostSummaryModel post);
+
+		/// <summary>
+		/// Convert a short URL back to an ID
+		/// </summary>
+		/// <param name="alias">The short URL</param>
+		/// <returns>ID represented by this short URL</returns>
+		int Extend(string alias);
 	}
 }

@@ -5,3 +5,4 @@
  - Update projects page
  - CSS and JS redir for Tumblr
  - Revision in footer?
+ - Blog tags

@@ -44,7 +44,11 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <returns>The entity</returns>
 		public T Get(int id)
 		{
-			return Connection.GetById<T>(id);
+			var entity = Connection.GetByIdOrDefault<T>(id);
+			if (entity == null)
+				throw new ItemNotFoundException();
+
+			return entity;
 		}
 
 		/// <summary>

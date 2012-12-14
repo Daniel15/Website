@@ -141,6 +141,7 @@
     <Compile Include="Attributes\StopwatchAttribute.cs" />
     <Compile Include="Controllers\BlogPartialsController.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\ISiteConfiguration.cs">
       <SubType>Code</SubType>
     </Compile>
