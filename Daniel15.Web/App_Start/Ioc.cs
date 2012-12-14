@@ -19,8 +19,8 @@ namespace Daniel15.Web.App_Start
 	/// <summary>
 	/// Handles initialisation of the IoC container.
 	/// </summary>
-    public static class Ioc
-    {
+	public static class Ioc
+	{
 		/// <summary>
 		/// IoC container. This should only be used when absolutely necessary - Constructor injection
 		/// should be used in most situations.
@@ -30,9 +30,9 @@ namespace Daniel15.Web.App_Start
 		/// <summary>
 		/// Initialises the IoC container
 		/// </summary>
-        public static void Initialize()
-        {
-            Container = new Container();
+		public static void Initialize()
+		{
+			Container = new Container();
 			Container.Options.ConstructorResolutionBehavior =
 				new T4MvcControllerConstructorResolutionBehavior(Container.Options.ConstructorResolutionBehavior);
 
@@ -42,14 +42,14 @@ namespace Daniel15.Web.App_Start
 			Container.Verify();
 
 			DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(Container));
-        }
+		}
 
 		/// <summary>
 		/// Initializes all the components in the IoC container.
 		/// </summary>
 		/// <param name="container">The container.</param>
-        private static void InitializeContainer(Container container)
-        {
+		private static void InitializeContainer(Container container)
+		{
 			// Configuration
 			var config = (SiteConfiguration)ConfigurationManager.GetSection("SiteConfiguration");
 			container.Register<ISiteConfiguration>(() => config);
@@ -58,7 +58,7 @@ namespace Daniel15.Web.App_Start
 			container.Register<IUrlShortener, UrlShortener>();
 
 			InitializeDatabase(container, config.EnableProfiling);
-        }
+		}
 
 		/// <summary>
 		/// Initialises the database stuff in the IoC container
@@ -90,5 +90,5 @@ namespace Daniel15.Web.App_Start
 			container.RegisterPerWebRequest<IBlogRepository, Repositories.OrmLite.BlogRepository>();
 			container.RegisterPerWebRequest<IProjectRepository, Repositories.Static.ProjectRepository>();
 		}
-    }
+	}
 }

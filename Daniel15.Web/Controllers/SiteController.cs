@@ -41,16 +41,16 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <returns></returns>
 		public virtual ActionResult Index()
-        {
+		{
 			// Load the most recent blog posts
 			var posts = HttpContext.Cache.GetOrInsert("LatestPosts", DateTime.Now + CACHE_POSTS_FOR, Cache.NoSlidingExpiration,
 			                                          () => _blogRepository.LatestPostsSummary());
 			
-            return View(new IndexViewModel
-	        {
-		        LatestPosts = posts
-	        });
-        }
+			return View(new IndexViewModel
+			{
+				LatestPosts = posts
+			});
+		}
 
 		/// <summary>
 		/// A list of all the projects I've worked on the past
@@ -147,5 +147,5 @@ namespace Daniel15.Web.Controllers
 			return Json(model, JsonRequestBehavior.AllowGet);
 		}
 		#endregion
-    }
+	}
 }

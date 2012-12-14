@@ -18,7 +18,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		private const int ITEMS_PER_PAGE = 10;
 
-	    private readonly IBlogRepository _blogRepository;
+		private readonly IBlogRepository _blogRepository;
 		private readonly IUrlShortener _urlShortener;
 
 		/// <summary>
@@ -36,7 +36,7 @@ namespace Daniel15.Web.Controllers
 		/// Index page of the blog
 		/// </summary>
 		public virtual ActionResult Index(int page = 1)
-        {
+		{
 			Func<PostModel, string> urlShortener = post => Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http");
 
 			var count = _blogRepository.Count();
@@ -50,7 +50,7 @@ namespace Daniel15.Web.Controllers
 				TotalPages = pages,
 				UrlShortener = urlShortener,
 			});
-        }
+		}
 
 		/// <summary>
 		/// Viewing a blog post
@@ -106,5 +106,5 @@ namespace Daniel15.Web.Controllers
 		{
 			throw new NotImplementedException();
 		}
-    }
+	}
 }
