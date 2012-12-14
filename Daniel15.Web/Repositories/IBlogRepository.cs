@@ -32,6 +32,25 @@ namespace Daniel15.Web.Repositories
 		List<PostModel> LatestPosts(int count = 10, int offset = 0);
 
 		/// <summary>
+		/// Gets the latest blog posts in this category
+		/// </summary>
+		/// <param name="category">Category to get posts from</param>
+		/// <param name="count">Number of posts to return</param>
+		/// <param name="offset">Post to start at</param>
+		/// <returns>Latest blog posts</returns>
+		List<PostModel> LatestPosts(CategoryModel category, int count = 10, int offset = 0);
+
+		/// <summary>
+		/// Gets the latest blog posts for the specified year and month
+		/// </summary>
+		/// /// <param name="year">Year to get posts for</param>
+		/// <param name="month">Month to get posts for</param>
+		/// <param name="count">Number of posts to return</param>
+		/// <param name="offset">Post to start at</param>
+		/// <returns>Latest blog posts</returns>
+		List<PostModel> LatestPostsForMonth(int year, int month, int count = 10, int offset = 0);
+
+		/// <summary>
 		/// Gets a reduced DTO of the latest posts (essentially everything except content)
 		/// </summary>
 		/// <param name="count">Number of posts to return</param>
@@ -43,5 +62,32 @@ namespace Daniel15.Web.Repositories
 		/// </summary>
 		/// <returns>A dictionary of years, which contains a dictionary of months and counts</returns>
 		IDictionary<int, IDictionary<int, int>> MonthCounts();
+
+		/// <summary>
+		/// Gets a category by slug
+		/// </summary>
+		/// <param name="slug">Slug of the category</param>
+		/// <returns>The category</returns>
+		CategoryModel GetCategory(string slug);
+
+		/// <summary>
+		/// Get the total number of posts that are published
+		/// </summary>
+		/// <returns>Total number of posts</returns>
+		int PublishedCount();
+
+		/// <summary>
+		/// Get the total number of posts that are published in this category
+		/// </summary>
+		/// <returns>Total number of posts in the category</returns>
+		int PublishedCount(CategoryModel category);
+
+		/// <summary>
+		/// Get the total number of posts that are published in this month and year
+		/// </summary>
+		/// <param name="year">Year to get count for</param>
+		/// <param name="month">Month to get count for</param>
+		/// <returns>Total number of posts that were posted in this month</returns>
+		int PublishedCountForMonth(int year, int month);
 	}
 }

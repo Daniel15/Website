@@ -1,16 +1,17 @@
-﻿@using System.Configuration
-@using ServiceStack.Text
+﻿@using ServiceStack.Text
 @model Daniel15.Web.Models.Blog.PostModel
 
 <div id="comments">
 	<div id="disqus_thread"></div>
-</div>
+</div>
+
 <script type="text/javascript">
     @* TODO: Clean up the retrieval of the Disqus shortname *@
-    var disqus_shortname = @Html.Raw(ConfigurationManager.AppSettings["DisqusShortname"].ToJson()),
+    var disqus_shortname = @Html.Raw(Config.DisqusShortname.ToJson()),
         disqus_title = @Html.Raw(Model.Title.ToJson()),
         disqus_identifier = @Model.Id,
-        disqus_url = @Html.Raw(Url.BlogAbsolute(Model).ToJson());
+        disqus_url = @Html.Raw(Url.BlogAbsolute(Model).ToJson());
+
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';

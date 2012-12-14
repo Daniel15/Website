@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Repositories;
@@ -33,23 +34,78 @@ namespace Daniel15.Web.Controllers
 		}
 
 		/// <summary>
+		/// Returns a listing of blog posts
+		/// </summary>
+		/// <param name="posts">Posts to be displayed</param>
+		/// <param name="count">Number of posts being displayed</param>
+		/// <param name="page">Page number of the current page</param>
+		/// <param name="viewName">Name of the view to render</param>
+		/// <param name="viewModel">View model to pass to the view</param>
+		/// <returns>Post listing</returns>
+		private ActionResult Listing(IList<PostModel> posts, int count, int page, string viewName = null, ListingViewModel viewModel = null)
+		{
+			if (viewName == null)
+				viewName = Views.Index;
+
+			if (viewModel == null)
+				viewModel = new ListingViewModel();
+
+			var pages = (int)Math.Ceiling((double)count / ITEMS_PER_PAGE);
+
+			viewModel.Posts = posts;
+			viewModel.TotalCount = count;
+			viewModel.Page = page;
+			viewModel.TotalPages = pages;
+			viewModel.UrlShortener = ShortUrl;
+			return View(viewName, viewModel);
+		}
+
+		/// <summary>
 		/// Index page of the blog
 		/// </summary>
 		public virtual ActionResult Index(int page = 1)
 		{
-			Func<PostModel, string> urlShortener = post => Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http");
+			var count = _blogRepository.PublishedCount();
+			var posts = _blogRepository.LatestPosts(ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
+			return Listing(posts, count, page, Views.Index);
+		}
 
-			var count = _blogRepository.Count();
-			var pages = (int)Math.Ceiling((double)count / ITEMS_PER_PAGE);
-
-			return View(new IndexViewModel
+		/// <summary>
+		/// Viewing a category listing
+		/// </summary>
+		/// <param name="slug">Category slug</param>
+		/// <param name="page">Page number to view</param>
+		/// <returns>Posts in this category</returns>
+		public virtual ActionResult Category(string slug, int page = 1)
+		{
+			CategoryModel category;
+			try
 			{
-				Posts = _blogRepository.LatestPosts(ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE),
-				TotalCount = count,
-				Page = page,
-				TotalPages = pages,
-				UrlShortener = urlShortener,
-			});
+				category = _blogRepository.GetCategory(slug);
+			}
+			catch (ItemNotFoundException)
+			{
+				// Throw a 404 if the category doesn't exist
+				return HttpNotFound(string.Format("Category '{0}' not found.", slug));
+			}
+
+			var count = _blogRepository.PublishedCount(category);
+			var posts = _blogRepository.LatestPosts(category, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
+			return Listing(posts, count, page, Views.Category, new CategoryListingViewModel { Category = category });
+		}
+
+		/// <summary>
+		/// Viewing the blog archive (articles posted in the specified year and month)
+		/// </summary>
+		/// <param name="year">Year to get posts for</param>
+		/// <param name="month">Month to get posts for</param>
+		/// <param name="page">Page number to view</param>
+		/// <returns>Posts from this month</returns>
+		public virtual ActionResult Archive(int year, int month, int page = 1)
+		{
+			var count = _blogRepository.PublishedCountForMonth(year, month);
+			var posts = _blogRepository.LatestPostsForMonth(year, month, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
+			return Listing(posts, count, page, Views.Index);
 		}
 
 		/// <summary>
@@ -87,17 +143,6 @@ namespace Daniel15.Web.Controllers
 		}
 
 		/// <summary>
-		/// Viewing a category listing
-		/// </summary>
-		/// <param name="slug">Category slug</param>
-		/// <param name="page">Page number to view</param>
-		/// <returns>Posts in this category</returns>
-		public virtual ActionResult Category(string slug, int page = 1)
-		{
-			throw new NotImplementedException();
-		}
-
-		/// <summary>
 		/// Short URL redirect - Looks up a short URL and redirects to the post
 		/// </summary>
 		/// <param name="alias">URL alias</param>
@@ -105,6 +150,16 @@ namespace Daniel15.Web.Controllers
 		public virtual ActionResult ShortUrl(string alias)
 		{
 			throw new NotImplementedException();
+		}
+
+		/// <summary>
+		/// Gets the short URL for this blog post
+		/// </summary>
+		/// <param name="post">Blog post</param>
+		/// <returns>The short URL</returns>
+		private string ShortUrl(PostModel post)
+		{
+			return Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http");
 		}
 	}
 }

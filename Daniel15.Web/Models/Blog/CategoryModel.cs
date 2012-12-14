@@ -10,6 +10,6 @@ namespace Daniel15.Web.Models.Blog
 		public string Slug { get; set; }
 
 		[Alias("parent_category_id")]
-		public int ParentId { get; set; }
+		public int? ParentId { get; set; }
 	}
 }

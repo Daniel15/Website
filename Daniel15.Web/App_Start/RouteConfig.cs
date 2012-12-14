@@ -91,12 +91,6 @@ namespace Daniel15.Web.App_Start
 			'action'    => 'index'
 		));
 		
-	Route::set('blog_home', 'blog')
-		->defaults(array(
-			'controller' => 'blog',
-			'action'     => 'index',
-		));
-		
 	// Blog administration
 	Route::set('blogadmin', 'blogadmin(/<controller>(/<action>(/<id>)))')
 		->defaults(array(

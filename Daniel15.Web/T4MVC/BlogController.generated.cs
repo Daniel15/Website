@@ -43,15 +43,15 @@ namespace Daniel15.Web.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult View()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.View);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Category()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult View()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.View);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -76,8 +76,8 @@ namespace Daniel15.Web.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
-            public readonly string View = "View";
             public readonly string Category = "Category";
+            public readonly string View = "View";
             public readonly string ShortUrl = "ShortUrl";
         }
 
@@ -85,8 +85,8 @@ namespace Daniel15.Web.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
-            public const string View = "View";
             public const string Category = "Category";
+            public const string View = "View";
             public const string ShortUrl = "ShortUrl";
         }
 
@@ -99,6 +99,15 @@ namespace Daniel15.Web.Controllers
         {
             public readonly string page = "page";
         }
+        static readonly ActionParamsClass_Category s_params_Category = new ActionParamsClass_Category();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Category CategoryParams { get { return s_params_Category; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Category
+        {
+            public readonly string slug = "slug";
+            public readonly string page = "page";
+        }
         static readonly ActionParamsClass_View s_params_View = new ActionParamsClass_View();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_View ViewParams { get { return s_params_View; } }
@@ -108,15 +117,6 @@ namespace Daniel15.Web.Controllers
             public readonly string month = "month";
             public readonly string year = "year";
             public readonly string slug = "slug";
-        }
-        static readonly ActionParamsClass_Category s_params_Category = new ActionParamsClass_Category();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Category CategoryParams { get { return s_params_Category; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Category
-        {
-            public readonly string slug = "slug";
-            public readonly string page = "page";
         }
         static readonly ActionParamsClass_ShortUrl s_params_ShortUrl = new ActionParamsClass_ShortUrl();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -145,6 +145,7 @@ namespace Daniel15.Web.Controllers
                 public readonly string _Posts = "_Posts";
                 public readonly string _ShareLinks = "_ShareLinks";
                 public readonly string _ViewStart = "_ViewStart";
+                public readonly string Category = "Category";
                 public readonly string Index = "Index";
                 public readonly string View = "View";
             }
@@ -157,6 +158,7 @@ namespace Daniel15.Web.Controllers
             public readonly string _Posts = "~/Views/Blog/_Posts.cshtml";
             public readonly string _ShareLinks = "~/Views/Blog/_ShareLinks.cshtml";
             public readonly string _ViewStart = "~/Views/Blog/_ViewStart.cshtml";
+            public readonly string Category = "~/Views/Blog/Category.cshtml";
             public readonly string Index = "~/Views/Blog/Index.cshtml";
             public readonly string View = "~/Views/Blog/View.cshtml";
         }
@@ -174,20 +176,20 @@ namespace Daniel15.Web.Controllers
             return callInfo;
         }
 
+        public override System.Web.Mvc.ActionResult Category(string slug, int page)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ActionResult View(int month, int year, string slug)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.View);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "month", month);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "year", year);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult Category(string slug, int page)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
             return callInfo;
         }
 

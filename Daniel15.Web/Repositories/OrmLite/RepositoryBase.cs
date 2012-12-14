@@ -64,21 +64,7 @@ namespace Daniel15.Web.Repositories.OrmLite
 		{
 			//Connection.GetScalar<T, int>(field => Sql.Count(field))
 			// Need to do this an ugly way - Using Sql.Count like above requires an int property...
-
-			// Get the type name as it might be the table name
-			// TODO: See if OrmLite has a built-in function to get table name from entity
-			var type = typeof (T);
-			var tableName = type.Name;
-
-			// If entity has an AliasAttribute, use it for the name instead
-			var attributes = type.GetCustomAttributes(typeof(AliasAttribute), true);
-			if (attributes.Length > 0)
-			{
-				tableName = ((AliasAttribute)attributes[0]).Name;
-			}
-
-			// Actually do the query!
-			return Connection.GetScalar<int>(string.Format("SELECT COUNT(*) FROM {0}", tableName));
+			return Connection.GetScalar<int>(string.Format("SELECT COUNT(*) FROM {0}", typeof(T).GetTableName()));
 		}
 	}
 }

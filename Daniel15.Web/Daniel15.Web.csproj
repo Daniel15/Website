@@ -158,6 +158,7 @@
     <Compile Include="Models\Home\ProjectTechnologyModel.cs" />
     <Compile Include="Repositories\IProjectRepository.cs" />
     <Compile Include="Repositories\ItemNotFoundException.cs" />
+    <Compile Include="Extensions\OrmLiteExtensions.cs" />
     <Compile Include="Repositories\Static\ProjectRepository.cs" />
     <Compile Include="Services\IUrlShortener.cs" />
     <Compile Include="Services\UrlShortener.cs" />
@@ -193,7 +194,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Blog\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Blog\CategoryListingViewModel.cs" />
+    <Compile Include="ViewModels\Blog\ListingViewModel.cs" />
     <Compile Include="ViewModels\Blog\PostViewModel.cs" />
     <Compile Include="ViewModels\Blog\SidebarViewModel.cs" />
     <Compile Include="ViewModels\Shared\PaginationModel.cs" />
@@ -506,6 +508,7 @@
     <Content Include="Views\Blog\_PostFull.cshtml" />
     <Content Include="Views\Blog\_Comments.cshtml" />
     <Content Include="Views\Shared\_Pagination.cshtml" />
+    <Content Include="Views\Blog\Category.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\framework\.git\branches\" />

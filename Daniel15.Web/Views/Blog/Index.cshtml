@@ -1,6 +1,7 @@
-﻿@model Daniel15.Web.ViewModels.Blog.IndexViewModel
+﻿@model Daniel15.Web.ViewModels.Blog.ListingViewModel
 
 @{
+	Model.PageUrlGenerator = page => Url.Action(MVC.Blog.Index(page));
 	Model.Heading = Config.BlogName;
 	
 	// Only show page number if we're not on page 1

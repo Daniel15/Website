@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Mvc;
 using Daniel15.Web.Models.Blog;
 
 namespace Daniel15.Web.ViewModels.Blog
 {
-	public class IndexViewModel : ViewModelBase
+	/// <summary>
+	/// Data for a blog listing page
+	/// </summary>
+	public class ListingViewModel : ViewModelBase
 	{
 		/// <summary>
 		/// Posts to display on the current blog page
@@ -31,5 +35,10 @@ namespace Daniel15.Web.ViewModels.Blog
 		/// TODO: Is this the best way to do this?
 		/// </summary>
 		public Func<PostModel, string> UrlShortener { get; set; }
+
+		/// <summary>
+		/// Function used to get the paging URLs
+		/// </summary>
+		public Func<int, string> PageUrlGenerator { get; set; }
 	}
 }
