@@ -29,41 +29,6 @@ namespace Daniel15.Web.ViewModels
 		/// </summary>
 		public DateTime? LastModified { get; set; }
 
-		// TODO: Move this elsewhere?
-		#region Configuration
-		/// <summary>
-		/// Gets the Google Analytics account number
-		/// </summary>
-		public string GoogleAnalyticsAccount
-		{
-			get { return ConfigurationManager.AppSettings["GoogleAnalyticsAccount"]; }
-		}
-
-		/// <summary>
-		/// Gets the name of the blog
-		/// </summary>
-		public string BlogName
-		{
-			get { return ConfigurationManager.AppSettings["BlogName"]; }
-		}
-
-		/// <summary>
-		/// Gets the URL to the blog's FeedBurner feed
-		/// </summary>
-		public string FeedBurnerUrl
-		{
-			get { return ConfigurationManager.AppSettings["FeedBurnerUrl"]; }
-		}
-
-		/// <summary>
-		/// Gets the Disqus shortname to use for blog comments
-		/// </summary>
-		public string DisqusShortname
-		{
-			get { return ConfigurationManager.AppSettings["DisqusShortname"]; }
-		}
-		#endregion
-
 		public ViewModelBase()
 		{
 			SidebarType = SidebarType.None;

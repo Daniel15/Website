@@ -1,8 +1,7 @@
 ﻿@using ServiceStack.Text
-@model string
 
 <script>
-	var disqus_shortname = @Html.Raw(Model.ToJson());
+	var disqus_shortname = @Html.Raw(Config.DisqusShortname.ToJson());
 
 	(function () {
 		var s = document.createElement('script'); s.async = true;

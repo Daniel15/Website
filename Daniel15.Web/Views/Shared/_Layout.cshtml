@@ -1,4 +1,5 @@
-﻿@model Daniel15.Web.ViewModels.ViewModelBase
+﻿@using StackExchange.Profiling
+@model Daniel15.Web.ViewModels.ViewModelBase
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie ie6 ielt8 ielt9"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie ie7 ielt8 ielt9"> <![endif]-->
@@ -6,6 +7,7 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js non-ie"> <!--<![endif]-->
 <head>
+	@this.InitClientTimings()
 	<title>@(string.IsNullOrEmpty(Model.Title) ? string.Empty : Model.Title + " — ")Daniel15</title>
 	<base href="@Url.ContentAbsolute("~")" />
 	<meta charset="utf-8" />
@@ -34,11 +36,11 @@
 
 	<!-- Other stuff -->
 	<link rel="start" href="/" title="Home" />
-	<link rel="alternate" type="application/rss+xml" title="@Model.BlogName - RSS Feed" href="@Model.FeedBurnerUrl" />
+	<link rel="alternate" type="application/rss+xml" title="@Config.BlogName - RSS Feed" href="@Config.FeedBurnerUrl" />
 	<script>
 		document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
 		// Google Analytics
-		var _gaq = [['_setAccount', '@Model.GoogleAnalyticsAccount'], ['_trackPageview']];
+		var _gaq = [['_setAccount', '@Config.GoogleAnalyticsAccount'], ['_trackPageview']];
 		(function (d, t)
 		{
 			var g = d.createElement(t),
@@ -97,5 +99,6 @@
 	<![endif]-->
 	
 	@RenderSection("extraFoot", required: false)
+	@MiniProfiler.RenderIncludes()
 </body>
 </html>

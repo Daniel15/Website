@@ -15,12 +15,12 @@
 
 @section extraHead
 {
-	<link rel="index" title="@Model.BlogName" href="@Url.Action(MVC.Blog.Index())" />
+	<link rel="index" title="@Config.BlogName" href="@Url.Action(MVC.Blog.Index())" />
 	@RenderSection("extraHead", required: false)
 }
 
 @section extraFoot
 {
-	@Html.Partial(MVC.Blog.Views._DisqusCount, Model.DisqusShortname)
+	@Html.Partial(MVC.Blog.Views._DisqusCount)
 	@RenderSection("extraFoot", required: false)
 }

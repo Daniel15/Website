@@ -47,6 +47,9 @@
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MiniProfiler">
+      <HintPath>..\packages\MiniProfiler.2.0.2\lib\net40\MiniProfiler.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.5.4\lib\net40\MySql.Data.dll</HintPath>
     </Reference>
@@ -132,12 +135,22 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MiniProfiler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\IocConfig.cs" />
+    <Compile Include="App_Start\Ioc.cs" />
     <Compile Include="Attributes\StopwatchAttribute.cs" />
     <Compile Include="Controllers\BlogPartialsController.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
-    <Compile Include="Infrastructure\T4MvcControllerConstructorResolutionBehavior.cs" />
+    <Compile Include="Infrastructure\ISiteConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\SiteConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\T4MvcControllerConstructorResolutionBehavior.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\ViewBase.cs" />
     <Compile Include="Models\Blog\CategoryModel.cs" />
     <Compile Include="Models\Blog\PostSummaryModel.cs" />
     <Compile Include="Models\Home\ChatStatusModel.cs" />
