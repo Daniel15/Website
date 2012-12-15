@@ -211,6 +211,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Blog\CategoryListingViewModel.cs" />
+    <Compile Include="ViewModels\Blog\FeedViewModel.cs" />
     <Compile Include="ViewModels\Blog\ListingViewModel.cs" />
     <Compile Include="ViewModels\Blog\PostViewModel.cs" />
     <Compile Include="ViewModels\Blog\SidebarViewModel.cs" />
@@ -525,6 +526,7 @@
     <Content Include="Views\Blog\_Comments.cshtml" />
     <Content Include="Views\Shared\_Pagination.cshtml" />
     <Content Include="Views\Blog\Category.cshtml" />
+    <Content Include="Views\Blog\Feed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\framework\.git\branches\" />

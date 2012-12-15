@@ -30,6 +30,16 @@ namespace Daniel15.Web.Infrastructure
 		}
 
 		/// <summary>
+		/// Gets the description of the blog
+		/// </summary>
+		[ConfigurationProperty("blogDescription", IsRequired = true)]
+		public string BlogDescription
+		{
+			get { return (string)this["blogDescription"]; }
+			set { this["blogDescription"] = value; }
+		}
+
+		/// <summary>
 		/// Gets the FeedBurner URL for the blog feed
 		/// </summary>
 		[ConfigurationProperty("feedBurnerUrl", IsRequired = true)]

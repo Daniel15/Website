@@ -70,5 +70,17 @@ namespace Daniel15.Web.Extensions
 		{
 			return UNIX_EPOCH.AddSeconds(unixTimeStamp).ToLocalTime();
 		}
+
+		/// <summary>
+		/// Convert this DateTime into an RFC822-compliant string
+		/// </summary>
+		/// <param name="dateTime">The date to convert</param>
+		/// <returns>String representing this date</returns>
+		public static string ToRFC822String(this DateTime dateTime)
+		{
+			return dateTime.ToString("ddd',' d MMM yyyy HH':'mm':'ss") 
+				+ " "
+				+ dateTime.ToString("zzzz").Replace(":", "");
+		}
 	}
 }

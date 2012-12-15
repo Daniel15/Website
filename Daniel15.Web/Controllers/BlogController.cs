@@ -21,6 +21,10 @@ namespace Daniel15.Web.Controllers
 		/// Number of blog posts to show on each page
 		/// </summary>
 		private const int ITEMS_PER_PAGE = 10;
+		/// <summary>
+		/// Number of blog posts to show in the RSS feed
+		/// </summary>
+		private const int ITEMS_IN_FEED = 10;
 
 		private readonly IBlogRepository _blogRepository;
 		private readonly IUrlShortener _urlShortener;
@@ -178,6 +182,31 @@ namespace Daniel15.Web.Controllers
 			}
 
 			return RedirectPermanent(Url.Blog(post));
+		}
+
+		/// <summary>
+		/// RSS feed of all the latest posts
+		/// </summary>
+		/// <returns>RSS feed</returns>
+		public virtual ActionResult Feed()
+		{
+			var posts = _blogRepository.LatestPosts(ITEMS_IN_FEED);
+
+			Response.ContentType = "application/rss+xml";
+			// Set last-modified date based on the date of the newest post
+			Response.Cache.SetLastModified(posts[0].Date);
+
+			return View(new FeedViewModel
+			{
+				Posts = posts.Select(post => new PostViewModel
+				{
+					Post = post,
+					ShortUrl = ShortUrl(post),
+					// TODO: This should be optimised as it will do a SELECT N+1
+					// Although FeedBurner will be caching this feed so it's not too significant
+					PostCategories = _blogRepository.CategoriesForPost(post)
+				}).ToList()
+			});
 		}
 
 		/// <summary>

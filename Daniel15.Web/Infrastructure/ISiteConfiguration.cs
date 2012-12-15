@@ -18,6 +18,11 @@ namespace Daniel15.Web.Infrastructure
 		string BlogName { get; }
 
 		/// <summary>
+		/// Gets the description of the blog
+		/// </summary>
+		string BlogDescription { get; }
+
+		/// <summary>
 		/// Gets the FeedBurner URL for the blog feed
 		/// </summary>
 		Uri FeedBurnerUrl { get; }

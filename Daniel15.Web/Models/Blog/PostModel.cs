@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Web;
 using ServiceStack.DataAnnotations;
@@ -15,9 +16,19 @@ namespace Daniel15.Web.Models.Blog
 		private const string ESCAPED_PRE_ATTRIBUTE = "escaped=\"true\"";
 
 		/// <summary>
+		/// Length of the summary of posts (in characters) for the RSS feed
+		/// </summary>
+		private const int SUMMARY_LENGTH = 330;
+
+		/// <summary>
 		/// Represents a pre tag, used to HTML encode contents of pre tags
 		/// </summary>
 		private static readonly Regex _preTag = new Regex(@"<pre(?<attributes>[^>]+)>(?<content>[\S\s]+?)</pre>", RegexOptions.Compiled);
+
+		/// <summary>
+		/// Matches any HTML tag
+		/// </summary>
+		private static readonly Regex _htmlTag = new Regex(@"<[^>]+>", RegexOptions.Compiled);
 
 		/// <summary>
 		/// The raw content of this blog post, as retrieved from the database
@@ -77,6 +88,24 @@ namespace Daniel15.Web.Models.Blog
 
 			showMoreLink = true;
 			return content.Substring(0, content.IndexOf(READ_MORE_HTML_MARKER));
+		}
+
+		/// <summary>
+		/// Gets the plain text blog post introduction, for the RSS feed
+		/// </summary>
+		/// <returns>First section of blog post as plain text</returns>
+		public string PlainTextIntro()
+		{
+			// Remove other HTML tags
+			var intro = _htmlTag.Replace(RawContent, string.Empty);
+
+			// Now trim it if needed
+			if (intro.Length > SUMMARY_LENGTH)
+			{
+				intro = intro.Substring(0, SUMMARY_LENGTH) + "...";
+			}
+
+			return intro;
 		}
 	}
 }

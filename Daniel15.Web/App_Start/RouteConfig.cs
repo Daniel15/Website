@@ -58,6 +58,13 @@ namespace Daniel15.Web.App_Start
 				defaults: new { controller = "Blog", action = "Category" }
 			);
 
+			// Blog RSS feed
+			routes.MapRoute(
+				name: "BlogFeed",
+				url: "blog/feed",
+				defaults: new { controller = "Blog", action = "Feed" }
+			);
+
 			// Blog home page
 			routes.MapRoute(
 				name: "BlogHome",
