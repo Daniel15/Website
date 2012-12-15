@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Daniel15.Web.Controllers;
 using Daniel15.Web.Models.Shared;
@@ -88,8 +89,8 @@ namespace Daniel15.Web.Extensions
 		/// <returns>HTML for the blog sidebar</returns>
 		public static MvcHtmlString BlogSidebar(this HtmlHelper htmlHelper)
 		{
-			// TODO: Put caching here
-			return htmlHelper.Action(MVC.BlogPartials.Sidebar());
+			return htmlHelper.ViewContext.HttpContext.Cache.GetOrInsert("BlogSidebar", DateTime.UtcNow.AddDays(1), null,
+			                                                            () => htmlHelper.Action(MVC.BlogPartials.Sidebar()));
 		}
 	}
 }

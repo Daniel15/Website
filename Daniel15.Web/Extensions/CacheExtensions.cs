@@ -11,11 +11,11 @@ namespace Daniel15.Web.Extensions
 		/// <typeparam name="T">Type of data</typeparam>
 		/// <param name="cache">The cache.</param>
 		/// <param name="key">The key.</param>
-		/// <param name="absoluteExpiration">Time the item will expire, or <c>Cache.NoAbsoluteExpiration</c> to use sliding expiration</param>
-		/// <param name="slidingExpiration">Sliding expiration (see MSDN docs) or <c>Cache.NoSlidingExpiration</c> to use absolute expiration</param>
+		/// <param name="absoluteExpiration">Time the item will expire, or <c>null</c> to use sliding expiration</param>
+		/// <param name="slidingExpiration">Sliding expiration (see MSDN docs) or <c>null</c> to use absolute expiration</param>
 		/// <param name="getData">Function to load data to cache. Called if data isn't in the cache, or is stale</param>
 		/// <returns></returns>
-		public static T GetOrInsert<T>(this Cache cache, string key, DateTime absoluteExpiration, TimeSpan slidingExpiration, Func<T> getData)
+		public static T GetOrInsert<T>(this Cache cache, string key, DateTime? absoluteExpiration, TimeSpan? slidingExpiration, Func<T> getData)
 		{
 			// Ensure cache exists - Return data directly otherwise
 			if (cache == null)
@@ -28,7 +28,7 @@ namespace Daniel15.Web.Extensions
 			{
 				// Load data and save into cache
 				data = getData();
-				cache.Insert(key, data, null, absoluteExpiration, slidingExpiration);
+				cache.Insert(key, data, null, absoluteExpiration ?? Cache.NoAbsoluteExpiration, slidingExpiration ?? Cache.NoSlidingExpiration);
 			}
 
 			return data;
