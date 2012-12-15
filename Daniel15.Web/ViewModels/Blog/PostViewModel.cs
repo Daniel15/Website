@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Daniel15.Web.Models.Blog;
+using Daniel15.Web.Services.Social;
 
 namespace Daniel15.Web.ViewModels.Blog
 {
@@ -22,5 +23,10 @@ namespace Daniel15.Web.ViewModels.Blog
 		/// List of all the categories this post is included in.
 		/// </summary>
 		public IList<CategoryModel> PostCategories { get; set; }
+
+		/// <summary>
+		/// All the social network sharing URLs for this post
+		/// </summary>
+		public IEnumerable<KeyValuePair<ISocialNetwork, string>> SocialNetworks { get; set; }
 	}
 }

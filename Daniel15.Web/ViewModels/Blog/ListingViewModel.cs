@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
 using Daniel15.Web.Models.Blog;
 
 namespace Daniel15.Web.ViewModels.Blog
@@ -13,7 +12,7 @@ namespace Daniel15.Web.ViewModels.Blog
 		/// <summary>
 		/// Posts to display on the current blog page
 		/// </summary>
-		public IList<PostModel> Posts { get; set; }
+		public IEnumerable<PostViewModel> Posts { get; set; }
 
 		/// <summary>
 		/// Total number of posts that are available
@@ -29,12 +28,6 @@ namespace Daniel15.Web.ViewModels.Blog
 		/// Total number of pages
 		/// </summary>
 		public int TotalPages { get; set; }
-
-		/// <summary>
-		/// Function used to shorten blog URLs
-		/// TODO: Is this the best way to do this?
-		/// </summary>
-		public Func<PostModel, string> UrlShortener { get; set; }
 
 		/// <summary>
 		/// Function used to get the paging URLs

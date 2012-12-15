@@ -26,6 +26,14 @@ namespace Daniel15.Web.App_Start
 				url: "sitemap.xml",
 				defaults: new { controller = "Feed", action = "Sitemap" }
 			);
+
+			// Blog social network sharing counts
+			routes.MapRoute(
+				name: "BlogPostShareCount",
+				url: "blog/{year}/{month}/{slug}/sharecount",
+				defaults: new { controller = "Social", action = "PostShareCount" },
+				constraints: new { year = @"\d{4}", month = @"\d{2}" }
+			);
 	
 			// Viewing a blog post
 			routes.MapRoute(

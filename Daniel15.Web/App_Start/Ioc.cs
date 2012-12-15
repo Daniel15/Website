@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Daniel15.Web.Infrastructure;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.Services;
+using Daniel15.Web.Services.Social;
 using ServiceStack.DataAccess;
 using ServiceStack.OrmLite;
 using SimpleInjector;
@@ -56,6 +57,7 @@ namespace Daniel15.Web.App_Start
 
 			// Services
 			container.Register<IUrlShortener, UrlShortener>();
+			container.Register<ISocialManager, SocialManager>();
 
 			InitializeDatabase(container, config.EnableProfiling);
 		}

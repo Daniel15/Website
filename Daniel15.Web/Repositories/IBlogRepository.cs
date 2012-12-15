@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Daniel15.Web.Models;
 using Daniel15.Web.Models.Blog;
 
 namespace Daniel15.Web.Repositories
@@ -15,6 +14,13 @@ namespace Daniel15.Web.Repositories
 		/// <param name="slug">The slug.</param>
 		/// <returns>The post</returns>
 		PostModel GetBySlug(string slug);
+
+		/// <summary>
+		/// Gets a post summary by slug.
+		/// </summary>
+		/// <param name="slug">The slug.</param>
+		/// <returns>The post</returns>
+		PostSummaryModel GetSummaryBySlug(string slug);
 
 		/// <summary>
 		/// Gets the categories for the specified blog post

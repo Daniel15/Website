@@ -1,10 +1,9 @@
-﻿@using Daniel15.Web.ViewModels.Blog
-@using Daniel15.Web.ViewModels.Shared
+﻿@using Daniel15.Web.ViewModels.Shared
 @model Daniel15.Web.ViewModels.Blog.ListingViewModel
 
 @foreach (var post in Model.Posts)
 {
-	@Html.Partial(MVC.Blog.Views._PostBrief, new PostViewModel { Post = post, ShortUrl = Model.UrlShortener(post) })
+	@Html.Partial(MVC.Blog.Views._PostBrief, post)
 }
 
 @Html.Partial(MVC.Shared.Views._Pagination, new PaginationModel

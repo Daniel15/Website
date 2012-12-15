@@ -1,4 +1,5 @@
-﻿ - Custom 404 / error pages
+﻿ - RSS feed
+ - Custom 404 / error pages
  - Remove ?page=1 from blog URLs
  - Last modified dates (header and possibly footer?)
  - Check HTML output - Find missing bits (like <meta> tags)

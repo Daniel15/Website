@@ -185,7 +185,8 @@ Blog.Post = function(post)
 {
 	this.post = post;
 	this.id = this.post.get('id').slice(5);
-	var socialCountUrl = 'social/blogpost/' + this.id;
+	var permalink = this.post.firstByTag('a').get('href');
+	var socialCountUrl = permalink + '/sharecount';
 	
 	this.socialNetworks = {};
 	var socialNetworks = this.post.firstByClass('share').getByTag('li');

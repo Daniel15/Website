@@ -91,6 +91,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Optimization, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
@@ -122,6 +123,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="T4MVCExtensions">
       <HintPath>..\packages\T4MVCExtensions.3.0.3\lib\net40\T4MVCExtensions.dll</HintPath>
     </Reference>
@@ -140,7 +142,9 @@
     <Compile Include="App_Start\Ioc.cs" />
     <Compile Include="Attributes\StopwatchAttribute.cs" />
     <Compile Include="Controllers\BlogPartialsController.cs" />
+    <Compile Include="Controllers\SocialController.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
+    <Compile Include="Extensions\QueryStringExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\ISiteConfiguration.cs">
       <SubType>Code</SubType>
@@ -162,6 +166,14 @@
     <Compile Include="Extensions\OrmLiteExtensions.cs" />
     <Compile Include="Repositories\Static\ProjectRepository.cs" />
     <Compile Include="Services\IUrlShortener.cs" />
+    <Compile Include="Services\Social\Facebook.cs" />
+    <Compile Include="Services\Social\ISocialManager.cs" />
+    <Compile Include="Services\Social\ISocialNetwork.cs" />
+    <Compile Include="Services\Social\ISocialShare.cs" />
+    <Compile Include="Services\Social\Linkedin.cs" />
+    <Compile Include="Services\Social\Reddit.cs" />
+    <Compile Include="Services\Social\SocialManager.cs" />
+    <Compile Include="Services\Social\Twitter.cs" />
     <Compile Include="Services\UrlShortener.cs" />
     <Compile Include="T4MVC\BlogController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -188,6 +200,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\SiteController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\SocialController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\T4MVC.cs">
@@ -546,7 +561,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49176</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

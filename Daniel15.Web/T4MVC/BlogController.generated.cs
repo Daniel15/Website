@@ -49,6 +49,12 @@ namespace Daniel15.Web.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Archive()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Archive);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult View()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.View);
@@ -77,6 +83,7 @@ namespace Daniel15.Web.Controllers
         {
             public readonly string Index = "Index";
             public readonly string Category = "Category";
+            public readonly string Archive = "Archive";
             public readonly string View = "View";
             public readonly string ShortUrl = "ShortUrl";
         }
@@ -86,6 +93,7 @@ namespace Daniel15.Web.Controllers
         {
             public const string Index = "Index";
             public const string Category = "Category";
+            public const string Archive = "Archive";
             public const string View = "View";
             public const string ShortUrl = "ShortUrl";
         }
@@ -106,6 +114,16 @@ namespace Daniel15.Web.Controllers
         public class ActionParamsClass_Category
         {
             public readonly string slug = "slug";
+            public readonly string page = "page";
+        }
+        static readonly ActionParamsClass_Archive s_params_Archive = new ActionParamsClass_Archive();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Archive ArchiveParams { get { return s_params_Archive; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Archive
+        {
+            public readonly string year = "year";
+            public readonly string month = "month";
             public readonly string page = "page";
         }
         static readonly ActionParamsClass_View s_params_View = new ActionParamsClass_View();
@@ -180,6 +198,15 @@ namespace Daniel15.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Archive(int year, int month, int page)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Archive);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "year", year);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "month", month);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
             return callInfo;
         }

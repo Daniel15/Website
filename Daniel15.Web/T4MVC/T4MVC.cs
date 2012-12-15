@@ -27,6 +27,7 @@ public static class MVC
     public static Daniel15.Web.Controllers.BlogController Blog = new Daniel15.Web.Controllers.T4MVC_BlogController();
     public static Daniel15.Web.Controllers.BlogPartialsController BlogPartials = new Daniel15.Web.Controllers.T4MVC_BlogPartialsController();
     public static Daniel15.Web.Controllers.SiteController Site = new Daniel15.Web.Controllers.T4MVC_SiteController();
+    public static Daniel15.Web.Controllers.SocialController Social = new Daniel15.Web.Controllers.T4MVC_SocialController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 

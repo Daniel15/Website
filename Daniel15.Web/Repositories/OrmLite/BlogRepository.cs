@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Daniel15.Web.Models;
 using Daniel15.Web.Models.Blog;
 using ServiceStack.OrmLite;
 using System.Linq;
-using ServiceStack.Text;
 using Daniel15.Web.Extensions;
 
 namespace Daniel15.Web.Repositories.OrmLite
@@ -38,6 +36,22 @@ namespace Daniel15.Web.Repositories.OrmLite
 			// Get the main category as well
 			// TODO: Do this using a join in the above query instead
 			post.MainCategory = Connection.First<CategoryModel>(x => x.Id == post.MainCategoryId);
+
+			return post;
+		}
+
+		/// <summary>
+		/// Gets a post summary by slug.
+		/// </summary>
+		/// <param name="slug">The slug.</param>
+		/// <returns>The post</returns>
+		public PostSummaryModel GetSummaryBySlug(string slug)
+		{
+			var post = Connection.FirstOrDefault<PostSummaryModel>(x => x.Slug == slug);
+
+			// Check if post wasn't found
+			if (post == null)
+				throw new ItemNotFoundException();
 
 			return post;
 		}

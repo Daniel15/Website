@@ -4,8 +4,11 @@ using System.Web.Mvc;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.Services;
+using Daniel15.Web.Services.Social;
 using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.Extensions;
+using System.Linq;
+using StackExchange.Profiling;
 
 namespace Daniel15.Web.Controllers
 {
@@ -21,16 +24,21 @@ namespace Daniel15.Web.Controllers
 
 		private readonly IBlogRepository _blogRepository;
 		private readonly IUrlShortener _urlShortener;
+		private readonly ISocialManager _socialManager;
+		private readonly MiniProfiler _profiler;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BlogController" /> class.
 		/// </summary>
 		/// <param name="blogRepository">The blog post repository.</param>
 		/// <param name="urlShortener">The URL shortener</param>
-		public BlogController(IBlogRepository blogRepository, IUrlShortener urlShortener)
+		/// <param name="socialManager">The social network manager used to get sharing URLs</param>
+		public BlogController(IBlogRepository blogRepository, IUrlShortener urlShortener, ISocialManager socialManager)
 		{
 			_blogRepository = blogRepository;
 			_urlShortener = urlShortener;
+			_socialManager = socialManager;
+			_profiler = MiniProfiler.Current;
 		}
 
 		/// <summary>
@@ -42,7 +50,7 @@ namespace Daniel15.Web.Controllers
 		/// <param name="viewName">Name of the view to render</param>
 		/// <param name="viewModel">View model to pass to the view</param>
 		/// <returns>Post listing</returns>
-		private ActionResult Listing(IList<PostModel> posts, int count, int page, string viewName = null, ListingViewModel viewModel = null)
+		private ActionResult Listing(IEnumerable<PostModel> posts, int count, int page, string viewName = null, ListingViewModel viewModel = null)
 		{
 			if (viewName == null)
 				viewName = Views.Index;
@@ -52,11 +60,18 @@ namespace Daniel15.Web.Controllers
 
 			var pages = (int)Math.Ceiling((double)count / ITEMS_PER_PAGE);
 
-			viewModel.Posts = posts;
+			using (_profiler.Step("Building post ViewModels"))
+			{
+				viewModel.Posts = posts.Select(post => new PostViewModel
+				{
+					Post = post, 
+					ShortUrl = ShortUrl(post),
+					SocialNetworks = _socialManager.ShareUrls(post, Url.BlogAbsolute(post), ShortUrl(post))
+				});
+			}
 			viewModel.TotalCount = count;
 			viewModel.Page = page;
 			viewModel.TotalPages = pages;
-			viewModel.UrlShortener = ShortUrl;
 			return View(viewName, viewModel);
 		}
 
@@ -138,7 +153,8 @@ namespace Daniel15.Web.Controllers
 			{
 				Post = post,
 				PostCategories = _blogRepository.CategoriesForPost(post),
-				ShortUrl = Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http")
+				ShortUrl = Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http"),
+				SocialNetworks = _socialManager.ShareUrls(post, Url.BlogAbsolute(post), ShortUrl(post))
 			});
 		}
 
@@ -153,6 +169,7 @@ namespace Daniel15.Web.Controllers
 			PostModel post;
 			try
 			{
+				// TODO: Add a GetSummary method and use that instead
 				post = _blogRepository.Get(id);
 			}
 			catch (Exception)

@@ -25,9 +25,6 @@ namespace Daniel15.Web.App_Start
 
 			MiniProfiler.Settings.SqlFormatter = new InlineFormatter();
 
-			// Make sure the MiniProfiler handles BeginRequest and EndRequest
-			DynamicModuleUtility.RegisterModule(typeof(MiniProfilerStartupModule));
-
 			// Setup profiler for Controllers via a Global ActionFilter
 			GlobalFilters.Filters.Add(new ProfilingActionFilter());
 
@@ -53,9 +50,12 @@ namespace Daniel15.Web.App_Start
 		/// <param name="context">An <see cref="T:System.Web.HttpApplication" /> that provides access to the methods, properties, and events common to all application objects within an ASP.NET application</param>
 		public void Init(HttpApplication context)
 		{
-			// Attach MiniProfiler to requests
-			context.BeginRequest += (sender, e) => MiniProfiler.Start();
-			context.EndRequest += (sender, e) => MiniProfiler.Stop();
+			// Attach MiniProfiler to requests, if it's enabled
+			if (Ioc.Container.GetInstance<ISiteConfiguration>().EnableProfiling)
+			{
+				context.BeginRequest += (sender, e) => MiniProfiler.Start();
+				context.EndRequest += (sender, e) => MiniProfiler.Stop();	
+			}
 		}
 
 		public void Dispose() { }
