@@ -30,7 +30,7 @@
 	}
 	@RenderSection("extraMeta", required: false)
 	
-	@Styles.Render("~/bundles/css")
+	@Styles.Render("~/Content/css/main.css")
 	
 	<!--[if lt IE 9]><script src="@Url.Js("lib/IE9.js")"></script><![endif]-->
 
@@ -85,9 +85,9 @@
 		</footer>
 	</div>
 	<!-- Now for the JS -->
-	@Scripts.Render("~/bundles/main")
+	@Scripts.Render("~/Content/js/main.js")
 	<script>Events.initPage();</script>
-	@Scripts.Render("~/bundles/syntaxHighlight")
+	@Scripts.Render("~/Content/js/syntaxHighlight.js")
 	
 	@RenderSection("scripts", required: false)
 

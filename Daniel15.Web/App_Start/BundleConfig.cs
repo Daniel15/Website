@@ -24,7 +24,7 @@ namespace Daniel15.Web.App_Start
 		/// <param name="bundles">Bundle collection</param>
 		private static void RegisterCssBundles(BundleCollection bundles)
 		{
-			var lessBundle = new StyleBundle("~/bundles/css").Include("~/Content/css/main.less");
+			var lessBundle = new StyleBundle("~/Content/css/main.css").Include("~/Content/css/main.less");
 			lessBundle.Transforms.Clear();
 			lessBundle.Transforms.Add(new LessTransform());
 			lessBundle.Transforms.Add(new CssMinify());
@@ -37,7 +37,7 @@ namespace Daniel15.Web.App_Start
 		/// <param name="bundles">Bundle collection</param>
 		private static void RegisterJsBundles(BundleCollection bundles)
 		{
-			bundles.Add(new ScriptBundle("~/bundles/main").Include(
+			bundles.Add(new ScriptBundle("~/Content/js/main.js").Include(
 				// Framework
 				"~/Content/js/framework/core.js",
 				"~/Content/js/framework/ajax.js",
@@ -51,7 +51,7 @@ namespace Daniel15.Web.App_Start
 				"~/Content/js/blog.js",
 				"~/Content/js/socialfeed.js"));
 
-			bundles.Add(new ScriptBundle("~/bundles/syntaxHighlight").Include(
+			bundles.Add(new ScriptBundle("~/Content/js/syntaxHighlight.js").Include(
 				"~/Content/js/lib/syntaxhighlighter/shCore.js",
 				"~/Content/js/lib/syntaxhighlighter/shBrushJScript.js",
 				"~/Content/js/lib/syntaxhighlighter/shBrushPhp.js",
@@ -59,7 +59,9 @@ namespace Daniel15.Web.App_Start
 				"~/Content/js/lib/syntaxhighlighter/shBrushXml.js",
 				"~/Content/js/lib/syntaxhighlighter/shBrushDelphi.js",
 				"~/Content/js/lib/syntaxhighlighter/shBrushPlain.js",
-				"~/Content/js/lib/syntaxhighlighter.js"));
+				"~/Content/js/lib/syntaxhighlighter.js",
+
+				"~/Content/js/syntaxhighlighter.js"));
 		}
 	}
 
