@@ -59,6 +59,7 @@ namespace Daniel15.Web.App_Start
 				"~/Content/js/lib/syntaxhighlighter/shBrushXml.js",
 				"~/Content/js/lib/syntaxhighlighter/shBrushDelphi.js",
 				"~/Content/js/lib/syntaxhighlighter/shBrushPlain.js",
+				"~/Content/js/lib/syntaxhighlighter/shBrushCss.js",
 				"~/Content/js/lib/syntaxhighlighter.js",
 
 				"~/Content/js/syntaxhighlighter.js"));
