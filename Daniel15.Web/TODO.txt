@@ -7,3 +7,4 @@
  - Revision in footer?
  - Blog tags
  - Sitemap
+ - Check the thingy
