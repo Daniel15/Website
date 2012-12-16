@@ -10,6 +10,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{64A266
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc stuff", "Misc stuff", "{DDB064E1-9601-4ACB-A573-D4DD018018E8}"
+	ProjectSection(SolutionItems) = preProject
+		deploy-test.bat = deploy-test.bat
+		elmah.sql = elmah.sql
+		README.md = README.md
+		schema.sql = schema.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

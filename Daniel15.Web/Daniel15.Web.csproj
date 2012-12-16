@@ -223,6 +223,7 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ConnectionStrings.config" />
     <Content Include="Content\css\blogadmin.css" />
     <Content Include="Content\css\border-radius.htc" />
     <Content Include="Content\css\csshover.htc" />
@@ -493,7 +494,9 @@
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeDefault.less" />
     <None Include="Content\js\framework\yuidoc.json" />
     <None Include="Content\not_an_easter_egg\zero\zero.utf8" />
+    <None Include="deploy.proj" />
     <None Include="T4MVC\T4MVC.tt.settings.xml" />
+    <Content Include="robots.txt" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
