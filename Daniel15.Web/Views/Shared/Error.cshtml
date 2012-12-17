@@ -1,16 +1,9 @@
-﻿@{
-    Layout = null;
+﻿@using Daniel15.Web.ViewModels.Shared
+@model HandleErrorInfo
+@{
+	// This can't do the layout here, since the model isn't an instance of ViewModelBase
+	// Need to render the actual error page as a partial so it gets the correct model class.
+	Layout = null;
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Error</title>
-</head>
-<body>
-    <h2>
-        Sorry, an error occurred while processing your request.
-    </h2>
-</body>
-</html>
+@Html.Partial("ErrorWithLayout", new ErrorViewModel { ErrorInfo = Model })

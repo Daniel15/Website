@@ -25,9 +25,6 @@ namespace Daniel15.Web.Controllers
     public partial class SocialController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SocialController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected SocialController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

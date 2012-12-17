@@ -40,12 +40,14 @@ namespace T4MVC
                 public readonly string _Pagination = "_Pagination";
                 public readonly string _Search = "_Search";
                 public readonly string Error = "Error";
+                public readonly string ErrorWithLayout = "ErrorWithLayout";
             }
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _Menu = "~/Views/Shared/_Menu.cshtml";
             public readonly string _Pagination = "~/Views/Shared/_Pagination.cshtml";
             public readonly string _Search = "~/Views/Shared/_Search.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";
+            public readonly string ErrorWithLayout = "~/Views/Shared/ErrorWithLayout.cshtml";
         }
     }
 

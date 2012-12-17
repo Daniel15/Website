@@ -142,6 +142,7 @@
     <Compile Include="App_Start\MiniProfiler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Ioc.cs" />
+    <Compile Include="Attributes\HandleErrorAttribute.cs" />
     <Compile Include="Attributes\StopwatchAttribute.cs" />
     <Compile Include="Controllers\BlogPartialsController.cs" />
     <Compile Include="Controllers\SocialController.cs" />
@@ -217,6 +218,7 @@
     <Compile Include="ViewModels\Blog\ListingViewModel.cs" />
     <Compile Include="ViewModels\Blog\PostViewModel.cs" />
     <Compile Include="ViewModels\Blog\SidebarViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ErrorViewModel.cs" />
     <Compile Include="ViewModels\Shared\PaginationModel.cs" />
     <Compile Include="ViewModels\Site\IndexViewModel.cs" />
     <Compile Include="ViewModels\Site\ProjectsViewModel.cs" />
@@ -532,6 +534,8 @@
     <Content Include="Views\Shared\_Pagination.cshtml" />
     <Content Include="Views\Blog\Category.cshtml" />
     <Content Include="Views\Blog\Feed.cshtml" />
+    <Content Include="Views\Site\FileNotFound.cshtml" />
+    <Content Include="Views\Shared\ErrorWithLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\framework\.git\branches\" />

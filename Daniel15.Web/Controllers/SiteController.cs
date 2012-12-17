@@ -86,6 +86,19 @@ namespace Daniel15.Web.Controllers
 			throw new NotImplementedException();
 		}
 
+		/// <summary>
+		/// The page that is displayed when a File Not Found (404) error occurs.
+		/// </summary>
+		/// <returns></returns>
+		public virtual ActionResult FileNotFound()
+		{
+			// Nginx will handle setting these as long as fastcgi_intercept_errors is on
+			//Response.StatusCode = (int) HttpStatusCode.NotFound;
+			//Response.TrySkipIisCustomErrors = true;
+
+			return View(new ViewModelBase());
+		}
+
 		#region Google Talk chat status
 		/// <summary>
 		/// "tk" parameter from badge URL

@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using Daniel15.Web.Attributes;
+using HandleErrorAttribute = Daniel15.Web.Attributes.HandleErrorAttribute;
 
 namespace Daniel15.Web.App_Start
 {

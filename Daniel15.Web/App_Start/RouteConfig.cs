@@ -13,6 +13,13 @@ namespace Daniel15.Web.App_Start
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 			routes.IgnoreRoute("elmah.axd");
 
+			// Index page
+			routes.MapRoute(
+				name: "Index",
+				url: "",
+				defaults: MVC.Site.Index()
+			);
+
 			// Normal pages on the website
 			routes.MapRoute(
 				name: "Page",
@@ -31,7 +38,7 @@ namespace Daniel15.Web.App_Start
 			routes.MapRoute(
 				name: "BlogPostShareCount",
 				url: "blog/{year}/{month}/{slug}/sharecount",
-				defaults: new { controller = "Social", action = "PostShareCount" },
+				defaults: MVC.Social.PostShareCount(),
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
 			);
 	
@@ -39,7 +46,7 @@ namespace Daniel15.Web.App_Start
 			routes.MapRoute(
 				name: "BlogView",
 				url: "blog/{year}/{month}/{slug}",
-				defaults: new { controller = "Blog", action = "View" },
+				defaults: MVC.Blog.View(),
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
 			);
 
@@ -47,7 +54,7 @@ namespace Daniel15.Web.App_Start
 			routes.MapRoute(
 				name: "BlogArchive",
 				url: "blog/{year}/{month}",
-				defaults: new { controller = "Blog", action = "Archive" },
+				defaults: MVC.Blog.Archive(),
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
 			);
 
@@ -55,28 +62,40 @@ namespace Daniel15.Web.App_Start
 			routes.MapRoute(
 				name: "BlogCategory",
 				url: "blog/category/{slug}",
-				defaults: new { controller = "Blog", action = "Category" }
+				defaults: new { controller = "Blog", action = "Category", page = 1 }
+			);
+			routes.MapRoute(
+				name: "BlogCategoryPage",
+				url: "blog/category/{slug}/page-{page}",
+				defaults: MVC.Blog.Category(),
+				constraints: new { page = @"\d+"}
 			);
 
 			// Blog RSS feed
 			routes.MapRoute(
 				name: "BlogFeed",
 				url: "blog/feed",
-				defaults: new { controller = "Blog", action = "Feed" }
+				defaults: MVC.Blog.Feed()
 			);
 
 			// Blog home page
 			routes.MapRoute(
 				name: "BlogHome",
 				url: "blog",
-				defaults: new { controller = "Blog", action = "Index" }
+				defaults: new { controller = "Blog", action = "Index", page = 1 }
+			);
+			routes.MapRoute(
+				name: "BlogHomePage",
+				url: "blog/page-{page}",
+				defaults: MVC.Blog.Index(),
+				constraints: new { page = @"\d+" }
 			);
 
 			// Blog short URLs
 			routes.MapRoute(
 				name: "BlogShortUrl",
 				url: "B{alias}",
-				defaults: new { controller = "Blog", action = "ShortUrl" },
+				defaults: MVC.Blog.ShortUrl(),
 				constraints: new { alias = @"[0-9A-Za-z\-_]+" }
 			);
 
@@ -86,12 +105,7 @@ namespace Daniel15.Web.App_Start
 				defaults: new { controller = "Site", action = "Index", id = UrlParameter.Optional }
 			);
 
-			/*	// Unsubscribe from blog comment emails
-	Route::set('blog_unsub', 'blog/<year>/<month>/<slug>/unsub/<email>', array('year' => '\d{4}', 'month' => '\d{2}', 'email' => '.+'))
-		->defaults(array(
-			'controller' => 'blog',
-			'action'     => 'unsub',
-		));
+			/*
 	// Viewing a tag
 	Route::set('blog_tag', 'blog/tag/<slug>')
 		->defaults(array(
@@ -114,24 +128,12 @@ namespace Daniel15.Web.App_Start
 			'action'     => 'index',
 		));
 		
-	// Errors
-	Route::set('error', 'error/<action>(/<message>)', array('action' => '[0-9]++', 'message' => '.+'))
-		->defaults(array(
-			'controller' => 'error'
-		));	
-		
 	// Latest CSS and JavaScript
 	Route::set('latest_js', 'res/combined/<name>.<type>')
 		->defaults(array(
 			'controller' => 'redirect',
 			'action'     => 'latest_res',
-		));	
-		
-	Route::set('default', '(<controller>(/<action>(/<id>)))')
-		->defaults(array(
-			'controller' => 'site',
-			'action'     => 'index',
-		));*/
+		));	*/
 		}
 	}
 }

@@ -61,6 +61,7 @@ namespace Daniel15.Web.Controllers
             public readonly string Projects = "Projects";
             public readonly string Search = "Search";
             public readonly string SocialFeed = "SocialFeed";
+            public readonly string FileNotFound = "FileNotFound";
             public readonly string ChatStatus = "ChatStatus";
         }
 
@@ -71,6 +72,7 @@ namespace Daniel15.Web.Controllers
             public const string Projects = "Projects";
             public const string Search = "Search";
             public const string SocialFeed = "SocialFeed";
+            public const string FileNotFound = "FileNotFound";
             public const string ChatStatus = "ChatStatus";
         }
 
@@ -87,12 +89,14 @@ namespace Daniel15.Web.Controllers
             {
                 public readonly string _LatestPosts = "_LatestPosts";
                 public readonly string _ProjectList = "_ProjectList";
+                public readonly string FileNotFound = "FileNotFound";
                 public readonly string Index = "Index";
                 public readonly string Projects = "Projects";
                 public readonly string Search = "Search";
             }
             public readonly string _LatestPosts = "~/Views/Site/_LatestPosts.cshtml";
             public readonly string _ProjectList = "~/Views/Site/_ProjectList.cshtml";
+            public readonly string FileNotFound = "~/Views/Site/FileNotFound.cshtml";
             public readonly string Index = "~/Views/Site/Index.cshtml";
             public readonly string Projects = "~/Views/Site/Projects.cshtml";
             public readonly string Search = "~/Views/Site/Search.cshtml";
@@ -125,6 +129,12 @@ namespace Daniel15.Web.Controllers
         public override System.Web.Mvc.ActionResult SocialFeed()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SocialFeed);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult FileNotFound()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.FileNotFound);
             return callInfo;
         }
 
