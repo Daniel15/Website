@@ -1,0 +1,35 @@
+﻿@model Daniel15.Web.ViewModels.Shared.PaginationModel
+
+<p class="pagination">
+	@if (Model.CurrentPage == 1)
+	{
+		@* What? This is from the old blog. Clean it up though. *@
+		<text>Previous</text>
+	}
+	else
+	{
+		<a href="@Model.UrlGenerator(Model.CurrentPage - 1)" rel="prev">Previous</a>
+	}
+	
+	@for (var page = 1; page <= Model.TotalPages; page++)
+	{
+		if (page == Model.CurrentPage)
+		{
+			<strong>@page</strong>
+		}
+		else
+		{
+			<a href="@Model.UrlGenerator(page)">@page</a>
+		}	
+	}
+	
+	@if (Model.CurrentPage == Model.TotalPages)
+	{
+		@* What? This is from the old blog. Clean it up though. *@
+		<text>Next</text>
+	}
+	else
+	{
+		<a href="@Model.UrlGenerator(Model.CurrentPage + 1)" rel="next">Next</a>
+	}
+</p>

@@ -1,0 +1,45 @@
+﻿@using Daniel15.Web.Extensions
+@model Daniel15.Web.ViewModels.Blog.FeedViewModel
+<?xml version="1.0" encoding="UTF-8"?>
+@{
+	Layout = null;
+}
+<rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+	<channel>
+		<title>@Config.BlogName</title>
+		<description>@Config.BlogDescription</description>
+		<language>en</language>
+		<generator>Daniel15's Website (http://dan.cx/)</generator>
+		<lastBuildDate>@Model.Posts[0].Post.Date.ToRFC822String()</lastBuildDate>
+		<atom:link href="@Config.FeedBurnerUrl" rel="self" type="application/rss+xml" />
+		<link>@Url.ActionAbsolute(MVC.Blog.Index())</link>
+		
+		@foreach (var post in Model.Posts)
+		{
+			<item>
+				<title>@post.Post.Title</title>
+				@* Hack for Razor's handling of <link> tags: http://stackoverflow.com/questions/12711507/using-razor-2-to-write-rss-fails-on-the-link-element *@
+				@Html.Raw("<link>" + Url.BlogAbsolute(post.Post) + "</link>")
+				<comments>@Url.BlogAbsolute(post.Post)#disqus_comments</comments>
+				<pubDate>@post.Post.Date.ToRFC822String()</pubDate>
+				<dc:creator>Daniel15</dc:creator>
+				<description>@post.Post.PlainTextIntro()</description>
+				<content:encoded>@post.Post.Content()</content:encoded>
+				<guid isPermaLink="true">@Url.BlogAbsolute(post.Post)</guid>
+				@foreach (var category in post.PostCategories)
+				{
+					<category>@category.Title</category>
+				}
+			</item>
+		}
+	</channel>
+</rss>
+
+<!-- Generated at @DateTime.Now -->

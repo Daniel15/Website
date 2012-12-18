@@ -1,0 +1,17 @@
+﻿@model Daniel15.Web.ViewModels.Blog.PostViewModel
+
+<!-- Begin share links -->
+<div class="share">
+	<ul>
+		@foreach (var kvp in Model.SocialNetworks)
+		{
+			<li class="@kvp.Key.Id">
+				<a href="@kvp.Value" title="Share on @kvp.Key.Name">
+					<span class="name">@kvp.Key.Name</span>
+					<span class="count">&hellip;</span>
+				</a>
+			</li>
+		}
+	</ul>
+</div>
+<!-- End share links -->

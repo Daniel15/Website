@@ -1,0 +1,26 @@
+﻿@model ViewModelBase
+
+@{
+	// "Inherit" from the base layout
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	Model.SidebarType = SidebarType.Right;
+}
+
+@RenderBody()
+
+@section sidebar
+{
+	@Html.BlogSidebar()
+}
+
+@section extraHead
+{
+	<link rel="index" title="@Config.BlogName" href="@Url.Action(MVC.Blog.Index())" />
+	@RenderSection("extraHead", required: false)
+}
+
+@section extraFoot
+{
+	@Html.Partial(MVC.Blog.Views._DisqusCount)
+	@RenderSection("extraFoot", required: false)
+}

@@ -1,0 +1,17 @@
+﻿@model Daniel15.Web.ViewModels.Blog.PostViewModel
+
+@{
+	Model.Title = Model.Post.Title;
+	Model.Heading = "Blog";
+}
+
+@section extraHead
+{
+	<!--meta property="og:title" content="@Model.Post.Title" /-->
+	<meta property="og:url" content="@Url.BlogAbsolute(Model.Post)" />
+	<link rel="canonical" href="@Url.BlogAbsolute(Model.Post)" />
+	<link rel="shortlink" href="@Model.ShortUrl" />
+}
+
+@Html.Partial(MVC.Blog.Views._PostFull, Model)
+@Html.Partial(MVC.Blog.Views._Comments, Model.Post)

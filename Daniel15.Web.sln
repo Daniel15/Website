@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daniel15.Web", "Daniel15.Web\Daniel15.Web.csproj", "{ECAA4A47-F98D-4BA1-83BA-AA5172C07FB5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{64A266F1-8387-4B9D-B594-FB6E84F1510A}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc stuff", "Misc stuff", "{DDB064E1-9601-4ACB-A573-D4DD018018E8}"
+	ProjectSection(SolutionItems) = preProject
+		deploy-test.bat = deploy-test.bat
+		elmah.sql = elmah.sql
+		README.md = README.md
+		schema.sql = schema.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECAA4A47-F98D-4BA1-83BA-AA5172C07FB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECAA4A47-F98D-4BA1-83BA-AA5172C07FB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECAA4A47-F98D-4BA1-83BA-AA5172C07FB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECAA4A47-F98D-4BA1-83BA-AA5172C07FB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,9 @@
+﻿@using Daniel15.Web.ViewModels.Shared
+@model HandleErrorInfo
+@{
+	// This can't do the layout here, since the model isn't an instance of ViewModelBase
+	// Need to render the actual error page as a partial so it gets the correct model class.
+	Layout = null;
+}
+
+@Html.Partial("ErrorWithLayout", new ErrorViewModel { ErrorInfo = Model })

@@ -1,0 +1,18 @@
+﻿@model Daniel15.Web.ViewModels.Blog.PostViewModel
+@{
+	bool showMoreLink;
+}
+
+<article id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting">
+	@Html.Partial(MVC.Blog.Views._PostHeader, Model)
+		@Html.Raw(Model.Post.Intro(out showMoreLink))
+		@if (showMoreLink)
+		{
+			<p><a href="@Url.Blog(Model.Post)" class="read-more">Read more &rArr;</a></p>
+		}
+	</div>
+	<footer>
+		@Html.Partial(MVC.Blog.Views._ShareLinks, Model)
+		<a href="@Url.Blog(Model.Post)#disqus_comments" itemprop="discussionUrl">Comments &raquo;</a>
+	</footer>
+</article>
