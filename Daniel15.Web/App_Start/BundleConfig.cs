@@ -24,7 +24,7 @@ namespace Daniel15.Web.App_Start
 		/// <param name="bundles">Bundle collection</param>
 		private static void RegisterCssBundles(BundleCollection bundles)
 		{
-			var lessBundle = new StyleBundle("~/Content/css/main.css").Include("~/Content/css/main.less");
+			var lessBundle = new StyleBundle("~/bundles/main.css").Include("~/Content/css/main.less");
 			lessBundle.Transforms.Clear();
 			lessBundle.Transforms.Add(new LessTransform());
 			lessBundle.Transforms.Add(new CssMinify());
@@ -37,7 +37,7 @@ namespace Daniel15.Web.App_Start
 		/// <param name="bundles">Bundle collection</param>
 		private static void RegisterJsBundles(BundleCollection bundles)
 		{
-			bundles.Add(new ScriptBundle("~/Content/js/main.js").Include(
+			bundles.Add(new ScriptBundle("~/bundles/main.js").Include(
 				// Framework
 				"~/Content/js/framework/core.js",
 				"~/Content/js/framework/ajax.js",
