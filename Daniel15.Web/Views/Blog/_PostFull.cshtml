@@ -6,7 +6,13 @@
 	</div>
 	@Html.Partial(MVC.Blog.Views._ShareLinks, Model)
 	
-	TODO: Tags
+	@if (Model.PostTags != null && Model.PostTags.Count > 0)
+	{
+		<p class="tags" itemprop="keywords">
+			<img src="@Url.Image("icons/tag_blue.png")" alt="Tags" title="Tags" />
+			@Html.Raw(string.Join(", ", Model.PostTags.Select(tag => Html.ActionLink(tag.Title, MVC.Blog.Tag(tag.Slug)))))
+		</p>
+	}
 	
 	<footer>
 		Short URL for sharing: @Model.ShortUrl. This entry was posted on @Model.Post.Date.ToStringWithOrdinal("d{0} MMMM yyyy") and is filed under 

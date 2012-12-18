@@ -71,6 +71,20 @@ namespace Daniel15.Web.Repositories.OrmLite
 		}
 
 		/// <summary>
+		/// Gets the tags for the specified blog post
+		/// </summary>
+		/// <param name="post">Blog post</param>
+		/// <returns>Tags for this blog post</returns>
+		public IList<TagModel> TagsForPost(PostSummaryModel post)
+		{
+			return Connection.Select<TagModel>(@"
+				SELECT blog_tags.id, blog_tags.title, blog_tags.slug
+				FROM blog_post_tags
+				INNER JOIN blog_tags ON blog_tags.id = blog_post_tags.tag_id
+				WHERE blog_post_tags.post_id = {0}", post.Id);
+		}
+
+		/// <summary>
 		/// Gets the latest blog posts
 		/// </summary>
 		/// <param name="count">Number of posts to return</param>

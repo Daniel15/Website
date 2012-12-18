@@ -19,6 +19,11 @@
 	{
 		@SitemapUrl(@Url.ActionAbsolute(MVC.Blog.Category(category.Slug)), null, "weekly", 0.7)
 	}
+	
+	@foreach (var tag in Model.Tags)
+	{
+		@SitemapUrl(@Url.ActionAbsolute(MVC.Blog.Tag(tag.Slug)), null, "weekly", 0.7)
+	}
 </urlset>
 
 @helper SitemapUrl(string url, DateTime? lastModified = null, string changeFreq = null, double? priority = null)

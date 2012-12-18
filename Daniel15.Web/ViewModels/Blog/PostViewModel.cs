@@ -25,6 +25,11 @@ namespace Daniel15.Web.ViewModels.Blog
 		public IList<CategoryModel> PostCategories { get; set; }
 
 		/// <summary>
+		/// List of all tags this post is tagged with.
+		/// </summary>
+		public IList<TagModel> PostTags { get; set; } 
+
+		/// <summary>
 		/// All the social network sharing URLs for this post
 		/// </summary>
 		public IEnumerable<KeyValuePair<ISocialNetwork, string>> SocialNetworks { get; set; }

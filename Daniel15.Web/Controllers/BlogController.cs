@@ -114,6 +114,18 @@ namespace Daniel15.Web.Controllers
 		}
 
 		/// <summary>
+		/// Viewing a listing of all posts tagged by a particular tag
+		/// </summary>
+		/// <param name="slug">Tag slug</param>
+		/// <param name="page">Page number to view</param>
+		/// <returns>Posts tagged with this tag</returns>
+		public virtual ActionResult Tag(string slug, int page = 1)
+		{
+			// TODO
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
 		/// Viewing the blog archive (articles posted in the specified year and month)
 		/// </summary>
 		/// <param name="year">Year to get posts for</param>
@@ -160,6 +172,7 @@ namespace Daniel15.Web.Controllers
 			{
 				Post = post,
 				PostCategories = _blogRepository.CategoriesForPost(post),
+				PostTags = _blogRepository.TagsForPost(post),
 				ShortUrl = Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http"),
 				SocialNetworks = _socialManager.ShareUrls(post, Url.BlogAbsolute(post), ShortUrl(post))
 			});

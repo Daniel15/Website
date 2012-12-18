@@ -28,6 +28,13 @@ namespace Daniel15.Web.Repositories
 		/// <param name="post">Blog post</param>
 		/// <returns>Categories for this blog post</returns>
 		IList<CategoryModel> CategoriesForPost(PostSummaryModel post);
+
+		/// <summary>
+		/// Gets the tags for the specified blog post
+		/// </summary>
+		/// <param name="post">Blog post</param>
+		/// <returns>Tags for this blog post</returns>
+		IList<TagModel> TagsForPost(PostSummaryModel post);
 			
 		/// <summary>
 		/// Gets the latest blog posts

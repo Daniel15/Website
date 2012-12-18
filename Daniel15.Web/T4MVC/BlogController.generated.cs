@@ -49,6 +49,12 @@ namespace Daniel15.Web.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Tag()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Tag);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Archive()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Archive);
@@ -83,6 +89,7 @@ namespace Daniel15.Web.Controllers
         {
             public readonly string Index = "Index";
             public readonly string Category = "Category";
+            public readonly string Tag = "Tag";
             public readonly string Archive = "Archive";
             public readonly string View = "View";
             public readonly string ShortUrl = "ShortUrl";
@@ -94,6 +101,7 @@ namespace Daniel15.Web.Controllers
         {
             public const string Index = "Index";
             public const string Category = "Category";
+            public const string Tag = "Tag";
             public const string Archive = "Archive";
             public const string View = "View";
             public const string ShortUrl = "ShortUrl";
@@ -114,6 +122,15 @@ namespace Daniel15.Web.Controllers
         public ActionParamsClass_Category CategoryParams { get { return s_params_Category; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Category
+        {
+            public readonly string slug = "slug";
+            public readonly string page = "page";
+        }
+        static readonly ActionParamsClass_Tag s_params_Tag = new ActionParamsClass_Tag();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Tag TagParams { get { return s_params_Tag; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Tag
         {
             public readonly string slug = "slug";
             public readonly string page = "page";
@@ -201,6 +218,14 @@ namespace Daniel15.Web.Controllers
         public override System.Web.Mvc.ActionResult Category(string slug, int page)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Tag(string slug, int page)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Tag);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
             return callInfo;

@@ -7,7 +7,7 @@ namespace Daniel15.Web.Controllers
 	/// <summary>
 	/// Handles rendering various feeds
 	/// </summary>
-	public class FeedController : Controller
+	public partial class FeedController : Controller
 	{
 		private readonly IBlogRepository _blogRepository;
 
@@ -24,7 +24,7 @@ namespace Daniel15.Web.Controllers
 		/// Gets a sitemap for the website
 		/// </summary>
 		/// <returns>Sitemap XML</returns>
-		public ActionResult Sitemap()
+		public virtual ActionResult Sitemap()
 		{
 			Response.ContentType = "text/xml";
 			return View(new SitemapViewModel

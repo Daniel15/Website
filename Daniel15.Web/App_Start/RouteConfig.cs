@@ -71,6 +71,19 @@ namespace Daniel15.Web.App_Start
 				constraints: new { page = @"\d+"}
 			);
 
+			// Viewing a tag
+			routes.MapRoute(
+				name: "BlogTag",
+				url: "blog/tag/{slug}",
+				defaults: new { controller = "Blog", action = "Tag", page = 1 }
+			);
+			routes.MapRoute(
+				name: "BlogTagPage",
+				url: "blog/tag/{slug}/page-{page}",
+				defaults: MVC.Blog.Tag(),
+				constraints: new { page = @"\d+" }
+			);
+
 			// Blog RSS feed
 			routes.MapRoute(
 				name: "BlogFeed",
@@ -105,14 +118,7 @@ namespace Daniel15.Web.App_Start
 				defaults: new { controller = "Site", action = "Index", id = UrlParameter.Optional }
 			);
 
-			/*
-	// Viewing a tag
-	Route::set('blog_tag', 'blog/tag/<slug>')
-		->defaults(array(
-			'controller' => 'blog',
-			'action'     => 'tag',
-		));
-		
+			/*		
 	// Blog sub-controllers (sidebar, feed)
 	Route::set('blog_sub', 'blog/<controller>(/<action>(/<id>))', array('controller' => '(sidebar|feed)'))
 		->defaults(array(
