@@ -153,6 +153,9 @@ namespace Daniel15.Web.Controllers
 				return RedirectPermanent(Url.Blog(post));
 			}
 
+			// Set last-modified date based on the date of the post
+			Response.Cache.SetLastModified(post.Date);
+
 			return View(new PostViewModel
 			{
 				Post = post,

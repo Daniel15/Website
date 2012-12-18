@@ -40,10 +40,7 @@ namespace Daniel15.Web.Extensions
 		/// <returns>Absoute URL</returns>
 		public static string Absolute(this UrlHelper urlHelper, string uri)
 		{
-			return new UriBuilder(urlHelper.RequestContext.HttpContext.Request.Url.AbsoluteUri)
-			{
-				Path = uri
-			}.ToString();
+			return urlHelper.RequestContext.HttpContext.Request.Url.GetLeftPart(UriPartial.Authority) + uri;
 		}
 
 		/// <summary>

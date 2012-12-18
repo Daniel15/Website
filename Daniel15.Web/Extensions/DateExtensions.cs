@@ -82,5 +82,15 @@ namespace Daniel15.Web.Extensions
 				+ " "
 				+ dateTime.ToString("zzzz").Replace(":", "");
 		}
+
+		/// <summary>
+		/// Converts this DateTime into a W3C string
+		/// </summary>
+		/// <param name="dateTime">The date to convert</param>
+		/// <returns>String representing this date</returns>
+		public static string ToW3CString(this DateTime dateTime)
+		{
+			return dateTime.ToString("yyyy-MM-ddTHH:mm:ssK");
+		}
 	}
 }

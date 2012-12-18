@@ -1,0 +1,42 @@
+﻿@model Daniel15.Web.ViewModels.Feed.SitemapViewModel
+<?xml version="1.0" encoding="UTF-8"?>
+@{
+	Layout = null;
+}
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	@SitemapUrl(@Url.ActionAbsolute(MVC.Site.Index()), null, "weekly", 1.0)
+	@SitemapUrl(@Url.ActionAbsolute(MVC.Site.Projects()).ToLower(), null, "weekly", 0.9)
+	@SitemapUrl(@Url.ActionAbsolute(MVC.Site.SocialFeed()).ToLower(), null, "daily", 0.7)
+	@SitemapUrl(@Url.ActionAbsolute(MVC.Blog.Index()), null, "daily", 0.9)
+	
+	@foreach (var post in Model.Posts)
+	{
+		@SitemapUrl(@Url.BlogAbsolute(post), post.Date, "monthly", 0.8)
+	}
+	
+	@foreach (var category in Model.Categories)
+	{
+		@SitemapUrl(@Url.ActionAbsolute(MVC.Blog.Category(category.Slug)), null, "weekly", 0.7)
+	}
+</urlset>
+
+@helper SitemapUrl(string url, DateTime? lastModified = null, string changeFreq = null, double? priority = null)
+{
+	<url>
+		<loc>@url</loc>
+		@if (lastModified != null)
+		{
+			<lastmod>@lastModified.Value.ToW3CString()</lastmod>
+		}
+		@if (changeFreq != null)
+		{
+			<changefreq>@changeFreq</changefreq>
+		}
+		@if (priority != null)
+		{
+			<priority>@priority</priority>
+		}
+	</url>
+}
+<!-- Generated at @DateTime.Now -->

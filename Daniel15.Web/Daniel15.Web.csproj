@@ -145,6 +145,7 @@
     <Compile Include="Attributes\HandleErrorAttribute.cs" />
     <Compile Include="Attributes\StopwatchAttribute.cs" />
     <Compile Include="Controllers\BlogPartialsController.cs" />
+    <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\SocialController.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
     <Compile Include="Extensions\QueryStringExtensions.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Infrastructure\ViewBase.cs" />
     <Compile Include="Models\Blog\CategoryModel.cs" />
     <Compile Include="Models\Blog\PostSummaryModel.cs" />
+    <Compile Include="Models\Blog\TagModel.cs" />
     <Compile Include="Models\Home\ChatStatusModel.cs" />
     <Compile Include="Models\Home\ProjectModel.cs" />
     <Compile Include="Models\Home\ProjectTechnologyModel.cs" />
@@ -218,6 +220,7 @@
     <Compile Include="ViewModels\Blog\ListingViewModel.cs" />
     <Compile Include="ViewModels\Blog\PostViewModel.cs" />
     <Compile Include="ViewModels\Blog\SidebarViewModel.cs" />
+    <Compile Include="ViewModels\Feed\SitemapViewModel.cs" />
     <Compile Include="ViewModels\Shared\ErrorViewModel.cs" />
     <Compile Include="ViewModels\Shared\PaginationModel.cs" />
     <Compile Include="ViewModels\Site\IndexViewModel.cs" />
@@ -536,6 +539,7 @@
     <Content Include="Views\Blog\Feed.cshtml" />
     <Content Include="Views\Site\FileNotFound.cshtml" />
     <Content Include="Views\Shared\ErrorWithLayout.cshtml" />
+    <Content Include="Views\Feed\Sitemap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\framework\.git\branches\" />

@@ -4,10 +4,17 @@ using Daniel15.Web.ViewModels.Blog;
 
 namespace Daniel15.Web.Controllers
 {
+	/// <summary>
+	/// Handles rendering partial views in the blog
+	/// </summary>
 	public partial class BlogPartialsController : Controller
 	{
 		private readonly IBlogRepository _blogRepository;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="BlogPartialsController" /> class.
+		/// </summary>
+		/// <param name="blogRepository">The blog repository.</param>
 		public BlogPartialsController(IBlogRepository blogRepository)
 		{
 			_blogRepository = blogRepository;
@@ -21,7 +28,8 @@ namespace Daniel15.Web.Controllers
 		{
 			return PartialView(new SidebarViewModel
 			{
-				Counts = _blogRepository.MonthCounts()
+				Counts = _blogRepository.MonthCounts(),
+				Categories = _blogRepository.Categories()
 			});
 		}
 	}

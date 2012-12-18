@@ -95,5 +95,17 @@ namespace Daniel15.Web.Repositories
 		/// <param name="month">Month to get count for</param>
 		/// <returns>Total number of posts that were posted in this month</returns>
 		int PublishedCountForMonth(int year, int month);
+
+		/// <summary>
+		/// Get an alphabetical list of available categories
+		/// </summary>
+		/// <returns>A list of categories</returns>
+		IList<CategoryModel> Categories();
+
+		/// <summary>
+		/// Get an alphabetical list of available tags
+		/// </summary>
+		/// <returns>A list of tags</returns>
+		IList<TagModel> Tags();
 	}
 }

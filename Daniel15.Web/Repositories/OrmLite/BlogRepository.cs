@@ -251,6 +251,24 @@ ORDER BY year DESC, month DESC");
 				AND date BETWEEN {0} AND {1}", firstDate.ToUnix(), lastDate.ToUnix());
 		}
 
+		/// <summary>
+		/// Get an alphabetical list of available categories
+		/// </summary>
+		/// <returns>A list of categories</returns>
+		public IList<CategoryModel> Categories()
+		{
+			return Connection.Select<CategoryModel>(query => query.OrderBy(cat => cat.Title)); // Meow
+		}
+
+		/// <summary>
+		/// Get an alphabetical list of available tags
+		/// </summary>
+		/// <returns>A list of tags</returns>
+		public IList<TagModel> Tags()
+		{
+			return Connection.Select<TagModel>(query => query.OrderBy(tag => tag.Title));
+		}
+
 		private class MonthYearCount
 		{
 			public int Month { get; set; }
