@@ -51,7 +51,7 @@ namespace Daniel15.Web.App_Start
 				"~/Content/js/blog.js",
 				"~/Content/js/socialfeed.js"));
 
-			bundles.Add(new ScriptBundle("~/Content/js/syntaxHighlight.js").Include(
+			bundles.Add(new ScriptBundle("~/bundles/syntaxHighlight.js").Include(
 				"~/Content/js/lib/syntaxhighlighter/shCore.js",
 				"~/Content/js/lib/syntaxhighlighter/shBrushJScript.js",
 				"~/Content/js/lib/syntaxhighlighter/shBrushPhp.js",

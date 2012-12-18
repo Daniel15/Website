@@ -83,7 +83,9 @@ namespace Daniel15.Web.Controllers
 		/// <returns></returns>
 		public virtual ActionResult SocialFeed()
 		{
-			throw new NotImplementedException();
+			// Currently just proxies to the PHP page - This needs to be rewritten in C#
+			var content = new WebClient().DownloadString("http://dan.cx/socialfeed/loadhtml.php");
+			return View(new SocialFeedViewModel { Content = content });
 		}
 
 		/// <summary>

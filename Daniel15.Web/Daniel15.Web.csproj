@@ -232,6 +232,7 @@
     <Compile Include="ViewModels\Shared\PaginationModel.cs" />
     <Compile Include="ViewModels\Site\IndexViewModel.cs" />
     <Compile Include="ViewModels\Site\ProjectsViewModel.cs" />
+    <Compile Include="ViewModels\Site\SocialFeedViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -547,6 +548,7 @@
     <Content Include="Views\Site\FileNotFound.cshtml" />
     <Content Include="Views\Shared\ErrorWithLayout.cshtml" />
     <Content Include="Views\Feed\Sitemap.cshtml" />
+    <Content Include="Views\Site\SocialFeed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\framework\.git\branches\" />
