@@ -1,7 +1,6 @@
 ﻿ - Last modified dates (header and possibly footer?)
  - Check HTML output - Find missing bits (like <meta> tags)
  - Update projects page
- - CSS and JS redir for Tumblr
  - Revision in footer?
  - Blog tags (viewing)
  - Check the thingy

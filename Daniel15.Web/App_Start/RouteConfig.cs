@@ -104,6 +104,18 @@ namespace Daniel15.Web.App_Start
 				constraints: new { page = @"\d+" }
 			);
 
+			// Redirects to latest CSS and JS
+			routes.MapRoute(
+				name: "LatestCSS",
+				url: "latest.css",
+				defaults: new { controller = "Redirect", action = "Css" }
+			);
+			routes.MapRoute(
+				name: "LatestJS",
+				url: "latest.js",
+				defaults: new { controller = "Redirect", action = "Js" }
+			);
+
 			// Blog short URLs
 			routes.MapRoute(
 				name: "BlogShortUrl",

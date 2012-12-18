@@ -146,6 +146,7 @@
     <Compile Include="Attributes\StopwatchAttribute.cs" />
     <Compile Include="Controllers\BlogPartialsController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
+    <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\SocialController.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
     <Compile Include="Extensions\QueryStringExtensions.cs" />
@@ -202,6 +203,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\FeedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\RedirectController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\SharedController.generated.cs">
