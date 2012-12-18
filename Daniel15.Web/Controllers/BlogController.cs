@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Daniel15.Web.Infrastructure;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.Services;
@@ -29,6 +30,7 @@ namespace Daniel15.Web.Controllers
 		private readonly IBlogRepository _blogRepository;
 		private readonly IUrlShortener _urlShortener;
 		private readonly ISocialManager _socialManager;
+		private readonly ISiteConfiguration _siteConfig;
 		private readonly MiniProfiler _profiler;
 
 		/// <summary>
@@ -37,11 +39,13 @@ namespace Daniel15.Web.Controllers
 		/// <param name="blogRepository">The blog post repository.</param>
 		/// <param name="urlShortener">The URL shortener</param>
 		/// <param name="socialManager">The social network manager used to get sharing URLs</param>
-		public BlogController(IBlogRepository blogRepository, IUrlShortener urlShortener, ISocialManager socialManager)
+		/// <param name="siteConfig">Site configuration</param>
+		public BlogController(IBlogRepository blogRepository, IUrlShortener urlShortener, ISocialManager socialManager, ISiteConfiguration siteConfig)
 		{
 			_blogRepository = blogRepository;
 			_urlShortener = urlShortener;
 			_socialManager = socialManager;
+			_siteConfig = siteConfig;
 			_profiler = MiniProfiler.Current;
 		}
 
@@ -206,6 +210,19 @@ namespace Daniel15.Web.Controllers
 		/// <returns>RSS feed</returns>
 		public virtual ActionResult Feed()
 		{
+			if (Request.UserAgent != null)
+			{
+				// If the user is accessing directly (ie. they're NOT FeedBurner), redirect to FeedBurner instead
+				// But allow explicit access to feed by adding feedburner_override GET param
+				var userAgent = Request.UserAgent.ToLower();
+				if (!userAgent.Contains("feedburner") 
+					&& !userAgent.Contains("feedvalidator")
+					&& Request.QueryString["feedburner_override"] == null)
+				{
+					return Redirect(_siteConfig.FeedBurnerUrl.ToString());
+				}
+			}
+
 			var posts = _blogRepository.LatestPosts(ITEMS_IN_FEED);
 
 			Response.ContentType = "application/rss+xml";
