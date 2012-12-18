@@ -54,6 +54,15 @@ namespace Daniel15.Web.Repositories
 		List<PostModel> LatestPosts(CategoryModel category, int count = 10, int offset = 0);
 
 		/// <summary>
+		/// Gets the latest blog posts in this tag
+		/// </summary>
+		/// <param name="tag">Tag to get posts from</param>
+		/// <param name="count">Number of posts to return</param>
+		/// <param name="offset">Post to start at</param>
+		/// <returns>Latest blog posts</returns>
+		List<PostModel> LatestPosts(TagModel tag, int count = 10, int offset = 0);
+
+		/// <summary>
 		/// Gets the latest blog posts for the specified year and month
 		/// </summary>
 		/// /// <param name="year">Year to get posts for</param>
@@ -84,6 +93,13 @@ namespace Daniel15.Web.Repositories
 		CategoryModel GetCategory(string slug);
 
 		/// <summary>
+		/// Gets a tag by slug
+		/// </summary>
+		/// <param name="slug">Slug of the tag</param>
+		/// <returns>The tag</returns>
+		TagModel GetTag(string slug);
+
+		/// <summary>
 		/// Get the total number of posts that are published
 		/// </summary>
 		/// <returns>Total number of posts</returns>
@@ -94,6 +110,12 @@ namespace Daniel15.Web.Repositories
 		/// </summary>
 		/// <returns>Total number of posts in the category</returns>
 		int PublishedCount(CategoryModel category);
+
+		/// <summary>
+		/// Get the total number of posts that are published in this tag
+		/// </summary>
+		/// <returns>Total number of posts in the tag</returns>
+		int PublishedCount(TagModel tag);
 
 		/// <summary>
 		/// Get the total number of posts that are published in this month and year

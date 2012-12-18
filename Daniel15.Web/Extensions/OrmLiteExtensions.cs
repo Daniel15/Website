@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Data;
+using System.Linq.Expressions;
 using ServiceStack.DataAnnotations;
+using ServiceStack.OrmLite;
 
 namespace Daniel15.Web.Repositories.OrmLite
 {
@@ -23,6 +26,23 @@ namespace Daniel15.Web.Repositories.OrmLite
 			}
 
 			return tableName;
+		}
+
+		/// <summary>
+		/// Returns the first item matching the predicate, or throws an exception
+		/// </summary>
+		/// <typeparam name="T">Entity type</typeparam>
+		/// <param name="connection">Database connection</param>
+		/// <param name="predicate">Predicate to match on</param>
+		/// <returns>First item that matches the predicate</returns>
+		/// <exception cref="ItemNotFoundException">Thrown if no item matched the predicate</exception>
+		public static T FirstOrThrow<T>(this IDbConnection connection, Expression<Func<T, bool>> predicate) where T : new()
+		{
+			var entity = connection.FirstOrDefault(predicate);
+			if (entity == null)
+				throw new ItemNotFoundException();
+
+			return entity;
 		}
 	}
 }

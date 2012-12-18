@@ -125,8 +125,20 @@ namespace Daniel15.Web.Controllers
 		/// <returns>Posts tagged with this tag</returns>
 		public virtual ActionResult Tag(string slug, int page = 1)
 		{
-			// TODO
-			throw new NotImplementedException();
+			TagModel tag;
+			try
+			{
+				tag = _blogRepository.GetTag(slug);
+			}
+			catch (ItemNotFoundException)
+			{
+				// Throw a 404 if the category doesn't exist
+				return HttpNotFound(string.Format("Tag '{0}' not found.", slug));
+			}
+
+			var count = _blogRepository.PublishedCount(tag);
+			var posts = _blogRepository.LatestPosts(tag, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
+			return Listing(posts, count, page, Views.Tag, new TagListingViewModel { Tag = tag });
 		}
 
 		/// <summary>

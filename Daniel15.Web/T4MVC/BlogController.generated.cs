@@ -185,6 +185,7 @@ namespace Daniel15.Web.Controllers
                 public readonly string Category = "Category";
                 public readonly string Feed = "Feed";
                 public readonly string Index = "Index";
+                public readonly string Tag = "Tag";
                 public readonly string View = "View";
             }
             public readonly string _Comments = "~/Views/Blog/_Comments.cshtml";
@@ -199,6 +200,7 @@ namespace Daniel15.Web.Controllers
             public readonly string Category = "~/Views/Blog/Category.cshtml";
             public readonly string Feed = "~/Views/Blog/Feed.cshtml";
             public readonly string Index = "~/Views/Blog/Index.cshtml";
+            public readonly string Tag = "~/Views/Blog/Tag.cshtml";
             public readonly string View = "~/Views/Blog/View.cshtml";
         }
     }

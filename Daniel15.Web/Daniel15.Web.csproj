@@ -227,6 +227,7 @@
     <Compile Include="ViewModels\Blog\ListingViewModel.cs" />
     <Compile Include="ViewModels\Blog\PostViewModel.cs" />
     <Compile Include="ViewModels\Blog\SidebarViewModel.cs" />
+    <Compile Include="ViewModels\Blog\TagListingViewModel.cs" />
     <Compile Include="ViewModels\Feed\SitemapViewModel.cs" />
     <Compile Include="ViewModels\Shared\ErrorViewModel.cs" />
     <Compile Include="ViewModels\Shared\PaginationModel.cs" />
@@ -549,6 +550,7 @@
     <Content Include="Views\Shared\ErrorWithLayout.cshtml" />
     <Content Include="Views\Feed\Sitemap.cshtml" />
     <Content Include="Views\Site\SocialFeed.cshtml" />
+    <Content Include="Views\Blog\Tag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\framework\.git\branches\" />

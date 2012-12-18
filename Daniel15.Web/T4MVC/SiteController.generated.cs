@@ -93,6 +93,7 @@ namespace Daniel15.Web.Controllers
                 public readonly string Index = "Index";
                 public readonly string Projects = "Projects";
                 public readonly string Search = "Search";
+                public readonly string SocialFeed = "SocialFeed";
             }
             public readonly string _LatestPosts = "~/Views/Site/_LatestPosts.cshtml";
             public readonly string _ProjectList = "~/Views/Site/_ProjectList.cshtml";
@@ -100,6 +101,7 @@ namespace Daniel15.Web.Controllers
             public readonly string Index = "~/Views/Site/Index.cshtml";
             public readonly string Projects = "~/Views/Site/Projects.cshtml";
             public readonly string Search = "~/Views/Site/Search.cshtml";
+            public readonly string SocialFeed = "~/Views/Site/SocialFeed.cshtml";
         }
     }
 

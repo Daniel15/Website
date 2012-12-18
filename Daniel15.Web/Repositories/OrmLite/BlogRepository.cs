@@ -27,12 +27,7 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <returns>The post</returns>
 		public PostModel GetBySlug(string slug)
 		{
-			var post = Connection.FirstOrDefault<PostModel>(x => x.Slug == slug);
-
-			// Check if post wasn't found
-			if (post == null)
-				throw new ItemNotFoundException();
-
+			var post = Connection.FirstOrThrow<PostModel>(x => x.Slug == slug);
 			// Get the main category as well
 			// TODO: Do this using a join in the above query instead
 			post.MainCategory = Connection.First<CategoryModel>(x => x.Id == post.MainCategoryId);
@@ -47,13 +42,7 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <returns>The post</returns>
 		public PostSummaryModel GetSummaryBySlug(string slug)
 		{
-			var post = Connection.FirstOrDefault<PostSummaryModel>(x => x.Slug == slug);
-
-			// Check if post wasn't found
-			if (post == null)
-				throw new ItemNotFoundException();
-
-			return post;
+			return Connection.FirstOrThrow<PostSummaryModel>(x => x.Slug == slug);
 		}
 
 		/// <summary>
@@ -111,15 +100,40 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <returns>Latest blog posts</returns>
 		public List<PostModel> LatestPosts(CategoryModel category, int count = 10, int offset = 0)
 		{
+			return LatestCategoryOrTag("category", "categories", category.Id, count, offset);
+		}
+
+		/// <summary>
+		/// Gets the latest blog posts in this tag
+		/// </summary>
+		/// <param name="tag">Tag to get posts from</param>
+		/// <param name="count">Number of posts to return</param>
+		/// <param name="offset">Post to start at</param>
+		/// <returns>Latest blog posts</returns>
+		public List<PostModel> LatestPosts(TagModel tag, int count = 10, int offset = 0)
+		{
+			return LatestCategoryOrTag("tag", "tags", tag.Id, count, offset);
+		}
+
+		/// <summary>
+		/// Gets the latest blog posts in this category or tag
+		/// </summary>
+		/// <param name="typeSingular">Singular type name ("tag" or "category")</param>
+		/// <param name="typePlural">Plural type name ("tags" or "categories")</param>
+		/// <param name="count">Number of posts to return</param>
+		/// <param name="offset">Post to start at</param>
+		/// <returns>Latest blog posts in the specified category or tag</returns>
+		private List<PostModel> LatestCategoryOrTag(string typeSingular, string typePlural, int id, int count, int offset)
+		{
 			var posts = Connection.Select<PostModel>(@"
 				SELECT id, title, slug, published, date, content, maincategory_id
-				FROM blog_post_categories
-				INNER JOIN blog_posts ON blog_posts.id = blog_post_categories.post_id
-				WHERE blog_post_categories.category_id = {0}
+				FROM blog_post_" + typePlural + @"
+				INNER JOIN blog_posts ON blog_posts.id = blog_post_" + typePlural + @".post_id
+				WHERE blog_post_" + typePlural + @"." + typeSingular + @"_id = {0}
 					AND blog_posts.published = 1
 				ORDER BY blog_posts.date DESC
-				LIMIT {1}, {2}", category.Id, offset, count);
-			
+				LIMIT {1}, {2}", id, offset, count, typePlural, typeSingular);
+
 			AddMainCategories(posts);
 			return posts;
 		}
@@ -215,13 +229,17 @@ ORDER BY year DESC, month DESC");
 		/// <returns>The category</returns>
 		public CategoryModel GetCategory(string slug)
 		{
-			var category = Connection.FirstOrDefault<CategoryModel>(x => x.Slug == slug);
+			return Connection.FirstOrThrow<CategoryModel>(x => x.Slug == slug);
+		}
 
-			// Check if category wasn't found
-			if (category == null)
-				throw new ItemNotFoundException();
-
-			return category;
+		/// <summary>
+		/// Gets a tag by slug
+		/// </summary>
+		/// <param name="slug">Slug of the tag</param>
+		/// <returns>The tag</returns>
+		public TagModel GetTag(string slug)
+		{
+			return Connection.FirstOrThrow<TagModel>(tag => tag.Slug == slug);
 		}
 
 		/// <summary>
@@ -239,12 +257,33 @@ ORDER BY year DESC, month DESC");
 		/// <returns>Total number of posts in the category</returns>
 		public int PublishedCount(CategoryModel category)
 		{
+			return PublishedCountCategoryOrTag("category", "categories", category.Id);
+		}
+
+		/// <summary>
+		/// Get the total number of posts that are published in this tag
+		/// </summary>
+		/// <returns>Total number of posts in the tag</returns>
+		public int PublishedCount(TagModel tag)
+		{
+			return PublishedCountCategoryOrTag("tag", "tags", tag.Id);
+		}
+
+		/// <summary>
+		/// Get the total number of posts that are published in this tag or category
+		/// </summary>
+		/// <param name="typeSingular">Singular type name ("tag" or "category")</param>
+		/// <param name="typePlural">Plural type name ("tags" or "categories")</param>
+		/// <param name="id">ID of the tag or category</param>
+		/// <returns>Total number of posts in the tag/category</returns>
+		private int PublishedCountCategoryOrTag(string typeSingular, string typePlural, int id)
+		{
 			return Connection.GetScalar<int>(@"
 				SELECT COUNT(*) 
-				FROM blog_post_categories 
-				INNER JOIN blog_posts ON blog_posts.id = blog_post_categories.post_id
-				WHERE blog_post_categories.category_id = {0}
-					AND blog_posts.published = 1", category.Id);
+				FROM blog_post_" + typePlural + @" 
+				INNER JOIN blog_posts ON blog_posts.id = blog_post_" + typePlural + @".post_id
+				WHERE blog_post_" + typePlural + @"." + typeSingular + @"_id = {0}
+					AND blog_posts.published = 1", id);
 		}
 
 		/// <summary>
