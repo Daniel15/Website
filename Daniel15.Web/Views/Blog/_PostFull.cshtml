@@ -1,0 +1,23 @@
+﻿@model Daniel15.Web.ViewModels.Blog.PostViewModel
+
+<article id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting">
+	@Html.Partial(MVC.Blog.Views._PostHeader, Model)
+		@Html.Raw(Model.Post.Content())
+	</div>
+	@Html.Partial(MVC.Blog.Views._ShareLinks, Model)
+	
+	@if (Model.PostTags != null && Model.PostTags.Count > 0)
+	{
+		<p class="tags" itemprop="keywords">
+			<img src="@Url.Image("icons/tag_blue.png")" alt="Tags" title="Tags" />
+			@Html.Raw(string.Join(", ", Model.PostTags.Select(tag => Html.ActionLink(tag.Title, MVC.Blog.Tag(tag.Slug)))))
+		</p>
+	}
+	
+	<footer>
+		Short URL for sharing: @Model.ShortUrl. This entry was posted on @Model.Post.Date.ToStringWithOrdinal("d{0} MMMM yyyy") and is filed under 
+		@Html.Raw(string.Join(", ", Model.PostCategories.Select(cat => Html.ActionLink(cat.Title, MVC.Blog.Category(cat.Slug))))). 
+		You can <a href="@Url.Blog(Model.Post)#leave-comment" itemprop="discussionUrl">leave a comment</a> 
+		if you'd like to, or subscribe to the RSS feed to keep up-to-date with all my latest blog posts! 
+	</footer>
+</article>

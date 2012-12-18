@@ -1,0 +1,22 @@
+﻿@using ServiceStack.Text
+@model Daniel15.Web.Models.Blog.PostModel
+
+<div id="comments">
+	<div id="disqus_thread"></div>
+</div>
+
+<script type="text/javascript">
+    @* TODO: Clean up the retrieval of the Disqus shortname *@
+    var disqus_shortname = @Html.Raw(Config.DisqusShortname.ToJson()),
+        disqus_title = @Html.Raw(Model.Title.ToJson()),
+        disqus_identifier = @Model.Id,
+        disqus_url = @Html.Raw(Url.BlogAbsolute(Model).ToJson());
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>

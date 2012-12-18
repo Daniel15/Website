@@ -1,0 +1,12 @@
+﻿@model Daniel15.Web.ViewModels.Blog.PostViewModel
+
+<header>
+	<h2 itemprop="name"><a href="@Url.Blog(Model.Post)" rel="bookmark" title="Permanent link to @Model.Post.Title" itemprop="url">@Model.Post.Title</a></h2>
+	<ul class="postmetadata">
+		<li class="date"><time datetime="@Model.Post.Date.ToString("s")" itemprop="datePublished">@Model.Post.Date.ToStringWithOrdinal("d{0} MMMM yyyy")</time></li>
+		<li class="category"><a href="@Url.Action(MVC.Blog.Category(Model.Post.MainCategory.Slug))" itemprop="keywords">@Model.Post.MainCategory.Title</a></li>
+		<li class="comments"><a href="@Url.Blog(Model.Post)#disqus_thread" data-disqus-identifier="@Model.Post.Id">Comments</a></li>
+		<li class="permalink">@Model.ShortUrl</li>
+	</ul>
+</header>
+<div itemprop="articleBody">
