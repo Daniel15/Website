@@ -24,6 +24,7 @@ using T4MVC;
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class MVC
 {
+    public static Daniel15.Web.Controllers.AccountController Account = new Daniel15.Web.Controllers.T4MVC_AccountController();
     public static Daniel15.Web.Controllers.BlogController Blog = new Daniel15.Web.Controllers.T4MVC_BlogController();
     public static Daniel15.Web.Controllers.BlogPartialsController BlogPartials = new Daniel15.Web.Controllers.T4MVC_BlogPartialsController();
     public static Daniel15.Web.Controllers.FeedController Feed = new Daniel15.Web.Controllers.T4MVC_FeedController();

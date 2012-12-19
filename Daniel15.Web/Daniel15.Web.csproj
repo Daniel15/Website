@@ -144,6 +144,7 @@
     <Compile Include="App_Start\Ioc.cs" />
     <Compile Include="Attributes\HandleErrorAttribute.cs" />
     <Compile Include="Attributes\StopwatchAttribute.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogPartialsController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
@@ -181,9 +182,6 @@
     <Compile Include="Services\Social\SocialManager.cs" />
     <Compile Include="Services\Social\Twitter.cs" />
     <Compile Include="Services\UrlShortener.cs" />
-    <Compile Include="T4MVC\BlogController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
@@ -199,29 +197,44 @@
     <Compile Include="Repositories\IRepositoryBase.cs" />
     <Compile Include="Repositories\OrmLite\BlogRepository.cs" />
     <Compile Include="Repositories\OrmLite\RepositoryBase.cs" />
+    <Compile Include="T4MVC\AccountController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\BlogController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="T4MVC\BlogPartialsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="T4MVC\FeedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="T4MVC\RedirectController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="T4MVC\SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="T4MVC\SiteController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="T4MVC\SocialController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="T4MVC\T4MVC.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
+      <SubType>Code</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Blog\CategoryListingViewModel.cs" />
     <Compile Include="ViewModels\Blog\FeedViewModel.cs" />
     <Compile Include="ViewModels\Blog\ListingViewModel.cs" />
@@ -237,6 +250,7 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Authentication.config" />
     <None Include="ConnectionStrings.config" />
     <Content Include="Content\css\blogadmin.css" />
     <Content Include="Content\css\border-radius.htc" />
@@ -509,6 +523,10 @@
     <None Include="Content\js\framework\yuidoc.json" />
     <None Include="Content\not_an_easter_egg\zero\zero.utf8" />
     <None Include="deploy.proj" />
+    <None Include="T4MVC\T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </None>
     <None Include="T4MVC\T4MVC.tt.settings.xml" />
     <Content Include="robots.txt" />
     <Content Include="TODO.txt" />
@@ -551,6 +569,7 @@
     <Content Include="Views\Feed\Sitemap.cshtml" />
     <Content Include="Views\Site\SocialFeed.cshtml" />
     <Content Include="Views\Blog\Tag.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\js\framework\.git\branches\" />
@@ -564,10 +583,6 @@
     <Content Include="Views\Site\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="T4MVC\T4MVC.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>T4MVC.cs</LastGenOutput>
-    </None>
     <None Include="T4MVC\T4MVC.tt.hooks.t4" />
   </ItemGroup>
   <ItemGroup>
