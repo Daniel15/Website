@@ -250,7 +250,9 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Authentication.config" />
+    <Content Include="Authentication.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="ConnectionStrings.config" />
     <Content Include="Content\css\blogadmin.css" />
     <Content Include="Content\css\border-radius.htc" />

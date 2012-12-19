@@ -10,6 +10,6 @@
 		<Delete Files="$(_PackageTempDir)\bin\Microsoft.Web.Infrastructure.dll" />
 		
 		<!-- Deploy via rsync -->
-		<Exec Command='rsync -arvuz --progress --chmod=ug=rwX,o=rX --exclude "ConnectionStrings.xml" obj/$(Configuration)/Package/PackageTmp/ daniel-deploy@lisa.youareaninja.com:/var/www/$(DestinationDir)/site/' />
+		<Exec Command='rsync -arvuz --progress --chmod=ug=rwX,o=rX --exclude "ConnectionStrings.config" --exclude "Authentication.config" obj/$(Configuration)/Package/PackageTmp/ daniel-deploy@lisa.youareaninja.com:/var/www/$(DestinationDir)/site/' />
 	</Target>
 </Project>

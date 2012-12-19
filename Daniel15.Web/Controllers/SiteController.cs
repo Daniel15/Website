@@ -46,7 +46,7 @@ namespace Daniel15.Web.Controllers
 			var posts = HttpContext.Cache.GetOrInsert("LatestPosts", DateTime.Now + CACHE_POSTS_FOR, Cache.NoSlidingExpiration,
 			                                          () => _blogRepository.LatestPostsSummary());
 			
-			return View(new IndexViewModel
+			return View(Views.Index, new IndexViewModel
 			{
 				LatestPosts = posts
 			});
@@ -60,7 +60,7 @@ namespace Daniel15.Web.Controllers
 		{
 			var projects = _projectRepository.All();
 
-			return View(MVC.Site.Views.Projects, new ProjectsViewModel
+			return View(Views.Projects, new ProjectsViewModel
 			{
 				CurrentProjects = projects.Where(x => x.IsCurrent).ToList(),
 				PreviousProjects = projects.Where(x => !x.IsCurrent).ToList(),
@@ -74,7 +74,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns></returns>
 		public virtual ActionResult Search()
 		{
-			return View(MVC.Site.Views.Search, new ViewModelBase());
+			return View(Views.Search, new ViewModelBase());
 		}
 
 		/// <summary>
@@ -85,7 +85,7 @@ namespace Daniel15.Web.Controllers
 		{
 			// Currently just proxies to the PHP page - This needs to be rewritten in C#
 			var content = new WebClient().DownloadString("http://dan.cx/socialfeed/loadhtml.php");
-			return View(new SocialFeedViewModel { Content = content });
+			return View(Views.SocialFeed, new SocialFeedViewModel { Content = content });
 		}
 
 		/// <summary>
@@ -98,7 +98,7 @@ namespace Daniel15.Web.Controllers
 			//Response.StatusCode = (int) HttpStatusCode.NotFound;
 			//Response.TrySkipIisCustomErrors = true;
 
-			return View(new ViewModelBase());
+			return View(Views.FileNotFound, new ViewModelBase());
 		}
 
 		#region Google Talk chat status
