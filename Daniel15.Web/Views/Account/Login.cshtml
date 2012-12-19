@@ -1,0 +1,21 @@
+﻿@model Daniel15.Web.ViewModels.Account.LoginViewModel
+
+@{
+	Model.Title = "Log in";
+}
+
+@using (Html.BeginForm(new { ReturnUrl = Model.ReturnUrl }))
+{
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary(true)
+
+	@Html.LabelFor(m => m.UserName)
+	@Html.TextBoxFor(m => m.UserName)
+	@Html.ValidationMessageFor(m => m.UserName)<br />
+
+	@Html.LabelFor(m => m.Password)
+	@Html.PasswordFor(m => m.Password)
+	@Html.ValidationMessageFor(m => m.Password)<br />
+	
+	<p><input type="submit" value="Log in" /></p>
+}
