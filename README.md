@@ -1,7 +1,8 @@
 Daniel15
 ========
 
-This is the code that powers [my personal website](http://dan.cx/) and blog
+This is the code that powers [my personal website](http://dan.cx/) and blog. It is in the process of
+being rewritten in .NET (old version was in PHP) so some of this is out-of-date.
 
 Blog
 ====
@@ -9,9 +10,7 @@ The blog is a very simple blog. It doesn't really have many fancy features. Thin
 supported are:
 
  - Browsing monthly archives
- - Writing comments
-   - Spam protection via Akismet
-   - Subscribing to comment replies (receive emails when new comments are made)
+ - Writing comments (now handled with Disqus)
  - Writing new posts
    - Posting new posts to Facebook and Twitter
    
@@ -23,13 +22,6 @@ username and password are "admin" and "p@ssw0rd" respectively. To change the pas
 /account/hash?password=your_new_password (where your_new_password is the password you want) to get a
 hash, and then copy this into the application/config/auth.php file. You should also change the hash
 key for maximum security. 
-
-CSS and JavaScript combining 
-============================
-The CSS and JavaScript files can be combined and compressed to save download time. To do this, first
-run tools/compress.php at the command line. This combines and compresses the CSS and JS files, saves
-the result into res/combined, and saves the filenames to application/config/site.php. Once this is
-done, make sure "enableCompression" is set to "true" in application/config/site.php.
 
 Licence
 =======
