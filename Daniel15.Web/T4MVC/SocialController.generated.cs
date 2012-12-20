@@ -53,9 +53,9 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Social";
+        public readonly string Name = "social";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Social";
+        public const string NameConst = "social";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -63,13 +63,7 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string PostShareCount = "PostShareCount";
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionNameConstants
-        {
-            public const string PostShareCount = "PostShareCount";
+            public readonly string PostShareCount = ("PostShareCount").ToLowerInvariant();
         }
 
 
@@ -79,7 +73,7 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_PostShareCount
         {
-            public readonly string slug = "slug";
+            public readonly string slug = ("slug").ToLowerInvariant();
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

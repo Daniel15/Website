@@ -1,0 +1,12 @@
+﻿@model Daniel15.Web.Areas.Admin.ViewModels.Blog.PostsViewModel
+
+@{
+	Model.Title = "Posts";
+}
+
+<ul id="posts">
+	@foreach (var post in Model.Posts)
+	{
+		<li id="post-@post.Id">@post.Date.ToString("yyyy-MM-dd") - <a href="@Url.BlogEdit(post)">@post.Title</a></li>
+	}
+</ul>

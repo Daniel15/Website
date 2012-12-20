@@ -47,9 +47,9 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "BlogPartials";
+        public readonly string Name = "blogpartials";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "BlogPartials";
+        public const string NameConst = "blogpartials";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -57,13 +57,7 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Sidebar = "Sidebar";
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionNameConstants
-        {
-            public const string Sidebar = "Sidebar";
+            public readonly string Sidebar = ("Sidebar").ToLowerInvariant();
         }
 
 

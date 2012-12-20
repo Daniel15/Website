@@ -76,8 +76,9 @@ namespace Daniel15.Web.Repositories
 		/// Gets a reduced DTO of the latest posts (essentially everything except content)
 		/// </summary>
 		/// <param name="count">Number of posts to return</param>
+		/// <param name="published">Whether to return published posts (true) or unpublished (false)</param>
 		/// <returns>Blog post summary</returns>
-		List<PostSummaryModel> LatestPostsSummary(int count = 10);
+		List<PostSummaryModel> LatestPostsSummary(int count = 10, bool published = true);
 
 		/// <summary>
 		/// Gets the count of blog posts for every year and every month.
@@ -116,6 +117,12 @@ namespace Daniel15.Web.Repositories
 		/// </summary>
 		/// <returns>Total number of posts in the tag</returns>
 		int PublishedCount(TagModel tag);
+
+		/// <summary>
+		/// Get the total number of posts that are not yet published
+		/// </summary>
+		/// <returns>Total number of posts that have not yet been published</returns>
+		int UnpublishedCount();
 
 		/// <summary>
 		/// Get the total number of posts that are published in this month and year

@@ -24,11 +24,16 @@ namespace Daniel15.Web.App_Start
 		/// <param name="bundles">Bundle collection</param>
 		private static void RegisterCssBundles(BundleCollection bundles)
 		{
-			var lessBundle = new StyleBundle("~/bundles/main.css").Include("~/Content/css/main.less");
-			lessBundle.Transforms.Clear();
-			lessBundle.Transforms.Add(new LessTransform());
-			lessBundle.Transforms.Add(new CssMinify());
-			bundles.Add(lessBundle);
+			RegisterLessBundle(bundles, new StyleBundle("~/bundles/main.css").Include("~/Content/css/main.less"));
+			RegisterLessBundle(bundles, new StyleBundle("~/bundles/blogadmin.css").Include("~/Content/css/blogadmin.css"));
+		}
+
+		private static void RegisterLessBundle(BundleCollection bundles, Bundle bundle)
+		{
+			bundle.Transforms.Clear();
+			bundle.Transforms.Add(new LessTransform());
+			bundle.Transforms.Add(new CssMinify());
+			bundles.Add(bundle);
 		}
 
 		/// <summary>
@@ -63,6 +68,8 @@ namespace Daniel15.Web.App_Start
 				"~/Content/js/lib/syntaxhighlighter.js",
 
 				"~/Content/js/syntaxhighlighter.js"));
+
+			bundles.Add(new ScriptBundle("~/bundles/blogadmin.js").Include("~/Content/js/blogadmin.js"));
 		}
 	}
 

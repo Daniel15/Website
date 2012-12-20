@@ -47,9 +47,9 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Feed";
+        public readonly string Name = "feed";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Feed";
+        public const string NameConst = "feed";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -57,13 +57,7 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Sitemap = "Sitemap";
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionNameConstants
-        {
-            public const string Sitemap = "Sitemap";
+            public readonly string Sitemap = ("Sitemap").ToLowerInvariant();
         }
 
 

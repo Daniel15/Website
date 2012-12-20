@@ -79,5 +79,20 @@ namespace Daniel15.Web.Extensions
 		{
 			return urlHelper.Absolute(urlHelper.Blog(post));
 		}
+
+		/// <summary>
+		/// Gets a URL to edit the specified blog post
+		/// </summary>
+		/// <param name="urlHelper">The URL helper.</param>
+		/// <param name="post">Blog post to link to</param>
+		/// <returns>URL to edit this blog post</returns>
+		public static string BlogEdit(this UrlHelper urlHelper, PostSummaryModel post)
+		{
+			// Post date needs to be padded with a 0 (eg. "01" for January) - T4MVC doesn't work in this
+			// case because it's strongly-typed (can't pass a string for an int param)
+
+			//return urlHelper.Action(MVC.Blog.View(post.Date.Month, post.Date.Year, post.Slug));
+			return urlHelper.Action("Edit", "Blog", new { area = "Admin", month = post.Date.Month.ToString("00"), year = post.Date.Year, slug = post.Slug });
+		}
 	}
 }

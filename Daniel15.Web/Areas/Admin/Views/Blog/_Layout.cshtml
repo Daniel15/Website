@@ -1,0 +1,20 @@
+﻿@model ViewModelBase
+
+@{
+	// "Inherit" from the base layout
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@RenderBody()
+
+@section extraHead
+{
+	@Styles.Render("~/bundles/blogadmin.css")
+	@RenderSection("extraHead", required: false)
+}
+
+@section extraFoot
+{
+	@Scripts.Render("~/bundles/blogadmin.js")
+	@RenderSection("extraFoot", required: false)
+}

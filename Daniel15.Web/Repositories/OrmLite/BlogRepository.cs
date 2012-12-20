@@ -188,10 +188,12 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// Gets a reduced DTO of the latest posts (essentially everything except content)
 		/// </summary>
 		/// <param name="count">Number of posts to return</param>
+		/// <param name="published">Whether to return published posts (true) or unpublished (false)</param>
 		/// <returns>Blog post summary</returns>
-		public List<PostSummaryModel> LatestPostsSummary(int count = 10)
+		public List<PostSummaryModel> LatestPostsSummary(int count = 10, bool published = true)
 		{
 			return Connection.Select<PostSummaryModel>(query => query
+				.Where(post => post.Published == published)
 				.OrderByDescending(post => post.Date)
 				.Limit(count)
 			);
@@ -267,6 +269,15 @@ ORDER BY year DESC, month DESC");
 		public int PublishedCount(TagModel tag)
 		{
 			return PublishedCountCategoryOrTag("tag", "tags", tag.Id);
+		}
+
+		/// <summary>
+		/// Get the total number of posts that are not yet published
+		/// </summary>
+		/// <returns>Total number of posts that have not yet been published</returns>
+		public int UnpublishedCount()
+		{
+			return Connection.GetScalar<int>("SELECT COUNT(*) FROM blog_posts WHERE published = 0");
 		}
 
 		/// <summary>

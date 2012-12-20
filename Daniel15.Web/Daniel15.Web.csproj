@@ -142,6 +142,11 @@
     <Compile Include="App_Start\MiniProfiler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Ioc.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Blog\EditViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Blog\IndexViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Blog\PostsViewModel.cs" />
     <Compile Include="Attributes\HandleErrorAttribute.cs" />
     <Compile Include="Attributes\StopwatchAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -200,6 +205,9 @@
     <Compile Include="T4MVC\AccountController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4MVC\Admin.BlogController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\BlogController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
       <SubType>Code</SubType>
@@ -228,11 +236,10 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="T4MVC\T4MVC.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-      <SubType>Code</SubType>
-      <DesignTime>True</DesignTime>
+    <Compile Include="T4MVC\T4MVC1.cs">
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Blog\CategoryListingViewModel.cs" />
@@ -253,6 +260,12 @@
     <Content Include="Authentication.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="Areas\Admin\Views\Blog\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog\Posts.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog\Edit.cshtml" />
     <None Include="ConnectionStrings.config" />
     <Content Include="Content\css\blogadmin.css" />
     <Content Include="Content\css\border-radius.htc" />
@@ -527,7 +540,7 @@
     <None Include="deploy.proj" />
     <None Include="T4MVC\T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>T4MVC.cs</LastGenOutput>
+      <LastGenOutput>T4MVC1.cs</LastGenOutput>
     </None>
     <None Include="T4MVC\T4MVC.tt.settings.xml" />
     <Content Include="robots.txt" />
@@ -574,6 +587,7 @@
     <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Content\js\framework\.git\branches\" />
     <Folder Include="Content\js\framework\.git\objects\info\" />
     <Folder Include="Content\js\framework\.git\refs\tags\" />

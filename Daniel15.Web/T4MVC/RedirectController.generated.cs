@@ -50,9 +50,9 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Redirect";
+        public readonly string Name = "redirect";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Redirect";
+        public const string NameConst = "redirect";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -60,15 +60,8 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Css = "Css";
-            public readonly string Js = "Js";
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionNameConstants
-        {
-            public const string Css = "Css";
-            public const string Js = "Js";
+            public readonly string Css = ("Css").ToLowerInvariant();
+            public readonly string Js = ("Js").ToLowerInvariant();
         }
 
 

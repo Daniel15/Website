@@ -1,0 +1,13 @@
+﻿@model Daniel15.Web.Areas.Admin.ViewModels.Blog.IndexViewModel
+
+@{
+	Model.Title = "Blog Administration";
+}
+
+<h2>Posts</h2>
+<p>There are:</p>
+<ul>
+	<li><a href="@Url.Action(MVC.Admin.Blog.Posts(published: true))">@Model.PublishedPosts published posts</a></li>
+	<li><a href="@Url.Action(MVC.Admin.Blog.Posts(published: false))">@Model.UnpublishedPosts unpublished posts</a></li>
+</ul>
+TODO: Create new post link

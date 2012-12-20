@@ -47,9 +47,9 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Site";
+        public readonly string Name = "site";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Site";
+        public const string NameConst = "site";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -57,23 +57,12 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = "Index";
-            public readonly string Projects = "Projects";
-            public readonly string Search = "Search";
-            public readonly string SocialFeed = "SocialFeed";
-            public readonly string FileNotFound = "FileNotFound";
-            public readonly string ChatStatus = "ChatStatus";
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionNameConstants
-        {
-            public const string Index = "Index";
-            public const string Projects = "Projects";
-            public const string Search = "Search";
-            public const string SocialFeed = "SocialFeed";
-            public const string FileNotFound = "FileNotFound";
-            public const string ChatStatus = "ChatStatus";
+            public readonly string Index = ("Index").ToLowerInvariant();
+            public readonly string Projects = ("Projects").ToLowerInvariant();
+            public readonly string Search = ("Search").ToLowerInvariant();
+            public readonly string SocialFeed = ("SocialFeed").ToLowerInvariant();
+            public readonly string FileNotFound = ("FileNotFound").ToLowerInvariant();
+            public readonly string ChatStatus = ("ChatStatus").ToLowerInvariant();
         }
 
 

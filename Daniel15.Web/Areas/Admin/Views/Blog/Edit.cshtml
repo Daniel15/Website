@@ -1,0 +1,35 @@
+﻿@model Daniel15.Web.Areas.Admin.ViewModels.Blog.EditViewModel
+
+@{
+	Model.Title = "Edit Post";
+}
+
+@using (Html.BeginForm())
+{
+	<div id="main">
+		<p>
+			@Html.LabelFor(x => x.Post.Title, "Title:")
+			@Html.TextBoxFor(x => x.Post.Title)
+		</p>
+		<p>
+			@Html.LabelFor(x => x.Post.Slug, "Slug:")
+			@Html.TextBoxFor(x => x.Post.Slug)
+		</p>
+		<p>
+			@Html.LabelFor(x => x.Post.Date, "Date:")
+			@Html.TextBoxFor(x => x.Post.Date)
+		</p>
+		<p>
+			@Html.CheckBoxFor(x => x.Post.Published)
+			@Html.LabelFor(x => x.Post.Published)
+		</p>
+		<p>
+			@Html.LabelFor(x => x.Post.RawContent, "Post (wrap paragraphs in <p> tags):")<br />
+			@Html.TextAreaFor(x => x.Post.RawContent, rows: 15, columns: 100, htmlAttributes: new { })
+		</p>
+		<p>
+			TODO: Post to Twitter and Facebook
+		</p>
+		TODO: Metadata
+	</div>
+}
