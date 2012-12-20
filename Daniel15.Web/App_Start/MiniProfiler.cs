@@ -2,7 +2,6 @@ using Daniel15.Web.Infrastructure;
 using System.Web;
 using System.Web.Mvc;
 using System.Linq;
-using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using StackExchange.Profiling;
 using StackExchange.Profiling.MVCHelpers;
 using StackExchange.Profiling.SqlFormatters;
@@ -19,14 +18,12 @@ namespace Daniel15.Web.App_Start
 		/// </summary>
 		public static void Init()
 		{
-			// Don't do anything if Mini Profiler isn't enabled
-			if (!Ioc.Container.GetInstance<ISiteConfiguration>().EnableProfiling)
-				return;
-
 			MiniProfiler.Settings.SqlFormatter = new InlineFormatter();
 
 			// Setup profiler for Controllers via a Global ActionFilter
 			GlobalFilters.Filters.Add(new ProfilingActionFilter());
+
+			MiniProfiler.Settings.Results_Authorize = MiniProfiler.Settings.Results_List_Authorize = request => request.IsAuthenticated;
 
 			// Intercept ViewEngines to profile all partial views and regular views.
 			// If you prefer to insert your profiling blocks manually you can comment this out
@@ -50,12 +47,16 @@ namespace Daniel15.Web.App_Start
 		/// <param name="context">An <see cref="T:System.Web.HttpApplication" /> that provides access to the methods, properties, and events common to all application objects within an ASP.NET application</param>
 		public void Init(HttpApplication context)
 		{
-			// Attach MiniProfiler to requests, if it's enabled
-			if (Ioc.Container.GetInstance<ISiteConfiguration>().EnableProfiling)
+			// Attach MiniProfiler to requests
+			context.BeginRequest += (sender, e) => MiniProfiler.Start();
+			context.EndRequest += (sender, e) => MiniProfiler.Stop();
+
+			context.AuthenticateRequest += (sender, e) =>
 			{
-				context.BeginRequest += (sender, e) => MiniProfiler.Start();
-				context.EndRequest += (sender, e) => MiniProfiler.Stop();	
-			}
+				// Stop profiling if user isn't logged in.
+				if (context.User == null || !context.User.Identity.IsAuthenticated)
+					MiniProfiler.Stop(discardResults: true);
+			};
 		}
 
 		public void Dispose() { }

@@ -31,10 +31,5 @@ namespace Daniel15.Web.Infrastructure
 		/// Gets the Disqus shortname used by the blog comments
 		/// </summary>
 		string DisqusShortname { get; }
-
-		/// <summary>
-		/// Whether to enable profiling of the website
-		/// </summary>
-		bool EnableProfiling { get; }
 	}
 }
