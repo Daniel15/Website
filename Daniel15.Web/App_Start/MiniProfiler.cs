@@ -54,7 +54,7 @@ namespace Daniel15.Web.App_Start
 			context.AuthenticateRequest += (sender, e) =>
 			{
 				// Stop profiling if user isn't logged in.
-				if (context.User == null || !context.User.Identity.IsAuthenticated)
+				if (!context.Request.IsAuthenticated)
 					MiniProfiler.Stop(discardResults: true);
 			};
 		}
