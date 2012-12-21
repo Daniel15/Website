@@ -8,11 +8,22 @@ namespace Daniel15.Web.App_Start
 	/// </summary>
 	public class RouteConfig
 	{
-		public static void RegisterRoutes(RouteCollection routes)
+		/// <summary>
+		/// Registers routes for URLs that should be ignored
+		/// </summary>
+		/// <param name="routes">The route collection to add routes to</param>
+		private static void RegisterIgnoreRoutes(RouteCollection routes)
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 			routes.IgnoreRoute("elmah.axd");
+		}
 
+		/// <summary>
+		/// Register routes relating to general site sections
+		/// </summary>
+		/// <param name="routes">The route collection to add routes to</param>
+		private static void RegisterSiteRoutes(RouteCollection routes)
+		{
 			// Index page
 			routes.MapRoute(
 				name: "Index",
@@ -33,7 +44,14 @@ namespace Daniel15.Web.App_Start
 				url: "sitemap.xml",
 				defaults: new { controller = "Feed", action = "Sitemap" }
 			);
+		}
 
+		/// <summary>
+		/// Register routes relating to the blog
+		/// </summary>
+		/// <param name="routes">The route collection to add routes to</param>
+		private static void RegisterBlogRoutes(RouteCollection routes)
+		{
 			// Blog social network sharing counts
 			routes.MapRoute(
 				name: "BlogPostShareCount",
@@ -41,7 +59,7 @@ namespace Daniel15.Web.App_Start
 				defaults: MVC.Social.PostShareCount(),
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
 			);
-	
+
 			// Viewing a blog post
 			routes.MapRoute(
 				name: "BlogView",
@@ -68,7 +86,7 @@ namespace Daniel15.Web.App_Start
 				name: "BlogCategoryPage",
 				url: "blog/category/{slug}/page-{page}",
 				defaults: MVC.Blog.Category(),
-				constraints: new { page = @"\d+"}
+				constraints: new { page = @"\d+" }
 			);
 
 			// Viewing a tag
@@ -104,6 +122,21 @@ namespace Daniel15.Web.App_Start
 				constraints: new { page = @"\d+" }
 			);
 
+			// Blog short URLs
+			routes.MapRoute(
+				name: "BlogShortUrl",
+				url: "B{alias}",
+				defaults: MVC.Blog.ShortUrl(),
+				constraints: new { alias = @"[0-9A-Za-z\-_]+" }
+			);
+		}
+
+		/// <summary>
+		/// Register any miscellaneous routes
+		/// </summary>
+		/// <param name="routes">The route collection to add routes to</param>
+		private static void RegisterMiscRoutes(RouteCollection routes)
+		{
 			// Redirects to latest CSS and JS
 			routes.MapRoute(
 				name: "LatestCSS",
@@ -115,43 +148,28 @@ namespace Daniel15.Web.App_Start
 				url: "latest.js",
 				defaults: new { controller = "Redirect", action = "Js" }
 			);
+		}
 
-			// Blog short URLs
-			routes.MapRoute(
-				name: "BlogShortUrl",
-				url: "B{alias}",
-				defaults: MVC.Blog.ShortUrl(),
-				constraints: new { alias = @"[0-9A-Za-z\-_]+" }
-			);
+		/// <summary>
+		/// Register all MVC routes for the site
+		/// </summary>
+		/// <param name="routes">The route collection to add routes to</param>
+		public static void RegisterRoutes(RouteCollection routes)
+		{
+			// Don't use controllers in custom areas with these routes - Use default namespace
+			ControllerBuilder.Current.DefaultNamespaces.Add("Daniel15.Web.Controllers");
 
+			RegisterIgnoreRoutes(routes);
+			RegisterSiteRoutes(routes);
+			RegisterBlogRoutes(routes);
+			RegisterMiscRoutes(routes);
+
+			// When all else fails... A default route, just in case.
 			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
 				defaults: new { controller = "Site", action = "Index", id = UrlParameter.Optional }
 			);
-
-			/*		
-	// Blog sub-controllers (sidebar, feed)
-	Route::set('blog_sub', 'blog/<controller>(/<action>(/<id>))', array('controller' => '(sidebar|feed)'))
-		->defaults(array(
-			'directory' => 'blog',
-			'action'    => 'index'
-		));
-		
-	// Blog administration
-	Route::set('blogadmin', 'blogadmin(/<controller>(/<action>(/<id>)))')
-		->defaults(array(
-			'directory'  => 'blogadmin',
-			'controller' => 'home',
-			'action'     => 'index',
-		));
-		
-	// Latest CSS and JavaScript
-	Route::set('latest_js', 'res/combined/<name>.<type>')
-		->defaults(array(
-			'controller' => 'redirect',
-			'action'     => 'latest_res',
-		));	*/
 		}
 	}
 }
