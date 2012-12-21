@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Daniel15.Web.Extensions;
 using ServiceStack.DataAnnotations;
 
@@ -8,7 +9,11 @@ namespace Daniel15.Web.Models.Blog
 	public class PostSummaryModel
 	{
 		public int Id { get; set; }
+
+		[Required]
 		public string Title { get; set; }
+
+		[Required]
 		public string Slug { get; set; }
 		public bool Published { get; set; }
 
@@ -20,6 +25,7 @@ namespace Daniel15.Web.Models.Blog
 		public long UnixDate { get; set; }
 
 		[Ignore]
+		[Required]
 		public DateTime Date
 		{
 			get { return DateExtensions.FromUnix(UnixDate); }

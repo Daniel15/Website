@@ -155,6 +155,7 @@
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\SocialController.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\QueryStringExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\ISiteConfiguration.cs">
@@ -249,6 +250,7 @@
     <Compile Include="ViewModels\Blog\SidebarViewModel.cs" />
     <Compile Include="ViewModels\Blog\TagListingViewModel.cs" />
     <Compile Include="ViewModels\Feed\SitemapViewModel.cs" />
+    <Compile Include="ViewModels\Shared\CheckboxListModel.cs" />
     <Compile Include="ViewModels\Shared\ErrorViewModel.cs" />
     <Compile Include="ViewModels\Shared\PaginationModel.cs" />
     <Compile Include="ViewModels\Site\IndexViewModel.cs" />
@@ -267,7 +269,7 @@
     <Content Include="Areas\Admin\Views\Blog\Posts.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\Edit.cshtml" />
     <None Include="ConnectionStrings.config" />
-    <Content Include="Content\css\blogadmin.css" />
+    <None Include="Content\css\blogadmin.less" />
     <Content Include="Content\css\border-radius.htc" />
     <Content Include="Content\css\csshover.htc" />
     <Content Include="Content\images\background.png" />
@@ -585,6 +587,7 @@
     <Content Include="Views\Site\SocialFeed.cshtml" />
     <Content Include="Views\Blog\Tag.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\_CheckboxList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

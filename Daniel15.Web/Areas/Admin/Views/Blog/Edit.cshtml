@@ -7,6 +7,8 @@
 @using (Html.BeginForm())
 {
 	<div id="main">
+		@Html.ValidationSummary()
+
 		<p>
 			@Html.LabelFor(x => x.Post.Title, "Title:")
 			@Html.TextBoxFor(x => x.Post.Title)
@@ -30,6 +32,27 @@
 		<p>
 			TODO: Post to Twitter and Facebook
 		</p>
-		TODO: Metadata
 	</div>
+	<div id="metadata">
+		<p>
+			@Html.LabelFor(x => x.Post.MainCategoryId, "Main category:")
+			@Html.DropDownListFor(x => x.Post.MainCategoryId, Model.Categories.Select(cat => new SelectListItem { Text = cat.Title, Value = cat.Id.ToString() }))
+		</p>
+		<p>
+			<label>Categories:</label><br />
+			<div id="categories">
+				@Html.CheckboxListFor(x => x.PostCategoryIds, Model.Categories, x => x.Id, x => x.Title)
+			</div>
+		</p>
+		<p>
+			<label>Tags:</label><br />
+			<div id="tags">
+				@Html.CheckboxListFor(x => x.PostTagIds, Model.Tags, x => x.Id, x => x.Title)
+			</div>
+		</p>
+	</div>
+	
+	<p style="clear: both" >
+		<input type="submit" value="Save" />
+	</p>
 }

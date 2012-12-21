@@ -1,6 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using System.Web.Security;
 using Daniel15.Web.Areas.Admin.ViewModels.Blog;
 using Daniel15.Web.Repositories;
+using System.Linq;
+using Daniel15.Web.Extensions;
 
 namespace Daniel15.Web.Areas.Admin.Controllers
 {
@@ -45,7 +49,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 
 			return View(Views.Posts, new PostsViewModel
 			{
-				Posts = posts
+				Posts = posts,
 			});
 		}
 
@@ -54,14 +58,49 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 		/// </summary>
 		/// <param name="slug">Slug of the blog post</param>
 		/// <returns></returns>
+		[HttpGet]
 		public virtual ActionResult Edit(string slug)
 		{
+			// TODO: Handle creation of a new post (null slug)
+
 			var post = _blogRepository.GetBySlug(slug);
 
 			return View(Views.Edit, new EditViewModel
 			{
-				Post = post
+				Post = post,
+				Categories = _blogRepository.Categories(),
+				Tags = _blogRepository.Tags(),
+				PostCategoryIds = _blogRepository.CategoriesForPost(post).Select(cat => cat.Id).ToList(),
+				PostTagIds = _blogRepository.TagsForPost(post).Select(tag => tag.Id).ToList()
 			});
+		}
+
+		/// <summary>
+		/// Save changes to a blog post
+		/// </summary>
+		/// <param name="slug">Slug of the blog post</param>
+		/// <param name="viewModel"></param>
+		/// <returns></returns>
+		[HttpPost]
+		public virtual ActionResult Edit(string slug, EditViewModel viewModel)
+		{
+			// Ensure valid
+			if (!ModelState.IsValid)
+			{
+				// Not valid - Go back to the edit page
+				return Edit(slug);
+			}
+
+			// Valid, so save
+			var post = _blogRepository.GetBySlug(slug);
+			UpdateModel(post, "Post", new[] { "Title", "Slug", "Date", "Published", "RawContent", "MainCategoryId" });
+			_blogRepository.Save(post);
+
+			// TODO: Save categories
+			// TODO: Save tags
+
+			//TempData["topMessage"] = DateTime.Now.ToLongTimeString() + ": Saved changes to " + Server.HtmlEncode(post.Title);
+			return Redirect(Url.BlogEdit(post));
 		}
 	}
 }

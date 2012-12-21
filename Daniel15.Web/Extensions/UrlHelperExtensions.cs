@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using Daniel15.Web.Models;
 using Daniel15.Web.Models.Blog;
 
 namespace Daniel15.Web.Extensions

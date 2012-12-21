@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.Mvc;
 using ServiceStack.DataAnnotations;
 
 namespace Daniel15.Web.Models.Blog
@@ -34,12 +34,15 @@ namespace Daniel15.Web.Models.Blog
 		/// The raw content of this blog post, as retrieved from the database
 		/// </summary>
 		[Alias("content")]
+		[AllowHtml]
+		[Required]
 		public string RawContent { get; set; }
 
 		/// <summary>
 		/// ID of the main category for this post
 		/// </summary>
 		[Alias("maincategory_id")]
+		[Required]
 		public int MainCategoryId { get; set; }
 
 		/// <summary>

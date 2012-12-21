@@ -35,6 +35,7 @@ namespace T4MVC
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _CheckboxList = "_CheckboxList";
                 public readonly string _Layout = "_Layout";
                 public readonly string _Menu = "_Menu";
                 public readonly string _Pagination = "_Pagination";
@@ -42,6 +43,7 @@ namespace T4MVC
                 public readonly string Error = "Error";
                 public readonly string ErrorWithLayout = "ErrorWithLayout";
             }
+            public readonly string _CheckboxList = "~/Views/Shared/_CheckboxList.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _Menu = "~/Views/Shared/_Menu.cshtml";
             public readonly string _Pagination = "~/Views/Shared/_Pagination.cshtml";

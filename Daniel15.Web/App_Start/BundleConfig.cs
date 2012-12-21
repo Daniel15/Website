@@ -25,7 +25,7 @@ namespace Daniel15.Web.App_Start
 		private static void RegisterCssBundles(BundleCollection bundles)
 		{
 			RegisterLessBundle(bundles, new StyleBundle("~/bundles/main.css").Include("~/Content/css/main.less"));
-			RegisterLessBundle(bundles, new StyleBundle("~/bundles/blogadmin.css").Include("~/Content/css/blogadmin.css"));
+			RegisterLessBundle(bundles, new StyleBundle("~/bundles/blogadmin.css").Include("~/Content/css/blogadmin.less"));
 		}
 
 		private static void RegisterLessBundle(BundleCollection bundles, Bundle bundle)

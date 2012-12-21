@@ -21,7 +21,14 @@ namespace Daniel15.Web.Extensions
 		public static string BodyId(this HtmlHelper htmlHelper)
 		{
 			var routeData = htmlHelper.ViewContext.RouteData;
-			return routeData.GetRequiredString("controller").ToLower() + "-" + routeData.GetRequiredString("action").ToLower();
+			var controller = routeData.GetRequiredString("controller").ToLower();
+			var action = routeData.GetRequiredString("action").ToLower();
+			var area = routeData.DataTokens["area"] as string;
+
+			if (!string.IsNullOrEmpty(area))
+				return area.ToLower() + "-" + controller + "-" + action;
+			else
+				return controller + "-" + action;
 		}
 
 		/// <summary>
