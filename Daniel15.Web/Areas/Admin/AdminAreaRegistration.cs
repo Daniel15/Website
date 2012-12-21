@@ -26,12 +26,19 @@ namespace Daniel15.Web.Areas.Admin
 				defaults: new { controller = "Blog", action = "Posts", published = false }
 			);
 
-			// Viewing a blog post
+			// Editing an existing blog post
 			context.MapRoute(
 				name: "BlogEdit",
 				url: "blog/{year}/{month}/{slug}/edit",
 				defaults: MVC.Admin.Blog.Edit(),
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
+			);
+
+			// Creating a new blog post
+			context.MapRoute(
+				name: "BlogNew",
+				url: "blog/admin/new",
+				defaults: MVC.Admin.Blog.Edit(null)
 			);
 
 			context.MapRoute(

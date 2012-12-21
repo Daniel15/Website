@@ -143,5 +143,19 @@ namespace Daniel15.Web.Repositories
 		/// </summary>
 		/// <returns>A list of tags</returns>
 		IList<TagModel> Tags();
+
+		/// <summary>
+		/// Set the categories this blog post is categorised under
+		/// </summary>
+		/// <param name="post">The post</param>
+		/// <param name="categoryIds">Category IDs</param>
+		void SetCategories(PostSummaryModel post, IEnumerable<int> categoryIds);
+
+		/// <summary>
+		/// Set the tags this blog post is tagged with
+		/// </summary>
+		/// <param name="post">The post</param>
+		/// <param name="tagIds">Tag IDs</param>
+		void SetTags(PostSummaryModel post, IEnumerable<int> tagIds);
 	}
 }

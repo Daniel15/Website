@@ -65,7 +65,7 @@ namespace Daniel15.Web.Extensions
 			// case because it's strongly-typed (can't pass a string for an int param)
 
 			//return urlHelper.Action(MVC.Blog.View(post.Date.Month, post.Date.Year, post.Slug));
-			return urlHelper.Action("View", "Blog", new { month = post.Date.Month.ToString("00"), year = post.Date.Year, slug = post.Slug });
+			return urlHelper.Action("View", "Blog", new { month = post.Date.Month.ToString("00"), year = post.Date.Year, slug = post.Slug, area = string.Empty });
 		}
 
 		/// <summary>

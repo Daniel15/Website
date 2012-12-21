@@ -4,7 +4,7 @@
 	@foreach (var item in Model.Items)
 	{
 		<li>
-			<input type="checkbox" id="@Model.Name-@(i++)" name="@Model.Name" value="@item.Id" checked="@item.Selected" />
+			<input type="checkbox" id="@Model.Name-@(++i)" name="@Model.Name" value="@item.Id" checked="@item.Selected" />
 			<label for="@Model.Name-@i">@item.Label</label>
 		</li>
 	}

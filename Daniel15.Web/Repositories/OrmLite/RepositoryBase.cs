@@ -34,7 +34,7 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// Gets all the entities in the database
 		/// </summary>
 		/// <returns></returns>
-		public List<T> All()
+		public virtual List<T> All()
 		{
 			return Connection.Select<T>();
 		}
@@ -44,11 +44,11 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// </summary>
 		/// <param name="id">ID of the entity</param>
 		/// <returns>The entity</returns>
-		public T Get(int id)
+		public virtual T Get(int id)
 		{
 			var entity = Connection.GetByIdOrDefault<T>(id);
 			if (entity == null)
-				throw new ItemNotFoundException();
+				throw new EntityNotFoundException();
 
 			return entity;
 		}
@@ -57,7 +57,7 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// Saves this entity to the database
 		/// </summary>
 		/// <param name="entity">The entity to save</param>
-		public void Save(T entity)
+		public virtual void Save(T entity)
 		{
 			Connection.Save(entity);
 		}
@@ -66,7 +66,7 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// Get the total number of records in this table
 		/// </summary>
 		/// <returns>Total number of records</returns>
-		public int Count()
+		public virtual int Count()
 		{
 			//Connection.GetScalar<T, int>(field => Sql.Count(field))
 			// Need to do this an ugly way - Using Sql.Count like above requires an int property...

@@ -58,15 +58,5 @@ namespace Daniel15.Web.Infrastructure
 			get { return (string)this["disqusShortname"]; }
 			set { this["disqusShortname"] = value; }
 		}
-
-		/// <summary>
-		/// Whether to enable profiling of the website
-		/// </summary>
-		[ConfigurationProperty("enableProfiling", IsRequired = false, DefaultValue = false)]
-		public bool EnableProfiling
-		{
-			get { return (bool)this["enableProfiling"]; }
-			set { this["enableProfiling"] = value; }
-		}
 	}
 }

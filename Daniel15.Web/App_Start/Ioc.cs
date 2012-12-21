@@ -5,6 +5,7 @@ using System.Data.Common;
 using System.Reflection;
 using System.Web.Mvc;
 using Daniel15.Web.Infrastructure;
+using Daniel15.Web.Mvc;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.Services;
 using Daniel15.Web.Services.Social;
@@ -55,24 +56,27 @@ namespace Daniel15.Web.App_Start
 			var config = (SiteConfiguration)ConfigurationManager.GetSection("SiteConfiguration");
 			container.Register<ISiteConfiguration>(() => config);
 
+			container.Register<ITempDataProvider, CookieTempDataProvider>();
+
 			// Services
 			container.Register<IUrlShortener, UrlShortener>();
 			container.Register<ISocialManager, SocialManager>();
 
-			InitializeDatabase(container, config.EnableProfiling);
+			InitializeDatabase(container);
 		}
 
 		/// <summary>
 		/// Initialises the database stuff in the IoC container
 		/// </summary>
 		/// <param name="container"></param>
-		/// <param name="enableProfiling">Whether database profiling is enabled</param>
-		private static void InitializeDatabase(Container container, bool enableProfiling)
+		private static void InitializeDatabase(Container container)
 		{
+			const bool ENABLE_PROFILING = true;
+
 			// By default, don't add a filter to the DB connection factory
 			Func<IDbConnection, IDbConnection> connFilter = conn => conn;
 			// Check if profiling is enabled
-			if (enableProfiling)
+			if (ENABLE_PROFILING)
 			{
 				// Yes, so we need to add a custom filter to the connection factory
 				connFilter = conn =>

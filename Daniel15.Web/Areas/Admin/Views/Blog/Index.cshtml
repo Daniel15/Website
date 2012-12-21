@@ -10,4 +10,4 @@
 	<li><a href="@Url.Action(MVC.Admin.Blog.Posts(published: true))">@Model.PublishedPosts published posts</a></li>
 	<li><a href="@Url.Action(MVC.Admin.Blog.Posts(published: false))">@Model.UnpublishedPosts unpublished posts</a></li>
 </ul>
-TODO: Create new post link
+<p>@Html.ActionLink("Write a new post", MVC.Admin.Blog.Edit())</p>

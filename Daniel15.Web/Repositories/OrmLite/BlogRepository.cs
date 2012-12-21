@@ -333,6 +333,61 @@ ORDER BY year DESC, month DESC");
 			return Connection.Select<TagModel>(query => query.OrderBy(tag => tag.Title));
 		}
 
+		/// <summary>
+		/// Set the categories this blog post is categorised under
+		/// </summary>
+		/// <param name="post">The post</param>
+		/// <param name="categoryIds">Category IDs</param>
+		public void SetCategories(PostSummaryModel post, IEnumerable<int> categoryIds)
+		{
+			// Find all the currently selected categories
+			var current = Connection
+				.Select<PostCategoryModel>(x => x.PostId == post.Id)
+				.Select(x => x.CategoryId)
+				.ToList();
+
+			// Remove items that are in the current list but NOT in the new list
+			var toRemove = current.Except(categoryIds).ToList();
+			if (toRemove.Count > 0)
+				Connection.Delete<PostCategoryModel>("post_id = {0} AND category_id IN ({1})".Params(post.Id, toRemove.SqlInValues()));
+
+			// Add items that are in the new list but NOT in the current list
+			var toAdd = categoryIds.Except(current).ToList();
+			if (toAdd.Count > 0)
+				Connection.InsertAll(toAdd.Select(categoryId => new PostCategoryModel { PostId = post.Id, CategoryId = categoryId }));
+		}
+
+		/// <summary>
+		/// Set the tags this blog post is tagged with
+		/// </summary>
+		/// <param name="post">The post</param>
+		/// <param name="tagIds">Tag IDs</param>
+		public void SetTags(PostSummaryModel post, IEnumerable<int> tagIds)
+		{
+			// Find all the currently selected tags
+			var current = Connection
+				.Select<PostTagModel>(x => x.PostId == post.Id)
+				.Select(x => x.TagId)
+				.ToList();
+
+			// Remove items that are in the current list but NOT in the new list
+			var toRemove = current.Except(tagIds).ToList();
+			if (toRemove.Count > 0)
+				Connection.Delete<PostTagModel>("post_id = {0} AND tag_ids IN ({1})".Params(post.Id, toRemove.SqlInValues()));
+
+			// Add items that are in the new list but NOT in the current list
+			var toAdd = tagIds.Except(current).ToList();
+			if (toAdd.Count > 0)
+				Connection.InsertAll(toAdd.Select(tagId => new PostTagModel { PostId = post.Id, TagId = tagId }));
+		}
+
+		public override void Save(PostModel entity)
+		{
+			base.Save(entity);
+			// Update the ID
+			entity.Id = Convert.ToInt32(Connection.GetLastInsertId());
+		}
+
 		private class MonthYearCount
 		{
 			public int Month { get; set; }

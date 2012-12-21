@@ -35,12 +35,12 @@ namespace Daniel15.Web.Repositories.OrmLite
 		/// <param name="connection">Database connection</param>
 		/// <param name="predicate">Predicate to match on</param>
 		/// <returns>First item that matches the predicate</returns>
-		/// <exception cref="ItemNotFoundException">Thrown if no item matched the predicate</exception>
+		/// <exception cref="EntityNotFoundException">Thrown if no item matched the predicate</exception>
 		public static T FirstOrThrow<T>(this IDbConnection connection, Expression<Func<T, bool>> predicate) where T : new()
 		{
 			var entity = connection.FirstOrDefault(predicate);
 			if (entity == null)
-				throw new ItemNotFoundException();
+				throw new EntityNotFoundException();
 
 			return entity;
 		}

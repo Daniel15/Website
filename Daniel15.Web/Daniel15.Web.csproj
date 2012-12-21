@@ -167,7 +167,10 @@
     <Compile Include="Infrastructure\T4MvcControllerConstructorResolutionBehavior.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Infrastructure\ViewBase.cs" />
+    <Compile Include="Models\Blog\PostCategoryModel.cs" />
+    <Compile Include="Models\Blog\PostTagModel.cs" />
+    <Compile Include="Mvc\CookieTempDataProvider.cs" />
+    <Compile Include="Mvc\ViewBase.cs" />
     <Compile Include="Models\Blog\CategoryModel.cs" />
     <Compile Include="Models\Blog\PostSummaryModel.cs" />
     <Compile Include="Models\Blog\TagModel.cs" />
@@ -175,7 +178,7 @@
     <Compile Include="Models\Home\ProjectModel.cs" />
     <Compile Include="Models\Home\ProjectTechnologyModel.cs" />
     <Compile Include="Repositories\IProjectRepository.cs" />
-    <Compile Include="Repositories\ItemNotFoundException.cs" />
+    <Compile Include="Repositories\EntityNotFoundException.cs" />
     <Compile Include="Extensions\OrmLiteExtensions.cs" />
     <Compile Include="Repositories\Static\ProjectRepository.cs" />
     <Compile Include="Services\IUrlShortener.cs" />

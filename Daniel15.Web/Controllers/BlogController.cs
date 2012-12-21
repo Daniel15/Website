@@ -106,7 +106,7 @@ namespace Daniel15.Web.Controllers
 			{
 				category = _blogRepository.GetCategory(slug);
 			}
-			catch (ItemNotFoundException)
+			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the category doesn't exist
 				return HttpNotFound(string.Format("Category '{0}' not found.", slug));
@@ -130,7 +130,7 @@ namespace Daniel15.Web.Controllers
 			{
 				tag = _blogRepository.GetTag(slug);
 			}
-			catch (ItemNotFoundException)
+			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the category doesn't exist
 				return HttpNotFound(string.Format("Tag '{0}' not found.", slug));
@@ -169,7 +169,7 @@ namespace Daniel15.Web.Controllers
 			{
 				post = _blogRepository.GetBySlug(slug);
 			}
-			catch (ItemNotFoundException)
+			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the post doesn't exist
 				return HttpNotFound(string.Format("Blog post '{0}' not found.", slug));
