@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Daniel15.Web.Models.Home;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.ViewModels;
+using Daniel15.Web.ViewModels.Shared;
 using Daniel15.Web.ViewModels.Site;
 using Daniel15.Web.Extensions;
 using System.Linq;
@@ -99,6 +100,17 @@ namespace Daniel15.Web.Controllers
 			//Response.TrySkipIisCustomErrors = true;
 
 			return View(Views.FileNotFound, new ViewModelBase());
+		}
+
+		/// <summary>
+		/// The page that is displayed when an internal server error occurs.
+		/// </summary>
+		/// <returns>The error page</returns>
+		public virtual ActionResult Error()
+		{
+			Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+			Response.TrySkipIisCustomErrors = true;
+			return View(MVC.Shared.Views.ErrorWithLayout, new ErrorViewModel());
 		}
 
 		#region Google Talk chat status
