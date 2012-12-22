@@ -56,7 +56,8 @@ namespace Daniel15.Web.Repositories.OrmLite
 				SELECT blog_categories.id, blog_categories.title, blog_categories.slug
 				FROM blog_post_categories
 				INNER JOIN blog_categories ON blog_categories.id = blog_post_categories.category_id
-				WHERE blog_post_categories.post_id = {0}", post.Id);
+				WHERE blog_post_categories.post_id = {0}
+				ORDER BY blog_categories.title", post.Id);
 		}
 
 		/// <summary>
@@ -70,7 +71,8 @@ namespace Daniel15.Web.Repositories.OrmLite
 				SELECT blog_tags.id, blog_tags.title, blog_tags.slug
 				FROM blog_post_tags
 				INNER JOIN blog_tags ON blog_tags.id = blog_post_tags.tag_id
-				WHERE blog_post_tags.post_id = {0}", post.Id);
+				WHERE blog_post_tags.post_id = {0}
+				ORDER BY blog_tags.title", post.Id);
 		}
 
 		/// <summary>
