@@ -383,9 +383,14 @@ ORDER BY year DESC, month DESC");
 
 		public override void Save(PostModel entity)
 		{
+			// Assume it's new if the ID isn't set yet
+			var isNew = entity.Id == 0;
+
 			base.Save(entity);
+
 			// Update the ID
-			entity.Id = Convert.ToInt32(Connection.GetLastInsertId());
+			if (isNew)
+				entity.Id = Convert.ToInt32(Connection.GetLastInsertId());
 		}
 
 		private class MonthYearCount
