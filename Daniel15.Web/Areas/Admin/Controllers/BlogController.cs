@@ -87,6 +87,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 		/// <param name="viewModel"></param>
 		/// <returns></returns>
 		[HttpPost]
+		[ValidateInput(false)]
 		public virtual ActionResult Edit(EditViewModel viewModel, string slug = null)
 		{
 			// Ensure valid
