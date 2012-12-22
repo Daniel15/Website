@@ -272,8 +272,8 @@
     <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\Posts.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\Edit.cshtml" />
-    <None Include="ConnectionStrings.config" />
-    <None Include="Content\css\blogadmin.less" />
+    <Content Include="ConnectionStrings.config" />
+    <Content Include="Content\css\blogadmin.less" />
     <Content Include="Content\css\border-radius.htc" />
     <Content Include="Content\css\csshover.htc" />
     <Content Include="Content\images\background.png" />
@@ -600,7 +600,7 @@
     <Folder Include="Content\js\framework\.git\refs\tags\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Site\Index.cshtml" />
