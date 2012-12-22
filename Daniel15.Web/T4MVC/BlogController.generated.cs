@@ -77,9 +77,9 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "blog";
+        public readonly string Name = "Blog";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "blog";
+        public const string NameConst = "Blog";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -87,13 +87,25 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = ("Index").ToLowerInvariant();
-            public readonly string Category = ("Category").ToLowerInvariant();
-            public readonly string Tag = ("Tag").ToLowerInvariant();
-            public readonly string Archive = ("Archive").ToLowerInvariant();
-            public readonly string View = ("View").ToLowerInvariant();
-            public readonly string ShortUrl = ("ShortUrl").ToLowerInvariant();
-            public readonly string Feed = ("Feed").ToLowerInvariant();
+            public readonly string Index = "Index";
+            public readonly string Category = "Category";
+            public readonly string Tag = "Tag";
+            public readonly string Archive = "Archive";
+            public readonly string View = "View";
+            public readonly string ShortUrl = "ShortUrl";
+            public readonly string Feed = "Feed";
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants
+        {
+            public const string Index = "Index";
+            public const string Category = "Category";
+            public const string Tag = "Tag";
+            public const string Archive = "Archive";
+            public const string View = "View";
+            public const string ShortUrl = "ShortUrl";
+            public const string Feed = "Feed";
         }
 
 
@@ -103,7 +115,7 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Index
         {
-            public readonly string page = ("page").ToLowerInvariant();
+            public readonly string page = "page";
         }
         static readonly ActionParamsClass_Category s_params_Category = new ActionParamsClass_Category();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -111,8 +123,8 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Category
         {
-            public readonly string slug = ("slug").ToLowerInvariant();
-            public readonly string page = ("page").ToLowerInvariant();
+            public readonly string slug = "slug";
+            public readonly string page = "page";
         }
         static readonly ActionParamsClass_Tag s_params_Tag = new ActionParamsClass_Tag();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -120,8 +132,8 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Tag
         {
-            public readonly string slug = ("slug").ToLowerInvariant();
-            public readonly string page = ("page").ToLowerInvariant();
+            public readonly string slug = "slug";
+            public readonly string page = "page";
         }
         static readonly ActionParamsClass_Archive s_params_Archive = new ActionParamsClass_Archive();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -129,9 +141,9 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Archive
         {
-            public readonly string year = ("year").ToLowerInvariant();
-            public readonly string month = ("month").ToLowerInvariant();
-            public readonly string page = ("page").ToLowerInvariant();
+            public readonly string year = "year";
+            public readonly string month = "month";
+            public readonly string page = "page";
         }
         static readonly ActionParamsClass_View s_params_View = new ActionParamsClass_View();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -139,9 +151,9 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_View
         {
-            public readonly string month = ("month").ToLowerInvariant();
-            public readonly string year = ("year").ToLowerInvariant();
-            public readonly string slug = ("slug").ToLowerInvariant();
+            public readonly string month = "month";
+            public readonly string year = "year";
+            public readonly string slug = "slug";
         }
         static readonly ActionParamsClass_ShortUrl s_params_ShortUrl = new ActionParamsClass_ShortUrl();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -149,7 +161,7 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_ShortUrl
         {
-            public readonly string alias = ("alias").ToLowerInvariant();
+            public readonly string alias = "alias";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

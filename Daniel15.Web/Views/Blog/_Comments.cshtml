@@ -10,7 +10,7 @@
     var disqus_shortname = @Html.Raw(Config.DisqusShortname.ToJson()),
         disqus_title = @Html.Raw(Model.Title.ToJson()),
         disqus_identifier = @Model.Id,
-        disqus_url = @Html.Raw(Url.BlogAbsolute(Model).ToJson());
+        disqus_url = @Html.Raw(Url.BlogPostAbsolute(Model).ToJson());
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

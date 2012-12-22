@@ -39,7 +39,7 @@ namespace Daniel15.Web.Controllers
 		public virtual ActionResult PostShareCount(string slug)
 		{
 			var post = _blogRepository.GetSummaryBySlug(slug);
-			var url = Url.BlogAbsolute(post);
+			var url = Url.BlogPostAbsolute(post);
 			var shortUrl = Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http");
 			var counts = _socialManager.ShareCounts(post, url, shortUrl);
 			return Json(counts.ToDictionary(x => x.Key.Id, x => x.Value), JsonRequestBehavior.AllowGet);

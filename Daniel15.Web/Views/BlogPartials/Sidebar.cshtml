@@ -33,7 +33,7 @@
 		<ul>
 			@foreach (var category in Model.Categories)
 			{
-				<li><a href="@Url.Action(MVC.Blog.Category(category.Slug))">@category.Title</a></li>
+				<li><a href="@Url.BlogCategory(category)">@category.Title</a></li>
 			}
 		</ul>
 	</li>

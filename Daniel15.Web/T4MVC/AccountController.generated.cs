@@ -56,9 +56,9 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "account";
+        public readonly string Name = "Account";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "account";
+        public const string NameConst = "Account";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -66,7 +66,13 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Login = ("Login").ToLowerInvariant();
+            public readonly string Login = "Login";
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants
+        {
+            public const string Login = "Login";
         }
 
 
@@ -76,8 +82,8 @@ namespace Daniel15.Web.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Login
         {
-            public readonly string returnUrl = ("returnUrl").ToLowerInvariant();
-            public readonly string model = ("model").ToLowerInvariant();
+            public readonly string returnUrl = "returnUrl";
+            public readonly string model = "model";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

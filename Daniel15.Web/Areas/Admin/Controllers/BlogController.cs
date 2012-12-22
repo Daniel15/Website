@@ -114,8 +114,8 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 
 			TempData["topMessage"] = string.Format(
 				"{0}: Saved changes to {1}. <a href=\"{2}\" target=\"_blank\">View post</a>.", DateTime.Now.ToLongTimeString(),
-				Server.HtmlEncode(post.Title), Url.Blog(post));
-			return Redirect(Url.BlogEdit(post));
+				Server.HtmlEncode(post.Title), Url.BlogPost(post));
+			return Redirect(Url.BlogPostEdit(post));
 		}
 	}
 }

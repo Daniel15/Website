@@ -26,7 +26,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns>Content of the blog sidebar</returns>
 		public virtual ActionResult Sidebar()
 		{
-			return PartialView(new SidebarViewModel
+			return PartialView(Views.Sidebar, new SidebarViewModel
 			{
 				Counts = _blogRepository.MonthCounts(),
 				Categories = _blogRepository.Categories()

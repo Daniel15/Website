@@ -5,24 +5,24 @@
 }
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	@SitemapUrl(@Url.ActionAbsolute(MVC.Site.Index()), null, "weekly", 1.0)
-	@SitemapUrl(@Url.ActionAbsolute(MVC.Site.Projects()).ToLower(), null, "weekly", 0.9)
-	@SitemapUrl(@Url.ActionAbsolute(MVC.Site.SocialFeed()).ToLower(), null, "daily", 0.7)
-	@SitemapUrl(@Url.ActionAbsolute(MVC.Blog.Index()), null, "daily", 0.9)
+	@SitemapUrl(Url.ActionAbsolute(MVC.Site.Index()), null, "weekly", 1.0)
+	@SitemapUrl(Url.ActionAbsolute(MVC.Site.Projects()).ToLower(), null, "weekly", 0.9)
+	@SitemapUrl(Url.ActionAbsolute(MVC.Site.SocialFeed()).ToLower(), null, "daily", 0.7)
+	@SitemapUrl(Url.Absolute(Url.BlogIndex()), null, "daily", 0.9)
 	
 	@foreach (var post in Model.Posts)
 	{
-		@SitemapUrl(@Url.BlogAbsolute(post), post.Date, "monthly", 0.8)
+		@SitemapUrl(Url.BlogPostAbsolute(post), post.Date, "monthly", 0.8)
 	}
 	
 	@foreach (var category in Model.Categories)
 	{
-		@SitemapUrl(@Url.ActionAbsolute(MVC.Blog.Category(category.Slug)), null, "weekly", 0.7)
+		@SitemapUrl(Url.Absolute(Url.BlogCategory(category)), null, "weekly", 0.7)
 	}
 	
 	@foreach (var tag in Model.Tags)
 	{
-		@SitemapUrl(@Url.ActionAbsolute(MVC.Blog.Tag(tag.Slug)), null, "weekly", 0.7)
+		@SitemapUrl(Url.Absolute(Url.BlogTag(tag)), null, "weekly", 0.7)
 	}
 </urlset>
 

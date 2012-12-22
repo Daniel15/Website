@@ -7,6 +7,6 @@
 <ul id="posts">
 	@foreach (var post in Model.Posts)
 	{
-		<li id="post-@post.Id">@post.Date.ToString("yyyy-MM-dd") - <a href="@Url.BlogEdit(post)">@post.Title</a></li>
+		<li id="post-@post.Id">@post.Date.ToString("yyyy-MM-dd") - <a href="@Url.BlogPostEdit(post)">@post.Title</a></li>
 	}
 </ul>

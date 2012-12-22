@@ -41,7 +41,7 @@ namespace T4MVC
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class AdminClass
     {
-        public readonly string Name = "admin";
+        public readonly string Name = "Admin";
         public Daniel15.Web.Areas.Admin.Controllers.BlogController Blog = new Daniel15.Web.Areas.Admin.Controllers.T4MVC_BlogController();
     }
 }
@@ -87,8 +87,7 @@ namespace Links
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string blog_less = Url("blog.less");
-            public static readonly string blogadmin_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/blogadmin.min.css") ? Url("blogadmin.min.css") : Url("blogadmin.css");
-                 
+            public static readonly string blogadmin_less = Url("blogadmin.less");
             public static readonly string border_radius_htc = Url("border-radius.htc");
             public static readonly string csshover_htc = Url("csshover.htc");
             public static readonly string main_less = Url("main.less");

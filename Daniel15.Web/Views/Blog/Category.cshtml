@@ -1,7 +1,8 @@
 ﻿@model Daniel15.Web.ViewModels.Blog.CategoryListingViewModel
 
 @{
-	Model.PageUrlGenerator = page => Url.Action(MVC.Blog.Category(Model.Category.Slug, page));
+	//Model.PageUrlGenerator = page => Url.Action(MVC.Blog.Category(Model.Category.Slug, page));
+	Model.PageUrlGenerator = page => Url.BlogCategory(Model.Category, page);
 	Model.Heading = Config.BlogName;
 	Model.Title = string.Format("Latest posts in {0} — {1}", Model.Category.Title, Config.BlogName);
 

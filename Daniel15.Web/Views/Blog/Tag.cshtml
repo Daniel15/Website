@@ -1,7 +1,7 @@
 ﻿@model Daniel15.Web.ViewModels.Blog.TagListingViewModel
 
 @{
-	Model.PageUrlGenerator = page => Url.Action(MVC.Blog.Tag(Model.Tag.Slug, page));
+	Model.PageUrlGenerator = page => Url.BlogTag(Model.Tag, page);
 	Model.Heading = Config.BlogName;
 	Model.Title = string.Format("Latest posts in {0} — {1}", Model.Tag.Title, Config.BlogName);
 

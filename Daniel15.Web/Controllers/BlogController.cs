@@ -74,7 +74,7 @@ namespace Daniel15.Web.Controllers
 				{
 					Post = post, 
 					ShortUrl = ShortUrl(post),
-					SocialNetworks = _socialManager.ShareUrls(post, Url.BlogAbsolute(post), ShortUrl(post))
+					SocialNetworks = _socialManager.ShareUrls(post, Url.BlogPostAbsolute(post), ShortUrl(post))
 				});
 			}
 			viewModel.TotalCount = count;
@@ -178,7 +178,7 @@ namespace Daniel15.Web.Controllers
 			// Check the URL was actually correct (year and month), redirect if not.
 			if (year != post.Date.Year || month != post.Date.Month)
 			{
-				return RedirectPermanent(Url.Blog(post));
+				return RedirectPermanent(Url.BlogPost(post));
 			}
 
 			// Set last-modified date based on the date of the post
@@ -190,7 +190,7 @@ namespace Daniel15.Web.Controllers
 				PostCategories = _blogRepository.CategoriesForPost(post),
 				PostTags = _blogRepository.TagsForPost(post),
 				ShortUrl = Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http"),
-				SocialNetworks = _socialManager.ShareUrls(post, Url.BlogAbsolute(post), ShortUrl(post))
+				SocialNetworks = _socialManager.ShareUrls(post, Url.BlogPostAbsolute(post), ShortUrl(post))
 			});
 		}
 
@@ -213,7 +213,7 @@ namespace Daniel15.Web.Controllers
 				return HttpNotFound(string.Format("Blog post {0} for short URL '{1}' not found.", id, alias));
 			}
 
-			return RedirectPermanent(Url.Blog(post));
+			return RedirectPermanent(Url.BlogPost(post));
 		}
 
 		/// <summary>

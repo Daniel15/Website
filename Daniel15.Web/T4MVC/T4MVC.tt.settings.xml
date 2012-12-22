@@ -33,7 +33,7 @@ as it breaks the templated helper code-->
 If false, the namespace of the interface must be referenced in the 'ReferencedNamespaces' setting-->
   <GenerateActionResultInterface>True</GenerateActionResultInterface>
   <!--If true, use lower case tokens in routes for the area, controller and action names-->
-  <UseLowercaseRoutes>True</UseLowercaseRoutes>
+  <UseLowercaseRoutes>False</UseLowercaseRoutes>
   <!--The namespace that the links are generated in (e.g. "Links", as in Links.Content.nerd_jpg)-->
   <LinksNamespace>Links</LinksNamespace>
   <!--If true, links to static files include a query string containing the file's last change time.

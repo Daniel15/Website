@@ -8,11 +8,11 @@
 		@Html.Raw(Model.Post.Intro(out showMoreLink))
 		@if (showMoreLink)
 		{
-			<p><a href="@Url.Blog(Model.Post)" class="read-more">Read more &rArr;</a></p>
+			<p><a href="@Url.BlogPost(Model.Post)" class="read-more">Read more &rArr;</a></p>
 		}
 	</div>
 	<footer>
 		@Html.Partial(MVC.Blog.Views._ShareLinks, Model)
-		<a href="@Url.Blog(Model.Post)#disqus_comments" itemprop="discussionUrl">Comments &raquo;</a>
+		<a href="@Url.BlogPost(Model.Post)#disqus_comments" itemprop="discussionUrl">Comments &raquo;</a>
 	</footer>
 </article>

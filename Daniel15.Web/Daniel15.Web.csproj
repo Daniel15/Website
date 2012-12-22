@@ -154,6 +154,7 @@
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\SocialController.cs" />
+    <Compile Include="Extensions\BlogUrlHelperExtensions.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\QueryStringExtensions.cs" />

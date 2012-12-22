@@ -47,21 +47,15 @@ namespace Daniel15.Web.Areas.Admin.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Posts);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Edit()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public BlogController Actions { get { return MVC.Admin.Blog; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "admin";
+        public readonly string Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "blog";
+        public readonly string Name = "Blog";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "blog";
+        public const string NameConst = "Blog";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -69,9 +63,17 @@ namespace Daniel15.Web.Areas.Admin.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = ("Index").ToLowerInvariant();
-            public readonly string Posts = ("Posts").ToLowerInvariant();
-            public readonly string Edit = ("Edit").ToLowerInvariant();
+            public readonly string Index = "Index";
+            public readonly string Posts = "Posts";
+            public readonly string Edit = "Edit";
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants
+        {
+            public const string Index = "Index";
+            public const string Posts = "Posts";
+            public const string Edit = "Edit";
         }
 
 
@@ -81,7 +83,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Posts
         {
-            public readonly string published = ("published").ToLowerInvariant();
+            public readonly string published = "published";
         }
         static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -89,7 +91,8 @@ namespace Daniel15.Web.Areas.Admin.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Edit
         {
-            public readonly string slug = ("slug").ToLowerInvariant();
+            public readonly string slug = "slug";
+            public readonly string viewModel = "viewModel";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -136,6 +139,14 @@ namespace Daniel15.Web.Areas.Admin.Controllers
         public override System.Web.Mvc.ActionResult Edit(string slug)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Edit(Daniel15.Web.Areas.Admin.ViewModels.Blog.EditViewModel viewModel, string slug)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "viewModel", viewModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
             return callInfo;
         }
