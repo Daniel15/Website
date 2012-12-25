@@ -25,6 +25,8 @@ public class UpdateGitDetails : Microsoft.Build.Utilities.Task
 	
 	public override bool Execute()
 	{
+		SiteDir = System.IO.Path.GetFullPath(SiteDir);
+		
 		// Get the details
 		var shortRevision = RunGit("rev-parse --short HEAD");
 		var revision = RunGit("rev-parse HEAD");
@@ -66,12 +68,12 @@ public class UpdateGitDetails : Microsoft.Build.Utilities.Task
 	</UsingTask>
 
 
-	<Target Name="UpdateGitDetails">
-		<UpdateGitDetails SiteDir="$(MSBuildProjectDirectory)" GitWebUrl="https://github.com/Daniel15/Website/commit/{0}" />
+	<Target Name="UpdateGitDetailsForDeploy">
+		<UpdateGitDetails SiteDir="$(_PackageTempDir)" GitWebUrl="https://github.com/Daniel15/Website/commit/{0}" />
 	</Target>
 	
 	<!-- PipelinePreDeployCopyAllFilesToOneFolder will actually do the publish into a temp folder -->
-	<Target Name="Deploy" DependsOnTargets="PipelinePreDeployCopyAllFilesToOneFolder; UpdateGitDetails">
+	<Target Name="Deploy" DependsOnTargets="PipelinePreDeployCopyAllFilesToOneFolder; UpdateGitDetailsForDeploy">
 		<Error Condition="'$(DestinationDir)'==''" Text="The DestinationDir property must be set to the directory name on the remote server." />
 		
 		<!-- Deploy via rsync -->
