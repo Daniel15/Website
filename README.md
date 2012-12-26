@@ -17,11 +17,9 @@ supported are:
 As it's just for my personal use, I haven't put too much work into polishing the blog administration
 section. 
 
-The database schema is in the schema.sql file. Blog administration is at /blogadmin. The default 
-username and password are "admin" and "p@ssw0rd" respectively. To change the password, go to 
-/account/hash?password=your_new_password (where your_new_password is the password you want) to get a
-hash, and then copy this into the application/config/auth.php file. You should also change the hash
-key for maximum security. 
+The database schema is in the schema.sql file. Blog administration is at /blog/admin. The default 
+username and password are "example" and "password" respectively. To change the password, SHA1 has the
+password you want to use, and then modify Authentication.config.
 
 Licence
 =======
