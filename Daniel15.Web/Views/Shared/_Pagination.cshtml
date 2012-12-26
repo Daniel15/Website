@@ -1,5 +1,11 @@
 ﻿@model Daniel15.Web.ViewModels.Shared.PaginationModel
 
+@* Don't even show anything if there's only one page *@
+@if (Model.TotalPages == 1)
+{
+	return;	
+}
+
 <p class="pagination">
 	@if (Model.CurrentPage == 1)
 	{
