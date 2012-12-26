@@ -4,6 +4,8 @@ Daniel15
 This is the code that powers [my personal website](http://dan.cx/) and blog. It is in the process of
 being rewritten in .NET (old version was in PHP) so some of this is out-of-date.
 
+The live site is currently running on [Mono](http://www.mono-project.com/) 3.0.2.
+
 Blog
 ====
 The blog is a very simple blog. It doesn't really have many fancy features. Things that ARE
