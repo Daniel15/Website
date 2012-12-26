@@ -9,7 +9,7 @@ namespace Daniel15.Web.Extensions
 		/// <summary>
 		/// Epoch used for Unix timestamps
 		/// </summary>
-		private static DateTime UNIX_EPOCH = new DateTime(1970, 1, 1);
+		private static DateTime UNIX_EPOCH = new DateTime(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0, kind: DateTimeKind.Utc);
 
 		/// <summary>
 		/// Like ToString but inserts the ordinal as well (1st, 2nd, etc.). Put {0} where you want
@@ -58,7 +58,7 @@ namespace Daniel15.Web.Extensions
 		/// <returns>UNIX timestamp</returns>
 		public static long ToUnix(this DateTime dateTime)
 		{
-			return Convert.ToInt64((dateTime - UNIX_EPOCH.ToLocalTime()).TotalSeconds);
+			return Convert.ToInt64((dateTime.ToUniversalTime() - UNIX_EPOCH).TotalSeconds);
 		}
 
 		/// <summary>
