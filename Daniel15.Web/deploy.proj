@@ -32,7 +32,7 @@ public class UpdateGitDetails : Microsoft.Build.Utilities.Task
 		var revision = RunGit("rev-parse HEAD");
 		var date = DateTime.Parse(RunGit("log --pretty=format:%ad --date=iso -n 1"));
 		
-		var fullGitRevision = string.Format("{0} ({1:g})", shortRevision, date);
+		var fullGitRevision = string.Format("{0} ({1:yyyy-MM-dd})", shortRevision, date);
 		var gitRevisionUrl = string.Format(GitWebUrl, revision);
 		
 		// Load the Web.config

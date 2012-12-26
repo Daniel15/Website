@@ -543,7 +543,9 @@
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeDefault.less" />
     <None Include="Content\js\framework\yuidoc.json" />
     <None Include="Content\not_an_easter_egg\zero\zero.utf8" />
-    <None Include="deploy.proj" />
+    <None Include="deploy.proj">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="T4MVC\T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC1.cs</LastGenOutput>

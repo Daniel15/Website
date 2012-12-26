@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{64A266
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc stuff", "Misc stuff", "{DDB064E1-9601-4ACB-A573-D4DD018018E8}"
 	ProjectSection(SolutionItems) = preProject
-		deploy-test.bat = deploy-test.bat
+		deploy.bat = deploy.bat
 		elmah.sql = elmah.sql
 		nginx.conf = nginx.conf
 		README.md = README.md
