@@ -61,6 +61,7 @@ namespace Daniel15.Web.Controllers
             public readonly string Projects = "Projects";
             public readonly string Search = "Search";
             public readonly string SocialFeed = "SocialFeed";
+            public readonly string TumblrPosts = "TumblrPosts";
             public readonly string FileNotFound = "FileNotFound";
             public readonly string Error = "Error";
             public readonly string ChatStatus = "ChatStatus";
@@ -73,6 +74,7 @@ namespace Daniel15.Web.Controllers
             public const string Projects = "Projects";
             public const string Search = "Search";
             public const string SocialFeed = "SocialFeed";
+            public const string TumblrPosts = "TumblrPosts";
             public const string FileNotFound = "FileNotFound";
             public const string Error = "Error";
             public const string ChatStatus = "ChatStatus";
@@ -91,6 +93,7 @@ namespace Daniel15.Web.Controllers
             {
                 public readonly string _LatestPosts = "_LatestPosts";
                 public readonly string _ProjectList = "_ProjectList";
+                public readonly string _TumblrPosts = "_TumblrPosts";
                 public readonly string FileNotFound = "FileNotFound";
                 public readonly string Index = "Index";
                 public readonly string Projects = "Projects";
@@ -99,6 +102,7 @@ namespace Daniel15.Web.Controllers
             }
             public readonly string _LatestPosts = "~/Views/Site/_LatestPosts.cshtml";
             public readonly string _ProjectList = "~/Views/Site/_ProjectList.cshtml";
+            public readonly string _TumblrPosts = "~/Views/Site/_TumblrPosts.cshtml";
             public readonly string FileNotFound = "~/Views/Site/FileNotFound.cshtml";
             public readonly string Index = "~/Views/Site/Index.cshtml";
             public readonly string Projects = "~/Views/Site/Projects.cshtml";
@@ -133,6 +137,12 @@ namespace Daniel15.Web.Controllers
         public override System.Web.Mvc.ActionResult SocialFeed()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SocialFeed);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult TumblrPosts()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.TumblrPosts);
             return callInfo;
         }
 

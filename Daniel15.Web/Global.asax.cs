@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Daniel15.Web.App_Start;
+using Daniel15.Web.Infrastructure;
 
 namespace Daniel15.Web
 {

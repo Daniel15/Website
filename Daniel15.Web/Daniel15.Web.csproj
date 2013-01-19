@@ -141,7 +141,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MiniProfiler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Ioc.cs" />
+    <Compile Include="Infrastructure\Ioc.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Blog\EditViewModel.cs" />
@@ -170,6 +170,7 @@
     </Compile>
     <Compile Include="Models\Blog\PostCategoryModel.cs" />
     <Compile Include="Models\Blog\PostTagModel.cs" />
+    <Compile Include="Models\Home\MicroblogPostModel.cs" />
     <Compile Include="Mvc\CookieTempDataProvider.cs" />
     <Compile Include="Mvc\ViewBase.cs" />
     <Compile Include="Models\Blog\CategoryModel.cs" />
@@ -178,9 +179,11 @@
     <Compile Include="Models\Home\ChatStatusModel.cs" />
     <Compile Include="Models\Home\ProjectModel.cs" />
     <Compile Include="Models\Home\ProjectTechnologyModel.cs" />
+    <Compile Include="Repositories\IMicroblogRepository.cs" />
     <Compile Include="Repositories\IProjectRepository.cs" />
     <Compile Include="Repositories\EntityNotFoundException.cs" />
     <Compile Include="Extensions\OrmLiteExtensions.cs" />
+    <Compile Include="Repositories\MicroblogRepository.cs" />
     <Compile Include="Repositories\Static\ProjectRepository.cs" />
     <Compile Include="Services\IUrlShortener.cs" />
     <Compile Include="Services\Social\Facebook.cs" />
@@ -594,6 +597,7 @@
     <Content Include="Views\Blog\Tag.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_CheckboxList.cshtml" />
+    <Content Include="Views\Site\_TumblrPosts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

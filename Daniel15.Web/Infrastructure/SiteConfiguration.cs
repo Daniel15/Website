@@ -58,5 +58,15 @@ namespace Daniel15.Web.Infrastructure
 			get { return (string)this["disqusShortname"]; }
 			set { this["disqusShortname"] = value; }
 		}
+
+		/// <summary>
+		/// Gets the URL to the microblog (Tumblr) feed
+		/// </summary>
+		[ConfigurationProperty("microblogFeedUrl", IsRequired = false)]
+		public Uri MicroblogFeedUrl
+		{
+			get { return (Uri)this["microblogFeedUrl"]; }
+			set { this["microblogFeedUrl"] = value; }
+		}
 	}
 }

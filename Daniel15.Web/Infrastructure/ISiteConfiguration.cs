@@ -31,5 +31,10 @@ namespace Daniel15.Web.Infrastructure
 		/// Gets the Disqus shortname used by the blog comments
 		/// </summary>
 		string DisqusShortname { get; }
+
+		/// <summary>
+		/// Gets the URL to the microblog (Tumblr) feed
+		/// </summary>
+		Uri MicroblogFeedUrl { get; }
 	}
 }

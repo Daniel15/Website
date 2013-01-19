@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Web.Caching;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Xml.Linq;
+using Daniel15.Web.Infrastructure;
 using Daniel15.Web.Models.Home;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.ViewModels;
@@ -10,6 +14,7 @@ using Daniel15.Web.ViewModels.Shared;
 using Daniel15.Web.ViewModels.Site;
 using Daniel15.Web.Extensions;
 using System.Linq;
+using ServiceStack.ServiceClient.Web;
 
 namespace Daniel15.Web.Controllers
 {
@@ -25,16 +30,19 @@ namespace Daniel15.Web.Controllers
 
 		private readonly IBlogRepository _blogRepository;
 		private readonly IProjectRepository _projectRepository;
+		private readonly IMicroblogRepository _microblogRepository;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SiteController" /> class.
 		/// </summary>
 		/// <param name="blogRepository">The blog post repository.</param>
 		/// <param name="projectRepository">The project repository</param>
-		public SiteController(IBlogRepository blogRepository, IProjectRepository projectRepository)
+		/// <param name="microblogRepository">The microblog (Tumblr) repository.</param>
+		public SiteController(IBlogRepository blogRepository, IProjectRepository projectRepository, IMicroblogRepository microblogRepository)
 		{
 			_blogRepository = blogRepository;
 			_projectRepository = projectRepository;
+			_microblogRepository = microblogRepository;
 		}
 
 		/// <summary>
@@ -87,6 +95,17 @@ namespace Daniel15.Web.Controllers
 			// Currently just proxies to the PHP page - This needs to be rewritten in C#
 			var content = new WebClient().DownloadString("http://dan.cx/socialfeed/loadhtml.php");
 			return View(Views.SocialFeed, new SocialFeedViewModel { Content = content });
+		}
+
+		/// <summary>
+		/// A list of recent Tumblr posts
+		/// </summary>
+		/// <returns></returns>
+		[OutputCache(Duration = 86400)]
+		public virtual ActionResult TumblrPosts()
+		{
+			var posts = _microblogRepository.LatestPosts();
+			return PartialView(Views._TumblrPosts, posts);
 		}
 
 		/// <summary>
