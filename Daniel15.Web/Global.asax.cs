@@ -14,7 +14,7 @@ namespace Daniel15.Web
 			AreaRegistration.RegisterAllAreas();
 
 			Ioc.Initialize();
-			MiniProfilerInitialiser.Init();
+			//MiniProfilerInitialiser.Init();
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			BundleConfig.RegisterBundles(BundleTable.Bundles);
