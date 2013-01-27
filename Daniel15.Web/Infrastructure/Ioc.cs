@@ -3,7 +3,10 @@ using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Reflection;
+using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
+using Daniel15.Web.Extensions;
 using Daniel15.Web.Mvc;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.Services;
@@ -14,6 +17,7 @@ using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
 using StackExchange.Profiling;
 using StackExchange.Profiling.Data;
+using SimpleInjector.Extensions;
 
 namespace Daniel15.Web.Infrastructure
 {
@@ -60,6 +64,13 @@ namespace Daniel15.Web.Infrastructure
 			// Services
 			container.Register<IUrlShortener, UrlShortener>();
 			container.Register<ISocialManager, SocialManager>();
+
+			// ASP.NET MVC stuff
+			// TODO: Figure out how to do this properly - http://simpleinjector.codeplex.com/discussions/430939
+			//container.RegisterPerWebRequest<RequestContext>(() => HttpContext.Current.Request.RequestContext);
+			//container.RegisterPerWebRequest<UrlHelper>(() => new UrlHelper(container.GetInstance<RequestContext>()));
+
+			container.RegisterPerWebRequest<IWebCache>(config.WebCacheType);
 
 			InitializeDatabase(container);
 		}

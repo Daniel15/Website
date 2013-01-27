@@ -36,5 +36,10 @@ namespace Daniel15.Web.Infrastructure
 		/// Gets the URL to the microblog (Tumblr) feed
 		/// </summary>
 		Uri MicroblogFeedUrl { get; }
+
+		/// <summary>
+		/// Gets the type of web cache being used for the site
+		/// </summary>
+		Type WebCacheType { get; }
 	}
 }

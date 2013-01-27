@@ -141,6 +141,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MiniProfiler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Extensions\SimpleInjectorExtensions.cs" />
     <Compile Include="Infrastructure\Ioc.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
@@ -185,7 +186,10 @@
     <Compile Include="Extensions\OrmLiteExtensions.cs" />
     <Compile Include="Repositories\MicroblogRepository.cs" />
     <Compile Include="Repositories\Static\ProjectRepository.cs" />
+    <Compile Include="Services\NullWebCache.cs" />
+    <Compile Include="Services\IWebCache.cs" />
     <Compile Include="Services\IUrlShortener.cs" />
+    <Compile Include="Services\NginxWebCache.cs" />
     <Compile Include="Services\Social\Facebook.cs" />
     <Compile Include="Services\Social\ISocialManager.cs" />
     <Compile Include="Services\Social\ISocialNetwork.cs" />

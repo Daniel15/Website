@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
-using System.Web.Security;
 using Daniel15.Web.Areas.Admin.ViewModels.Blog;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Repositories;
 using System.Linq;
 using Daniel15.Web.Extensions;
+using Daniel15.Web.Services;
 
 namespace Daniel15.Web.Areas.Admin.Controllers
 {
@@ -16,15 +16,18 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 	public partial class BlogController : Controller
 	{
 		private readonly IBlogRepository _blogRepository;
+		private readonly IWebCache _webCache;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BlogController" /> class.
 		/// </summary>
 		/// <param name="blogRepository">The blog repository.</param>
 		/// <param name="tempDataProvider">The temporary data provider</param>
-		public BlogController(IBlogRepository blogRepository, ITempDataProvider tempDataProvider)
+		/// <param name="webCache">Web cache to clear when modifying posts</param>
+		public BlogController(IBlogRepository blogRepository, ITempDataProvider tempDataProvider, IWebCache webCache)
 		{
 			_blogRepository = blogRepository;
+			_webCache = webCache;
 			// TODO: This shouldn't be required to be passed in the constructor - Can set it as a property.
 			TempDataProvider = tempDataProvider;
 		}
@@ -112,6 +115,9 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 
 			_blogRepository.SetCategories(post, categories);
 			_blogRepository.SetTags(post, viewModel.PostTagIds ?? Enumerable.Empty<int>());
+
+			// Clear any cache for this post
+			_webCache.ClearCache(post);
 
 			TempData["topMessage"] = string.Format(
 				"{0}: Saved changes to {1}. <a href=\"{2}\" target=\"_blank\">View post</a>.", DateTime.Now.ToLongTimeString(),

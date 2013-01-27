@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Configuration;
 
 namespace Daniel15.Web.Infrastructure
@@ -67,6 +68,17 @@ namespace Daniel15.Web.Infrastructure
 		{
 			get { return (Uri)this["microblogFeedUrl"]; }
 			set { this["microblogFeedUrl"] = value; }
+		}
+
+		/// <summary>
+		/// Gets the type of web cache being used for the site
+		/// </summary>
+		[ConfigurationProperty("webCacheType", IsRequired = true)]
+		[TypeConverter(typeof(TypeNameConverter))]
+		public Type WebCacheType
+		{
+			get { return (Type)this["webCacheType"]; }
+			set { this["webCacheType"] = value; }
 		}
 	}
 }
