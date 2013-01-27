@@ -81,7 +81,7 @@ namespace Daniel15.Web.Infrastructure
 		/// <param name="container"></param>
 		private static void InitializeDatabase(Container container)
 		{
-			const bool ENABLE_PROFILING = true;
+			const bool ENABLE_PROFILING = false;
 
 			// By default, don't add a filter to the DB connection factory
 			Func<IDbConnection, IDbConnection> connFilter = conn => conn;
