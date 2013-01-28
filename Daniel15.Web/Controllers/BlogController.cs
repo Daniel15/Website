@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.UI;
 using Daniel15.Web.Infrastructure;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Repositories;
@@ -26,6 +27,10 @@ namespace Daniel15.Web.Controllers
 		/// Number of blog posts to show in the RSS feed
 		/// </summary>
 		private const int ITEMS_IN_FEED = 10;
+		/// <summary>
+		/// One hour in seconds.
+		/// </summary>
+		private const int ONE_HOUR = 3600;
 
 		private readonly IBlogRepository _blogRepository;
 		private readonly IUrlShortener _urlShortener;
@@ -86,6 +91,7 @@ namespace Daniel15.Web.Controllers
 		/// <summary>
 		/// Index page of the blog
 		/// </summary>
+		[OutputCache(Location = OutputCacheLocation.Downstream, Duration = ONE_HOUR, VaryByParam = "page")]
 		public virtual ActionResult Index(int page = 1)
 		{
 			var count = _blogRepository.PublishedCount();

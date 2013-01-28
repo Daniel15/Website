@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Text.RegularExpressions;
-using System.Web.Caching;
 using System.Web.Mvc;
 using System.Web.UI;
-using System.Xml.Linq;
-using Daniel15.Web.Infrastructure;
 using Daniel15.Web.Models.Home;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Shared;
 using Daniel15.Web.ViewModels.Site;
-using Daniel15.Web.Extensions;
 using System.Linq;
-using ServiceStack.ServiceClient.Web;
 
 namespace Daniel15.Web.Controllers
 {
@@ -24,9 +17,9 @@ namespace Daniel15.Web.Controllers
 	public partial class SiteController : Controller
 	{
 		/// <summary>
-		/// How long to cache the recent blog posts for
+		/// One hour in seconds.
 		/// </summary>
-		private static readonly TimeSpan CACHE_POSTS_FOR = new TimeSpan(1, 0, 0);
+		private const int ONE_HOUR = 3600;
 
 		private readonly IBlogRepository _blogRepository;
 		private readonly IProjectRepository _projectRepository;
@@ -49,15 +42,12 @@ namespace Daniel15.Web.Controllers
 		/// Home page of the site :-)
 		/// </summary>
 		/// <returns></returns>
+		[OutputCache(Location = OutputCacheLocation.Downstream, Duration = ONE_HOUR)]
 		public virtual ActionResult Index()
 		{
-			// Load the most recent blog posts
-			var posts = HttpContext.Cache.GetOrInsert("LatestPosts", DateTime.Now + CACHE_POSTS_FOR, Cache.NoSlidingExpiration,
-			                                          () => _blogRepository.LatestPostsSummary());
-			
 			return View(Views.Index, new IndexViewModel
 			{
-				LatestPosts = posts
+				LatestPosts = _blogRepository.LatestPostsSummary()
 			});
 		}
 
