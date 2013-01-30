@@ -77,6 +77,6 @@ public class UpdateGitDetails : Microsoft.Build.Utilities.Task
 		<Error Condition="'$(DestinationDir)'==''" Text="The DestinationDir property must be set to the directory name on the remote server." />
 		
 		<!-- Deploy via rsync -->
-		<Exec Command='rsync -arvuz --progress --chmod=ug=rwX,o=rX --exclude "ConnectionStrings.config" --exclude "Authentication.config" obj/$(Configuration)/Package/PackageTmp/ daniel-deploy@lisa.youareaninja.com:/var/www/$(DestinationDir)/site/' />
+		<Exec Command='rsync -arvuz --progress --chmod=ug=rwX,o=rX --exclude "ConnectionStrings.config" --exclude "Authentication.config" obj/$(Configuration)/Package/PackageTmp/ daniel-deploy@dan.cx:/var/www/$(DestinationDir)/site/' />
 	</Target>
 </Project>
