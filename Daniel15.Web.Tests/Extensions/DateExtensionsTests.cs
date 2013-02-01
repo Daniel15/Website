@@ -1,5 +1,5 @@
 ﻿using System;
-using Daniel15.Web.Extensions;
+using Daniel15.Shared.Extensions;
 using NUnit.Framework;
 
 namespace Daniel15.Web.Tests.Extensions

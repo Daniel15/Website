@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc stuff", "Misc stuff", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daniel15.Web.Tests", "Daniel15.Web.Tests\Daniel15.Web.Tests.csproj", "{9978BCD0-840A-4BC0-936C-B6BE508F7338}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daniel15.Data", "Daniel15.Data\Daniel15.Data.csproj", "{3F58E67D-1C33-4670-9780-F9CA1F43E83F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daniel15.Shared", "Daniel15.Shared\Daniel15.Shared.csproj", "{F38B83AD-77EB-43D8-A076-43D68FE409BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,14 @@ Global
 		{9978BCD0-840A-4BC0-936C-B6BE508F7338}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9978BCD0-840A-4BC0-936C-B6BE508F7338}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9978BCD0-840A-4BC0-936C-B6BE508F7338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F58E67D-1C33-4670-9780-F9CA1F43E83F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F58E67D-1C33-4670-9780-F9CA1F43E83F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F58E67D-1C33-4670-9780-F9CA1F43E83F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F58E67D-1C33-4670-9780-F9CA1F43E83F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F38B83AD-77EB-43D8-A076-43D68FE409BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F38B83AD-77EB-43D8-A076-43D68FE409BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F38B83AD-77EB-43D8-A076-43D68FE409BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F38B83AD-77EB-43D8-A076-43D68FE409BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

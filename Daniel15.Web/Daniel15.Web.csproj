@@ -50,23 +50,23 @@
     <Reference Include="MiniProfiler">
       <HintPath>..\packages\MiniProfiler.2.0.2\lib\net40\MiniProfiler.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data">
-      <HintPath>..\packages\MySql.Data.6.5.4\lib\net40\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=6.6.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.6.4\lib\net40\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Common">
-      <HintPath>..\packages\ServiceStack.Common.3.9.28\lib\net35\ServiceStack.Common.dll</HintPath>
+    <Reference Include="ServiceStack.Common, Version=3.9.35.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Common.3.9.35\lib\net35\ServiceStack.Common.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\packages\ServiceStack.Common.3.9.28\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    <Reference Include="ServiceStack.Interfaces, Version=3.9.35.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Common.3.9.35\lib\net35\ServiceStack.Interfaces.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.OrmLite">
-      <HintPath>..\packages\ServiceStack.OrmLite.MySql.3.9.28\lib\ServiceStack.OrmLite.dll</HintPath>
+    <Reference Include="ServiceStack.OrmLite, Version=3.9.35.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.OrmLite.MySql.3.9.35\lib\ServiceStack.OrmLite.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.OrmLite.MySql">
-      <HintPath>..\packages\ServiceStack.OrmLite.MySql.3.9.28\lib\ServiceStack.OrmLite.MySql.dll</HintPath>
+    <Reference Include="ServiceStack.OrmLite.MySql, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.OrmLite.MySql.3.9.35\lib\ServiceStack.OrmLite.MySql.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\packages\ServiceStack.Text.3.9.29\lib\net35\ServiceStack.Text.dll</HintPath>
+    <Reference Include="ServiceStack.Text, Version=3.9.35.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Text.3.9.35\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="SimpleInjector">
       <HintPath>..\packages\SimpleInjector.1.6.0.12319\lib\net35\SimpleInjector.dll</HintPath>
@@ -160,32 +160,15 @@
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\QueryStringExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Infrastructure\ISiteConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Infrastructure\SiteConfiguration.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Infrastructure\T4MvcControllerConstructorResolutionBehavior.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Models\Blog\PostCategoryModel.cs" />
-    <Compile Include="Models\Blog\PostTagModel.cs" />
-    <Compile Include="Models\Home\MicroblogPostModel.cs" />
     <Compile Include="Mvc\CookieTempDataProvider.cs" />
     <Compile Include="Mvc\ViewBase.cs" />
-    <Compile Include="Models\Blog\CategoryModel.cs" />
-    <Compile Include="Models\Blog\PostSummaryModel.cs" />
-    <Compile Include="Models\Blog\TagModel.cs" />
     <Compile Include="Models\Home\ChatStatusModel.cs" />
-    <Compile Include="Models\Home\ProjectModel.cs" />
-    <Compile Include="Models\Home\ProjectTechnologyModel.cs" />
-    <Compile Include="Repositories\IMicroblogRepository.cs" />
-    <Compile Include="Repositories\IProjectRepository.cs" />
-    <Compile Include="Repositories\EntityNotFoundException.cs" />
-    <Compile Include="Extensions\OrmLiteExtensions.cs" />
-    <Compile Include="Repositories\MicroblogRepository.cs" />
-    <Compile Include="Repositories\Static\ProjectRepository.cs" />
     <Compile Include="Services\NullWebCache.cs" />
     <Compile Include="Services\IWebCache.cs" />
     <Compile Include="Services\IUrlShortener.cs" />
@@ -201,19 +184,13 @@
     <Compile Include="Services\UrlShortener.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
-    <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\HtmlLayoutExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
-    <Compile Include="Models\Blog\PostModel.cs" />
     <Compile Include="Models\Shared\MenuItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IBlogRepository.cs" />
-    <Compile Include="Repositories\IRepositoryBase.cs" />
-    <Compile Include="Repositories\OrmLite\BlogRepository.cs" />
-    <Compile Include="Repositories\OrmLite\RepositoryBase.cs" />
     <Compile Include="T4MVC\AccountController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -620,6 +597,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Daniel15.Data\Daniel15.Data.csproj">
+      <Project>{3F58E67D-1C33-4670-9780-F9CA1F43E83F}</Project>
+      <Name>Daniel15.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Daniel15.Shared\Daniel15.Shared.csproj">
+      <Project>{F38B83AD-77EB-43D8-A076-43D68FE409BB}</Project>
+      <Name>Daniel15.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

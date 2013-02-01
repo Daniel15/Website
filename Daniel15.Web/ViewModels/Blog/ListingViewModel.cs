@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Daniel15.Web.Models.Blog;
 
 namespace Daniel15.Web.ViewModels.Blog
 {

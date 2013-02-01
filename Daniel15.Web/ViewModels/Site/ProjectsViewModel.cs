@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Daniel15.Data.Entities.Projects;
 using Daniel15.Web.Models.Home;
 
 namespace Daniel15.Web.ViewModels.Site

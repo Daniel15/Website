@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Daniel15.Web.Models.Home;
+using Daniel15.Data.Entities.Blog;
 
-namespace Daniel15.Web.Repositories
+namespace Daniel15.Data.Repositories
 {
 	/// <summary>
 	/// Repository for accessing microblog (ie. Tumblr) posts

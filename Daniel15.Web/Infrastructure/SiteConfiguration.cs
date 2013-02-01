@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Configuration;
+using Daniel15.Infrastructure;
 
 namespace Daniel15.Web.Infrastructure
 {

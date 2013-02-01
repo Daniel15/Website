@@ -88,6 +88,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Daniel15.Data\Daniel15.Data.csproj">
+      <Project>{3F58E67D-1C33-4670-9780-F9CA1F43E83F}</Project>
+      <Name>Daniel15.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Daniel15.Shared\Daniel15.Shared.csproj">
+      <Project>{F38B83AD-77EB-43D8-A076-43D68FE409BB}</Project>
+      <Name>Daniel15.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Daniel15.Web\Daniel15.Web.csproj">
       <Project>{ECAA4A47-F98D-4BA1-83BA-AA5172C07FB5}</Project>
       <Name>Daniel15.Web</Name>

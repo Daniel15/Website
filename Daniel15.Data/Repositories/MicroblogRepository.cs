@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml.Linq;
-using Daniel15.Web.Infrastructure;
-using Daniel15.Web.Models.Home;
+using Daniel15.Data.Entities.Blog;
 using System.Linq;
+using Daniel15.Infrastructure;
 
-namespace Daniel15.Web.Repositories
+namespace Daniel15.Data.Repositories
 {
 	/// <summary>
 	/// Repository for accessing microblog (ie. Tumblr) posts via RSS feed

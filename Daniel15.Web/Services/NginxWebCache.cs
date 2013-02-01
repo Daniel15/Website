@@ -2,7 +2,7 @@
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Daniel15.Web.Models.Blog;
+using Daniel15.Data.Entities.Blog;
 using Daniel15.Web.Extensions;
 using Elmah;
 

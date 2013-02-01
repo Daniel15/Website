@@ -1,6 +1,6 @@
 ﻿using ServiceStack.DataAnnotations;
 
-namespace Daniel15.Web.Models.Blog
+namespace Daniel15.Data.Entities.Blog
 {
 	/// <summary>
 	/// The link between a post and a category

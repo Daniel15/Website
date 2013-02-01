@@ -3,12 +3,13 @@ using System.Configuration;
 using System.Data;
 using System.Data.Common;
 using System.Reflection;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
+using Daniel15.Data.Repositories;
+using Daniel15.Data.Repositories.OrmLite;
+using Daniel15.Data.Repositories.Static;
+using Daniel15.Infrastructure;
 using Daniel15.Web.Extensions;
 using Daniel15.Web.Mvc;
-using Daniel15.Web.Repositories;
 using Daniel15.Web.Services;
 using Daniel15.Web.Services.Social;
 using ServiceStack.DataAccess;
@@ -17,7 +18,6 @@ using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
 using StackExchange.Profiling;
 using StackExchange.Profiling.Data;
-using SimpleInjector.Extensions;
 
 namespace Daniel15.Web.Infrastructure
 {
@@ -96,6 +96,7 @@ namespace Daniel15.Web.Infrastructure
 				};
 			}
 
+			// TODO: Move to Daniel15.Data
 			container.RegisterPerWebRequest<IDbConnectionFactory>(() =>
 				new OrmLiteConnectionFactory(ConfigurationManager.ConnectionStrings["Database"].ConnectionString, 
 					                         MySqlDialect.Provider) { ConnectionFilter = connFilter });
@@ -103,9 +104,9 @@ namespace Daniel15.Web.Infrastructure
 			container.RegisterPerWebRequest<IDbConnection>(() => container.GetInstance<IDbConnectionFactory>().OpenDbConnection());
 
 			// Repositories
-			container.RegisterPerWebRequest<IBlogRepository, Repositories.OrmLite.BlogRepository>();
-			container.RegisterPerWebRequest<IProjectRepository, Repositories.Static.ProjectRepository>();
-			container.RegisterPerWebRequest<IMicroblogRepository, Repositories.MicroblogRepository>();
+			container.RegisterPerWebRequest<IBlogRepository, BlogRepository>();
+			container.RegisterPerWebRequest<IProjectRepository, ProjectRepository>();
+			container.RegisterPerWebRequest<IMicroblogRepository, MicroblogRepository>();
 		}
 	}
 }

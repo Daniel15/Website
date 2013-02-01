@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using Daniel15.Data.Entities.Blog;
 using Daniel15.Web.Models;
-using Daniel15.Web.Models.Blog;
 
 namespace Daniel15.Web.ViewModels.Site
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Daniel15.Web.Repositories
+namespace Daniel15.Data
 {
 	/// <summary>
 	/// Thrown when an item is not found in the database

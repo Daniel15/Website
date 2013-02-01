@@ -2,8 +2,8 @@
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.UI;
+using Daniel15.Data.Repositories;
 using Daniel15.Web.Models.Home;
-using Daniel15.Web.Repositories;
 using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Shared;
 using Daniel15.Web.ViewModels.Site;

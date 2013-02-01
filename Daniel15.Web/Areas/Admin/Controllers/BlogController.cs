@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
+using Daniel15.Data.Entities.Blog;
+using Daniel15.Data.Repositories;
 using Daniel15.Web.Areas.Admin.ViewModels.Blog;
-using Daniel15.Web.Models.Blog;
-using Daniel15.Web.Repositories;
 using System.Linq;
 using Daniel15.Web.Extensions;
 using Daniel15.Web.Services;

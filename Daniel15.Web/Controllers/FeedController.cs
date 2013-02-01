@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using Daniel15.Web.Repositories;
+using Daniel15.Data.Repositories;
 using Daniel15.Web.ViewModels.Feed;
 
 namespace Daniel15.Web.Controllers

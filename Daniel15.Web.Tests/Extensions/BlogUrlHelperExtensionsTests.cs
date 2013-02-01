@@ -1,6 +1,6 @@
 ﻿using System;
+using Daniel15.Data.Entities.Blog;
 using Daniel15.Web.Extensions;
-using Daniel15.Web.Models.Blog;
 using NUnit.Framework;
 
 namespace Daniel15.Web.Tests.Extensions

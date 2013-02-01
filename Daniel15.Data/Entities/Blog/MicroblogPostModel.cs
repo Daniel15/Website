@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Daniel15.Web.Models.Home
+namespace Daniel15.Data.Entities.Blog
 {
 	public class MicroblogPostModel
 	{

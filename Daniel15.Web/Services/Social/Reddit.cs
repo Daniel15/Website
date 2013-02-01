@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Helpers;
-using Daniel15.Web.Models.Blog;
+using Daniel15.Data.Entities.Blog;
 using Daniel15.Web.Extensions;
 using ServiceStack.Text;
 

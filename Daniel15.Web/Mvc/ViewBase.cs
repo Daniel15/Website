@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using Daniel15.Web.App_Start;
+using Daniel15.Infrastructure;
 using Daniel15.Web.Infrastructure;
 
 namespace Daniel15.Web.Mvc

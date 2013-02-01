@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Daniel15.Web.Models.Blog;
+using Daniel15.Data.Entities.Blog;
 using StackExchange.Profiling;
 
 namespace Daniel15.Web.Services.Social
