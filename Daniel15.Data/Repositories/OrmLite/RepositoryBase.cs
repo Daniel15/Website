@@ -61,6 +61,19 @@ namespace Daniel15.Data.Repositories.OrmLite
 		}
 
 		/// <summary>
+		/// Saves the entity to the database
+		/// </summary>
+		/// <param name="entity">The entity to save</param>
+		/// <param name="isNew"><c>true</c> to do an INSERT or <c>false</c> to do an UPDATE</param>
+		public void Save(T entity, bool isNew)
+		{
+			if (isNew)
+				Connection.Insert(entity);
+			else
+				Connection.Update(entity);
+		}
+
+		/// <summary>
 		/// Get the total number of records in this table
 		/// </summary>
 		/// <returns>Total number of records</returns>

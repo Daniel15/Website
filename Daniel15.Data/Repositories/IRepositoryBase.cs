@@ -22,10 +22,19 @@ namespace Daniel15.Data.Repositories
 		T Get(int id);
 
 		/// <summary>
-		/// Saves this entity to the database
+		/// Saves this entity to the database. First tries to load the entity to check if it exists
+		/// If it exists, does an update. Otherwise, does an insert. If you know which operation you
+		/// want to do, use the overload with the "isNew" parameter.
 		/// </summary>
 		/// <param name="entity">The entity to save</param>
 		void Save(T entity);
+
+		/// <summary>
+		/// Saves the entity to the database
+		/// </summary>
+		/// <param name="entity">The entity to save</param>
+		/// <param name="isNew"><c>true</c> to do an INSERT or <c>false</c> to do an UPDATE</param>
+		void Save(T entity, bool isNew);
 
 		/// <summary>
 		/// Get the total number of records in this table

@@ -64,6 +64,7 @@ namespace Daniel15.Web.Infrastructure
 			// Services
 			container.Register<IUrlShortener, UrlShortener>();
 			container.Register<ISocialManager, SocialManager>();
+			container.Register<IDisqusComments, DisqusComments>();
 
 			// ASP.NET MVC stuff
 			// TODO: Figure out how to do this properly - http://simpleinjector.codeplex.com/discussions/430939
@@ -105,6 +106,7 @@ namespace Daniel15.Web.Infrastructure
 
 			// Repositories
 			container.RegisterPerWebRequest<IBlogRepository, BlogRepository>();
+			container.RegisterPerWebRequest<IDisqusCommentRepository, DisqusCommentRepository>();
 			container.RegisterPerWebRequest<IProjectRepository, ProjectRepository>();
 			container.RegisterPerWebRequest<IMicroblogRepository, MicroblogRepository>();
 		}

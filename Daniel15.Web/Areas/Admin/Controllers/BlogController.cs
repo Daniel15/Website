@@ -5,6 +5,7 @@ using Daniel15.Data.Repositories;
 using Daniel15.Web.Areas.Admin.ViewModels.Blog;
 using System.Linq;
 using Daniel15.Web.Extensions;
+using Daniel15.Web.Infrastructure;
 using Daniel15.Web.Services;
 
 namespace Daniel15.Web.Areas.Admin.Controllers
@@ -17,6 +18,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 	{
 		private readonly IBlogRepository _blogRepository;
 		private readonly IWebCache _webCache;
+		private readonly IDisqusComments _comments;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BlogController" /> class.
@@ -24,10 +26,12 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 		/// <param name="blogRepository">The blog repository.</param>
 		/// <param name="tempDataProvider">The temporary data provider</param>
 		/// <param name="webCache">Web cache to clear when modifying posts</param>
-		public BlogController(IBlogRepository blogRepository, ITempDataProvider tempDataProvider, IWebCache webCache)
+		/// <param name="comments">Disqus comments service</param>
+		public BlogController(IBlogRepository blogRepository, ITempDataProvider tempDataProvider, IWebCache webCache, IDisqusComments comments)
 		{
 			_blogRepository = blogRepository;
 			_webCache = webCache;
+			_comments = comments;
 			// TODO: This shouldn't be required to be passed in the constructor - Can set it as a property.
 			TempDataProvider = tempDataProvider;
 		}
@@ -123,6 +127,13 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 				"{0}: Saved changes to {1}. <a href=\"{2}\" target=\"_blank\">View post</a>.", DateTime.Now.ToLongTimeString(),
 				Server.HtmlEncode(post.Title), Url.BlogPost(post));
 			return Redirect(Url.BlogPostEdit(post));
+		}
+
+		public virtual ActionResult SyncComments()
+		{
+			_comments.Sync();
+			TempData["topMessage"] = "All done!";
+			return RedirectToAction(MVC.Admin.Blog.Index());
 		}
 	}
 }

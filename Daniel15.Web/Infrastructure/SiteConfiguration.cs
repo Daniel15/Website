@@ -62,6 +62,26 @@ namespace Daniel15.Web.Infrastructure
 		}
 
 		/// <summary>
+		/// Gets the Disqus API key (used for syncing comments)
+		/// </summary>
+		[ConfigurationProperty("disqusApiKey", IsRequired = false)]
+		public string DisqusApiKey
+		{
+			get { return (string)this["disqusApiKey"]; }
+			set { this["disqusApiKey"] = value; }
+		}
+
+		/// <summary>
+		/// Gets the Disqus category ID (used for syncing comments)
+		/// </summary>
+		[ConfigurationProperty("disqusCategory", IsRequired = false)]
+		public int DisqusCategory
+		{
+			get { return (int)this["disqusCategory"]; }
+			set { this["disqusCategory"] = value; }
+		}
+
+		/// <summary>
 		/// Gets the URL to the microblog (Tumblr) feed
 		/// </summary>
 		[ConfigurationProperty("microblogFeedUrl", IsRequired = false)]

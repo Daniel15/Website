@@ -397,6 +397,16 @@ namespace Daniel15.Data.Repositories.Static
 		}
 
 		/// <summary>
+		/// Saves the entity to the database
+		/// </summary>
+		/// <param name="entity">The entity to save</param>
+		/// <param name="isNew"><c>true</c> to do an INSERT or <c>false</c> to do an UPDATE</param>
+		public void Save(ProjectModel entity, bool isNew)
+		{
+			throw new NotImplementedException();
+		}
+
+		/// <summary>
 		/// Get the total number of records in this table
 		/// </summary>
 		/// <returns>Total number of records</returns>

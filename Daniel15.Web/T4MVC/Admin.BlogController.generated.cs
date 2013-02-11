@@ -66,6 +66,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
             public readonly string Index = "Index";
             public readonly string Posts = "Posts";
             public readonly string Edit = "Edit";
+            public readonly string SyncComments = "SyncComments";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -74,6 +75,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
             public const string Index = "Index";
             public const string Posts = "Posts";
             public const string Edit = "Edit";
+            public const string SyncComments = "SyncComments";
         }
 
 
@@ -148,6 +150,12 @@ namespace Daniel15.Web.Areas.Admin.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "viewModel", viewModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SyncComments()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SyncComments);
             return callInfo;
         }
 

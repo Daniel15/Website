@@ -33,6 +33,16 @@ namespace Daniel15.Infrastructure
 		string DisqusShortname { get; }
 
 		/// <summary>
+		/// Gets the Disqus API key (used for syncing comments)
+		/// </summary>
+		string DisqusApiKey { get; }
+
+		/// <summary>
+		/// Gets the Disqus category ID (used for syncing comments)
+		/// </summary>
+		int DisqusCategory { get; }
+
+		/// <summary>
 		/// Gets the URL to the microblog (Tumblr) feed
 		/// </summary>
 		Uri MicroblogFeedUrl { get; }

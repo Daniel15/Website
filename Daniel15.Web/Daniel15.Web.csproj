@@ -169,6 +169,8 @@
     <Compile Include="Mvc\CookieTempDataProvider.cs" />
     <Compile Include="Mvc\ViewBase.cs" />
     <Compile Include="Models\Home\ChatStatusModel.cs" />
+    <Compile Include="Services\DisqusComments.cs" />
+    <Compile Include="Services\IDisqusComments.cs" />
     <Compile Include="Services\NullWebCache.cs" />
     <Compile Include="Services\IWebCache.cs" />
     <Compile Include="Services\IUrlShortener.cs" />
