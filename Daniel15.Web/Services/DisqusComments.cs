@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Web.Helpers;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
@@ -49,7 +51,16 @@ namespace Daniel15.Web.Services
 			{
 				// TODO: Pass "since" parameter to only get recent comments
 				var url = BuildUrl(cursor);
-				var data = Json.Decode(url.GetJsonFromUrl());
+				dynamic data;
+				try
+				{
+					data = Json.Decode(url.GetJsonFromUrl());
+				}
+				catch (WebException	ex)
+				{
+					var errorText = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
+					throw new Exception("Retrieving Disqus comments failed with: " + errorText, ex);
+				}
 
 				foreach (var comment in data.response)
 				{
