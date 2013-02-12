@@ -582,6 +582,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_CheckboxList.cshtml" />
     <Content Include="Views\Site\_TumblrPosts.cshtml" />
+    <Content Include="Views\Blog\_CommentList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

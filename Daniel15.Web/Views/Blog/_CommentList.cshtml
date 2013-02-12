@@ -1,0 +1,27 @@
+﻿@using Daniel15.Shared.Extensions
+@model IEnumerable<Daniel15.Data.Entities.Blog.DisqusCommentModel>
+
+<ol>
+	@foreach (var comment in Model)
+	{
+		@* Link to the user's Disqus profile if they don't have a URL *@
+		var authorUrl = string.IsNullOrEmpty(comment.AuthorUrl) ? comment.AuthorProfileUrl : comment.AuthorUrl;
+
+		<li id="comment-@comment.Id" itemprop="comment" itemscope itemtype="http://schema.org/UserComments">
+			<article>
+				<header>
+					<img class="avatar" src="@comment.AuthorImage" alt="Avatar for @comment.AuthorName" itemprop="image" />
+					<time datetime="@comment.Date.ToW3CString()" itemprop="commentTime">@comment.Date.ToStringWithOrdinal("d{0} MMMM yyyy 'at' hh:mm tt")</time>
+					<a href="@authorUrl" rel="nofollow">@comment.AuthorName</a> said:
+				</header>
+				<div itemprop="commentText">
+					@Html.Raw(comment.Content)
+				</div>
+			</article>
+			@if (comment.Children != null && comment.Children.Count > 0)
+			{
+				@Html.Partial(MVC.Blog.Views._CommentList, comment.Children)
+			}
+		</li>	
+	}
+</ol>

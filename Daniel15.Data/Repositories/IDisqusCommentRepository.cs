@@ -1,4 +1,6 @@
-﻿using Daniel15.Data.Entities.Blog;
+﻿using System.Collections.Generic;
+using Daniel15.Data.Entities;
+using Daniel15.Data.Entities.Blog;
 
 namespace Daniel15.Data.Repositories
 {
@@ -13,5 +15,19 @@ namespace Daniel15.Data.Repositories
 		/// <param name="id">Comment ID</param>
 		/// <returns>Comment, or <c>null</c> if it doesn't exist</returns>
 		DisqusCommentModel GetOrDefault(string id);
+
+		/// <summary>
+		/// Gets all the cached Disqus comments for this entity
+		/// </summary>
+		/// <param name="entity">Entity to get comments for</param>
+		/// <returns>List of all the comments</returns>
+		IEnumerable<DisqusCommentModel> GetComments(ISupportsDisqus entity);
+
+		/// <summary>
+		/// Gets all the cached Disqus posts for this entity, as a tree.
+		/// </summary>
+		/// <param name="entity">Entity to get comments for</param>
+		/// <returns>List of all the root-level comments, with the Children properties populated</returns>
+		IEnumerable<DisqusCommentModel> GetCommentsTree(ISupportsDisqus entity);
 	}
 }

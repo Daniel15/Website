@@ -40,8 +40,8 @@ CREATE TABLE IF NOT EXISTS `blog_categories` (
 --
 -- Table structure for table `blog_comments`
 --
-
-CREATE TABLE IF NOT EXISTS `blog_comments` (
+-- No longer required since Disqus is now used
+/*CREATE TABLE IF NOT EXISTS `blog_comments` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `post_id` int(10) unsigned NOT NULL,
   `author` varchar(255) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `blog_comments` (
   PRIMARY KEY (`id`),
   KEY `parent_comment_id` (`parent_comment_id`),
   KEY `post_id` (`post_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;*/
 
 -- --------------------------------------------------------
 
@@ -127,14 +127,34 @@ CREATE TABLE IF NOT EXISTS `blog_tags` (
 --
 -- Table structure for table `blog_subscriptions`
 --
-
-CREATE TABLE IF NOT EXISTS `blog_subscriptions` (
+-- No longer required since Disqus is now used
+/*CREATE TABLE IF NOT EXISTS `blog_subscriptions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `post_id` int(10) unsigned NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `post_id` (`post_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;*/
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `disqus_comments`
+--
+CREATE TABLE IF NOT EXISTS `disqus_comments` (
+  `id` varchar(32) NOT NULL,
+  `thread_id` varchar(32) NOT NULL,
+  `thread_link` varchar(200) NOT NULL,
+  `thread_identifier` varchar(255) NOT NULL,
+  `parent_comment_id` varchar(32) DEFAULT NULL,
+  `content` text NOT NULL,
+  `author_name` varchar(200) NOT NULL,
+  `author_url` varchar(200) DEFAULT NULL,
+  `author_profile_url` varchar(255) NOT NULL,
+  `author_image` varchar(255) DEFAULT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `thread_identifier` (`thread_identifier`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 --
@@ -150,9 +170,9 @@ ALTER TABLE `blog_categories`
 --
 -- Constraints for table `blog_comments`
 --
-ALTER TABLE `blog_comments`
+/*ALTER TABLE `blog_comments`
   ADD CONSTRAINT `blog_comments_ibfk_2` FOREIGN KEY (`parent_comment_id`) REFERENCES `blog_comments` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `blog_comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `blog_posts` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `blog_comments_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `blog_posts` (`id`) ON DELETE CASCADE;*/
 
 --
 -- Constraints for table `blog_posts`

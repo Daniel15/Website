@@ -27,7 +27,12 @@ namespace Daniel15.Web.ViewModels.Blog
 		/// <summary>
 		/// List of all tags this post is tagged with.
 		/// </summary>
-		public IList<TagModel> PostTags { get; set; } 
+		public IList<TagModel> PostTags { get; set; }
+
+		/// <summary>
+		/// All the cached Disqus comments for this post
+		/// </summary>
+		public IEnumerable<DisqusCommentModel> Comments { get; set; }
 
 		/// <summary>
 		/// All the social network sharing URLs for this post

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ServiceStack.DataAnnotations;
 
 namespace Daniel15.Data.Entities.Blog
@@ -41,5 +42,8 @@ namespace Daniel15.Data.Entities.Blog
 
 		[Alias("date")]
 		public DateTime Date { get; set; }
+
+		[Ignore]
+		public IList<DisqusCommentModel> Children { get; set; }
 	}
 }

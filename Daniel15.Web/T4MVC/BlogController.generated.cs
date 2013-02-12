@@ -173,6 +173,7 @@ namespace Daniel15.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _CommentList = "_CommentList";
                 public readonly string _Comments = "_Comments";
                 public readonly string _DisqusCount = "_DisqusCount";
                 public readonly string _Layout = "_Layout";
@@ -188,6 +189,7 @@ namespace Daniel15.Web.Controllers
                 public readonly string Tag = "Tag";
                 public readonly string View = "View";
             }
+            public readonly string _CommentList = "~/Views/Blog/_CommentList.cshtml";
             public readonly string _Comments = "~/Views/Blog/_Comments.cshtml";
             public readonly string _DisqusCount = "~/Views/Blog/_DisqusCount.cshtml";
             public readonly string _Layout = "~/Views/Blog/_Layout.cshtml";

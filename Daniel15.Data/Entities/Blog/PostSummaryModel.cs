@@ -1,12 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using Daniel15.Shared.Extensions;
 using ServiceStack.DataAnnotations;
 
 namespace Daniel15.Data.Entities.Blog
 {
 	[Alias("blog_posts")]
-	public class PostSummaryModel
+	public class PostSummaryModel : ISupportsDisqus
 	{
 		public int Id { get; set; }
 
@@ -30,6 +31,15 @@ namespace Daniel15.Data.Entities.Blog
 		{
 			get { return DateExtensions.FromUnix(UnixDate); }
 			set { UnixDate = value.ToUnix(); }
+		}
+
+		/// <summary>
+		/// Gets the Disqus identifier for this post (currently just the post ID)
+		/// </summary>
+		[Ignore]
+		public string DisqusIdentifier
+		{
+			get { return Id.ToString(); }
 		}
 	}
 }

@@ -70,6 +70,7 @@
     <Compile Include="Entities\Blog\PostSummaryModel.cs" />
     <Compile Include="Entities\Blog\PostTagModel.cs" />
     <Compile Include="Entities\Blog\TagModel.cs" />
+    <Compile Include="Entities\ISupportsDisqus.cs" />
     <Compile Include="Entities\Projects\ProjectModel.cs" />
     <Compile Include="Entities\Projects\ProjectTechnologyModel.cs" />
     <Compile Include="Extensions\OrmLiteExtensions.cs" />

@@ -34,6 +34,7 @@ namespace Daniel15.Web.Controllers
 		private const int ONE_HOUR = 3600;
 
 		private readonly IBlogRepository _blogRepository;
+		private readonly IDisqusCommentRepository _commentRepository;
 		private readonly IUrlShortener _urlShortener;
 		private readonly ISocialManager _socialManager;
 		private readonly ISiteConfiguration _siteConfig;
@@ -43,12 +44,14 @@ namespace Daniel15.Web.Controllers
 		/// Initializes a new instance of the <see cref="BlogController" /> class.
 		/// </summary>
 		/// <param name="blogRepository">The blog post repository.</param>
+		/// <param name="commentRepository">The Disqus comment repository</param>
 		/// <param name="urlShortener">The URL shortener</param>
 		/// <param name="socialManager">The social network manager used to get sharing URLs</param>
 		/// <param name="siteConfig">Site configuration</param>
-		public BlogController(IBlogRepository blogRepository, IUrlShortener urlShortener, ISocialManager socialManager, ISiteConfiguration siteConfig)
+		public BlogController(IBlogRepository blogRepository, IDisqusCommentRepository commentRepository, IUrlShortener urlShortener, ISocialManager socialManager, ISiteConfiguration siteConfig)
 		{
 			_blogRepository = blogRepository;
+			_commentRepository = commentRepository;
 			_urlShortener = urlShortener;
 			_socialManager = socialManager;
 			_siteConfig = siteConfig;
@@ -197,7 +200,8 @@ namespace Daniel15.Web.Controllers
 				PostCategories = _blogRepository.CategoriesForPost(post),
 				PostTags = _blogRepository.TagsForPost(post),
 				ShortUrl = Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http"),
-				SocialNetworks = _socialManager.ShareUrls(post, Url.BlogPostAbsolute(post), ShortUrl(post))
+				SocialNetworks = _socialManager.ShareUrls(post, Url.BlogPostAbsolute(post), ShortUrl(post)),
+				Comments = _commentRepository.GetCommentsTree(post)
 			});
 		}
 

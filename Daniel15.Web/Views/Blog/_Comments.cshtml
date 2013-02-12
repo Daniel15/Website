@@ -1,16 +1,18 @@
 ﻿@using ServiceStack.Text
-@model Daniel15.Data.Entities.Blog.PostModel
+@model Daniel15.Web.ViewModels.Blog.PostViewModel
 
 <div id="comments">
-	<div id="disqus_thread"></div>
+	<div id="disqus_thread">
+		<h3>Comments</h3>
+		@Html.Partial(MVC.Blog.Views._CommentList, Model.Comments)
+	</div>
 </div>
 
 <script type="text/javascript">
-    @* TODO: Clean up the retrieval of the Disqus shortname *@
     var disqus_shortname = @Html.Raw(Config.DisqusShortname.ToJson()),
-        disqus_title = @Html.Raw(Model.Title.ToJson()),
-        disqus_identifier = @Model.Id,
-        disqus_url = @Html.Raw(Url.BlogPostAbsolute(Model).ToJson());
+        disqus_title = @Html.Raw(Model.Post.Title.ToJson()),
+        disqus_identifier = @Model.Post.DisqusIdentifier,
+        disqus_url = @Html.Raw(Url.BlogPostAbsolute(Model.Post).ToJson());
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
