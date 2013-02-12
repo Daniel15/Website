@@ -249,7 +249,7 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Authentication.config">
+    <Content Include="Authentication.private.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Admin\Views\Web.config" />
@@ -258,7 +258,7 @@
     <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\Posts.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\Edit.cshtml" />
-    <Content Include="ConnectionStrings.config" />
+    <Content Include="ConnectionStrings.private.config" />
     <Content Include="Content\css\blogadmin.less" />
     <Content Include="Content\css\border-radius.htc" />
     <Content Include="Content\css\csshover.htc" />
