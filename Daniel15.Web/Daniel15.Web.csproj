@@ -488,6 +488,7 @@
     <Content Include="Content\css\style-ie7.less" />
     <Content Include="Content\css\style-ie8.less" />
     <Content Include="Content\css\style.less" />
+    <Content Include="ApiKeys.private.config" />
     <None Include="Content\images\header_fade.psd" />
     <None Include="Content\js\framework\.git\config" />
     <None Include="Content\js\framework\.git\description" />

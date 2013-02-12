@@ -57,6 +57,7 @@ namespace Daniel15.Web.Infrastructure
 		{
 			// Configuration
 			var config = (SiteConfiguration)ConfigurationManager.GetSection("SiteConfiguration");
+			config.ApiKeys = (ApiKeysConfiguration)ConfigurationManager.GetSection("ApiKeys");
 			container.Register<ISiteConfiguration>(() => config);
 
 			container.Register<ITempDataProvider, CookieTempDataProvider>();

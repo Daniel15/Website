@@ -11,6 +11,8 @@ namespace Daniel15.Web.Infrastructure
 	/// </summary>
 	public class SiteConfiguration : ConfigurationSection, ISiteConfiguration
 	{
+		public ApiKeysConfiguration ApiKeys { get; set; }
+
 		/// <summary>
 		/// Gets the Google Analytics account to use for the site
 		/// </summary>
@@ -64,11 +66,9 @@ namespace Daniel15.Web.Infrastructure
 		/// <summary>
 		/// Gets the Disqus API key (used for syncing comments)
 		/// </summary>
-		[ConfigurationProperty("disqusApiKey", IsRequired = false)]
 		public string DisqusApiKey
 		{
-			get { return (string)this["disqusApiKey"]; }
-			set { this["disqusApiKey"] = value; }
+			get { return ApiKeys.DisqusApiKey; }
 		}
 
 		/// <summary>
@@ -100,6 +100,23 @@ namespace Daniel15.Web.Infrastructure
 		{
 			get { return (Type)this["webCacheType"]; }
 			set { this["webCacheType"] = value; }
+		}
+	}
+
+	/// <summary>
+	/// API key configuration section. Separated so that the API keys may be in a separate XML file
+	/// outside of source control.
+	/// </summary>
+	public class ApiKeysConfiguration : ConfigurationSection
+	{
+		/// <summary>
+		/// Gets the Disqus API key (used for syncing comments)
+		/// </summary>
+		[ConfigurationProperty("disqusApiKey", IsRequired = false)]
+		public string DisqusApiKey
+		{
+			get { return (string)this["disqusApiKey"]; }
+			set { this["disqusApiKey"] = value; }
 		}
 	}
 }
