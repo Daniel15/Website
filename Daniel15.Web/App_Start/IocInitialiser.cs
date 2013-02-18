@@ -5,6 +5,7 @@ using Daniel15.Web.Infrastructure;
 using Daniel15.Web.Mvc;
 using Daniel15.Web.Services;
 using SimpleInjector;
+using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
 
 namespace Daniel15.Web.App_Start
@@ -38,7 +39,7 @@ namespace Daniel15.Web.App_Start
 			container.RegisterPerWebRequest<IWebCache>(config => config.WebCacheType);
 
 			// Initialise all the standard stuff
-			Ioc.Initialize(container);
+			Ioc.Initialize(container, new WebRequestLifestyle());
 
 			DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
 		}

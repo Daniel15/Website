@@ -41,20 +41,14 @@ namespace Daniel15.Infrastructure
 		}
 
 		/// <summary>
-		/// Initialises the IoC container
-		/// </summary>
-		public static void Initialize()
-		{
-			Initialize(new Container());
-		}
-
-		/// <summary>
 		/// Initializes all the components in the IoC container.
 		/// </summary>
 		/// <param name="container">The container.</param>
-		public static void Initialize(Container container)
+		/// <param name="dbLifestyle">Lifestyle to use for database connections</param>
+		public static void Initialize(Container container = null, Lifestyle dbLifestyle = null)
 		{
-			Container = container;
+			Container = container ?? new Container();
+			dbLifestyle = dbLifestyle ?? Lifestyle.Transient;
 
 			// Configuration
 			container.Register<ISiteConfiguration>(() => _siteConfig);
@@ -64,14 +58,15 @@ namespace Daniel15.Infrastructure
 			container.Register<ISocialManager, SocialManager>();
 			container.Register<IDisqusComments, DisqusComments>();
 
-			InitializeDatabase(container);
+			InitializeDatabase(container, dbLifestyle);
 		}
 
 		/// <summary>
 		/// Initialises the database stuff in the IoC container
 		/// </summary>
 		/// <param name="container"></param>
-		private static void InitializeDatabase(Container container)
+		/// <param name="lifestyle">Lifestyle to use when registering components</param>
+		private static void InitializeDatabase(Container container, Lifestyle lifestyle)
 		{
 			const bool ENABLE_PROFILING = false;
 
@@ -89,17 +84,17 @@ namespace Daniel15.Infrastructure
 			}
 
 			// TODO: Move to Daniel15.Data
-			container.RegisterPerWebRequest<IDbConnectionFactory>(() =>
+			container.Register<IDbConnectionFactory>(() =>
 				new OrmLiteConnectionFactory(ConfigurationManager.ConnectionStrings["Database"].ConnectionString, 
-					                         MySqlDialect.Provider) { ConnectionFilter = connFilter });
+					                         MySqlDialect.Provider) { ConnectionFilter = connFilter }, lifestyle);
 
-			container.RegisterPerWebRequest<IDbConnection>(() => container.GetInstance<IDbConnectionFactory>().OpenDbConnection());
+			container.Register<IDbConnection>(() => container.GetInstance<IDbConnectionFactory>().OpenDbConnection(), lifestyle);
 
 			// Repositories
-			container.RegisterPerWebRequest<IBlogRepository, BlogRepository>();
-			container.RegisterPerWebRequest<IDisqusCommentRepository, DisqusCommentRepository>();
-			container.RegisterPerWebRequest<IProjectRepository, ProjectRepository>();
-			container.RegisterPerWebRequest<IMicroblogRepository, MicroblogRepository>();
+			container.Register<IBlogRepository, BlogRepository>(lifestyle);
+			container.Register<IDisqusCommentRepository, DisqusCommentRepository>(lifestyle);
+			container.Register<IProjectRepository, ProjectRepository>(lifestyle);
+			container.Register<IMicroblogRepository, MicroblogRepository>(lifestyle);
 		}
 
 		/// <summary>
