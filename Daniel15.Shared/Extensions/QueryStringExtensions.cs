@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web;
 
-namespace Daniel15.Web.Extensions
+namespace Daniel15.Shared.Extensions
 {
 	/// <summary>
 	/// Extensions for building query strings.

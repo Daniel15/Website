@@ -2,34 +2,34 @@
 using System.Collections.Generic;
 using System.Web.Helpers;
 using Daniel15.Data.Entities.Blog;
-using Daniel15.Web.Extensions;
+using Daniel15.Shared.Extensions;
 using ServiceStack.Text;
 
-namespace Daniel15.Web.Services.Social
+namespace Daniel15.BusinessLayer.Services.Social
 {
 	/// <summary>
-	/// Support for sharing posts on Twitter
+	/// Support for sharing posts on Reddit
 	/// </summary>
-	public class Twitter : ISocialShare
+	public class Reddit : ISocialShare
 	{
 		/// <summary>
-		/// Base URL for Twitter share URLs
+		/// Base URL for Reddit share URLs
 		/// </summary>
-		private const string SHARE_URL = "https://twitter.com/intent/tweet";
+		private const string SHARE_URL = "http://reddit.com/submit";
 		/// <summary>
 		/// URL to retrieve sharing count
 		/// </summary>
-		private const string COUNT_URL = "http://urls.api.twitter.com/1/urls/count.json";
+		private const string API_URL = "http://www.reddit.com/api/info.json";
 
 		/// <summary>
 		/// Gets the internal ID of this social network
 		/// </summary>
-		public string Id { get { return "twitter"; } }
+		public string Id { get { return "reddit"; } }
 
 		/// <summary>
 		/// Gets the friendly name of this social network
 		/// </summary>
-		public string Name { get { return "Twitter"; } }
+		public string Name { get { return "Reddit"; } }
 
 		#region Implementation of ISocialShare
 		/// <summary>
@@ -43,11 +43,8 @@ namespace Daniel15.Web.Services.Social
 		{
 			return SHARE_URL + "?" + new Dictionary<string, object>
 			{
-				{"text", post.Title},
-				{"original_referer", url},
-				{"url", shortUrl},
-				{"via", "Daniel15"},
-				{"related", "Daniel15"}
+				{"url", url},
+				{"title", post.Title}
 			}.ToQueryString();
 		}
 
@@ -60,16 +57,23 @@ namespace Daniel15.Web.Services.Social
 		/// <returns>Share count for this post</returns>
 		public int GetShareCount(PostSummaryModel post, string url, string shortUrl)
 		{
-			var countUrl = COUNT_URL + "?" + new Dictionary<string, object>
+			var total = 0;
+			var apiUrl = API_URL + "?" + new Dictionary<string, object>
 			{
-				{"url", url},
+				{"url", url}
 			}.ToQueryString();
 
-			var response = Json.Decode(countUrl.GetJsonFromUrl());
-			if (response == null || response.count == null)
+			var data = Json.Decode(apiUrl.GetJsonFromUrl());
+			if (data == null || data.data == null || data.data.children == null)
 				return 0;
 
-			return Convert.ToInt32(response.count);
+			// Need to add up the points in every submission of this URL
+			foreach (var child in data.data.children)
+			{
+				total += Convert.ToInt32(child.data.score);
+			}
+
+			return total;
 		}
 		#endregion
 	}

@@ -1,4 +1,4 @@
-namespace Daniel15.Web.Services
+namespace Daniel15.BusinessLayer.Services
 {
 	/// <summary>
 	/// Handles synchronisation of comments between Disqus and the local database.

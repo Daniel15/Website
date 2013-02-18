@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
 using System.Web.UI;
+using Daniel15.BusinessLayer.Services;
+using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data.Repositories;
-using Daniel15.Web.Services;
-using Daniel15.Web.Services.Social;
 using Daniel15.Web.Extensions;
 using System.Linq;
 

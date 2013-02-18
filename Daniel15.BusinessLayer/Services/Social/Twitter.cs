@@ -1,39 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Xml.Linq;
+using System.Web.Helpers;
 using Daniel15.Data.Entities.Blog;
-using Daniel15.Web.Extensions;
+using Daniel15.Shared.Extensions;
 using ServiceStack.Text;
 
-namespace Daniel15.Web.Services.Social
+namespace Daniel15.BusinessLayer.Services.Social
 {
 	/// <summary>
-	/// Support for sharing posts on Facebook
+	/// Support for sharing posts on Twitter
 	/// </summary>
-	public class Facebook : ISocialShare
+	public class Twitter : ISocialShare
 	{
 		/// <summary>
-		/// Base URL for Facebook share URLs
+		/// Base URL for Twitter share URLs
 		/// </summary>
-		private const string SHARE_URL = "https://www.facebook.com/sharer.php";
+		private const string SHARE_URL = "https://twitter.com/intent/tweet";
 		/// <summary>
-		/// API URL for FQL queries
+		/// URL to retrieve sharing count
 		/// </summary>
-		private const string QUERY_URL = "http://api.facebook.com/method/fql.query";
-		/// <summary>
-		/// Query to get sharing counts
-		/// </summary>
-		private const string LINK_QUERY = "SELECT share_count, like_count, comment_count, total_count FROM link_stat WHERE url=\"{0}\"";
+		private const string COUNT_URL = "http://urls.api.twitter.com/1/urls/count.json";
 
 		/// <summary>
 		/// Gets the internal ID of this social network
 		/// </summary>
-		public string Id { get { return "facebook"; } }
+		public string Id { get { return "twitter"; } }
 
 		/// <summary>
 		/// Gets the friendly name of this social network
 		/// </summary>
-		public string Name { get { return "Facebook"; } }
+		public string Name { get { return "Twitter"; } }
 
 		#region Implementation of ISocialShare
 		/// <summary>
@@ -47,8 +43,11 @@ namespace Daniel15.Web.Services.Social
 		{
 			return SHARE_URL + "?" + new Dictionary<string, object>
 			{
-				{"u", url},
-				{"t", post.Title},
+				{"text", post.Title},
+				{"original_referer", url},
+				{"url", shortUrl},
+				{"via", "Daniel15"},
+				{"related", "Daniel15"}
 			}.ToQueryString();
 		}
 
@@ -61,25 +60,16 @@ namespace Daniel15.Web.Services.Social
 		/// <returns>Share count for this post</returns>
 		public int GetShareCount(PostSummaryModel post, string url, string shortUrl)
 		{
-			// Get the count using FQL. Returns *both* like count and share count.
-			var query = string.Format(LINK_QUERY, url);
-			var queryUrl = QUERY_URL + "?" + new Dictionary<string, object>
+			var countUrl = COUNT_URL + "?" + new Dictionary<string, object>
 			{
-				{"query", query}
+				{"url", url},
 			}.ToQueryString();
 
-			var xml = XDocument.Load(queryUrl);
-			XNamespace ns = "http://api.facebook.com/1.0/";
-
-			if (xml.Root == null)
+			var response = Json.Decode(countUrl.GetJsonFromUrl());
+			if (response == null || response.count == null)
 				return 0;
 
-			var linkStat = xml.Root.Element(ns + "link_stat");
-			if (linkStat == null)
-				return 0;
-
-			var totalCount = linkStat.Element(ns + "total_count");
-			return totalCount == null ? 0 : Convert.ToInt32(totalCount.Value);
+			return Convert.ToInt32(response.count);
 		}
 		#endregion
 	}

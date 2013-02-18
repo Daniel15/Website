@@ -3,7 +3,7 @@ using System.Reflection;
 using SimpleInjector;
 using System.Linq;
 
-namespace Daniel15.Web.Extensions
+namespace Daniel15.Infrastructure.Extensions
 {
 	/// <summary>
 	/// Extension methods for SimpleInjector.

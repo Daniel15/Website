@@ -2,24 +2,19 @@ using System;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Reflection;
-using System.Web.Mvc;
+using Daniel15.BusinessLayer.Services;
+using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Repositories.OrmLite;
 using Daniel15.Data.Repositories.Static;
-using Daniel15.Infrastructure;
-using Daniel15.Web.Extensions;
-using Daniel15.Web.Mvc;
-using Daniel15.Web.Services;
-using Daniel15.Web.Services.Social;
+using Daniel15.Infrastructure.Extensions;
 using ServiceStack.DataAccess;
 using ServiceStack.OrmLite;
 using SimpleInjector;
-using SimpleInjector.Integration.Web.Mvc;
 using StackExchange.Profiling;
 using StackExchange.Profiling.Data;
 
-namespace Daniel15.Web.Infrastructure
+namespace Daniel15.Infrastructure
 {
 	/// <summary>
 	/// Handles initialisation of the IoC container.
@@ -33,46 +28,41 @@ namespace Daniel15.Web.Infrastructure
 		public static Container Container { get; private set; }
 
 		/// <summary>
+		/// Some IoC-registered components might require settings during initialisation (eg. to know
+		/// which component to register). This is ugly - Need to think of a better way :(
+		/// </summary>
+		private static readonly SiteConfiguration _siteConfig;
+
+		static Ioc()
+		{
+			// This is ugly - Clean it up!
+			_siteConfig = (SiteConfiguration)ConfigurationManager.GetSection("SiteConfiguration");
+			_siteConfig.ApiKeys = (ApiKeysConfiguration)ConfigurationManager.GetSection("ApiKeys");
+		}
+
+		/// <summary>
 		/// Initialises the IoC container
 		/// </summary>
 		public static void Initialize()
 		{
-			Container = new Container();
-			Container.Options.ConstructorResolutionBehavior =
-				new T4MvcControllerConstructorResolutionBehavior(Container.Options.ConstructorResolutionBehavior);
-
-			InitializeContainer(Container);
-			Container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
-			Container.RegisterMvcAttributeFilterProvider();
-			Container.Verify();
-
-			DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(Container));
+			Initialize(new Container());
 		}
 
 		/// <summary>
 		/// Initializes all the components in the IoC container.
 		/// </summary>
 		/// <param name="container">The container.</param>
-		private static void InitializeContainer(Container container)
+		public static void Initialize(Container container)
 		{
-			// Configuration
-			var config = (SiteConfiguration)ConfigurationManager.GetSection("SiteConfiguration");
-			config.ApiKeys = (ApiKeysConfiguration)ConfigurationManager.GetSection("ApiKeys");
-			container.Register<ISiteConfiguration>(() => config);
+			Container = container;
 
-			container.Register<ITempDataProvider, CookieTempDataProvider>();
+			// Configuration
+			container.Register<ISiteConfiguration>(() => _siteConfig);
 
 			// Services
 			container.Register<IUrlShortener, UrlShortener>();
 			container.Register<ISocialManager, SocialManager>();
 			container.Register<IDisqusComments, DisqusComments>();
-
-			// ASP.NET MVC stuff
-			// TODO: Figure out how to do this properly - http://simpleinjector.codeplex.com/discussions/430939
-			//container.RegisterPerWebRequest<RequestContext>(() => HttpContext.Current.Request.RequestContext);
-			//container.RegisterPerWebRequest<UrlHelper>(() => new UrlHelper(container.GetInstance<RequestContext>()));
-
-			container.RegisterPerWebRequest<IWebCache>(config.WebCacheType);
 
 			InitializeDatabase(container);
 		}
@@ -110,6 +100,20 @@ namespace Daniel15.Web.Infrastructure
 			container.RegisterPerWebRequest<IDisqusCommentRepository, DisqusCommentRepository>();
 			container.RegisterPerWebRequest<IProjectRepository, ProjectRepository>();
 			container.RegisterPerWebRequest<IMicroblogRepository, MicroblogRepository>();
+		}
+
+		/// <summary>
+		/// Registers that one instance of the type specified by the config value <paramref name="configValue"/> 
+		/// will be returned for every web request every time a <typeparamref name="TService"/> is 
+		/// requested and ensures that -if  <paramref name="configValue"/> implements <see cref="IDisposable"/>
+		/// - this instance will get disposed on the end of the web request.
+		/// </summary>
+		/// <typeparam name="TService">The interface or base type that can be used to retrieve the instances.</typeparam>
+		/// <param name="container">The container to make the registrations in.</param>
+		/// <param name="configValue">Configuration value that specifies concrete type.</param>
+		public static void RegisterPerWebRequest<TService>(this Container container, Func<ISiteConfiguration, Type> configValue) where TService : class
+		{
+			container.RegisterPerWebRequest<TService>(configValue(_siteConfig));
 		}
 	}
 }

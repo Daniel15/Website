@@ -6,10 +6,10 @@ using System.Web.Helpers;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Infrastructure;
-using Daniel15.Web.Extensions;
+using Daniel15.Shared.Extensions;
 using ServiceStack.Text;
 
-namespace Daniel15.Web.Services
+namespace Daniel15.BusinessLayer.Services
 {
 	/// <summary>
 	/// Handles synchronisation of comments between Disqus and the local database.

@@ -1,4 +1,5 @@
-﻿using Daniel15.Web.Services;
+﻿using Daniel15.BusinessLayer.Services;
+using Daniel15.Web.Services;
 using NUnit.Framework;
 
 namespace Daniel15.Web.Tests

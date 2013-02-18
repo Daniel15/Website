@@ -68,18 +68,15 @@
     <Reference Include="ServiceStack.Text, Version=3.9.35.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ServiceStack.Text.3.9.35\lib\net35\ServiceStack.Text.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector">
-      <HintPath>..\packages\SimpleInjector.1.6.0.12319\lib\net35\SimpleInjector.dll</HintPath>
+    <Reference Include="SimpleInjector, Version=2.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.2.0.0-beta4\lib\net40-client\SimpleInjector.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Extensions">
-      <HintPath>..\packages\SimpleInjector.Extensions.1.6.0.12319\lib\net35\SimpleInjector.Extensions.dll</HintPath>
+    <Reference Include="SimpleInjector.Integration.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.Integration.Web.2.0.0-beta4\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector.Integration.Web, Version=1.6.0.12319, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\SimpleInjector.Integration.Web.1.6.0.12319\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector.Integration.Web.Mvc">
-      <HintPath>..\packages\SimpleInjector.MVC3.1.6.0.12319\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.2.0.0-beta4\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -139,10 +136,9 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IocInitialiser.cs" />
     <Compile Include="App_Start\MiniProfiler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Extensions\SimpleInjectorExtensions.cs" />
-    <Compile Include="Infrastructure\Ioc.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Blog\EditViewModel.cs" />
@@ -158,32 +154,13 @@
     <Compile Include="Extensions\BlogUrlHelperExtensions.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
-    <Compile Include="Extensions\QueryStringExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Infrastructure\SiteConfiguration.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Infrastructure\T4MvcControllerConstructorResolutionBehavior.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Mvc\CookieTempDataProvider.cs" />
     <Compile Include="Mvc\ViewBase.cs" />
     <Compile Include="Models\Home\ChatStatusModel.cs" />
-    <Compile Include="Services\DisqusComments.cs" />
-    <Compile Include="Services\IDisqusComments.cs" />
-    <Compile Include="Services\NullWebCache.cs" />
-    <Compile Include="Services\IWebCache.cs" />
-    <Compile Include="Services\IUrlShortener.cs" />
-    <Compile Include="Services\NginxWebCache.cs" />
-    <Compile Include="Services\Social\Facebook.cs" />
-    <Compile Include="Services\Social\ISocialManager.cs" />
-    <Compile Include="Services\Social\ISocialNetwork.cs" />
-    <Compile Include="Services\Social\ISocialShare.cs" />
-    <Compile Include="Services\Social\Linkedin.cs" />
-    <Compile Include="Services\Social\Reddit.cs" />
-    <Compile Include="Services\Social\SocialManager.cs" />
-    <Compile Include="Services\Social\Twitter.cs" />
-    <Compile Include="Services\UrlShortener.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Extensions\HtmlLayoutExtensions.cs" />
@@ -193,6 +170,9 @@
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Models\Shared\MenuItemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IWebCache.cs" />
+    <Compile Include="Services\NginxWebCache.cs" />
+    <Compile Include="Services\NullWebCache.cs" />
     <Compile Include="T4MVC\AccountController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -603,9 +583,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Daniel15.BusinessLayer\Daniel15.BusinessLayer.csproj">
+      <Project>{BFF0CA23-1DD2-431B-BFD0-DD2D492B575F}</Project>
+      <Name>Daniel15.BusinessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Daniel15.Data\Daniel15.Data.csproj">
       <Project>{3F58E67D-1C33-4670-9780-F9CA1F43E83F}</Project>
       <Name>Daniel15.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Daniel15.Infrastructure\Daniel15.Infrastructure.csproj">
+      <Project>{3735A312-3F49-4565-A4EC-2A7A41D2086E}</Project>
+      <Name>Daniel15.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\Daniel15.Shared\Daniel15.Shared.csproj">
       <Project>{F38B83AD-77EB-43D8-A076-43D68FE409BB}</Project>
