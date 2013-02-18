@@ -122,6 +122,18 @@ namespace Daniel15.Web.Controllers
 			return View(MVC.Shared.Views.ErrorWithLayout, new ErrorViewModel());
 		}
 
+		/// <summary>
+		/// Page used by Pingdom to determine that the site is running. The index page is not used
+		/// as this could be cached by a frontend cache (and hence be accessible while the ASP.NET
+		/// MVC part of the site is down)
+		/// </summary>
+		/// <returns></returns>
+		[OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+		public virtual ActionResult Alive()
+		{
+			return Content("Site is alive and running :)");
+		}
+
 		#region Google Talk chat status
 		/// <summary>
 		/// "tk" parameter from badge URL
