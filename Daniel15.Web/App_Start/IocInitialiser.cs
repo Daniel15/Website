@@ -39,7 +39,7 @@ namespace Daniel15.Web.App_Start
 			container.RegisterPerWebRequest<IWebCache>(config => config.WebCacheType);
 
 			// Initialise all the standard stuff
-			Ioc.Initialize(container, new WebRequestLifestyle());
+			Ioc.Initialise(container, new WebRequestLifestyle());
 
 			DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
 		}

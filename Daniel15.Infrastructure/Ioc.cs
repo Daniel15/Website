@@ -45,7 +45,7 @@ namespace Daniel15.Infrastructure
 		/// </summary>
 		/// <param name="container">The container.</param>
 		/// <param name="dbLifestyle">Lifestyle to use for database connections</param>
-		public static void Initialize(Container container = null, Lifestyle dbLifestyle = null)
+		public static void Initialise(Container container = null, Lifestyle dbLifestyle = null)
 		{
 			Container = container ?? new Container();
 			dbLifestyle = dbLifestyle ?? Lifestyle.Transient;
