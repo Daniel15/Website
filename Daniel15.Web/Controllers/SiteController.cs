@@ -83,7 +83,7 @@ namespace Daniel15.Web.Controllers
 		public virtual ActionResult SocialFeed()
 		{
 			// Currently just proxies to the PHP page - This needs to be rewritten in C#
-			var content = new WebClient().DownloadString("http://dan.cx/socialfeed/loadhtml.php");
+			var content = new WebClient().DownloadString("http://dan.cx/socialfeed/loadhtml.php?" + Request.QueryString);
 			return View(Views.SocialFeed, new SocialFeedViewModel { Content = content });
 		}
 
