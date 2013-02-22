@@ -20,6 +20,14 @@ namespace Daniel15.Data.Repositories.Static
 			_technologies = new List<ProjectTechnologyModel>
 			{
 				// TODO: Move this all into the database!!!
+				new ProjectTechnologyModel
+				{
+					IsPrimary = true,
+					Name ="ASP.NET MVC",
+					Alias = "dotnetmvc",
+					Url = "http://asp.net/mvc",
+					Desc = "<p><a href=\"http://asp.net/mvc\">ASP.NET MVC</a> is Microsoft's newest web development framework.</p>",
+				},
 				new ProjectTechnologyModel {
 					IsPrimary = true,
 					Name ="C#",
@@ -179,6 +187,12 @@ namespace Daniel15.Data.Repositories.Static
 					Name = "Highcharts",
 					Url = "http://www.highcharts.com/"
 				},
+				new ProjectTechnologyModel
+				{
+					Alias = "ormlite",
+					Name = "ServiceStack ORMLite",
+					Url = "https://github.com/ServiceStack/ServiceStack.OrmLite"
+				},
 			};
 
 			var techsByAlias = _technologies.ToDictionary(x => x.Alias);
@@ -191,9 +205,9 @@ namespace Daniel15.Data.Repositories.Static
 					Url = "http://dan.cx/",
 					Thumbnail = "daniel15net",
 					ProjectType = ProjectType.Website,
-					Description = "A personal site about me, listing all the current and previous projects I've worked on, as well as contact information. Site was designed and coded by me, using the Kohana PHP framework, and the MooTools JavaScript framework. The source code is <a href=\"http://github.com/Daniel15/Website\">available on Github</a>. It is <em>always</em> under construction, I keep changing it. :P",
-					Date = "January 2012",
-					Technologies = new List<ProjectTechnologyModel> { techsByAlias["php"], techsByAlias["kohana"], techsByAlias["html"], techsByAlias["css"], techsByAlias["js"], techsByAlias["kohana_orm"] },
+					Description = "A personal site about me, listing all the current and previous projects I've worked on, as well as contact information. Site was designed and coded by me, using the ASP.NET MVC framework and my own JavaScript framework (previously, it has used the Kohana PHP framework, and the MooTools JavaScript framework). The source code is <a href=\"http://github.com/Daniel15/Website\">available on Github</a>. It is <em>always</em> under construction, I keep changing it. :P",
+					Date = "February 2013",
+					Technologies = new List<ProjectTechnologyModel> { techsByAlias["csharp"], techsByAlias["dotnetmvc"], techsByAlias["html"], techsByAlias["css"], techsByAlias["js"], techsByAlias["ormlite"] },
 				},
 			
 				new ProjectModel {

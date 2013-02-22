@@ -124,7 +124,7 @@ Page.Site.Projects =
 		
 		// Show or hide the "active projects" section depending on if it actually contains anything.
 		var activeProjects = $('active_projects');
-		activeProjects.setStyle('display', activeProjects.firstByClass('.visible') ? '' : 'none');
+		activeProjects.setStyle('display', activeProjects.firstByClass('visible') ? '' : 'none');
 		
 		Events.stop(e);
 	},
