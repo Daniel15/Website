@@ -84,13 +84,16 @@ namespace Daniel15.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_FeedController : Daniel15.Web.Controllers.FeedController
+    public partial class T4MVC_FeedController : Daniel15.Web.Controllers.FeedController
     {
         public T4MVC_FeedController() : base(Dummy.Instance) { }
+
+        partial void SitemapOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult Sitemap()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Sitemap);
+            SitemapOverride(callInfo);
             return callInfo;
         }
 

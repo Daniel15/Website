@@ -32,6 +32,9 @@ as it breaks the templated helper code-->
   <!--If true, the T4MVC action result interface will be generated
 If false, the namespace of the interface must be referenced in the 'ReferencedNamespaces' setting-->
   <GenerateActionResultInterface>True</GenerateActionResultInterface>
+  <!--If true, [new] overrides will be created for async actions on AsyncControllers
+This breaks the Go To Definition function for async actions.-->
+  <SupportAsyncActions>False</SupportAsyncActions>
   <!--If true, use lower case tokens in routes for the area, controller and action names-->
   <UseLowercaseRoutes>False</UseLowercaseRoutes>
   <!--The namespace that the links are generated in (e.g. "Links", as in Links.Content.nerd_jpg)-->
@@ -53,6 +56,10 @@ See http://mvccontrib.codeplex.com/workitem/7163 for potential issues with this 
   <!--When creating links with T4MVC, it can force them to HTTPS if the action method you are linking to requires Http.-->
   <AttributeIndicatingHttps>System.Web.Mvc.RequireHttpsAttribute</AttributeIndicatingHttps>
   <GenerateSecureLinksInDebugMode>False</GenerateSecureLinksInDebugMode>
+  <!--Set this to false to omit the generation of parameters for action methods.-->
+  <GenerateParamsForActionMethods>True</GenerateParamsForActionMethods>
+  <!--Set this to true to omit the generation of parameters for action methods as constants.  Choose this or GenerateParamsForActionMethods.-->
+  <GenerateParamsAsConstantsForActionMethods>False</GenerateParamsAsConstantsForActionMethods>
   <!--The suffix added to action method names for the property containing the parameters, for example ImportParams
 for the Import action method.-->
   <ParamsPropertySuffix>Params</ParamsPropertySuffix>

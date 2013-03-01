@@ -43,31 +43,31 @@ namespace Daniel15.Web.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Category()
+        public virtual System.Web.Mvc.ActionResult Category()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Tag()
+        public virtual System.Web.Mvc.ActionResult Tag()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Tag);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Archive()
+        public virtual System.Web.Mvc.ActionResult Archive()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Archive);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult View()
+        public virtual System.Web.Mvc.ActionResult View()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.View);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult ShortUrl()
+        public virtual System.Web.Mvc.ActionResult ShortUrl()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ShortUrl);
         }
@@ -208,32 +208,43 @@ namespace Daniel15.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_BlogController : Daniel15.Web.Controllers.BlogController
+    public partial class T4MVC_BlogController : Daniel15.Web.Controllers.BlogController
     {
         public T4MVC_BlogController() : base(Dummy.Instance) { }
+
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int page);
 
         public override System.Web.Mvc.ActionResult Index(int page)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            IndexOverride(callInfo, page);
             return callInfo;
         }
+
+        partial void CategoryOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string slug, int page);
 
         public override System.Web.Mvc.ActionResult Category(string slug, int page)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            CategoryOverride(callInfo, slug, page);
             return callInfo;
         }
+
+        partial void TagOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string slug, int page);
 
         public override System.Web.Mvc.ActionResult Tag(string slug, int page)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Tag);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            TagOverride(callInfo, slug, page);
             return callInfo;
         }
+
+        partial void ArchiveOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int year, int month, int page);
 
         public override System.Web.Mvc.ActionResult Archive(int year, int month, int page)
         {
@@ -241,8 +252,11 @@ namespace Daniel15.Web.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "year", year);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "month", month);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            ArchiveOverride(callInfo, year, month, page);
             return callInfo;
         }
+
+        partial void ViewOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int month, int year, string slug);
 
         public override System.Web.Mvc.ActionResult View(int month, int year, string slug)
         {
@@ -250,19 +264,26 @@ namespace Daniel15.Web.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "month", month);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "year", year);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            ViewOverride(callInfo, month, year, slug);
             return callInfo;
         }
+
+        partial void ShortUrlOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string alias);
 
         public override System.Web.Mvc.ActionResult ShortUrl(string alias)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ShortUrl);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "alias", alias);
+            ShortUrlOverride(callInfo, alias);
             return callInfo;
         }
+
+        partial void FeedOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult Feed()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Feed);
+            FeedOverride(callInfo);
             return callInfo;
         }
 

@@ -84,13 +84,16 @@ namespace Daniel15.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_BlogPartialsController : Daniel15.Web.Controllers.BlogPartialsController
+    public partial class T4MVC_BlogPartialsController : Daniel15.Web.Controllers.BlogPartialsController
     {
         public T4MVC_BlogPartialsController() : base(Dummy.Instance) { }
+
+        partial void SidebarOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult Sidebar()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Sidebar);
+            SidebarOverride(callInfo);
             return callInfo;
         }
 

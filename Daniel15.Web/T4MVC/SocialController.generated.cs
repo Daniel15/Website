@@ -43,7 +43,7 @@ namespace Daniel15.Web.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult PostShareCount()
+        public virtual System.Web.Mvc.ActionResult PostShareCount()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PostShareCount);
         }
@@ -96,14 +96,17 @@ namespace Daniel15.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_SocialController : Daniel15.Web.Controllers.SocialController
+    public partial class T4MVC_SocialController : Daniel15.Web.Controllers.SocialController
     {
         public T4MVC_SocialController() : base(Dummy.Instance) { }
+
+        partial void PostShareCountOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string slug);
 
         public override System.Web.Mvc.ActionResult PostShareCount(string slug)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PostShareCount);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            PostShareCountOverride(callInfo, slug);
             return callInfo;
         }
 

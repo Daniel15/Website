@@ -87,19 +87,25 @@ namespace Daniel15.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_RedirectController : Daniel15.Web.Controllers.RedirectController
+    public partial class T4MVC_RedirectController : Daniel15.Web.Controllers.RedirectController
     {
         public T4MVC_RedirectController() : base(Dummy.Instance) { }
+
+        partial void CssOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult Css()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Css);
+            CssOverride(callInfo);
             return callInfo;
         }
+
+        partial void JsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult Js()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Js);
+            JsOverride(callInfo);
             return callInfo;
         }
 

@@ -46,7 +46,7 @@ namespace Daniel15.Web.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Login()
+        public virtual System.Web.Mvc.ActionResult Login()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
         }
@@ -102,22 +102,28 @@ namespace Daniel15.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_AccountController : Daniel15.Web.Controllers.AccountController
+    public partial class T4MVC_AccountController : Daniel15.Web.Controllers.AccountController
     {
         public T4MVC_AccountController() : base(Dummy.Instance) { }
+
+        partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string returnUrl);
 
         public override System.Web.Mvc.ActionResult Login(string returnUrl)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            LoginOverride(callInfo, returnUrl);
             return callInfo;
         }
+
+        partial void LoginOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Daniel15.Web.ViewModels.Account.LoginViewModel model, string returnUrl);
 
         public override System.Web.Mvc.ActionResult Login(Daniel15.Web.ViewModels.Account.LoginViewModel model, string returnUrl)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Login);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            LoginOverride(callInfo, model, returnUrl);
             return callInfo;
         }
 

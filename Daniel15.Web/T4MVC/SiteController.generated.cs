@@ -64,6 +64,7 @@ namespace Daniel15.Web.Controllers
             public readonly string TumblrPosts = "TumblrPosts";
             public readonly string FileNotFound = "FileNotFound";
             public readonly string Error = "Error";
+            public readonly string Alive = "Alive";
             public readonly string ChatStatus = "ChatStatus";
         }
 
@@ -77,6 +78,7 @@ namespace Daniel15.Web.Controllers
             public const string TumblrPosts = "TumblrPosts";
             public const string FileNotFound = "FileNotFound";
             public const string Error = "Error";
+            public const string Alive = "Alive";
             public const string ChatStatus = "ChatStatus";
         }
 
@@ -112,55 +114,88 @@ namespace Daniel15.Web.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_SiteController : Daniel15.Web.Controllers.SiteController
+    public partial class T4MVC_SiteController : Daniel15.Web.Controllers.SiteController
     {
         public T4MVC_SiteController() : base(Dummy.Instance) { }
+
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            IndexOverride(callInfo);
             return callInfo;
         }
+
+        partial void ProjectsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult Projects()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Projects);
+            ProjectsOverride(callInfo);
             return callInfo;
         }
+
+        partial void SearchOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult Search()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Search);
+            SearchOverride(callInfo);
             return callInfo;
         }
+
+        partial void SocialFeedOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult SocialFeed()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SocialFeed);
+            SocialFeedOverride(callInfo);
             return callInfo;
         }
+
+        partial void TumblrPostsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult TumblrPosts()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.TumblrPosts);
+            TumblrPostsOverride(callInfo);
             return callInfo;
         }
+
+        partial void FileNotFoundOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult FileNotFound()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.FileNotFound);
+            FileNotFoundOverride(callInfo);
             return callInfo;
         }
+
+        partial void ErrorOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult Error()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Error);
+            ErrorOverride(callInfo);
             return callInfo;
         }
+
+        partial void AliveOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult Alive()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Alive);
+            AliveOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void ChatStatusOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult ChatStatus()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChatStatus);
+            ChatStatusOverride(callInfo);
             return callInfo;
         }
 

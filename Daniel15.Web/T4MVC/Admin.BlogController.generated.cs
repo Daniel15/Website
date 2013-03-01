@@ -43,7 +43,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Posts()
+        public virtual System.Web.Mvc.ActionResult Posts()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Posts);
         }
@@ -121,41 +121,56 @@ namespace Daniel15.Web.Areas.Admin.Controllers
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_BlogController : Daniel15.Web.Areas.Admin.Controllers.BlogController
+    public partial class T4MVC_BlogController : Daniel15.Web.Areas.Admin.Controllers.BlogController
     {
         public T4MVC_BlogController() : base(Dummy.Instance) { }
+
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            IndexOverride(callInfo);
             return callInfo;
         }
+
+        partial void PostsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, bool published);
 
         public override System.Web.Mvc.ActionResult Posts(bool published)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Posts);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "published", published);
+            PostsOverride(callInfo, published);
             return callInfo;
         }
+
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string slug);
 
         public override System.Web.Mvc.ActionResult Edit(string slug)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            EditOverride(callInfo, slug);
             return callInfo;
         }
+
+        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, Daniel15.Web.Areas.Admin.ViewModels.Blog.EditViewModel viewModel, string slug);
 
         public override System.Web.Mvc.ActionResult Edit(Daniel15.Web.Areas.Admin.ViewModels.Blog.EditViewModel viewModel, string slug)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "viewModel", viewModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            EditOverride(callInfo, viewModel, slug);
             return callInfo;
         }
+
+        partial void SyncCommentsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         public override System.Web.Mvc.ActionResult SyncComments()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SyncComments);
+            SyncCommentsOverride(callInfo);
             return callInfo;
         }
 
