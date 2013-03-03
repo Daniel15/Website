@@ -86,6 +86,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -158,6 +159,7 @@
     <Compile Include="Controllers\BlogPartialsController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
+    <Compile Include="Controllers\SignatureController.cs" />
     <Compile Include="Controllers\SocialController.cs" />
     <Compile Include="Extensions\BlogUrlHelperExtensions.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
@@ -200,6 +202,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\SignatureController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\SiteController.generated.cs">

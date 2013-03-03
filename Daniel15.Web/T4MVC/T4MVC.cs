@@ -31,6 +31,7 @@ public static class MVC
     public static Daniel15.Web.Controllers.BlogPartialsController BlogPartials = new Daniel15.Web.Controllers.T4MVC_BlogPartialsController();
     public static Daniel15.Web.Controllers.FeedController Feed = new Daniel15.Web.Controllers.T4MVC_FeedController();
     public static Daniel15.Web.Controllers.RedirectController Redirect = new Daniel15.Web.Controllers.T4MVC_RedirectController();
+    public static Daniel15.Web.Controllers.SignatureController Signature = new Daniel15.Web.Controllers.T4MVC_SignatureController();
     public static Daniel15.Web.Controllers.SiteController Site = new Daniel15.Web.Controllers.T4MVC_SiteController();
     public static Daniel15.Web.Controllers.SocialController Social = new Daniel15.Web.Controllers.T4MVC_SocialController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();

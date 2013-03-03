@@ -44,6 +44,13 @@ namespace Daniel15.Web.App_Start
 				url: "sitemap.xml",
 				defaults: new { controller = "Feed", action = "Sitemap" }
 			);
+
+			// Signature images
+			routes.MapRoute(
+				name: "Signature",
+				url: "sig/{action}.png",
+				defaults: new { controller = "Signature" }
+			);
 		}
 
 		/// <summary>
