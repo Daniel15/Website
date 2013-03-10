@@ -28,39 +28,19 @@ Page.Site.Index =
 			count: 10,
 			loadOnInit: true
 		});
-		this.initGoogleTalk();
 		// TODO: Hover thingies
 	},
 	/**
 	 * Load Google Talk status via AJAX request
 	 */
-	initGoogleTalk: function()
+	initGoogleTalk: function(data)
 	{
-		(new Ajax('Site/ChatStatus', 
-		{
-			onSuccess: function(data)
-			{
-				$('gtalk').removeClass('offline').addClass(data.StatusString.toLowerCase());
-				$('gtalk_address').set('title', data.StatusString);
-				var status = data.StatusString;
-				if (data.StatusText != data.StatusString)
-				    status += ' (' + data.StatusText + ')';
-				$('gtalk_status').set('innerHTML', status);
-				
-				// If status is not Online, we can't start a new conversation (even Busy!)
-				if (data.StatusString == 'Online')
-					$('start_gtalk_chat').setStyle('display', 'inline');
-			},
-			context: this,
-			abortPrev: false
-		})).send();
-		
-		// Make the "start conversation" link open in a new window
-		$('start_gtalk_chat').addEvent('click', function(e)
-		{
-			Events.stop(e);
-			window.open(this.href, '_blank', 'height=500px,width=300px');
-		});
+		$('gtalk').removeClass('offline').addClass(data.state.toLowerCase());
+		$('gtalk_address').set('title', data.state);
+		var status = data.state;
+		if (data.statusText && data.statusText.toLowerCase() !== data.state.toLowerCase())
+			status += ' (' + data.statusText + ')';
+		$('gtalk_status').set('innerHTML', status);
 	}
 };
 
