@@ -25,9 +25,6 @@ namespace Daniel15.Web.Controllers
     public partial class SignatureController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SignatureController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected SignatureController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

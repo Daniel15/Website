@@ -65,7 +65,6 @@ namespace Daniel15.Web.Controllers
             public readonly string FileNotFound = "FileNotFound";
             public readonly string Error = "Error";
             public readonly string Alive = "Alive";
-            public readonly string ChatStatus = "ChatStatus";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -79,7 +78,6 @@ namespace Daniel15.Web.Controllers
             public const string FileNotFound = "FileNotFound";
             public const string Error = "Error";
             public const string Alive = "Alive";
-            public const string ChatStatus = "ChatStatus";
         }
 
 
@@ -187,15 +185,6 @@ namespace Daniel15.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Alive);
             AliveOverride(callInfo);
-            return callInfo;
-        }
-
-        partial void ChatStatusOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        public override System.Web.Mvc.ActionResult ChatStatus()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChatStatus);
-            ChatStatusOverride(callInfo);
             return callInfo;
         }
 
