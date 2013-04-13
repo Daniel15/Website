@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Blog\CategoryModel.cs" />
+    <Compile Include="Entities\Blog\CategoryWithPostIdModel.cs" />
     <Compile Include="Entities\Blog\DisqusCommentModel.cs" />
     <Compile Include="Entities\Blog\MicroblogPostModel.cs" />
     <Compile Include="Entities\Blog\PostCategoryModel.cs" />

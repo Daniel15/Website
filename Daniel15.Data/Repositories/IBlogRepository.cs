@@ -30,6 +30,13 @@ namespace Daniel15.Data.Repositories
 		IList<CategoryModel> CategoriesForPost(PostSummaryModel post);
 
 		/// <summary>
+		/// Gets the categories for the specified blog posts
+		/// </summary>
+		/// <param name="posts">Blog posts</param>
+		/// <returns>Categories for all the specified posts</returns>
+		IDictionary<PostSummaryModel, IEnumerable<CategoryModel>> CategoriesForPosts(IEnumerable<PostSummaryModel> posts);
+
+		/// <summary>
 		/// Gets the tags for the specified blog post
 		/// </summary>
 		/// <param name="post">Blog post</param>

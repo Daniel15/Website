@@ -62,6 +62,29 @@ namespace Daniel15.Data.Repositories.OrmLite
 		}
 
 		/// <summary>
+		/// Gets the categories for the specified blog posts
+		/// </summary>
+		/// <param name="posts">Blog posts</param>
+		/// <returns>Categories for all the specified posts</returns>
+		public IDictionary<PostSummaryModel, IEnumerable<CategoryModel>> CategoriesForPosts(IEnumerable<PostSummaryModel> posts)
+		{
+			var indexedPosts = posts.ToDictionary(post => post.Id, post => post);
+
+			// Get all the categories associated with all of the posts
+			var allCategories = Connection.Select<CategoryWithPostIdModel>(@"
+				SELECT blog_post_categories.post_id, blog_categories.id, blog_categories.title, blog_categories.slug, blog_categories.parent_category_id
+				FROM blog_post_categories
+				INNER JOIN blog_categories ON blog_categories.id = blog_post_categories.category_id
+				WHERE blog_post_categories.post_id IN (" + string.Join(", ", indexedPosts.Keys) + @")
+				ORDER BY blog_categories.title");
+
+			// Now group all the records by post
+			return allCategories
+				.GroupBy(cat => cat.PostId)
+				.ToDictionary(group => indexedPosts[group.Key], group => group.Cast<CategoryModel>());
+		}
+
+		/// <summary>
 		/// Gets the tags for the specified blog post
 		/// </summary>
 		/// <param name="post">Blog post</param>

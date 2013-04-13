@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Data.Entities.Blog;
@@ -62,10 +63,22 @@ namespace Daniel15.Web.Controllers
 				return Redirect(_siteConfig.FeedBurnerUrl.ToString());
 
 			var posts = _blogRepository.LatestPosts(ITEMS_IN_FEED);
+			return RenderFeed(posts);
+		}
 
-			Response.ContentType = "application/rss+xml";
+		/// <summary>
+		/// Renders the specified list of posts to an RSS feed
+		/// </summary>
+		/// <param name="posts">Posts to render</param>
+		/// <returns>RSS feed</returns>
+		private ActionResult RenderFeed(IList<PostModel> posts)
+		{
+			//Response.ContentType = "application/rss+xml";
+			Response.ContentType = "text/xml";
 			// Set last-modified date based on the date of the newest post
 			Response.Cache.SetLastModified(posts[0].Date);
+
+			var categories = _blogRepository.CategoriesForPosts(posts);
 
 			return View(new FeedViewModel
 			{
@@ -73,9 +86,7 @@ namespace Daniel15.Web.Controllers
 				{
 					Post = post,
 					ShortUrl = ShortUrl(post),
-					// TODO: This should be optimised as it will do a SELECT N+1
-					// Although FeedBurner will be caching this feed so it's not too significant
-					PostCategories = _blogRepository.CategoriesForPost(post)
+					PostCategories = categories[post]
 				}).ToList()
 			});
 		}
