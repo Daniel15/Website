@@ -520,6 +520,7 @@
     <None Include="deploy.proj">
       <SubType>Designer</SubType>
     </None>
+    <None Include="nginx.conf" />
     <None Include="T4MVC\T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>

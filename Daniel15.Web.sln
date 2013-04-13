@@ -15,7 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc stuff", "Misc stuff", 
 		deploy.bat = deploy.bat
 		Daniel15.Web\deploy.proj = Daniel15.Web\deploy.proj
 		elmah.sql = elmah.sql
-		nginx.conf = nginx.conf
 		README.md = README.md
 		schema.sql = schema.sql
 	EndProjectSection
