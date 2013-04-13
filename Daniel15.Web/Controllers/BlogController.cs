@@ -25,10 +25,6 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		private const int ITEMS_PER_PAGE = 10;
 		/// <summary>
-		/// Number of blog posts to show in the RSS feed
-		/// </summary>
-		private const int ITEMS_IN_FEED = 10;
-		/// <summary>
 		/// One hour in seconds.
 		/// </summary>
 		private const int ONE_HOUR = 3600;
@@ -37,7 +33,6 @@ namespace Daniel15.Web.Controllers
 		private readonly IDisqusCommentRepository _commentRepository;
 		private readonly IUrlShortener _urlShortener;
 		private readonly ISocialManager _socialManager;
-		private readonly ISiteConfiguration _siteConfig;
 		private readonly MiniProfiler _profiler;
 
 		/// <summary>
@@ -48,13 +43,12 @@ namespace Daniel15.Web.Controllers
 		/// <param name="urlShortener">The URL shortener</param>
 		/// <param name="socialManager">The social network manager used to get sharing URLs</param>
 		/// <param name="siteConfig">Site configuration</param>
-		public BlogController(IBlogRepository blogRepository, IDisqusCommentRepository commentRepository, IUrlShortener urlShortener, ISocialManager socialManager, ISiteConfiguration siteConfig)
+		public BlogController(IBlogRepository blogRepository, IDisqusCommentRepository commentRepository, IUrlShortener urlShortener, ISocialManager socialManager)
 		{
 			_blogRepository = blogRepository;
 			_commentRepository = commentRepository;
 			_urlShortener = urlShortener;
 			_socialManager = socialManager;
-			_siteConfig = siteConfig;
 			_profiler = MiniProfiler.Current;
 		}
 
@@ -225,44 +219,6 @@ namespace Daniel15.Web.Controllers
 			}
 
 			return RedirectPermanent(Url.BlogPost(post));
-		}
-
-		/// <summary>
-		/// RSS feed of all the latest posts
-		/// </summary>
-		/// <returns>RSS feed</returns>
-		public virtual ActionResult Feed()
-		{
-			if (Request.UserAgent != null)
-			{
-				// If the user is accessing directly (ie. they're NOT FeedBurner), redirect to FeedBurner instead
-				// But allow explicit access to feed by adding feedburner_override GET param
-				var userAgent = Request.UserAgent.ToLower();
-				if (!userAgent.Contains("feedburner") 
-					&& !userAgent.Contains("feedvalidator")
-					&& Request.QueryString["feedburner_override"] == null)
-				{
-					return Redirect(_siteConfig.FeedBurnerUrl.ToString());
-				}
-			}
-
-			var posts = _blogRepository.LatestPosts(ITEMS_IN_FEED);
-
-			Response.ContentType = "application/rss+xml";
-			// Set last-modified date based on the date of the newest post
-			Response.Cache.SetLastModified(posts[0].Date);
-
-			return View(new FeedViewModel
-			{
-				Posts = posts.Select(post => new PostViewModel
-				{
-					Post = post,
-					ShortUrl = ShortUrl(post),
-					// TODO: This should be optimised as it will do a SELECT N+1
-					// Although FeedBurner will be caching this feed so it's not too significant
-					PostCategories = _blogRepository.CategoriesForPost(post)
-				}).ToList()
-			});
 		}
 
 		/// <summary>

@@ -1,5 +1,10 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using Daniel15.BusinessLayer.Services;
+using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
+using Daniel15.Infrastructure;
+using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.ViewModels.Feed;
 
 namespace Daniel15.Web.Controllers
@@ -9,15 +14,26 @@ namespace Daniel15.Web.Controllers
 	/// </summary>
 	public partial class FeedController : Controller
 	{
+		/// <summary>
+		/// Number of blog posts to show in the RSS feed
+		/// </summary>
+		private const int ITEMS_IN_FEED = 10;
+
 		private readonly IBlogRepository _blogRepository;
+		private readonly ISiteConfiguration _siteConfig;
+		private readonly IUrlShortener _urlShortener;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="FeedController" /> class.
 		/// </summary>
 		/// <param name="blogRepository">The blog repository.</param>
-		public FeedController(IBlogRepository blogRepository)
+		/// <param name="siteConfig">Site configuration</param>
+		/// <param name="urlShortener">URL shortener</param>
+		public FeedController(IBlogRepository blogRepository, ISiteConfiguration siteConfig, IUrlShortener urlShortener)
 		{
 			_blogRepository = blogRepository;
+			_siteConfig = siteConfig;
+			_urlShortener = urlShortener;
 		}
 
 		/// <summary>
@@ -33,6 +49,54 @@ namespace Daniel15.Web.Controllers
 				Categories = _blogRepository.Categories(),
 				Tags = _blogRepository.Tags()
 			});
+		}
+
+		/// <summary>
+		/// RSS feed of all the latest posts
+		/// </summary>
+		/// <returns>RSS feed</returns>
+		public virtual ActionResult BlogLatest()
+		{
+			if (Request.UserAgent != null)
+			{
+				// If the user is accessing directly (ie. they're NOT FeedBurner), redirect to FeedBurner instead
+				// But allow explicit access to feed by adding feedburner_override GET param
+				var userAgent = Request.UserAgent.ToLower();
+				if (!userAgent.Contains("feedburner")
+					&& !userAgent.Contains("feedvalidator")
+					&& Request.QueryString["feedburner_override"] == null)
+				{
+					return Redirect(_siteConfig.FeedBurnerUrl.ToString());
+				}
+			}
+
+			var posts = _blogRepository.LatestPosts(ITEMS_IN_FEED);
+
+			Response.ContentType = "application/rss+xml";
+			// Set last-modified date based on the date of the newest post
+			Response.Cache.SetLastModified(posts[0].Date);
+
+			return View(new FeedViewModel
+			{
+				Posts = posts.Select(post => new PostViewModel
+				{
+					Post = post,
+					ShortUrl = ShortUrl(post),
+					// TODO: This should be optimised as it will do a SELECT N+1
+					// Although FeedBurner will be caching this feed so it's not too significant
+					PostCategories = _blogRepository.CategoriesForPost(post)
+				}).ToList()
+			});
+		}
+
+		/// <summary>
+		/// Gets the short URL for this blog post
+		/// </summary>
+		/// <param name="post">Blog post</param>
+		/// <returns>The short URL</returns>
+		private string ShortUrl(PostModel post)
+		{
+			return Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http");
 		}
 	}
 }

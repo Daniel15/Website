@@ -560,7 +560,7 @@
     <Content Include="Views\Blog\_Comments.cshtml" />
     <Content Include="Views\Shared\_Pagination.cshtml" />
     <Content Include="Views\Blog\Category.cshtml" />
-    <Content Include="Views\Blog\Feed.cshtml" />
+    <Content Include="Views\Feed\BlogLatest.cshtml" />
     <Content Include="Views\Site\FileNotFound.cshtml" />
     <Content Include="Views\Shared\ErrorWithLayout.cshtml" />
     <Content Include="Views\Feed\Sitemap.cshtml" />

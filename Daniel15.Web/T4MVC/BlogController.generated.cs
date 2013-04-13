@@ -93,7 +93,6 @@ namespace Daniel15.Web.Controllers
             public readonly string Archive = "Archive";
             public readonly string View = "View";
             public readonly string ShortUrl = "ShortUrl";
-            public readonly string Feed = "Feed";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -105,7 +104,6 @@ namespace Daniel15.Web.Controllers
             public const string Archive = "Archive";
             public const string View = "View";
             public const string ShortUrl = "ShortUrl";
-            public const string Feed = "Feed";
         }
 
 
@@ -184,7 +182,6 @@ namespace Daniel15.Web.Controllers
                 public readonly string _ShareLinks = "_ShareLinks";
                 public readonly string _ViewStart = "_ViewStart";
                 public readonly string Category = "Category";
-                public readonly string Feed = "Feed";
                 public readonly string Index = "Index";
                 public readonly string Tag = "Tag";
                 public readonly string View = "View";
@@ -200,7 +197,6 @@ namespace Daniel15.Web.Controllers
             public readonly string _ShareLinks = "~/Views/Blog/_ShareLinks.cshtml";
             public readonly string _ViewStart = "~/Views/Blog/_ViewStart.cshtml";
             public readonly string Category = "~/Views/Blog/Category.cshtml";
-            public readonly string Feed = "~/Views/Blog/Feed.cshtml";
             public readonly string Index = "~/Views/Blog/Index.cshtml";
             public readonly string Tag = "~/Views/Blog/Tag.cshtml";
             public readonly string View = "~/Views/Blog/View.cshtml";
@@ -275,15 +271,6 @@ namespace Daniel15.Web.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ShortUrl);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "alias", alias);
             ShortUrlOverride(callInfo, alias);
-            return callInfo;
-        }
-
-        partial void FeedOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        public override System.Web.Mvc.ActionResult Feed()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Feed);
-            FeedOverride(callInfo);
             return callInfo;
         }
 

@@ -113,7 +113,7 @@ namespace Daniel15.Web.App_Start
 			routes.MapRoute(
 				name: "BlogFeed",
 				url: "blog/feed",
-				defaults: MVC.Blog.Feed()
+				defaults: MVC.Feed.BlogLatest()
 			);
 
 			// Blog home page - Don't include page number in URL for first page

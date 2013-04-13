@@ -58,12 +58,14 @@ namespace Daniel15.Web.Controllers
         public class ActionNamesClass
         {
             public readonly string Sitemap = "Sitemap";
+            public readonly string BlogLatest = "BlogLatest";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Sitemap = "Sitemap";
+            public const string BlogLatest = "BlogLatest";
         }
 
 
@@ -77,8 +79,10 @@ namespace Daniel15.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string BlogLatest = "BlogLatest";
                 public readonly string Sitemap = "Sitemap";
             }
+            public readonly string BlogLatest = "~/Views/Feed/BlogLatest.cshtml";
             public readonly string Sitemap = "~/Views/Feed/Sitemap.cshtml";
         }
     }
@@ -94,6 +98,15 @@ namespace Daniel15.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Sitemap);
             SitemapOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void BlogLatestOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult BlogLatest()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BlogLatest);
+            BlogLatestOverride(callInfo);
             return callInfo;
         }
 
