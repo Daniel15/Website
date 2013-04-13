@@ -6,6 +6,7 @@ using Daniel15.Data.Repositories;
 using Daniel15.Infrastructure;
 using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.ViewModels.Feed;
+using Daniel15.Web.Extensions;
 
 namespace Daniel15.Web.Controllers
 {
@@ -57,18 +58,8 @@ namespace Daniel15.Web.Controllers
 		/// <returns>RSS feed</returns>
 		public virtual ActionResult BlogLatest()
 		{
-			if (Request.UserAgent != null)
-			{
-				// If the user is accessing directly (ie. they're NOT FeedBurner), redirect to FeedBurner instead
-				// But allow explicit access to feed by adding feedburner_override GET param
-				var userAgent = Request.UserAgent.ToLower();
-				if (!userAgent.Contains("feedburner")
-					&& !userAgent.Contains("feedvalidator")
-					&& Request.QueryString["feedburner_override"] == null)
-				{
-					return Redirect(_siteConfig.FeedBurnerUrl.ToString());
-				}
-			}
+			if (Request.ShouldRedirectToFeedburner())
+				return Redirect(_siteConfig.FeedBurnerUrl.ToString());
 
 			var posts = _blogRepository.LatestPosts(ITEMS_IN_FEED);
 

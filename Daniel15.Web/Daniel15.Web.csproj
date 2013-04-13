@@ -164,6 +164,7 @@
     <Compile Include="Extensions\BlogUrlHelperExtensions.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
+    <Compile Include="Extensions\HttpRequestBaseExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Infrastructure\T4MvcControllerConstructorResolutionBehavior.cs">
       <SubType>Code</SubType>
