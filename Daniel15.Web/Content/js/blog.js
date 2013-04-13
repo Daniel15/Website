@@ -37,7 +37,7 @@ Page.Blog =
 			inner.originalHeight = inner.get('offsetHeight');
 			inner.setStyle('height', '0');
 			
-			year.addEvent('click', this.toggleYear.bind(this));
+			year.firstByTag('a').addEvent('click', this.toggleYear.bind(this));
 		}
 	},
 	
