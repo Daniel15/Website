@@ -83,6 +83,12 @@ namespace Daniel15.Web.App_Start
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
 			);
 
+			// RSS feed for a category
+			routes.MapRoute(
+				name: "BlogCategoryFeed",
+				url: "blog/category/{slug}.rss",
+				defaults: MVC.Feed.BlogCategory()
+			);
 			// Viewing a category
 			routes.MapRoute(
 				name: "BlogCategory",

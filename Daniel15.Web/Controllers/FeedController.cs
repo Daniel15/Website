@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Daniel15.BusinessLayer.Services;
+using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Infrastructure;
@@ -63,32 +64,64 @@ namespace Daniel15.Web.Controllers
 				return Redirect(_siteConfig.FeedBurnerUrl.ToString());
 
 			var posts = _blogRepository.LatestPosts(ITEMS_IN_FEED);
-			return RenderFeed(posts);
+			return RenderFeed(posts, new FeedViewModel
+			{
+				Title = _siteConfig.BlogName,
+				Description = _siteConfig.BlogDescription,
+				FeedUrl = _siteConfig.FeedBurnerUrl.ToString(),
+				SiteUrl = Url.ActionAbsolute(MVC.Blog.Index())
+			});
+		}
+
+		/// <summary>
+		/// RSS feed for a specific category
+		/// </summary>
+		/// <param name="slug">Category slug</param>
+		/// <returns>RSS feed</returns>
+		public virtual ActionResult BlogCategory(string slug)
+		{
+			CategoryModel category;
+			try
+			{
+				category = _blogRepository.GetCategory(slug);
+			}
+			catch (EntityNotFoundException)
+			{
+				// Throw a 404 if the category doesn't exist
+				return HttpNotFound(string.Format("Category '{0}' not found.", slug));
+			}
+
+			var posts = _blogRepository.LatestPosts(category, ITEMS_IN_FEED);
+			return RenderFeed(posts, new FeedViewModel
+			{
+				Title = category.Title + " - " + _siteConfig.BlogName,
+				Description = category.Title + " posts to " + _siteConfig.BlogName,
+				FeedUrl = Url.ActionAbsolute(MVC.Feed.BlogCategory(slug)),
+				SiteUrl = Url.ActionAbsolute(MVC.Blog.Category(slug))
+			});
 		}
 
 		/// <summary>
 		/// Renders the specified list of posts to an RSS feed
 		/// </summary>
 		/// <param name="posts">Posts to render</param>
+		/// <param name="model">View model to render with</param>
 		/// <returns>RSS feed</returns>
-		private ActionResult RenderFeed(IList<PostModel> posts)
+		private ActionResult RenderFeed(IList<PostModel> posts, FeedViewModel model)
 		{
-			//Response.ContentType = "application/rss+xml";
-			Response.ContentType = "text/xml";
+			Response.ContentType = "application/rss+xml";
 			// Set last-modified date based on the date of the newest post
 			Response.Cache.SetLastModified(posts[0].Date);
 
 			var categories = _blogRepository.CategoriesForPosts(posts);
-
-			return View(new FeedViewModel
+			model.Posts = posts.Select(post => new PostViewModel
 			{
-				Posts = posts.Select(post => new PostViewModel
-				{
-					Post = post,
-					ShortUrl = ShortUrl(post),
-					PostCategories = categories[post]
-				}).ToList()
-			});
+				Post = post,
+				ShortUrl = ShortUrl(post),
+				PostCategories = categories[post]
+			}).ToList();
+
+			return View(Views.Blog, model);
 		}
 
 		/// <summary>

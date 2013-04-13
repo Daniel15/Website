@@ -13,13 +13,13 @@
 	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
 	>
 	<channel>
-		<title>@Config.BlogName</title>
-		<description>@Config.BlogDescription</description>
+		<title>@Model.Title</title>
+		<description>@Model.Description</description>
 		<language>en</language>
 		<generator>Daniel15's Website (http://dan.cx/)</generator>
 		<lastBuildDate>@Model.Posts[0].Post.Date.ToRFC822String()</lastBuildDate>
-		<atom:link href="@Config.FeedBurnerUrl" rel="self" type="application/rss+xml" />
-		<link>@Url.ActionAbsolute(MVC.Blog.Index())</link>
+		<atom:link href="@Model.FeedUrl" rel="self" type="application/rss+xml" />
+		<link>@Model.SiteUrl</link>
 		
 		@foreach (var post in Model.Posts)
 		{

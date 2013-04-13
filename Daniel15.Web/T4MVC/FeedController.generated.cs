@@ -41,6 +41,12 @@ namespace Daniel15.Web.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult BlogCategory()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BlogCategory);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FeedController Actions { get { return MVC.Feed; } }
@@ -59,6 +65,7 @@ namespace Daniel15.Web.Controllers
         {
             public readonly string Sitemap = "Sitemap";
             public readonly string BlogLatest = "BlogLatest";
+            public readonly string BlogCategory = "BlogCategory";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -66,9 +73,18 @@ namespace Daniel15.Web.Controllers
         {
             public const string Sitemap = "Sitemap";
             public const string BlogLatest = "BlogLatest";
+            public const string BlogCategory = "BlogCategory";
         }
 
 
+        static readonly ActionParamsClass_BlogCategory s_params_BlogCategory = new ActionParamsClass_BlogCategory();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_BlogCategory BlogCategoryParams { get { return s_params_BlogCategory; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_BlogCategory
+        {
+            public readonly string slug = "slug";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -79,10 +95,10 @@ namespace Daniel15.Web.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string BlogLatest = "BlogLatest";
+                public readonly string Blog = "Blog";
                 public readonly string Sitemap = "Sitemap";
             }
-            public readonly string BlogLatest = "~/Views/Feed/BlogLatest.cshtml";
+            public readonly string Blog = "~/Views/Feed/Blog.cshtml";
             public readonly string Sitemap = "~/Views/Feed/Sitemap.cshtml";
         }
     }
@@ -107,6 +123,16 @@ namespace Daniel15.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BlogLatest);
             BlogLatestOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void BlogCategoryOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string slug);
+
+        public override System.Web.Mvc.ActionResult BlogCategory(string slug)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BlogCategory);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            BlogCategoryOverride(callInfo, slug);
             return callInfo;
         }
 

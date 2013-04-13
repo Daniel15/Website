@@ -22,7 +22,7 @@ namespace Daniel15.Web.ViewModels.Blog
 		/// <summary>
 		/// List of all the categories this post is included in.
 		/// </summary>
-		public IList<CategoryModel> PostCategories { get; set; }
+		public IEnumerable<CategoryModel> PostCategories { get; set; }
 
 		/// <summary>
 		/// List of all tags this post is tagged with.
