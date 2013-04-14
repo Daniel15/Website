@@ -63,7 +63,7 @@ namespace Daniel15.Web.Extensions
 		}
 
 		/// <summary>
-		/// Gets the URL to the specified blog tagged post listing
+		/// Gets the URL to the specified blog category post listing
 		/// </summary>
 		/// <param name="urlHelper">The URL helper</param>
 		/// <param name="category">Category to link to</param>
@@ -71,21 +71,20 @@ namespace Daniel15.Web.Extensions
 		/// <returns>The URL</returns>
 		public static string BlogCategory(this UrlHelper urlHelper, CategoryModel category, int page = 1)
 		{
-			return urlHelper.BlogCategory(category.Slug, page);
-		}
-
-		/// <summary>
-		/// Gets the URL to the specified blog category
-		/// </summary>
-		/// <param name="urlHelper">The URL helper</param>
-		/// <param name="slug">Slug of the category</param>
-		/// <param name="page">Page number to link to</param>
-		/// <returns>The URL</returns>
-		public static string BlogCategory(this UrlHelper urlHelper, string slug, int page = 1)
-		{
-			return page == 1
-				? urlHelper.RouteUrl("BlogCategory", new { slug })
-				: urlHelper.RouteUrl("BlogCategoryPage", new { slug, page });
+			// It's safer to explicitly use the correct route here, instead of relying on the ASP.NET 
+			// routing engine to choose it.
+			if (string.IsNullOrEmpty(category.ParentSlug))
+			{
+				return page == 1
+					? urlHelper.RouteUrl("BlogCategory", new { slug = category.Slug })
+					: urlHelper.RouteUrl("BlogCategoryPage", new { slug = category.Slug, page = page });
+			}
+			else
+			{
+				return page == 1
+					? urlHelper.RouteUrl("BlogSubCategory", new { slug = category.Slug, parentSlug = category.ParentSlug })
+					: urlHelper.RouteUrl("BlogSubCategoryPage", new { slug = category.Slug, parentSlug = category.ParentSlug, page = page });
+			}
 		}
 
 		/// <summary>

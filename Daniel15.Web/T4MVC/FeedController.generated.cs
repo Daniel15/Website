@@ -84,6 +84,7 @@ namespace Daniel15.Web.Controllers
         public class ActionParamsClass_BlogCategory
         {
             public readonly string slug = "slug";
+            public readonly string parentSlug = "parentSlug";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -126,13 +127,14 @@ namespace Daniel15.Web.Controllers
             return callInfo;
         }
 
-        partial void BlogCategoryOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string slug);
+        partial void BlogCategoryOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string slug, string parentSlug);
 
-        public override System.Web.Mvc.ActionResult BlogCategory(string slug)
+        public override System.Web.Mvc.ActionResult BlogCategory(string slug, string parentSlug)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BlogCategory);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
-            BlogCategoryOverride(callInfo, slug);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "parentSlug", parentSlug);
+            BlogCategoryOverride(callInfo, slug, parentSlug);
             return callInfo;
         }
 

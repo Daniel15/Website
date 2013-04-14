@@ -54,9 +54,11 @@ namespace Daniel15.Data.Repositories.OrmLite
 		public IList<CategoryModel> CategoriesForPost(PostSummaryModel post)
 		{
 			return Connection.Select<CategoryModel>(@"
-				SELECT blog_categories.id, blog_categories.title, blog_categories.slug
+				SELECT blog_categories.id, blog_categories.title, blog_categories.slug, 
+					blog_categories.parent_category_id, parent.slug AS parent_slug
 				FROM blog_post_categories
 				INNER JOIN blog_categories ON blog_categories.id = blog_post_categories.category_id
+				LEFT OUTER JOIN blog_categories AS parent ON parent.id = blog_categories.parent_category_id
 				WHERE blog_post_categories.post_id = {0}
 				ORDER BY blog_categories.title", post.Id);
 		}
@@ -72,9 +74,11 @@ namespace Daniel15.Data.Repositories.OrmLite
 
 			// Get all the categories associated with all of the posts
 			var allCategories = Connection.Select<CategoryWithPostIdModel>(@"
-				SELECT blog_post_categories.post_id, blog_categories.id, blog_categories.title, blog_categories.slug, blog_categories.parent_category_id
+				SELECT blog_post_categories.post_id, blog_categories.id, blog_categories.title, blog_categories.slug,
+					blog_categories.parent_category_id, parent.slug AS parent_slug
 				FROM blog_post_categories
 				INNER JOIN blog_categories ON blog_categories.id = blog_post_categories.category_id
+				LEFT OUTER JOIN blog_categories AS parent ON parent.id = blog_categories.parent_category_id
 				WHERE blog_post_categories.post_id IN (" + string.Join(", ", indexedPosts.Keys) + @")
 				ORDER BY blog_categories.title");
 

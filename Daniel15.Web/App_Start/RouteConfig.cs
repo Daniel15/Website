@@ -85,19 +85,40 @@ namespace Daniel15.Web.App_Start
 
 			// RSS feed for a category
 			routes.MapRoute(
+				name: "BlogSubCategoryFeed",
+				url: "blog/category/{parentSlug}/{slug}.rss",
+				defaults: MVC.Feed.BlogCategory()
+			);
+			routes.MapRoute(
 				name: "BlogCategoryFeed",
 				url: "blog/category/{slug}.rss",
 				defaults: MVC.Feed.BlogCategory()
 			);
+
 			// Viewing a category
 			routes.MapRoute(
 				name: "BlogCategory",
 				url: "blog/category/{slug}",
 				defaults: new { controller = "Blog", action = "Category", page = 1 }
 			);
+			// This route needs to be above the subcategory route otherwise "page-{page}" will be
+			// matched as a subcategory slug.
 			routes.MapRoute(
 				name: "BlogCategoryPage",
 				url: "blog/category/{slug}/page-{page}",
+				defaults: MVC.Blog.Category(),
+				constraints: new { page = @"\d+" }
+			);
+
+			// Viewing a subcategory
+			routes.MapRoute(
+				name: "BlogSubCategory",
+				url: "blog/category/{parentSlug}/{slug}",
+				defaults: new { controller = "Blog", action = "Category", page = 1 }
+			);
+			routes.MapRoute(
+				name: "BlogSubCategoryPage",
+				url: "blog/category/{parentSlug}/{slug}/page-{page}",
 				defaults: MVC.Blog.Category(),
 				constraints: new { page = @"\d+" }
 			);

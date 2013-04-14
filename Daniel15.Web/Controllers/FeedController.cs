@@ -78,7 +78,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="slug">Category slug</param>
 		/// <returns>RSS feed</returns>
-		public virtual ActionResult BlogCategory(string slug)
+		public virtual ActionResult BlogCategory(string slug, string parentSlug = null)
 		{
 			CategoryModel category;
 			try
@@ -89,6 +89,12 @@ namespace Daniel15.Web.Controllers
 			{
 				// Throw a 404 if the category doesn't exist
 				return HttpNotFound(string.Format("Category '{0}' not found.", slug));
+			}
+
+			// If the category has a parent category, ensure it's in the URL
+			if (!string.IsNullOrEmpty(category.ParentSlug) && string.IsNullOrEmpty(parentSlug))
+			{
+				return RedirectToActionPermanent(MVC.Feed.BlogCategory(slug, category.ParentSlug));
 			}
 
 			var posts = _blogRepository.LatestPosts(category, ITEMS_IN_FEED);

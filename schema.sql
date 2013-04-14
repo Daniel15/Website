@@ -199,3 +199,13 @@ ALTER TABLE `blog_post_tags`
 --
 ALTER TABLE `blog_tags`
   ADD CONSTRAINT `blog_tags_ibfk_1` FOREIGN KEY (`parent_tag_id`) REFERENCES `blog_tags` (`id`);
+
+
+--
+-- Views
+--
+CREATE VIEW v_blog_categories AS
+SELECT cat.id, cat.title, cat.slug, cat.parent_category_id,
+	parent.slug AS parent_slug
+FROM blog_categories cat
+LEFT OUTER JOIN blog_categories parent ON parent.id = cat.parent_category_id

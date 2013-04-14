@@ -123,6 +123,7 @@ namespace Daniel15.Web.Controllers
         {
             public readonly string slug = "slug";
             public readonly string page = "page";
+            public readonly string parentSlug = "parentSlug";
         }
         static readonly ActionParamsClass_Tag s_params_Tag = new ActionParamsClass_Tag();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -218,14 +219,15 @@ namespace Daniel15.Web.Controllers
             return callInfo;
         }
 
-        partial void CategoryOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string slug, int page);
+        partial void CategoryOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string slug, int page, string parentSlug);
 
-        public override System.Web.Mvc.ActionResult Category(string slug, int page)
+        public override System.Web.Mvc.ActionResult Category(string slug, int page, string parentSlug)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Category);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
-            CategoryOverride(callInfo, slug, page);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "parentSlug", parentSlug);
+            CategoryOverride(callInfo, slug, page, parentSlug);
             return callInfo;
         }
 
