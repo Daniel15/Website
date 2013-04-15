@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using Daniel15.Data.Entities.Blog
 @model Daniel15.Web.ViewModels.Blog.SidebarViewModel
 
 <ul>
@@ -30,11 +31,26 @@
 	</li>
 	<li>
 		<h2>Categories</h2>
-		<ul>
-			@foreach (var category in Model.Categories)
-			{
-				<li><a href="@Url.BlogCategory(category)">@category.Title</a></li>
-			}
-		</ul>
+		@Categories(Model.Categories[0])
 	</li>
 </ul>
+
+@helper Categories(IEnumerable<CategoryModel> categories)
+{
+	<ul>
+		@foreach (var category in categories)
+		{
+			@CategoryLink(category)
+			@* Render child categories if applicable *@
+			if (Model.Categories.ContainsKey(category.Id))
+			{
+				@Categories(Model.Categories[category.Id])
+			}
+		}
+	</ul>
+}
+
+@helper CategoryLink(CategoryModel category)
+{
+	<li><a href="@Url.BlogCategory(category)">@category.Title</a></li>
+}

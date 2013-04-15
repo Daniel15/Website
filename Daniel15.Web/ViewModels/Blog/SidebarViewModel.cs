@@ -6,6 +6,6 @@ namespace Daniel15.Web.ViewModels.Blog
 	public class SidebarViewModel
 	{
 		public IDictionary<int, IDictionary<int, int>> Counts { get; set; }
-		public IList<CategoryModel> Categories { get; set; }
+		public IDictionary<int, List<CategoryModel>> Categories { get; set; }
 	}
 }
