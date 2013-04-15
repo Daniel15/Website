@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daniel15.Infrastructure", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daniel15.BusinessLayer", "Daniel15.BusinessLayer\Daniel15.BusinessLayer.csproj", "{BFF0CA23-1DD2-431B-BFD0-DD2D492B575F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C2D6C6B7-7471-4F56-AB46-ADC276AD6559}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,5 +64,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9978BCD0-840A-4BC0-936C-B6BE508F7338} = {C2D6C6B7-7471-4F56-AB46-ADC276AD6559}
 	EndGlobalSection
 EndGlobal

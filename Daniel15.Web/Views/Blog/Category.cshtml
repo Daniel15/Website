@@ -17,5 +17,5 @@
 
 @section extraHead
 {
-	<link rel="alternate" type="application/rss+xml" title="@Model.Category.Title - @Config.BlogName - RSS Feed" href="@Url.ActionAbsolute(MVC.Feed.BlogCategory(Model.Category.Slug))" />
+	<link rel="alternate" type="application/rss+xml" title="@Model.Category.Title - @Config.BlogName - RSS Feed" href="@Model.RssUrl" />
 }

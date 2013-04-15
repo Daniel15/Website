@@ -11,6 +11,7 @@ using Daniel15.Infrastructure;
 using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.Extensions;
 using System.Linq;
+using ServiceStack;
 using StackExchange.Profiling;
 
 namespace Daniel15.Web.Controllers
@@ -124,7 +125,11 @@ namespace Daniel15.Web.Controllers
 
 			var count = _blogRepository.PublishedCount(category);
 			var posts = _blogRepository.LatestPosts(category, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
-			return Listing(posts, count, page, Views.Category, new CategoryListingViewModel { Category = category });
+			return Listing(posts, count, page, Views.Category, new CategoryListingViewModel
+			{
+				Category = category,
+				RssUrl = Url.ActionAbsolute(MVC.Feed.BlogCategory(category.Slug, category.ParentSlug))
+			});
 		}
 
 		/// <summary>

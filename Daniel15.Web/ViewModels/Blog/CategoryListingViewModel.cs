@@ -9,5 +9,7 @@ namespace Daniel15.Web.ViewModels.Blog
 	public class CategoryListingViewModel : ListingViewModel
 	{
 		public CategoryModel Category { get; set; }
+
+		public string RssUrl { get; set; }
 	}
 }
