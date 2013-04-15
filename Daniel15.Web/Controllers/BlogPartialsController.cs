@@ -28,7 +28,7 @@ namespace Daniel15.Web.Controllers
 		public virtual ActionResult Sidebar()
 		{
 			// Group categories based on parent ID - Root level categories will be grouped with parent ID = 0
-			var groupedCategories = _blogRepository.Categories()
+			var groupedCategories = _blogRepository.CategoriesInUse()
 				.GroupBy(x => x.ParentId)
 				.ToDictionary(x => x.Key ?? 0, x => x.ToList());
 

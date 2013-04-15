@@ -355,6 +355,22 @@ ORDER BY year DESC, month DESC");
 		}
 
 		/// <summary>
+		/// Get an alphabetical list of categories that contain posts
+		/// </summary>
+		/// <returns>A list of categories</returns>
+		public IList<CategoryModel> CategoriesInUse()
+		{
+			return Connection.Select<CategoryModel>(@"
+				SELECT DISTINCT
+					cat.id, cat.title, cat.slug,
+					parent.id AS parent_category_id, parent.slug AS parent_slug
+				FROM blog_post_categories post
+				INNER JOIN blog_categories AS cat ON cat.id = post.category_id
+				LEFT OUTER JOIN blog_categories AS parent ON parent.id = cat.parent_category_id
+				ORDER BY cat.title");
+		}
+
+		/// <summary>
 		/// Get an alphabetical list of available tags
 		/// </summary>
 		/// <returns>A list of tags</returns>

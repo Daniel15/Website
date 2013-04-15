@@ -146,6 +146,12 @@ namespace Daniel15.Data.Repositories
 		IList<CategoryModel> Categories();
 
 		/// <summary>
+		/// Get an alphabetical list of categories that contain posts
+		/// </summary>
+		/// <returns>A list of categories</returns>
+		IList<CategoryModel> CategoriesInUse();
+			
+		/// <summary>
 		/// Get an alphabetical list of available tags
 		/// </summary>
 		/// <returns>A list of tags</returns>
