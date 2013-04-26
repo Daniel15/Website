@@ -1,4 +1,5 @@
-﻿@model ViewModelBase
+﻿@using Combres.Mvc
+@model ViewModelBase
 
 @{
 	// "Inherit" from the base layout
@@ -9,12 +10,12 @@
 
 @section extraHead
 {
-	@Styles.Render("~/bundles/blogadmin.css")
+	@Url.CombresLink("blogadmin.css")
 	@RenderSection("extraHead", required: false)
 }
 
 @section extraFoot
 {
-	@Scripts.Render("~/bundles/blogadmin.js")
+	@Url.CombresLink("blogadmin.js")
 	@RenderSection("extraFoot", required: false)
 }

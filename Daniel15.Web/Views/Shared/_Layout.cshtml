@@ -1,4 +1,5 @@
 ﻿@using StackExchange.Profiling
+@using Combres.Mvc
 @model Daniel15.Web.ViewModels.ViewModelBase
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie ie6 ielt8 ielt9"> <![endif]-->
@@ -30,7 +31,7 @@
 	}
 	@RenderSection("extraMeta", required: false)
 	
-	@Styles.Render("~/bundles/main.css")
+	@Url.CombresLink("main.css")
 	
 	<!--[if lt IE 9]><script src="@Url.Js("lib/IE9.js")"></script><![endif]-->
 
@@ -86,9 +87,9 @@
 		</footer>
 	</div>
 	<!-- Now for the JS -->
-	@Scripts.Render("~/bundles/main.js")
+	@Url.CombresLink("main.js")
 	<script>Events.initPage();</script>
-	@Scripts.Render("~/bundles/syntaxHighlight.js")
+	@Url.CombresLink("syntaxHighlighter.js")
 	
 	@RenderSection("scripts", required: false)
 

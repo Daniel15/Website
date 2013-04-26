@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using Combres;
 
 namespace Daniel15.Web.App_Start
 {
@@ -192,6 +193,8 @@ namespace Daniel15.Web.App_Start
 		{
 			// Don't use controllers in custom areas with these routes - Use default namespace
 			ControllerBuilder.Current.DefaultNamespaces.Add("Daniel15.Web.Controllers");
+
+			RouteTable.Routes.AddCombresRoute("Combres");
 
 			RegisterIgnoreRoutes(routes);
 			RegisterSiteRoutes(routes);

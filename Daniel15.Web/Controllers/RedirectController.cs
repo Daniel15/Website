@@ -1,5 +1,5 @@
-﻿using System.Web.Mvc;
-using System.Web.Optimization;
+﻿using System;
+using System.Web.Mvc;
 
 namespace Daniel15.Web.Controllers
 {
@@ -13,9 +13,9 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <returns></returns>
 		public virtual ActionResult Css()
-        {
-	        return Redirect(Styles.Url("~/bundles/main.css").ToString());
-        }
+		{
+			return Redirect(Combres.WebExtensions.CombresUrl("mainCss"));
+		}
 
 		/// <summary>
 		/// Redirects to the latest JavaScript file
@@ -23,7 +23,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns></returns>
 		public virtual ActionResult Js()
 		{
-			return Redirect(Scripts.Url("~/bundles/main.js").ToString());
+			return Redirect(Combres.WebExtensions.CombresUrl("mainJs"));
 		}
     }
 }
