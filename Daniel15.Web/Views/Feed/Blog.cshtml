@@ -17,7 +17,7 @@
 		<description>@Model.Description</description>
 		<language>en</language>
 		<generator>Daniel15's Website (http://dan.cx/)</generator>
-		<lastBuildDate>@Model.Posts[0].Post.Date.ToRFC822String()</lastBuildDate>
+		<lastBuildDate>@Model.LastModified.ToRFC822String()</lastBuildDate>
 		<atom:link href="@Model.FeedUrl" rel="self" type="application/rss+xml" />
 		<link>@Model.SiteUrl</link>
 		

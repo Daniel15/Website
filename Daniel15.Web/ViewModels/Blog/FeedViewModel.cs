@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Daniel15.Web.ViewModels.Blog
 {
@@ -31,5 +32,14 @@ namespace Daniel15.Web.ViewModels.Blog
 		/// URL to the site
 		/// </summary>
 		public string SiteUrl { get; set; }
+
+		/// <summary>
+		/// Gets the last modified date/time of the feed. This is the publish date of the latest post,
+		/// or <c>DateTime.Now</c> if there are no posts in the feed.
+		/// </summary>
+		public DateTime LastModified
+		{
+			get { return Posts.Count == 0 ? DateTime.Now : Posts[0].Post.Date; }
+		}
 	}
 }

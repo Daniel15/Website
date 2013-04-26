@@ -117,7 +117,8 @@ namespace Daniel15.Web.Controllers
 		{
 			Response.ContentType = "application/rss+xml";
 			// Set last-modified date based on the date of the newest post
-			Response.Cache.SetLastModified(posts[0].Date);
+			if (posts.Count > 0)
+				Response.Cache.SetLastModified(posts[0].Date);
 
 			var categories = _blogRepository.CategoriesForPosts(posts);
 			model.Posts = posts.Select(post => new PostViewModel

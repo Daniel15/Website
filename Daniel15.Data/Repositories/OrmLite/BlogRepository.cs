@@ -70,6 +70,9 @@ namespace Daniel15.Data.Repositories.OrmLite
 		/// <returns>Categories for all the specified posts</returns>
 		public IDictionary<PostSummaryModel, IEnumerable<CategoryModel>> CategoriesForPosts(IEnumerable<PostSummaryModel> posts)
 		{
+			if (!posts.Any())
+				return new Dictionary<PostSummaryModel, IEnumerable<CategoryModel>>();
+
 			var indexedPosts = posts.ToDictionary(post => post.Id, post => post);
 
 			// Get all the categories associated with all of the posts
