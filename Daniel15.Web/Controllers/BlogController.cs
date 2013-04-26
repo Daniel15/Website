@@ -72,6 +72,9 @@ namespace Daniel15.Web.Controllers
 
 			var pages = (int)Math.Ceiling((double)count / ITEMS_PER_PAGE);
 
+			if (page > pages)
+				return HttpNotFound(string.Format("Requested page number ({0}) is greater than page count ({1})"));
+
 			using (_profiler.Step("Building post ViewModels"))
 			{
 				viewModel.Posts = posts.Select(post => new PostViewModel
