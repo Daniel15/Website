@@ -14,7 +14,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns></returns>
 		public virtual ActionResult Css()
 		{
-			return Redirect(Combres.WebExtensions.CombresUrl("mainCss"));
+			return Redirect(Combres.WebExtensions.CombresUrl("main.css"));
 		}
 
 		/// <summary>
@@ -23,7 +23,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns></returns>
 		public virtual ActionResult Js()
 		{
-			return Redirect(Combres.WebExtensions.CombresUrl("mainJs"));
+			return Redirect(Combres.WebExtensions.CombresUrl("main.js"));
 		}
     }
 }
