@@ -292,6 +292,7 @@
     <Content Include="Content\images\icons\social\large\pinboard.png" />
     <Content Include="Content\images\icons\social\large\reddit.png" />
     <Content Include="Content\images\icons\social\large\stackoverflow.png" />
+    <Content Include="Content\images\icons\social\large\steam.png" />
     <Content Include="Content\images\icons\social\large\tumblr.png" />
     <Content Include="Content\images\icons\social\large\twitter.png" />
     <Content Include="Content\images\icons\social\lastfm.png" />
@@ -357,7 +358,7 @@
     <Content Include="Content\images\screenshots\xanga.png" />
     <Content Include="Content\images\screenshots\zurl-old.png" />
     <Content Include="Content\images\screenshots\zurl.png" />
-    <Content Include="Content\images\sprites\mainsprite-b073f8354e2f4f7956038f163cddcf91.png" />
+    <Content Include="Content\images\sprites\mainsprite-c652f03ec9a34c9e68dd54b019494dbf.png" />
     <Content Include="Content\images\sprites\projects-81b0cb7176be026724ab5f3cb4b4f8ad.png" />
     <Content Include="Content\images\stripy.png" />
     <Content Include="Content\js\blog.js" />
