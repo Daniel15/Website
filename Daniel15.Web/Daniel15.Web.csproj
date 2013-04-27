@@ -285,7 +285,14 @@
     <Content Include="Content\images\icons\social\github.png" />
     <Content Include="Content\images\icons\social\gplus.png" />
     <Content Include="Content\images\icons\social\large\facebook.png" />
+    <Content Include="Content\images\icons\social\large\github.png" />
+    <Content Include="Content\images\icons\social\large\gplus.png" />
+    <Content Include="Content\images\icons\social\large\lastfm.png" />
+    <Content Include="Content\images\icons\social\large\linkedin.png" />
+    <Content Include="Content\images\icons\social\large\pinboard.png" />
     <Content Include="Content\images\icons\social\large\reddit.png" />
+    <Content Include="Content\images\icons\social\large\stackoverflow.png" />
+    <Content Include="Content\images\icons\social\large\tumblr.png" />
     <Content Include="Content\images\icons\social\large\twitter.png" />
     <Content Include="Content\images\icons\social\lastfm.png" />
     <Content Include="Content\images\icons\social\linkedin.png" />
@@ -472,7 +479,6 @@
     <Content Include="favicon.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\css\blog.less" />
-    <Content Include="Content\css\main.less" />
     <Content Include="Content\css\mixins.less" />
     <Content Include="Content\css\mobile.less" />
     <Content Include="Content\css\pages\index.less" />
