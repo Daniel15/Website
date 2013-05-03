@@ -8,6 +8,7 @@ using Daniel15.Data.Repositories;
 using Daniel15.Data.Repositories.OrmLite;
 using Daniel15.Data.Repositories.Static;
 using Daniel15.Infrastructure.Extensions;
+using Glimpse.Ado.AlternateType;
 using ServiceStack.DataAccess;
 using ServiceStack.OrmLite;
 using SimpleInjector;
@@ -68,7 +69,7 @@ namespace Daniel15.Infrastructure
 		/// <param name="lifestyle">Lifestyle to use when registering components</param>
 		private static void InitializeDatabase(Container container, Lifestyle lifestyle)
 		{
-			const bool ENABLE_PROFILING = false;
+			const bool ENABLE_PROFILING = true;
 
 			// By default, don't add a filter to the DB connection factory
 			Func<IDbConnection, IDbConnection> connFilter = conn => conn;
@@ -78,8 +79,7 @@ namespace Daniel15.Infrastructure
 				// Yes, so we need to add a custom filter to the connection factory
 				connFilter = conn =>
 				{
-					var innerConn = ((IHasDbConnection)conn).DbConnection;
-					return new ProfiledDbConnection((DbConnection)innerConn, MiniProfiler.Current);
+					return new ProfiledDbConnection(new GlimpseDbConnection((DbConnection)conn), MiniProfiler.Current);
 				};
 			}
 
