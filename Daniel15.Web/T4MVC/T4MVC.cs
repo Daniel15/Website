@@ -91,7 +91,6 @@ namespace Links
             public static readonly string blogadmin_less = Url("blogadmin.less");
             public static readonly string border_radius_htc = Url("border-radius.htc");
             public static readonly string csshover_htc = Url("csshover.htc");
-            public static readonly string main_less = Url("main.less");
             public static readonly string mixins_less = Url("mixins.less");
             public static readonly string mobile_less = Url("mobile.less");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -167,7 +166,15 @@ namespace Links
                         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                         public static readonly string facebook_png = Url("facebook.png");
+                        public static readonly string github_png = Url("github.png");
+                        public static readonly string gplus_png = Url("gplus.png");
+                        public static readonly string lastfm_png = Url("lastfm.png");
+                        public static readonly string linkedin_png = Url("linkedin.png");
+                        public static readonly string pinboard_png = Url("pinboard.png");
                         public static readonly string reddit_png = Url("reddit.png");
+                        public static readonly string stackoverflow_png = Url("stackoverflow.png");
+                        public static readonly string steam_png = Url("steam.png");
+                        public static readonly string tumblr_png = Url("tumblr.png");
                         public static readonly string twitter_png = Url("twitter.png");
                     }
                 
@@ -271,7 +278,7 @@ namespace Links
                 private const string URLPATH = "~/Content/images/sprites";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string mainsprite_b073f8354e2f4f7956038f163cddcf91_png = Url("mainsprite-b073f8354e2f4f7956038f163cddcf91.png");
+                public static readonly string mainsprite_c652f03ec9a34c9e68dd54b019494dbf_png = Url("mainsprite-c652f03ec9a34c9e68dd54b019494dbf.png");
                 public static readonly string projects_81b0cb7176be026724ab5f3cb4b4f8ad_png = Url("projects-81b0cb7176be026724ab5f3cb4b4f8ad.png");
             }
         

@@ -66,6 +66,7 @@ namespace Daniel15.Web.Controllers
 			var posts = _blogRepository.LatestPosts(ITEMS_IN_FEED);
 			return RenderFeed(posts, new FeedViewModel
 			{
+				FeedGuidBase = "Latest",
 				Title = _siteConfig.BlogName,
 				Description = _siteConfig.BlogDescription,
 				FeedUrl = _siteConfig.FeedBurnerUrl.ToString(),
@@ -100,6 +101,7 @@ namespace Daniel15.Web.Controllers
 			var posts = _blogRepository.LatestPosts(category, ITEMS_IN_FEED);
 			return RenderFeed(posts, new FeedViewModel
 			{
+				FeedGuidBase = "Category-" + category.Slug + "-",
 				Title = category.Title + " - " + _siteConfig.BlogName,
 				Description = category.Title + " posts to " + _siteConfig.BlogName,
 				FeedUrl = Url.ActionAbsolute(MVC.Feed.BlogCategory(slug)),

@@ -63,7 +63,7 @@ namespace Daniel15.Web.App_Start
 			// Blog social network sharing counts
 			routes.MapRoute(
 				name: "BlogPostShareCount",
-				url: "blog/{year}/{month}/{slug}/sharecount",
+				url: "{year}/{month}/{slug}/sharecount",
 				defaults: MVC.Social.PostShareCount(),
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
 			);
@@ -71,7 +71,7 @@ namespace Daniel15.Web.App_Start
 			// Viewing a blog post
 			routes.MapRoute(
 				name: "BlogView",
-				url: "blog/{year}/{month}/{slug}",
+				url: "{year}/{month}/{slug}",
 				defaults: MVC.Blog.View(),
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
 			);
@@ -79,7 +79,7 @@ namespace Daniel15.Web.App_Start
 			// Blog monthly archive
 			routes.MapRoute(
 				name: "BlogArchive",
-				url: "blog/{year}/{month}",
+				url: "{year}/{month}",
 				defaults: MVC.Blog.Archive(),
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
 			);
@@ -87,26 +87,26 @@ namespace Daniel15.Web.App_Start
 			// RSS feed for a category
 			routes.MapRoute(
 				name: "BlogSubCategoryFeed",
-				url: "blog/category/{parentSlug}/{slug}.rss",
+				url: "category/{parentSlug}/{slug}.rss",
 				defaults: MVC.Feed.BlogCategory()
 			);
 			routes.MapRoute(
 				name: "BlogCategoryFeed",
-				url: "blog/category/{slug}.rss",
+				url: "category/{slug}.rss",
 				defaults: MVC.Feed.BlogCategory()
 			);
 
 			// Viewing a category
 			routes.MapRoute(
 				name: "BlogCategory",
-				url: "blog/category/{slug}",
+				url: "category/{slug}",
 				defaults: new { controller = "Blog", action = "Category", page = 1 }
 			);
 			// This route needs to be above the subcategory route otherwise "page-{page}" will be
 			// matched as a subcategory slug.
 			routes.MapRoute(
 				name: "BlogCategoryPage",
-				url: "blog/category/{slug}/page-{page}",
+				url: "category/{slug}/page-{page}",
 				defaults: MVC.Blog.Category(),
 				constraints: new { page = @"\d+" }
 			);
@@ -114,12 +114,12 @@ namespace Daniel15.Web.App_Start
 			// Viewing a subcategory
 			routes.MapRoute(
 				name: "BlogSubCategory",
-				url: "blog/category/{parentSlug}/{slug}",
+				url: "category/{parentSlug}/{slug}",
 				defaults: new { controller = "Blog", action = "Category", page = 1 }
 			);
 			routes.MapRoute(
 				name: "BlogSubCategoryPage",
-				url: "blog/category/{parentSlug}/{slug}/page-{page}",
+				url: "category/{parentSlug}/{slug}/page-{page}",
 				defaults: MVC.Blog.Category(),
 				constraints: new { page = @"\d+" }
 			);
@@ -127,12 +127,12 @@ namespace Daniel15.Web.App_Start
 			// Viewing a tag
 			routes.MapRoute(
 				name: "BlogTag",
-				url: "blog/tag/{slug}",
+				url: "tag/{slug}",
 				defaults: new { controller = "Blog", action = "Tag", page = 1 }
 			);
 			routes.MapRoute(
 				name: "BlogTagPage",
-				url: "blog/tag/{slug}/page-{page}",
+				url: "tag/{slug}/page-{page}",
 				defaults: MVC.Blog.Tag(),
 				constraints: new { page = @"\d+" }
 			);
@@ -155,6 +155,15 @@ namespace Daniel15.Web.App_Start
 				url: "blog/page-{page}",
 				defaults: MVC.Blog.Index(),
 				constraints: new { page = @"\d+" }
+			);
+
+			// Old blog URLs
+			// Blog pages used to have /blog/ in the URL but this was removed.
+			// Easier to do this redirect here instead of Nginx config as some /blog/ URLs are still valid.
+			routes.MapRoute(
+				name: "BlogRedirect",
+				url: "blog/{*uri}", 
+				defaults: MVC.Redirect.BlogUri()
 			);
 
 			// Blog short URLs

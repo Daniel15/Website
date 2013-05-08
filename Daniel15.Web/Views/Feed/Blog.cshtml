@@ -32,7 +32,7 @@
 				<dc:creator>Daniel15</dc:creator>
 				<description>@post.Post.PlainTextIntro()</description>
 				<content:encoded>@post.Post.Content()</content:encoded>
-				<guid isPermaLink="true">@Url.BlogPostAbsolute(post.Post)</guid>
+				<guid isPermaLink="false">Daniel15-@Model.FeedGuidBase-@post.Post.Id</guid>
 				@foreach (var category in post.PostCategories)
 				{
 					<category>@category.Title</category>

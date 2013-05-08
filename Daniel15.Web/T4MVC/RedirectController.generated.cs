@@ -44,6 +44,12 @@ namespace Daniel15.Web.Controllers
             return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult BlogUri()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BlogUri);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public RedirectController Actions { get { return MVC.Redirect; } }
@@ -62,6 +68,7 @@ namespace Daniel15.Web.Controllers
         {
             public readonly string Css = "Css";
             public readonly string Js = "Js";
+            public readonly string BlogUri = "BlogUri";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -69,9 +76,18 @@ namespace Daniel15.Web.Controllers
         {
             public const string Css = "Css";
             public const string Js = "Js";
+            public const string BlogUri = "BlogUri";
         }
 
 
+        static readonly ActionParamsClass_BlogUri s_params_BlogUri = new ActionParamsClass_BlogUri();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_BlogUri BlogUriParams { get { return s_params_BlogUri; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_BlogUri
+        {
+            public readonly string uri = "uri";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -106,6 +122,16 @@ namespace Daniel15.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Js);
             JsOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void BlogUriOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string uri);
+
+        public override System.Web.Mvc.ActionResult BlogUri(string uri)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BlogUri);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "uri", uri);
+            BlogUriOverride(callInfo, uri);
             return callInfo;
         }
 

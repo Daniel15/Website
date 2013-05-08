@@ -25,5 +25,19 @@ namespace Daniel15.Web.Controllers
 		{
 			return Redirect(Combres.WebExtensions.CombresUrl("main.js"));
 		}
+
+		/// <summary>
+		/// Redirect to a blog URL. Used to redirect old /blog/... URLs to remove the "/blog"
+		/// </summary>
+		/// <param name="uri">URI to redirect to</param>
+		/// <returns>Redirect</returns>
+		public virtual ActionResult BlogUri(string uri)
+		{
+			var redirect = "~/" + uri;
+			if (Request.QueryString != null && Request.QueryString.Count > 0)
+				redirect += "?" + Request.QueryString;
+
+			return RedirectPermanent(redirect);
+		}
     }
 }
