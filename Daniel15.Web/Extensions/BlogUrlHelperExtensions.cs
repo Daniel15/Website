@@ -24,6 +24,18 @@ namespace Daniel15.Web.Extensions
 		}
 
 		/// <summary>
+		/// Gets a legacy URL to the specified blog post (containing /blog/ at the start)
+		/// </summary>
+		/// <param name="urlHelper">The URL helper.</param>
+		/// <param name="post">Blog post to link to</param>
+		/// <returns>URL to this blog post</returns>
+		public static string LegacyBlogPost(this UrlHelper urlHelper, PostSummaryModel post)
+		{
+			var currentUrl = urlHelper.BlogPost(post);
+			return currentUrl.Replace(post.Date.Year.ToString(), "blog/" + post.Date.Year);
+		}
+
+		/// <summary>
 		/// Gets an absolute URL to the specified blog post
 		/// </summary>
 		/// <param name="urlHelper">The URL helper.</param>

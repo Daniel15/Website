@@ -35,14 +35,19 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="slug">The post's slug.</param>
 		/// <returns>JSON data</returns>
-		[OutputCache(Duration = 1800, Location = OutputCacheLocation.ServerAndClient, VaryByParam = "slug")]
+		[OutputCache(Duration = 86400, Location = OutputCacheLocation.ServerAndClient, VaryByParam = "slug")]
 		public virtual ActionResult PostShareCount(string slug)
 		{
 			var post = _blogRepository.GetSummaryBySlug(slug);
 			var url = Url.BlogPostAbsolute(post);
+			var legacyUrl = Url.Absolute(Url.LegacyBlogPost(post));
 			var shortUrl = Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http");
+			
 			var counts = _socialManager.ShareCounts(post, url, shortUrl);
-			return Json(counts.ToDictionary(x => x.Key.Id, x => x.Value), JsonRequestBehavior.AllowGet);
+			var legacyCounts = _socialManager.ShareCounts(post, legacyUrl, shortUrl);
+			var combinedCounts = counts.ToDictionary(x => x.Key.Id, x => x.Value + legacyCounts[x.Key]);
+
+			return Json(combinedCounts, JsonRequestBehavior.AllowGet);
 		}
 	}
 }
