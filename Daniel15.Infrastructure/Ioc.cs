@@ -51,14 +51,14 @@ namespace Daniel15.Infrastructure
 			dbLifestyle = dbLifestyle ?? Lifestyle.Transient;
 
 			// Configuration
-			container.Register<ISiteConfiguration>(() => _siteConfig);
+			Container.Register<ISiteConfiguration>(() => _siteConfig);
 
 			// Services
-			container.Register<IUrlShortener, UrlShortener>();
-			container.Register<ISocialManager, SocialManager>();
-			container.Register<IDisqusComments, DisqusComments>();
+			Container.Register<IUrlShortener, UrlShortener>();
+			Container.Register<ISocialManager, SocialManager>();
+			Container.Register<IDisqusComments, DisqusComments>();
 
-			InitializeDatabase(container, dbLifestyle);
+			InitializeDatabase(Container, dbLifestyle);
 		}
 
 		/// <summary>

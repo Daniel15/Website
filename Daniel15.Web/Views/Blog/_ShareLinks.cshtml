@@ -5,10 +5,10 @@
 	<ul>
 		@foreach (var kvp in Model.SocialNetworks)
 		{
-			<li class="@kvp.Key.Id">
-				<a href="@kvp.Value" title="Share on @kvp.Key.Name">
-					<span class="name">@kvp.Key.Name</span>
-					<span class="count">&hellip;</span>
+			<li class="@kvp.SocialNetwork.Id">
+				<a href="@kvp.Url" title="Share on @kvp.SocialNetwork.Name">
+					<span class="name">@kvp.SocialNetwork.Name</span>
+					<span class="count">@kvp.Count</span>
 				</a>
 			</li>
 		}

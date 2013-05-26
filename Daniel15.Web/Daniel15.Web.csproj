@@ -163,6 +163,8 @@
     <Compile Include="Areas\Admin\ViewModels\Blog\EditViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Blog\IndexViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Blog\PostsViewModel.cs" />
+    <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\PostsApiController.cs" />
     <Compile Include="Attributes\HandleErrorAttribute.cs" />
     <Compile Include="Attributes\StopwatchAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -170,7 +172,6 @@
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\SignatureController.cs" />
-    <Compile Include="Controllers\SocialController.cs" />
     <Compile Include="Extensions\BlogUrlHelperExtensions.cs" />
     <Compile Include="Extensions\CacheExtensions.cs" />
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Infrastructure\T4MvcControllerConstructorResolutionBehavior.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Blog\PostSocialNetworkModel.cs" />
     <Compile Include="Mvc\CookieTempDataProvider.cs" />
     <Compile Include="Mvc\ViewBase.cs" />
     <Compile Include="Models\Home\ChatStatusModel.cs" />
@@ -200,6 +202,12 @@
     <Compile Include="T4MVC\Admin.BlogController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4MVC\Api.PostsApiController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\Api.SharedController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\BlogController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -219,9 +227,6 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\SiteController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="T4MVC\SocialController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\T4MVC.cs">
@@ -494,6 +499,7 @@
     <Content Include="Content\css\style-ie8.less" />
     <Content Include="Content\css\style.less" />
     <Content Include="ApiKeys.private.config" />
+    <Content Include="Areas\Api\Views\Web.config" />
     <None Include="Content\images\header_fade.psd" />
     <None Include="Content\js\framework\.git\config" />
     <None Include="Content\js\framework\.git\description" />
@@ -592,6 +598,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Api\Models\" />
+    <Folder Include="Areas\Api\Views\Shared\" />
     <Folder Include="Content\js\framework\.git\branches\" />
     <Folder Include="Content\js\framework\.git\objects\info\" />
     <Folder Include="Content\js\framework\.git\refs\tags\" />

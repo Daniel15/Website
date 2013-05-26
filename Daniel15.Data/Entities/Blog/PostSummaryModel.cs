@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using Daniel15.Shared.Extensions;
 using ServiceStack.DataAnnotations;
 
@@ -32,6 +32,12 @@ namespace Daniel15.Data.Entities.Blog
 			get { return DateExtensions.FromUnix(UnixDate); }
 			set { UnixDate = value.ToUnix(); }
 		}
+
+		/// <summary>
+		/// Details of how many times this post was shared on social networking sites
+		/// </summary>
+		[Alias("share_counts")]
+		public IDictionary<string, int> ShareCounts { get; set; }
 
 		/// <summary>
 		/// Gets the Disqus identifier for this post (currently just the post ID)

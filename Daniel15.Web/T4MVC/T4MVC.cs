@@ -26,6 +26,8 @@ public static class MVC
 {
     static readonly AdminClass s_Admin = new AdminClass();
     public static AdminClass Admin { get { return s_Admin; } }
+    static readonly ApiClass s_Api = new ApiClass();
+    public static ApiClass Api { get { return s_Api; } }
     public static Daniel15.Web.Controllers.AccountController Account = new Daniel15.Web.Controllers.T4MVC_AccountController();
     public static Daniel15.Web.Controllers.BlogController Blog = new Daniel15.Web.Controllers.T4MVC_BlogController();
     public static Daniel15.Web.Controllers.BlogPartialsController BlogPartials = new Daniel15.Web.Controllers.T4MVC_BlogPartialsController();
@@ -33,7 +35,6 @@ public static class MVC
     public static Daniel15.Web.Controllers.RedirectController Redirect = new Daniel15.Web.Controllers.T4MVC_RedirectController();
     public static Daniel15.Web.Controllers.SignatureController Signature = new Daniel15.Web.Controllers.T4MVC_SignatureController();
     public static Daniel15.Web.Controllers.SiteController Site = new Daniel15.Web.Controllers.T4MVC_SiteController();
-    public static Daniel15.Web.Controllers.SocialController Social = new Daniel15.Web.Controllers.T4MVC_SocialController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -44,6 +45,13 @@ namespace T4MVC
     {
         public readonly string Name = "Admin";
         public Daniel15.Web.Areas.Admin.Controllers.BlogController Blog = new Daniel15.Web.Areas.Admin.Controllers.T4MVC_BlogController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class ApiClass
+    {
+        public readonly string Name = "Api";
+        public Daniel15.Web.Areas.Api.Controllers.PostsApiController PostsApi = new Daniel15.Web.Areas.Api.Controllers.T4MVC_PostsApiController();
+        public T4MVC.Api.SharedController Shared = new T4MVC.Api.SharedController();
     }
 }
 

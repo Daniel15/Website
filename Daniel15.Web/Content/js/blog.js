@@ -185,8 +185,6 @@ Blog.Post = function(post)
 {
 	this.post = post;
 	this.id = this.post.get('id').slice(5);
-	var permalink = this.post.firstByTag('a').get('href');
-	var socialCountUrl = permalink + '/sharecount';
 	
 	this.socialNetworks = {};
 	var socialNetworks = this.post.firstByClass('share').getByTag('li');
@@ -198,15 +196,6 @@ Blog.Post = function(post)
 	this.addPopupHandler('facebook', 500, 400);
 	this.addPopupHandler('twitter', 550, 420);
 	this.addPopupHandler('linkedin', 520, 570);
-	
-	// Initialise data for network sharing links
-	(new Ajax(socialCountUrl, 
-	{
-		method: 'get',
-		onSuccess: this.updateSocialCounts,
-		context: this,
-		abortPrev: false
-	})).send();
 };
 
 Blog.Post.prototype = 
@@ -222,16 +211,5 @@ Blog.Post.prototype =
 			window.open(this.href, '_blank', 'height=' + height + 'px,width=' + width + 'px');
 			Events.stop(e);
 		});
-	},
-	
-	/**
-	 * Update the social sharing counts for a post (called via AJAX response)
-	 */
-	updateSocialCounts: function(data)
-	{
-		for (var name in data)
-		{
-			this.socialNetworks[name].firstByClass('count').set('innerHTML', data[name]);
-		}
 	}
 };

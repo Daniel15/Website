@@ -48,6 +48,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 		public IDictionary<ISocialNetwork, int> ShareCounts(PostSummaryModel post, string url, string shortUrl)
 		{
 			IDictionary<ISocialNetwork, int> results = new Dictionary<ISocialNetwork, int>(_socialShares.Count);
+			var legacyUrl = GetLegacyUrl(post, url);
 
 			foreach (var sharer in _socialShares)
 			{
@@ -57,6 +58,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 					try
 					{
 						count = sharer.GetShareCount(post, url, shortUrl);
+						count += sharer.GetShareCount(post, legacyUrl, string.Empty);
 					}
 					catch (Exception ex)
 					{
@@ -71,6 +73,17 @@ namespace Daniel15.BusinessLayer.Services.Social
 			}
 
 			return results;
+		}
+
+		/// <summary>
+		/// Gets a legacy URL to the specified blog post (containing /blog/ at the start)
+		/// </summary>
+		/// <param name="post">Blog post to link to</param>
+		/// <param name="currentUrl">Current URL to the blog post</param>
+		/// <returns>Legacy URL to this blog post</returns>
+		private string GetLegacyUrl(PostSummaryModel post, string currentUrl)
+		{
+			return currentUrl.Replace(post.Date.Year.ToString(), "blog/" + post.Date.Year);
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace Daniel15.Infrastructure
 		/// <summary>
 		/// Gets the name of the blog
 		/// </summary>
-		[ConfigurationProperty("blogName", IsRequired = true)]
+		[ConfigurationProperty("blogName", IsRequired = false)]
 		public string BlogName
 		{
 			get { return (string)this["blogName"]; }
@@ -35,7 +35,7 @@ namespace Daniel15.Infrastructure
 		/// <summary>
 		/// Gets the description of the blog
 		/// </summary>
-		[ConfigurationProperty("blogDescription", IsRequired = true)]
+		[ConfigurationProperty("blogDescription", IsRequired = false)]
 		public string BlogDescription
 		{
 			get { return (string)this["blogDescription"]; }
@@ -45,7 +45,7 @@ namespace Daniel15.Infrastructure
 		/// <summary>
 		/// Gets the FeedBurner URL for the blog feed
 		/// </summary>
-		[ConfigurationProperty("feedBurnerUrl", IsRequired = true)]
+		[ConfigurationProperty("feedBurnerUrl", IsRequired = false)]
 		public Uri FeedBurnerUrl
 		{
 			get { return (Uri)this["feedBurnerUrl"]; }
@@ -55,7 +55,7 @@ namespace Daniel15.Infrastructure
 		/// <summary>
 		/// Gets the Disqus shortname used by the blog comments
 		/// </summary>
-		[ConfigurationProperty("disqusShortname", IsRequired = true)]
+		[ConfigurationProperty("disqusShortname", IsRequired = false)]
 		public string DisqusShortname
 		{
 			get { return (string)this["disqusShortname"]; }
@@ -93,7 +93,7 @@ namespace Daniel15.Infrastructure
 		/// <summary>
 		/// Gets the type of web cache being used for the site
 		/// </summary>
-		[ConfigurationProperty("webCacheType", IsRequired = true)]
+		[ConfigurationProperty("webCacheType", IsRequired = false)]
 		[TypeConverter(typeof(TypeNameConverter))]
 		public Type WebCacheType
 		{

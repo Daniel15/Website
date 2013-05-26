@@ -8,6 +8,7 @@ using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Infrastructure;
+using Daniel15.Web.Models.Blog;
 using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.Extensions;
 using System.Linq;
@@ -81,7 +82,7 @@ namespace Daniel15.Web.Controllers
 				{
 					Post = post, 
 					ShortUrl = ShortUrl(post),
-					SocialNetworks = _socialManager.ShareUrls(post, Url.BlogPostAbsolute(post), ShortUrl(post))
+					SocialNetworks = GetSocialNetworks(post)
 				});
 			}
 			viewModel.TotalCount = count;
@@ -208,7 +209,7 @@ namespace Daniel15.Web.Controllers
 				PostCategories = _blogRepository.CategoriesForPost(post),
 				PostTags = _blogRepository.TagsForPost(post),
 				ShortUrl = Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http"),
-				SocialNetworks = _socialManager.ShareUrls(post, Url.BlogPostAbsolute(post), ShortUrl(post)),
+				SocialNetworks = GetSocialNetworks(post),
 				Comments = _commentRepository.GetCommentsTree(post)
 			});
 		}
@@ -240,9 +241,27 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="post">Blog post</param>
 		/// <returns>The short URL</returns>
-		private string ShortUrl(PostModel post)
+		private string ShortUrl(PostSummaryModel post)
 		{
 			return Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http");
+		}
+
+		/// <summary>
+		/// Gets the social network URLs and share counts for the specified post
+		/// </summary>
+		/// <param name="post">Post to get statistics on</param>
+		/// <returns>Social network URLs and share counts for the post</returns>
+		private IEnumerable<PostSocialNetworkModel> GetSocialNetworks(PostSummaryModel post)
+		{
+			var shareCounts = post.ShareCounts ?? new Dictionary<string, int>();
+			var socialNetworks = _socialManager.ShareUrls(post, Url.BlogPostAbsolute(post), ShortUrl(post));
+
+			return socialNetworks.Select(x => new PostSocialNetworkModel
+			{
+				SocialNetwork = x.Key,
+				Url = x.Value,
+				Count = shareCounts.ContainsKey(x.Key.Id) ? shareCounts[x.Key.Id] : 0
+			});
 		}
 	}
 }

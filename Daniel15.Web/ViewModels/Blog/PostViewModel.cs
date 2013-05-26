@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data.Entities.Blog;
+using Daniel15.Web.Models.Blog;
 
 namespace Daniel15.Web.ViewModels.Blog
 {
@@ -37,6 +38,6 @@ namespace Daniel15.Web.ViewModels.Blog
 		/// <summary>
 		/// All the social network sharing URLs for this post
 		/// </summary>
-		public IEnumerable<KeyValuePair<ISocialNetwork, string>> SocialNetworks { get; set; }
+		public IEnumerable<PostSocialNetworkModel> SocialNetworks { get; set; }
 	}
 }

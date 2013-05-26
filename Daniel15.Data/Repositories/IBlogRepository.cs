@@ -170,5 +170,12 @@ namespace Daniel15.Data.Repositories
 		/// <param name="post">The post</param>
 		/// <param name="tagIds">Tag IDs</param>
 		void SetTags(PostSummaryModel post, IEnumerable<int> tagIds);
+
+		/// <summary>
+		/// Saves this entity to the database. First tries to load the entity to check if it exists
+		/// If it exists, does an update.
+		/// </summary>
+		/// <param name="entity">The entity to save</param>
+		void Save(PostSummaryModel entity);
 	}
 }

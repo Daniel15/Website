@@ -432,10 +432,20 @@ ORDER BY year DESC, month DESC");
 
 		public override void Save(PostModel entity)
 		{
+			Save((PostSummaryModel)entity);
+		}
+
+		/// <summary>
+		/// Saves this entity to the database. First tries to load the entity to check if it exists
+		/// If it exists, does an update.
+		/// </summary>
+		/// <param name="entity">The entity to save</param>
+		public void Save(PostSummaryModel entity)
+		{
 			// Assume it's new if the ID isn't set yet
 			var isNew = entity.Id == 0;
 
-			base.Save(entity);
+			Connection.Save(entity);
 
 			// Update the ID
 			if (isNew)

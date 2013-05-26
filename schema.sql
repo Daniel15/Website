@@ -75,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `blog_posts` (
   `maincategory_id` int(10) unsigned NOT NULL,
   `slug` varchar(255) NOT NULL,
   `published` tinyint(1) NOT NULL,
+  `share_counts` varchar(5000) NULL
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`),
   KEY `maincategory_id` (`maincategory_id`)

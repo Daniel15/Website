@@ -60,14 +60,6 @@ namespace Daniel15.Web.App_Start
 		/// <param name="routes">The route collection to add routes to</param>
 		private static void RegisterBlogRoutes(RouteCollection routes)
 		{
-			// Blog social network sharing counts
-			routes.MapRoute(
-				name: "BlogPostShareCount",
-				url: "{year}/{month}/{slug}/sharecount",
-				defaults: MVC.Social.PostShareCount(),
-				constraints: new { year = @"\d{4}", month = @"\d{2}" }
-			);
-
 			// Viewing a blog post
 			routes.MapRoute(
 				name: "BlogView",
