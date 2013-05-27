@@ -1,6 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Deploy">
-	<Import Project="Daniel15.Web.csproj" />
+
+	<PropertyGroup>
+		<Properties>Configuration=Release</Properties>
+		<SitePackageDir>Daniel15.Web\obj\Release\Package\PackageTmp\</SitePackageDir>
+		<CronPackageDir>Daniel15.Cron\bin\Release\</CronPackageDir>
+	</PropertyGroup>
 
 	<UsingTask
 		TaskName="UpdateGitDetails"
@@ -67,16 +72,24 @@ public class UpdateGitDetails : Microsoft.Build.Utilities.Task
 		</Task>
 	</UsingTask>
 
+	<Target Name="Build">
+		<MSBuild Projects="Daniel15.Web.sln" Targets="Build" Properties="$(Properties)" />
+	</Target>
+
+	<Target Name="PackageSite">
+		<MSBuild Projects="Daniel15.Web\Daniel15.Web.csproj" Targets="PipelinePreDeployCopyAllFilesToOneFolder" Properties="$(Properties)" />
+	</Target>
 
 	<Target Name="UpdateGitDetailsForDeploy">
-		<UpdateGitDetails SiteDir="$(_PackageTempDir)" GitWebUrl="https://github.com/Daniel15/Website/commit/{0}" />
+		<UpdateGitDetails SiteDir="$(SitePackageDir)" GitWebUrl="https://github.com/Daniel15/Website/commit/{0}" />
 	</Target>
 	
 	<!-- PipelinePreDeployCopyAllFilesToOneFolder will actually do the publish into a temp folder -->
-	<Target Name="Deploy" DependsOnTargets="PipelinePreDeployCopyAllFilesToOneFolder; UpdateGitDetailsForDeploy">
+	<Target Name="Deploy" DependsOnTargets="Build; PackageSite; UpdateGitDetailsForDeploy">
 		<Error Condition="'$(DestinationDir)'==''" Text="The DestinationDir property must be set to the directory name on the remote server." />
 		
 		<!-- Deploy via rsync -->
-		<Exec Command='rsync -arvuz --progress --chmod=ug=rwX,o=rX --exclude "*.private.config" obj/$(Configuration)/Package/PackageTmp/ daniel-deploy@dan.cx:/var/www/$(DestinationDir)/site/' />
+		<Exec Command='rsync -arvuz --progress --chmod=ug=rwX,o=rX --exclude "*.private.config" $(SitePackageDir.Replace("\", "/")) daniel-deploy@dan.cx:/var/www/$(DestinationDir)/site/' />
+		<Exec Command='rsync -arvuz --progress --chmod=ug=rwX,o=rX --exclude "*.private.config" $(CronPackageDir.Replace("\", "/")) daniel-deploy@dan.cx:/var/www/$(DestinationDir)/cron/' />
 	</Target>
 </Project>
