@@ -64,7 +64,9 @@ namespace Daniel15.BusinessLayer.Services.Social
 					{
 						// If an error occured, just set the count to 0 and log it.
 						// These aren't overly important - They shouldn't crash the page!
-						Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception("Couldn't get social share count for " + sharer.Name, ex));
+						// TODO: Figure out how to use ELMAH outside of websites
+						//Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception("Couldn't get social share count for " + sharer.Name, ex));
+						Console.Error.WriteLine("WARNING: Couldn't get social share count for {0}: {1}", sharer.Name, ex);
 						count = 0;
 					}
 

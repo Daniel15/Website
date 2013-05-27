@@ -36,8 +36,6 @@ namespace Daniel15.Cron
 			{
 				UpdatePost(post);
 			}
-
-			Console.ReadKey();
 		}
 
 		/// <summary>
