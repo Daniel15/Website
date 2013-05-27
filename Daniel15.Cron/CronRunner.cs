@@ -8,7 +8,7 @@ namespace Daniel15.Cron
 	{
 		static void Main(string[] args)
 		{
-			new CronRunner().Run(args[1]);
+			new CronRunner().Run(args[0]);
 		}
 
 		public CronRunner()
