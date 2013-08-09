@@ -10,3 +10,5 @@
 _ReSharper.*
 /packages/
 *.private.config
+/ss
+Daniel15.Web.sln.DotSettings

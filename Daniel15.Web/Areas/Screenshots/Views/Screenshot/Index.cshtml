@@ -1,0 +1,33 @@
+﻿@using Daniel15.Web.Areas.Screenshots.Models.Screenshot
+@model Daniel15.Web.Areas.Screenshots.ViewModels.Screenshot.IndexViewModel
+
+@{
+	Model.Heading = "Screenshots";
+	
+	Model.Title = "Screenshots";
+	if (!string.IsNullOrWhiteSpace(Model.Path))
+	{
+		Model.Title += " — " + Model.Path;
+	}
+}
+
+@if (!string.IsNullOrWhiteSpace(Model.Path))
+{
+	<h2>@Model.Path</h2>	
+}
+<ul class="files">
+	@foreach (var file in Model.Files)
+	{
+		<li>
+			<a href="@file.Url">
+				<figure>
+					@if (file.Type == ScreenshotFileModel.FileType.File)
+					{
+						<img src="@file.ThumbnailUrl" alt="Thumbnail of @file.FileName" />	
+					}
+					<figcaption>@file.FileName</figcaption>
+				</figure>
+			</a>
+		</li>
+	}
+</ul>

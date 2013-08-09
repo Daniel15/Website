@@ -165,6 +165,10 @@
     <Compile Include="Areas\Admin\ViewModels\Blog\PostsViewModel.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\PostsApiController.cs" />
+    <Compile Include="Areas\Screenshots\Controllers\ScreenshotController.cs" />
+    <Compile Include="Areas\Screenshots\Models\Screenshot\ScreenshotFileModel.cs" />
+    <Compile Include="Areas\Screenshots\ScreenshotsAreaRegistration.cs" />
+    <Compile Include="Areas\Screenshots\ViewModels\Screenshot\IndexViewModel.cs" />
     <Compile Include="Attributes\HandleErrorAttribute.cs" />
     <Compile Include="Attributes\StopwatchAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -218,6 +222,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\RedirectController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="T4MVC\Screenshots.ScreenshotController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\SharedController.generated.cs">
@@ -500,6 +507,10 @@
     <Content Include="Content\css\style.less" />
     <Content Include="ApiKeys.private.config" />
     <Content Include="Areas\Api\Views\Web.config" />
+    <Content Include="Areas\Screenshots\Views\Web.config" />
+    <Content Include="Areas\Screenshots\Views\Screenshot\Index.cshtml" />
+    <Content Include="Areas\Screenshots\Views\_ViewStart.cshtml" />
+    <None Include="Content\css\pages\screenshots.less" />
     <None Include="Content\images\header_fade.psd" />
     <None Include="Content\js\framework\.git\config" />
     <None Include="Content\js\framework\.git\description" />

@@ -28,6 +28,8 @@ public static class MVC
     public static AdminClass Admin { get { return s_Admin; } }
     static readonly ApiClass s_Api = new ApiClass();
     public static ApiClass Api { get { return s_Api; } }
+    static readonly ScreenshotsClass s_Screenshots = new ScreenshotsClass();
+    public static ScreenshotsClass Screenshots { get { return s_Screenshots; } }
     public static Daniel15.Web.Controllers.AccountController Account = new Daniel15.Web.Controllers.T4MVC_AccountController();
     public static Daniel15.Web.Controllers.BlogController Blog = new Daniel15.Web.Controllers.T4MVC_BlogController();
     public static Daniel15.Web.Controllers.BlogPartialsController BlogPartials = new Daniel15.Web.Controllers.T4MVC_BlogPartialsController();
@@ -52,6 +54,12 @@ namespace T4MVC
         public readonly string Name = "Api";
         public Daniel15.Web.Areas.Api.Controllers.PostsApiController PostsApi = new Daniel15.Web.Areas.Api.Controllers.T4MVC_PostsApiController();
         public T4MVC.Api.SharedController Shared = new T4MVC.Api.SharedController();
+    }
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class ScreenshotsClass
+    {
+        public readonly string Name = "Screenshots";
+        public Daniel15.Web.Areas.Screenshots.Controllers.ScreenshotController Screenshot = new Daniel15.Web.Areas.Screenshots.Controllers.T4MVC_ScreenshotController();
     }
 }
 
@@ -108,6 +116,7 @@ namespace Links
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string index_less = Url("index.less");
                 public static readonly string projects_less = Url("projects.less");
+                public static readonly string screenshots_less = Url("screenshots.less");
                 public static readonly string search_less = Url("search.less");
                 public static readonly string socialfeed_less = Url("socialfeed.less");
             }

@@ -51,5 +51,10 @@ namespace Daniel15.Infrastructure
 		/// Gets the type of web cache being used for the site
 		/// </summary>
 		Type WebCacheType { get; }
+
+		/// <summary>
+		/// Gets the directory screenshots are stored in
+		/// </summary>
+		string ScreenshotsDir { get; }
 	}
 }
