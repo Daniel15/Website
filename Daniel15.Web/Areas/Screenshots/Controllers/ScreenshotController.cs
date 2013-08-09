@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Web.Mvc;
 using Daniel15.Infrastructure;
@@ -19,6 +20,11 @@ namespace Daniel15.Web.Areas.Screenshots.Controllers
 		/// Maximum size (width or height) for thumbnail images
 		/// </summary>
 		private const int MAX_THUMBNAIL_SIZE = 200;
+		/// <summary>
+		/// Name of the thumbnail directory
+		/// </summary>
+		private const string THUMBNAIL_DIR = "thumb";
+
 		/// <summary>
 		/// The site configuration
 		/// </summary>
@@ -42,6 +48,12 @@ namespace Daniel15.Web.Areas.Screenshots.Controllers
 		public virtual ActionResult Index(string path = "")
 		{
 			var fullPath = GetAndValidateFullPath(path);
+
+			// Don't allow access to thumbnail directory
+			if (path == THUMBNAIL_DIR)
+			{
+				return HttpNotFound("Tried to directly access thumbnail folder");
+			}
 
 			// Directory? Return a directory listing.
 			if (System.IO.Directory.Exists(fullPath))
@@ -69,7 +81,7 @@ namespace Daniel15.Web.Areas.Screenshots.Controllers
 		private ActionResult Directory(string path, string fullPath)
 		{
 			var filesAndDirectories =
-				System.IO.Directory.EnumerateDirectories(fullPath).Select(x => BuildScreenshotModel(x, ScreenshotFileModel.FileType.Directory))
+				System.IO.Directory.EnumerateDirectories(fullPath).Where(x => Path.GetFileName(x) != THUMBNAIL_DIR).Select(x => BuildScreenshotModel(x, ScreenshotFileModel.FileType.Directory))
 				.Concat(System.IO.Directory.EnumerateFiles(fullPath).Select(x => BuildScreenshotModel(x, ScreenshotFileModel.FileType.File)));
 
 			return View(Views.Index, new IndexViewModel
@@ -97,15 +109,22 @@ namespace Daniel15.Web.Areas.Screenshots.Controllers
 		/// <returns>Thumbnail</returns>
 		public virtual ActionResult Thumbnail(string path)
 		{
-			// TODO: Cache and serve cache through web server
-
 			var fullPath = GetAndValidateFullPath(path);
+			var cachePath = Path.Combine(_siteConfiguration.ScreenshotsDir, THUMBNAIL_DIR, path);
 
-			using (var sourceImg = new Bitmap(fullPath))
-			using (var thumb = sourceImg.GenerateThumbnail(MAX_THUMBNAIL_SIZE))
+			// Cache the thumbnail if it doesn't already exist
+			if (!System.IO.File.Exists(cachePath))
 			{
-				return File(thumb.ToByteArray(), "image/png");
+				System.IO.Directory.CreateDirectory(Path.GetDirectoryName(cachePath));
+
+				using (var sourceImg = new Bitmap(fullPath))
+				using (var thumb = sourceImg.GenerateThumbnail(MAX_THUMBNAIL_SIZE))
+				{
+					thumb.Save(cachePath, ImageFormat.Png);
+				}	
 			}
+
+			return File(cachePath, "image/png");
 		}
 
 		/// <summary>
