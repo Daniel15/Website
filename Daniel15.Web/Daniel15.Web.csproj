@@ -510,7 +510,7 @@
     <Content Include="Areas\Screenshots\Views\Web.config" />
     <Content Include="Areas\Screenshots\Views\Screenshot\Index.cshtml" />
     <Content Include="Areas\Screenshots\Views\_ViewStart.cshtml" />
-    <None Include="Content\css\pages\screenshots.less" />
+    <Content Include="Content\css\pages\screenshots.less" />
     <None Include="Content\images\header_fade.psd" />
     <None Include="Content\js\framework\.git\config" />
     <None Include="Content\js\framework\.git\description" />
