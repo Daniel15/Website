@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -81,14 +82,22 @@ namespace Daniel15.Web.Areas.Screenshots.Controllers
 		/// <returns>Directory listing</returns>
 		private ActionResult Directory(string path, string fullPath)
 		{
-			var filesAndDirectories =
-				System.IO.Directory.EnumerateDirectories(fullPath).Where(x => Path.GetFileName(x) != THUMBNAIL_DIR).Select(x => BuildScreenshotModel(x, ScreenshotFileModel.FileType.Directory))
-				.Concat(System.IO.Directory.EnumerateFiles(fullPath).Select(x => BuildScreenshotModel(x, ScreenshotFileModel.FileType.File)));
+			var dirBlacklist = new HashSet<string> { THUMBNAIL_DIR, "cgi-bin" };
+
+			var directories = System.IO.Directory.EnumerateDirectories(fullPath)
+				// Ignore thumbnail directory
+				.Where(x => !dirBlacklist.Contains(Path.GetFileName(x)))
+				.Select(x => BuildScreenshotModel(x, ScreenshotFileModel.FileType.Directory));
+
+			var files = System.IO.Directory.EnumerateFiles(fullPath)
+				// Ignore dotfiles (hidden)
+				.Where(x => !Path.GetFileName(x).StartsWith("."))
+				.Select(x => BuildScreenshotModel(x, ScreenshotFileModel.FileType.File));
 
 			return View(Views.Index, new IndexViewModel
 			{
 				Path = path,
-				Files = filesAndDirectories
+				Files = directories.Concat(files)
 			});
 		}
 
@@ -162,14 +171,35 @@ namespace Daniel15.Web.Areas.Screenshots.Controllers
 				.Replace(_siteConfiguration.ScreenshotsDir, string.Empty)
 				.TrimStart(Path.DirectorySeparatorChar);
 
+			var relativeUri = relativePath.Replace('\\', '/');
 			return new ScreenshotFileModel
 			{
 				FileName = Path.GetFileName(path),
 				RelativePath = relativePath,
-				Url = Url.Action(MVC.Screenshots.Screenshot.Index(relativePath.Replace('\\', '/'))),
-				ThumbnailUrl = Url.Action(MVC.Screenshots.Screenshot.Thumbnail(relativePath.Replace('\\', '/'))),
+				Url = type == ScreenshotFileModel.FileType.File ? ScreenshotUrl(relativeUri) : Url.Action(MVC.Screenshots.Screenshot.Index(relativeUri)),
+				ThumbnailUrl = ThumbnailUrl(relativeUri),
 				Type = type
 			};
+		}
+
+		/// <summary>
+		/// Get the URL to the thumbnail for the specified image
+		/// </summary>
+		/// <param name="path">Image path</param>
+		/// <returns>Thumbnail URL</returns>
+		private string ThumbnailUrl(string path)
+		{
+			return ScreenshotUrl(THUMBNAIL_DIR + "/" + path);
+		}
+
+		/// <summary>
+		/// Get the URL to the specified screenshot image
+		/// </summary>
+		/// <param name="path">Image path</param>
+		/// <returns>Screenshot URL</returns>
+		private string ScreenshotUrl(string path)
+		{
+			return _siteConfiguration.ScreenshotsUrl + path.Replace('\\', '/');
 		}
 	}
 }
