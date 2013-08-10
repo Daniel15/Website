@@ -56,5 +56,10 @@ namespace Daniel15.Infrastructure
 		/// Gets the directory screenshots are stored in
 		/// </summary>
 		string ScreenshotsDir { get; }
+
+		/// <summary>
+		/// Gets the URL screenshots are accessible from
+		/// </summary>
+		Uri ScreenshotsUrl { get; set; }
 	}
 }

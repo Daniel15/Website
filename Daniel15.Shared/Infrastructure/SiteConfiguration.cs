@@ -110,6 +110,13 @@ namespace Daniel15.Infrastructure
 			get { return (string)this["screenshotsDir"]; }
 			set { this["screenshotsDir"] = value; }
 		}
+
+		[ConfigurationProperty("screenshotsUrl", IsRequired = false)]
+		public Uri ScreenshotsUrl
+		{
+			get { return (Uri)this["screenshotsUrl"]; }
+			set { this["screenshotsUrl"] = value; }
+		}
 	}
 
 	/// <summary>
