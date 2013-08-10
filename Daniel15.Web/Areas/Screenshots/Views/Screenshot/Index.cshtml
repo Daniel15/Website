@@ -11,10 +11,24 @@
 	}
 }
 
-@if (!string.IsNullOrWhiteSpace(Model.Path))
-{
-	<h2>@Model.Path</h2>	
-}
+<h2>
+	@Html.ActionLink("Screenshots", MVC.Screenshots.Screenshot.Index())
+	
+	@if (!string.IsNullOrWhiteSpace(Model.Path))
+	{
+		var allSegments = Model.Path.Split('/');
+		var segments = new List<string>();
+	 
+		foreach (var segment in allSegments)
+		{
+			segments.Add(segment);
+			var currentPath = string.Join("/", segments);
+			<text>—</text>
+			@Html.ActionLink(segment, MVC.Screenshots.Screenshot.Index(currentPath))
+		}
+	}
+</h2>
+
 <ul class="files">
 	@foreach (var file in Model.Files)
 	{
