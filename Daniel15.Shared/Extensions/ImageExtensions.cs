@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
@@ -60,6 +62,18 @@ namespace Daniel15.Shared.Extensions
 				}
 			}
 
+			return sourceImg.GenerateMagickThumbnail(width, height);
+		}
+
+		/// <summary>
+		/// Generates a thumbnail for the specified image, using GDI+
+		/// </summary>
+		/// <param name="sourceImg">Image to generate thumbnail for</param>
+		/// <param name="width">Width of the thumbnail</param>
+		/// <param name="height">Height of the thumbnail</param>
+		/// <returns>Thumbnail image</returns>
+		public static Bitmap GenerateGdiPlusThumbnail(this Image sourceImg, int width, int height)
+		{
 			var thumb = new Bitmap(width, height);
 			using (var graphics = Graphics.FromImage(thumb))
 			{
@@ -69,6 +83,53 @@ namespace Daniel15.Shared.Extensions
 				graphics.DrawImage(sourceImg, 0, 0, width, height);
 			}
 			return thumb;
+		}
+
+		/// <summary>
+		/// Generates a thumbnail for the specified image, using ImageMagick or GraphicsMagick
+		/// </summary>
+		/// <param name="sourceImg">Image to generate thumbnail for</param>
+		/// <param name="width">Width of the thumbnail</param>
+		/// <param name="height">Height of the thumbnail</param>
+		/// <returns>Thumbnail image</returns>
+		public static Bitmap GenerateMagickThumbnail(this Image sourceImg, int width, int height)
+		{
+			// Create new GraphicsMagick process for thumbnail generation
+			var process = new Process
+			{
+				StartInfo = new ProcessStartInfo
+				{
+					FileName = "gm",
+					Arguments = string.Format("convert - -filter sinc -size {0}x{1} -resize {0}x{1} -", width, height),
+					RedirectStandardInput = true,
+					RedirectStandardOutput = true,
+					RedirectStandardError = true,
+					UseShellExecute = false,
+					CreateNoWindow = true,
+				}
+			};
+
+			process.Start();
+
+			// Write source image to input stream of GraphicsMagick
+			sourceImg.Save(process.StandardInput.BaseStream, ImageFormat.Png);
+			process.StandardInput.Flush();
+			process.StandardInput.Close();
+
+			try
+			{
+				var thumb = new Bitmap(process.StandardOutput.BaseStream);
+				return thumb;
+			}
+			catch (Exception ex)
+			{
+				var errors = process.StandardError.ReadToEnd();
+				throw new Exception(string.Format("Error invoking GraphicsMagick: {0}\nOriginal exception: {1}", errors, ex));
+			}
+			finally
+			{
+				process.Dispose();
+			}
 		}
 	}
 }
