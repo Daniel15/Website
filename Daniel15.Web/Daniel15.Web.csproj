@@ -185,6 +185,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Blog\PostSocialNetworkModel.cs" />
+    <Compile Include="Mvc\AccelRedirectFileResult.cs" />
     <Compile Include="Mvc\CookieTempDataProvider.cs" />
     <Compile Include="Mvc\ViewBase.cs" />
     <Compile Include="Models\Home\ChatStatusModel.cs" />

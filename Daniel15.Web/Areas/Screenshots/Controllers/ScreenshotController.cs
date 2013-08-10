@@ -8,6 +8,7 @@ using Daniel15.Web.Areas.Screenshots.Models.Screenshot;
 using Daniel15.Web.Areas.Screenshots.ViewModels.Screenshot;
 using System.Linq;
 using Daniel15.Shared.Extensions;
+using Daniel15.Web.Mvc;
 
 namespace Daniel15.Web.Areas.Screenshots.Controllers
 {
@@ -99,7 +100,7 @@ namespace Daniel15.Web.Areas.Screenshots.Controllers
 		/// <returns>File contents</returns>
 		private ActionResult Download(string fullPath)
 		{
-			return File(fullPath, "image/png");
+			return this.AccelRedirectFile(fullPath, "image/png");
 		}
 
 		/// <summary>
@@ -124,7 +125,7 @@ namespace Daniel15.Web.Areas.Screenshots.Controllers
 				}	
 			}
 
-			return File(cachePath, "image/png");
+			return this.AccelRedirectFile(cachePath, "image/png");
 		}
 
 		/// <summary>
