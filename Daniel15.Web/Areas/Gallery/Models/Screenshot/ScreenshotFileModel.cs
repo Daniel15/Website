@@ -1,4 +1,4 @@
-﻿namespace Daniel15.Web.Areas.Screenshots.Models.Screenshot
+﻿namespace Daniel15.Web.Areas.Gallery.Models.Screenshot
 {
 	/// <summary>
 	/// Represents a screenshot file or directory.

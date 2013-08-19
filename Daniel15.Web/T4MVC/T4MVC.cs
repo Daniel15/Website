@@ -28,8 +28,8 @@ public static class MVC
     public static AdminClass Admin { get { return s_Admin; } }
     static readonly ApiClass s_Api = new ApiClass();
     public static ApiClass Api { get { return s_Api; } }
-    static readonly ScreenshotsClass s_Screenshots = new ScreenshotsClass();
-    public static ScreenshotsClass Screenshots { get { return s_Screenshots; } }
+    static readonly GalleryClass s_Gallery = new GalleryClass();
+    public static GalleryClass Gallery { get { return s_Gallery; } }
     public static Daniel15.Web.Controllers.AccountController Account = new Daniel15.Web.Controllers.T4MVC_AccountController();
     public static Daniel15.Web.Controllers.BlogController Blog = new Daniel15.Web.Controllers.T4MVC_BlogController();
     public static Daniel15.Web.Controllers.BlogPartialsController BlogPartials = new Daniel15.Web.Controllers.T4MVC_BlogPartialsController();
@@ -56,10 +56,10 @@ namespace T4MVC
         public T4MVC.Api.SharedController Shared = new T4MVC.Api.SharedController();
     }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class ScreenshotsClass
+    public class GalleryClass
     {
-        public readonly string Name = "Screenshots";
-        public Daniel15.Web.Areas.Screenshots.Controllers.ScreenshotController Screenshot = new Daniel15.Web.Areas.Screenshots.Controllers.T4MVC_ScreenshotController();
+        public readonly string Name = "Gallery";
+        public Daniel15.Web.Areas.Gallery.Controllers.ScreenshotController Screenshot = new Daniel15.Web.Areas.Gallery.Controllers.T4MVC_ScreenshotController();
     }
 }
 

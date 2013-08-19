@@ -5,13 +5,13 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Web.Mvc;
 using Daniel15.Infrastructure;
-using Daniel15.Web.Areas.Screenshots.Models.Screenshot;
-using Daniel15.Web.Areas.Screenshots.ViewModels.Screenshot;
+using Daniel15.Web.Areas.Gallery.Models.Screenshot;
+using Daniel15.Web.Areas.Gallery.ViewModels.Screenshot;
 using System.Linq;
 using Daniel15.Shared.Extensions;
 using Daniel15.Web.Mvc;
 
-namespace Daniel15.Web.Areas.Screenshots.Controllers
+namespace Daniel15.Web.Areas.Gallery.Controllers
 {
 	/// <summary>
 	/// Handles browsing and serving screenshots
@@ -176,7 +176,7 @@ namespace Daniel15.Web.Areas.Screenshots.Controllers
 			{
 				FileName = Path.GetFileName(path),
 				RelativePath = relativePath,
-				Url = type == ScreenshotFileModel.FileType.File ? ScreenshotUrl(relativeUri) : Url.Action(MVC.Screenshots.Screenshot.Index(relativeUri)),
+				Url = type == ScreenshotFileModel.FileType.File ? ScreenshotUrl(relativeUri) : Url.Action(MVC.Gallery.Screenshot.Index(relativeUri)),
 				ThumbnailUrl = ThumbnailUrl(relativeUri),
 				Type = type
 			};

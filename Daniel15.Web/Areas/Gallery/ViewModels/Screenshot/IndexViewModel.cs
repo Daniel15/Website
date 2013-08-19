@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Daniel15.Web.Areas.Screenshots.Models.Screenshot;
+using Daniel15.Web.Areas.Gallery.Models.Screenshot;
 using Daniel15.Web.ViewModels;
 
-namespace Daniel15.Web.Areas.Screenshots.ViewModels.Screenshot
+namespace Daniel15.Web.Areas.Gallery.ViewModels.Screenshot
 {
 	/// <summary>
 	/// Represents data required to render a screenshot listing

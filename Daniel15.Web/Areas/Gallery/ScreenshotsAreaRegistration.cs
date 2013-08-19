@@ -1,14 +1,14 @@
 ﻿using System.Web.Mvc;
 
-namespace Daniel15.Web.Areas.Screenshots
+namespace Daniel15.Web.Areas.Gallery
 {
-	public class ScreenshotsAreaRegistration : AreaRegistration
+	public class GalleryAreaRegistration : AreaRegistration
 	{
 		public override string AreaName
 		{
 			get
 			{
-				return "Screenshots";
+				return "Gallery";
 			}
 		}
 
@@ -17,13 +17,13 @@ namespace Daniel15.Web.Areas.Screenshots
 			context.MapRoute(
 				name: "ScreenshotThumbnail",
 				url: "screenshots/thumb/{*path}",
-				defaults: MVC.Screenshots.Screenshot.Thumbnail()
+				defaults: MVC.Gallery.Screenshot.Thumbnail()
 			);
 
 			context.MapRoute(
 				name: "ScreenshotHome",
 				url: "screenshots/{*path}",
-				defaults: MVC.Screenshots.Screenshot.Index()
+				defaults: MVC.Gallery.Screenshot.Index()
 			);
 
 			context.MapRoute(

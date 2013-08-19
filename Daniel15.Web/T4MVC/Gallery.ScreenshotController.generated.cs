@@ -20,7 +20,7 @@ using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
 using T4MVC;
-namespace Daniel15.Web.Areas.Screenshots.Controllers
+namespace Daniel15.Web.Areas.Gallery.Controllers
 {
     public partial class ScreenshotController
     {
@@ -49,9 +49,9 @@ namespace Daniel15.Web.Areas.Screenshots.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ScreenshotController Actions { get { return MVC.Screenshots.Screenshot; } }
+        public ScreenshotController Actions { get { return MVC.Gallery.Screenshot; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "Screenshots";
+        public readonly string Area = "Gallery";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "Screenshot";
         [GeneratedCode("T4MVC", "2.0")]
@@ -103,12 +103,12 @@ namespace Daniel15.Web.Areas.Screenshots.Controllers
             {
                 public readonly string Index = "Index";
             }
-            public readonly string Index = "~/Areas/Screenshots/Views/Screenshot/Index.cshtml";
+            public readonly string Index = "~/Areas/Gallery/Views/Screenshot/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_ScreenshotController : Daniel15.Web.Areas.Screenshots.Controllers.ScreenshotController
+    public partial class T4MVC_ScreenshotController : Daniel15.Web.Areas.Gallery.Controllers.ScreenshotController
     {
         public T4MVC_ScreenshotController() : base(Dummy.Instance) { }
 

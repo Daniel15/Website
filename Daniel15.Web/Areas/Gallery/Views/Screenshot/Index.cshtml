@@ -1,5 +1,5 @@
-﻿@using Daniel15.Web.Areas.Screenshots.Models.Screenshot
-@model Daniel15.Web.Areas.Screenshots.ViewModels.Screenshot.IndexViewModel
+﻿@using Daniel15.Web.Areas.Gallery.Models.Screenshot
+@model Daniel15.Web.Areas.Gallery.ViewModels.Screenshot.IndexViewModel
 
 @{
 	Model.Heading = "Screenshots";
@@ -12,7 +12,7 @@
 }
 
 <h2>
-	@Html.ActionLink("Screenshots", MVC.Screenshots.Screenshot.Index())
+	@Html.ActionLink("Screenshots", MVC.Gallery.Screenshot.Index())
 	
 	@if (!string.IsNullOrWhiteSpace(Model.Path))
 	{
@@ -24,7 +24,7 @@
 			segments.Add(segment);
 			var currentPath = string.Join("/", segments);
 			<text>—</text>
-			@Html.ActionLink(segment, MVC.Screenshots.Screenshot.Index(currentPath))
+			@Html.ActionLink(segment, MVC.Gallery.Screenshot.Index(currentPath))
 		}
 	}
 </h2>
