@@ -48,11 +48,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\ConfigurationElementCollection.cs" />
+    <Compile Include="Configuration\GalleryConfiguration.cs" />
+    <Compile Include="Configuration\IGallery.cs" />
+    <Compile Include="Configuration\IGalleryConfiguration.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\QueryStringExtensions.cs" />
-    <Compile Include="Infrastructure\ISiteConfiguration.cs" />
-    <Compile Include="Infrastructure\SiteConfiguration.cs" />
+    <Compile Include="Configuration\ISiteConfiguration.cs" />
+    <Compile Include="Configuration\SiteConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

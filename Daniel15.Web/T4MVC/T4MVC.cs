@@ -114,9 +114,9 @@ namespace Links
                 private const string URLPATH = "~/Content/css/pages";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string gallery_less = Url("gallery.less");
                 public static readonly string index_less = Url("index.less");
                 public static readonly string projects_less = Url("projects.less");
-                public static readonly string screenshots_less = Url("screenshots.less");
                 public static readonly string search_less = Url("search.less");
                 public static readonly string socialfeed_less = Url("socialfeed.less");
             }

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Web.Mvc;
+using Daniel15.Configuration;
 using Daniel15.Infrastructure;
 using Daniel15.Web.Areas.Gallery.Models.Screenshot;
 using Daniel15.Web.Areas.Gallery.ViewModels.Screenshot;
@@ -28,17 +29,26 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		private const string THUMBNAIL_DIR = "thumb";
 
 		/// <summary>
-		/// The site configuration
+		/// The gallery configuration
 		/// </summary>
-		private readonly ISiteConfiguration _siteConfiguration;
+		private readonly IGalleryConfiguration _galleryConfig;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ScreenshotController" /> class.
 		/// </summary>
-		/// <param name="siteConfiguration">The site configuration.</param>
-		public ScreenshotController(ISiteConfiguration siteConfiguration)
+		/// <param name="galleryConfig">The gallery configuration.</param>
+		public ScreenshotController(IGalleryConfiguration galleryConfig)
 		{
-			_siteConfiguration = siteConfiguration;
+			_galleryConfig = galleryConfig;
+		}
+
+		/// <summary>
+		/// Gets the specified gallery from the configuration
+		/// </summary>
+		/// <returns></returns>
+		private IGallery GetGallery()
+		{
+			return _galleryConfig.Galleries["screenshots"];
 		}
 
 		/// <summary>
@@ -49,7 +59,8 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <returns>Screenshot listing or file download</returns>
 		public virtual ActionResult Index(string path = "")
 		{
-			var fullPath = GetAndValidateFullPath(path);
+			var gallery = GetGallery();
+			var fullPath = GetAndValidateFullPath(gallery, path);
 
 			// Don't allow access to thumbnail directory
 			if (path == THUMBNAIL_DIR)
@@ -60,7 +71,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 			// Directory? Return a directory listing.
 			if (System.IO.Directory.Exists(fullPath))
 			{
-				return Directory(path, fullPath);
+				return Directory(gallery, path, fullPath);
 			}
 			// File? Serve the file
 			else if (System.IO.File.Exists(fullPath))
@@ -80,19 +91,19 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="path">Relative path to display</param>
 		/// <param name="fullPath">Full file system path</param>
 		/// <returns>Directory listing</returns>
-		private ActionResult Directory(string path, string fullPath)
+		private ActionResult Directory(IGallery gallery, string path, string fullPath)
 		{
 			var dirBlacklist = new HashSet<string> { THUMBNAIL_DIR, "cgi-bin" };
 
 			var directories = System.IO.Directory.EnumerateDirectories(fullPath)
 				// Ignore thumbnail directory
 				.Where(x => !dirBlacklist.Contains(Path.GetFileName(x)))
-				.Select(x => BuildScreenshotModel(x, ScreenshotFileModel.FileType.Directory));
+				.Select(x => BuildScreenshotModel(gallery, x, ScreenshotFileModel.FileType.Directory));
 
 			var files = System.IO.Directory.EnumerateFiles(fullPath)
 				// Ignore dotfiles (hidden)
 				.Where(x => !Path.GetFileName(x).StartsWith("."))
-				.Select(x => BuildScreenshotModel(x, ScreenshotFileModel.FileType.File));
+				.Select(x => BuildScreenshotModel(gallery, x, ScreenshotFileModel.FileType.File));
 
 			return View(Views.Index, new IndexViewModel
 			{
@@ -119,8 +130,10 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <returns>Thumbnail</returns>
 		public virtual ActionResult Thumbnail(string path)
 		{
-			var fullPath = GetAndValidateFullPath(path);
-			var cachePath = Path.Combine(_siteConfiguration.ScreenshotsDir, THUMBNAIL_DIR, path);
+			var gallery = GetGallery();
+
+			var fullPath = GetAndValidateFullPath(gallery, path);
+			var cachePath = Path.Combine(gallery.ImageDir, THUMBNAIL_DIR, path);
 
 			// Cache the thumbnail if it doesn't already exist
 			if (!System.IO.File.Exists(cachePath))
@@ -143,9 +156,9 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// </summary>
 		/// <param name="path">Relative path</param>
 		/// <returns>Absolute path</returns>
-		private string GetAndValidateFullPath(string path)
+		private string GetAndValidateFullPath(IGallery gallery, string path)
 		{
-			var root = _siteConfiguration.ScreenshotsDir;
+			var root = gallery.ImageDir;
 			var fullPath = Path.Combine(root, path);
 
 			// The URI class handles normalising the path (eg. c:\Blah\..\foo\ --> c:\foo)
@@ -165,10 +178,10 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="path">Path to the file or directory</param>
 		/// <param name="type">Type of the entity</param>
 		/// <returns>Screenshot model</returns>
-		private ScreenshotFileModel BuildScreenshotModel(string path, ScreenshotFileModel.FileType type)
+		private ScreenshotFileModel BuildScreenshotModel(IGallery gallery, string path, ScreenshotFileModel.FileType type)
 		{
 			var relativePath = path
-				.Replace(_siteConfiguration.ScreenshotsDir, string.Empty)
+				.Replace(gallery.ImageDir, string.Empty)
 				.TrimStart(Path.DirectorySeparatorChar);
 
 			var relativeUri = relativePath.Replace('\\', '/');
@@ -176,8 +189,8 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 			{
 				FileName = Path.GetFileName(path),
 				RelativePath = relativePath,
-				Url = type == ScreenshotFileModel.FileType.File ? ScreenshotUrl(relativeUri) : Url.Action(MVC.Gallery.Screenshot.Index(relativeUri)),
-				ThumbnailUrl = ThumbnailUrl(relativeUri),
+				Url = type == ScreenshotFileModel.FileType.File ? ScreenshotUrl(gallery, relativeUri) : Url.Action(MVC.Gallery.Screenshot.Index(relativeUri)),
+				ThumbnailUrl = ThumbnailUrl(gallery, relativeUri),
 				Type = type
 			};
 		}
@@ -187,9 +200,9 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// </summary>
 		/// <param name="path">Image path</param>
 		/// <returns>Thumbnail URL</returns>
-		private string ThumbnailUrl(string path)
+		private string ThumbnailUrl(IGallery gallery, string path)
 		{
-			return ScreenshotUrl(THUMBNAIL_DIR + "/" + path);
+			return ScreenshotUrl(gallery, THUMBNAIL_DIR + "/" + path);
 		}
 
 		/// <summary>
@@ -197,9 +210,9 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// </summary>
 		/// <param name="path">Image path</param>
 		/// <returns>Screenshot URL</returns>
-		private string ScreenshotUrl(string path)
+		private string ScreenshotUrl(IGallery gallery, string path)
 		{
-			return _siteConfiguration.ScreenshotsUrl + path.Replace('\\', '/');
+			return gallery.ImageUrl + path.Replace('\\', '/');
 		}
 	}
 }

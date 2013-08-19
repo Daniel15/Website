@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.Social;
+using Daniel15.Configuration;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Repositories.OrmLite;
 using Daniel15.Data.Repositories.Static;
@@ -52,6 +53,7 @@ namespace Daniel15.Infrastructure
 
 			// Configuration
 			Container.Register<ISiteConfiguration>(() => _siteConfig);
+			Container.Register<IGalleryConfiguration>(() => (GalleryConfiguration)ConfigurationManager.GetSection("Gallery"));
 
 			// Services
 			Container.Register<IUrlShortener, UrlShortener>();

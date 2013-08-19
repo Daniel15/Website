@@ -100,23 +100,6 @@ namespace Daniel15.Infrastructure
 			get { return (Type)this["webCacheType"]; }
 			set { this["webCacheType"] = value; }
 		}
-
-		/// <summary>
-		/// Gets the directory screenshots are stored in
-		/// </summary>
-		[ConfigurationProperty("screenshotsDir", IsRequired = false)]
-		public string ScreenshotsDir
-		{
-			get { return (string)this["screenshotsDir"]; }
-			set { this["screenshotsDir"] = value; }
-		}
-
-		[ConfigurationProperty("screenshotsUrl", IsRequired = false)]
-		public Uri ScreenshotsUrl
-		{
-			get { return (Uri)this["screenshotsUrl"]; }
-			set { this["screenshotsUrl"] = value; }
-		}
 	}
 
 	/// <summary>
