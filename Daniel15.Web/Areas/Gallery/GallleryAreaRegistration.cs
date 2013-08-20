@@ -17,13 +17,13 @@ namespace Daniel15.Web.Areas.Gallery
 			context.MapRoute(
 				name: "ScreenshotThumbnail",
 				url: "screenshots/thumb/{*path}",
-				defaults: MVC.Gallery.Screenshot.Thumbnail()
+				defaults: MVC.Gallery.Gallery.Thumbnail()
 			);
 
 			context.MapRoute(
 				name: "ScreenshotHome",
 				url: "screenshots/{*path}",
-				defaults: MVC.Gallery.Screenshot.Index()
+				defaults: MVC.Gallery.Gallery.Index()
 			);
 
 			context.MapRoute(

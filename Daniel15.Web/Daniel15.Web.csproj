@@ -165,10 +165,10 @@
     <Compile Include="Areas\Admin\ViewModels\Blog\PostsViewModel.cs" />
     <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
     <Compile Include="Areas\Api\Controllers\PostsApiController.cs" />
-    <Compile Include="Areas\Gallery\Controllers\ScreenshotController.cs" />
-    <Compile Include="Areas\Gallery\Models\Screenshot\ScreenshotFileModel.cs" />
-    <Compile Include="Areas\Gallery\ScreenshotsAreaRegistration.cs" />
-    <Compile Include="Areas\Gallery\ViewModels\Screenshot\IndexViewModel.cs" />
+    <Compile Include="Areas\Gallery\Controllers\GalleryController.cs" />
+    <Compile Include="Areas\Gallery\Models\GalleryFileModel.cs" />
+    <Compile Include="Areas\Gallery\GallleryAreaRegistration.cs" />
+    <Compile Include="Areas\Gallery\ViewModels\IndexViewModel.cs" />
     <Compile Include="Attributes\HandleErrorAttribute.cs" />
     <Compile Include="Attributes\StopwatchAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -222,7 +222,7 @@
     <Compile Include="T4MVC\FeedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="T4MVC\Gallery.ScreenshotController.generated.cs">
+    <Compile Include="T4MVC\Gallery.GalleryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="T4MVC\RedirectController.generated.cs">
@@ -509,7 +509,7 @@
     <Content Include="ApiKeys.private.config" />
     <Content Include="Areas\Api\Views\Web.config" />
     <Content Include="Areas\Gallery\Views\Web.config" />
-    <Content Include="Areas\Gallery\Views\Screenshot\Index.cshtml" />
+    <Content Include="Areas\Gallery\Views\Gallery\Index.cshtml" />
     <Content Include="Areas\Gallery\Views\_ViewStart.cshtml" />
     <Content Include="Content\css\pages\gallery.less" />
     <None Include="Content\images\header_fade.psd" />
@@ -559,7 +559,7 @@
     <Content Include="nginx.conf" />
     <None Include="T4MVC\T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>T4MVC.cs</LastGenOutput>
+      <LastGenOutput>T4MVC1.cs</LastGenOutput>
     </None>
     <None Include="T4MVC\T4MVC.tt.hooks.t4" />
     <None Include="T4MVC\T4MVC.tt.settings.xml" />

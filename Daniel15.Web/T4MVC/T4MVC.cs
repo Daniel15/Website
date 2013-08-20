@@ -59,7 +59,7 @@ namespace T4MVC
     public class GalleryClass
     {
         public readonly string Name = "Gallery";
-        public Daniel15.Web.Areas.Gallery.Controllers.ScreenshotController Screenshot = new Daniel15.Web.Areas.Gallery.Controllers.T4MVC_ScreenshotController();
+        public Daniel15.Web.Areas.Gallery.Controllers.GalleryController Gallery = new Daniel15.Web.Areas.Gallery.Controllers.T4MVC_GalleryController();
     }
 }
 

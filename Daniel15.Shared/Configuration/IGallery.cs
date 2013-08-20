@@ -11,6 +11,11 @@ namespace Daniel15.Configuration
 		string Name { get; }
 
 		/// <summary>
+		/// Gets the friendly title of the image gallery
+		/// </summary>
+		string Title { get; }
+
+		/// <summary>
 		/// Gets the URL images in this gallery are directly accessible at
 		/// </summary>
 		Uri ImageUrl { get; }

@@ -42,6 +42,16 @@ namespace Daniel15.Configuration
 		}
 
 		/// <summary>
+		/// Gets the friendly title of the image gallery
+		/// </summary>
+		[ConfigurationProperty("title", IsRequired = true)]
+		public string Title
+		{
+			get { return (string)this["title"]; }
+			set { this["title"] = value; }
+		}
+
+		/// <summary>
 		/// Gets the URL images in this gallery are directly accessible at
 		/// </summary>
 		[ConfigurationProperty("imageUrl", IsRequired = true)]

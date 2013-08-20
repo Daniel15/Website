@@ -22,10 +22,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace Daniel15.Web.Areas.Gallery.Controllers
 {
-    public partial class ScreenshotController
+    public partial class GalleryController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected ScreenshotController(Dummy d) { }
+        protected GalleryController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -49,13 +49,13 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ScreenshotController Actions { get { return MVC.Gallery.Screenshot; } }
+        public GalleryController Actions { get { return MVC.Gallery.Gallery; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "Gallery";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Screenshot";
+        public readonly string Name = "Gallery";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Screenshot";
+        public const string NameConst = "Gallery";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -103,14 +103,14 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
             {
                 public readonly string Index = "Index";
             }
-            public readonly string Index = "~/Areas/Gallery/Views/Screenshot/Index.cshtml";
+            public readonly string Index = "~/Areas/Gallery/Views/Gallery/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_ScreenshotController : Daniel15.Web.Areas.Gallery.Controllers.ScreenshotController
+    public partial class T4MVC_GalleryController : Daniel15.Web.Areas.Gallery.Controllers.GalleryController
     {
-        public T4MVC_ScreenshotController() : base(Dummy.Instance) { }
+        public T4MVC_GalleryController() : base(Dummy.Instance) { }
 
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string path);
 

@@ -1,10 +1,11 @@
-﻿@using Daniel15.Web.Areas.Gallery.Models.Screenshot
-@model Daniel15.Web.Areas.Gallery.ViewModels.Screenshot.IndexViewModel
+﻿@using Daniel15.Web.Areas.Gallery.Models
+@model Daniel15.Web.Areas.Gallery.ViewModels.IndexViewModel
 
 @{
-	Model.Heading = "Screenshots";
-	
-	Model.Title = "Screenshots";
+	// TODO: Different heading and title per gallery
+	Model.Heading = Model.Gallery.Title;
+
+	Model.Title = Model.Gallery.Title;
 	if (!string.IsNullOrWhiteSpace(Model.Path))
 	{
 		Model.Title += " — " + Model.Path;
@@ -12,7 +13,7 @@
 }
 
 <h2>
-	@Html.ActionLink("Screenshots", MVC.Gallery.Screenshot.Index())
+	@Html.ActionLink(Model.Gallery.Title, MVC.Gallery.Gallery.Index())
 	
 	@if (!string.IsNullOrWhiteSpace(Model.Path))
 	{
@@ -24,7 +25,7 @@
 			segments.Add(segment);
 			var currentPath = string.Join("/", segments);
 			<text>—</text>
-			@Html.ActionLink(segment, MVC.Gallery.Screenshot.Index(currentPath))
+			@Html.ActionLink(segment, MVC.Gallery.Gallery.Index(currentPath))
 		}
 	}
 </h2>
@@ -35,7 +36,7 @@
 		<li>
 			<a href="@file.Url">
 				<figure>
-					@if (file.Type == ScreenshotFileModel.FileType.File)
+					@if (file.Type == GalleryFileModel.FileType.File)
 					{
 						<img src="@file.ThumbnailUrl" alt="Thumbnail of @file.FileName" />	
 					}

@@ -1,33 +1,33 @@
-﻿namespace Daniel15.Web.Areas.Gallery.Models.Screenshot
+﻿namespace Daniel15.Web.Areas.Gallery.Models
 {
 	/// <summary>
-	/// Represents a screenshot file or directory.
+	/// Represents a gallery file or directory.
 	/// </summary>
-	public class ScreenshotFileModel
+	public class GalleryFileModel
 	{
 		/// <summary>
-		/// Relative path of the screenshot
+		/// Relative path of the item
 		/// </summary>
 		public string RelativePath { get; set; }
 		/// <summary>
-		/// File name of the screenshot
+		/// File name of the item
 		/// </summary>
 		public string FileName { get; set; }
 		/// <summary>
-		/// URL to the screenshot
+		/// URL to the item
 		/// </summary>
 		public string Url { get; set; }
 		/// <summary>
-		/// URL to the screenshot's thumbnail
+		/// URL to the item's thumbnail
 		/// </summary>
 		public string ThumbnailUrl { get; set; }
 		/// <summary>
-		/// Type of screenshot
+		/// Type of item
 		/// </summary>
 		public FileType Type { get; set; }
 
 		/// <summary>
-		/// Screenshot model types
+		/// Gallery file model types
 		/// </summary>
 		public enum FileType
 		{
