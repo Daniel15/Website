@@ -12,6 +12,11 @@ namespace Daniel15.Shared.Extensions
 		private static DateTime UNIX_EPOCH = new DateTime(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0, kind: DateTimeKind.Utc);
 
 		/// <summary>
+		/// Number of dates in a year
+		/// </summary>
+		private static double DAYS_IN_YEAR = 365.24;
+
+		/// <summary>
 		/// Like ToString but inserts the ordinal as well (1st, 2nd, etc.). Put {0} where you want
 		/// the ordinal to appear
 		/// </summary>
@@ -100,7 +105,8 @@ namespace Daniel15.Shared.Extensions
 		/// <returns>Years</returns>
 		public static int Years(this TimeSpan timeSpan)
 		{
-			return (int)Math.Floor(timeSpan.Days / 365.24);
+			// I don't care about leap years here. YOLO.
+			return (int)Math.Floor(timeSpan.Days / DAYS_IN_YEAR); 
 		}
 	}
 }
