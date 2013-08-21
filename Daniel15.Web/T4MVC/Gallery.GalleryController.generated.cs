@@ -43,6 +43,12 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Index()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Thumbnail()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Thumbnail);
@@ -81,6 +87,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Index
         {
+            public readonly string galleryName = "galleryName";
             public readonly string path = "path";
         }
         static readonly ActionParamsClass_Thumbnail s_params_Thumbnail = new ActionParamsClass_Thumbnail();
@@ -89,6 +96,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Thumbnail
         {
+            public readonly string galleryName = "galleryName";
             public readonly string path = "path";
         }
         static readonly ViewsClass s_views = new ViewsClass();
@@ -112,23 +120,25 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
     {
         public T4MVC_GalleryController() : base(Dummy.Instance) { }
 
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string path);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string galleryName, string path);
 
-        public override System.Web.Mvc.ActionResult Index(string path)
+        public override System.Web.Mvc.ActionResult Index(string galleryName, string path)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "galleryName", galleryName);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "path", path);
-            IndexOverride(callInfo, path);
+            IndexOverride(callInfo, galleryName, path);
             return callInfo;
         }
 
-        partial void ThumbnailOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string path);
+        partial void ThumbnailOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string galleryName, string path);
 
-        public override System.Web.Mvc.ActionResult Thumbnail(string path)
+        public override System.Web.Mvc.ActionResult Thumbnail(string galleryName, string path)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Thumbnail);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "galleryName", galleryName);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "path", path);
-            ThumbnailOverride(callInfo, path);
+            ThumbnailOverride(callInfo, galleryName, path);
             return callInfo;
         }
 

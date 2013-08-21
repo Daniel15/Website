@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using Daniel15.Configuration;
 using Daniel15.Web.Areas.Gallery.Models;
@@ -45,11 +47,12 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// Displays a listing of gallery images or serves a gallery file, depending on whether the
 		/// request was for a file or directory.
 		/// </summary>
+		/// <param name="galleryName">Name of the gallery</param>
 		/// <param name="path">Path to display</param>
 		/// <returns>Gallery listing or file download</returns>
-		public virtual ActionResult Index(string path = "")
+		public virtual ActionResult Index(string galleryName, string path = "")
 		{
-			var gallery = GetGallery();
+			var gallery = GetGallery(galleryName);
 			var fullPath = GetAndValidateFullPath(gallery, path);
 
 			// Don't allow access to thumbnail directory
@@ -118,11 +121,12 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <summary>
 		/// Generates a thumbnail for the specified image
 		/// </summary>
+		/// <param name="galleryName">Name of the gallery</param>
 		/// <param name="path">Image to generate thumbnail for</param>
 		/// <returns>Thumbnail</returns>
-		public virtual ActionResult Thumbnail(string path)
+		public virtual ActionResult Thumbnail(string galleryName, string path)
 		{
-			var gallery = GetGallery();
+			var gallery = GetGallery(galleryName);
 
 			var fullPath = GetAndValidateFullPath(gallery, path);
 			var cachePath = Path.Combine(gallery.ImageDir, THUMBNAIL_DIR, path);
@@ -183,7 +187,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 			{
 				FileName = Path.GetFileName(path),
 				RelativePath = relativePath,
-				Url = type == GalleryFileModel.FileType.File ? ImageUrl(gallery, relativeUri) : Url.Action(MVC.Gallery.Gallery.Index(relativeUri)),
+				Url = type == GalleryFileModel.FileType.File ? ImageUrl(gallery, relativeUri) : Url.Action(MVC.Gallery.Gallery.Index(gallery.Name, relativeUri)),
 				ThumbnailUrl = ThumbnailUrl(gallery, relativeUri),
 				Type = type
 			};
@@ -192,10 +196,16 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <summary>
 		/// Gets the specified gallery from the configuration
 		/// </summary>
-		/// <returns></returns>
-		private IGallery GetGallery()
+		/// <param name="name">Name of the gallery to return</param>
+		/// <returns>Details on the specified gallery</returns>
+		private IGallery GetGallery(string name)
 		{
-			return _galleryConfig.Galleries["screenshots"];
+			if (!_galleryConfig.Galleries.ContainsKey(name))
+			{
+				throw new HttpException((int)HttpStatusCode.NotFound, string.Format("Gallery '{0}' doesn't exist", name));
+			}
+
+			return _galleryConfig.Galleries[name];
 		}
 
 		/// <summary>

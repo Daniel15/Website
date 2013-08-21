@@ -559,7 +559,7 @@
     <Content Include="nginx.conf" />
     <None Include="T4MVC\T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>T4MVC1.cs</LastGenOutput>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
     <None Include="T4MVC\T4MVC.tt.hooks.t4" />
     <None Include="T4MVC\T4MVC.tt.settings.xml" />
@@ -572,6 +572,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
