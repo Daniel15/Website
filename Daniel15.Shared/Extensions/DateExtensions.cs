@@ -92,5 +92,15 @@ namespace Daniel15.Shared.Extensions
 		{
 			return dateTime.ToString("yyyy-MM-ddTHH:mm:ssK");
 		}
+
+		/// <summary>
+		/// Calculate the number of years in the specified TimeSpan.
+		/// </summary>
+		/// <param name="timeSpan">Timespan</param>
+		/// <returns>Years</returns>
+		public static int Years(this TimeSpan timeSpan)
+		{
+			return (int)Math.Floor(timeSpan.Days / 365.24);
+		}
 	}
 }
