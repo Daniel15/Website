@@ -6,13 +6,18 @@
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	@SitemapUrl(Url.ActionAbsolute(MVC.Site.Index()), null, "weekly", 1.0)
-	@SitemapUrl(Url.ActionAbsolute(MVC.Site.Projects()).ToLower(), null, "weekly", 0.9)
+	@SitemapUrl(Url.ActionAbsolute(MVC.Project.Index()), null, "weekly", 0.9)
 	@SitemapUrl(Url.ActionAbsolute(MVC.Site.SocialFeed()).ToLower(), null, "daily", 0.7)
 	@SitemapUrl(Url.Absolute(Url.BlogIndex()), null, "daily", 0.9)
 	
 	@foreach (var post in Model.Posts)
 	{
 		@SitemapUrl(Url.BlogPostAbsolute(post), post.Date, "monthly", 0.8)
+	}
+	
+	@foreach (var project in Model.Projects)
+	{
+		@SitemapUrl(Url.ActionAbsolute(MVC.Project.Detail(project.Slug)), null, "monthly", 0.8)
 	}
 	
 	@foreach (var category in Model.Categories)

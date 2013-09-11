@@ -23,6 +23,7 @@ namespace Daniel15.Web.Controllers
 		private const int ITEMS_IN_FEED = 10;
 
 		private readonly IBlogRepository _blogRepository;
+		private readonly IProjectRepository _projectRepository;
 		private readonly ISiteConfiguration _siteConfig;
 		private readonly IUrlShortener _urlShortener;
 
@@ -30,11 +31,13 @@ namespace Daniel15.Web.Controllers
 		/// Initializes a new instance of the <see cref="FeedController" /> class.
 		/// </summary>
 		/// <param name="blogRepository">The blog repository.</param>
+		/// <param name="projectRepository">Project repository</param>
 		/// <param name="siteConfig">Site configuration</param>
 		/// <param name="urlShortener">URL shortener</param>
-		public FeedController(IBlogRepository blogRepository, ISiteConfiguration siteConfig, IUrlShortener urlShortener)
+		public FeedController(IBlogRepository blogRepository, IProjectRepository projectRepository, ISiteConfiguration siteConfig, IUrlShortener urlShortener)
 		{
 			_blogRepository = blogRepository;
+			_projectRepository = projectRepository;
 			_siteConfig = siteConfig;
 			_urlShortener = urlShortener;
 		}
@@ -50,7 +53,8 @@ namespace Daniel15.Web.Controllers
 			{
 				Posts = _blogRepository.LatestPostsSummary(10000), // Should be big enough, lols
 				Categories = _blogRepository.Categories(),
-				Tags = _blogRepository.Tags()
+				Tags = _blogRepository.Tags(),
+				Projects = _projectRepository.All()
 			});
 		}
 
