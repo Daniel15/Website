@@ -157,6 +157,49 @@ CREATE TABLE IF NOT EXISTS `disqus_comments` (
   KEY `thread_identifier` (`thread_identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project_techs`
+--
+
+CREATE TABLE IF NOT EXISTS `project_techs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `description` varchar(4000) DEFAULT NULL,
+  `primary` bit(1) NOT NULL,
+  `order` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects`
+--
+
+CREATE TABLE IF NOT EXISTS `projects` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `thumbnail` varchar(255) DEFAULT NULL,
+  `thumbnail_height` smallint(6) DEFAULT NULL,
+  `thumbnail_width` smallint(6) DEFAULT NULL,
+  `type` enum('website','webapp','library') NOT NULL,
+  `description` text NOT NULL,
+  `date` text NOT NULL,
+  `readme_url` varchar(255) DEFAULT NULL,
+  `current` bit(1) NOT NULL,
+  `technologies` text NOT NULL,
+  `order` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 
 --
 -- Constraints for dumped tables

@@ -32,6 +32,19 @@ namespace Daniel15.Web.App_Start
 				defaults: MVC.Site.Index()
 			);
 
+			// Projects
+			routes.MapRoute(
+				name: "ProjectsIndex",
+				url: "projects.htm",
+				defaults: MVC.Project.Index()
+			);
+
+			routes.MapRoute(
+				name: "ProjectView",
+				url: "projects/{slug}",
+				defaults: new { controller = "Project", action = "Detail" }
+			);
+
 			// Normal pages on the website
 			routes.MapRoute(
 				name: "Page",

@@ -1,0 +1,10 @@
+﻿@model Daniel15.Web.ViewModels.Project.ProjectViewModel
+
+@{
+	Model.Title = Model.Project.Name;
+}
+
+<em>The following information is from the <a href="@Model.Project.Url">@Model.Project.Name website</a>:</em>
+<hr />
+
+@Html.Raw(Model.Content)

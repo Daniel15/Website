@@ -1,13 +1,10 @@
 ﻿using System.Net;
-using System.Text.RegularExpressions;
 using System.Web.Mvc;
 using System.Web.UI;
 using Daniel15.Data.Repositories;
-using Daniel15.Web.Models.Home;
 using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Shared;
 using Daniel15.Web.ViewModels.Site;
-using System.Linq;
 
 namespace Daniel15.Web.Controllers
 {
@@ -22,19 +19,16 @@ namespace Daniel15.Web.Controllers
 		private const int ONE_HOUR = 3600;
 
 		private readonly IBlogRepository _blogRepository;
-		private readonly IProjectRepository _projectRepository;
 		private readonly IMicroblogRepository _microblogRepository;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SiteController" /> class.
 		/// </summary>
 		/// <param name="blogRepository">The blog post repository.</param>
-		/// <param name="projectRepository">The project repository</param>
 		/// <param name="microblogRepository">The microblog (Tumblr) repository.</param>
-		public SiteController(IBlogRepository blogRepository, IProjectRepository projectRepository, IMicroblogRepository microblogRepository)
+		public SiteController(IBlogRepository blogRepository, IMicroblogRepository microblogRepository)
 		{
 			_blogRepository = blogRepository;
-			_projectRepository = projectRepository;
 			_microblogRepository = microblogRepository;
 		}
 
@@ -48,22 +42,6 @@ namespace Daniel15.Web.Controllers
 			return View(Views.Index, new IndexViewModel
 			{
 				LatestPosts = _blogRepository.LatestPostsSummary()
-			});
-		}
-
-		/// <summary>
-		/// A list of all the projects I've worked on the past
-		/// </summary>
-		/// <returns></returns>
-		public virtual ActionResult Projects()
-		{
-			var projects = _projectRepository.All();
-
-			return View(Views.Projects, new ProjectsViewModel
-			{
-				CurrentProjects = projects.Where(x => x.IsCurrent).ToList(),
-				PreviousProjects = projects.Where(x => !x.IsCurrent).ToList(),
-				PrimaryTechnologies = _projectRepository.PrimaryTechnologies(),
 			});
 		}
 

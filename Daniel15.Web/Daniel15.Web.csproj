@@ -174,6 +174,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BlogPartialsController.cs" />
     <Compile Include="Controllers\FeedController.cs" />
+    <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\RedirectController.cs" />
     <Compile Include="Controllers\SignatureController.cs" />
     <Compile Include="Extensions\BlogUrlHelperExtensions.cs" />
@@ -225,6 +226,9 @@
     <Compile Include="T4MVC\Gallery.GalleryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="T4MVC\ProjectController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC\RedirectController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -250,11 +254,13 @@
     <Compile Include="ViewModels\Blog\SidebarViewModel.cs" />
     <Compile Include="ViewModels\Blog\TagListingViewModel.cs" />
     <Compile Include="ViewModels\Feed\SitemapViewModel.cs" />
+    <Compile Include="ViewModels\Project\ProjectListViewModel.cs" />
+    <Compile Include="ViewModels\Project\ProjectViewModel.cs" />
     <Compile Include="ViewModels\Shared\CheckboxListModel.cs" />
     <Compile Include="ViewModels\Shared\ErrorViewModel.cs" />
     <Compile Include="ViewModels\Shared\PaginationModel.cs" />
     <Compile Include="ViewModels\Site\IndexViewModel.cs" />
-    <Compile Include="ViewModels\Site\ProjectsViewModel.cs" />
+    <Compile Include="ViewModels\Project\IndexViewModel.cs" />
     <Compile Include="ViewModels\Site\SocialFeedViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
   </ItemGroup>
@@ -553,9 +559,6 @@
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeDefault.less" />
     <None Include="Content\js\framework\yuidoc.json" />
     <None Include="Content\not_an_easter_egg\zero\zero.utf8" />
-    <None Include="deploy.proj">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="nginx.conf" />
     <None Include="T4MVC\T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -581,8 +584,8 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Shared\_Menu.cshtml" />
     <Content Include="Views\Site\_LatestPosts.cshtml" />
-    <Content Include="Views\Site\Projects.cshtml" />
-    <Content Include="Views\Site\_ProjectList.cshtml" />
+    <Content Include="Views\Project\Index.cshtml" />
+    <Content Include="Views\Project\_ProjectList.cshtml" />
     <Content Include="Views\Blog\_Layout.cshtml" />
     <Content Include="Views\Blog\_ViewStart.cshtml" />
     <Content Include="Views\BlogPartials\Sidebar.cshtml" />
@@ -608,6 +611,7 @@
     <Content Include="Views\Shared\_CheckboxList.cshtml" />
     <Content Include="Views\Site\_TumblrPosts.cshtml" />
     <Content Include="Views\Blog\_CommentList.cshtml" />
+    <Content Include="Views\Project\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

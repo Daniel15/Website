@@ -12,6 +12,13 @@ namespace Daniel15.Data.Repositories
 		/// Gets a list of the main technologies used to build my sites
 		/// </summary>
 		/// <returns>A list of technologies</returns>
-		IList<ProjectTechnologyModel> PrimaryTechnologies();
+		IList<ProjectTechnologyModel> Technologies();
+
+		/// <summary>
+		/// Gets a project by slug.
+		/// </summary>
+		/// <param name="slug">The slug.</param>
+		/// <returns>The project</returns>
+		ProjectModel GetBySlug(string slug);
 	}
 }

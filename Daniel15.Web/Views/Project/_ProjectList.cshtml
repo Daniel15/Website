@@ -1,0 +1,94 @@
+﻿@using Daniel15.Data.Entities.Projects
+@model Daniel15.Web.ViewModels.Project.ProjectListViewModel
+
+<ul class="projects">
+	@foreach (var project in Model.Projects)
+	{
+		<li class="@(string.Join(" ", project.Technologies))">
+			@Thumbnail(project)
+			<h3>
+				@if (!string.IsNullOrEmpty(project.Slug))
+				{
+					<a href="@Url.Action(MVC.Project.Detail(project.Slug))">@project.Name</a>
+				}
+				else if (!string.IsNullOrEmpty(project.Url))
+				{
+					<a href="@project.Url">@project.Name</a>
+				}
+				else
+				{
+					@project.Name
+				}
+			</h3>
+			<strong>Type: </strong> @project.ProjectType.ToString()<br />
+			<strong>Description: </strong> @Html.Raw(project.Description)
+			@if (!string.IsNullOrEmpty(project.Date))
+			{
+				<br /><strong>Date: </strong> @project.Date
+			}
+			@if (!string.IsNullOrEmpty(project.Url))
+			{
+				<br /><strong>Website: </strong> <a href="@project.Url">@project.Url</a>
+			}
+			@if (project.Technologies != null && project.Technologies.Count > 0)
+			{
+				@Technologies(project.Technologies)
+			}
+		</li>
+	}
+</ul>
+
+@helper Thumbnail(ProjectModel project)
+{
+	if (string.IsNullOrEmpty(project.Thumbnail))
+	{
+		return;
+	}
+		
+	if (!string.IsNullOrEmpty(project.Url))
+	{
+		@:<a href="@project.Url">
+	}
+	<img class="thumb" src="@Url.Image("screenshots/" + project.Thumbnail + ".png")" alt="Thumbnail for @project.Name" height="@(project.ThumbnailHeight ?? 160)" width="@(project.ThumbnailWidth ?? 200)" />		
+	
+	if (!string.IsNullOrEmpty(project.Url))
+	{
+		@:</a>
+	}	
+}
+
+@helper Technologies(IList<string> technologySlugs)
+{
+	var technologies = technologySlugs.Select(slug => Model.Technologies[slug]);
+		
+	var primaryTechs = technologies.Where(x => x.IsPrimary);
+	var secondaryTechs = technologies.Where(x => !x.IsPrimary);
+	   
+	<br />
+	<span class="techs">
+		<strong>Technologies used:</strong>
+		@foreach (var tech in primaryTechs)
+		{
+			<a href="@tech.Url" title="@tech.Name" class="@tech.Slug">@tech.Name</a>
+		}
+	</span>
+
+	@* Check if any secondary technologies are in use *@
+	if (!secondaryTechs.Any())
+	{
+		return;
+	}
+	
+	@:+
+	foreach (var tech in secondaryTechs)
+	{
+		if (string.IsNullOrEmpty(tech.Url))
+		{
+			@:@tech.Name,
+		}
+		else
+		{
+			@:<a href="@tech.Url">@tech.Name</a>,
+		}
+	}
+}

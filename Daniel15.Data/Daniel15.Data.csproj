@@ -89,8 +89,8 @@
     <Compile Include="Repositories\MicroblogRepository.cs" />
     <Compile Include="Repositories\OrmLite\DisqusCommentRepository.cs" />
     <Compile Include="Repositories\OrmLite\BlogRepository.cs" />
+    <Compile Include="Repositories\OrmLite\ProjectRepository.cs" />
     <Compile Include="Repositories\OrmLite\RepositoryBase.cs" />
-    <Compile Include="Repositories\Static\ProjectRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -7,13 +7,13 @@ using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Configuration;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Repositories.OrmLite;
-using Daniel15.Data.Repositories.Static;
 using Daniel15.Infrastructure.Extensions;
 using ServiceStack.DataAccess;
 using ServiceStack.OrmLite;
 using SimpleInjector;
 using StackExchange.Profiling;
 using StackExchange.Profiling.Data;
+using ProjectRepository = Daniel15.Data.Repositories.OrmLite.ProjectRepository;
 
 namespace Daniel15.Infrastructure
 {
@@ -59,6 +59,7 @@ namespace Daniel15.Infrastructure
 			Container.Register<IUrlShortener, UrlShortener>();
 			Container.Register<ISocialManager, SocialManager>();
 			Container.Register<IDisqusComments, DisqusComments>();
+			Container.Register<IMarkdownProcessor, MarkdownProcessor>();
 
 			InitializeDatabase(Container, dbLifestyle);
 		}

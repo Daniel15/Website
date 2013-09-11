@@ -34,6 +34,7 @@ public static class MVC
     public static Daniel15.Web.Controllers.BlogController Blog = new Daniel15.Web.Controllers.T4MVC_BlogController();
     public static Daniel15.Web.Controllers.BlogPartialsController BlogPartials = new Daniel15.Web.Controllers.T4MVC_BlogPartialsController();
     public static Daniel15.Web.Controllers.FeedController Feed = new Daniel15.Web.Controllers.T4MVC_FeedController();
+    public static Daniel15.Web.Controllers.ProjectController Project = new Daniel15.Web.Controllers.T4MVC_ProjectController();
     public static Daniel15.Web.Controllers.RedirectController Redirect = new Daniel15.Web.Controllers.T4MVC_RedirectController();
     public static Daniel15.Web.Controllers.SignatureController Signature = new Daniel15.Web.Controllers.T4MVC_SignatureController();
     public static Daniel15.Web.Controllers.SiteController Site = new Daniel15.Web.Controllers.T4MVC_SiteController();
@@ -295,7 +296,7 @@ namespace Links
                 private const string URLPATH = "~/Content/images/sprites";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string mainsprite_c652f03ec9a34c9e68dd54b019494dbf_png = Url("mainsprite-c652f03ec9a34c9e68dd54b019494dbf.png");
+                public static readonly string mainsprite_fe31f4967fdd2ce792d69ddb99a217ae_png = Url("mainsprite-fe31f4967fdd2ce792d69ddb99a217ae.png");
                 public static readonly string projects_81b0cb7176be026724ab5f3cb4b4f8ad_png = Url("projects-81b0cb7176be026724ab5f3cb4b4f8ad.png");
             }
         
