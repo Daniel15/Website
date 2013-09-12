@@ -35,7 +35,6 @@ namespace Daniel15.Cron
 				_projectUpdater.UpdateProject(project);
 				Console.WriteLine("Done.");
 			}
-			Console.ReadKey();
 		}
 	}
 }

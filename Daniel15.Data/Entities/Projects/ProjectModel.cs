@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using ServiceStack.DataAnnotations;
 
 namespace Daniel15.Data.Entities.Projects
@@ -85,7 +86,26 @@ namespace Daniel15.Data.Entities.Projects
 		/// </summary>
 		public IList<string> Technologies { get; set; }
 
+		/// <summary>
+		/// A number representing where to display this project in the list
+		/// </summary>
 		public int Order { get; set; }
+
+		/// <summary>
+		/// Code repository for this project, if it's open-source
+		/// </summary>
+		[Alias("repository_url")]
+		public string RepositoryUrl { get; set; }
+
+		/// <summary>
+		/// Date this project was created
+		/// </summary>
+		public DateTime? Created { get; set; }
+
+		/// <summary>
+		/// Date this project was updated
+		/// </summary>
+		public DateTime? Updated { get; set; }
 	}
 
 	/// <summary>
