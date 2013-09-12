@@ -2,6 +2,7 @@ using System;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
+using Daniel15.BusinessLayer;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Configuration;
@@ -60,6 +61,7 @@ namespace Daniel15.Infrastructure
 			Container.Register<ISocialManager, SocialManager>();
 			Container.Register<IDisqusComments, DisqusComments>();
 			Container.Register<IMarkdownProcessor, MarkdownProcessor>();
+			Container.Register<IProjectCacheUpdater, ProjectCacheUpdater>();
 
 			InitializeDatabase(Container, dbLifestyle);
 		}

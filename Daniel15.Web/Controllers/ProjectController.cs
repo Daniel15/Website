@@ -1,7 +1,5 @@
 ﻿using System.Linq;
-using System.Net;
 using System.Web.Mvc;
-using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Projects;
 using Daniel15.Data.Repositories;
@@ -11,14 +9,12 @@ using IndexViewModel = Daniel15.Web.ViewModels.Project.IndexViewModel;
 namespace Daniel15.Web.Controllers
 {
 	public partial class ProjectController : Controller
-    {
+	{
 		private readonly IProjectRepository _projectRepository;
-		private readonly IMarkdownProcessor _markdown;
 
-		public ProjectController(IProjectRepository projectRepository, IMarkdownProcessor markdown)
+		public ProjectController(IProjectRepository projectRepository)
 		{
 			_projectRepository = projectRepository;
-			_markdown = markdown;
 		}
 
 		/// <summary>
@@ -58,16 +54,10 @@ namespace Daniel15.Web.Controllers
 				return Redirect(project.Url);
 			}
 
-			// Load the readme and display it
-			var client = new WebClient();
-			var readmeSource = client.DownloadString(project.ReadmeUrl);
-			var result = _markdown.Parse(readmeSource);
-
 			return View(new ProjectViewModel
 			{
 				Project = project,
-				Content = result
 			});
 		}
-    }
+	}
 }

@@ -28,6 +28,10 @@ namespace Daniel15.Cron
 					Ioc.Container.GetInstance<SocialShareUpdater>().Run();
 					break;
 
+				case "-projects":
+					Ioc.Container.GetInstance<ProjectUpdater>().Run();
+					break;
+
 				default:
 					throw new Exception("Invalid operation '" + operation + "'");
 			}
