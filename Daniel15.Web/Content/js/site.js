@@ -47,7 +47,8 @@ Page.Site.Index =
 /**
  * Projects page
  */
-Page.Site.Projects = 
+Page.Project = {};
+Page.Project.Index = 
 {
 	/**
 	 * Initialise the page
