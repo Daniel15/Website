@@ -68,7 +68,7 @@ namespace Daniel15.Web.Extensions
 				},
 				new MenuItemModel
 				{
-					Url = "projects.htm", 
+					Url = "projects", 
 					Title = "Projects", 
 					Active = controller is ProjectController
 				},

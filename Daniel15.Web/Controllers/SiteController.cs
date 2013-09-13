@@ -111,5 +111,13 @@ namespace Daniel15.Web.Controllers
 		{
 			return Content("Site is alive and running :)");
 		}
+
+		/// <summary>
+		/// Redirects to the new projects page
+		/// </summary>
+		public virtual ActionResult Projects()
+		{
+			return RedirectToActionPermanent(MVC.Project.Index());
+		}
 	}
 }
