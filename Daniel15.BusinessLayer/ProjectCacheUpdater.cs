@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Text;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.CodeRepositories;
 using Daniel15.Data.Entities.Projects;
@@ -64,6 +65,7 @@ namespace Daniel15.BusinessLayer
 
 			using (var client = new WebClient())
 			{
+				client.Encoding = Encoding.UTF8;
 				var readmeSource = client.DownloadString(project.ReadmeUrl);
 				project.Readme = _markdown.Parse(readmeSource);
 				return true;
