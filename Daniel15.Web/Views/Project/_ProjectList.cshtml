@@ -4,18 +4,17 @@
 <ul class="projects">
 	@foreach (var project in Model.Projects)
 	{
-		<li class="@(string.Join(" ", project.Technologies))">
+		<li class="@(string.Join(" ", project.Technologies.Select(tech => "uses-" + tech)))">
 			@Thumbnail(project)
 			<h3>
 				<a href="@Url.Action(MVC.Project.Detail(project.Slug))">@project.Name</a>
 			</h3>
-			<strong>Type: </strong> @project.ProjectType.ToString()<br />
-			<strong>Description: </strong> @Html.Raw(project.Description)
+			@Html.Raw(project.Description)<br />
 			
 			@if (project.Created != null && project.Updated != null)
 			{
 				<br />
-				<strong>Date: </strong> <text>Started</text> @project.Created.Value.ToStringWithOrdinal("d{0} MMMM yyyy")<text>, last updated </text>@project.Updated.Value.ToStringWithOrdinal("d{0} MMMM yyyy")
+				<strong>Date: </strong> <text>Started</text> <time datetime="@project.Created.Value.ToString("s")">@project.Created.Value.ToStringWithOrdinal("d{0} MMMM yyyy")</time><text>, last updated </text><time datetime="@project.Updated.Value.ToString("s")">@project.Updated.Value.ToStringWithOrdinal("d{0} MMMM yyyy")</time>
 			}
 			else if (!string.IsNullOrEmpty(project.Date))
 			{
@@ -24,6 +23,10 @@
 			@if (!string.IsNullOrEmpty(project.Url))
 			{
 				<br /><strong>Website: </strong> <a href="@project.Url">@project.Url</a>
+			}
+			@if (!string.IsNullOrWhiteSpace(project.RepositoryUrl))
+			{
+				<br /><strong>Code available at: </strong> <a href="@project.RepositoryUrl">@project.RepositoryUrl</a>
 			}
 			@if (project.Technologies != null && project.Technologies.Count > 0)
 			{
