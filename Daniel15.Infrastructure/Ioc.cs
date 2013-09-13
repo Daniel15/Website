@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Common;
 using Daniel15.BusinessLayer;
 using Daniel15.BusinessLayer.Services;
+using Daniel15.BusinessLayer.Services.CodeRepositories;
 using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Configuration;
 using Daniel15.Data.Repositories;
@@ -62,6 +63,8 @@ namespace Daniel15.Infrastructure
 			Container.Register<IDisqusComments, DisqusComments>();
 			Container.Register<IMarkdownProcessor, MarkdownProcessor>();
 			Container.Register<IProjectCacheUpdater, ProjectCacheUpdater>();
+			Container.Register<ICodeRepositoryManager, CodeRepositoryManager>();
+			Container.RegisterAll<ICodeRepository>(typeof(GithubCodeRepository));
 
 			InitializeDatabase(Container, dbLifestyle);
 		}

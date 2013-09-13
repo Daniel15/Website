@@ -61,6 +61,11 @@
     <Compile Include="IProjectCacheUpdater.cs" />
     <Compile Include="ProjectCacheUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CodeRepositories\CodeRepositoryManager.cs" />
+    <Compile Include="Services\CodeRepositories\GithubCodeRepository.cs" />
+    <Compile Include="Services\CodeRepositories\ICodeRepository.cs" />
+    <Compile Include="Services\CodeRepositories\ICodeRepositoryManager.cs" />
+    <Compile Include="Services\CodeRepositories\RepositoryInfo.cs" />
     <Compile Include="Services\DisqusComments.cs" />
     <Compile Include="Services\IDisqusComments.cs" />
     <Compile Include="Services\IMarkdownProcessor.cs" />
