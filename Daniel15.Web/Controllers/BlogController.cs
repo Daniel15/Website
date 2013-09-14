@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.UI;
+using AttributeRouting.Web.Mvc;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
-using Daniel15.Infrastructure;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.Extensions;
 using System.Linq;
-using ServiceStack;
 using StackExchange.Profiling;
 
 namespace Daniel15.Web.Controllers
@@ -95,6 +94,8 @@ namespace Daniel15.Web.Controllers
 		/// Index page of the blog
 		/// </summary>
 		[OutputCache(Location = OutputCacheLocation.Downstream, Duration = ONE_HOUR, VaryByParam = "page")]
+		[GET("blog", ActionPrecedence = 1, RouteName = "BlogHome")]
+		[GET("blog/page-{page:int}", ActionPrecedence = 2, RouteName = "BlogHomePage")]
 		public virtual ActionResult Index(int page = 1)
 		{
 			var count = _blogRepository.PublishedCount();
@@ -108,6 +109,10 @@ namespace Daniel15.Web.Controllers
 		/// <param name="slug">Category slug</param>
 		/// <param name="page">Page number to view</param>
 		/// <returns>Posts in this category</returns>
+		[GET("category/{slug}", ActionPrecedence = 1, RouteName = "BlogCategory")]
+		[GET("category/{slug}/page-{page:int}", ActionPrecedence = 2, RouteName = "BlogCategoryPage")]
+		[GET("category/{parentSlug}/{slug}", ActionPrecedence = 3, RouteName = "BlogSubCategory")]
+		[GET("category/{parentSlug}/{slug}/page-{page:int}", ActionPrecedence = 4, RouteName = "BlogSubCategoryPage")]
 		public virtual ActionResult Category(string slug, int page = 1, string parentSlug = null)
 		{
 			CategoryModel category;
@@ -142,6 +147,8 @@ namespace Daniel15.Web.Controllers
 		/// <param name="slug">Tag slug</param>
 		/// <param name="page">Page number to view</param>
 		/// <returns>Posts tagged with this tag</returns>
+		[GET("tag/{slug}", ActionPrecedence = 1, RouteName = "BlogTag")]
+		[GET("tag/{slug}/page-{page:int}", ActionPrecedence = 2, RouteName = "BlogTagPage")]
 		public virtual ActionResult Tag(string slug, int page = 1)
 		{
 			TagModel tag;
@@ -167,6 +174,7 @@ namespace Daniel15.Web.Controllers
 		/// <param name="month">Month to get posts for</param>
 		/// <param name="page">Page number to view</param>
 		/// <returns>Posts from this month</returns>
+		[GET("{year:int:length(4)}/{month:int:length(2)}")]
 		public virtual ActionResult Archive(int year, int month, int page = 1)
 		{
 			var count = _blogRepository.PublishedCountForMonth(year, month);
@@ -181,6 +189,7 @@ namespace Daniel15.Web.Controllers
 		/// <param name="year">The year of the post</param>
 		/// <param name="slug">The slug.</param>
 		/// <returns>Blog post page</returns>
+		[GET("{year:int:length(4)}/{month:int:length(2)}/{slug}")]
 		public virtual ActionResult View(int month, int year, string slug)
 		{
 			PostModel post;
@@ -219,6 +228,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="alias">URL alias</param>
 		/// <returns>Redirect to correct post</returns>
+		[GET(@"B{alias:regex(^[0-9A-Za-z\-_]+$)}", ControllerPrecedence = -1)]
 		public virtual ActionResult ShortUrl(string alias)
 		{
 			var id = _urlShortener.Extend(alias);

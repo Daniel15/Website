@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AttributeRouting.Web.Mvc;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
@@ -46,6 +47,7 @@ namespace Daniel15.Web.Controllers
 		/// Gets a sitemap for the website
 		/// </summary>
 		/// <returns>Sitemap XML</returns>
+		[GET("sitemap.xml")]
 		public virtual ActionResult Sitemap()
 		{
 			Response.ContentType = "text/xml";
@@ -62,6 +64,7 @@ namespace Daniel15.Web.Controllers
 		/// RSS feed of all the latest posts
 		/// </summary>
 		/// <returns>RSS feed</returns>
+		[GET("blog/feed")]
 		public virtual ActionResult BlogLatest()
 		{
 			if (Request.ShouldRedirectToFeedburner())
@@ -83,6 +86,8 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="slug">Category slug</param>
 		/// <returns>RSS feed</returns>
+		[GET("category/{parentSlug}/{slug}.rss", ActionPrecedence = 1, RouteName = "BlogSubCategoryFeed")]
+		[GET("category/{slug}.rss", ActionPrecedence = 2, RouteName = "BlogCategoryFeed")]
 		public virtual ActionResult BlogCategory(string slug, string parentSlug = null)
 		{
 			CategoryModel category;
@@ -108,8 +113,8 @@ namespace Daniel15.Web.Controllers
 				FeedGuidBase = "Category-" + category.Slug + "-",
 				Title = category.Title + " - " + _siteConfig.BlogName,
 				Description = category.Title + " posts to " + _siteConfig.BlogName,
-				FeedUrl = Url.ActionAbsolute(MVC.Feed.BlogCategory(slug)),
-				SiteUrl = Url.ActionAbsolute(MVC.Blog.Category(slug))
+				FeedUrl = Url.Absolute(Url.BlogCategoryFeed(category)),
+				SiteUrl = Url.Absolute(Url.BlogCategory(category))
 			});
 		}
 

@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 using System.Web.UI;
+using AttributeRouting.Web.Mvc;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Shared;
@@ -35,7 +36,7 @@ namespace Daniel15.Web.Controllers
 		/// <summary>
 		/// Home page of the site :-)
 		/// </summary>
-		/// <returns></returns>
+		[GET("")]
 		[OutputCache(Location = OutputCacheLocation.Downstream, Duration = ONE_HOUR)]
 		public virtual ActionResult Index()
 		{

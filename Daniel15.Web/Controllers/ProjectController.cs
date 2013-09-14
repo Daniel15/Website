@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using AttributeRouting.Web.Mvc;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Projects;
 using Daniel15.Data.Repositories;
@@ -20,7 +21,7 @@ namespace Daniel15.Web.Controllers
 		/// <summary>
 		/// A list of all the projects I've worked on the past
 		/// </summary>
-		/// <returns></returns>
+		[GET("projects")]
 		public virtual ActionResult Index()
 		{
 			var projects = _projectRepository.All();
@@ -35,6 +36,11 @@ namespace Daniel15.Web.Controllers
 			});
 		}
 
+		/// <summary>
+		/// View details on the specified project
+		/// </summary>
+		/// <param name="slug">URL slug of the project</param>
+		[GET("projects/{slug}")]
 		public virtual ActionResult Detail(string slug)
 		{
 			ProjectModel project;
