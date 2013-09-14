@@ -159,7 +159,7 @@ namespace Daniel15.Data.Repositories.OrmLite
 		private List<PostModel> LatestCategoryOrTag(string typeSingular, string typePlural, int id, int count, int offset)
 		{
 			var posts = Connection.Select<PostModel>(@"
-				SELECT id, title, slug, published, date, content, maincategory_id
+				SELECT id, title, slug, published, date, content, share_counts, maincategory_id
 				FROM blog_post_" + typePlural + @"
 				INNER JOIN blog_posts ON blog_posts.id = blog_post_" + typePlural + @".post_id
 				WHERE blog_post_" + typePlural + @"." + typeSingular + @"_id = {0}
