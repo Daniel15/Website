@@ -91,6 +91,7 @@ namespace Daniel15.Data.Entities.Projects
 		/// </summary>
 		public int Order { get; set; }
 
+		#region Repository information
 		/// <summary>
 		/// Code repository for this project, if it's open-source
 		/// </summary>
@@ -106,6 +107,23 @@ namespace Daniel15.Data.Entities.Projects
 		/// Date this project was updated
 		/// </summary>
 		public DateTime? Updated { get; set; }
+
+		/// <summary>
+		/// Number of forks this project has.
+		/// </summary>
+		public int? Forks { get; set; }
+
+		/// <summary>
+		/// Number of "watchers" (users watching it) this project has.
+		/// </summary>
+		public int? Watchers { get; set; }
+
+		/// <summary>
+		/// Number of bugs or issues this project has.
+		/// </summary>
+		[Alias("open_issues")]
+		public int? OpenIssues { get; set; }
+		#endregion
 	}
 
 	/// <summary>

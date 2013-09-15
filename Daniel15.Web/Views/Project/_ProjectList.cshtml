@@ -1,4 +1,5 @@
-﻿@using Daniel15.Data.Entities.Projects
+﻿@using Daniel15.BusinessLayer.Services.CodeRepositories
+@using Daniel15.Data.Entities.Projects
 @model Daniel15.Web.ViewModels.Project.ProjectListViewModel
 
 <ul class="projects">
@@ -24,17 +25,40 @@
 			{
 				<br /><strong>Website: </strong> <a href="@project.Url">@project.Url</a>
 			}
-			@if (!string.IsNullOrWhiteSpace(project.RepositoryUrl))
-			{
-				<br /><strong>Code available at: </strong> <a href="@project.RepositoryUrl">@project.RepositoryUrl</a>
-			}
 			@if (project.Technologies != null && project.Technologies.Count > 0)
 			{
 				@Technologies(project.Technologies)
 			}
+			@if (!string.IsNullOrWhiteSpace(project.RepositoryUrl))
+			{
+				<br />@Repository(project)
+			}
 		</li>
 	}
 </ul>
+
+@helper Repository(ProjectModel project)
+{
+	@* TODO: Move this logic to controller or ViewModel *@
+	var repositoryUrl = new Uri(project.RepositoryUrl);
+	if (GithubCodeRepository.IsGithubRepository(repositoryUrl))
+	{
+		var githubWebUrl = "https://github.com" + repositoryUrl.AbsolutePath.Replace(".git", string.Empty);
+		<text>Code available on <a href="@githubWebUrl">GitHub</a></text>
+		if (project.Forks != null || project.Watchers != null || project.OpenIssues != null)
+		{
+			<text>(@(project.Forks ?? 0) <a href="@githubWebUrl/network">forks</a>, @(project.Watchers ?? 0) <a href="@githubWebUrl/stargazers">watchers</a>, @(project.OpenIssues ?? 0) <a href="@githubWebUrl/issues">open issues</a>)</text>
+		}
+	}
+	else
+	{
+		<strong>Code available at: </strong> <a href="@project.RepositoryUrl">@project.RepositoryUrl</a>
+		if (project.Forks != null || project.Watchers != null || project.OpenIssues != null)
+		{
+			<text>(@(project.Forks ?? 0) forks, @(project.Watchers ?? 0) watchers, @(project.OpenIssues ?? 0) open issues)</text>
+		}
+	}
+}
 
 @helper Thumbnail(ProjectModel project)
 {

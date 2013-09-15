@@ -9,6 +9,21 @@ namespace Daniel15.BusinessLayer.Services.CodeRepositories
 	public class RepositoryInfo
 	{
 		/// <summary>
+		/// Number of forks the repository has.
+		/// </summary>
+		public int? Forks { get; set; }
+
+		/// <summary>
+		/// Number of "watchers" (users watching it) the repository has.
+		/// </summary>
+		public int? Watchers { get; set; }
+
+		/// <summary>
+		/// Number of bugs or issues the repository has.
+		/// </summary>
+		public int? OpenIssues { get; set; }
+
+		/// <summary>
 		/// Date the repository was created
 		/// </summary>
 		public DateTime? Created { get; set; }

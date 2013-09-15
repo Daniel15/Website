@@ -24,9 +24,19 @@ namespace Daniel15.BusinessLayer.Services.CodeRepositories
 		/// <returns><c>true</c> if this implementation can handle it</returns>
 		public bool CanHandle(Uri repositoryUrl)
 		{
+			return IsGithubRepository(repositoryUrl);
+		}
+
+		/// <summary>
+		/// Determines whether the specified repository is a Github repository.
+		/// </summary>
+		/// <param name="repositoryUrl">URL to the repository</param>
+		/// <returns><c>true</c> if this is a Github repository</returns>
+		public static bool IsGithubRepository(Uri repositoryUrl)
+		{
 			return (repositoryUrl.Scheme.Equals("git", StringComparison.InvariantCultureIgnoreCase) ||
 			        repositoryUrl.Scheme.Equals("http", StringComparison.InvariantCultureIgnoreCase)) &&
-			       repositoryUrl.Host.Equals("github.com", StringComparison.InvariantCultureIgnoreCase);
+				    repositoryUrl.Host.Equals("github.com", StringComparison.InvariantCultureIgnoreCase);
 		}
 
 		/// <summary>
@@ -53,6 +63,9 @@ namespace Daniel15.BusinessLayer.Services.CodeRepositories
 				{
 					Created = DateTime.Parse(response.created_at),
 					Updated = DateTime.Parse(response.updated_at),
+					Forks = response.forks,
+					Watchers = response.watchers,
+					OpenIssues = response.open_issues,
 				};
 			}
 		}

@@ -83,8 +83,12 @@ namespace Daniel15.BusinessLayer
 
 			var uri = new Uri(project.RepositoryUrl);
 			var info = _repositoryManager.GetRepositoryInfo(uri);
+			// TODO: Use AutoMapper here
 			project.Created = info.Created;
 			project.Updated = info.Updated;
+			project.Forks = info.Forks;
+			project.Watchers = info.Watchers;
+			project.OpenIssues = info.OpenIssues;
 			return true;
 		}
 	}
