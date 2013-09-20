@@ -27,10 +27,13 @@
 <ul id="contact-me">
 	<!-- Yeah, this is ugly, but it's a really simple method for spambot prevention >_< -->
 	<li><strong>Email</strong> &mdash; <span id="email_address"></span></li>
-	<li><strong>Windows Live Messenger / MSN Messenger</strong> &mdash; <span id="messenger_address"></span></li>
-	<li id="gtalk" class="offline">
-		<strong>Google Talk / Jabber</strong> &mdash; <span id="gtalk_address"></span>.
+	<li id="gtalk" class="presence offline">
+		<strong>Google Talk / Jabber</strong> &mdash; <span id="gtalk_address" class="address"></span>.
 		I'm currently <span id="gtalk_status">Offline</span>.
+	</li>
+	<li id="skype" class="presence offline">
+		<strong>Skype</strong> &mdash; <span id="skype_address" class="address">daniel15au</span>.
+		I'm currently <span id="skype_status">Offline</span>.
 	</li>
 	<li class="social">
 		<strong>Social networking (and other) sites:</strong>
@@ -68,5 +71,12 @@
 
 @section scripts
 {
-	<script async src="http://mystatus.im/daniel.json?callback=Page.Site.Index.initGoogleTalk"></script>
+	<script async defer src="http://mystatus.im/daniel.json?callback=Page.Site.Index.initGoogleTalk"></script>
+	<!-- Skype status -->
+	@YqlJsonp("SELECT * FROM skype.user.status WHERE user='daniel15au'", "Page.Site.Index.initSkype")
+}
+
+@helper YqlJsonp(string query, string callback)
+{
+	<script async defer src="http://query.yahooapis.com/v1/public/yql?q=@(Url.Encode(query))&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=@callback"></script>
 }

@@ -19,7 +19,6 @@ Page.Site.Index =
 	init: function()
 	{
 		$('email_address').set('innerHTML', '&#100;&#097;&#110;&#105;&#101;&#108;&#049;&#053;&#115;&#105;&#116;&#101;&#064;&#100;&#097;&#110;&#046;&#099;&#120;');
-		$('messenger_address').set('innerHTML', '&#x6D;&#x73;&#x6E;&#64;&#100;&#x61;&#110;&#x69;&#x65;&#x6C;&#49;&#53;&#x2E;&#x63;&#111;&#x6D;');
 		$('gtalk_address').set('innerHTML', '&#100;&#097;&#110;&#105;&#101;&#108;&#064;&#100;&#049;&#053;&#046;&#098;&#105;&#122;');
 		
 		// TODO: Tips
@@ -41,6 +40,44 @@ Page.Site.Index =
 		if (data.statusText && data.statusText.toLowerCase() !== data.state.toLowerCase())
 			status += ' (' + data.statusText + ')';
 		$('gtalk_status').set('innerHTML', status);
+	},
+	
+	initSkype: function(data)
+	{
+		// Don't do anything if there's no response
+		if (!data.query || data.query.count != 1 || !data.query.results || !data.query.results.result)
+			return;
+
+		var skypeStatuses = {
+			UNKNOWN: 0,
+			OFFLINE: 1,
+			ONLINE: 2,
+			AWAY: 3,
+			DND: 5 // Do Not Disturb
+		};
+
+		var result = data.query.results.result,
+		    statusCode = parseInt(result.status, 10),
+		    status = result.message.en,
+			cssClass = 'offline';
+		
+		switch (statusCode)
+		{
+			case skypeStatuses.OFFLINE:
+				cssClass = 'offline';
+				break;
+			case skypeStatuses.ONLINE:
+				cssClass = 'online';
+				break;
+			case skypeStatuses.AWAY:
+			case skypeStatuses.DND:
+				cssClass = 'busy';
+				break;
+		}
+
+		$('skype').removeClass('offline').addClass(cssClass);
+		$('skype_address').set('title', status);
+		$('skype_status').set('innerHTML', status);
 	}
 };
 
