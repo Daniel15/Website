@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Daniel15.Data.Extensions;
 using ServiceStack.OrmLite;
@@ -9,7 +10,7 @@ namespace Daniel15.Data.Repositories.OrmLite
 	/// A base repository class that uses OrmLite as the data access component.
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
-	public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : new()
+	public abstract class RepositoryBase<T> : IDisposable, IRepositoryBase<T> where T : new()
 	{
 		protected readonly IDbConnectionFactory _connectionFactory;
 		private IDbConnection _connection;
@@ -17,6 +18,14 @@ namespace Daniel15.Data.Repositories.OrmLite
 		protected IDbConnection Connection
 		{
 			get { return _connection ?? (_connection = _connectionFactory.OpenDbConnection()); }
+		}
+
+		public void Dispose()
+		{
+			if (_connection != null)
+			{
+				_connection.Dispose();
+			}
 		}
 
 		/// <summary>
