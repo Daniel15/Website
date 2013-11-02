@@ -15,7 +15,7 @@
     <AssemblyName>Daniel15.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
@@ -528,41 +528,6 @@
     <Content Include="Areas\Gallery\Views\_ViewStart.cshtml" />
     <Content Include="Content\css\pages\gallery.less" />
     <None Include="Content\images\header_fade.psd" />
-    <None Include="Content\js\framework\.git\config" />
-    <None Include="Content\js\framework\.git\description" />
-    <None Include="Content\js\framework\.git\FETCH_HEAD" />
-    <None Include="Content\js\framework\.git\HEAD" />
-    <None Include="Content\js\framework\.git\hooks\applypatch-msg.sample" />
-    <None Include="Content\js\framework\.git\hooks\commit-msg.sample" />
-    <None Include="Content\js\framework\.git\hooks\post-commit.sample" />
-    <None Include="Content\js\framework\.git\hooks\post-receive.sample" />
-    <None Include="Content\js\framework\.git\hooks\post-update.sample" />
-    <None Include="Content\js\framework\.git\hooks\pre-applypatch.sample" />
-    <None Include="Content\js\framework\.git\hooks\pre-commit.sample" />
-    <None Include="Content\js\framework\.git\hooks\pre-rebase.sample" />
-    <None Include="Content\js\framework\.git\hooks\prepare-commit-msg.sample" />
-    <None Include="Content\js\framework\.git\hooks\update.sample" />
-    <None Include="Content\js\framework\.git\index" />
-    <None Include="Content\js\framework\.git\info\exclude" />
-    <None Include="Content\js\framework\.git\logs\HEAD" />
-    <None Include="Content\js\framework\.git\logs\refs\heads\master" />
-    <None Include="Content\js\framework\.git\logs\refs\remotes\origin\master" />
-    <None Include="Content\js\framework\.git\objects\13\a8ca8855c7da8508d34f04ec34dd6f7aa334f3" />
-    <None Include="Content\js\framework\.git\objects\19\d6d333b970292f2c239a493f221f69342dfe24" />
-    <None Include="Content\js\framework\.git\objects\45\074d723445453441d91f1148956e4afce59674" />
-    <None Include="Content\js\framework\.git\objects\53\0005dabdfca803684e9ce0c1e259769087ff4a" />
-    <None Include="Content\js\framework\.git\objects\63\feaf7e71b5811af669ebe6a18a8b2329c99b7c" />
-    <None Include="Content\js\framework\.git\objects\c9\b9287427b04c688fcff6b93e52be81ac970ef2" />
-    <None Include="Content\js\framework\.git\objects\e1\70fbbc55378c3ac800bcd38d5608010949a277" />
-    <None Include="Content\js\framework\.git\objects\ef\9fad0ce3ca067f95cb6bafc774d964a77f6e3c" />
-    <None Include="Content\js\framework\.git\objects\f7\930c1cfedff335a6f0288eb93cffbcce9d76f1" />
-    <None Include="Content\js\framework\.git\objects\pack\pack-5793e1c205d36194d90cf89406091b656913ef16.idx" />
-    <None Include="Content\js\framework\.git\objects\pack\pack-5793e1c205d36194d90cf89406091b656913ef16.pack" />
-    <None Include="Content\js\framework\.git\ORIG_HEAD" />
-    <None Include="Content\js\framework\.git\packed-refs" />
-    <None Include="Content\js\framework\.git\refs\heads\master" />
-    <None Include="Content\js\framework\.git\refs\remotes\origin\HEAD" />
-    <None Include="Content\js\framework\.git\refs\remotes\origin\master" />
     <None Include="Content\js\framework\README.md" />
     <Content Include="Content\js\lib\syntaxhighlighter\shCore.less" />
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeDefault.less" />
@@ -626,9 +591,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Api\Models\" />
     <Folder Include="Areas\Api\Views\Shared\" />
-    <Folder Include="Content\js\framework\.git\branches\" />
-    <Folder Include="Content\js\framework\.git\objects\info\" />
-    <Folder Include="Content\js\framework\.git\refs\tags\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -675,7 +637,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49176</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/dan.cx/</IISUrl>
+          <IISUrl>http://localhost:49176/dan.cx/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
