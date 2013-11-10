@@ -17,6 +17,7 @@ namespace Daniel15.Data.Entities.Blog
 		[Required]
 		public string Slug { get; set; }
 		public bool Published { get; set; }
+		public string Summary { get; set; }
 
 		/// <summary>
 		/// UNIX timestamp this blog article was posted at. This is only for backwards compatibility

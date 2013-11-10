@@ -7,8 +7,13 @@
 
 @section extraHead
 {
-	<!--meta property="og:title" content="@Model.Post.Title" /-->
+	@{
+		var summary = Model.Post.SummaryOrPlainTextIntro();
+	}
+
 	<meta property="og:url" content="@Url.BlogPostAbsolute(Model.Post)" />
+	<meta property="og:description" content="@summary" />
+	<meta name="Description" content="@summary" />
 	<link rel="canonical" href="@Url.BlogPostAbsolute(Model.Post)" />
 	<link rel="shortlink" href="@Model.ShortUrl" />
 }

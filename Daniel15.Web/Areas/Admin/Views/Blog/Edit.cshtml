@@ -27,10 +27,14 @@
 			@Html.CheckBoxFor(x => x.Post.Published)
 			@Html.LabelFor(x => x.Post.Published)
 		</p>
-		<p>
-			@Html.LabelFor(x => x.Post.RawContent, "Post (wrap paragraphs in <p> tags):")<br />
-			@Html.TextAreaFor(x => x.Post.RawContent, rows: 15, columns: 100, htmlAttributes: new { })
-		</p>
+	    <p>
+	        @Html.LabelFor(x => x.Post.RawContent, "Post (wrap paragraphs in <p> tags):")<br />
+	        @Html.TextAreaFor(x => x.Post.RawContent, rows: 15, columns: 100, htmlAttributes: new { })
+	    </p>
+	    <p>
+	        @Html.LabelFor(x => x.Post.Summary, "Summary:")<br />
+			@Html.TextAreaFor(x => x.Post.Summary, rows: 10, columns: 100, htmlAttributes: new { })
+	    </p>
 	</div>
 	<div id="metadata">
 		<p>

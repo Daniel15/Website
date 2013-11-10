@@ -109,5 +109,14 @@ namespace Daniel15.Data.Entities.Blog
 
 			return intro;
 		}
+
+		/// <summary>
+		/// Gets the summary text if available, otherwise passes through to <see cref="PlainTextIntro"/>
+		/// to get a plain text introduction.
+		/// </summary>
+		public string SummaryOrPlainTextIntro()
+		{
+			return string.IsNullOrWhiteSpace(Summary) ? PlainTextIntro() : Summary;
+		}
 	}
 }

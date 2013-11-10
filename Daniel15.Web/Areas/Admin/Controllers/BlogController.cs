@@ -110,7 +110,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 				: _blogRepository.GetBySlug(slug);
 
 			// Valid, so save the post using a whitelist of fields allowed to be updated from the UI
-			UpdateModel(post, "Post", new[] { "Title", "Slug", "Date", "Published", "RawContent", "MainCategoryId" }); 
+			UpdateModel(post, "Post", new[] { "Title", "Slug", "Date", "Published", "RawContent", "MainCategoryId", "Summary" }); 
 			_blogRepository.Save(post);
 
 			// Now save categories and tags
