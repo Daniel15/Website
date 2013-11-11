@@ -29,7 +29,7 @@ namespace Daniel15.Web.Areas.Admin
 			// Editing an existing blog post
 			context.MapRoute(
 				name: "BlogEdit",
-				url: "blog/{year}/{month}/{slug}/edit",
+				url: "{year}/{month}/{slug}/edit",
 				defaults: MVC.Admin.Blog.Edit(),
 				constraints: new { year = @"\d{4}", month = @"\d{2}" }
 			);
