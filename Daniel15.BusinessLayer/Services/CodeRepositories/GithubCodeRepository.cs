@@ -57,6 +57,7 @@ namespace Daniel15.BusinessLayer.Services.CodeRepositories
 			using (var client = new WebClient())
 			{
 				client.Encoding = Encoding.UTF8;
+				client.Headers["User-Agent"] = "Daniel15-Website/1.0 (http://dan.cx/)";
 				var responseText = client.DownloadString(apiUrl);
 				var response = Json.Decode(responseText);
 				return new RepositoryInfo
