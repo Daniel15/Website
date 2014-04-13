@@ -54,7 +54,7 @@
       <HintPath>..\packages\AttributeRouting.3.5.6\lib\net40\AttributeRouting.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Cassette">
-      <HintPath>..\packages\Cassette.2.4.1\lib\net40-client\Cassette.dll</HintPath>
+      <HintPath>..\lib\Cassette.dll</HintPath>
     </Reference>
     <Reference Include="Cassette.Aspnet">
       <HintPath>..\packages\Cassette.Aspnet.2.4.1\lib\net40\Cassette.Aspnet.dll</HintPath>
