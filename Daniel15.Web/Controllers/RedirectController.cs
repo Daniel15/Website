@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using AttributeRouting.Web.Mvc;
-using Daniel15.Web.Extensions;
+using Cassette.Views;
 
 namespace Daniel15.Web.Controllers
 {
@@ -16,7 +16,7 @@ namespace Daniel15.Web.Controllers
 		[GET("latest.css")]
 		public virtual ActionResult Css()
 		{
-			return Redirect(Combres.WebExtensions.CombresUrl("main.css"));
+			return Redirect(Bundles.Url("main.css"));
 		}
 
 		/// <summary>
@@ -25,7 +25,7 @@ namespace Daniel15.Web.Controllers
 		[GET("latest.js")]
 		public virtual ActionResult Js()
 		{
-			return Redirect(Combres.WebExtensions.CombresUrl("main.js"));
+			return Redirect(Bundles.Url("main.js"));
 		}
 
 		/// <summary>

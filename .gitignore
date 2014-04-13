@@ -12,3 +12,4 @@ _ReSharper.*
 *.private.config
 /ss
 Daniel15.Web.sln.DotSettings
+Daniel15.Web/cassette-cache/

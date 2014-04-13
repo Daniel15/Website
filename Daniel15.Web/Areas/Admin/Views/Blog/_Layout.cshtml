@@ -1,21 +1,21 @@
-﻿@using Combres.Mvc
+﻿@using Cassette.Views
 @model ViewModelBase
 
 @{
 	// "Inherit" from the base layout
 	Layout = "~/Views/Shared/_Layout.cshtml";
+	Bundles.Reference("blogadmin.css");
+	Bundles.Reference("blogadmin.js");
 }
 
 @RenderBody()
 
 @section extraHead
 {
-	@Url.CombresLink("blogadmin.css")
 	@RenderSection("extraHead", required: false)
 }
 
 @section extraFoot
 {
-	@Url.CombresLink("blogadmin.js")
 	@RenderSection("extraFoot", required: false)
 }
