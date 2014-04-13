@@ -7,6 +7,7 @@
 		<CronPackageDir>Daniel15.Cron\bin\Release\</CronPackageDir>
 	</PropertyGroup>
 
+	<UsingTask AssemblyFile="Daniel15.Web\bin\Cassette.MSBuild.dll" TaskName="CreateBundles" />
 	<UsingTask
 		TaskName="UpdateGitDetails"
 		TaskFactory="CodeTaskFactory"
@@ -78,6 +79,11 @@ public class UpdateGitDetails : Microsoft.Build.Utilities.Task
 
 	<Target Name="PackageSite">
 		<MSBuild Projects="Daniel15.Web\Daniel15.Web.csproj" Targets="PipelinePreDeployCopyAllFilesToOneFolder" Properties="$(Properties)" />
+		<!-- Precompile Cassette assets -->
+		<CreateBundles
+			Source="Daniel15.Web"
+			Output="..\$(SitePackageDir)cassette-cache\"
+		/>
 	</Target>
 
 	<Target Name="UpdateGitDetailsForDeploy">
