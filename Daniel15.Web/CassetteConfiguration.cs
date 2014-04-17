@@ -17,6 +17,7 @@ namespace Daniel15.Web
 				"~/Content/css/blog.less",
 
 				// Pages
+				"~/Content/css/pages/gallery.less",
 				"~/Content/css/pages/index.less",
 				"~/Content/css/pages/socialfeed.less",
 				"~/Content/css/pages/projects.less",
