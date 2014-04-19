@@ -2,6 +2,7 @@
 @model Daniel15.Web.ViewModels.ViewModelBase
 @{
 	Bundles.Reference("main.css");
+	Bundles.Reference("~/Content/js/lib/react-0.10.0.js");
 	Bundles.Reference("main.js");
 	Bundles.AddInlineScript("Events.initPage();");
 	Bundles.Reference("syntaxHighlighter.js");
@@ -93,9 +94,9 @@
 	</div>
 	<!-- Now for the JS -->
 	@Bundles.RenderScripts()
-	
-	@RenderSection("scripts", required: false)
 
+	@RenderSection("scripts", required: false)
+	@Html.ReactInitJavaScript()
 	<!-- Prompt IE 6 and 7 users to install Chrome Frame -->
 	<!--[if lt IE 8]>
 		<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
