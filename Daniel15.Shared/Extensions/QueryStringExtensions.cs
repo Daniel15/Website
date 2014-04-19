@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 
 namespace Daniel15.Shared.Extensions
@@ -19,8 +20,10 @@ namespace Daniel15.Shared.Extensions
 			var output = HttpUtility.ParseQueryString(string.Empty);
 
 			// Add all parameters to it
-			foreach (var kvp in dictionary)
+			foreach (var kvp in dictionary.Where(kvp => kvp.Value != null))
+			{
 				output.Add(kvp.Key, kvp.Value.ToString());
+			}
 
 			return output.ToString();
 		}
