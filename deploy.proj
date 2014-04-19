@@ -79,6 +79,8 @@ public class UpdateGitDetails : Microsoft.Build.Utilities.Task
 
 	<Target Name="PackageSite">
 		<MSBuild Projects="Daniel15.Web\Daniel15.Web.csproj" Targets="PipelinePreDeployCopyAllFilesToOneFolder" Properties="$(Properties)" />
+		<!--Transform JSX -->
+		<Exec Command="&quot;$(msbuildtoolspath)\msbuild.exe&quot; $(SitePackageDir)TransformJsx.proj /p:OutputPath=bin /nr:false" />
 		<!-- Precompile Cassette assets -->
 		<CreateBundles
 			Source="Daniel15.Web"
