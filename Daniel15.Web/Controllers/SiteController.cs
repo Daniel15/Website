@@ -1,8 +1,10 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Web.Mvc;
 using System.Web.UI;
 using AttributeRouting.Web.Mvc;
 using Daniel15.Data.Repositories;
+using Daniel15.Shared.Extensions;
 using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Shared;
 using Daniel15.Web.ViewModels.Site;
@@ -59,11 +61,17 @@ namespace Daniel15.Web.Controllers
 		/// A feed of all the stuff I've done on the interwebs.
 		/// </summary>
 		/// <returns></returns>
-		public virtual ActionResult SocialFeed()
+		public virtual ActionResult SocialFeed(int count = 25, int? before_date = null)
 		{
 			// Currently just proxies to the PHP page - This needs to be rewritten in C#
-			var content = new WebClient().DownloadString("http://dan.cx/socialfeed/loadhtml.php?" + Request.QueryString);
-			return View(Views.SocialFeed, new SocialFeedViewModel { Content = content });
+			var url = "http://dan.cx/socialfeed/loadjson.php?" + new Dictionary<string, object>
+			{
+				{"count", count},
+				{"before_date", before_date}
+			}.ToQueryString();
+			var responseText = new WebClient().DownloadString(url);
+			var response = System.Web.Helpers.Json.Decode(responseText);
+			return View(Views.SocialFeed, new SocialFeedViewModel { Data = response });
 		}
 
 		/// <summary>

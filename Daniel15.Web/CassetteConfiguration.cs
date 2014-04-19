@@ -52,9 +52,9 @@ namespace Daniel15.Web
 
 				// Site scripts
 				"~/Content/js/core.js",
-				"~/Content/js/site.js",
+				"~/Content/js/site.jsx",
 				"~/Content/js/blog.js",
-				"~/Content/js/socialfeed.js"
+				"~/Content/js/socialfeed.jsx"
 			);
 
 			bundles.Add<ScriptBundle>("syntaxHighlighter.js",

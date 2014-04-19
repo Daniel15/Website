@@ -64,6 +64,7 @@ namespace Daniel15.Web.Controllers
             public readonly string FileNotFound = "FileNotFound";
             public readonly string Error = "Error";
             public readonly string Alive = "Alive";
+            public readonly string Projects = "Projects";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -76,9 +77,19 @@ namespace Daniel15.Web.Controllers
             public const string FileNotFound = "FileNotFound";
             public const string Error = "Error";
             public const string Alive = "Alive";
+            public const string Projects = "Projects";
         }
 
 
+        static readonly ActionParamsClass_SocialFeed s_params_SocialFeed = new ActionParamsClass_SocialFeed();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SocialFeed SocialFeedParams { get { return s_params_SocialFeed; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SocialFeed
+        {
+            public readonly string count = "count";
+            public readonly string before_date = "before_date";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -128,12 +139,14 @@ namespace Daniel15.Web.Controllers
             return callInfo;
         }
 
-        partial void SocialFeedOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void SocialFeedOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int count, int? before_date);
 
-        public override System.Web.Mvc.ActionResult SocialFeed()
+        public override System.Web.Mvc.ActionResult SocialFeed(int count, int? before_date)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SocialFeed);
-            SocialFeedOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "count", count);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "before_date", before_date);
+            SocialFeedOverride(callInfo, count, before_date);
             return callInfo;
         }
 
@@ -170,6 +183,15 @@ namespace Daniel15.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Alive);
             AliveOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void ProjectsOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        public override System.Web.Mvc.ActionResult Projects()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Projects);
+            ProjectsOverride(callInfo);
             return callInfo;
         }
 

@@ -502,8 +502,6 @@
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeMDUltra.css" />
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeMidnight.css" />
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeRDark.css" />
-    <Content Include="Content\js\site.js" />
-    <Content Include="Content\js\socialfeed.js" />
     <Content Include="Content\js\syntaxhighlighter.js" />
     <Content Include="Content\not_an_easter_egg\zero.css" />
     <Content Include="Content\not_an_easter_egg\zero\color0.css" />
@@ -575,6 +573,8 @@
     <Content Include="Content\js\lib\syntaxhighlighter\shCore.less" />
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeDefault.less" />
     <None Include="Content\js\framework\yuidoc.json" />
+    <Content Include="Content\js\socialfeed.jsx" />
+    <Content Include="Content\js\site.jsx" />
     <None Include="Content\not_an_easter_egg\zero\zero.utf8" />
     <Content Include="nginx.conf" />
     <None Include="T4MVC\T4MVC.tt">
