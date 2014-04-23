@@ -72,7 +72,7 @@ namespace Daniel15.Web
 			bundles.Add<ScriptBundle>("blogadmin.js", "~/Content/js/blogadmin.js");
 
 			bundles.AddUrlWithLocalAssets<ScriptBundle>(
-				"http://fb.me/react-0.10.0-min.js",
+				"http://fb.me/react-0.10.0.min.js",
 				new LocalAssetSettings
 				{
 					FallbackCondition = "!window.React",

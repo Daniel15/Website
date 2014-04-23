@@ -46,6 +46,12 @@ namespace Daniel15.Web.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult BlogPost()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BlogPost);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult BlogUri()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BlogUri);
@@ -68,6 +74,7 @@ namespace Daniel15.Web.Controllers
         {
             public readonly string Css = "Css";
             public readonly string Js = "Js";
+            public readonly string BlogPost = "BlogPost";
             public readonly string BlogUri = "BlogUri";
         }
 
@@ -76,10 +83,22 @@ namespace Daniel15.Web.Controllers
         {
             public const string Css = "Css";
             public const string Js = "Js";
+            public const string BlogPost = "BlogPost";
             public const string BlogUri = "BlogUri";
         }
 
 
+        static readonly ActionParamsClass_BlogPost s_params_BlogPost = new ActionParamsClass_BlogPost();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_BlogPost BlogPostParams { get { return s_params_BlogPost; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_BlogPost
+        {
+            public readonly string month = "month";
+            public readonly string year = "year";
+            public readonly string day = "day";
+            public readonly string slug = "slug";
+        }
         static readonly ActionParamsClass_BlogUri s_params_BlogUri = new ActionParamsClass_BlogUri();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_BlogUri BlogUriParams { get { return s_params_BlogUri; } }
@@ -122,6 +141,19 @@ namespace Daniel15.Web.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Js);
             JsOverride(callInfo);
+            return callInfo;
+        }
+
+        partial void BlogPostOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int month, int year, int day, string slug);
+
+        public override System.Web.Mvc.ActionResult BlogPost(int month, int year, int day, string slug)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.BlogPost);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "month", month);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "year", year);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "day", day);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "slug", slug);
+            BlogPostOverride(callInfo, month, year, day, slug);
             return callInfo;
         }
 
