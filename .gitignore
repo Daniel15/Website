@@ -13,3 +13,4 @@ _ReSharper.*
 /ss
 Daniel15.Web.sln.DotSettings
 Daniel15.Web/cassette-cache/
+*.generated.js

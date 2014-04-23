@@ -94,12 +94,12 @@ namespace Daniel15.Web.Controllers
             public class _ViewNamesClass
             {
                 public readonly string _ProjectList = "_ProjectList";
+                public readonly string Detail = "Detail";
                 public readonly string Index = "Index";
-                public readonly string View = "View";
             }
             public readonly string _ProjectList = "~/Views/Project/_ProjectList.cshtml";
+            public readonly string Detail = "~/Views/Project/Detail.cshtml";
             public readonly string Index = "~/Views/Project/Index.cshtml";
-            public readonly string View = "~/Views/Project/View.cshtml";
         }
     }
 

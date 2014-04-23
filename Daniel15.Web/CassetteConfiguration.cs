@@ -52,9 +52,9 @@ namespace Daniel15.Web
 
 				// Site scripts
 				"~/Content/js/core.js",
-				"~/Content/js/site.js",
+				"~/Content/js/site.jsx",
 				"~/Content/js/blog.js",
-				"~/Content/js/socialfeed.js"
+				"~/Content/js/socialfeed.jsx"
 			);
 
 			bundles.Add<ScriptBundle>("syntaxHighlighter.js",
@@ -70,6 +70,15 @@ namespace Daniel15.Web
 			);
 
 			bundles.Add<ScriptBundle>("blogadmin.js", "~/Content/js/blogadmin.js");
+
+			bundles.AddUrlWithLocalAssets<ScriptBundle>(
+				"http://fb.me/react-0.10.0.min.js",
+				new LocalAssetSettings
+				{
+					FallbackCondition = "!window.React",
+					Path = "~/Content/js/lib/react-0.10.0.js",
+				}
+			);
         }
     }
 }

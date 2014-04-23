@@ -53,7 +53,8 @@
     <Reference Include="AttributeRouting.Web.Mvc">
       <HintPath>..\packages\AttributeRouting.3.5.6\lib\net40\AttributeRouting.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette">
+    <Reference Include="Cassette, Version=2.4.2.39843, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Cassette.dll</HintPath>
     </Reference>
     <Reference Include="Cassette.Aspnet">
@@ -65,6 +66,10 @@
     <Reference Include="Cassette.MSBuild">
       <HintPath>..\packages\Cassette.MSBuild.2.4.1\lib\net40\Cassette.MSBuild.dll</HintPath>
     </Reference>
+    <Reference Include="Cassette.React, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Cassette.React.0.2.1-dev-20140421-2229\lib\net40\Cassette.React.dll</HintPath>
+    </Reference>
     <Reference Include="Cassette.Views">
       <HintPath>..\packages\Cassette.Views.2.4.1\lib\net40\Cassette.Views.dll</HintPath>
     </Reference>
@@ -74,12 +79,50 @@
     <Reference Include="Elmah">
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
     </Reference>
+    <Reference Include="JavaScriptEngineSwitcher.Core">
+      <HintPath>..\packages\JavaScriptEngineSwitcher.Core.1.1.3\lib\net40\JavaScriptEngineSwitcher.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="JavaScriptEngineSwitcher.Jint">
+      <HintPath>..\packages\JavaScriptEngineSwitcher.Jint.1.1.5\lib\net40\JavaScriptEngineSwitcher.Jint.dll</HintPath>
+    </Reference>
+    <Reference Include="JavaScriptEngineSwitcher.Msie">
+      <HintPath>..\packages\JavaScriptEngineSwitcher.Msie.1.1.4\lib\net40\JavaScriptEngineSwitcher.Msie.dll</HintPath>
+    </Reference>
+    <Reference Include="Jint">
+      <HintPath>..\packages\JavaScriptEngineSwitcher.Jint.1.1.5\lib\net40\Jint.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MiniProfiler">
       <HintPath>..\packages\MiniProfiler.2.0.2\lib\net40\MiniProfiler.dll</HintPath>
     </Reference>
+    <Reference Include="MsieJavaScriptEngine">
+      <HintPath>..\packages\MsieJavaScriptEngine.1.4.2\lib\net40\MsieJavaScriptEngine.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.6.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.6.4\lib\net40\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="React, Version=0.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\React.Core.0.2.1-dev-20140421-2257\lib\net40\React.dll</HintPath>
+    </Reference>
+    <Reference Include="React.JavaScriptEngine.VroomJs, Version=0.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\React.JavaScriptEngine.VroomJs.0.2.1-dev-20140421-2257\lib\net40\React.JavaScriptEngine.VroomJs.dll</HintPath>
+    </Reference>
+    <Reference Include="React.MSBuild, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\React.MSBuild.0.2.1-dev-20140421-2229\lib\net40\React.MSBuild.dll</HintPath>
+    </Reference>
+    <Reference Include="React.Web, Version=0.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\React.Web.0.2.1-dev-20140421-2229\lib\net40\React.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="React.Web.Mvc4, Version=0.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\React.Web.Mvc4.0.2.1-dev-20140421-2229\lib\net40\React.Web.Mvc4.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.37.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -159,14 +202,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\T4MVCExtensions.3.5.1\lib\net40\T4MVCExtensions.dll</HintPath>
     </Reference>
+    <Reference Include="VroomJs">
+      <HintPath>..\packages\React.JavaScriptEngine.VroomJs.0.2.1-dev-20140421-2257\lib\net40\VroomJs.dll</HintPath>
+    </Reference>
     <Reference Include="WebActivator">
       <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IocInitialiser.cs" />
     <Compile Include="App_Start\MiniProfiler.cs" />
+    <Compile Include="App_Start\ReactConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BlogController.cs" />
@@ -417,6 +467,7 @@
     <Content Include="Content\js\lib\less-1.2.1.js" />
     <Content Include="Content\js\lib\less-1.2.1.min.js" />
     <Content Include="Content\js\lib\LocalStorage.js" />
+    <Content Include="Content\js\lib\react-0.10.0.js" />
     <Content Include="Content\js\lib\syntaxhighlighter\shAutoloader.js" />
     <Content Include="Content\js\lib\syntaxhighlighter\shBrushAppleScript.js" />
     <Content Include="Content\js\lib\syntaxhighlighter\shBrushAS3.js" />
@@ -460,8 +511,6 @@
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeMDUltra.css" />
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeMidnight.css" />
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeRDark.css" />
-    <Content Include="Content\js\site.js" />
-    <Content Include="Content\js\socialfeed.js" />
     <Content Include="Content\js\syntaxhighlighter.js" />
     <Content Include="Content\not_an_easter_egg\zero.css" />
     <Content Include="Content\not_an_easter_egg\zero\color0.css" />
@@ -533,6 +582,8 @@
     <Content Include="Content\js\lib\syntaxhighlighter\shCore.less" />
     <Content Include="Content\js\lib\syntaxhighlighter\shThemeDefault.less" />
     <None Include="Content\js\framework\yuidoc.json" />
+    <Content Include="Content\js\socialfeed.jsx" />
+    <Content Include="Content\js\site.jsx" />
     <None Include="Content\not_an_easter_egg\zero\zero.utf8" />
     <Content Include="nginx.conf" />
     <None Include="T4MVC\T4MVC.tt">
@@ -587,6 +638,7 @@
     <Content Include="Views\Site\_TumblrPosts.cshtml" />
     <Content Include="Views\Blog\_CommentList.cshtml" />
     <Content Include="Views\Project\Detail.cshtml" />
+    <Content Include="TransformJsx.proj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />

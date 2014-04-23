@@ -2,6 +2,6 @@
 {
 	public class SocialFeedViewModel : ViewModelBase
 	{
-		public string Content { get; set; }
+		public dynamic Data { get; set; }
 	}
 }

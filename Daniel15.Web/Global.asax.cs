@@ -15,6 +15,7 @@ namespace Daniel15.Web
 			//MiniProfilerInitialiser.Init();
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
+			ReactConfig.Configure();
 		}
 	}
 }

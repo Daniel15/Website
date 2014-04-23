@@ -1,6 +1,7 @@
 /**
- * dan.cx JavaScript (revision 2) - By Daniel15, 2011-2012
+ * dan.cx JavaScript (revision 2) - By Daniel15, 2011-2014
  * Feel free to use any of this, but please link back to my site
+ * @jsx React.DOM
  */
 
 /**
@@ -21,13 +22,14 @@ Page.Site.Index =
 		$('email_address').set('innerHTML', '&#100;&#097;&#110;&#105;&#101;&#108;&#049;&#053;&#115;&#105;&#116;&#101;&#064;&#100;&#097;&#110;&#046;&#099;&#120;');
 		$('gtalk_address').set('innerHTML', '&#100;&#097;&#110;&#105;&#101;&#108;&#064;&#100;&#049;&#053;&#046;&#098;&#105;&#122;');
 		
-		// TODO: Tips
-		this.socialfeed = new SocialFeed($('minifeed'), 
-		{
-			count: 10,
-			loadOnInit: true
-		});
-		// TODO: Hover thingies
+		React.renderComponent(
+			<SocialFeed
+				count={10}
+				className="minifeed"
+				showLoadMore={false}
+			/>,
+			document.getElementById('minifeed')
+		);
 	},
 	/**
 	 * Load Google Talk status via AJAX request
