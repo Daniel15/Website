@@ -66,9 +66,9 @@
     <Reference Include="Cassette.MSBuild">
       <HintPath>..\packages\Cassette.MSBuild.2.4.1\lib\net40\Cassette.MSBuild.dll</HintPath>
     </Reference>
-    <Reference Include="Cassette.React, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cassette.React, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cassette.React.0.2.1-dev-20140421-2229\lib\net40\Cassette.React.dll</HintPath>
+      <HintPath>..\packages\Cassette.React.1.0.0-dev-20140425-2015\lib\net40\Cassette.React.dll</HintPath>
     </Reference>
     <Reference Include="Cassette.Views">
       <HintPath>..\packages\Cassette.Views.2.4.1\lib\net40\Cassette.Views.dll</HintPath>
@@ -104,25 +104,25 @@
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="React, Version=0.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
+    <Reference Include="React, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\React.Core.0.2.1-dev-20140421-2257\lib\net40\React.dll</HintPath>
+      <HintPath>..\packages\React.Core.1.0.0-dev-20140425-2015\lib\net40\React.dll</HintPath>
     </Reference>
-    <Reference Include="React.JavaScriptEngine.VroomJs, Version=0.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
+    <Reference Include="React.JavaScriptEngine.VroomJs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\React.JavaScriptEngine.VroomJs.0.2.1-dev-20140421-2257\lib\net40\React.JavaScriptEngine.VroomJs.dll</HintPath>
+      <HintPath>..\packages\React.JavaScriptEngine.VroomJs.1.0.0-dev-20140425-2015\lib\net40\React.JavaScriptEngine.VroomJs.dll</HintPath>
     </Reference>
-    <Reference Include="React.MSBuild, Version=0.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="React.MSBuild, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\React.MSBuild.0.2.1-dev-20140421-2229\lib\net40\React.MSBuild.dll</HintPath>
+      <HintPath>..\packages\React.MSBuild.1.0.0-dev-20140425-2015\lib\net40\React.MSBuild.dll</HintPath>
     </Reference>
-    <Reference Include="React.Web, Version=0.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
+    <Reference Include="React.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\React.Web.0.2.1-dev-20140421-2229\lib\net40\React.Web.dll</HintPath>
+      <HintPath>..\packages\React.Web.1.0.0-dev-20140425-2015\lib\net40\React.Web.dll</HintPath>
     </Reference>
-    <Reference Include="React.Web.Mvc4, Version=0.2.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
+    <Reference Include="React.Web.Mvc4, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\React.Web.Mvc4.0.2.1-dev-20140421-2229\lib\net40\React.Web.Mvc4.dll</HintPath>
+      <HintPath>..\packages\React.Web.Mvc4.1.0.0-dev-20140425-2015\lib\net40\React.Web.Mvc4.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.Common, Version=3.9.37.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -202,8 +202,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\T4MVCExtensions.3.5.1\lib\net40\T4MVCExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="VroomJs">
-      <HintPath>..\packages\React.JavaScriptEngine.VroomJs.0.2.1-dev-20140421-2257\lib\net40\VroomJs.dll</HintPath>
+    <Reference Include="VroomJs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=9aed67b161f7db78, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\React.JavaScriptEngine.VroomJs.1.0.0-dev-20140425-2015\lib\net40\VroomJs.dll</HintPath>
     </Reference>
     <Reference Include="WebActivator">
       <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
