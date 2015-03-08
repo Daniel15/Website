@@ -393,6 +393,7 @@ namespace Links
                 public static readonly string less_1_2_1_min_js = Url("less-1.2.1.min.js");
                 public static readonly string LocalStorage_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/LocalStorage.min.js") ? Url("LocalStorage.min.js") : Url("LocalStorage.js");
                               
+                public static readonly string react_0_12_1_min_js = Url("react-0.12.1.min.js");
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class syntaxhighlighter {
                     private const string URLPATH = "~/Content/js/lib/syntaxhighlighter";
@@ -490,8 +491,7 @@ namespace Links
             
             }
         
-            public static readonly string site_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/site.min.js") ? Url("site.min.js") : Url("site.js");
-                          
+            public static readonly string site_jsx = Url("site.jsx");
             public static readonly string socialfeed_jsx = Url("socialfeed.jsx");
             public static readonly string syntaxhighlighter_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/syntaxhighlighter.min.js") ? Url("syntaxhighlighter.min.js") : Url("syntaxhighlighter.js");
                           

@@ -26,7 +26,7 @@ namespace Daniel15.Web.App_Start
 
 			// Register the MVC controls
 			container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
-			container.RegisterMvcAttributeFilterProvider();
+			container.RegisterMvcIntegratedFilterProvider();
 			container.Register<ITempDataProvider, CookieTempDataProvider>();
 
 			// The other MVC stuff
