@@ -14,7 +14,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Sharing URL for this post</returns>
-		string GetShareUrl(PostSummaryModel post, string url, string shortUrl);
+		string GetShareUrl(PostModel post, string url, string shortUrl);
 
 		/// <summary>
 		/// Gets the number of times this URL has been shared on this social network.
@@ -23,6 +23,6 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Share count for this post</returns>
-		int GetShareCount(PostSummaryModel post, string url, string shortUrl);
+		int GetShareCount(PostModel post, string url, string shortUrl);
 	}
 }

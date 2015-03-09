@@ -41,9 +41,9 @@ namespace Daniel15.Data.Repositories.OrmLite
 		/// </summary>
 		/// <param name="slug">The slug.</param>
 		/// <returns>The post</returns>
-		public PostSummaryModel GetSummaryBySlug(string slug)
+		public PostModel GetSummaryBySlug(string slug)
 		{
-			return Connection.FirstOrThrow<PostSummaryModel>(x => x.Slug == slug);
+			return Connection.FirstOrThrow<PostModel>(x => x.Slug == slug);
 		}
 
 		/// <summary>
@@ -51,7 +51,7 @@ namespace Daniel15.Data.Repositories.OrmLite
 		/// </summary>
 		/// <param name="post">Blog post</param>
 		/// <returns>Categories for this blog post</returns>
-		public IList<CategoryModel> CategoriesForPost(PostSummaryModel post)
+		public IList<CategoryModel> CategoriesForPost(PostModel post)
 		{
 			return Connection.Select<CategoryModel>(@"
 				SELECT blog_categories.id, blog_categories.title, blog_categories.slug, 
@@ -68,10 +68,10 @@ namespace Daniel15.Data.Repositories.OrmLite
 		/// </summary>
 		/// <param name="posts">Blog posts</param>
 		/// <returns>Categories for all the specified posts</returns>
-		public IDictionary<PostSummaryModel, IEnumerable<CategoryModel>> CategoriesForPosts(IEnumerable<PostSummaryModel> posts)
+		public IDictionary<PostModel, IEnumerable<CategoryModel>> CategoriesForPosts(IEnumerable<PostModel> posts)
 		{
 			if (!posts.Any())
-				return new Dictionary<PostSummaryModel, IEnumerable<CategoryModel>>();
+				return new Dictionary<PostModel, IEnumerable<CategoryModel>>();
 
 			var indexedPosts = posts.ToDictionary(post => post.Id, post => post);
 
@@ -96,7 +96,7 @@ namespace Daniel15.Data.Repositories.OrmLite
 		/// </summary>
 		/// <param name="post">Blog post</param>
 		/// <returns>Tags for this blog post</returns>
-		public IList<TagModel> TagsForPost(PostSummaryModel post)
+		public IList<TagModel> TagsForPost(PostModel post)
 		{
 			return Connection.Select<TagModel>(@"
 				SELECT blog_tags.id, blog_tags.title, blog_tags.slug
@@ -223,9 +223,9 @@ namespace Daniel15.Data.Repositories.OrmLite
 		/// <param name="count">Number of posts to return</param>
 		/// <param name="published">Whether to return published posts (true) or unpublished (false)</param>
 		/// <returns>Blog post summary</returns>
-		public List<PostSummaryModel> LatestPostsSummary(int count = 10, bool published = true)
+		public List<PostModel> LatestPostsSummary(int count = 10, bool published = true)
 		{
-			return Connection.Select<PostSummaryModel>(query => query
+			return Connection.Select<PostModel>(query => query
 				.Where(post => post.Published == published)
 				.OrderByDescending(post => post.Date)
 				.Limit(count)
@@ -387,7 +387,7 @@ ORDER BY year DESC, month DESC");
 		/// </summary>
 		/// <param name="post">The post</param>
 		/// <param name="categoryIds">Category IDs</param>
-		public void SetCategories(PostSummaryModel post, IEnumerable<int> categoryIds)
+		public void SetCategories(PostModel post, IEnumerable<int> categoryIds)
 		{
 			// Find all the currently selected categories
 			var current = Connection
@@ -411,7 +411,7 @@ ORDER BY year DESC, month DESC");
 		/// </summary>
 		/// <param name="post">The post</param>
 		/// <param name="tagIds">Tag IDs</param>
-		public void SetTags(PostSummaryModel post, IEnumerable<int> tagIds)
+		public void SetTags(PostModel post, IEnumerable<int> tagIds)
 		{
 			// Find all the currently selected tags
 			var current = Connection
@@ -428,28 +428,6 @@ ORDER BY year DESC, month DESC");
 			var toAdd = tagIds.Except(current).ToList();
 			if (toAdd.Count > 0)
 				Connection.InsertAll(toAdd.Select(tagId => new PostTagModel { PostId = post.Id, TagId = tagId }));
-		}
-
-		public override void Save(PostModel entity)
-		{
-			Save((PostSummaryModel)entity);
-		}
-
-		/// <summary>
-		/// Saves this entity to the database. First tries to load the entity to check if it exists
-		/// If it exists, does an update.
-		/// </summary>
-		/// <param name="entity">The entity to save</param>
-		public void Save(PostSummaryModel entity)
-		{
-			// Assume it's new if the ID isn't set yet
-			var isNew = entity.Id == 0;
-
-			Connection.Save(entity);
-
-			// Update the ID
-			if (isNew)
-				entity.Id = Convert.ToInt32(Connection.GetLastInsertId());
 		}
 
 		private class MonthYearCount

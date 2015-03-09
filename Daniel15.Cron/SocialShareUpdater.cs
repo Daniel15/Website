@@ -42,7 +42,7 @@ namespace Daniel15.Cron
 		/// Updates the social media sharing counts of the specified post
 		/// </summary>
 		/// <param name="post">Post to update</param>
-		private void UpdatePost(PostSummaryModel post)
+		private void UpdatePost(PostModel post)
 		{
 			// TODO: Move this elsewhere (Business Layer)
 			var urls = GetBlogUrl(post);
@@ -59,7 +59,7 @@ namespace Daniel15.Cron
 		/// </summary>
 		/// <param name="post">Blog post to get URL of</param>
 		/// <returns>URL of the blog post</returns>
-		private UrlResponse GetBlogUrl(PostSummaryModel post)
+		private UrlResponse GetBlogUrl(PostModel post)
 		{
 			// TODO: Remove hard-coded URL from here
 			var urlApi = string.Format("http://dan.cx/api/posts/{0}/url", post.Id);

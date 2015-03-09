@@ -73,7 +73,6 @@
     <Compile Include="Entities\Blog\MicroblogPostModel.cs" />
     <Compile Include="Entities\Blog\PostCategoryModel.cs" />
     <Compile Include="Entities\Blog\PostModel.cs" />
-    <Compile Include="Entities\Blog\PostSummaryModel.cs" />
     <Compile Include="Entities\Blog\PostTagModel.cs" />
     <Compile Include="Entities\Blog\TagModel.cs" />
     <Compile Include="Entities\ISupportsDisqus.cs" />

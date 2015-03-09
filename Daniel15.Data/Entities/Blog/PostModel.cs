@@ -1,14 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Web;
+using Daniel15.Shared.Extensions;
 using ServiceStack.DataAnnotations;
 
 namespace Daniel15.Data.Entities.Blog
 {
-	/// <summary>
-	/// Represents a blog post
-	/// </summary>
-	public class PostModel : PostSummaryModel
+	[Alias("blog_posts")]
+	public class PostModel : ISupportsDisqus
 	{
 		private const string READ_MORE_COMMENT = "<!--more-->";
 		private const string READ_MORE_HTML_MARKER = "<span id=\"read-more\"></span>";
@@ -28,6 +29,31 @@ namespace Daniel15.Data.Entities.Blog
 		/// Matches any HTML tag
 		/// </summary>
 		private static readonly Regex _htmlTag = new Regex(@"<[^>]+>", RegexOptions.Compiled);
+
+		public int Id { get; set; }
+
+		[Required]
+		public string Title { get; set; }
+
+		[Required]
+		public string Slug { get; set; }
+		public bool Published { get; set; }
+		public string Summary { get; set; }
+
+		/// <summary>
+		/// UNIX timestamp this blog article was posted at. This is only for backwards compatibility
+		/// with the old database - Use <see cref="Date"/> instead.
+		/// </summary>
+		[Alias("date")]
+		public long UnixDate { get; set; }
+
+		[Ignore]
+		[Required]
+		public DateTime Date
+		{
+			get { return DateExtensions.FromUnix(UnixDate); }
+			set { UnixDate = value.ToUnix(); }
+		}
 
 		/// <summary>
 		/// The raw content of this blog post, as retrieved from the database
@@ -49,6 +75,21 @@ namespace Daniel15.Data.Entities.Blog
 		/// </summary>
 		[Ignore]
 		public CategoryModel MainCategory { get; set; }
+
+		/// <summary>
+		/// Details of how many times this post was shared on social networking sites
+		/// </summary>
+		[Alias("share_counts")]
+		public IDictionary<string, int> ShareCounts { get; set; }
+
+		/// <summary>
+		/// Gets the Disqus identifier for this post (currently just the post ID)
+		/// </summary>
+		[Ignore]
+		public string DisqusIdentifier
+		{
+			get { return Id.ToString(); }
+		}
 
 		/// <summary>
 		/// Gets the processed content of this blog post

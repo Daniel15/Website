@@ -9,6 +9,6 @@ namespace Daniel15.Web.ViewModels.Site
 	/// </summary>
 	public class IndexViewModel : ViewModelBase
 	{
-		public List<PostSummaryModel> LatestPosts { get; set; }
+		public List<PostModel> LatestPosts { get; set; }
 	}
 }

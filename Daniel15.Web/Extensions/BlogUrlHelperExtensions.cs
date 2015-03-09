@@ -14,7 +14,7 @@ namespace Daniel15.Web.Extensions
 		/// <param name="urlHelper">The URL helper.</param>
 		/// <param name="post">Blog post to link to</param>
 		/// <returns>URL to this blog post</returns>
-		public static string BlogPost(this UrlHelper urlHelper, PostSummaryModel post)
+		public static string BlogPost(this UrlHelper urlHelper, PostModel post)
 		{
 			// Post date needs to be padded with a 0 (eg. "01" for January) - T4MVC doesn't work in this
 			// case because it's strongly-typed (can't pass a string for an int param)
@@ -29,7 +29,7 @@ namespace Daniel15.Web.Extensions
 		/// <param name="urlHelper">The URL helper.</param>
 		/// <param name="post">Blog post to link to</param>
 		/// <returns>URL to this blog post</returns>
-		public static string BlogPostAbsolute(this UrlHelper urlHelper, PostSummaryModel post)
+		public static string BlogPostAbsolute(this UrlHelper urlHelper, PostModel post)
 		{
 			return urlHelper.Absolute(urlHelper.BlogPost(post));
 		}
@@ -40,7 +40,7 @@ namespace Daniel15.Web.Extensions
 		/// <param name="urlHelper">The URL helper.</param>
 		/// <param name="post">Blog post to link to</param>
 		/// <returns>URL to edit this blog post</returns>
-		public static string BlogPostEdit(this UrlHelper urlHelper, PostSummaryModel post)
+		public static string BlogPostEdit(this UrlHelper urlHelper, PostModel post)
 		{
 			// Post date needs to be padded with a 0 (eg. "01" for January) - T4MVC doesn't work in this
 			// case because it's strongly-typed (can't pass a string for an int param)

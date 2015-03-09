@@ -42,7 +42,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Sharing URL for this post</returns>
-		public string GetShareUrl(PostSummaryModel post, string url, string shortUrl)
+		public string GetShareUrl(PostModel post, string url, string shortUrl)
 		{
 			return SHARE_URL + "?" + new Dictionary<string, object>
 			{
@@ -58,7 +58,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Share count for this post</returns>
-		public int GetShareCount(PostSummaryModel post, string url, string shortUrl)
+		public int GetShareCount(PostModel post, string url, string shortUrl)
 		{
 			// Get the count using FQL. Returns *both* like count and share count.
 			var query = string.Format(LINK_QUERY, url);

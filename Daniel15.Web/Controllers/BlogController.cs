@@ -251,7 +251,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="post">Blog post</param>
 		/// <returns>The short URL</returns>
-		private string ShortUrl(PostSummaryModel post)
+		private string ShortUrl(PostModel post)
 		{
 			return Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http");
 		}
@@ -261,7 +261,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="post">Post to get statistics on</param>
 		/// <returns>Social network URLs and share counts for the post</returns>
-		private IEnumerable<PostSocialNetworkModel> GetSocialNetworks(PostSummaryModel post)
+		private IEnumerable<PostSocialNetworkModel> GetSocialNetworks(PostModel post)
 		{
 			var shareCounts = post.ShareCounts ?? new Dictionary<string, int>();
 			var socialNetworks = _socialManager.ShareUrls(post, Url.BlogPostAbsolute(post), ShortUrl(post));

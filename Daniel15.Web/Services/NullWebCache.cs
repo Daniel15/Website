@@ -18,7 +18,7 @@ namespace Daniel15.Web.Services
 		/// Clear the cache for this blog post
 		/// </summary>
 		/// <param name="post">The blog post</param>
-		public void ClearCache(PostSummaryModel post)
+		public void ClearCache(PostModel post)
 		{
 		}
 	}

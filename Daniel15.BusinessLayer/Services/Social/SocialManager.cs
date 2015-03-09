@@ -30,7 +30,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Sharing URLs for this post</returns>
-		public IEnumerable<KeyValuePair<ISocialNetwork, string>> ShareUrls(PostSummaryModel post, string url, string shortUrl)
+		public IEnumerable<KeyValuePair<ISocialNetwork, string>> ShareUrls(PostModel post, string url, string shortUrl)
 		{
 			foreach (var sharer in _socialShares)
 			{
@@ -45,7 +45,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Share count for this post</returns>
-		public IDictionary<ISocialNetwork, int> ShareCounts(PostSummaryModel post, string url, string shortUrl)
+		public IDictionary<ISocialNetwork, int> ShareCounts(PostModel post, string url, string shortUrl)
 		{
 			IDictionary<ISocialNetwork, int> results = new Dictionary<ISocialNetwork, int>(_socialShares.Count);
 			var legacyUrl = GetLegacyUrl(post, url);
@@ -83,7 +83,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="post">Blog post to link to</param>
 		/// <param name="currentUrl">Current URL to the blog post</param>
 		/// <returns>Legacy URL to this blog post</returns>
-		private string GetLegacyUrl(PostSummaryModel post, string currentUrl)
+		private string GetLegacyUrl(PostModel post, string currentUrl)
 		{
 			return currentUrl.Replace(post.Date.Year.ToString(), "blog/" + post.Date.Year);
 		}

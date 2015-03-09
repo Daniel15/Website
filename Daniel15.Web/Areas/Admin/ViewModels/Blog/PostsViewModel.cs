@@ -6,6 +6,6 @@ namespace Daniel15.Web.Areas.Admin.ViewModels.Blog
 {
 	public class PostsViewModel : ViewModelBase
 	{
-		public IList<PostSummaryModel> Posts { get; set; }
+		public IList<PostModel> Posts { get; set; }
 	}
 }

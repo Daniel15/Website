@@ -12,7 +12,7 @@ namespace Daniel15.Web.Tests.Extensions
 		[Ignore("Not working under Mono yet")]
 		public void BlogPosts()
 		{
-			var post = new PostSummaryModel
+			var post = new PostModel
 			{
 				Id = 123,
 				Date = new DateTime(2012, 1, 1),

@@ -9,7 +9,7 @@ namespace Daniel15.BusinessLayer.Services
 		/// </summary>
 		/// <param name="post">Blog post</param>
 		/// <returns>The short URL</returns>
-		string Shorten(PostSummaryModel post);
+		string Shorten(PostModel post);
 
 		/// <summary>
 		/// Convert a short URL back to an ID

@@ -20,28 +20,28 @@ namespace Daniel15.Data.Repositories
 		/// </summary>
 		/// <param name="slug">The slug.</param>
 		/// <returns>The post</returns>
-		PostSummaryModel GetSummaryBySlug(string slug);
+		PostModel GetSummaryBySlug(string slug);
 
 		/// <summary>
 		/// Gets the categories for the specified blog post
 		/// </summary>
 		/// <param name="post">Blog post</param>
 		/// <returns>Categories for this blog post</returns>
-		IList<CategoryModel> CategoriesForPost(PostSummaryModel post);
+		IList<CategoryModel> CategoriesForPost(PostModel post);
 
 		/// <summary>
 		/// Gets the categories for the specified blog posts
 		/// </summary>
 		/// <param name="posts">Blog posts</param>
 		/// <returns>Categories for all the specified posts</returns>
-		IDictionary<PostSummaryModel, IEnumerable<CategoryModel>> CategoriesForPosts(IEnumerable<PostSummaryModel> posts);
+		IDictionary<PostModel, IEnumerable<CategoryModel>> CategoriesForPosts(IEnumerable<PostModel> posts);
 
 		/// <summary>
 		/// Gets the tags for the specified blog post
 		/// </summary>
 		/// <param name="post">Blog post</param>
 		/// <returns>Tags for this blog post</returns>
-		IList<TagModel> TagsForPost(PostSummaryModel post);
+		IList<TagModel> TagsForPost(PostModel post);
 			
 		/// <summary>
 		/// Gets the latest blog posts
@@ -85,7 +85,7 @@ namespace Daniel15.Data.Repositories
 		/// <param name="count">Number of posts to return</param>
 		/// <param name="published">Whether to return published posts (true) or unpublished (false)</param>
 		/// <returns>Blog post summary</returns>
-		List<PostSummaryModel> LatestPostsSummary(int count = 10, bool published = true);
+		List<PostModel> LatestPostsSummary(int count = 10, bool published = true);
 
 		/// <summary>
 		/// Gets the count of blog posts for every year and every month.
@@ -162,20 +162,20 @@ namespace Daniel15.Data.Repositories
 		/// </summary>
 		/// <param name="post">The post</param>
 		/// <param name="categoryIds">Category IDs</param>
-		void SetCategories(PostSummaryModel post, IEnumerable<int> categoryIds);
+		void SetCategories(PostModel post, IEnumerable<int> categoryIds);
 
 		/// <summary>
 		/// Set the tags this blog post is tagged with
 		/// </summary>
 		/// <param name="post">The post</param>
 		/// <param name="tagIds">Tag IDs</param>
-		void SetTags(PostSummaryModel post, IEnumerable<int> tagIds);
+		void SetTags(PostModel post, IEnumerable<int> tagIds);
 
 		/// <summary>
 		/// Saves this entity to the database. First tries to load the entity to check if it exists
 		/// If it exists, does an update.
 		/// </summary>
 		/// <param name="entity">The entity to save</param>
-		void Save(PostSummaryModel entity);
+		void Save(PostModel entity);
 	}
 }

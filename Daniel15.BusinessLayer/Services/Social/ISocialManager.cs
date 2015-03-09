@@ -15,7 +15,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Sharing URLs for this post</returns>
-		IEnumerable<KeyValuePair<ISocialNetwork, string>> ShareUrls(PostSummaryModel post, string url, string shortUrl);
+		IEnumerable<KeyValuePair<ISocialNetwork, string>> ShareUrls(PostModel post, string url, string shortUrl);
 
 		/// <summary>
 		/// Gets the number of times this URL has been shared on this social network.
@@ -24,6 +24,6 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Share count for this post</returns>
-		IDictionary<ISocialNetwork, int> ShareCounts(PostSummaryModel post, string url, string shortUrl);
+		IDictionary<ISocialNetwork, int> ShareCounts(PostModel post, string url, string shortUrl);
 	}
 }
