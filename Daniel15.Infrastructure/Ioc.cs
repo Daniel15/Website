@@ -84,11 +84,7 @@ namespace Daniel15.Infrastructure
 			if (ENABLE_PROFILING)
 			{
 				// Yes, so we need to add a custom filter to the connection factory
-				connFilter = conn =>
-				{
-					var innerConn = ((IHasDbConnection)conn).DbConnection;
-					return new ProfiledDbConnection((DbConnection)innerConn, MiniProfiler.Current);
-				};
+				connFilter = conn => new ProfiledDbConnection((DbConnection)conn, MiniProfiler.Current);
 			}
 
 			// TODO: Move to Daniel15.Data

@@ -12,7 +12,7 @@ namespace Daniel15.Web
 			AreaRegistration.RegisterAllAreas();
 
 			IocInitialiser.Initialise();
-			//MiniProfilerInitialiser.Init();
+			MiniProfilerInitialiser.Init();
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);
 			ReactConfig.Configure();

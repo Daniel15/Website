@@ -1,9 +1,8 @@
-using Daniel15.Web.Infrastructure;
 using System.Web;
 using System.Web.Mvc;
 using System.Linq;
 using StackExchange.Profiling;
-using StackExchange.Profiling.MVCHelpers;
+using StackExchange.Profiling.Mvc;
 using StackExchange.Profiling.SqlFormatters;
 
 namespace Daniel15.Web.App_Start 
