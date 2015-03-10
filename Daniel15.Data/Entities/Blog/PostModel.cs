@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Web;
 using Daniel15.Shared.Extensions;
+using ServiceStack.Text;
 
 namespace Daniel15.Data.Entities.Blog
 {
@@ -76,7 +77,16 @@ namespace Daniel15.Data.Entities.Blog
 		/// <summary>
 		/// Details of how many times this post was shared on social networking sites
 		/// </summary>
-		public IDictionary<string, int> ShareCounts { get; set; }
+		public IDictionary<string, int> ShareCounts
+		{
+			get { return  RawShareCounts.FromJsv<IDictionary<string, int>>(); }
+			set { RawShareCounts = value.ToJsv(); }
+		}
+
+		/// <summary>
+		/// Raw JSON-encoded blob for <see cref="ShareCounts"/>.
+		/// </summary>
+		public string RawShareCounts { get; set; }
 
 		/// <summary>
 		/// Gets the Disqus identifier for this post (currently just the post ID)
