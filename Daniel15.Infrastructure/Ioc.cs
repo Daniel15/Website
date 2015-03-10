@@ -1,7 +1,5 @@
 using System;
 using System.Configuration;
-using System.Data;
-using System.Data.Common;
 using Daniel15.BusinessLayer;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.CodeRepositories;
@@ -10,13 +8,8 @@ using Daniel15.Configuration;
 using Daniel15.Data;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Repositories.EntityFramework;
-using Daniel15.Data.Repositories.OrmLite;
 using Daniel15.Infrastructure.Extensions;
-using ServiceStack.DataAccess;
-using ServiceStack.OrmLite;
 using SimpleInjector;
-using StackExchange.Profiling;
-using StackExchange.Profiling.Data;
 
 namespace Daniel15.Infrastructure
 {
@@ -77,25 +70,6 @@ namespace Daniel15.Infrastructure
 		/// <param name="lifestyle">Lifestyle to use when registering components</param>
 		private static void InitializeDatabase(Container container, Lifestyle lifestyle)
 		{
-			const bool ENABLE_PROFILING = false;
-
-			// By default, don't add a filter to the DB connection factory
-			Func<IDbConnection, IDbConnection> connFilter = conn => conn;
-			// Check if profiling is enabled
-			if (ENABLE_PROFILING)
-			{
-				// Yes, so we need to add a custom filter to the connection factory
-				connFilter = conn => new ProfiledDbConnection((DbConnection)conn, MiniProfiler.Current);
-			}
-
-			// TODO: Move to Daniel15.Data
-			container.Register<IDbConnectionFactory>(() =>
-				new OrmLiteConnectionFactory(ConfigurationManager.ConnectionStrings["Database"].ConnectionString, 
-					                         MySqlDialect.Provider) { ConnectionFilter = connFilter }, lifestyle);
-
-			container.Register<IDbConnection>(() => container.GetInstance<IDbConnectionFactory>().OpenDbConnection(), lifestyle);
-
-			// Repositories
 			container.Register<DatabaseContext>(lifestyle);
 			container.Register<IBlogRepository, BlogRepository>(lifestyle);
 			container.Register<IDisqusCommentRepository, DisqusCommentRepository>(lifestyle);

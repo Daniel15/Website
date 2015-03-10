@@ -56,6 +56,10 @@ namespace Daniel15.Data
 		/// Blog tags.
 		/// </summary>
 		public virtual DbSet<TagModel> Tags { get; set; }
+		/// <summary>
+		/// Comments synchronised from Disqus.
+		/// </summary>
+		public virtual DbSet<DisqusCommentModel> DisqusComments { get; set; }
 
 		/// <summary>
 		/// Initialises the Entity Framework model
@@ -75,6 +79,9 @@ namespace Daniel15.Data
 			modelBuilder.Entity<CategoryModel>().Property(x => x.ParentId).HasColumnName("parent_category_id");
 			modelBuilder.Entity<TagModel>().ToTable("blog_tags");
 			modelBuilder.Entity<TagModel>().Property(x => x.ParentId).HasColumnName("parent_tag_id");
+			modelBuilder.Entity<DisqusCommentModel>()
+				.ToTable("disqus_comments")
+				.Ignore(x => x.Children);
 
 			// Backwards compatibility with old DB - Dates as UNIX times
 			modelBuilder.Entity<PostModel>().Ignore(x => x.Date);

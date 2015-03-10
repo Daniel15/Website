@@ -1,18 +1,30 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using Daniel15.Data.Entities;
 using Daniel15.Data.Entities.Blog;
-using ServiceStack.OrmLite;
-using System.Linq;
 
-namespace Daniel15.Data.Repositories.OrmLite
+namespace Daniel15.Data.Repositories.EntityFramework
 {
 	/// <summary>
 	/// Repository for accessing Disqus comments
 	/// </summary>
 	public class DisqusCommentRepository : RepositoryBase<DisqusCommentModel>, IDisqusCommentRepository
 	{
-		public DisqusCommentRepository(IDbConnectionFactory connectionFactory) : base(connectionFactory)
+		/// <summary>
+		/// Creates a new <see cref="DisqusCommentRepository"/>
+		/// </summary>
+		/// <param name="context">Entity Framework database context</param>
+		public DisqusCommentRepository(DatabaseContext context) : base(context)
 		{
+		}
+
+		/// <summary>
+		/// Gets the <see cref="DbSet{T}"/> represented by this repository.
+		/// </summary>
+		protected override DbSet<DisqusCommentModel> Set
+		{
+			get { return Context.DisqusComments; }
 		}
 
 		/// <summary>
@@ -22,7 +34,7 @@ namespace Daniel15.Data.Repositories.OrmLite
 		/// <returns>Comment, or <c>null</c> if it doesn't exist</returns>
 		public DisqusCommentModel GetOrDefault(string id)
 		{
-			return Connection.GetByIdOrDefault<DisqusCommentModel>(id);
+			return Context.DisqusComments.Find(id);
 		}
 
 		/// <summary>
@@ -32,9 +44,9 @@ namespace Daniel15.Data.Repositories.OrmLite
 		/// <returns>List of all the comments</returns>
 		public IEnumerable<DisqusCommentModel> GetComments(ISupportsDisqus entity)
 		{
-			return Connection.Select<DisqusCommentModel>(query => query
+			return Context.DisqusComments
 				.Where(comm => comm.ThreadIdentifier == entity.DisqusIdentifier)
-				.OrderBy(comm => comm.Date));
+				.OrderBy(comm => comm.Date);
 		}
 
 		/// <summary>
