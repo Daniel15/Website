@@ -2,6 +2,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Linq;
 using StackExchange.Profiling;
+using StackExchange.Profiling.EntityFramework6;
 using StackExchange.Profiling.Mvc;
 using StackExchange.Profiling.SqlFormatters;
 
@@ -18,6 +19,7 @@ namespace Daniel15.Web.App_Start
 		public static void Init()
 		{
 			MiniProfiler.Settings.SqlFormatter = new InlineFormatter();
+			MiniProfilerEF6.Initialize();
 
 			// Setup profiler for Controllers via a Global ActionFilter
 			GlobalFilters.Filters.Add(new ProfilingActionFilter());

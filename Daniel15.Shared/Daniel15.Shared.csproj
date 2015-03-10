@@ -57,10 +57,12 @@
     <Compile Include="Configuration\IGallery.cs" />
     <Compile Include="Configuration\IGalleryConfiguration.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\ImageExtensions.cs" />
     <Compile Include="Extensions\QueryStringExtensions.cs" />
     <Compile Include="Configuration\ISiteConfiguration.cs" />
     <Compile Include="Configuration\SiteConfiguration.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

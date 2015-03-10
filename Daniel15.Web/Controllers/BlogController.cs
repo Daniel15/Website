@@ -73,7 +73,7 @@ namespace Daniel15.Web.Controllers
 			var pages = (int)Math.Ceiling((double)count / ITEMS_PER_PAGE);
 
 			if (page > pages)
-				return HttpNotFound(string.Format("Requested page number ({0}) is greater than page count ({1})", page, count));
+				return HttpNotFound(string.Format("Requested page number ({0}) is greater than page count ({1})", page, pages));
 
 			using (_profiler.Step("Building post ViewModels"))
 			{
@@ -127,7 +127,7 @@ namespace Daniel15.Web.Controllers
 			}
 
 			// If the category has a parent category, ensure it's in the URL
-			if (!string.IsNullOrEmpty(category.ParentSlug) && string.IsNullOrEmpty(parentSlug))
+			if (category.Parent != null && string.IsNullOrEmpty(parentSlug))
 			{
 				return RedirectPermanent(Url.BlogCategory(category, page));
 			}
@@ -137,7 +137,7 @@ namespace Daniel15.Web.Controllers
 			return Listing(posts, count, page, Views.Category, new CategoryListingViewModel
 			{
 				Category = category,
-				RssUrl = Url.ActionAbsolute(MVC.Feed.BlogCategory(category.Slug, category.ParentSlug))
+				RssUrl = Url.ActionAbsolute(MVC.Feed.BlogCategory(category.Slug, category.Parent == null ? null : category.Parent.Slug))
 			});
 		}
 

@@ -4,11 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Web;
 using Daniel15.Shared.Extensions;
-using ServiceStack.DataAnnotations;
 
 namespace Daniel15.Data.Entities.Blog
 {
-	[Alias("blog_posts")]
 	public class PostModel : ISupportsDisqus
 	{
 		private const string READ_MORE_COMMENT = "<!--more-->";
@@ -44,10 +42,8 @@ namespace Daniel15.Data.Entities.Blog
 		/// UNIX timestamp this blog article was posted at. This is only for backwards compatibility
 		/// with the old database - Use <see cref="Date"/> instead.
 		/// </summary>
-		[Alias("date")]
 		public long UnixDate { get; set; }
 
-		[Ignore]
 		[Required]
 		public DateTime Date
 		{
@@ -58,34 +54,33 @@ namespace Daniel15.Data.Entities.Blog
 		/// <summary>
 		/// The raw content of this blog post, as retrieved from the database
 		/// </summary>
-		[Alias("content")]
 		//[AllowHtml]
 		[Required]
 		public string RawContent { get; set; }
 
-		/// <summary>
-		/// ID of the main category for this post
-		/// </summary>
-		[Alias("maincategory_id")]
-		[Required]
 		public int MainCategoryId { get; set; }
 
 		/// <summary>
 		/// The main category of this post
 		/// </summary>
-		[Ignore]
-		public CategoryModel MainCategory { get; set; }
+		public virtual CategoryModel MainCategory { get; set; }
+		/// <summary>
+		/// Categories this post is contained in
+		/// </summary>
+		public virtual ICollection<CategoryModel> Categories { get; set; }
+		/// <summary>
+		/// Tags this post is tagged with
+		/// </summary>
+		public virtual ICollection<TagModel> Tags { get; set; }
 
 		/// <summary>
 		/// Details of how many times this post was shared on social networking sites
 		/// </summary>
-		[Alias("share_counts")]
 		public IDictionary<string, int> ShareCounts { get; set; }
 
 		/// <summary>
 		/// Gets the Disqus identifier for this post (currently just the post ID)
 		/// </summary>
-		[Ignore]
 		public string DisqusIdentifier
 		{
 			get { return Id.ToString(); }

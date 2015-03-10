@@ -44,7 +44,7 @@ namespace Daniel15.Web.Controllers
 		{
 			return View(Views.Index, new IndexViewModel
 			{
-				LatestPosts = _blogRepository.LatestPostsSummary()
+				LatestPosts = _blogRepository.LatestPosts()
 			});
 		}
 

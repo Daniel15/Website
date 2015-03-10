@@ -53,7 +53,7 @@ namespace Daniel15.Web.Controllers
 			Response.ContentType = "text/xml";
 			return View(new SitemapViewModel
 			{
-				Posts = _blogRepository.LatestPostsSummary(10000), // Should be big enough, lols
+				Posts = _blogRepository.LatestPosts(10000), // Should be big enough, lols
 				Categories = _blogRepository.Categories(),
 				Tags = _blogRepository.Tags(),
 				Projects = _projectRepository.All()
@@ -102,9 +102,9 @@ namespace Daniel15.Web.Controllers
 			}
 
 			// If the category has a parent category, ensure it's in the URL
-			if (!string.IsNullOrEmpty(category.ParentSlug) && string.IsNullOrEmpty(parentSlug))
+			if (category.Parent != null && string.IsNullOrEmpty(parentSlug))
 			{
-				return RedirectToActionPermanent(MVC.Feed.BlogCategory(slug, category.ParentSlug));
+				return RedirectToActionPermanent(MVC.Feed.BlogCategory(slug, category.Parent.Slug));
 			}
 
 			var posts = _blogRepository.LatestPosts(category, ITEMS_IN_FEED);

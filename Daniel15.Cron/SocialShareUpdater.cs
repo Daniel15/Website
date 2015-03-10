@@ -31,7 +31,7 @@ namespace Daniel15.Cron
 		/// </summary>
 		public void Run()
 		{
-			var posts = _blogRepository.LatestPostsSummary(10000);
+			var posts = _blogRepository.LatestPosts(10000);
 			foreach (var post in posts)
 			{
 				UpdatePost(post);

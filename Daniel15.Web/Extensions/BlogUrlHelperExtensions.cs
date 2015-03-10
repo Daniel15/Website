@@ -71,7 +71,7 @@ namespace Daniel15.Web.Extensions
 		/// <returns>The URL</returns>
 		public static string BlogCategory(this UrlHelper urlHelper, CategoryModel category, int page = 1)
 		{
-			return BlogCategory(urlHelper, "Category", category.Slug, category.ParentSlug, page);
+			return BlogCategory(urlHelper, "Category", category.Slug, category.Parent == null ? null : category.Parent.Slug, page);
 		}
 
 		/// <summary>
@@ -82,7 +82,7 @@ namespace Daniel15.Web.Extensions
 		/// <returns>The URL</returns>
 		public static string BlogCategoryFeed(this UrlHelper urlHelper, CategoryModel category)
 		{
-			return BlogCategory(urlHelper, "CategoryFeed", category.Slug, category.ParentSlug);
+			return BlogCategory(urlHelper, "CategoryFeed", category.Slug, category.Parent == null ? null :  category.Parent.Slug);
 		}
 
 		/// <summary>

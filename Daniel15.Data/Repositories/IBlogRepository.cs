@@ -16,13 +16,6 @@ namespace Daniel15.Data.Repositories
 		PostModel GetBySlug(string slug);
 
 		/// <summary>
-		/// Gets a post summary by slug.
-		/// </summary>
-		/// <param name="slug">The slug.</param>
-		/// <returns>The post</returns>
-		PostModel GetSummaryBySlug(string slug);
-
-		/// <summary>
 		/// Gets the categories for the specified blog post
 		/// </summary>
 		/// <param name="post">Blog post</param>
@@ -42,14 +35,15 @@ namespace Daniel15.Data.Repositories
 		/// <param name="post">Blog post</param>
 		/// <returns>Tags for this blog post</returns>
 		IList<TagModel> TagsForPost(PostModel post);
-			
+
 		/// <summary>
 		/// Gets the latest blog posts
 		/// </summary>
 		/// <param name="count">Number of posts to return</param>
 		/// <param name="offset">Post to start at</param>
+		/// <param name="published">Whether to return published or unpublished posts</param>
 		/// <returns>Latest blog posts</returns>
-		List<PostModel> LatestPosts(int count = 10, int offset = 0);
+		List<PostModel> LatestPosts(int count = 10, int offset = 0, bool published = true);
 
 		/// <summary>
 		/// Gets the latest blog posts in this category
@@ -78,14 +72,6 @@ namespace Daniel15.Data.Repositories
 		/// <param name="offset">Post to start at</param>
 		/// <returns>Latest blog posts</returns>
 		List<PostModel> LatestPostsForMonth(int year, int month, int count = 10, int offset = 0);
-
-		/// <summary>
-		/// Gets a reduced DTO of the latest posts (essentially everything except content)
-		/// </summary>
-		/// <param name="count">Number of posts to return</param>
-		/// <param name="published">Whether to return published posts (true) or unpublished (false)</param>
-		/// <returns>Blog post summary</returns>
-		List<PostModel> LatestPostsSummary(int count = 10, bool published = true);
 
 		/// <summary>
 		/// Gets the count of blog posts for every year and every month.
@@ -170,12 +156,5 @@ namespace Daniel15.Data.Repositories
 		/// <param name="post">The post</param>
 		/// <param name="tagIds">Tag IDs</param>
 		void SetTags(PostModel post, IEnumerable<int> tagIds);
-
-		/// <summary>
-		/// Saves this entity to the database. First tries to load the entity to check if it exists
-		/// If it exists, does an update.
-		/// </summary>
-		/// <param name="entity">The entity to save</param>
-		void Save(PostModel entity);
 	}
 }

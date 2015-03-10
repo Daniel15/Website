@@ -56,7 +56,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 		/// <returns>A list of posts</returns>
 		public virtual ActionResult Posts(bool published)
 		{
-			var posts = _blogRepository.LatestPostsSummary(100000, published);
+			var posts = _blogRepository.LatestPosts(count: 100000, published: published);
 
 			return View(Views.Posts, new PostsViewModel
 			{

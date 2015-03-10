@@ -7,7 +7,9 @@ using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.CodeRepositories;
 using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Configuration;
+using Daniel15.Data;
 using Daniel15.Data.Repositories;
+using Daniel15.Data.Repositories.EntityFramework;
 using Daniel15.Data.Repositories.OrmLite;
 using Daniel15.Infrastructure.Extensions;
 using ServiceStack.DataAccess;
@@ -15,7 +17,6 @@ using ServiceStack.OrmLite;
 using SimpleInjector;
 using StackExchange.Profiling;
 using StackExchange.Profiling.Data;
-using ProjectRepository = Daniel15.Data.Repositories.OrmLite.ProjectRepository;
 
 namespace Daniel15.Infrastructure
 {
@@ -95,6 +96,7 @@ namespace Daniel15.Infrastructure
 			container.Register<IDbConnection>(() => container.GetInstance<IDbConnectionFactory>().OpenDbConnection(), lifestyle);
 
 			// Repositories
+			container.Register<DatabaseContext>(lifestyle);
 			container.Register<IBlogRepository, BlogRepository>(lifestyle);
 			container.Register<IDisqusCommentRepository, DisqusCommentRepository>(lifestyle);
 			container.Register<IProjectRepository, ProjectRepository>(lifestyle);

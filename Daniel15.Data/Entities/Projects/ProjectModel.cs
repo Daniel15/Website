@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using ServiceStack.DataAnnotations;
+using Daniel15.Shared.Extensions;
 
 namespace Daniel15.Data.Entities.Projects
 {
 	/// <summary>
 	/// Represents a project I've worked on in the past
 	/// </summary>
-	[Alias("projects")]
 	public class ProjectModel
 	{
 		/// <summary>
@@ -38,20 +37,30 @@ namespace Daniel15.Data.Entities.Projects
 		/// <summary>
 		/// Height of the thumbnail, or <c>null</c> for the default
 		/// </summary>
-		[Alias("thumbnail_height")]
 		public int? ThumbnailHeight { get; set; }
 
 		/// <summary>
 		/// Width of the thumbnail, or <c>null</c> for the default
 		/// </summary>
-		[Alias("thumbnail_width")]
 		public int? ThumbnailWidth { get; set; }
 
 		/// <summary>
 		/// Project type
 		/// </summary>
-		[Alias("type")]
 		public ProjectType ProjectType { get; set; }
+
+		/// <summary>
+		/// String version of <see cref="ProjectType"/>. Only required because Entity Framework can not
+		/// serialise enums as strings. Use <see cref="ProjectType"/> instead.
+		/// </summary>
+		public string RawProjectType
+		{
+			get { return ProjectType.ToString(); }
+			set
+			{
+				ProjectType = value.FirstUpper().ParseEnum<ProjectType>();
+			}
+		}
 
 		/// <summary>
 		/// Description of this project
@@ -67,7 +76,6 @@ namespace Daniel15.Data.Entities.Projects
 		/// <summary>
 		/// URL to a Markdown readme file for this project
 		/// </summary>
-		[Alias("readme_url")]
 		public string ReadmeUrl { get; set; }
 
 		/// <summary>
@@ -78,13 +86,22 @@ namespace Daniel15.Data.Entities.Projects
 		/// <summary>
 		/// Whether this project is still being worked on
 		/// </summary>
-		[Alias("current")]
 		public bool IsCurrent { get; set; }
 
 		/// <summary>
 		/// A list of technologies used during development of this project
 		/// </summary>
 		public IList<string> Technologies { get; set; }
+
+		/// <summary>
+		/// A raw comma-separated list of technologies used during development of this project. Use
+		/// <see cref="Technologies"/> instead.
+		/// </summary>
+		public string RawTechnologies
+		{
+			get { return string.Join(",", Technologies); }
+			set { Technologies = value.Split(','); }
+		}
 
 		/// <summary>
 		/// A number representing where to display this project in the list
@@ -95,7 +112,6 @@ namespace Daniel15.Data.Entities.Projects
 		/// <summary>
 		/// Code repository for this project, if it's open-source
 		/// </summary>
-		[Alias("repository_url")]
 		public string RepositoryUrl { get; set; }
 
 		/// <summary>
@@ -121,7 +137,6 @@ namespace Daniel15.Data.Entities.Projects
 		/// <summary>
 		/// Number of bugs or issues this project has.
 		/// </summary>
-		[Alias("open_issues")]
 		public int? OpenIssues { get; set; }
 		#endregion
 	}
@@ -139,7 +154,7 @@ namespace Daniel15.Data.Entities.Projects
 		/// <summary>
 		/// This project is a web application
 		/// </summary>
-		WebApp,
+		Webapp,
 
 		/// <summary>
 		/// This project is a reusable library

@@ -1,11 +1,10 @@
-﻿using ServiceStack.DataAnnotations;
+﻿using System.Collections.Generic;
 
 namespace Daniel15.Data.Entities.Blog
 {
 	/// <summary>
 	/// A category in the blog
 	/// </summary>
-	[Alias("v_blog_categories")]
 	public class CategoryModel
 	{
 		/// <summary>
@@ -23,12 +22,14 @@ namespace Daniel15.Data.Entities.Blog
 		/// <summary>
 		/// Parent category ID
 		/// </summary>
-		[Alias("parent_category_id")]
 		public int? ParentId { get; set; }
 		/// <summary>
-		/// Slug (URL alias) of the parent category
+		/// Parent category this category is contained in
 		/// </summary>
-		[Alias("parent_slug")]
-		public string ParentSlug { get; set; }
+		public virtual CategoryModel Parent { get; set; }
+		/// <summary>
+		/// Posts that belong to this category
+		/// </summary>
+		public virtual ICollection<PostModel> Posts { get; set; }
 	}
 }

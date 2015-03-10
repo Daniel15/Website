@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using Daniel15.Data.Entities.Projects;
-using ServiceStack.OrmLite;
-using Daniel15.Data.Extensions;
 
-namespace Daniel15.Data.Repositories.OrmLite
+namespace Daniel15.Data.Repositories.EntityFramework
 {
 	/// <summary>
-	/// Blog repository that uses OrmLite as the data access component
+	/// Project repository that uses Entity Framework as the data access component
 	/// </summary>
 	public class ProjectRepository : RepositoryBase<ProjectModel>, IProjectRepository
 	{
+		public ProjectRepository(DatabaseContext context) : base(context) {}
+
 		/// <summary>
-		/// Initializes a new instance of the <see cref="ProjectRepository" /> class.
+		/// Gets the <see cref="DbSet{T}"/> represented by this repository.
 		/// </summary>
-		/// <param name="connectionFactory">The connection factory.</param>
-		public ProjectRepository(IDbConnectionFactory connectionFactory) : base(connectionFactory)
+		protected override DbSet<ProjectModel> Set
 		{
+			get { return Context.Projects; }
 		}
 
 		/// <summary>
@@ -25,7 +26,7 @@ namespace Daniel15.Data.Repositories.OrmLite
 		/// <returns>The project entities</returns>
 		public override List<ProjectModel> All()
 		{
-			return Connection.Select<ProjectModel>(query => query.OrderBy(proj => proj.Order));
+			return Context.Projects.OrderBy(proj => proj.Order).ToList();
 		}
 
 		/// <summary>
@@ -34,7 +35,7 @@ namespace Daniel15.Data.Repositories.OrmLite
 		/// <returns>List of technologies</returns>
 		public IList<ProjectTechnologyModel> Technologies()
 		{
-			return Connection.Select<ProjectTechnologyModel>(query => query.OrderBy(tech => tech.Order));
+			return Context.Technologies.OrderBy(tech => tech.Order).ToList();
 		}
 
 		/// <summary>
@@ -44,7 +45,7 @@ namespace Daniel15.Data.Repositories.OrmLite
 		/// <returns></returns>
 		public ProjectModel GetBySlug(string slug)
 		{
-			return Connection.FirstOrThrow<ProjectModel>(proj => proj.Slug == slug);
+			return Context.Projects.First(proj => proj.Slug == slug);
 		}
 	}
 }
