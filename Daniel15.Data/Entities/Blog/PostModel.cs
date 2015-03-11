@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using System.Web;
 using Daniel15.Shared.Extensions;
-using ServiceStack.Text;
+using Newtonsoft.Json;
 
 namespace Daniel15.Data.Entities.Blog
 {
@@ -79,8 +79,8 @@ namespace Daniel15.Data.Entities.Blog
 		/// </summary>
 		public IDictionary<string, int> ShareCounts
 		{
-			get { return  RawShareCounts.FromJsv<IDictionary<string, int>>(); }
-			set { RawShareCounts = value.ToJsv(); }
+			get { return JsonConvert.DeserializeObject<IDictionary<string, int>>(RawShareCounts); }
+			set { RawShareCounts = JsonConvert.SerializeObject(value); }
 		}
 
 		/// <summary>

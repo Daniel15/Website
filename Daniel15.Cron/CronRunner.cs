@@ -1,6 +1,7 @@
 ﻿using System;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Infrastructure;
+using SimpleInjector;
 
 namespace Daniel15.Cron
 {
@@ -13,7 +14,7 @@ namespace Daniel15.Cron
 
 		public CronRunner()
 		{
-			Ioc.Initialise();
+			Ioc.Initialise(dbLifestyle: Lifestyle.Singleton);
 		}
 
 		private void Run(string operation)
