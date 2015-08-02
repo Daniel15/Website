@@ -100,10 +100,6 @@
       <Project>{F38B83AD-77EB-43D8-A076-43D68FE409BB}</Project>
       <Name>Daniel15.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Daniel15.Web\Daniel15.Web.csproj">
-      <Project>{ECAA4A47-F98D-4BA1-83BA-AA5172C07FB5}</Project>
-      <Name>Daniel15.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />

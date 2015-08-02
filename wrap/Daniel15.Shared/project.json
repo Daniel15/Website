@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net40": {
+      "wrappedProject": "../../Daniel15.Shared/Daniel15.Shared.csproj",
+      "bin": {
+        "assembly": "../../Daniel15.Shared/obj/{configuration}/Daniel15.Shared.dll",
+        "pdb": "../../Daniel15.Shared/obj/{configuration}/Daniel15.Shared.pdb"
+      }
+    }
+  }
+}

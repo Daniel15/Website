@@ -16,3 +16,6 @@ Daniel15.Web/cassette-cache/
 *.generated.js
 *.generated.js.map
 Backup/
+.vs/
+project.lock.json
+Daniel15.Web-old

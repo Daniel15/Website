@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Configuration;
-using System.Web;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace Daniel15.Web.ViewModels
 {
@@ -32,12 +31,12 @@ namespace Daniel15.Web.ViewModels
 		/// <summary>
 		/// Gets the version string to use in the footer of the site
 		/// </summary>
-		public IHtmlString Version
+		public HtmlString Version
 		{
 			get
 			{
-				var gitRevision = ConfigurationManager.AppSettings["GitRevision"];
-				var gitRevisionUrl = ConfigurationManager.AppSettings["GitRevisionUrl"];
+				var gitRevision = "TODO";//ConfigurationManager.AppSettings["GitRevision"];
+				var gitRevisionUrl = "TODO";//ConfigurationManager.AppSettings["GitRevisionUrl"];
 
 				// Don't display anything if there's no version in the Web.config
 				if (string.IsNullOrEmpty(gitRevision))

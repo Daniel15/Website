@@ -5,12 +5,14 @@ using System.Text.RegularExpressions;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Entities.Projects;
 using Daniel15.Shared.Extensions;
+using Microsoft.Framework.Configuration;
 
 namespace Daniel15.Data
 {
 	/// <summary>
 	/// Entity Framework database context
 	/// </summary>
+	[DbConfigurationType(typeof(DatabaseConfiguration))]
 	public class DatabaseContext : DbContext
 	{
 		/// <summary>
@@ -34,7 +36,8 @@ namespace Daniel15.Data
 		/// <summary>
 		/// Creates a new instance of <see cref="DatabaseContext"/>.
 		/// </summary>
-		public DatabaseContext() : base("name=Database") { }
+		public DatabaseContext(IConfiguration config) 
+			: base(config.Get("Data:DefaultConnection:ConnectionString")) { }
 
 		/// <summary>
 		/// Projects in the database.

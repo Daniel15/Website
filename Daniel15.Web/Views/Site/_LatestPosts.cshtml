@@ -1,7 +1,7 @@
 ﻿@model List<Daniel15.Data.Entities.Blog.PostModel>
 
 <div id="blog-posts" class="blog-posts">
-	<h2>@Html.ActionLink("Recent Blog Posts", MVC.Blog.Index())</h2>
+	<h2>@Html.ActionLink("Recent Blog Posts", "Index", "Blog")</h2>
 	<ul>
 		@foreach (var post in Model)
 		{

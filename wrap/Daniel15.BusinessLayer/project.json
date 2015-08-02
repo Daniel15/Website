@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../Daniel15.BusinessLayer/Daniel15.BusinessLayer.csproj",
+      "bin": {
+        "assembly": "../../Daniel15.BusinessLayer/obj/{configuration}/Daniel15.BusinessLayer.dll",
+        "pdb": "../../Daniel15.BusinessLayer/obj/{configuration}/Daniel15.BusinessLayer.pdb"
+      },
+      "dependencies": {
+        "MarkdownDeep.NET": "1.5",
+        "MiniProfiler": "3.1.1.140",
+        "ServiceStack.Text": "3.9.37",
+        "Daniel15.Data": "1.0.0-*",
+        "Daniel15.Shared": "1.0.0-*",
+        "System.Web.Helpers": "1.0.0-*"
+      }
+    }
+  }
+}

@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Net;
-using System.Web.Mvc;
-using System.Web.UI;
-using AttributeRouting.Web.Mvc;
 using Daniel15.Data.Repositories;
 using Daniel15.Shared.Extensions;
 using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Shared;
 using Daniel15.Web.ViewModels.Site;
+using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Controllers
 {
@@ -38,11 +36,11 @@ namespace Daniel15.Web.Controllers
 		/// <summary>
 		/// Home page of the site :-)
 		/// </summary>
-		[GET("")]
-		[OutputCache(Location = OutputCacheLocation.Downstream, Duration = ONE_HOUR)]
+		[Route("")]
+		[ResponseCache(Location = ResponseCacheLocation.Any, Duration = ONE_HOUR)]
 		public virtual ActionResult Index()
 		{
-			return View(Views.Index, new IndexViewModel
+			return View("Index", new IndexViewModel
 			{
 				LatestPosts = _blogRepository.LatestPosts()
 			});
@@ -54,7 +52,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns></returns>
 		public virtual ActionResult Search()
 		{
-			return View(Views.Search, new ViewModelBase());
+			return View("Search", new ViewModelBase());
 		}
 
 		/// <summary>
@@ -71,18 +69,18 @@ namespace Daniel15.Web.Controllers
 			}.ToQueryString();
 			var responseText = new WebClient().DownloadString(url);
 			var response = System.Web.Helpers.Json.Decode(responseText);
-			return View(Views.SocialFeed, new SocialFeedViewModel { Data = response });
+			return View("SocialFeed", new SocialFeedViewModel { Data = response });
 		}
 
 		/// <summary>
 		/// A list of recent Tumblr posts
 		/// </summary>
 		/// <returns></returns>
-		[OutputCache(Duration = 86400)]
+		[ResponseCache(Duration = 86400)]
 		public virtual ActionResult TumblrPosts()
 		{
 			var posts = _microblogRepository.LatestPosts();
-			return PartialView(Views._TumblrPosts, posts);
+			return PartialView("_TumblrPosts", posts);
 		}
 
 		/// <summary>
@@ -95,7 +93,7 @@ namespace Daniel15.Web.Controllers
 			//Response.StatusCode = (int) HttpStatusCode.NotFound;
 			//Response.TrySkipIisCustomErrors = true;
 
-			return View(Views.FileNotFound, new ViewModelBase());
+			return View("FileNotFound", new ViewModelBase());
 		}
 
 		/// <summary>
@@ -105,8 +103,7 @@ namespace Daniel15.Web.Controllers
 		public virtual ActionResult Error()
 		{
 			Response.StatusCode = (int) HttpStatusCode.InternalServerError;
-			Response.TrySkipIisCustomErrors = true;
-			return View(MVC.Shared.Views.ErrorWithLayout, new ErrorViewModel());
+			return View("ErrorWithLayout");//, new ErrorViewModel());
 		}
 
 		/// <summary>
@@ -115,7 +112,7 @@ namespace Daniel15.Web.Controllers
 		/// MVC part of the site is down)
 		/// </summary>
 		/// <returns></returns>
-		[OutputCache(NoStore = true, Location = OutputCacheLocation.None)]
+		[ResponseCache(NoStore = true, Location = ResponseCacheLocation.None)]
 		public virtual ActionResult Alive()
 		{
 			return Content("Site is alive and running :)");
@@ -126,7 +123,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		public virtual ActionResult Projects()
 		{
-			return RedirectToActionPermanent(MVC.Project.Index());
+			return RedirectToActionPermanent("Index", "Projects");
 		}
 	}
 }

@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0-*",
+  "frameworks": {
+    "net45": {
+      "wrappedProject": "../../Daniel15.Infrastructure/Daniel15.Infrastructure.csproj",
+      "bin": {
+        "assembly": "../../Daniel15.Infrastructure/obj/{configuration}/Daniel15.Infrastructure.dll",
+        "pdb": "../../Daniel15.Infrastructure/obj/{configuration}/Daniel15.Infrastructure.pdb"
+      },
+      "dependencies": {
+        "EntityFramework": "6.1.3",
+        "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta6",
+        "MySql.Data": "6.9.7",
+        "Daniel15.BusinessLayer": "1.0.0-*",
+        "Daniel15.Data": "1.0.0-*",
+        "Daniel15.Shared": "1.0.0-*"
+      }
+    }
+  }
+}
