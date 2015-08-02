@@ -8,7 +8,8 @@ namespace Daniel15.Web
 		{
 			ReactSiteConfiguration.Configuration = new ReactSiteConfiguration()
 				.AddScript("~/Content/js/socialfeed.jsx")
-				.SetUseHarmony(true);
+				.SetUseHarmony(true)
+				.SetReuseJavaScriptEngines(false);
 		}
 	}
 }
