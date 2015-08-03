@@ -13,9 +13,11 @@ _ReSharper.*
 /ss
 Daniel15.Web.sln.DotSettings
 Daniel15.Web/cassette-cache/
+Daniel15.Web/wwwroot/cache/
 *.generated.js
 *.generated.js.map
 Backup/
 .vs/
 project.lock.json
 Daniel15.Web-old
+node_modules

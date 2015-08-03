@@ -2,13 +2,6 @@
 @using System.Threading.Tasks
 @using Daniel15.Web.Extensions
 @model Daniel15.Web.ViewModels.ViewModelBase
-@{
-	/*Bundles.Reference("main.css");
-	Bundles.Reference("~/Content/js/lib/react-0.12.1.min.js");
-	Bundles.Reference("main.js");
-	Bundles.AddInlineScript("Events.initPage();");
-	Bundles.Reference("syntaxHighlighter.js");*/
-}
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie ie6 ielt8 ielt9"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie ie7 ielt8 ielt9"> <![endif]-->
@@ -37,8 +30,13 @@
 		<meta name="DC.Date" content="@Model.LastModified.Value.ToString("yyyy-MM-dd")" />
 	}
 	@RenderSection("extraMeta", required: false)
-	
-	@*@Bundles.RenderStylesheets()*@
+
+	<environment names="Development">
+		<link rel="stylesheet" href="~/cache/main.css" />
+	</environment>
+	<environment names="Staging,Production">
+		<link rel="stylesheet" href="~/cache/main.min.css" asp-append-version="true"/>
+	</environment>
 	
 	<!--[if lt IE 9]><script src="@Url.Js("lib/IE9.js")"></script><![endif]-->
 
@@ -85,7 +83,7 @@
 
 		</div></div>
 		<footer>
-			&copy;2008&ndash;2013 <a href="http://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.<br />
+			&copy;2008&ndash;2015 <a href="http://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.<br />
 			@Model.Version
 			@if (Model.LastModified.HasValue)
 			{
@@ -94,10 +92,23 @@
 		</footer>
 	</div>
 	<!-- Now for the JS -->
-	@*@Bundles.RenderScripts()*@
-
+	<script 
+		src="http://fb.me/react-0.12.1.min.js"
+		asp-fallback-src="~/Content/js/lib/react-0.12.1.min.js"
+		asp-fallback-test="window.React">
+    </script>
+	<environment names="Development">
+		<script src="~/cache/main.js"></script>
+		<script>Events.initPage();</script>
+		<script src="~/cache/syntaxHighlighter.js"></script>
+	</environment>
+	<environment names="Staging,Production">
+		<script src="~/cache/main.js" asp-append-version="true"></script>
+		<script>Events.initPage();</script>
+		<script src="~/cache/syntaxHighlighter.js"  asp-append-version="true"></script>
+		<link rel="stylesheet" href="~/cache/main.min.css"/>
+	</environment>
 	@RenderSection("scripts", required: false)
-    @*@Html.ReactInitJavaScript()*@
 	
 	<!-- Prompt IE 6 and 7 users to install Chrome Frame -->
 	<!--[if lt IE 8]>
