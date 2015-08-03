@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Daniel15.Web.Controllers;
 using Daniel15.Web.Models.Shared;
 using Daniel15.Web.ViewModels;
+using Microsoft.AspNet.Html.Abstractions;
 using Microsoft.AspNet.Mvc.Rendering;
 
 namespace Daniel15.Web.Extensions
@@ -52,11 +53,11 @@ namespace Daniel15.Web.Extensions
 		/// </summary>
 		/// <param name="htmlHelper">The HTML helper.</param>
 		/// <returns>Text for the top menu</returns>
-		public static HtmlString Menu(this IHtmlHelper htmlHelper)
+		public static IHtmlContent Menu(this IHtmlHelper htmlHelper)
 		{
-			return new HtmlString("TODO");
-			/*var controller = htmlHelper.ViewContext.Controller;
-			var action = htmlHelper.ViewContext.RouteData.GetRequiredString("action").ToLower();
+			var routeData = htmlHelper.ViewContext.RouteData;
+			var controller = ((string)routeData.Values["controller"]).ToLower();
+			var action = ((string)routeData.Values["action"]).ToLower();
 
 			// TODO: Where should these actually be? Probably in a model.
 			// TODO: Should these be using UrlHelper?
@@ -66,19 +67,19 @@ namespace Daniel15.Web.Extensions
 				{
 					Url = "", 
 					Title = "Home", 
-					Active = controller is SiteController && action == "index"
+					Active = controller == "site" && action == "index"
 				},
 				new MenuItemModel
 				{
 					Url = "projects", 
 					Title = "Projects", 
-					Active = controller is ProjectController
+					Active = controller == "project"
 				},
 				new MenuItemModel
 				{
 					Url = "blog", 
 					Title = "Blog", 
-					Active = controller is BlogController
+					Active = controller == "blog"
 				},
 				new MenuItemModel
 				{
@@ -88,7 +89,7 @@ namespace Daniel15.Web.Extensions
 				},
 			};
 
-			return htmlHelper.Partial(MVC.Shared.Views._Menu, menuItems);*/
+			return htmlHelper.Partial("_Menu", menuItems);
 		}
 
 		/// <summary>

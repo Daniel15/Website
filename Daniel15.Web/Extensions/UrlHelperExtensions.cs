@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Mvc;
+﻿using System;
+using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Extensions
 {
@@ -7,6 +9,8 @@ namespace Daniel15.Web.Extensions
 	/// </summary>
 	public static class UrlHelperExtensions
 	{
+		public static IHttpContextAccessor HttpContextAccessor { get; set; }
+
 		/// <summary>
 		/// Gets the URL to the specified JavaScript file
 		/// </summary>
@@ -37,8 +41,19 @@ namespace Daniel15.Web.Extensions
 		/// <returns>Absoute URL</returns>
 		public static string Absolute(this IUrlHelper urlHelper, string uri)
 		{
-			return "TODO";
-			//return urlHelper.RequestContext.HttpContext.Request.Url.GetLeftPart(UriPartial.Authority) + uri;
+			var request = HttpContextAccessor.HttpContext.Request;
+			var hostAndPort = request.Host.Value.Split(':');
+            var builder = new UriBuilder
+			{
+				Host = hostAndPort[0],
+				Scheme = request.Scheme,
+				Path = uri
+			};
+			if (hostAndPort.Length == 2)
+			{
+				builder.Port = int.Parse(hostAndPort[1]);
+			}
+			return builder.ToString();
 		}
 
 		/// <summary>

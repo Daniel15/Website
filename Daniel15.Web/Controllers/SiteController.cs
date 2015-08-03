@@ -73,17 +73,6 @@ namespace Daniel15.Web.Controllers
 		}
 
 		/// <summary>
-		/// A list of recent Tumblr posts
-		/// </summary>
-		/// <returns></returns>
-		[ResponseCache(Duration = 86400)]
-		public virtual ActionResult TumblrPosts()
-		{
-			var posts = _microblogRepository.LatestPosts();
-			return PartialView("_TumblrPosts", posts);
-		}
-
-		/// <summary>
 		/// The page that is displayed when a File Not Found (404) error occurs.
 		/// </summary>
 		/// <returns></returns>

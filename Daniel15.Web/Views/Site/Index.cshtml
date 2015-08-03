@@ -68,7 +68,7 @@
 </ul>
 
 @Html.Partial("_LatestPosts", Model.LatestPosts)
-TODO @*@Html.Action("TumblrPosts")*@
+@Component.Invoke("TumblrPosts")
 
 @section sidebar
 {

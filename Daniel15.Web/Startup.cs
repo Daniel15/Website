@@ -1,4 +1,5 @@
 ﻿using Daniel15.Infrastructure;
+using Daniel15.Web.Extensions;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Configuration;
@@ -77,6 +78,11 @@ namespace Daniel15.Web
 					template: "{controller=Site}/{action=Index}/{id?}"
 				);
 			});
+
+
+			// This is really not ideal, need to figure out a better way to do this.
+			// Based off http://stackoverflow.com/a/30762664/210370
+			UrlHelperExtensions.HttpContextAccessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
 		}
 	}
 }
