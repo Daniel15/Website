@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using Daniel15.Data.Entities.Projects;
+using Daniel15.Data.Extensions;
 
 namespace Daniel15.Data.Repositories.EntityFramework
 {
@@ -45,7 +46,7 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns></returns>
 		public ProjectModel GetBySlug(string slug)
 		{
-			return Context.Projects.First(proj => proj.Slug == slug);
+			return Context.Projects.FirstOrThrow(proj => proj.Slug == slug);
 		}
 	}
 }

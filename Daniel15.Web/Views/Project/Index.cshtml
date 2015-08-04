@@ -23,7 +23,7 @@
 <div id="active_projects">
 	<h2>Active Projects</h2>
 	<p>These are all the projects I'm working on at the moment.</p>
-	@Html.Partial(MVC.Project.Views._ProjectList, new ProjectListViewModel
+	@Html.Partial("_ProjectList", new ProjectListViewModel
 	{
 		Projects = Model.CurrentProjects,
 		Technologies = Model.Technologies
@@ -37,7 +37,7 @@
 		This section lists all the projects I have completed, as well as projects that I was 
 		previously working on but don't update any more due to time constraints.
 	</p>
-	@Html.Partial(MVC.Project.Views._ProjectList, new ProjectListViewModel
+	@Html.Partial("_ProjectList", new ProjectListViewModel
 	{
 		Projects = Model.PreviousProjects,
 		Technologies = Model.Technologies

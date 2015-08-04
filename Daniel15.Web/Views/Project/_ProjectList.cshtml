@@ -1,109 +1,14 @@
-﻿@using Daniel15.BusinessLayer.Services.CodeRepositories
-@using Daniel15.Data.Entities.Projects
-@model Daniel15.Web.ViewModels.Project.ProjectListViewModel
+﻿@using Daniel15.Web.ViewModels.Project
+@using Microsoft.AspNet.Mvc.Rendering
+@model ProjectListViewModel
 
 <ul class="projects">
 	@foreach (var project in Model.Projects)
 	{
-		<li class="@(string.Join(" ", project.Technologies.Select(tech => "uses-" + tech)))">
-			@Thumbnail(project)
-			<h3>
-				<a href="@Url.Action(MVC.Project.Detail(project.Slug))">@project.Name</a>
-			</h3>
-			@Html.Raw(project.Description)<br />
-			
-			@if (project.Created != null && project.Updated != null)
-			{
-				<br />
-				<strong>Date: </strong> <text>Started</text> <time datetime="@project.Created.Value.ToString("s")">@project.Created.Value.ToStringWithOrdinal("d{0} MMMM yyyy")</time><text>, last updated </text><time datetime="@project.Updated.Value.ToString("s")">@project.Updated.Value.ToStringWithOrdinal("d{0} MMMM yyyy")</time>
-			}
-			else if (!string.IsNullOrEmpty(project.Date))
-			{
-				<br /><strong>Date: </strong> @project.Date
-			}
-			@if (!string.IsNullOrEmpty(project.Url))
-			{
-				<br /><strong>Website: </strong> <a href="@project.Url">@project.Url</a>
-			}
-			@if (project.Technologies != null && project.Technologies.Count > 0)
-			{
-				@Technologies(project.Technologies)
-			}
-			@if (!string.IsNullOrWhiteSpace(project.RepositoryUrl))
-			{
-				<br />@Repository(project)
-			}
-		</li>
+		@Html.Partial("_Project", new ProjectViewModel
+		{
+			Project = project,
+			Technologies = project.Technologies.Select(slug => Model.Technologies[slug]),
+		});
 	}
 </ul>
-
-@helper Repository(ProjectModel project)
-{
-	@* TODO: Move this logic to controller or ViewModel *@
-	var repositoryUrl = new Uri(project.RepositoryUrl);
-	if (GithubCodeRepository.IsGithubRepository(repositoryUrl))
-	{
-		var githubWebUrl = "https://github.com" + repositoryUrl.AbsolutePath.Replace(".git", string.Empty);
-		<text>Code available on <a href="@githubWebUrl">GitHub</a></text>
-		if (project.Forks != null || project.Watchers != null || project.OpenIssues != null)
-		{
-			<text>(@(project.Forks ?? 0) <a href="@githubWebUrl/network">forks</a>, @(project.Watchers ?? 0) <a href="@githubWebUrl/stargazers">watchers</a>, @(project.OpenIssues ?? 0) <a href="@githubWebUrl/issues">open issues</a>)</text>
-		}
-	}
-	else
-	{
-		<strong>Code available at: </strong> <a href="@project.RepositoryUrl">@project.RepositoryUrl</a>
-		if (project.Forks != null || project.Watchers != null || project.OpenIssues != null)
-		{
-			<text>(@(project.Forks ?? 0) forks, @(project.Watchers ?? 0) watchers, @(project.OpenIssues ?? 0) open issues)</text>
-		}
-	}
-}
-
-@helper Thumbnail(ProjectModel project)
-{
-	if (string.IsNullOrEmpty(project.Thumbnail))
-	{
-		return;
-	}
-		
-	<a href="@Url.Action(MVC.Project.Detail(project.Slug))" class="thumb">
-		<img class="thumb" src="@Url.Image("screenshots/" + project.Thumbnail + ".png")" alt="Thumbnail for @project.Name" height="@(project.ThumbnailHeight ?? 160)" width="@(project.ThumbnailWidth ?? 200)" />
-	</a>
-}
-
-@helper Technologies(IList<string> technologySlugs)
-{
-	var technologies = technologySlugs.Select(slug => Model.Technologies[slug]);
-		
-	var primaryTechs = technologies.Where(x => x.IsPrimary);
-	var secondaryTechs = technologies.Where(x => !x.IsPrimary);
-	   
-	<br />
-	<span class="techs">
-		<strong>Technologies used:</strong>
-		@foreach (var tech in primaryTechs)
-		{
-			<a href="@tech.Url" title="@tech.Name" class="@tech.Slug">@tech.Name</a>
-		}
-	</span>
-
-	@* Check if any secondary technologies are in use *@
-	if (!secondaryTechs.Any())
-	{
-		return;
-	}
-	
-	@:+
-	foreach (var tech in secondaryTechs)
-	{
-		if (string.IsNullOrEmpty(tech.Url))
-		{
-			@:@tech.Name,
-		}
-		else
-		{
-			@:<a href="@tech.Url">@tech.Name</a>,
-		}
-	}
-}

@@ -1,10 +1,9 @@
 ﻿using System.Linq;
-using System.Web.Mvc;
-using AttributeRouting.Web.Mvc;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Projects;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.ViewModels.Project;
+using Microsoft.AspNet.Mvc;
 using IndexViewModel = Daniel15.Web.ViewModels.Project.IndexViewModel;
 
 namespace Daniel15.Web.Controllers
@@ -21,13 +20,13 @@ namespace Daniel15.Web.Controllers
 		/// <summary>
 		/// A list of all the projects I've worked on the past
 		/// </summary>
-		[GET("projects")]
+		[Route("projects")]
 		public virtual ActionResult Index()
 		{
 			var projects = _projectRepository.All();
 			var techs = _projectRepository.Technologies();
 
-			return View(Views.Index, new IndexViewModel
+			return View("Index", new IndexViewModel
 			{
 				CurrentProjects = projects.Where(x => x.IsCurrent).ToList(),
 				PreviousProjects = projects.Where(x => !x.IsCurrent).ToList(),
@@ -40,7 +39,7 @@ namespace Daniel15.Web.Controllers
 		/// View details on the specified project
 		/// </summary>
 		/// <param name="slug">URL slug of the project</param>
-		[GET("projects/{slug}")]
+		[Route("projects/{slug}")]
 		public virtual ActionResult Detail(string slug)
 		{
 			ProjectModel project;
@@ -51,7 +50,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the project doesn't exist
-				return HttpNotFound(string.Format("Project '{0}' not found.", slug));
+				return HttpNotFound($"Project '{slug}' not found.");
 			}
 
 			// If there's no readme, just redirect to the project site itself
