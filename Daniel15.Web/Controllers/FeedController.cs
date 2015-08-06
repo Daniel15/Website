@@ -125,7 +125,6 @@ namespace Daniel15.Web.Controllers
 		/// <returns>RSS feed</returns>
 		private ActionResult RenderFeed(IList<PostModel> posts, FeedViewModel model)
 		{
-			Response.ContentType = "application/rss+xml";
 			// Set last-modified date based on the date of the newest post
 			if (posts.Count > 0)
 			{
