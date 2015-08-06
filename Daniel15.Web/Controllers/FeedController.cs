@@ -70,7 +70,7 @@ namespace Daniel15.Web.Controllers
 				return Redirect(_siteConfig.FeedBurnerUrl);
 
 			var posts = _blogRepository.LatestPosts(ITEMS_IN_FEED);
-            return RenderFeed(posts, new FeedViewModel
+			return RenderFeed(posts, new FeedViewModel
 			{
 				FeedGuidBase = "Latest",
 				Title = _siteConfig.BlogName,
