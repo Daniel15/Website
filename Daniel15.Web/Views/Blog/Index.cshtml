@@ -1,4 +1,5 @@
 ﻿@model Daniel15.Web.ViewModels.Blog.ListingViewModel
+@inject Daniel15.Infrastructure.ISiteConfiguration Config
 
 @{
 	//Model.PageUrlGenerator = page => Url.Action(MVC.Blog.Index(page));
@@ -11,4 +12,4 @@
 		: string.Format("Page {0} — {1}", Model.Page, Config.BlogName);
 }
 
-@Html.Partial(MVC.Blog.Views._Posts, Model)
+@Html.Partial("_Posts", Model)

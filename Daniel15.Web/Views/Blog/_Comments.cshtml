@@ -1,10 +1,11 @@
 ﻿@using ServiceStack.Text
 @model Daniel15.Web.ViewModels.Blog.PostViewModel
+@inject Daniel15.Infrastructure.ISiteConfiguration Config
 
 <div id="comments">
 	<div id="disqus_thread">
 		<h3>Comments</h3>
-		@Html.Partial(MVC.Blog.Views._CommentList, Model.Comments)
+		@Html.Partial("_CommentList", Model.Comments)
 	</div>
 </div>
 

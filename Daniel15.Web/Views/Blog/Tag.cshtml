@@ -1,15 +1,16 @@
 ﻿@model Daniel15.Web.ViewModels.Blog.TagListingViewModel
+@inject Daniel15.Infrastructure.ISiteConfiguration Config
 
 @{
 	Model.PageUrlGenerator = page => Url.BlogTag(Model.Tag, page);
 	Model.Heading = Config.BlogName;
-	Model.Title = string.Format("Latest posts in {0} — {1}", Model.Tag.Title, Config.BlogName);
+	Model.Title = $"Latest posts in {Model.Tag.Title} — {Config.BlogName}";
 
 	// Only show page number if we're not on page 1
 	if (Model.Page != 1)
 	{
-		Model.Title = string.Format("Page {0} — {1}", Model.Page, Model.Title);
+		Model.Title = $"Page {Model.Page} — {Model.Title}";
 	}
 }
 
-@Html.Partial(MVC.Blog.Views._Posts, Model)
+@Html.Partial("_Posts", Model)

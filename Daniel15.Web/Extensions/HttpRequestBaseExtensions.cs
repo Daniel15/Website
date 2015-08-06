@@ -1,4 +1,4 @@
-﻿using System.Web;
+﻿using Microsoft.AspNet.Http;
 
 namespace Daniel15.Web.Extensions
 {
@@ -14,13 +14,13 @@ namespace Daniel15.Web.Extensions
 		/// </summary>
 		/// <param name="request">The request</param>
 		/// <returns><c>true</c> if this request can redirect to FeedBurner</returns>
-		public static bool ShouldRedirectToFeedburner(this HttpRequestBase request)
+		public static bool ShouldRedirectToFeedburner(this HttpRequest request)
 		{
-			var userAgent = (request.UserAgent ?? string.Empty).ToLower();
+			var userAgent = (request.Headers.Get("User-Agent") ?? string.Empty).ToLower();
 			return
 				!userAgent.Contains("feedburner")
 				&& !userAgent.Contains("feedvalidator")
-				&& request.QueryString["feedburner_override"] == null;
+				&& !request.Query.ContainsKey("feedburner_override");
 		}
 	}
 }

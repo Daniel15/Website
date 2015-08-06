@@ -20,7 +20,7 @@
 			</article>
 			@if (comment.Children != null && comment.Children.Count > 0)
 			{
-				@Html.Partial(MVC.Blog.Views._CommentList, comment.Children)
+				@Html.Partial("_CommentList", comment.Children)
 			}
 		</li>	
 	}

@@ -1,4 +1,5 @@
 ﻿@using ServiceStack.Text
+@inject Daniel15.Infrastructure.ISiteConfiguration Config
 
 <script>
 	var disqus_shortname = @Html.Raw(Config.DisqusShortname.ToJson());

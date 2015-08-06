@@ -91,17 +91,5 @@ namespace Daniel15.Web.Extensions
 
 			return htmlHelper.Partial("_Menu", menuItems);
 		}
-
-		/// <summary>
-		/// Retrieves the content of the blog sidebar
-		/// </summary>
-		/// <param name="htmlHelper">HTML helper</param>
-		/// <returns>HTML for the blog sidebar</returns>
-		public static HtmlString BlogSidebar(this IHtmlHelper htmlHelper)
-		{
-			return new HtmlString("TODO");
-			/*return htmlHelper.ViewContext.HttpContext.Cache.GetOrInsert("BlogSidebar", DateTime.UtcNow.AddDays(1), null,
-			                                                            () => htmlHelper.Action(MVC.BlogPartials.Sidebar()));*/
-		}
 	}
 }

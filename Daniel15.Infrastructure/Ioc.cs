@@ -24,6 +24,10 @@ namespace Daniel15.Infrastructure
 			services.AddSingleton<IProjectCacheUpdater, ProjectCacheUpdater>();
 			services.AddSingleton<ICodeRepositoryManager, CodeRepositoryManager>();
 			services.AddSingleton<ICodeRepository, GithubCodeRepository>();
+			services.AddSingleton<Facebook>();
+			services.AddSingleton<Reddit>();
+			services.AddSingleton<Twitter>();
+			services.AddSingleton<Linkedin>();
 
 			// TODO
 			// _siteConfig.ApiKeys = (ApiKeysConfiguration)ConfigurationManager.GetSection("ApiKeys");

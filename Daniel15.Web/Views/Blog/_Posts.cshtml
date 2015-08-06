@@ -3,10 +3,10 @@
 
 @foreach (var post in Model.Posts)
 {
-	@Html.Partial(MVC.Blog.Views._PostBrief, post)
+	@Html.Partial("_PostBrief", post)
 }
 
-@Html.Partial(MVC.Shared.Views._Pagination, new PaginationModel
+@Html.Partial("_Pagination", new PaginationModel
 {
 	CurrentPage = Model.Page, 
 	TotalPages = Model.TotalPages, 
