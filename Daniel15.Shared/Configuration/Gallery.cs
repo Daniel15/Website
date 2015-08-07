@@ -1,28 +1,25 @@
-using System;
-using System.Configuration;
-
 namespace Daniel15.Configuration
 {
-	public interface IGallery
+	public class Gallery
 	{
 		/// <summary>
 		/// Gets the name of the image gallery
 		/// </summary>
-		string Name { get; }
+		public string Name { get; set; }
 
 		/// <summary>
 		/// Gets the friendly title of the image gallery
 		/// </summary>
-		string Title { get; }
+		public string Title { get; set; }
 
 		/// <summary>
 		/// Gets the URL images in this gallery are directly accessible at
 		/// </summary>
-		Uri ImageUrl { get; }
+		public string ImageUrl { get; set; }
 
 		/// <summary>
 		/// Gets the directory images for this gallery are stored in
 		/// </summary>
-		string ImageDir { get; }
+		public string ImageDir { get; set; }
 	}
 }

@@ -48,9 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\ConfigurationElementCollection.cs" />
     <Compile Include="Configuration\GalleryConfiguration.cs" />
-    <Compile Include="Configuration\IGallery.cs" />
+    <Compile Include="Configuration\Gallery.cs" />
     <Compile Include="Configuration\IGalleryConfiguration.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\EnumExtensions.cs" />

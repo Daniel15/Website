@@ -7,6 +7,6 @@ namespace Daniel15.Configuration
 		/// <summary>
 		/// Gets all the configured image galleries
 		/// </summary>
-		IDictionary<string, IGallery> Galleries { get; }
+		Dictionary<string, Gallery> Galleries { get; }
 	}
 }

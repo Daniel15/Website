@@ -13,7 +13,7 @@ namespace Daniel15.Web.Areas.Gallery.ViewModels
 		/// <summary>
 		/// Details on the gallery
 		/// </summary>
-		public IGallery Gallery { get; set; }
+		public Configuration.Gallery Gallery { get; set; }
 		/// <summary>
 		/// Path to the gallery listing
 		/// </summary>

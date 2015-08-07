@@ -13,8 +13,8 @@
 }
 
 <h2>
-	@Html.ActionLink(Model.Gallery.Title, MVC.Gallery.Gallery.Index(Model.Gallery.Name))
-	
+	@Html.ActionLink(Model.Gallery.Title, "Index", "Gallery", new { galleryName = Model.Gallery.Name, path = string.Empty })
+
 	@if (!string.IsNullOrWhiteSpace(Model.Path))
 	{
 		var allSegments = Model.Path.Split('/');
@@ -24,8 +24,9 @@
 		{
 			segments.Add(segment);
 			var currentPath = string.Join("/", segments);
-			<text>—</text>
-			@Html.ActionLink(segment, MVC.Gallery.Gallery.Index(Model.Gallery.Name, currentPath))
+			<text> — </text>
+
+			@Html.ActionLink(segment, "Index", "Gallery", new { galleryName = Model.Gallery.Name, path = currentPath })
 		}
 	}
 </h2>

@@ -8,6 +8,16 @@
     "GoogleAnalyticsAccount": "UA-25623237-2",
     "MicroblogFeedUrl": "http://feeds.dan.cx/dan-thoughts"
   },
+  "Gallery": {
+    "Galleries": {
+      "screenshots": {
+        "Name": "screenshots",
+        "Title": "Screenshots",
+        "ImageUrl": "http://localhost/ss/",
+        "ImageDir": "c:\\Temp\\Screenshots"
+      }
+    }
+  },
   "Data": {
     "DefaultConnection": {
       "ConnectionString": "Server=192.168.146.1; Database=daniel15_site; Uid=vmdev; Pwd=password;"

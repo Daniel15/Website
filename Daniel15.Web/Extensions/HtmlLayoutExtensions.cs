@@ -24,7 +24,7 @@ namespace Daniel15.Web.Extensions
 			var controller = ((string)routeData.Values["controller"]).ToLower();
 			var action = ((string)routeData.Values["action"]).ToLower();
 			object areaObj;
-			routeData.DataTokens.TryGetValue("area", out areaObj);
+			routeData.Values.TryGetValue("area", out areaObj);
 			var area = (string)areaObj;
 
 			if (!string.IsNullOrEmpty(area))
