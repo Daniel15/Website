@@ -9,6 +9,7 @@ using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.ViewModels.Feed;
 using Daniel15.Web.Extensions;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Net.Http.Headers;
 
 namespace Daniel15.Web.Controllers
 {
@@ -49,14 +50,15 @@ namespace Daniel15.Web.Controllers
 		[Route("sitemap.xml")]
 		public virtual ActionResult Sitemap()
 		{
-			Response.ContentType = "text/xml";
-			return View(new SitemapViewModel
+			var view = View(new SitemapViewModel
 			{
 				Posts = _blogRepository.LatestPosts(10000), // Should be big enough, lols
 				Categories = _blogRepository.Categories(),
 				Tags = _blogRepository.Tags(),
 				Projects = _projectRepository.All()
 			});
+			view.ContentType = MediaTypeHeaderValue.Parse("text/xml");
+			return view;
 		}
 
 		/// <summary>
