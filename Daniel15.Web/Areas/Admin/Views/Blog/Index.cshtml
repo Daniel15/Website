@@ -7,8 +7,8 @@
 <h2>Posts</h2>
 <p>There are:</p>
 <ul>
-	<li><a href="@Url.Action(MVC.Admin.Blog.Posts(published: true))">@Model.PublishedPosts published posts</a></li>
-	<li><a href="@Url.Action(MVC.Admin.Blog.Posts(published: false))">@Model.UnpublishedPosts unpublished posts</a></li>
+	<li><a asp-action="Posts" asp-route-published="true">@Model.PublishedPosts published posts</a></li>
+	<li><a asp-action="Posts" asp-route-published="false">@Model.UnpublishedPosts unpublished posts</a></li>
 </ul>
-<p>@Html.ActionLink("Write a new post", MVC.Admin.Blog.Edit())</p>
-<p>@Html.ActionLink("Sync Disqus comments", MVC.Admin.Blog.SyncComments())</p>
+<p>@Html.ActionLink("Write a new post", "Edit")</p>
+<p>@Html.ActionLink("Sync Disqus comments", "SyncComments")</p>

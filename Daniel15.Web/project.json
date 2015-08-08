@@ -17,7 +17,8 @@
         "Microsoft.Framework.Configuration.Json": "1.0.0-beta6",
         "Microsoft.Framework.Logging.Console": "1.0.0-beta6",
         "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-beta6",
-        "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta6"
+        "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta6",
+        "Microsoft.AspNet.Session": "1.0.0-beta6"
     },
 
     "commands": {

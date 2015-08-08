@@ -4,7 +4,7 @@
 	Model.Title = "Edit Post";
 }
 
-@Html.ActionLink("← Back to administration", MVC.Admin.Blog.Index())
+@Html.ActionLink("← Back to administration", "Index", "Blog", new { area = "Admin" })
 
 @using (Html.BeginForm())
 {

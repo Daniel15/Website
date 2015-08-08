@@ -79,7 +79,7 @@ namespace Daniel15.Data.Entities.Blog
 		/// </summary>
 		public IDictionary<string, int> ShareCounts
 		{
-			get { return JsonConvert.DeserializeObject<IDictionary<string, int>>(RawShareCounts); }
+			get { return string.IsNullOrEmpty(RawShareCounts) ? null : JsonConvert.DeserializeObject<IDictionary<string, int>>(RawShareCounts); }
 			set { RawShareCounts = JsonConvert.SerializeObject(value); }
 		}
 
