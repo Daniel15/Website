@@ -59,49 +59,8 @@ namespace Daniel15.Web
 			app.UseStaticFiles();
 			app.UseIdentity();
 			app.UseSession();
-			app.UseMvc(routes =>
-			{
-				// The only routes here are default routes, and routes that can not be expressed
-				// with attribute routing. Most routes are defined using attributes.
-
-				// Normal pages on the website
-				routes.MapRoute(
-					name: "GalleryDefault",
-					template: "Gallery/{controller}/{action=Index}",
-					defaults: new { area = "Gallery" }
-				);
-
-				routes.MapRoute(
-					name: "BlogAdminPostsPublished",
-					template: "blog/admin/posts/published",
-					defaults: new { area = "Admin", controller = "Blog", action = "Posts", published = "true" }
-				);
-
-				routes.MapRoute(
-					name: "BlogAdminPostsUnpublished",
-					template: "blog/admin/posts/unpublished",
-					defaults: new { area = "Admin", controller = "Blog", action = "Posts", published = "false" }
-				);
-
-				routes.MapRoute(
-					name: "BlogAdminDefault",
-					template: "blog/admin/{action=Index}",
-					defaults: new { area = "Admin", controller = "Blog" }
-				);
-
-				routes.MapRoute(
-					name: "AdminDefault",
-					template: "Admin/{controller}/{action=Index}",
-					defaults: new { area = "Admin" }
-				);
-
-				// When all else fails... A default route, just in case.
-				routes.MapRoute(
-					name: "default",
-					template: "{controller=Site}/{action=Index}/{id?}"
-				);
-			});
-
+			// All real routes are defined using attributes.
+			app.UseMvcWithDefaultRoute();
 
 			// This is really not ideal, need to figure out a better way to do this.
 			// Based off http://stackoverflow.com/a/30762664/210370

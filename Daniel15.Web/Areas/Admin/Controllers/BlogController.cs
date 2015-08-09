@@ -4,7 +4,6 @@ using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.Areas.Admin.ViewModels.Blog;
 using System.Linq;
-using System.Threading.Tasks;
 using Daniel15.Web.Extensions;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
@@ -17,6 +16,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 	/// </summary>
 	[Authorize]
 	[Area("Admin")]
+	[Route("blog/admin")]
 	public partial class BlogController : Controller
 	{
 		private readonly IBlogRepository _blogRepository;
@@ -37,6 +37,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 		/// Shows the blog administration homepage
 		/// </summary>
 		/// <returns></returns>
+		[Route("")]
 		public virtual ActionResult Index()
 		{
 			return View("Index", new IndexViewModel
@@ -51,6 +52,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 		/// </summary>
 		/// <param name="published">Whether to display published posts (true) or unpublished posts (false)</param>
 		/// <returns>A list of posts</returns>
+		[Route("posts")]
 		public virtual ActionResult Posts(bool published)
 		{
 			var posts = _blogRepository.LatestPosts(count: 100000, published: published);
@@ -66,8 +68,8 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 		/// </summary>
 		/// <param name="slug">Slug of the blog post</param>
 		/// <returns></returns>
-		[HttpGet("{year:int:length(4)}/{month:int:length(2)}/{slug}/edit", Order = 1)]
-		[HttpGet("blog/admin/new", Order = 2)]
+		[HttpGet("~/{year:int:length(4)}/{month:int:length(2)}/{slug}/edit", Order = 1)]
+		[HttpGet("~/blog/admin/new", Order = 2)]
 		public virtual ActionResult Edit(string slug = null)
 		{
 			// If slug is not specified, we're creating a new post
@@ -91,8 +93,8 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 		/// <param name="slug">Slug of the blog post</param>
 		/// <param name="viewModel"></param>
 		/// <returns></returns>
-		[HttpPost("{year:int:length(4)}/{month:int:length(2)}/{slug}/edit", Order = 1)]
-		[HttpPost("blog/admin/new", Order = 2)]
+		[HttpPost("~/{year:int:length(4)}/{month:int:length(2)}/{slug}/edit", Order = 1)]
+		[HttpPost("~/blog/admin/new", Order = 2)]
 		public virtual ActionResult Edit(EditViewModel viewModel, string slug = null)
 		{
 			// Ensure valid
@@ -136,6 +138,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 			return Redirect(Url.BlogPostEdit(post));
 		}
 
+		[Route("synccomments")]
 		public virtual ActionResult SyncComments()
 		{
 			_comments.Sync();

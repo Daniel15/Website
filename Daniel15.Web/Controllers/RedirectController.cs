@@ -28,7 +28,7 @@ namespace Daniel15.Web.Controllers
 		{
 			var redirect = "~/" + uri;
 			if (Request.Query != null && Request.Query.Count > 0)
-				redirect += "?" + Request.QueryString;
+				redirect += Request.QueryString;
 
 			return RedirectPermanent(redirect);
 		}
