@@ -46,7 +46,12 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns>The entity</returns>
 		public virtual T Get(int id)
 		{
-			return Set.Find(id);
+			var entity = Set.Find(id);
+			if (entity == null)
+			{
+				throw new EntityNotFoundException();
+			}
+			return entity;
 		}
 
 		/// <summary>
