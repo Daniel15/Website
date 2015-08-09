@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "Disqus": {
+      "commandName": "Daniel15.Cron",
+      "commandLineArgs": "-disqus"
+    },
+    "Social": {
+      "commandName": "Daniel15.Cron",
+      "commandLineArgs": "-social"
+    },
+    "Projects": {
+      "commandName": "Daniel15.Cron",
+      "commandLineArgs": "-projects"
+    }
+  }
+}

@@ -62,8 +62,8 @@ namespace Daniel15.BusinessLayer.Services.CodeRepositories
 				dynamic response = JObject.Parse(responseText);
 				return new RepositoryInfo
 				{
-					Created = DateTime.Parse(response.created_at),
-					Updated = DateTime.Parse(response.updated_at),
+					Created = response.created_at,
+					Updated = response.updated_at,
 					Forks = response.forks,
 					Watchers = response.watchers,
 					OpenIssues = response.open_issues,

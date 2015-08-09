@@ -1,5 +1,4 @@
-﻿using Daniel15.Configuration;
-using Daniel15.Infrastructure;
+﻿using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
 using Daniel15.Web.Extensions;
 using Microsoft.AspNet.Builder;
@@ -7,7 +6,6 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
-using Microsoft.Framework.OptionsModel;
 using Microsoft.Framework.Runtime;
 
 namespace Daniel15.Web
@@ -27,16 +25,6 @@ namespace Daniel15.Web
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.Configure<SiteConfiguration>(Configuration.GetConfigurationSection("Site"));
-			services.Configure<GalleryConfiguration>(Configuration.GetConfigurationSection("Gallery"));
-			services.AddSingleton<ISiteConfiguration>(
-				provider => provider.GetRequiredService<IOptions<SiteConfiguration>>().Options
-			);
-			services.AddSingleton<IGalleryConfiguration>(
-				provider => provider.GetRequiredService<IOptions<GalleryConfiguration>>().Options
-			);
-			services.AddSingleton<IConfiguration>(_ => Configuration);
-
 			services.AddIdentity<SimpleIdentityUser, SimpleIdentityRole>()
 				.AddSimpleIdentity<SimpleIdentityUser>(Configuration.GetConfigurationSection("Auth"))
 				.AddDefaultTokenProviders();
@@ -45,6 +33,7 @@ namespace Daniel15.Web
 			services.AddSession();
 			services.AddMvc();
 			services.AddDaniel15();
+			services.AddDaniel15Config(Configuration);
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)

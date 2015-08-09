@@ -9,7 +9,8 @@
     "dependencies": {
         "Daniel15.BusinessLayer": "1.0.0-*",
         "Daniel15.Data": "1.0.0-*",
-        "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta6"
+        "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta6",
+        "Microsoft.Framework.OptionsModel": "1.0.0-beta6"
     },
 
     "frameworks": {

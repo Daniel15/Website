@@ -2,8 +2,9 @@
 using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
-using ServiceStack.Text;
 using System.Linq;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace Daniel15.Cron
 {
@@ -63,7 +64,12 @@ namespace Daniel15.Cron
 		{
 			// TODO: Remove hard-coded URL from here
 			var urlApi = string.Format("http://dan.cx/api/posts/{0}/url", post.Id);
-			return urlApi.GetJsonFromUrl().FromJson<UrlResponse>();
+			using (var client = new WebClient())
+			{
+				var rawResponse = client.DownloadString(urlApi);
+				return JsonConvert.DeserializeObject<UrlResponse>(rawResponse);
+			}
+			
 		}
 
 		private class UrlResponse

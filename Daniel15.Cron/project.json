@@ -1,0 +1,27 @@
+{
+    "version": "1.0.0-*",
+    "description": "Daniel15.Cron Console Application",
+    "authors": [ "Daniel Lo Nigro" ],
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": "",
+
+    "dependencies": {
+        "Daniel15.BusinessLayer": "1.0.0-*",
+        "Daniel15.Infrastructure": "1.0.0-*",
+        "Daniel15.Data": "1.0.0-*",
+        "Microsoft.Framework.DependencyInjection": "1.0.0-beta6",
+        "Microsoft.Framework.Configuration": "1.0.0-beta6",
+        "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta6",
+        "Microsoft.Framework.Configuration.Json": "1.0.0-beta6",
+        "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta6"
+    },
+
+    "commands": {
+        "Daniel15.Cron": "Daniel15.Cron"
+    },
+
+    "frameworks": {
+        "dnx451": { }
+    }
+}
