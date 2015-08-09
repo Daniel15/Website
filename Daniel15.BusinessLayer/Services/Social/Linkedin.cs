@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Helpers;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Shared.Extensions;
+using Newtonsoft.Json.Linq;
 using ServiceStack.Text;
 
 namespace Daniel15.BusinessLayer.Services.Social
@@ -68,7 +68,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 			// Ugly hack to get JSON data from the JavaScript method call
 			// This API call is usually used client-side via JSONP...
 			responseText = responseText.Replace("IN.Tags.Share.handleCount(", "").Replace(");", "");
-			var response = Json.Decode(responseText);
+			dynamic response = JObject.Parse(responseText);
 
 			if (response == null || response.count == null)
 				return 0;

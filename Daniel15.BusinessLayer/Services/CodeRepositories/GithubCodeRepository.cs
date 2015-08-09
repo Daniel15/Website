@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Text;
-using System.Web.Helpers;
+using Newtonsoft.Json.Linq;
 
 namespace Daniel15.BusinessLayer.Services.CodeRepositories
 {
@@ -59,7 +59,7 @@ namespace Daniel15.BusinessLayer.Services.CodeRepositories
 				client.Encoding = Encoding.UTF8;
 				client.Headers["User-Agent"] = "Daniel15-Website/1.0 (http://dan.cx/)";
 				var responseText = client.DownloadString(apiUrl);
-				var response = Json.Decode(responseText);
+				dynamic response = JObject.Parse(responseText);
 				return new RepositoryInfo
 				{
 					Created = DateTime.Parse(response.created_at),

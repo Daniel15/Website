@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Helpers;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Shared.Extensions;
+using Newtonsoft.Json.Linq;
 using ServiceStack.Text;
 
 namespace Daniel15.BusinessLayer.Services.Social
@@ -63,7 +63,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 				{"url", url}
 			}.ToQueryString();
 
-			var data = Json.Decode(apiUrl.GetJsonFromUrl());
+			dynamic data = JObject.Parse(apiUrl.GetJsonFromUrl());
 			if (data == null || data.data == null || data.data.children == null)
 				return 0;
 

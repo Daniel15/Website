@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Web.Helpers;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Infrastructure;
 using Daniel15.Shared.Extensions;
 using ServiceStack.Text;
+using Newtonsoft.Json.Linq;
 
 namespace Daniel15.BusinessLayer.Services
 {
@@ -54,7 +54,7 @@ namespace Daniel15.BusinessLayer.Services
 				dynamic data;
 				try
 				{
-					data = Json.Decode(url.GetJsonFromUrl());
+					data = JObject.Parse(url.GetJsonFromUrl());
 				}
 				catch (WebException	ex)
 				{

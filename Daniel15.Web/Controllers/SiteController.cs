@@ -6,6 +6,7 @@ using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Shared;
 using Daniel15.Web.ViewModels.Site;
 using Microsoft.AspNet.Mvc;
+using Newtonsoft.Json.Linq;
 
 namespace Daniel15.Web.Controllers
 {
@@ -68,7 +69,7 @@ namespace Daniel15.Web.Controllers
 				{"before_date", before_date}
 			}.ToQueryString();
 			var responseText = new WebClient().DownloadString(url);
-			var response = System.Web.Helpers.Json.Decode(responseText);
+			dynamic response = JObject.Parse(responseText);
 			return View("SocialFeed", new SocialFeedViewModel { Data = response });
 		}
 

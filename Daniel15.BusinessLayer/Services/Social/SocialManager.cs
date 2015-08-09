@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Daniel15.Data.Entities.Blog;
-using StackExchange.Profiling;
 
 namespace Daniel15.BusinessLayer.Services.Social
 {
@@ -52,26 +51,21 @@ namespace Daniel15.BusinessLayer.Services.Social
 
 			foreach (var sharer in _socialShares)
 			{
-				using (MiniProfiler.Current.Step("Sharing count for " + sharer.Name))
+				int count;
+				try
 				{
-					int count;
-					try
-					{
-						count = sharer.GetShareCount(post, url, shortUrl);
-						count += sharer.GetShareCount(post, legacyUrl, string.Empty);
-					}
-					catch (Exception ex)
-					{
-						// If an error occured, just set the count to 0 and log it.
-						// These aren't overly important - They shouldn't crash the page!
-						// TODO: Figure out how to use ELMAH outside of websites
-						//Elmah.ErrorSignal.FromCurrentContext().Raise(new Exception("Couldn't get social share count for " + sharer.Name, ex));
-						Console.Error.WriteLine("WARNING: Couldn't get social share count for {0}: {1}", sharer.Name, ex);
-						count = 0;
-					}
-
-					results.Add(sharer, count);
+					count = sharer.GetShareCount(post, url, shortUrl);
+					count += sharer.GetShareCount(post, legacyUrl, string.Empty);
 				}
+				catch (Exception ex)
+				{
+					// If an error occured, just set the count to 0 and log it.
+					// These aren't overly important - They shouldn't crash the cronjob!
+					Console.Error.WriteLine("WARNING: Couldn't get social share count for {0}: {1}", sharer.Name, ex);
+					count = 0;
+				}
+
+				results.Add(sharer, count);
 			}
 
 			return results;
