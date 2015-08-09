@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Infrastructure;
-using Daniel15.Shared.Extensions;
-using ServiceStack.Text;
+using Microsoft.AspNet.Http.Extensions;
 using Newtonsoft.Json.Linq;
 
 namespace Daniel15.BusinessLayer.Services
@@ -54,7 +52,11 @@ namespace Daniel15.BusinessLayer.Services
 				dynamic data;
 				try
 				{
-					data = JObject.Parse(url.GetJsonFromUrl());
+					using (var client = new WebClient())
+					{
+						var result = client.DownloadString(url);
+						data = JArray.Parse(result);
+					}
 				}
 				catch (WebException	ex)
 				{
@@ -113,15 +115,15 @@ namespace Daniel15.BusinessLayer.Services
 		/// <returns>URL for the API</returns>
 		private string BuildUrl(string cursor)
 		{
-			return LIST_POSTS_URL + "?" + new Dictionary<string, object>
+			return LIST_POSTS_URL + new QueryBuilder
 			{
 				{"api_key", _siteConfiguration.DisqusApiKey},
-				{"category", _siteConfiguration.DisqusCategory},
+				{"category", _siteConfiguration.DisqusCategory.ToString()},
 				{"related", "thread"},
-				{"limit", 100},
+				{"limit", "100"},
 				{"order", "asc"},
 				{"cursor", cursor},
-			}.ToQueryString();
+			};
 		}
 	}
 }

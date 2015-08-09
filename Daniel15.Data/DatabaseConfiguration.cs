@@ -14,7 +14,7 @@ namespace Daniel15.Data
 	{
 		public DatabaseConfiguration()
 		{
-			// Attempt to add MySQL ADO.NET providefr
+			// Attempt to add MySQL ADO.NET provider
 			try
 			{
 				var dataSet = (DataSet) ConfigurationManager.GetSection("system.data");

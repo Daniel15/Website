@@ -1,0 +1,18 @@
+﻿{
+  "version": "1.0.0-*",
+  "description": "Daniel15.Shared Class Library",
+  "authors": [ "Daniel Lo Nigro" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": { },
+
+  "frameworks": {
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Drawing": "4.0.0.0"
+      }
+    }
+  }
+}

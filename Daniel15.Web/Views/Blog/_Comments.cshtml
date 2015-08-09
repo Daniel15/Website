@@ -1,4 +1,4 @@
-﻿@using ServiceStack.Text
+﻿@using Newtonsoft.Json
 @model Daniel15.Web.ViewModels.Blog.PostViewModel
 @inject Daniel15.Infrastructure.ISiteConfiguration Config
 
@@ -10,10 +10,10 @@
 </div>
 
 <script type="text/javascript">
-    var disqus_shortname = @Html.Raw(Config.DisqusShortname.ToJson()),
-        disqus_title = @Html.Raw(Model.Post.Title.ToJson()),
+    var disqus_shortname = @Html.Raw(JsonConvert.SerializeObject(Config.DisqusShortname)),
+        disqus_title = @Html.Raw(JsonConvert.SerializeObject(Model.Post.Title)),
         disqus_identifier = @Model.Post.DisqusIdentifier,
-        disqus_url = @Html.Raw(Url.BlogPostAbsolute(Model.Post).ToJson());
+        disqus_url = @Html.Raw(JsonConvert.SerializeObject(Url.BlogPostAbsolute(Model.Post)));
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

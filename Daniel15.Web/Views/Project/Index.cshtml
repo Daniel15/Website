@@ -1,5 +1,6 @@
-﻿@using Daniel15.Web.ViewModels.Project
-@using ServiceStack.Text
+﻿@using System.Threading.Tasks
+@using Daniel15.Web.ViewModels.Project
+@using Newtonsoft.Json
 @model Daniel15.Web.ViewModels.Project.IndexViewModel
 
 @{
@@ -47,7 +48,7 @@
 <!-- I guess this is kinda ugly, but it's better than doing a separate request per tech when you click it -->
 <script type="text/javascript">
 //<![CDATA[
-	var tech_descs = @Html.Raw(Model.PrimaryTechnologies.ToDictionary(x => x.Slug, x => x.Description).ToJson())
+	var tech_descs = @Html.Raw(JsonConvert.SerializeObject(Model.PrimaryTechnologies.ToDictionary(x => x.Slug, x => x.Description)))
 //]]>
 </script>
 

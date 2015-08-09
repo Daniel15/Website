@@ -1,0 +1,22 @@
+{
+    "version": "1.0.0-*",
+    "description": "Daniel15.BusinessLayer Class Library",
+    "authors": [ "Daniel Lo Nigro" ],
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": "",
+
+    "dependencies": {
+        "Daniel15.Data": "1.0.0-*",
+        "MarkdownDeep.NET": "1.5.0",
+        "Microsoft.AspNet.Http.Extensions": "1.0.0-beta6"
+    },
+
+    "frameworks": {
+        "dnx451": {
+            "frameworkAssemblies": {
+                "System.Net": "4.0.0.0"
+            }
+        }
+    }
+}

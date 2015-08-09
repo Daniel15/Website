@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using Daniel15.Data.Entities.Blog;
-using Daniel15.Shared.Extensions;
+using Microsoft.AspNet.Http.Extensions;
 using Newtonsoft.Json.Linq;
-using ServiceStack.Text;
 
 namespace Daniel15.BusinessLayer.Services.Social
 {
@@ -41,11 +41,11 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <returns>Sharing URL for this post</returns>
 		public string GetShareUrl(PostModel post, string url, string shortUrl)
 		{
-			return SHARE_URL + "?" + new Dictionary<string, object>
+			return SHARE_URL + new QueryBuilder
 			{
 				{"url", url},
 				{"title", post.Title}
-			}.ToQueryString();
+			};
 		}
 
 		/// <summary>
@@ -58,22 +58,26 @@ namespace Daniel15.BusinessLayer.Services.Social
 		public int GetShareCount(PostModel post, string url, string shortUrl)
 		{
 			var total = 0;
-			var apiUrl = API_URL + "?" + new Dictionary<string, object>
+			var apiUrl = API_URL + new QueryBuilder
 			{
 				{"url", url}
-			}.ToQueryString();
+			};
 
-			dynamic data = JObject.Parse(apiUrl.GetJsonFromUrl());
-			if (data == null || data.data == null || data.data.children == null)
-				return 0;
-
-			// Need to add up the points in every submission of this URL
-			foreach (var child in data.data.children)
+			using (var client = new WebClient())
 			{
-				total += Convert.ToInt32(child.data.score);
-			}
+				var rawData = client.DownloadString(apiUrl);
+				dynamic data = JObject.Parse(rawData);
+				if (data == null || data.data == null || data.data.children == null)
+					return 0;
 
-			return total;
+				// Need to add up the points in every submission of this URL
+				foreach (var child in data.data.children)
+				{
+					total += Convert.ToInt32(child.data.score);
+				}
+
+				return total;
+			}
 		}
 		#endregion
 	}

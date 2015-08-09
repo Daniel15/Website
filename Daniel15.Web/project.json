@@ -29,12 +29,7 @@
 
   "frameworks": {
     "dnx451": {
-      "dependencies": {
-        "Daniel15.BusinessLayer": "1.0.0-*",
-        "Daniel15.Data": "1.0.0-*",
-        "Daniel15.Shared": "1.0.0-*",
-        "Daniel15.Infrastructure": "1.0.0-*"
-      },
+      "dependencies": { },
       "frameworkAssemblies": {
         "System.Drawing": "4.0.0.0"
       }

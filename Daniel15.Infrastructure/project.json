@@ -1,0 +1,18 @@
+{
+    "version": "1.0.0-*",
+    "description": "Daniel15.Infrastructure Class Library",
+    "authors": [ "Daniel Lo Nigro" ],
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": "",
+
+    "dependencies": {
+        "Daniel15.BusinessLayer": "1.0.0-*",
+        "Daniel15.Data": "1.0.0-*",
+        "Microsoft.Framework.DependencyInjection.Abstractions": "1.0.0-beta6"
+    },
+
+    "frameworks": {
+        "dnx451": { }
+    }
+}

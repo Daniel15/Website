@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using Daniel15.Data.Repositories;
-using Daniel15.Shared.Extensions;
 using Daniel15.Web.ViewModels;
-using Daniel15.Web.ViewModels.Shared;
 using Daniel15.Web.ViewModels.Site;
+using Microsoft.AspNet.Http.Extensions;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json.Linq;
 
@@ -64,11 +63,11 @@ namespace Daniel15.Web.Controllers
 		public virtual ActionResult SocialFeed(int count = 25, int? before_date = null)
 		{
 			// Currently just proxies to the PHP page - This needs to be rewritten in C#
-			var url = "http://dan.cx/socialfeed/loadjson.php?" + new Dictionary<string, object>
+			var url = "http://dan.cx/socialfeed/loadjson.php" + new QueryBuilder
 			{
-				{"count", count},
-				{"before_date", before_date}
-			}.ToQueryString();
+				{"count", count.ToString()},
+				{"before_date", before_date.ToString()}
+			};
 			var responseText = new WebClient().DownloadString(url);
 			dynamic response = JArray.Parse(responseText);
 			return View("SocialFeed", new SocialFeedViewModel { Data = response });
