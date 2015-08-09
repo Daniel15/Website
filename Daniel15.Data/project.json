@@ -21,9 +21,9 @@
             },
             "frameworkAssemblies": {
                 "System.Xml.Linq": "4.0.0.0",
-                "System.XML": "4.0.0.0",
+                "System.Xml": "4.0.0.0",
                 "System.Data": "4.0.0.0",
-                "System.configuration": "4.0.0.0"
+                "System.Configuration": "4.0.0.0"
             }
         }
     }

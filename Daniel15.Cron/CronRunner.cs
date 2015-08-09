@@ -12,7 +12,6 @@ namespace Daniel15.Cron
 	{
 		private readonly IApplicationEnvironment _appEnv;
 		private readonly IServiceCollection _serviceCollection = new ServiceCollection();
-		private IConfiguration _config;
 		private IServiceProvider _serviceProvider;
 
 		public Program(IApplicationEnvironment appEnv)
