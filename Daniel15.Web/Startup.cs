@@ -77,19 +77,6 @@ namespace Daniel15.Web
 
 				// Normal pages on the website
 				routes.MapRoute(
-					name: "Page",
-					template: "{action}.htm",
-					defaults: new { controller = "Site" }
-				);
-
-				// Signature images
-				routes.MapRoute(
-					name: "Signature",
-					template: "sig/{action}.png",
-					defaults: new { controller = "Signature" }
-				);
-
-				routes.MapRoute(
 					name: "GalleryDefault",
 					template: "Gallery/{controller}/{action=Index}",
 					defaults: new { area = "Gallery" }

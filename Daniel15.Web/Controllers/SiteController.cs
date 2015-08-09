@@ -13,6 +13,7 @@ namespace Daniel15.Web.Controllers
 	/// <summary>
 	/// Controller for the home page as well as a few auxiliary pages.
 	/// </summary>
+	[Route("[action].htm")]
 	public partial class SiteController : Controller
 	{
 		/// <summary>
@@ -37,7 +38,7 @@ namespace Daniel15.Web.Controllers
 		/// <summary>
 		/// Home page of the site :-)
 		/// </summary>
-		[Route("")]
+		[Route("~/")]
 		[ResponseCache(Location = ResponseCacheLocation.Any, Duration = ONE_HOUR)]
 		public virtual ActionResult Index()
 		{
@@ -69,7 +70,7 @@ namespace Daniel15.Web.Controllers
 				{"before_date", before_date}
 			}.ToQueryString();
 			var responseText = new WebClient().DownloadString(url);
-			dynamic response = JObject.Parse(responseText);
+			dynamic response = JArray.Parse(responseText);
 			return View("SocialFeed", new SocialFeedViewModel { Data = response });
 		}
 
