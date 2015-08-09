@@ -1,5 +1,6 @@
 ﻿using Daniel15.Configuration;
 using Daniel15.Infrastructure;
+using Daniel15.SimpleIdentity;
 using Daniel15.Web.Extensions;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
@@ -36,6 +37,10 @@ namespace Daniel15.Web
 			);
 			services.AddSingleton<IConfiguration>(_ => Configuration);
 
+			services.AddIdentity<SimpleIdentityUser, SimpleIdentityRole>()
+				.AddSimpleIdentity<SimpleIdentityUser>(Configuration.GetConfigurationSection("Auth"))
+				.AddDefaultTokenProviders();
+
 			services.AddCaching();
 			services.AddSession();
 			services.AddMvc();
@@ -63,6 +68,7 @@ namespace Daniel15.Web
 			}
 
 			app.UseStaticFiles();
+			app.UseIdentity();
 			app.UseSession();
 			app.UseMvc(routes =>
 			{

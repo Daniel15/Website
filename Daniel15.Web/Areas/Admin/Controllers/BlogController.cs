@@ -6,6 +6,7 @@ using Daniel15.Web.Areas.Admin.ViewModels.Blog;
 using System.Linq;
 using System.Threading.Tasks;
 using Daniel15.Web.Extensions;
+using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Framework.WebEncoders;
 
@@ -14,7 +15,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 	/// <summary>
 	/// Handles administration of the blog
 	/// </summary>
-	//[Authorize]
+	[Authorize]
 	[Area("Admin")]
 	public partial class BlogController : Controller
 	{
@@ -92,7 +93,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 		/// <returns></returns>
 		[HttpPost("{year:int:length(4)}/{month:int:length(2)}/{slug}/edit", Order = 1)]
 		[HttpPost("blog/admin/new", Order = 2)]
-		public virtual async Task<ActionResult> Edit(EditViewModel viewModel, string slug = null)
+		public virtual ActionResult Edit(EditViewModel viewModel, string slug = null)
 		{
 			// Ensure valid
 			if (!ModelState.IsValid)
