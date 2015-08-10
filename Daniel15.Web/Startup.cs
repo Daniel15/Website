@@ -7,6 +7,7 @@ using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using Microsoft.Framework.Runtime;
+using React.AspNet;
 
 namespace Daniel15.Web
 {
@@ -32,6 +33,7 @@ namespace Daniel15.Web
 			services.AddCaching();
 			services.AddSession();
 			services.AddMvc();
+			services.AddReact();
 			services.AddDaniel15();
 			services.AddDaniel15Config(Configuration);
 		}
@@ -40,8 +42,6 @@ namespace Daniel15.Web
 		{
 			loggerFactory.MinimumLevel = LogLevel.Information;
 			loggerFactory.AddConsole();
-
-			// Configure the HTTP request pipeline.
 
 			// Add the following to the request pipeline only in development environment.
 			if (env.IsDevelopment())
@@ -55,6 +55,14 @@ namespace Daniel15.Web
 				// send the request to the following path or controller action.
 				app.UseErrorHandler("/Site/Error");
 			}
+
+			app.UseReact(config =>
+			{
+				config
+					.AddScript("~/Content/js/socialfeed.jsx")
+					.SetUseHarmony(true)
+					.SetReuseJavaScriptEngines(false);
+			});
 
 			app.UseStaticFiles();
 			app.UseIdentity();

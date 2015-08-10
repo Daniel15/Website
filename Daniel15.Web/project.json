@@ -20,7 +20,8 @@
     "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-beta6",
     "Microsoft.AspNet.Session": "1.0.0-beta6",
     "Daniel15.SimpleIdentity": "1.0.0",
-    "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta6"
+    "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta6",
+    "React.AspNet": "1.5.4"
   },
 
   "commands": {
