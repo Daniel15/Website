@@ -2,7 +2,9 @@
 using System.Net;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.ViewModels;
+using Daniel15.Web.ViewModels.Shared;
 using Daniel15.Web.ViewModels.Site;
+using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Http.Extensions;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json.Linq;
@@ -92,8 +94,12 @@ namespace Daniel15.Web.Controllers
 		/// <returns>The error page</returns>
 		public virtual ActionResult Error()
 		{
-			Response.StatusCode = (int) HttpStatusCode.InternalServerError;
-			return View("ErrorWithLayout");//, new ErrorViewModel());
+			var view = View("Error", new ErrorViewModel
+			{
+				Exception = Context.GetFeature<IErrorHandlerFeature>()?.Error,
+			});
+			view.StatusCode = (int)HttpStatusCode.InternalServerError;
+			return view;
 		}
 
 		/// <summary>

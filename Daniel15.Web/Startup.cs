@@ -53,7 +53,7 @@ namespace Daniel15.Web
 			{
 				// Add Error handling middleware which catches all application specific errors and
 				// send the request to the following path or controller action.
-				app.UseErrorHandler("/Site/Error");
+				app.UseErrorHandler("/error.htm");
 			}
 
 			app.UseReact(config =>
