@@ -69,7 +69,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 			// Don't allow access to thumbnail directory
 			if (path == THUMBNAIL_DIR)
 			{
-				return HttpNotFound("Tried to directly access thumbnail folder");
+				return HttpNotFound();
 			}
 
 			// Directory? Return a directory listing.
@@ -85,7 +85,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 			else
 			{
 				// Neither a directory or file - Bail out!
-				return HttpNotFound($"Gallery file '{path}' not found in gallery {gallery.Name}.");
+				return HttpNotFound();
 			}
 		}
 

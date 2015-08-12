@@ -1,4 +1,5 @@
-﻿using Daniel15.Infrastructure;
+﻿using System.Threading.Tasks;
+using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
 using Daniel15.Web.Extensions;
 using Microsoft.AspNet.Builder;
@@ -42,8 +43,7 @@ namespace Daniel15.Web
 		{
 			loggerFactory.MinimumLevel = LogLevel.Information;
 			loggerFactory.AddConsole();
-
-			// Add the following to the request pipeline only in development environment.
+			
 			if (env.IsDevelopment())
 			{
 				app.UseBrowserLink();
@@ -51,9 +51,8 @@ namespace Daniel15.Web
 			}
 			else
 			{
-				// Add Error handling middleware which catches all application specific errors and
-				// send the request to the following path or controller action.
-				app.UseErrorHandler("/error.htm");
+				app.UseStatusCodePagesWithReExecute("/Error/Status{0}");
+				app.UseErrorHandler("/Error");	
 			}
 
 			app.UseReact(config =>
@@ -69,6 +68,15 @@ namespace Daniel15.Web
 			app.UseSession();
 			// All real routes are defined using attributes.
 			app.UseMvcWithDefaultRoute();
+
+
+			// Don't fall back to IIS on 404.
+			// TODO: This won't be needed from beta7 onwards: https://github.com/aspnet/Announcements/issues/54
+			app.Run(context =>
+			{
+				context.Response.StatusCode = 404;
+				return Task.FromResult(0);
+			});
 
 			// This is really not ideal, need to figure out a better way to do this.
 			// Based off http://stackoverflow.com/a/30762664/210370

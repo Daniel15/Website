@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Daniel15.Web.ViewModels.Shared
+namespace Daniel15.Web.ViewModels.Error
 {
     public class ErrorViewModel : ViewModelBase
     {

@@ -99,7 +99,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the category doesn't exist
-				return HttpNotFound($"Category '{slug}' not found.");
+				return HttpNotFound();
 			}
 
 			// If the category has a parent category, ensure it's in the URL

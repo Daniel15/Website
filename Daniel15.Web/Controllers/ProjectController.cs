@@ -50,7 +50,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the project doesn't exist
-				return HttpNotFound($"Project '{slug}' not found.");
+				return HttpNotFound();
 			}
 
 			// If there's no readme, just redirect to the project site itself

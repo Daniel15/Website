@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.ViewModels;
-using Daniel15.Web.ViewModels.Shared;
 using Daniel15.Web.ViewModels.Site;
-using Microsoft.AspNet.Diagnostics;
 using Microsoft.AspNet.Http.Extensions;
 using Microsoft.AspNet.Mvc;
 using Newtonsoft.Json.Linq;
@@ -23,17 +20,14 @@ namespace Daniel15.Web.Controllers
 		private const int ONE_HOUR = 3600;
 
 		private readonly IBlogRepository _blogRepository;
-		private readonly IMicroblogRepository _microblogRepository;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SiteController" /> class.
 		/// </summary>
 		/// <param name="blogRepository">The blog post repository.</param>
-		/// <param name="microblogRepository">The microblog (Tumblr) repository.</param>
-		public SiteController(IBlogRepository blogRepository, IMicroblogRepository microblogRepository)
+		public SiteController(IBlogRepository blogRepository)
 		{
 			_blogRepository = blogRepository;
-			_microblogRepository = microblogRepository;
 		}
 
 		/// <summary>
@@ -43,7 +37,7 @@ namespace Daniel15.Web.Controllers
 		[ResponseCache(Location = ResponseCacheLocation.Any, Duration = ONE_HOUR)]
 		public virtual ActionResult Index()
 		{
-			return View("Index", new IndexViewModel
+			return View(new IndexViewModel
 			{
 				LatestPosts = _blogRepository.LatestPosts()
 			});
@@ -55,7 +49,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns></returns>
 		public virtual ActionResult Search()
 		{
-			return View("Search", new ViewModelBase());
+			return View(new ViewModelBase());
 		}
 
 		/// <summary>
@@ -73,33 +67,6 @@ namespace Daniel15.Web.Controllers
 			var responseText = new WebClient().DownloadString(url);
 			dynamic response = JArray.Parse(responseText);
 			return View("SocialFeed", new SocialFeedViewModel { Data = response });
-		}
-
-		/// <summary>
-		/// The page that is displayed when a File Not Found (404) error occurs.
-		/// </summary>
-		/// <returns></returns>
-		public virtual ActionResult FileNotFound()
-		{
-			// Nginx will handle setting these as long as fastcgi_intercept_errors is on
-			//Response.StatusCode = (int) HttpStatusCode.NotFound;
-			//Response.TrySkipIisCustomErrors = true;
-
-			return View("FileNotFound", new ViewModelBase());
-		}
-
-		/// <summary>
-		/// The page that is displayed when an internal server error occurs.
-		/// </summary>
-		/// <returns>The error page</returns>
-		public virtual ActionResult Error()
-		{
-			var view = View("Error", new ErrorViewModel
-			{
-				Exception = Context.GetFeature<IErrorHandlerFeature>()?.Error,
-			});
-			view.StatusCode = (int)HttpStatusCode.InternalServerError;
-			return view;
 		}
 
 		/// <summary>

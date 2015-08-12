@@ -46,7 +46,7 @@ namespace Daniel15.Web.Areas.Api.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the post doesn't exist
-				return HttpNotFound(string.Format("Blog post #{0} not found.", postId));
+				return HttpNotFound();
 			}
 
 			return new ObjectResult(new PostUrlsModel

@@ -67,7 +67,7 @@ namespace Daniel15.Web.Controllers
 			var pages = (int)Math.Ceiling((double)count / ITEMS_PER_PAGE);
 
 			if (page > pages)
-				return HttpNotFound($"Requested page number ({page}) is greater than page count ({pages})");
+				return HttpNotFound();
 
 			viewModel.Posts = posts.Select(post => new PostViewModel
 			{
@@ -115,7 +115,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the category doesn't exist
-				return HttpNotFound($"Category '{slug}' not found.");
+				return HttpNotFound();
 			}
 
 			// If the category has a parent category, ensure it's in the URL
@@ -155,7 +155,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the category doesn't exist
-				return HttpNotFound($"Tag '{slug}' not found.");
+				return HttpNotFound();
 			}
 
 			var count = _blogRepository.PublishedCount(tag);
@@ -196,7 +196,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the post doesn't exist
-				return HttpNotFound($"Blog post '{slug}' not found.");
+				return HttpNotFound();
 			}
 
 			// Check the URL was actually correct (year and month), redirect if not.
@@ -235,7 +235,7 @@ namespace Daniel15.Web.Controllers
 			}
 			catch (Exception)
 			{
-				return HttpNotFound($"Blog post {id} for short URL '{alias}' not found.");
+				return HttpNotFound();
 			}
 
 			return RedirectPermanent(Url.BlogPost(post));
