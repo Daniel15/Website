@@ -1,6 +1,7 @@
-﻿@using Newtonsoft.Json
+﻿@using Daniel15.Shared.Configuration
+@using Newtonsoft.Json
 @model Daniel15.Web.ViewModels.Blog.PostViewModel
-@inject Daniel15.Infrastructure.ISiteConfiguration Config
+@inject ISiteConfiguration Config
 
 <div id="comments">
 	<div id="disqus_thread">

@@ -4,10 +4,10 @@ using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
-using Daniel15.Infrastructure;
+using Daniel15.Shared.Configuration;
+using Daniel15.Web.Extensions;
 using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.ViewModels.Feed;
-using Daniel15.Web.Extensions;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Net.Http.Headers;
 
@@ -86,6 +86,7 @@ namespace Daniel15.Web.Controllers
 		/// RSS feed for a specific category
 		/// </summary>
 		/// <param name="slug">Category slug</param>
+		/// <param name="parentSlug">Slug of the category's parent</param>
 		/// <returns>RSS feed</returns>
 		[Route("category/{parentSlug}/{slug}.rss", Order = 1, Name = "BlogSubCategoryFeed")]
 		[Route("category/{slug}.rss", Order = 2, Name = "BlogCategoryFeed")]

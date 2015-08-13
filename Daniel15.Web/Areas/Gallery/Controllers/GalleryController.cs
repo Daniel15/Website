@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using Daniel15.Configuration;
+using System.Linq;
+using Daniel15.Shared.Configuration;
+using Daniel15.Shared.Extensions;
 using Daniel15.Web.Areas.Gallery.Models;
 using Daniel15.Web.Areas.Gallery.ViewModels;
-using System.Linq;
-using Daniel15.Shared.Extensions;
 using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Areas.Gallery.Controllers
@@ -96,7 +96,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="path">Relative path to display</param>
 		/// <param name="fullPath">Full file system path</param>
 		/// <returns>Directory listing</returns>
-		private ActionResult Directory(Configuration.Gallery gallery, string path, string fullPath)
+		private ActionResult Directory(Shared.Configuration.Gallery gallery, string path, string fullPath)
 		{
 			var dirBlacklist = new HashSet<string> { THUMBNAIL_DIR, "cgi-bin" };
 
@@ -166,7 +166,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="gallery">Gallery to display images for</param>
 		/// <param name="path">Relative path</param>
 		/// <returns>Absolute path</returns>
-		private string GetAndValidateFullPath(Configuration.Gallery gallery, string path)
+		private string GetAndValidateFullPath(Shared.Configuration.Gallery gallery, string path)
 		{
 			var root = gallery.ImageDir;
 			var fullPath = Path.Combine(root, path);
@@ -189,7 +189,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="path">Path to the file or directory</param>
 		/// <param name="type">Type of the entity</param>
 		/// <returns>Gallery item model</returns>
-		private GalleryFileModel BuildGalleryModel(Configuration.Gallery gallery, string path, GalleryFileModel.FileType type)
+		private GalleryFileModel BuildGalleryModel(Shared.Configuration.Gallery gallery, string path, GalleryFileModel.FileType type)
 		{
 			var relativePath = path
 				.Replace(gallery.ImageDir, string.Empty)
@@ -213,7 +213,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// </summary>
 		/// <param name="name">Name of the gallery to return</param>
 		/// <returns>Details on the specified gallery</returns>
-		private Configuration.Gallery GetGallery(string name)
+		private Shared.Configuration.Gallery GetGallery(string name)
 		{
 			if (!_galleryConfig.Galleries.ContainsKey(name))
 			{
@@ -229,7 +229,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="gallery">Gallery to display images for</param>
 		/// <param name="path">Image path</param>
 		/// <returns>Thumbnail URL</returns>
-		private string ThumbnailUrl(Configuration.Gallery gallery, string path)
+		private string ThumbnailUrl(Shared.Configuration.Gallery gallery, string path)
 		{
 			return ImageUrl(gallery, THUMBNAIL_DIR + "/" + path);
 		}
@@ -240,7 +240,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="gallery">Gallery to display images for</param>
 		/// <param name="path">Image path</param>
 		/// <returns>Gallery URL</returns>
-		private string ImageUrl(Configuration.Gallery gallery, string path)
+		private string ImageUrl(Shared.Configuration.Gallery gallery, string path)
 		{
 			return gallery.ImageUrl + path.Replace('\\', '/');
 		}

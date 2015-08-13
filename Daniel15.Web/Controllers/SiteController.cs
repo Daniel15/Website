@@ -56,6 +56,7 @@ namespace Daniel15.Web.Controllers
 		/// A feed of all the stuff I've done on the interwebs.
 		/// </summary>
 		/// <returns></returns>
+		// ReSharper disable once InconsistentNaming - Backwards compatibility with old URL
 		public virtual ActionResult SocialFeed(int count = 25, int? before_date = null)
 		{
 			// Currently just proxies to the PHP page - This needs to be rewritten in C#

@@ -1,7 +1,7 @@
-﻿using Daniel15.Data.Repositories;
+﻿using System.Linq;
+using Daniel15.Data.Repositories;
 using Daniel15.Web.ViewModels.Blog;
 using Microsoft.AspNet.Mvc;
-using System.Linq;
 
 namespace Daniel15.Web.ViewComponents
 {

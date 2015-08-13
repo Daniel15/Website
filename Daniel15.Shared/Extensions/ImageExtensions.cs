@@ -124,7 +124,7 @@ namespace Daniel15.Shared.Extensions
 			catch (Exception ex)
 			{
 				var errors = process.StandardError.ReadToEnd();
-				throw new Exception(string.Format("Error invoking GraphicsMagick: {0}\nOriginal exception: {1}", errors, ex));
+				throw new Exception($"Error invoking GraphicsMagick: {errors}\nOriginal exception: {ex}");
 			}
 			finally
 			{

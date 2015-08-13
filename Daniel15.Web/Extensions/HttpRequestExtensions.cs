@@ -3,9 +3,9 @@
 namespace Daniel15.Web.Extensions
 {
 	/// <summary>
-	/// Extension methods for <see cref="HttpRequestBase"/>.
+	/// Extension methods for <see cref="HttpRequest"/>.
 	/// </summary>
-	public static class HttpRequestBaseExtensions
+	public static class HttpRequestExtensions
 	{
 		/// <summary>
 		/// Determines if the specified request should redirect to FeedBurner. This is the case when

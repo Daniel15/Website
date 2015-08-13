@@ -26,12 +26,12 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <summary>
 		/// Gets the internal ID of this social network
 		/// </summary>
-		public string Id { get { return "facebook"; } }
+		public string Id => "facebook";
 
 		/// <summary>
 		/// Gets the friendly name of this social network
 		/// </summary>
-		public string Name { get { return "Facebook"; } }
+		public string Name => "Facebook";
 
 		#region Implementation of ISocialShare
 		/// <summary>
@@ -69,10 +69,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 			var xml = XDocument.Load(queryUrl);
 			XNamespace ns = "http://api.facebook.com/1.0/";
 
-			if (xml.Root == null)
-				return 0;
-
-			var linkStat = xml.Root.Element(ns + "link_stat");
+			var linkStat = xml.Root?.Element(ns + "link_stat");
 			if (linkStat == null)
 				return 0;
 

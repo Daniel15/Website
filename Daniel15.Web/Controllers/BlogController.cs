@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
+using Daniel15.Web.Extensions;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.ViewModels.Blog;
-using Daniel15.Web.Extensions;
-using System.Linq;
 using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Controllers
@@ -99,6 +99,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="slug">Category slug</param>
 		/// <param name="page">Page number to view</param>
+		/// <param name="parentSlug">Slug of the category's parent</param>
 		/// <returns>Posts in this category</returns>
 		/// <remarks>These must be ordered AFTER the RSS rules in FeedController!</remarks>
 		[Route("category/{slug}", Order = 5, Name = "BlogCategory")]

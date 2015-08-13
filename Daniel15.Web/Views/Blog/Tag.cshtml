@@ -1,5 +1,6 @@
-﻿@model Daniel15.Web.ViewModels.Blog.TagListingViewModel
-@inject Daniel15.Infrastructure.ISiteConfiguration Config
+﻿@using Daniel15.Shared.Configuration
+@model Daniel15.Web.ViewModels.Blog.TagListingViewModel
+@inject ISiteConfiguration Config
 
 @{
 	Model.PageUrlGenerator = page => Url.BlogTag(Model.Tag, page);

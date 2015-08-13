@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Net;
 using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
-using System.Linq;
-using System.Net;
 using Newtonsoft.Json;
 
 namespace Daniel15.Cron
@@ -63,7 +64,7 @@ namespace Daniel15.Cron
 		private UrlResponse GetBlogUrl(PostModel post)
 		{
 			// TODO: Remove hard-coded URL from here
-			var urlApi = string.Format("http://dan.cx/api/posts/{0}/url", post.Id);
+			var urlApi = $"http://dan.cx/api/posts/{post.Id}/url";
 			using (var client = new WebClient())
 			{
 				var rawResponse = client.DownloadString(urlApi);
@@ -72,6 +73,8 @@ namespace Daniel15.Cron
 			
 		}
 
+		[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
+		[SuppressMessage("ReSharper", "ClassNeverInstantiated.Local")]
 		private class UrlResponse
 		{
 			public string Url { get; set; }

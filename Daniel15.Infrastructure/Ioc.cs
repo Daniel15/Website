@@ -2,10 +2,10 @@ using Daniel15.BusinessLayer;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.CodeRepositories;
 using Daniel15.BusinessLayer.Services.Social;
-using Daniel15.Configuration;
 using Daniel15.Data;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Repositories.EntityFramework;
+using Daniel15.Shared.Configuration;
 using Microsoft.Framework.Configuration;
 using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.OptionsModel;
@@ -41,7 +41,7 @@ namespace Daniel15.Infrastructure
 
 		public static void AddDaniel15Config(this IServiceCollection services, IConfiguration config)
 		{
-			services.AddSingleton<IConfiguration>(_ => config);
+			services.AddSingleton(_ => config);
 			services.Configure<SiteConfiguration>(config.GetConfigurationSection("Site"));
 			services.Configure<GalleryConfiguration>(config.GetConfigurationSection("Gallery"));
 			services.AddSingleton<ISiteConfiguration>(

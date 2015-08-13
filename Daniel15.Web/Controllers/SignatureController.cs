@@ -1,5 +1,5 @@
-﻿using Daniel15.Data.Repositories;
-using System.Linq;
+﻿using System.Linq;
+using Daniel15.Data.Repositories;
 using Daniel15.Shared;
 using Microsoft.AspNet.Mvc;
 

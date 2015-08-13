@@ -1,4 +1,4 @@
-namespace Daniel15.Configuration
+namespace Daniel15.Shared.Configuration
 {
 	public class Gallery
 	{

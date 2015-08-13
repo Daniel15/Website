@@ -1,4 +1,4 @@
-﻿namespace Daniel15.Infrastructure
+﻿namespace Daniel15.Shared.Configuration
 {
 	/// <summary>
 	/// An implementation of <see cref="ISiteConfiguration"/>.

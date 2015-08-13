@@ -4,7 +4,6 @@ using Daniel15.Data.Entities.Projects;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.ViewModels.Project;
 using Microsoft.AspNet.Mvc;
-using IndexViewModel = Daniel15.Web.ViewModels.Project.IndexViewModel;
 
 namespace Daniel15.Web.Controllers
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Daniel15.Configuration
+namespace Daniel15.Shared.Configuration
 {
 	public class GalleryConfiguration : IGalleryConfiguration
 	{

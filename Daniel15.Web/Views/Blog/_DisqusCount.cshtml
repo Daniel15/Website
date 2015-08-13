@@ -1,6 +1,7 @@
 ﻿@using System.Threading.Tasks
+@using Daniel15.Shared.Configuration
 @using Newtonsoft.Json
-@inject Daniel15.Infrastructure.ISiteConfiguration Config
+@inject ISiteConfiguration Config
 
 <script>
 	var disqus_shortname = @Html.Raw(JsonConvert.SerializeObject(Config.DisqusShortname));

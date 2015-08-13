@@ -91,10 +91,7 @@ namespace Daniel15.Data.Entities.Blog
 		/// <summary>
 		/// Gets the Disqus identifier for this post (currently just the post ID)
 		/// </summary>
-		public string DisqusIdentifier
-		{
-			get { return Id.ToString(); }
-		}
+		public string DisqusIdentifier => Id.ToString();
 
 		/// <summary>
 		/// Gets the processed content of this blog post
@@ -135,7 +132,7 @@ namespace Daniel15.Data.Entities.Blog
 			}
 
 			showMoreLink = true;
-			return content.Substring(0, content.IndexOf(READ_MORE_HTML_MARKER));
+			return content.Substring(0, content.IndexOf(READ_MORE_HTML_MARKER, StringComparison.Ordinal));
 		}
 
 		/// <summary>

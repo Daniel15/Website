@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using Daniel15.Data.Entities.Blog;
 using Microsoft.AspNet.Http.Extensions;
@@ -24,12 +23,12 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <summary>
 		/// Gets the internal ID of this social network
 		/// </summary>
-		public string Id { get { return "reddit"; } }
+		public string Id => "reddit";
 
 		/// <summary>
 		/// Gets the friendly name of this social network
 		/// </summary>
-		public string Name { get { return "Reddit"; } }
+		public string Name => "Reddit";
 
 		#region Implementation of ISocialShare
 		/// <summary>

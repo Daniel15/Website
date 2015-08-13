@@ -3,7 +3,7 @@ using System.IO;
 using System.Net;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
-using Daniel15.Infrastructure;
+using Daniel15.Shared.Configuration;
 using Microsoft.AspNet.Http.Extensions;
 using Newtonsoft.Json.Linq;
 

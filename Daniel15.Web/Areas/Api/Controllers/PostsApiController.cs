@@ -1,9 +1,9 @@
 ﻿using Daniel15.BusinessLayer.Services;
+using Daniel15.Data;
+using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.Areas.Api.Models.Blog;
 using Daniel15.Web.Extensions;
-using Daniel15.Data;
-using Daniel15.Data.Entities.Blog;
 using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Areas.Api.Controllers

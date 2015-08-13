@@ -59,7 +59,7 @@ namespace Daniel15.Web.Extensions
 		{
 			return page == 1 
 				? urlHelper.RouteUrl("BlogHome") 
-				: urlHelper.RouteUrl("BlogHomePage", new { page = page });
+				: urlHelper.RouteUrl("BlogHomePage", new { page });
 		}
 		
 		/// <summary>
@@ -71,7 +71,7 @@ namespace Daniel15.Web.Extensions
 		/// <returns>The URL</returns>
 		public static string BlogCategory(this IUrlHelper urlHelper, CategoryModel category, int page = 1)
 		{
-			return BlogCategory(urlHelper, "Category", category.Slug, category.Parent == null ? null : category.Parent.Slug, page);
+			return BlogCategory(urlHelper, "Category", category.Slug, category.Parent?.Slug, page);
 		}
 
 		/// <summary>
@@ -82,7 +82,7 @@ namespace Daniel15.Web.Extensions
 		/// <returns>The URL</returns>
 		public static string BlogCategoryFeed(this IUrlHelper urlHelper, CategoryModel category)
 		{
-			return BlogCategory(urlHelper, "CategoryFeed", category.Slug, category.Parent == null ? null :  category.Parent.Slug);
+			return BlogCategory(urlHelper, "CategoryFeed", category.Slug, category.Parent?.Slug);
 		}
 
 		/// <summary>
@@ -101,14 +101,14 @@ namespace Daniel15.Web.Extensions
 			if (string.IsNullOrEmpty(parentSlug))
 			{
 				return page == 1
-					? urlHelper.RouteUrl("Blog" + routeType, new { slug = slug })
-					: urlHelper.RouteUrl("Blog" + routeType + "Page", new { slug = slug, page = page });
+					? urlHelper.RouteUrl("Blog" + routeType, new { slug })
+					: urlHelper.RouteUrl("Blog" + routeType + "Page", new { slug, page });
 			}
 			else
 			{
 				return page == 1
-					? urlHelper.RouteUrl("BlogSub" + routeType, new { slug = slug, parentSlug = parentSlug })
-					: urlHelper.RouteUrl("BlogSub" + routeType + "Page", new { slug = slug, parentSlug = parentSlug, page = page });
+					? urlHelper.RouteUrl("BlogSub" + routeType, new { slug, parentSlug })
+					: urlHelper.RouteUrl("BlogSub" + routeType + "Page", new { slug, parentSlug, page });
 			}
 		}
 

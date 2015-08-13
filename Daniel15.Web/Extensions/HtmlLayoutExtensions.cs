@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Daniel15.Web.Controllers;
+﻿using System.Collections.Generic;
 using Daniel15.Web.Models.Shared;
 using Daniel15.Web.ViewModels;
 using Microsoft.AspNet.Html.Abstractions;
