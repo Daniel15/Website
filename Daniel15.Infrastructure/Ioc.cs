@@ -32,10 +32,6 @@ namespace Daniel15.Infrastructure
 			services.AddSingleton<Twitter>();
 			services.AddSingleton<Linkedin>();
 
-			// TODO
-			// _siteConfig.ApiKeys = (ApiKeysConfiguration)ConfigurationManager.GetSection("ApiKeys");
-			// Container.Register<IGalleryConfiguration>(() => (GalleryConfiguration)ConfigurationManager.GetSection("Gallery"));
-
 			InitializeDatabase(services);
 		}
 
