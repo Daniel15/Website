@@ -8,70 +8,7 @@
 	</PropertyGroup>
 
 	<UsingTask AssemblyFile="Daniel15.Web\bin\Cassette.MSBuild.dll" TaskName="CreateBundles" />
-	<UsingTask
-		TaskName="UpdateGitDetails"
-		TaskFactory="CodeTaskFactory"
-		AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-		<ParameterGroup>
-			<SiteDir Required="True" />
-			<GitWebUrl Required="True" />
-		</ParameterGroup>
-		<Task>
-			<Reference Include="System.Web" />
-			<Reference Include="System.Configuration" />
-			<Code Type="Class" Language="cs"><![CDATA[
-using System;
-using System.Diagnostics;
-using System.Web.Configuration;
 
-public class UpdateGitDetails : Microsoft.Build.Utilities.Task
-{
-	public string SiteDir { get; set; }
-	public string GitWebUrl { get; set; }
-	
-	public override bool Execute()
-	{
-		SiteDir = System.IO.Path.GetFullPath(SiteDir);
-		
-		// Get the details
-		var shortRevision = RunGit("rev-parse --short HEAD");
-		var revision = RunGit("rev-parse HEAD");
-		var date = DateTime.Parse(RunGit("log --pretty=format:%ad --date=iso -n 1"));
-		
-		var fullGitRevision = string.Format("{0} ({1:yyyy-MM-dd})", shortRevision, date);
-		var gitRevisionUrl = string.Format(GitWebUrl, revision);
-		
-		// Load the Web.config
-		var wcfm = new WebConfigurationFileMap();
-		wcfm.VirtualDirectories.Add("/", new VirtualDirectoryMapping(SiteDir, true));
-		var config = WebConfigurationManager.OpenMappedWebConfiguration(wcfm, "/");
-
-		// Write details to Web.config
-		config.AppSettings.Settings.Remove("GitRevision");
-		config.AppSettings.Settings.Remove("GitRevisionUrl");
-		config.AppSettings.Settings.Add("GitRevision", fullGitRevision);
-		config.AppSettings.Settings.Add("GitRevisionUrl", gitRevisionUrl);
-		config.Save();
-		
-		Log.LogMessage("Updated Web.config to include Git revision {0}", fullGitRevision);
-
-		return true;
-	}
-					
-	private string RunGit(string param)
-	{
-		var process = Process.Start(new ProcessStartInfo("git", param)
-		{
-			RedirectStandardOutput = true, 
-			UseShellExecute = false,
-			WorkingDirectory = SiteDir,
-		});
-		return process.StandardOutput.ReadToEnd().Trim();
-	}
-}
-			]]></Code>
-		</Task>
-	</UsingTask>
 
 	<Target Name="Build">
 		<MSBuild Projects="Daniel15.Web.sln" Targets="Build" Properties="$(Properties)" />
@@ -79,21 +16,10 @@ public class UpdateGitDetails : Microsoft.Build.Utilities.Task
 
 	<Target Name="PackageSite">
 		<MSBuild Projects="Daniel15.Web\Daniel15.Web.csproj" Targets="PipelinePreDeployCopyAllFilesToOneFolder" Properties="$(Properties)" />
-		<!--Transform JSX -->
-		<Exec Command="&quot;$(msbuildtoolspath)\msbuild.exe&quot; $(SitePackageDir)TransformJsx.proj /p:OutputPath=bin /nr:false" />
-		<!-- Precompile Cassette assets -->
-		<CreateBundles
-			Source="Daniel15.Web"
-			Output="..\$(SitePackageDir)cassette-cache\"
-		/>
-	</Target>
-
-	<Target Name="UpdateGitDetailsForDeploy">
-		<UpdateGitDetails SiteDir="$(SitePackageDir)" GitWebUrl="https://github.com/Daniel15/Website/commit/{0}" />
 	</Target>
 	
 	<!-- PipelinePreDeployCopyAllFilesToOneFolder will actually do the publish into a temp folder -->
-	<Target Name="Deploy" DependsOnTargets="Build; PackageSite; UpdateGitDetailsForDeploy">
+	<Target Name="Deploy" DependsOnTargets="Build; PackageSite">
 		<Error Condition="'$(DestinationDir)'==''" Text="The DestinationDir property must be set to the directory name on the remote server." />
 		
 		<!-- Deploy via rsync -->

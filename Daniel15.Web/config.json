@@ -6,7 +6,10 @@
     "DisqusShortname": "daniel15",
     "FeedBurnerUrl": "http://feeds.d15.biz/Daniel15",
     "GoogleAnalyticsAccount": "UA-25623237-2",
-    "MicroblogFeedUrl": "http://feeds.dan.cx/dan-thoughts"
+    "MicroblogFeedUrl": "http://feeds.dan.cx/dan-thoughts",
+    "Git": {
+      "RevisionUrl": "https://github.com/Daniel15/Website/commit/{0}"
+    }
   },
   "Gallery": {
     "Galleries": {

@@ -45,5 +45,10 @@
 		/// Gets the URL to the microblog (Tumblr) feed
 		/// </summary>
 		public string MicroblogFeedUrl { get; set; }
+
+		/// <summary>
+		/// Gets information about the Git commit the site is running on
+		/// </summary>
+		public SiteGitConfiguration Git { get; set; }
 	}
 }

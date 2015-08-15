@@ -6,6 +6,7 @@
     "gulp": "3.9.0",
     "gulp-concat": "2.6.0",
     "gulp-css-url-adjuster": "0.2.3",
+    "gulp-git": "1.2.4",
     "gulp-less": "3.0.3",
     "gulp-minify-css": "1.2.0",
     "gulp-react": "3.0.1",

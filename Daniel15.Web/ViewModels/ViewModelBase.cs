@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.AspNet.Mvc.Rendering;
 
 namespace Daniel15.Web.ViewModels
 {
@@ -28,23 +27,6 @@ namespace Daniel15.Web.ViewModels
 		/// Last modified date of the page
 		/// </summary>
 		public DateTime? LastModified { get; set; }
-		/// <summary>
-		/// Gets the version string to use in the footer of the site
-		/// </summary>
-		public HtmlString Version
-		{
-			get
-			{
-				var gitRevision = "TODO";//ConfigurationManager.AppSettings["GitRevision"];
-				var gitRevisionUrl = "TODO";//ConfigurationManager.AppSettings["GitRevisionUrl"];
-
-				// Don't display anything if there's no version in the Web.config
-				if (string.IsNullOrEmpty(gitRevision))
-					return null;
-
-				return new HtmlString(string.Format("Running revision <a href=\"{1}\">{0}</a>", gitRevision, gitRevisionUrl));
-			}
-		}
 
 		public ViewModelBase()
 		{

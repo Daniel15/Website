@@ -1,7 +1,9 @@
-﻿/// <binding Clean='clean' />
+﻿/// <binding AfterBuild='build' Clean='clean' />
 
 var concat = require('gulp-concat'),
 	del = require('del'),
+	fs = require('fs');
+	git = require('gulp-git'),
     gulp = require('gulp'),
     lazypipe = require('lazypipe'),
     less = require('gulp-less'),
@@ -90,5 +92,23 @@ gulp.task('build', [
 	'build:css',
 	'build:js:main',
 	'build:js:syntaxHighlighter',
-	'build:js:blogadmin'
+	'build:js:blogadmin',
+	'build:config'
 ]);
+
+gulp.task('build:config', function(cb) {
+	git.revParse({ args: 'HEAD' }, function(err, revision) {
+		git.exec({ args: 'log --pretty=format:%ad --date=iso -n 1' }, function(err, stdout) {
+			var date = Date.parse(stdout);
+			var config = {
+				Site: {
+					Git: {
+						Revision: revision,
+						Date: date / 1000
+					}
+				}
+			};
+			fs.writeFile('config.generated.json', JSON.stringify(config, null, 4), cb);
+		});
+	});
+});

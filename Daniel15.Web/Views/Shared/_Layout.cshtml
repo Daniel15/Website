@@ -83,8 +83,8 @@
 
 		</div></div>
 		<footer>
-			&copy;2008&ndash;2015 <a href="http://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.<br />
-			@Model.Version
+			&copy;2008&ndash;2015 <a href="http://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.<br/>
+			@Html.Partial("_FooterVersion")
 			@if (Model.LastModified.HasValue)
 			{
 				<text>This page last modified @Model.LastModified.Value.ToString("d MMM yyyy")</text>
