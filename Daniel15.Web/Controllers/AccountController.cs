@@ -1,6 +1,8 @@
-﻿using System.Web.Mvc;
-using System.Web.Security;
+﻿using System.Threading.Tasks;
+using Daniel15.SimpleIdentity;
 using Daniel15.Web.ViewModels.Account;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Controllers
 {
@@ -9,6 +11,13 @@ namespace Daniel15.Web.Controllers
 	/// </summary>
 	public partial class AccountController : Controller
 	{
+		private readonly SignInManager<SimpleIdentityUser> _signInManager;
+
+		public AccountController(SignInManager<SimpleIdentityUser> signInManager)
+		{
+			_signInManager = signInManager;
+		}
+
 		/// <summary>
 		/// Displays the login page
 		/// </summary>
@@ -16,7 +25,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns></returns>
 		public virtual ActionResult Login(string returnUrl)
 		{
-			return View(Views.Login, new LoginViewModel { ReturnUrl = returnUrl });
+			return View(new LoginViewModel { ReturnUrl = returnUrl });
 		}
 
 		/// <summary>
@@ -27,17 +36,20 @@ namespace Daniel15.Web.Controllers
 		/// <returns></returns>
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public virtual ActionResult Login(LoginViewModel model, string returnUrl)
+		public virtual async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
 		{
-			if (ModelState.IsValid && FormsAuthentication.Authenticate(model.UserName, model.Password))
+			if (ModelState.IsValid)
 			{
-				FormsAuthentication.SetAuthCookie(model.UserName, false);
-				return RedirectToLocal(returnUrl);
+				var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, isPersistent: false, lockoutOnFailure: false);
+				if (result.Succeeded)
+				{
+					return RedirectToLocal(returnUrl);
+				}
 			}
 
 			// If we got this far, something failed, redisplay form
-			ModelState.AddModelError("", "The user name or password provided is incorrect.");
-			return View(Views.Login, model);
+			ModelState.AddModelError(string.Empty, "The user name or password provided is incorrect.");
+			return View(model);
 		}
 
 		/// <summary>
@@ -54,7 +66,7 @@ namespace Daniel15.Web.Controllers
 			else
 			{
 				// TODO: Redirect to admin home
-				return RedirectToAction(MVC.Site.Index());
+				return RedirectToAction("Index", "Site");
 			}
 		}
 	}

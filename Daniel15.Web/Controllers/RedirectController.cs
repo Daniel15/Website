@@ -1,7 +1,4 @@
-﻿using System;
-using System.Web.Mvc;
-using AttributeRouting.Web.Mvc;
-using Cassette.Views;
+﻿using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Controllers
 {
@@ -11,27 +8,9 @@ namespace Daniel15.Web.Controllers
 	public partial class RedirectController : Controller
     {
 		/// <summary>
-		/// Redirects to the latest CSS file
-		/// </summary>
-		[GET("latest.css")]
-		public virtual ActionResult Css()
-		{
-			return Redirect(Bundles.Url("main.css"));
-		}
-
-		/// <summary>
-		/// Redirects to the latest JavaScript file
-		/// </summary>
-		[GET("latest.js")]
-		public virtual ActionResult Js()
-		{
-			return Redirect(Bundles.Url("main.js"));
-		}
-
-		/// <summary>
 		/// Redirects from an old blog URL (/blog/year/month/day/slug) to a new one
 		/// </summary>
-		[GET("blog/{year:int:length(4)}/{month:int:length(2)}/{day:int:length(2)}/{slug}", SitePrecedence = -1, ControllerPrecedence = 1)]
+		[Route("blog/{year:int:length(4)}/{month:int:length(2)}/{day:int:length(2)}/{slug}", Order = 98)]
 		public virtual ActionResult BlogPost(int month, int year, int day, string slug)
 		{
 			return RedirectToAction("View", "Blog", new { year = year.ToString(), month = month.ToString("00"), slug = slug });
@@ -44,12 +23,12 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="uri">URI to redirect to</param>
 		/// <returns>Redirect</returns>
-		[GET("blog/{*uri}", SitePrecedence = -1, ControllerPrecedence = 2)]
+		[Route("blog/{*uri}", Order = 99)]
 		public virtual ActionResult BlogUri(string uri)
 		{
 			var redirect = "~/" + uri;
-			if (Request.QueryString != null && Request.QueryString.Count > 0)
-				redirect += "?" + Request.QueryString;
+			if (Request.Query != null && Request.Query.Count > 0)
+				redirect += Request.QueryString;
 
 			return RedirectPermanent(redirect);
 		}

@@ -1,0 +1,26 @@
+﻿{
+  "Gallery": {
+    "Galleries": {
+      "screenshots": {
+        "Name": "screenshots",
+        "Title": "Screenshots",
+        "ImageUrl": "http://localhost/ss/",
+        "ImageDir": "c:\\Temp\\Screenshots"
+      }
+    }
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=192.168.146.1; Database=daniel15_site; Uid=vmdev; Pwd=password;"
+    }
+  },
+  "Auth": {
+    "Users": {
+      "USER@EXAMPLE.COM": {
+        "Email": "user@example.com",
+        "NormalizedUserName": "USER@EXAMPLE.COM",
+        "PasswordHash": "AQAAAAEAACcQAAAAEJOYL0MGZ5CNnERvqzI2Wl9eJLXMsuchKP1EIWGQneZ1GuNCjheC4pD1AWgVy+decQ=="
+      }
+    }
+  }
+}

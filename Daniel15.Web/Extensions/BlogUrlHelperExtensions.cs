@@ -1,5 +1,5 @@
-﻿using System.Web.Mvc;
-using Daniel15.Data.Entities.Blog;
+﻿using Daniel15.Data.Entities.Blog;
+using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Extensions
 {
@@ -14,7 +14,7 @@ namespace Daniel15.Web.Extensions
 		/// <param name="urlHelper">The URL helper.</param>
 		/// <param name="post">Blog post to link to</param>
 		/// <returns>URL to this blog post</returns>
-		public static string BlogPost(this UrlHelper urlHelper, PostModel post)
+		public static string BlogPost(this IUrlHelper urlHelper, PostModel post)
 		{
 			// Post date needs to be padded with a 0 (eg. "01" for January) - T4MVC doesn't work in this
 			// case because it's strongly-typed (can't pass a string for an int param)
@@ -29,7 +29,7 @@ namespace Daniel15.Web.Extensions
 		/// <param name="urlHelper">The URL helper.</param>
 		/// <param name="post">Blog post to link to</param>
 		/// <returns>URL to this blog post</returns>
-		public static string BlogPostAbsolute(this UrlHelper urlHelper, PostModel post)
+		public static string BlogPostAbsolute(this IUrlHelper urlHelper, PostModel post)
 		{
 			return urlHelper.Absolute(urlHelper.BlogPost(post));
 		}
@@ -40,7 +40,7 @@ namespace Daniel15.Web.Extensions
 		/// <param name="urlHelper">The URL helper.</param>
 		/// <param name="post">Blog post to link to</param>
 		/// <returns>URL to edit this blog post</returns>
-		public static string BlogPostEdit(this UrlHelper urlHelper, PostModel post)
+		public static string BlogPostEdit(this IUrlHelper urlHelper, PostModel post)
 		{
 			// Post date needs to be padded with a 0 (eg. "01" for January) - T4MVC doesn't work in this
 			// case because it's strongly-typed (can't pass a string for an int param)
@@ -55,11 +55,11 @@ namespace Daniel15.Web.Extensions
 		/// <param name="urlHelper">The URL helper</param>
 		/// <param name="page">Page number to link to</param>
 		/// <returns>The URL</returns>
-		public static string BlogIndex(this UrlHelper urlHelper, int page = 1)
+		public static string BlogIndex(this IUrlHelper urlHelper, int page = 1)
 		{
 			return page == 1 
 				? urlHelper.RouteUrl("BlogHome") 
-				: urlHelper.RouteUrl("BlogHomePage", new { page = page });
+				: urlHelper.RouteUrl("BlogHomePage", new { page });
 		}
 		
 		/// <summary>
@@ -69,9 +69,9 @@ namespace Daniel15.Web.Extensions
 		/// <param name="category">Category to link to</param>
 		/// <param name="page">Page number to link to</param>
 		/// <returns>The URL</returns>
-		public static string BlogCategory(this UrlHelper urlHelper, CategoryModel category, int page = 1)
+		public static string BlogCategory(this IUrlHelper urlHelper, CategoryModel category, int page = 1)
 		{
-			return BlogCategory(urlHelper, "Category", category.Slug, category.Parent == null ? null : category.Parent.Slug, page);
+			return BlogCategory(urlHelper, "Category", category.Slug, category.Parent?.Slug, page);
 		}
 
 		/// <summary>
@@ -80,9 +80,9 @@ namespace Daniel15.Web.Extensions
 		/// <param name="urlHelper">The URL helper</param>
 		/// <param name="category">Category to link to</param>
 		/// <returns>The URL</returns>
-		public static string BlogCategoryFeed(this UrlHelper urlHelper, CategoryModel category)
+		public static string BlogCategoryFeed(this IUrlHelper urlHelper, CategoryModel category)
 		{
-			return BlogCategory(urlHelper, "CategoryFeed", category.Slug, category.Parent == null ? null :  category.Parent.Slug);
+			return BlogCategory(urlHelper, "CategoryFeed", category.Slug, category.Parent?.Slug);
 		}
 
 		/// <summary>
@@ -94,21 +94,21 @@ namespace Daniel15.Web.Extensions
 		/// <param name="routeType">Route type to link to (eg. "Category" or "CategoryFeed")</param>
 		/// <param name="slug">Slug of the category</param>
 		/// <returns>The URL</returns>
-		public static string BlogCategory(this UrlHelper urlHelper, string routeType, string slug, string parentSlug, int page = 1)
+		public static string BlogCategory(this IUrlHelper urlHelper, string routeType, string slug, string parentSlug, int page = 1)
 		{
 			// It's safer to explicitly use the correct route here, instead of relying on the ASP.NET 
 			// routing engine to choose it.
 			if (string.IsNullOrEmpty(parentSlug))
 			{
 				return page == 1
-					? urlHelper.RouteUrl("Blog" + routeType, new { slug = slug })
-					: urlHelper.RouteUrl("Blog" + routeType + "Page", new { slug = slug, page = page });
+					? urlHelper.RouteUrl("Blog" + routeType, new { slug })
+					: urlHelper.RouteUrl("Blog" + routeType + "Page", new { slug, page });
 			}
 			else
 			{
 				return page == 1
-					? urlHelper.RouteUrl("BlogSub" + routeType, new { slug = slug, parentSlug = parentSlug })
-					: urlHelper.RouteUrl("BlogSub" + routeType + "Page", new { slug = slug, parentSlug = parentSlug, page = page });
+					? urlHelper.RouteUrl("BlogSub" + routeType, new { slug, parentSlug })
+					: urlHelper.RouteUrl("BlogSub" + routeType + "Page", new { slug, parentSlug, page });
 			}
 		}
 
@@ -119,7 +119,7 @@ namespace Daniel15.Web.Extensions
 		/// <param name="tag">Tag to link to</param>
 		/// <param name="page">Page number to link to</param>
 		/// <returns>The URL</returns>
-		public static string BlogTag(this UrlHelper urlHelper, TagModel tag, int page = 1)
+		public static string BlogTag(this IUrlHelper urlHelper, TagModel tag, int page = 1)
 		{
 			return urlHelper.BlogTag(tag.Slug, page);
 		}
@@ -131,7 +131,7 @@ namespace Daniel15.Web.Extensions
 		/// <param name="slug">Slug of the tag</param>
 		/// <param name="page">Page number to link to</param>
 		/// <returns>The URL</returns>
-		public static string BlogTag(this UrlHelper urlHelper, string slug, int page = 1)
+		public static string BlogTag(this IUrlHelper urlHelper, string slug, int page = 1)
 		{
 			return page == 1
 				? urlHelper.RouteUrl("BlogTag", new { slug })

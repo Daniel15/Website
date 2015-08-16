@@ -1,0 +1,30 @@
+{
+    "version": "1.0.0-*",
+    "description": "Daniel15.Data Class Library",
+    "authors": [ "Daniel Lo Nigro" ],
+    "tags": [ "" ],
+    "projectUrl": "",
+    "licenseUrl": "",
+
+    "dependencies": {
+        "Daniel15.Shared": "1.0.0-*",
+        "EntityFramework": "6.1.3",
+        "Newtonsoft.Json": "7.0.1",
+        "MySql.Data.Entity": "6.9.7",
+        "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta6",
+        "Microsoft.Framework.WebEncoders.Core": "1.0.0-beta6"
+    },
+
+    "frameworks": {
+        "dnx451": {
+            "dependencies": {
+            },
+            "frameworkAssemblies": {
+                "System.Xml.Linq": "4.0.0.0",
+                "System.Xml": "4.0.0.0",
+                "System.Data": "4.0.0.0",
+                "System.Configuration": "4.0.0.0"
+            }
+        }
+    }
+}

@@ -42,9 +42,6 @@ namespace Daniel15.Web.ViewModels.Blog
 		/// Gets the last modified date/time of the feed. This is the publish date of the latest post,
 		/// or <c>DateTime.Now</c> if there are no posts in the feed.
 		/// </summary>
-		public DateTime LastModified
-		{
-			get { return Posts.Count == 0 ? DateTime.Now : Posts[0].Post.Date; }
-		}
+		public DateTime LastModified => Posts.Count == 0 ? DateTime.Now : Posts[0].Post.Date;
 	}
 }

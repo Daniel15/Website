@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Web.Mvc;
-using Daniel15.Web.Controllers;
+﻿using System.Collections.Generic;
 using Daniel15.Web.Models.Shared;
 using Daniel15.Web.ViewModels;
-using System.Web.Mvc.Html;
+using Microsoft.AspNet.Html.Abstractions;
+using Microsoft.AspNet.Mvc.Rendering;
 
 namespace Daniel15.Web.Extensions
 {
@@ -18,12 +16,14 @@ namespace Daniel15.Web.Extensions
 		/// </summary>
 		/// <param name="htmlHelper">The HTML helper.</param>
 		/// <returns>The ID</returns>
-		public static string BodyId(this HtmlHelper htmlHelper)
+		public static string BodyId(this IHtmlHelper htmlHelper)
 		{
 			var routeData = htmlHelper.ViewContext.RouteData;
-			var controller = routeData.GetRequiredString("controller").ToLower();
-			var action = routeData.GetRequiredString("action").ToLower();
-			var area = routeData.DataTokens["area"] as string;
+			var controller = ((string)routeData.Values["controller"]).ToLower();
+			var action = ((string)routeData.Values["action"]).ToLower();
+			object areaObj;
+			routeData.Values.TryGetValue("area", out areaObj);
+			var area = (string)areaObj;
 
 			if (!string.IsNullOrEmpty(area))
 				return area.ToLower() + "-" + controller + "-" + action;
@@ -36,11 +36,11 @@ namespace Daniel15.Web.Extensions
 		/// </summary>
 		/// <param name="htmlHelper">The HTML helper.</param>
 		/// <returns>The class</returns>
-		public static string BodyClass(this HtmlHelper<ViewModelBase> htmlHelper)
+		public static string BodyClass(this IHtmlHelper<ViewModelBase> htmlHelper)
 		{
 			var classes = new List<string>
 			{
-				htmlHelper.ViewContext.RouteData.GetRequiredString("controller").ToLower(),
+				((string)htmlHelper.ViewContext.RouteData.Values["controller"]).ToLower(),
 				"col-" + htmlHelper.ViewData.Model.SidebarType.ToString().ToLower()
 			};
 			return string.Join(" ", classes);
@@ -51,10 +51,11 @@ namespace Daniel15.Web.Extensions
 		/// </summary>
 		/// <param name="htmlHelper">The HTML helper.</param>
 		/// <returns>Text for the top menu</returns>
-		public static MvcHtmlString Menu(this HtmlHelper htmlHelper)
+		public static IHtmlContent Menu(this IHtmlHelper htmlHelper)
 		{
-			var controller = htmlHelper.ViewContext.Controller;
-			var action = htmlHelper.ViewContext.RouteData.GetRequiredString("action").ToLower();
+			var routeData = htmlHelper.ViewContext.RouteData;
+			var controller = ((string)routeData.Values["controller"]).ToLower();
+			var action = ((string)routeData.Values["action"]).ToLower();
 
 			// TODO: Where should these actually be? Probably in a model.
 			// TODO: Should these be using UrlHelper?
@@ -64,19 +65,19 @@ namespace Daniel15.Web.Extensions
 				{
 					Url = "", 
 					Title = "Home", 
-					Active = controller is SiteController && action == "index"
+					Active = controller == "site" && action == "index"
 				},
 				new MenuItemModel
 				{
 					Url = "projects", 
 					Title = "Projects", 
-					Active = controller is ProjectController
+					Active = controller == "project"
 				},
 				new MenuItemModel
 				{
 					Url = "blog", 
 					Title = "Blog", 
-					Active = controller is BlogController
+					Active = controller == "blog"
 				},
 				new MenuItemModel
 				{
@@ -86,18 +87,7 @@ namespace Daniel15.Web.Extensions
 				},
 			};
 
-			return htmlHelper.Partial(MVC.Shared.Views._Menu, menuItems);
-		}
-
-		/// <summary>
-		/// Retrieves the content of the blog sidebar
-		/// </summary>
-		/// <param name="htmlHelper">HTML helper</param>
-		/// <returns>HTML for the blog sidebar</returns>
-		public static MvcHtmlString BlogSidebar(this HtmlHelper htmlHelper)
-		{
-			return htmlHelper.ViewContext.HttpContext.Cache.GetOrInsert("BlogSidebar", DateTime.UtcNow.AddDays(1), null,
-			                                                            () => htmlHelper.Action(MVC.BlogPartials.Sidebar()));
+			return htmlHelper.Partial("_Menu", menuItems);
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿@model Daniel15.Web.ViewModels.Blog.ListingViewModel
+﻿@using Daniel15.Shared.Configuration
+@model Daniel15.Web.ViewModels.Blog.ListingViewModel
+@inject ISiteConfiguration Config
 
 @{
 	//Model.PageUrlGenerator = page => Url.Action(MVC.Blog.Index(page));
@@ -8,7 +10,7 @@
 	// Only show page number if we're not on page 1
 	Model.Title = Model.Page == 1
 		? Config.BlogName
-		: string.Format("Page {0} — {1}", Model.Page, Config.BlogName);
+		: $"Page {Model.Page} — {Config.BlogName}";
 }
 
-@Html.Partial(MVC.Blog.Views._Posts, Model)
+@Html.Partial("_Posts", Model)

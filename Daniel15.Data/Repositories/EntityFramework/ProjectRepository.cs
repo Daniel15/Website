@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using Daniel15.Data.Entities.Projects;
+using Daniel15.Data.Extensions;
 
 namespace Daniel15.Data.Repositories.EntityFramework
 {
@@ -13,12 +14,9 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		public ProjectRepository(DatabaseContext context) : base(context) {}
 
 		/// <summary>
-		/// Gets the <see cref="DbSet{T}"/> represented by this repository.
+		/// Gets the <see cref="DbSet{TEntity}"/> represented by this repository.
 		/// </summary>
-		protected override DbSet<ProjectModel> Set
-		{
-			get { return Context.Projects; }
-		}
+		protected override DbSet<ProjectModel> Set => Context.Projects;
 
 		/// <summary>
 		/// Gets all the project entities in the database
@@ -45,7 +43,7 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns></returns>
 		public ProjectModel GetBySlug(string slug)
 		{
-			return Context.Projects.First(proj => proj.Slug == slug);
+			return Context.Projects.FirstOrThrow(proj => proj.Slug == slug);
 		}
 	}
 }

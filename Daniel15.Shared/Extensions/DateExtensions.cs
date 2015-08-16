@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace Daniel15.Shared.Extensions
 {
 	/// <summary>
@@ -9,12 +10,12 @@ namespace Daniel15.Shared.Extensions
 		/// <summary>
 		/// Epoch used for Unix timestamps
 		/// </summary>
-		private static DateTime UNIX_EPOCH = new DateTime(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0, kind: DateTimeKind.Utc);
+		private static DateTime _unixEpoch = new DateTime(year: 1970, month: 1, day: 1, hour: 0, minute: 0, second: 0, kind: DateTimeKind.Utc);
 
 		/// <summary>
 		/// Number of dates in a year
 		/// </summary>
-		private static double DAYS_IN_YEAR = 365.24;
+		private const double DAYS_IN_YEAR = 365.24;
 
 		/// <summary>
 		/// Like ToString but inserts the ordinal as well (1st, 2nd, etc.). Put {0} where you want
@@ -63,7 +64,7 @@ namespace Daniel15.Shared.Extensions
 		/// <returns>UNIX timestamp</returns>
 		public static long ToUnix(this DateTime dateTime)
 		{
-			return Convert.ToInt64((dateTime.ToUniversalTime() - UNIX_EPOCH).TotalSeconds);
+			return Convert.ToInt64((dateTime.ToUniversalTime() - _unixEpoch).TotalSeconds);
 		}
 
 		/// <summary>
@@ -73,7 +74,7 @@ namespace Daniel15.Shared.Extensions
 		/// <returns>Date represented by this UNIX timestamp</returns>
 		public static DateTime FromUnix(long unixTimeStamp)
 		{
-			return UNIX_EPOCH.AddSeconds(unixTimeStamp).ToLocalTime();
+			return _unixEpoch.AddSeconds(unixTimeStamp).ToLocalTime();
 		}
 
 		/// <summary>
@@ -81,7 +82,7 @@ namespace Daniel15.Shared.Extensions
 		/// </summary>
 		/// <param name="dateTime">The date to convert</param>
 		/// <returns>String representing this date</returns>
-		public static string ToRFC822String(this DateTime dateTime)
+		public static string ToRfc822String(this DateTime dateTime)
 		{
 			return dateTime.ToString("ddd',' d MMM yyyy HH':'mm':'ss") 
 				+ " "

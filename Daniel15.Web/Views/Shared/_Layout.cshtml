@@ -1,13 +1,7 @@
-﻿@using StackExchange.Profiling
-@using StackExchange.Profiling.Mvc
-@model Daniel15.Web.ViewModels.ViewModelBase
-@{
-	Bundles.Reference("main.css");
-	Bundles.Reference("~/Content/js/lib/react-0.12.1.min.js");
-	Bundles.Reference("main.js");
-	Bundles.AddInlineScript("Events.initPage();");
-	Bundles.Reference("syntaxHighlighter.js");
-}
+﻿@inject ISiteConfiguration Config
+@using System.Threading.Tasks
+@using Daniel15.Shared.Configuration
+@model ViewModelBase
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html lang="en" class="no-js ie ie6 ielt8 ielt9"> <![endif]-->
 <!--[if IE 7 ]>    <html lang="en" class="no-js ie ie7 ielt8 ielt9"> <![endif]-->
@@ -15,9 +9,8 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js non-ie"> <!--<![endif]-->
 <head>
-	@this.InitClientTimings()
 	<title>@(string.IsNullOrEmpty(Model.Title) ? string.Empty : Model.Title + " — ")Daniel15</title>
-	<base href="@Url.ContentAbsolute("~")" />
+	<base href="@Url.ContentAbsolute("~/")" />
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="viewport" content="width=device-width" />
@@ -37,8 +30,13 @@
 		<meta name="DC.Date" content="@Model.LastModified.Value.ToString("yyyy-MM-dd")" />
 	}
 	@RenderSection("extraMeta", required: false)
-	
-	@Bundles.RenderStylesheets()
+
+	<environment names="Development">
+		<link rel="stylesheet" href="~/cache/main.css" />
+	</environment>
+	<environment names="Staging,Production">
+		<link rel="stylesheet" href="cache/main.min.css" asp-append-version="true"/>
+	</environment>
 	
 	<!--[if lt IE 9]><script src="@Url.Js("lib/IE9.js")"></script><![endif]-->
 
@@ -70,10 +68,6 @@
 		</header>
 		<div id="colmask"><div id="colright">
 			<div id="content_wrap"><div id="content" role="main">
-				@if (TempData["topMessage"] != null)
-				{
-					<div id="top_message" class="@(TempData["topMessageType"] ?? "success")">@Html.Raw(TempData["topMessage"])</div>
-				}
 				@RenderBody()
 			</div></div>	  
 			@if (IsSectionDefined("sidebar"))
@@ -85,8 +79,8 @@
 
 		</div></div>
 		<footer>
-			&copy;2008&ndash;2013 <a href="http://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.<br />
-			@Model.Version
+			&copy;2008&ndash;2015 <a href="http://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.<br/>
+			@Html.Partial("_FooterVersion")
 			@if (Model.LastModified.HasValue)
 			{
 				<text>This page last modified @Model.LastModified.Value.ToString("d MMM yyyy")</text>
@@ -94,10 +88,23 @@
 		</footer>
 	</div>
 	<!-- Now for the JS -->
-	@Bundles.RenderScripts()
-
+	<script 
+		src="http://fb.me/react-0.12.1.min.js"
+		asp-fallback-src="~/Content/js/lib/react-0.12.1.min.js"
+		asp-fallback-test="window.React">
+    </script>
+	<environment names="Development">
+		<script src="~/cache/main.js"></script>
+		<script>Events.initPage();</script>
+		<script src="~/cache/syntaxHighlighter.js"></script>
+	</environment>
+	<environment names="Staging,Production">
+		<script src="cache/main.min.js" asp-append-version="true"></script>
+		<script>Events.initPage();</script>
+		<script src="cache/syntaxHighlighter.min.js"  asp-append-version="true"></script>
+	</environment>
 	@RenderSection("scripts", required: false)
-	@Html.ReactInitJavaScript()
+	
 	<!-- Prompt IE 6 and 7 users to install Chrome Frame -->
 	<!--[if lt IE 8]>
 		<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
@@ -106,7 +113,6 @@
 	<![endif]-->
 	
 	@RenderSection("extraFoot", required: false)
-	@MiniProfiler.RenderIncludes()
 </body>
 </html>
 <!-- Generated at @DateTime.Now -->

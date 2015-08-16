@@ -1,22 +1,22 @@
 ﻿@model Daniel15.Web.ViewModels.Blog.PostViewModel
 
 <article id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting">
-	@Html.Partial(MVC.Blog.Views._PostHeader, Model)
+	@Html.Partial("_PostHeader", Model)
 		@Html.Raw(Model.Post.Content())
 	</div>
-	@Html.Partial(MVC.Blog.Views._ShareLinks, Model)
+	@Html.Partial("_ShareLinks", Model)
 	
 	@if (Model.PostTags != null && Model.PostTags.Count > 0)
 	{
 		<p class="tags" itemprop="keywords">
 			<img src="@Url.Image("icons/tag_blue.png")" alt="Tags" title="Tags" />
-			@Html.Raw(string.Join(", ", Model.PostTags.Select(tag => string.Format("<a href=\"{0}\">{1}</a>", Url.BlogTag(tag), Html.Encode(tag.Title)))))
+			@Html.Raw(string.Join(", ", Model.PostTags.Select(tag => $"<a href=\"{Url.BlogTag(tag)}\">{Html.Encode(tag.Title)}</a>")))
 		</p>
 	}
 	
 	<footer>
-		Short URL for sharing: @Model.ShortUrl. This entry was posted on @Model.Post.Date.ToStringWithOrdinal("d{0} MMMM yyyy") and is filed under 
-		@Html.Raw(string.Join(", ", Model.PostCategories.Select(cat => string.Format("<a href=\"{0}\">{1}</a>", Url.BlogCategory(cat), Html.Encode(cat.Title))))). 
+		Short URL for sharing: @Model.ShortUrl. This entry was posted on @Model.Post.Date.ToStringWithOrdinal("d{0} MMMM yyyy") and is filed under
+		@Html.Raw(string.Join(", ", Model.PostCategories.Select(cat => $"<a href=\"{Url.BlogCategory(cat)}\">{Html.Encode(cat.Title)}</a>"))). 
 		You can <a href="@Url.BlogPost(Model.Post)#leave-comment" itemprop="discussionUrl">leave a comment</a> 
 		if you'd like to, or subscribe to the RSS feed to keep up-to-date with all my latest blog posts! 
 	</footer>

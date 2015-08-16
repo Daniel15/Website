@@ -1,0 +1,17 @@
+﻿@model Daniel15.Web.ViewModels.Feed.SitemapUrlModel
+
+<url>
+	<loc>@Model.Url</loc>
+	@if (Model.LastModified != null)
+	{
+		<lastmod>@Model.LastModified.Value.ToW3CString()</lastmod>
+	}
+	@if (Model.ChangeFrequency != null)
+	{
+		<changefreq>@Model.ChangeFrequency</changefreq>
+	}
+	@if (Model.Priority != null)
+	{
+		<priority>@Model.Priority</priority>
+	}
+</url>

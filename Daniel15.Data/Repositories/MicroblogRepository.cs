@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using Daniel15.Data.Entities.Blog;
-using System.Linq;
-using Daniel15.Infrastructure;
+using Daniel15.Shared.Configuration;
 
 namespace Daniel15.Data.Repositories
 {
@@ -31,7 +31,7 @@ namespace Daniel15.Data.Repositories
 		public IEnumerable<MicroblogPostModel> LatestPosts(int count = 10, int offset = 0)
 		{
 			XNamespace feedburnerNs = "http://rssnamespace.org/feedburner/ext/1.0";
-			var url = _siteConfiguration.MicroblogFeedUrl.ToString();
+			var url = _siteConfiguration.MicroblogFeedUrl;
 			var xml = XElement.Load(url);
 
 			return xml

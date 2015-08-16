@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Xml.Linq;
 using Daniel15.Data.Entities.Blog;
-using Daniel15.Shared.Extensions;
+using Microsoft.AspNet.Http.Extensions;
 
 namespace Daniel15.BusinessLayer.Services.Social
 {
@@ -27,12 +26,12 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <summary>
 		/// Gets the internal ID of this social network
 		/// </summary>
-		public string Id { get { return "facebook"; } }
+		public string Id => "facebook";
 
 		/// <summary>
 		/// Gets the friendly name of this social network
 		/// </summary>
-		public string Name { get { return "Facebook"; } }
+		public string Name => "Facebook";
 
 		#region Implementation of ISocialShare
 		/// <summary>
@@ -44,11 +43,11 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <returns>Sharing URL for this post</returns>
 		public string GetShareUrl(PostModel post, string url, string shortUrl)
 		{
-			return SHARE_URL + "?" + new Dictionary<string, object>
+			return SHARE_URL + new QueryBuilder
 			{
 				{"u", url},
 				{"t", post.Title},
-			}.ToQueryString();
+			};
 		}
 
 		/// <summary>
@@ -62,18 +61,15 @@ namespace Daniel15.BusinessLayer.Services.Social
 		{
 			// Get the count using FQL. Returns *both* like count and share count.
 			var query = string.Format(LINK_QUERY, url);
-			var queryUrl = QUERY_URL + "?" + new Dictionary<string, object>
+			var queryUrl = QUERY_URL + new QueryBuilder
 			{
 				{"query", query}
-			}.ToQueryString();
+			};
 
 			var xml = XDocument.Load(queryUrl);
 			XNamespace ns = "http://api.facebook.com/1.0/";
 
-			if (xml.Root == null)
-				return 0;
-
-			var linkStat = xml.Root.Element(ns + "link_stat");
+			var linkStat = xml.Root?.Element(ns + "link_stat");
 			if (linkStat == null)
 				return 0;
 

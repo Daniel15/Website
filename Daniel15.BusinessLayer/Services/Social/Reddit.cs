@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web.Helpers;
+using System.Net;
 using Daniel15.Data.Entities.Blog;
-using Daniel15.Shared.Extensions;
-using ServiceStack.Text;
+using Microsoft.AspNet.Http.Extensions;
+using Newtonsoft.Json.Linq;
 
 namespace Daniel15.BusinessLayer.Services.Social
 {
@@ -24,12 +23,12 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <summary>
 		/// Gets the internal ID of this social network
 		/// </summary>
-		public string Id { get { return "reddit"; } }
+		public string Id => "reddit";
 
 		/// <summary>
 		/// Gets the friendly name of this social network
 		/// </summary>
-		public string Name { get { return "Reddit"; } }
+		public string Name => "Reddit";
 
 		#region Implementation of ISocialShare
 		/// <summary>
@@ -41,11 +40,11 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <returns>Sharing URL for this post</returns>
 		public string GetShareUrl(PostModel post, string url, string shortUrl)
 		{
-			return SHARE_URL + "?" + new Dictionary<string, object>
+			return SHARE_URL + new QueryBuilder
 			{
 				{"url", url},
 				{"title", post.Title}
-			}.ToQueryString();
+			};
 		}
 
 		/// <summary>
@@ -58,22 +57,26 @@ namespace Daniel15.BusinessLayer.Services.Social
 		public int GetShareCount(PostModel post, string url, string shortUrl)
 		{
 			var total = 0;
-			var apiUrl = API_URL + "?" + new Dictionary<string, object>
+			var apiUrl = API_URL + new QueryBuilder
 			{
 				{"url", url}
-			}.ToQueryString();
+			};
 
-			var data = Json.Decode(apiUrl.GetJsonFromUrl());
-			if (data == null || data.data == null || data.data.children == null)
-				return 0;
-
-			// Need to add up the points in every submission of this URL
-			foreach (var child in data.data.children)
+			using (var client = new WebClient())
 			{
-				total += Convert.ToInt32(child.data.score);
-			}
+				var rawData = client.DownloadString(apiUrl);
+				dynamic data = JObject.Parse(rawData);
+				if (data == null || data.data == null || data.data.children == null)
+					return 0;
 
-			return total;
+				// Need to add up the points in every submission of this URL
+				foreach (var child in data.data.children)
+				{
+					total += Convert.ToInt32(child.data.score);
+				}
+
+				return total;
+			}
 		}
 		#endregion
 	}

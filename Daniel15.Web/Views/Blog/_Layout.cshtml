@@ -1,4 +1,6 @@
-﻿@model ViewModelBase
+﻿@using Daniel15.Shared.Configuration
+@model ViewModelBase
+@inject ISiteConfiguration Config
 
 @{
 	// "Inherit" from the base layout
@@ -10,17 +12,19 @@
 
 @section sidebar
 {
-	@Html.BlogSidebar()
+	<cache expires-after="TimeSpan.FromDays(1)">
+		@Component.Invoke("BlogSidebar")
+	</cache>
 }
 
 @section extraHead
 {
-	<link rel="index" title="@Config.BlogName" href="@Url.Action(MVC.Blog.Index())" />
+	<link rel="index" title="@Config.BlogName" href="@Url.Action("Index")" />
 	@RenderSection("extraHead", required: false)
 }
 
 @section extraFoot
 {
-	@Html.Partial(MVC.Blog.Views._DisqusCount)
+	@Html.Partial("_DisqusCount")
 	@RenderSection("extraFoot", required: false)
 }

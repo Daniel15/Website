@@ -4,7 +4,7 @@
 }
 
 <article id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting">
-	@Html.Partial(MVC.Blog.Views._PostHeader, Model)
+	@Html.Partial("_PostHeader", Model)
 		@Html.Raw(Model.Post.Intro(out showMoreLink))
 		@if (showMoreLink)
 		{
@@ -12,7 +12,7 @@
 		}
 	</div>
 	<footer>
-		@Html.Partial(MVC.Blog.Views._ShareLinks, Model)
+		@Html.Partial("_ShareLinks", Model)
 		<a href="@Url.BlogPost(Model.Post)#disqus_comments" itemprop="discussionUrl">Comments &raquo;</a>
 	</footer>
 </article>

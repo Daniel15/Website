@@ -1,5 +1,6 @@
-﻿@using Daniel15.Web.ViewModels.Project
-@using ServiceStack.Text
+﻿@using System.Threading.Tasks
+@using Daniel15.Web.ViewModels.Project
+@using Newtonsoft.Json
 @model Daniel15.Web.ViewModels.Project.IndexViewModel
 
 @{
@@ -23,7 +24,7 @@
 <div id="active_projects">
 	<h2>Active Projects</h2>
 	<p>These are all the projects I'm working on at the moment.</p>
-	@Html.Partial(MVC.Project.Views._ProjectList, new ProjectListViewModel
+	@Html.Partial("_ProjectList", new ProjectListViewModel
 	{
 		Projects = Model.CurrentProjects,
 		Technologies = Model.Technologies
@@ -37,7 +38,7 @@
 		This section lists all the projects I have completed, as well as projects that I was 
 		previously working on but don't update any more due to time constraints.
 	</p>
-	@Html.Partial(MVC.Project.Views._ProjectList, new ProjectListViewModel
+	@Html.Partial("_ProjectList", new ProjectListViewModel
 	{
 		Projects = Model.PreviousProjects,
 		Technologies = Model.Technologies
@@ -47,7 +48,7 @@
 <!-- I guess this is kinda ugly, but it's better than doing a separate request per tech when you click it -->
 <script type="text/javascript">
 //<![CDATA[
-	var tech_descs = @Html.Raw(Model.PrimaryTechnologies.ToDictionary(x => x.Slug, x => x.Description).ToJson())
+	var tech_descs = @Html.Raw(JsonConvert.SerializeObject(Model.PrimaryTechnologies.ToDictionary(x => x.Slug, x => x.Description)))
 //]]>
 </script>
 

@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using Daniel15.Configuration;
+using System.Linq;
+using Daniel15.Shared.Configuration;
+using Daniel15.Shared.Extensions;
 using Daniel15.Web.Areas.Gallery.Models;
 using Daniel15.Web.Areas.Gallery.ViewModels;
-using System.Linq;
-using Daniel15.Shared.Extensions;
-using Daniel15.Web.Mvc;
+using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Areas.Gallery.Controllers
 {
 	/// <summary>
 	/// Handles browsing and serving pictures in a gallery.
 	/// </summary>
+	[Area("Gallery")]
 	public partial class GalleryController : Controller
 	{
 		/// <summary>
@@ -28,6 +26,13 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// Name of the thumbnail directory
 		/// </summary>
 		private const string THUMBNAIL_DIR = "thumb";
+
+		/// <summary>
+		/// All galleries listed here will have a "shortcut" route. Instead of using 
+		/// /gallery/{galleryName}/..., they just use /{galleryName}/... These are all explicitly
+		/// whitelisted to prevent conflicts with other parts of the site.
+		/// </summary>
+		private const string SHORTCUT_REGEX = "(screenshots)";
 
 		/// <summary>
 		/// The gallery configuration
@@ -50,15 +55,21 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="galleryName">Name of the gallery</param>
 		/// <param name="path">Path to display</param>
 		/// <returns>Gallery listing or file download</returns>
-		public virtual ActionResult Index(string galleryName, string path = "")
+		[Route("{galleryName:regex("+  SHORTCUT_REGEX + ")}/{*path}", Order = 1)]
+		[Route("gallery/{galleryName}/{*path}", Order = 2)]
+		public virtual ActionResult Index(string galleryName, string path)
 		{
+			if (path == null)
+			{
+				path = string.Empty;
+			}
 			var gallery = GetGallery(galleryName);
 			var fullPath = GetAndValidateFullPath(gallery, path);
 
 			// Don't allow access to thumbnail directory
 			if (path == THUMBNAIL_DIR)
 			{
-				return HttpNotFound("Tried to directly access thumbnail folder");
+				return HttpNotFound();
 			}
 
 			// Directory? Return a directory listing.
@@ -74,7 +85,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 			else
 			{
 				// Neither a directory or file - Bail out!
-				return HttpNotFound(string.Format("Gallery file '{0}' not found in gallery {1}.", path, gallery.Name));
+				return HttpNotFound();
 			}
 		}
 
@@ -85,7 +96,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="path">Relative path to display</param>
 		/// <param name="fullPath">Full file system path</param>
 		/// <returns>Directory listing</returns>
-		private ActionResult Directory(IGallery gallery, string path, string fullPath)
+		private ActionResult Directory(Shared.Configuration.Gallery gallery, string path, string fullPath)
 		{
 			var dirBlacklist = new HashSet<string> { THUMBNAIL_DIR, "cgi-bin" };
 
@@ -99,7 +110,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 				.Where(x => !Path.GetFileName(x).StartsWith("."))
 				.Select(x => BuildGalleryModel(gallery, x, GalleryFileModel.FileType.File));
 
-			return View(Views.Index, new IndexViewModel
+			return View("Index", new IndexViewModel
 			{
 				Gallery = gallery,
 				Path = path,
@@ -115,7 +126,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <returns>File contents</returns>
 		private ActionResult Download(string fullPath)
 		{
-			return this.AccelRedirectFile(fullPath, "image/png");
+			return File(fullPath, "image/png");
 		}
 
 		/// <summary>
@@ -124,6 +135,8 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="galleryName">Name of the gallery</param>
 		/// <param name="path">Image to generate thumbnail for</param>
 		/// <returns>Thumbnail</returns>
+		[Route("{galleryName:regex(" + SHORTCUT_REGEX + ")}/thumb/{*path}", Order = 1)]
+		[Route("gallery/{galleryName}/thumb/{*path}", Order = 2)]
 		public virtual ActionResult Thumbnail(string galleryName, string path)
 		{
 			var gallery = GetGallery(galleryName);
@@ -143,7 +156,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 				}	
 			}
 
-			return this.AccelRedirectFile(cachePath, "image/png");
+			return File(cachePath, "image/png");
 		}
 
 		/// <summary>
@@ -153,7 +166,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="gallery">Gallery to display images for</param>
 		/// <param name="path">Relative path</param>
 		/// <returns>Absolute path</returns>
-		private string GetAndValidateFullPath(IGallery gallery, string path)
+		private string GetAndValidateFullPath(Shared.Configuration.Gallery gallery, string path)
 		{
 			var root = gallery.ImageDir;
 			var fullPath = Path.Combine(root, path);
@@ -176,7 +189,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="path">Path to the file or directory</param>
 		/// <param name="type">Type of the entity</param>
 		/// <returns>Gallery item model</returns>
-		private GalleryFileModel BuildGalleryModel(IGallery gallery, string path, GalleryFileModel.FileType type)
+		private GalleryFileModel BuildGalleryModel(Shared.Configuration.Gallery gallery, string path, GalleryFileModel.FileType type)
 		{
 			var relativePath = path
 				.Replace(gallery.ImageDir, string.Empty)
@@ -187,7 +200,9 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 			{
 				FileName = Path.GetFileName(path),
 				RelativePath = relativePath,
-				Url = type == GalleryFileModel.FileType.File ? ImageUrl(gallery, relativeUri) : Url.Action(MVC.Gallery.Gallery.Index(gallery.Name, relativeUri)),
+				Url = type == GalleryFileModel.FileType.File 
+					? ImageUrl(gallery, relativeUri) 
+					: Url.Action("Index", "Gallery", new { area = "Gallery", galleryName = gallery.Name, path = relativeUri }),
 				ThumbnailUrl = ThumbnailUrl(gallery, relativeUri),
 				Type = type
 			};
@@ -198,11 +213,11 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// </summary>
 		/// <param name="name">Name of the gallery to return</param>
 		/// <returns>Details on the specified gallery</returns>
-		private IGallery GetGallery(string name)
+		private Shared.Configuration.Gallery GetGallery(string name)
 		{
 			if (!_galleryConfig.Galleries.ContainsKey(name))
 			{
-				throw new HttpException((int)HttpStatusCode.NotFound, string.Format("Gallery '{0}' doesn't exist", name));
+				throw new Exception($"Gallery '{name}' doesn't exist");
 			}
 
 			return _galleryConfig.Galleries[name];
@@ -214,7 +229,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="gallery">Gallery to display images for</param>
 		/// <param name="path">Image path</param>
 		/// <returns>Thumbnail URL</returns>
-		private string ThumbnailUrl(IGallery gallery, string path)
+		private string ThumbnailUrl(Shared.Configuration.Gallery gallery, string path)
 		{
 			return ImageUrl(gallery, THUMBNAIL_DIR + "/" + path);
 		}
@@ -225,7 +240,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <param name="gallery">Gallery to display images for</param>
 		/// <param name="path">Image path</param>
 		/// <returns>Gallery URL</returns>
-		private string ImageUrl(IGallery gallery, string path)
+		private string ImageUrl(Shared.Configuration.Gallery gallery, string path)
 		{
 			return gallery.ImageUrl + path.Replace('\\', '/');
 		}

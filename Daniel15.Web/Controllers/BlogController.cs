@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Web.Mvc;
-using System.Web.UI;
-using AttributeRouting.Web.Mvc;
+using System.Linq;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
+using Daniel15.Web.Extensions;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.ViewModels.Blog;
-using Daniel15.Web.Extensions;
-using System.Linq;
-using StackExchange.Profiling;
+using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Controllers
 {
@@ -34,7 +31,6 @@ namespace Daniel15.Web.Controllers
 		private readonly IDisqusCommentRepository _commentRepository;
 		private readonly IUrlShortener _urlShortener;
 		private readonly ISocialManager _socialManager;
-		private readonly MiniProfiler _profiler;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BlogController" /> class.
@@ -43,14 +39,12 @@ namespace Daniel15.Web.Controllers
 		/// <param name="commentRepository">The Disqus comment repository</param>
 		/// <param name="urlShortener">The URL shortener</param>
 		/// <param name="socialManager">The social network manager used to get sharing URLs</param>
-		/// <param name="siteConfig">Site configuration</param>
 		public BlogController(IBlogRepository blogRepository, IDisqusCommentRepository commentRepository, IUrlShortener urlShortener, ISocialManager socialManager)
 		{
 			_blogRepository = blogRepository;
 			_commentRepository = commentRepository;
 			_urlShortener = urlShortener;
 			_socialManager = socialManager;
-			_profiler = MiniProfiler.Current;
 		}
 
 		/// <summary>
@@ -65,7 +59,7 @@ namespace Daniel15.Web.Controllers
 		private ActionResult Listing(IEnumerable<PostModel> posts, int count, int page, string viewName = null, ListingViewModel viewModel = null)
 		{
 			if (viewName == null)
-				viewName = Views.Index;
+				viewName = "Index";
 
 			if (viewModel == null)
 				viewModel = new ListingViewModel();
@@ -73,17 +67,14 @@ namespace Daniel15.Web.Controllers
 			var pages = (int)Math.Ceiling((double)count / ITEMS_PER_PAGE);
 
 			if (page > pages)
-				return HttpNotFound(string.Format("Requested page number ({0}) is greater than page count ({1})", page, pages));
+				return HttpNotFound();
 
-			using (_profiler.Step("Building post ViewModels"))
+			viewModel.Posts = posts.Select(post => new PostViewModel
 			{
-				viewModel.Posts = posts.Select(post => new PostViewModel
-				{
-					Post = post, 
-					ShortUrl = ShortUrl(post),
-					SocialNetworks = GetSocialNetworks(post)
-				});
-			}
+				Post = post, 
+				ShortUrl = ShortUrl(post),
+				SocialNetworks = GetSocialNetworks(post)
+			});
 			viewModel.TotalCount = count;
 			viewModel.Page = page;
 			viewModel.TotalPages = pages;
@@ -93,14 +84,14 @@ namespace Daniel15.Web.Controllers
 		/// <summary>
 		/// Index page of the blog
 		/// </summary>
-		[OutputCache(Location = OutputCacheLocation.Downstream, Duration = ONE_HOUR, VaryByParam = "page")]
-		[GET("blog", ActionPrecedence = 1, RouteName = "BlogHome")]
-		[GET("blog/page-{page:int}", ActionPrecedence = 2, RouteName = "BlogHomePage")]
+		[ResponseCache(Location = ResponseCacheLocation.Any, Duration = ONE_HOUR)]
+		[Route("blog", Order = 1, Name = "BlogHome")]
+		[Route("blog/page-{page:int}", Order = 2, Name= "BlogHomePage")]
 		public virtual ActionResult Index(int page = 1)
 		{
 			var count = _blogRepository.PublishedCount();
 			var posts = _blogRepository.LatestPosts(ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
-			return Listing(posts, count, page, Views.Index);
+			return Listing(posts, count, page, "Index");
 		}
 
 		/// <summary>
@@ -108,11 +99,13 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="slug">Category slug</param>
 		/// <param name="page">Page number to view</param>
+		/// <param name="parentSlug">Slug of the category's parent</param>
 		/// <returns>Posts in this category</returns>
-		[GET("category/{slug}", ActionPrecedence = 1, RouteName = "BlogCategory")]
-		[GET("category/{slug}/page-{page:int}", ActionPrecedence = 2, RouteName = "BlogCategoryPage")]
-		[GET("category/{parentSlug}/{slug}", ActionPrecedence = 3, RouteName = "BlogSubCategory")]
-		[GET("category/{parentSlug}/{slug}/page-{page:int}", ActionPrecedence = 4, RouteName = "BlogSubCategoryPage")]
+		/// <remarks>These must be ordered AFTER the RSS rules in FeedController!</remarks>
+		[Route("category/{slug}", Order = 5, Name = "BlogCategory")]
+		[Route("category/{slug}/page-{page:int}", Order = 6, Name = "BlogCategoryPage")]
+		[Route("category/{parentSlug}/{slug}", Order = 7, Name = "BlogSubCategory")]
+		[Route("category/{parentSlug}/{slug}/page-{page:int}", Order = 8, Name = "BlogSubCategoryPage")]
 		public virtual ActionResult Category(string slug, int page = 1, string parentSlug = null)
 		{
 			CategoryModel category;
@@ -123,7 +116,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the category doesn't exist
-				return HttpNotFound(string.Format("Category '{0}' not found.", slug));
+				return HttpNotFound();
 			}
 
 			// If the category has a parent category, ensure it's in the URL
@@ -134,10 +127,14 @@ namespace Daniel15.Web.Controllers
 
 			var count = _blogRepository.PublishedCount(category);
 			var posts = _blogRepository.LatestPosts(category, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
-			return Listing(posts, count, page, Views.Category, new CategoryListingViewModel
+			return Listing(posts, count, page, "Category", new CategoryListingViewModel
 			{
 				Category = category,
-				RssUrl = Url.ActionAbsolute(MVC.Feed.BlogCategory(category.Slug, category.Parent == null ? null : category.Parent.Slug))
+				RssUrl = Url.Action("BlogCategory", "Feed", new
+				{
+					Slug = category.Slug,
+					ParentSlug = category.Parent?.Slug
+				}, Request.Scheme)
 			});
 		}
 
@@ -147,8 +144,8 @@ namespace Daniel15.Web.Controllers
 		/// <param name="slug">Tag slug</param>
 		/// <param name="page">Page number to view</param>
 		/// <returns>Posts tagged with this tag</returns>
-		[GET("tag/{slug}", ActionPrecedence = 1, RouteName = "BlogTag")]
-		[GET("tag/{slug}/page-{page:int}", ActionPrecedence = 2, RouteName = "BlogTagPage")]
+		[Route("tag/{slug}", Order = 1, Name = "BlogTag")]
+		[Route("tag/{slug}/page-{page:int}", Order = 2, Name = "BlogTagPage")]
 		public virtual ActionResult Tag(string slug, int page = 1)
 		{
 			TagModel tag;
@@ -159,12 +156,12 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the category doesn't exist
-				return HttpNotFound(string.Format("Tag '{0}' not found.", slug));
+				return HttpNotFound();
 			}
 
 			var count = _blogRepository.PublishedCount(tag);
 			var posts = _blogRepository.LatestPosts(tag, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
-			return Listing(posts, count, page, Views.Tag, new TagListingViewModel { Tag = tag });
+			return Listing(posts, count, page, "Tag", new TagListingViewModel { Tag = tag });
 		}
 
 		/// <summary>
@@ -174,12 +171,12 @@ namespace Daniel15.Web.Controllers
 		/// <param name="month">Month to get posts for</param>
 		/// <param name="page">Page number to view</param>
 		/// <returns>Posts from this month</returns>
-		[GET("{year:int:length(4)}/{month:int:length(2)}")]
+		[Route("{year:int:length(4)}/{month:int:length(2)}")]
 		public virtual ActionResult Archive(int year, int month, int page = 1)
 		{
 			var count = _blogRepository.PublishedCountForMonth(year, month);
 			var posts = _blogRepository.LatestPostsForMonth(year, month, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
-			return Listing(posts, count, page, Views.Index);
+			return Listing(posts, count, page, "Index");
 		}
 
 		/// <summary>
@@ -189,7 +186,7 @@ namespace Daniel15.Web.Controllers
 		/// <param name="year">The year of the post</param>
 		/// <param name="slug">The slug.</param>
 		/// <returns>Blog post page</returns>
-		[GET("{year:int:length(4)}/{month:int:length(2)}/{slug}")]
+		[Route("{year:int:length(4)}/{month:int:length(2)}/{slug}")]
 		public virtual ActionResult View(int month, int year, string slug)
 		{
 			PostModel post;
@@ -200,7 +197,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the post doesn't exist
-				return HttpNotFound(string.Format("Blog post '{0}' not found.", slug));
+				return HttpNotFound();
 			}
 
 			// Check the URL was actually correct (year and month), redirect if not.
@@ -210,14 +207,14 @@ namespace Daniel15.Web.Controllers
 			}
 
 			// Set last-modified date based on the date of the post
-			Response.Cache.SetLastModified(post.Date);
+			Response.Headers.Set("Last-Modified", post.Date.ToUniversalTime().ToString("R"));
 
 			return View(new PostViewModel
 			{
 				Post = post,
 				PostCategories = _blogRepository.CategoriesForPost(post),
 				PostTags = _blogRepository.TagsForPost(post),
-				ShortUrl = Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http"),
+				ShortUrl = Url.Action("ShortUrl", "Blog", new { Alias = _urlShortener.Shorten(post) }, Request.Scheme),
 				SocialNetworks = GetSocialNetworks(post),
 				Comments = _commentRepository.GetCommentsTree(post)
 			});
@@ -228,19 +225,18 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="alias">URL alias</param>
 		/// <returns>Redirect to correct post</returns>
-		[GET(@"B{alias:regex(^[0-9A-Za-z\-_]+$)}", ControllerPrecedence = -1)]
+		[Route(@"B{alias:regex(^[[0-9A-Za-z\-_]]+$)}", Order = 999)]
 		public virtual ActionResult ShortUrl(string alias)
 		{
 			var id = _urlShortener.Extend(alias);
 			PostModel post;
 			try
 			{
-				// TODO: Add a GetSummary method and use that instead
 				post = _blogRepository.Get(id);
 			}
 			catch (Exception)
 			{
-				return HttpNotFound(string.Format("Blog post {0} for short URL '{1}' not found.", id, alias));
+				return HttpNotFound();
 			}
 
 			return RedirectPermanent(Url.BlogPost(post));
@@ -253,7 +249,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns>The short URL</returns>
 		private string ShortUrl(PostModel post)
 		{
-			return Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http");
+			return Url.Action("ShortUrl", "Blog", new { Alias = _urlShortener.Shorten(post) }, Request.Scheme);
 		}
 
 		/// <summary>

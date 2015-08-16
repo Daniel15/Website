@@ -1,4 +1,5 @@
-﻿@model Daniel15.Web.ViewModels.Site.IndexViewModel
+﻿@using System.Threading.Tasks
+@model Daniel15.Web.ViewModels.Site.IndexViewModel
 @{
 	var age = (DateTime.Now - new DateTime(1990, 06, 01)).Years();
 	
@@ -66,8 +67,8 @@
 	</li>
 </ul>
 
-@Html.Partial(MVC.Site.Views._LatestPosts, Model.LatestPosts)
-@Html.Action(MVC.Site.TumblrPosts())
+@Html.Partial("_LatestPosts", Model.LatestPosts)
+@Component.Invoke("TumblrPosts")
 
 @section sidebar
 {
@@ -81,14 +82,7 @@
 	</ul>
 }
 
-@section scripts
-{
+@section scripts {
 	<script async defer src="http://mystatus.im/daniel.json?callback=Page.Site.Index.initGoogleTalk"></script>
-	<!-- Skype status -->
-	@YqlJsonp("SELECT * FROM skype.user.status WHERE user='daniel15au'", "Page.Site.Index.initSkype")
-}
-
-@helper YqlJsonp(string query, string callback)
-{
-	<script async defer src="http://query.yahooapis.com/v1/public/yql?q=@(Url.Encode(query))&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=@callback"></script>
+	<yql query="SELECT * FROM skype.user.status WHERE user='daniel15au'" callback="Page.Site.Index.initSkype" />	
 }

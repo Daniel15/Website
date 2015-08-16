@@ -1,7 +1,10 @@
-﻿@using ServiceStack.Text
+﻿@using System.Threading.Tasks
+@using Daniel15.Shared.Configuration
+@using Newtonsoft.Json
+@inject ISiteConfiguration Config
 
 <script>
-	var disqus_shortname = @Html.Raw(Config.DisqusShortname.ToJson());
+	var disqus_shortname = @Html.Raw(JsonConvert.SerializeObject(Config.DisqusShortname));
 
 	(function () {
 		var s = document.createElement('script'); s.async = true;

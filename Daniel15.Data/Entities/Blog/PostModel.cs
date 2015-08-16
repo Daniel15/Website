@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
-using System.Web;
 using Daniel15.Shared.Extensions;
+using Microsoft.Framework.WebEncoders;
 using Newtonsoft.Json;
 
 namespace Daniel15.Data.Entities.Blog
@@ -79,7 +79,7 @@ namespace Daniel15.Data.Entities.Blog
 		/// </summary>
 		public IDictionary<string, int> ShareCounts
 		{
-			get { return JsonConvert.DeserializeObject<IDictionary<string, int>>(RawShareCounts); }
+			get { return string.IsNullOrEmpty(RawShareCounts) ? null : JsonConvert.DeserializeObject<IDictionary<string, int>>(RawShareCounts); }
 			set { RawShareCounts = JsonConvert.SerializeObject(value); }
 		}
 
@@ -91,10 +91,7 @@ namespace Daniel15.Data.Entities.Blog
 		/// <summary>
 		/// Gets the Disqus identifier for this post (currently just the post ID)
 		/// </summary>
-		public string DisqusIdentifier
-		{
-			get { return Id.ToString(); }
-		}
+		public string DisqusIdentifier => Id.ToString();
 
 		/// <summary>
 		/// Gets the processed content of this blog post
@@ -113,7 +110,7 @@ namespace Daniel15.Data.Entities.Blog
 				if (match.Groups["attributes"].Value.Contains(ESCAPED_PRE_ATTRIBUTE))
 					return match.Value.Replace(ESCAPED_PRE_ATTRIBUTE, "");
 
-				return "<pre" + match.Groups["attributes"] + ">" + HttpUtility.HtmlEncode(match.Groups["content"]) + "</pre>";
+				return "<pre" + match.Groups["attributes"] + ">" + HtmlEncoder.Default.HtmlEncode(match.Groups["content"].Value) + "</pre>";
 			});
 
 			return content;
@@ -135,7 +132,7 @@ namespace Daniel15.Data.Entities.Blog
 			}
 
 			showMoreLink = true;
-			return content.Substring(0, content.IndexOf(READ_MORE_HTML_MARKER));
+			return content.Substring(0, content.IndexOf(READ_MORE_HTML_MARKER, StringComparison.Ordinal));
 		}
 
 		/// <summary>

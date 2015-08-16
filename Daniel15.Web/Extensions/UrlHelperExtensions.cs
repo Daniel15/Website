@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Web.Mvc;
+using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Extensions
 {
@@ -8,13 +9,15 @@ namespace Daniel15.Web.Extensions
 	/// </summary>
 	public static class UrlHelperExtensions
 	{
+		public static IHttpContextAccessor HttpContextAccessor { get; set; }
+
 		/// <summary>
 		/// Gets the URL to the specified JavaScript file
 		/// </summary>
 		/// <param name="urlHelper">The URL helper.</param>
 		/// <param name="filename">The filename.</param>
 		/// <returns>JavaScript URL</returns>
-		public static string Js(this UrlHelper urlHelper, string filename)
+		public static string Js(this IUrlHelper urlHelper, string filename)
 		{
 			return urlHelper.Content("~/Content/js/" + filename);
 		}
@@ -25,7 +28,7 @@ namespace Daniel15.Web.Extensions
 		/// <param name="urlHelper">The URL helper.</param>
 		/// <param name="filename">The filename.</param>
 		/// <returns>Image URL</returns>
-		public static string Image(this UrlHelper urlHelper, string filename)
+		public static string Image(this IUrlHelper urlHelper, string filename)
 		{
 			return urlHelper.Content("~/Content/images/" + filename);
 		}
@@ -36,9 +39,21 @@ namespace Daniel15.Web.Extensions
 		/// <param name="urlHelper">URL helper</param>
 		/// <param name="uri">Relative URI</param>
 		/// <returns>Absoute URL</returns>
-		public static string Absolute(this UrlHelper urlHelper, string uri)
+		public static string Absolute(this IUrlHelper urlHelper, string uri)
 		{
-			return urlHelper.RequestContext.HttpContext.Request.Url.GetLeftPart(UriPartial.Authority) + uri;
+			var request = HttpContextAccessor.HttpContext.Request;
+			var hostAndPort = request.Host.Value.Split(':');
+            var builder = new UriBuilder
+			{
+				Host = hostAndPort[0],
+				Scheme = request.Scheme,
+				Path = uri
+			};
+			if (hostAndPort.Length == 2)
+			{
+				builder.Port = int.Parse(hostAndPort[1]);
+			}
+			return builder.ToString();
 		}
 
 		/// <summary>
@@ -47,7 +62,7 @@ namespace Daniel15.Web.Extensions
 		/// <param name="urlHelper">The URL helper</param>
 		/// <param name="uri">URI to link to</param>
 		/// <returns>The absolute URL</returns>
-		public static string ContentAbsolute(this UrlHelper urlHelper, string uri)
+		public static string ContentAbsolute(this IUrlHelper urlHelper, string uri)
 		{
 			return urlHelper.Absolute(urlHelper.Content(uri));
 		}

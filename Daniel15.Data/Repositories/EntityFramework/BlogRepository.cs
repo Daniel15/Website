@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Extensions;
@@ -22,10 +23,7 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <summary>
 		/// Gets the <see cref="DbSet{T}"/> represented by this repository.
 		/// </summary>
-		protected override DbSet<PostModel> Set
-		{
-			get { return Context.Posts; }
-		}
+		protected override DbSet<PostModel> Set => Context.Posts;
 
 		/// <summary>
 		/// Gets a post by slug.
@@ -75,22 +73,22 @@ namespace Daniel15.Data.Repositories.EntityFramework
 
 			// Group the categories by post ID
 			// TODO: There's almost certainly a better way of doing this...
-			var postIDToCategory = new Dictionary<int, IList<CategoryModel>>();
+			var postIdToCategory = new Dictionary<int, IList<CategoryModel>>();
 			foreach (var categoryAndPost in categories)
 			{
 				foreach (var postId in categoryAndPost.PostIDs)
 				{
-					if (!postIDToCategory.ContainsKey(postId))
+					if (!postIdToCategory.ContainsKey(postId))
 					{
-						postIDToCategory.Add(postId, new List<CategoryModel>());
+						postIdToCategory.Add(postId, new List<CategoryModel>());
                     }
-					postIDToCategory[postId].Add(categoryAndPost.Category);
+					postIdToCategory[postId].Add(categoryAndPost.Category);
 				}
 			}
 
 			return posts.ToDictionary(
 				post => post,
-				post => postIDToCategory[post.Id].AsEnumerable()
+				post => postIdToCategory[post.Id].AsEnumerable()
 			);
 		}
 
@@ -154,6 +152,7 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <param name="posts">Data source for blog posts</param>
 		/// <param name="count">Number of posts to return</param>
 		/// <param name="offset">Post to start at</param>
+		/// <param name="published">Whether to return published posts (<c>true</c> to show published or <c>false</c> to show unpublished)</param>
 		/// <returns>Latest blog posts</returns>
 		private List<PostModel> LatestPosts(IQueryable<PostModel> posts, int count, int offset, bool published = true)
 		{
@@ -361,6 +360,8 @@ ORDER BY year DESC, month DESC");
 			Context.SaveChanges();
 		}
 
+		[SuppressMessage("ReSharper", "ClassNeverInstantiated.Local")]
+		[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
 		private class MonthYearCount
 		{
 			public int Month { get; set; }

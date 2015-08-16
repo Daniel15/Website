@@ -1,0 +1,18 @@
+﻿@using Daniel15.Web.ViewModels.Blog
+@model Daniel15.Web.ViewModels.Blog.SidebarCategoriesViewModel
+
+<ul>
+	@foreach (var category in Model.Categories)
+	{
+		<li><a href="@Url.BlogCategory(category)">@category.Title</a></li>
+		@* Render child categories if applicable *@
+		if (Model.CategoryTree.ContainsKey(category.Id))
+		{
+			@Html.Partial("_SidebarCategories", new SidebarCategoriesViewModel
+			{
+				Categories = Model.CategoryTree[category.Id],
+				CategoryTree = Model.CategoryTree,
+			})
+		}
+	}
+</ul>

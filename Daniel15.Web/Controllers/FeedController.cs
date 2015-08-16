@@ -1,15 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web.Mvc;
-using AttributeRouting.Web.Mvc;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
-using Daniel15.Infrastructure;
+using Daniel15.Shared.Configuration;
+using Daniel15.Web.Extensions;
 using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.ViewModels.Feed;
-using Daniel15.Web.Extensions;
+using Microsoft.AspNet.Mvc;
+using Microsoft.Net.Http.Headers;
 
 namespace Daniel15.Web.Controllers
 {
@@ -47,28 +47,29 @@ namespace Daniel15.Web.Controllers
 		/// Gets a sitemap for the website
 		/// </summary>
 		/// <returns>Sitemap XML</returns>
-		[GET("sitemap.xml")]
+		[Route("sitemap.xml")]
 		public virtual ActionResult Sitemap()
 		{
-			Response.ContentType = "text/xml";
-			return View(new SitemapViewModel
+			var view = View(new SitemapViewModel
 			{
 				Posts = _blogRepository.LatestPosts(10000), // Should be big enough, lols
 				Categories = _blogRepository.Categories(),
 				Tags = _blogRepository.Tags(),
 				Projects = _projectRepository.All()
 			});
+			view.ContentType = MediaTypeHeaderValue.Parse("text/xml");
+			return view;
 		}
 
 		/// <summary>
 		/// RSS feed of all the latest posts
 		/// </summary>
 		/// <returns>RSS feed</returns>
-		[GET("blog/feed")]
+		[Route("blog/feed")]
 		public virtual ActionResult BlogLatest()
 		{
 			if (Request.ShouldRedirectToFeedburner())
-				return Redirect(_siteConfig.FeedBurnerUrl.ToString());
+				return Redirect(_siteConfig.FeedBurnerUrl);
 
 			var posts = _blogRepository.LatestPosts(ITEMS_IN_FEED);
 			return RenderFeed(posts, new FeedViewModel
@@ -76,8 +77,8 @@ namespace Daniel15.Web.Controllers
 				FeedGuidBase = "Latest",
 				Title = _siteConfig.BlogName,
 				Description = _siteConfig.BlogDescription,
-				FeedUrl = _siteConfig.FeedBurnerUrl.ToString(),
-				SiteUrl = Url.ActionAbsolute(MVC.Blog.Index())
+				FeedUrl = _siteConfig.FeedBurnerUrl,
+				SiteUrl = Url.Action("Index", "Blog", null, Request.Scheme),
 			});
 		}
 
@@ -85,9 +86,10 @@ namespace Daniel15.Web.Controllers
 		/// RSS feed for a specific category
 		/// </summary>
 		/// <param name="slug">Category slug</param>
+		/// <param name="parentSlug">Slug of the category's parent</param>
 		/// <returns>RSS feed</returns>
-		[GET("category/{parentSlug}/{slug}.rss", ActionPrecedence = 1, RouteName = "BlogSubCategoryFeed")]
-		[GET("category/{slug}.rss", ActionPrecedence = 2, RouteName = "BlogCategoryFeed")]
+		[Route("category/{parentSlug}/{slug}.rss", Order = 1, Name = "BlogSubCategoryFeed")]
+		[Route("category/{slug}.rss", Order = 2, Name = "BlogCategoryFeed")]
 		public virtual ActionResult BlogCategory(string slug, string parentSlug = null)
 		{
 			CategoryModel category;
@@ -98,13 +100,13 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the category doesn't exist
-				return HttpNotFound(string.Format("Category '{0}' not found.", slug));
+				return HttpNotFound();
 			}
 
 			// If the category has a parent category, ensure it's in the URL
 			if (category.Parent != null && string.IsNullOrEmpty(parentSlug))
 			{
-				return RedirectToActionPermanent(MVC.Feed.BlogCategory(slug, category.Parent.Slug));
+				return RedirectToActionPermanent("BlogCategory", "Feed", new { slug, parentSlug = category.Parent.Slug });
 			}
 
 			var posts = _blogRepository.LatestPosts(category, ITEMS_IN_FEED);
@@ -126,10 +128,11 @@ namespace Daniel15.Web.Controllers
 		/// <returns>RSS feed</returns>
 		private ActionResult RenderFeed(IList<PostModel> posts, FeedViewModel model)
 		{
-			Response.ContentType = "application/rss+xml";
 			// Set last-modified date based on the date of the newest post
 			if (posts.Count > 0)
-				Response.Cache.SetLastModified(posts[0].Date);
+			{
+				Response.Headers.Set("Last-Modified", posts[0].Date.ToString("R"));
+			}
 
 			var categories = _blogRepository.CategoriesForPosts(posts);
 			model.Posts = posts.Select(post => new PostViewModel
@@ -139,7 +142,7 @@ namespace Daniel15.Web.Controllers
 				PostCategories = categories[post]
 			}).ToList();
 
-			return View(Views.Blog, model);
+			return View("Blog", model);
 		}
 
 		/// <summary>
@@ -149,7 +152,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns>The short URL</returns>
 		private string ShortUrl(PostModel post)
 		{
-			return Url.Action(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)), "http");
+			return Url.Action("ShortUrl", "Blog", new { alias = _urlShortener.Shorten(post) }, Request.Scheme);
 		}
 	}
 }

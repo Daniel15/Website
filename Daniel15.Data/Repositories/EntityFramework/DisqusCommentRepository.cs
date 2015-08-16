@@ -20,12 +20,9 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		}
 
 		/// <summary>
-		/// Gets the <see cref="DbSet{T}"/> represented by this repository.
+		/// Gets the <see cref="DbSet{TEntity}"/> represented by this repository.
 		/// </summary>
-		protected override DbSet<DisqusCommentModel> Set
-		{
-			get { return Context.DisqusComments; }
-		}
+		protected override DbSet<DisqusCommentModel> Set => Context.DisqusComments;
 
 		/// <summary>
 		/// Load the specified comment, returning <c>null</c> if it's not in the database.

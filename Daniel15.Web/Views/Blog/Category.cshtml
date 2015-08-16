@@ -1,19 +1,21 @@
-﻿@model Daniel15.Web.ViewModels.Blog.CategoryListingViewModel
+﻿@using Daniel15.Shared.Configuration
+@model Daniel15.Web.ViewModels.Blog.CategoryListingViewModel
+@inject ISiteConfiguration Config
 
 @{
 	//Model.PageUrlGenerator = page => Url.Action(MVC.Blog.Category(Model.Category.Slug, page));
 	Model.PageUrlGenerator = page => Url.BlogCategory(Model.Category, page);
 	Model.Heading = Config.BlogName;
-	Model.Title = string.Format("Latest posts in {0} — {1}", Model.Category.Title, Config.BlogName);
+	Model.Title = $"Latest posts in {Model.Category.Title} — {Config.BlogName}";
 
 	// Only show page number if we're not on page 1
 	if (Model.Page != 1)
 	{
-		Model.Title = string.Format("Page {0} — {1}", Model.Page, Model.Title);
+		Model.Title = $"Page {Model.Page} — {Model.Title}";
 	}
 }
 
-@Html.Partial(MVC.Blog.Views._Posts, Model)
+@Html.Partial("_Posts", Model)
 
 @section extraHead
 {

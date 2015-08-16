@@ -1,15 +1,18 @@
-﻿using System.Web.Mvc;
-using Daniel15.BusinessLayer.Services;
+﻿using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
+using Daniel15.Web.Areas.Api.Models.Blog;
 using Daniel15.Web.Extensions;
+using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Areas.Api.Controllers
 {
 	/// <summary>
 	/// API for blog posts
 	/// </summary>
+	[Area("Api")]
+	[Route("api/posts/{postId}/[action]")]
 	public partial class PostsApiController : Controller
 	{
 		private readonly IBlogRepository _blogRepository;
@@ -32,7 +35,8 @@ namespace Daniel15.Web.Areas.Api.Controllers
 		/// <param name="postId">ID of the post to get the URL for</param>
 		/// <returns>URL to the post</returns>
 		[ActionName("Url")]
-		public virtual ActionResult Urls(int postId)
+		[HttpGet]
+		public IActionResult Urls(int postId)
 		{
 			PostModel post;
 			try
@@ -42,14 +46,14 @@ namespace Daniel15.Web.Areas.Api.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the post doesn't exist
-				return HttpNotFound(string.Format("Blog post #{0} not found.", postId));
+				return HttpNotFound();
 			}
 
-			return Json(new
+			return new ObjectResult(new PostUrlsModel
 			{
 				Url = Url.BlogPostAbsolute(post),
-				ShortUrl = Url.ActionAbsolute(MVC.Blog.ShortUrl(_urlShortener.Shorten(post)))
-			}, JsonRequestBehavior.AllowGet);
+				ShortUrl = Url.Action("ShortUrl", "Blog", new { alias = _urlShortener.Shorten(post) }, Request.Scheme),
+			});
 		}
 	}
 }

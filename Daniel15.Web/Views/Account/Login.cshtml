@@ -4,9 +4,7 @@
 	Model.Title = "Log in";
 }
 
-@using (Html.BeginForm(new { ReturnUrl = Model.ReturnUrl }))
-{
-	@Html.AntiForgeryToken()
+<form asp-controller="Account" asp-action="Login" asp-route-ReturnUrl="@Model.ReturnUrl" method="POST">
 	@Html.ValidationSummary(true)
 
 	@Html.LabelFor(m => m.UserName)
@@ -18,4 +16,4 @@
 	@Html.ValidationMessageFor(m => m.Password)<br />
 	
 	<p><input type="submit" value="Log in" /></p>
-}
+</form>

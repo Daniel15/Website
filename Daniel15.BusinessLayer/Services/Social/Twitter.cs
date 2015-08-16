@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web.Helpers;
+using System.Net;
 using Daniel15.Data.Entities.Blog;
-using Daniel15.Shared.Extensions;
-using ServiceStack.Text;
+using Microsoft.AspNet.Http.Extensions;
+using Newtonsoft.Json.Linq;
 
 namespace Daniel15.BusinessLayer.Services.Social
 {
@@ -24,12 +23,12 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <summary>
 		/// Gets the internal ID of this social network
 		/// </summary>
-		public string Id { get { return "twitter"; } }
+		public string Id => "twitter";
 
 		/// <summary>
 		/// Gets the friendly name of this social network
 		/// </summary>
-		public string Name { get { return "Twitter"; } }
+		public string Name => "Twitter";
 
 		#region Implementation of ISocialShare
 		/// <summary>
@@ -41,14 +40,14 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <returns>Sharing URL for this post</returns>
 		public string GetShareUrl(PostModel post, string url, string shortUrl)
 		{
-			return SHARE_URL + "?" + new Dictionary<string, object>
+			return SHARE_URL + new QueryBuilder
 			{
 				{"text", post.Title},
 				{"original_referer", url},
 				{"url", shortUrl},
 				{"via", "Daniel15"},
 				{"related", "Daniel15"}
-			}.ToQueryString();
+			};
 		}
 
 		/// <summary>
@@ -60,16 +59,20 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <returns>Share count for this post</returns>
 		public int GetShareCount(PostModel post, string url, string shortUrl)
 		{
-			var countUrl = COUNT_URL + "?" + new Dictionary<string, object>
+			var countUrl = COUNT_URL + new QueryBuilder
 			{
 				{"url", url},
-			}.ToQueryString();
+			};
 
-			var response = Json.Decode(countUrl.GetJsonFromUrl());
-			if (response == null || response.count == null)
-				return 0;
+			using (var client = new WebClient())
+			{
+				var rawResponse = client.DownloadString(countUrl);
+				dynamic response = JObject.Parse(rawResponse);
+				if (response == null || response.count == null)
+					return 0;
 
-			return Convert.ToInt32(response.count);
+				return Convert.ToInt32(response.count);
+			}
 		}
 		#endregion
 	}

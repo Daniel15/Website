@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web.Helpers;
+using System.Net;
 using Daniel15.Data.Entities.Blog;
-using Daniel15.Shared.Extensions;
-using ServiceStack.Text;
+using Microsoft.AspNet.Http.Extensions;
+using Newtonsoft.Json.Linq;
 
 namespace Daniel15.BusinessLayer.Services.Social
 {
@@ -24,12 +23,12 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <summary>
 		/// Gets the internal ID of this social network
 		/// </summary>
-		public string Id { get { return "linkedin"; } }
+		public string Id => "linkedin";
 
 		/// <summary>
 		/// Gets the friendly name of this social network
 		/// </summary>
-		public string Name { get { return "LinkedIn"; } }
+		public string Name => "LinkedIn";
 
 		#region Implementation of ISocialShare
 		/// <summary>
@@ -41,13 +40,13 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <returns>Sharing URL for this post</returns>
 		public string GetShareUrl(PostModel post, string url, string shortUrl)
 		{
-			return SHARE_URL + "?" + new Dictionary<string, object>
+			return SHARE_URL + new QueryBuilder
 			{
 				{"mini", "true"},
 				{"url", url},
 				{"title", post.Title},
 				{"source", "Daniel15"},
-			}.ToQueryString();
+			};
 		}
 
 		/// <summary>
@@ -59,21 +58,24 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <returns>Share count for this post</returns>
 		public int GetShareCount(PostModel post, string url, string shortUrl)
 		{
-			var apiUrl = API_COUNT_URL + "?" + new Dictionary<string, object>
+			var apiUrl = API_COUNT_URL + new QueryBuilder
 			{
 				{"url", url}
-			}.ToQueryString();
+			};
 
-			var responseText = apiUrl.GetJsonFromUrl();
-			// Ugly hack to get JSON data from the JavaScript method call
-			// This API call is usually used client-side via JSONP...
-			responseText = responseText.Replace("IN.Tags.Share.handleCount(", "").Replace(");", "");
-			var response = Json.Decode(responseText);
+			using (var client = new WebClient())
+			{
+				var responseText = client.DownloadString(apiUrl);
+				// Ugly hack to get JSON data from the JavaScript method call
+				// This API call is usually used client-side via JSONP...
+				responseText = responseText.Replace("IN.Tags.Share.handleCount(", "").Replace(");", "");
+				dynamic response = JObject.Parse(responseText);
 
-			if (response == null || response.count == null)
-				return 0;
+				if (response == null || response.count == null)
+					return 0;
 
-			return Convert.ToInt32(response.count);
+				return Convert.ToInt32(response.count);
+			}
 		}
 		#endregion
 	}

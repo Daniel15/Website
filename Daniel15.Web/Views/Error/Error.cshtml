@@ -1,0 +1,13 @@
+﻿@model Daniel15.Web.ViewModels.Error.ErrorViewModel
+@{
+	Model.Title = "Something broke :(";
+}
+
+<p>
+	Sorry, something went wrong. This error has been logged, but please email me at
+	<strong>daniel@dan.cx</strong> and let me know what broke. :(
+</p>
+<p>
+	Technical details: @Model.Exception?.Message
+</p>
+<p>@DateTime.Now</p>

@@ -1,52 +1,50 @@
-﻿@model Daniel15.Web.ViewModels.Feed.SitemapViewModel
+﻿@using Daniel15.Web.ViewModels.Feed
+@using Microsoft.AspNet.Html.Abstractions
+@model SitemapViewModel
 <?xml version="1.0" encoding="UTF-8"?>
 @{
 	Layout = null;
+	var scheme = ViewContext.HttpContext.Request.Scheme;
 }
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	@SitemapUrl(Url.ActionAbsolute(MVC.Site.Index()), null, "weekly", 1.0)
-	@SitemapUrl(Url.ActionAbsolute(MVC.Project.Index()), null, "weekly", 0.9)
-	@SitemapUrl(Url.ActionAbsolute(MVC.Site.SocialFeed()).ToLower(), null, "daily", 0.7)
+	@SitemapUrl(Url.Action("Index", "Site", new {}, scheme), null, "weekly", 1.0)
+	@SitemapUrl(Url.Action("Index", "Project", new {}, scheme), null, "weekly", 0.9)
+	@SitemapUrl(Url.Action("SocialFeed", "Site", new {}, scheme).ToLower(), null, "daily", 0.7)
 	@SitemapUrl(Url.Absolute(Url.BlogIndex()), null, "daily", 0.9)
-	
+
 	@foreach (var post in Model.Posts)
 	{
 		@SitemapUrl(Url.BlogPostAbsolute(post), post.Date, "monthly", 0.8)
 	}
-	
+
 	@foreach (var project in Model.Projects)
 	{
-		@SitemapUrl(Url.ActionAbsolute(MVC.Project.Detail(project.Slug)), null, "monthly", 0.8)
+		@SitemapUrl(Url.Action("Detail", "Project", new {slug = project.Slug}, scheme), null, "monthly", 0.8)
 	}
-	
+
 	@foreach (var category in Model.Categories)
 	{
 		@SitemapUrl(Url.Absolute(Url.BlogCategory(category)), null, "weekly", 0.7)
 	}
-	
+
 	@foreach (var tag in Model.Tags)
 	{
 		@SitemapUrl(Url.Absolute(Url.BlogTag(tag)), null, "weekly", 0.7)
 	}
 </urlset>
 
-@helper SitemapUrl(string url, DateTime? lastModified = null, string changeFreq = null, double? priority = null)
-{
-	<url>
-		<loc>@url</loc>
-		@if (lastModified != null)
+@functions {
+	IHtmlContent SitemapUrl(string url, DateTime? lastModified = null, string changeFreq = null, double? priority = null)
+	{
+		return Html.Partial("_SitemapUrl", new SitemapUrlModel
 		{
-			<lastmod>@lastModified.Value.ToW3CString()</lastmod>
-		}
-		@if (changeFreq != null)
-		{
-			<changefreq>@changeFreq</changefreq>
-		}
-		@if (priority != null)
-		{
-			<priority>@priority</priority>
-		}
-	</url>
+			ChangeFrequency = changeFreq,
+			Priority = priority,
+			LastModified = lastModified,
+			Url = url,
+		});
+	}
 }
+
 <!-- Generated at @DateTime.Now -->

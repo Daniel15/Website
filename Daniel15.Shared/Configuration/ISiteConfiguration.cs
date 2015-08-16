@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Daniel15.Infrastructure
+﻿namespace Daniel15.Shared.Configuration
 {
 	/// <summary>
 	/// Represents configuration details for the site.
@@ -25,7 +23,7 @@ namespace Daniel15.Infrastructure
 		/// <summary>
 		/// Gets the FeedBurner URL for the blog feed
 		/// </summary>
-		Uri FeedBurnerUrl { get; }
+		string FeedBurnerUrl { get; }
 
 		/// <summary>
 		/// Gets the Disqus shortname used by the blog comments
@@ -45,11 +43,11 @@ namespace Daniel15.Infrastructure
 		/// <summary>
 		/// Gets the URL to the microblog (Tumblr) feed
 		/// </summary>
-		Uri MicroblogFeedUrl { get; }
+		string MicroblogFeedUrl { get; }
 
 		/// <summary>
-		/// Gets the type of web cache being used for the site
+		/// Gets information about the Git commit the site is running on
 		/// </summary>
-		Type WebCacheType { get; }
+		SiteGitConfiguration Git { get; }
 	}
 }

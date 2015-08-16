@@ -1,21 +1,34 @@
-﻿@using Cassette.Views
-@model ViewModelBase
+﻿@model ViewModelBase
 
 @{
 	// "Inherit" from the base layout
 	Layout = "~/Views/Shared/_Layout.cshtml";
-	Bundles.Reference("blogadmin.css");
-	Bundles.Reference("blogadmin.js");
 }
 
+@if (TempData["topMessage"] != null)
+{
+	<div id="top_message" class="@(TempData["topMessageType"] ?? "success")">@Html.Raw(TempData["topMessage"])</div>
+}
 @RenderBody()
 
 @section extraHead
 {
+	<environment names="Development">
+		<link rel="stylesheet" href="~/cache/blogadmin.css" />
+	</environment>
+	<environment names="Staging,Production">
+		<link rel="stylesheet" href="cache/blogadmin.min.css" asp-append-version="true" />
+	</environment>
 	@RenderSection("extraHead", required: false)
 }
 
 @section extraFoot
 {
+	<environment names="Development">
+		<script src="~/cache/blogadmin.js"></script>
+	</environment>
+	<environment names="Staging,Production">
+		<script src="cache/blogadmin.min.js" asp-append-version="true"></script>
+	</environment>
 	@RenderSection("extraFoot", required: false)
 }

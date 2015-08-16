@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Diagnostics;
 using System.Linq;
 
 namespace Daniel15.Data.Repositories.EntityFramework
@@ -14,10 +13,10 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <summary>
 		/// Entity Framework database context.
 		/// </summary>
-		protected DatabaseContext Context { get; private set; }
+		protected DatabaseContext Context { get; }
 
 		/// <summary>
-		/// Gets the <see cref="DbSet{T}"/> represented by this repository.
+		/// Gets the <see cref="DbSet{TEntity}"/> represented by this repository.
 		/// </summary>
 		protected abstract DbSet<T> Set { get; }
 
@@ -46,7 +45,12 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns>The entity</returns>
 		public virtual T Get(int id)
 		{
-			return Set.Find(id);
+			var entity = Set.Find(id);
+			if (entity == null)
+			{
+				throw new EntityNotFoundException();
+			}
+			return entity;
 		}
 
 		/// <summary>

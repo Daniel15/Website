@@ -1,18 +1,20 @@
-﻿@using ServiceStack.Text
+﻿@using Daniel15.Shared.Configuration
+@using Newtonsoft.Json
 @model Daniel15.Web.ViewModels.Blog.PostViewModel
+@inject ISiteConfiguration Config
 
 <div id="comments">
 	<div id="disqus_thread">
 		<h3>Comments</h3>
-		@Html.Partial(MVC.Blog.Views._CommentList, Model.Comments)
+		@Html.Partial("_CommentList", Model.Comments)
 	</div>
 </div>
 
 <script type="text/javascript">
-    var disqus_shortname = @Html.Raw(Config.DisqusShortname.ToJson()),
-        disqus_title = @Html.Raw(Model.Post.Title.ToJson()),
+    var disqus_shortname = @Html.Raw(JsonConvert.SerializeObject(Config.DisqusShortname)),
+        disqus_title = @Html.Raw(JsonConvert.SerializeObject(Model.Post.Title)),
         disqus_identifier = @Model.Post.DisqusIdentifier,
-        disqus_url = @Html.Raw(Url.BlogPostAbsolute(Model.Post).ToJson());
+        disqus_url = @Html.Raw(JsonConvert.SerializeObject(Url.BlogPostAbsolute(Model.Post)));
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

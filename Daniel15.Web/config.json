@@ -1,0 +1,24 @@
+﻿{
+  "Site": {
+    "BlogDescription": "Blog of Daniel Lo Nigro, a slightly awesome 25-year-old web developer from Melbourne, Australia",
+    "BlogName": "Daniel15's Blog",
+    "DisqusCategory": 95959,
+    "DisqusShortname": "daniel15",
+    "FeedBurnerUrl": "http://feeds.d15.biz/Daniel15",
+    "GoogleAnalyticsAccount": "UA-25623237-2",
+    "MicroblogFeedUrl": "http://feeds.dan.cx/dan-thoughts",
+    "Git": {
+      "RevisionUrl": "https://github.com/Daniel15/Website/commit/{0}"
+    }
+  },
+  "Gallery": {
+    "Galleries": {
+      "screenshots": {
+        "Name": "screenshots",
+        "Title": "Screenshots",
+        "ImageUrl": "http://localhost/ss/",
+        "ImageDir": "c:\\Temp\\Screenshots"
+      }
+    }
+  }
+}
