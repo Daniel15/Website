@@ -35,7 +35,7 @@
 		<link rel="stylesheet" href="~/cache/main.css" />
 	</environment>
 	<environment names="Staging,Production">
-		<link rel="stylesheet" href="~/cache/main.min.css" asp-append-version="true"/>
+		<link rel="stylesheet" href="cache/main.min.css" asp-append-version="true"/>
 	</environment>
 	
 	<!--[if lt IE 9]><script src="@Url.Js("lib/IE9.js")"></script><![endif]-->
@@ -99,9 +99,9 @@
 		<script src="~/cache/syntaxHighlighter.js"></script>
 	</environment>
 	<environment names="Staging,Production">
-		<script src="~/cache/main.min.js" asp-append-version="true"></script>
+		<script src="cache/main.min.js" asp-append-version="true"></script>
 		<script>Events.initPage();</script>
-		<script src="~/cache/syntaxHighlighter.min.js"  asp-append-version="true"></script>
+		<script src="cache/syntaxHighlighter.min.js"  asp-append-version="true"></script>
 	</environment>
 	@RenderSection("scripts", required: false)
 	

@@ -17,7 +17,7 @@
 		<link rel="stylesheet" href="~/cache/blogadmin.css" />
 	</environment>
 	<environment names="Staging,Production">
-		<link rel="stylesheet" href="~/cache/blogadmin.min.css" asp-append-version="true" />
+		<link rel="stylesheet" href="cache/blogadmin.min.css" asp-append-version="true" />
 	</environment>
 	@RenderSection("extraHead", required: false)
 }
@@ -28,7 +28,7 @@
 		<script src="~/cache/blogadmin.js"></script>
 	</environment>
 	<environment names="Staging,Production">
-		<script src="~/cache/blogadmin.min.js" asp-append-version="true"></script>
+		<script src="cache/blogadmin.min.js" asp-append-version="true"></script>
 	</environment>
 	@RenderSection("extraFoot", required: false)
 }
