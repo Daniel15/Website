@@ -12,7 +12,7 @@
     "Microsoft.AspNet.Mvc": "6.0.0-beta6",
     "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-beta6",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta6",
-    "Microsoft.AspNet.Server.WebListener": "1.0.0-beta6",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta6",
     "Microsoft.AspNet.StaticFiles": "1.0.0-beta6",
     "Microsoft.Framework.Configuration.Json": "1.0.0-beta6",
     "Microsoft.Framework.Logging.Console": "1.0.0-beta6",
@@ -21,7 +21,7 @@
     "Microsoft.AspNet.Session": "1.0.0-beta6",
     "Daniel15.SimpleIdentity": "1.0.0",
     "Microsoft.AspNet.Tooling.Razor": "1.0.0-beta6",
-    "React.AspNet": "1.5.4"
+    "React.AspNet": "1.5.5"
   },
 
   "commands": {

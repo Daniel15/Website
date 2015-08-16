@@ -10,6 +10,7 @@ var concat = require('gulp-concat'),
     minifyCSS = require('gulp-minify-css'),
 	react = require('gulp-react'),
     rename = require('gulp-rename'),
+	shell = require('gulp-shell'),
     uglify = require('gulp-uglify'),
 	urlAdjuster = require('gulp-css-url-adjuster'),
 	project = require('./project.json');
@@ -19,11 +20,16 @@ var paths = {
 	webroot: webroot,
 	css: webroot + 'Content/css/',
 	js: webroot + 'Content/js/',
-	concatRoot: webroot + 'cache/'
+	concatRoot: webroot + 'cache/',
+	// Located in the drive root, otherwise the paths get too long :/
+	tempPublish: 'c:/TempPublish/'
 };
 
 gulp.task('clean', function(cb) {
-	del([paths.concatRoot + '/*'], cb);
+	del([
+		paths.concatRoot + '/*',
+		paths.tempPublish + '/*'
+	], { force: true }, cb);
 });
 
 gulp.task('build:css', function() {
@@ -111,4 +117,43 @@ gulp.task('build:config', function(cb) {
 			fs.writeFile('config.generated.json', JSON.stringify(config, null, 4), cb);
 		});
 	});
+});
+
+function publish(subDir) {
+	var extraOptions = subDir === 'site' ? '--wwwroot-out "wwwroot"' : '';
+	return shell(
+		'dnu publish "<%= file.path %>" --out "' + paths.tempPublish + subDir + '" --configuration Release --no-source ' + extraOptions
+	);
+}
+
+gulp.task('package:site', ['build'], function() {
+	return gulp.src('.').pipe(publish('site'));
+});
+
+gulp.task('package:cron', function () {
+	return gulp.src('../Daniel15.Cron').pipe(publish('cron'));
+});
+
+gulp.task('package', ['package:site', 'package:cron']);
+
+function deploy(remoteDir) {
+	return gulp.src(paths.tempPublish)
+		.pipe(shell(
+			'rsync -arvuz --progress --chmod=ug=rwX,o=rX --exclude "config.Production.json" <%= cygwinPath(file.path) %> daniel-deploy@dan.cx:/var/www/dan.cx/' + remoteDir + '/',
+			{
+				templateData: {
+					cygwinPath: function (path) {
+						return path.replace(/\\/g, '/').replace('c:/', '/cygdrive/c/') + '/';
+					}
+				}
+			}
+		));
+}
+
+gulp.task('deploy:staging', ['package'], function () {
+	return deploy('staging');
+});
+
+gulp.task('deploy:live', ['package'], function () {
+	return deploy('live');
 });
