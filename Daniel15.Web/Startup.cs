@@ -42,18 +42,17 @@ namespace Daniel15.Web
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
-			loggerFactory.MinimumLevel = LogLevel.Information;
-			loggerFactory.AddConsole();
-			
 			if (env.IsDevelopment())
 			{
 				app.UseBrowserLink();
 				app.UseErrorPage();
+				loggerFactory.AddConsole(LogLevel.Information);
 			}
 			else
 			{
 				app.UseStatusCodePagesWithReExecute("/Error/Status{0}");
-				app.UseErrorHandler("/Error");	
+				app.UseErrorHandler("/Error");
+				loggerFactory.AddConsole(LogLevel.Warning);
 			}
 
 			app.UseReact(config =>
