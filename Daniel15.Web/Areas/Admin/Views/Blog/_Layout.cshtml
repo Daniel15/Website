@@ -5,6 +5,10 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (TempData["topMessage"] != null)
+{
+	<div id="top_message" class="@(TempData["topMessageType"] ?? "success")">@Html.Raw(TempData["topMessage"])</div>
+}
 @RenderBody()
 
 @section extraHead

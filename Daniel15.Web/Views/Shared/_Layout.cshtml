@@ -68,10 +68,6 @@
 		</header>
 		<div id="colmask"><div id="colright">
 			<div id="content_wrap"><div id="content" role="main">
-				@if (TempData["topMessage"] != null)
-				{
-					<div id="top_message" class="@(TempData["topMessageType"] ?? "success")">@Html.Raw(TempData["topMessage"])</div>
-				}
 				@RenderBody()
 			</div></div>	  
 			@if (IsSectionDefined("sidebar"))
