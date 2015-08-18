@@ -104,6 +104,7 @@
 		<script src="cache/syntaxHighlighter.min.js"  asp-append-version="true"></script>
 	</environment>
 	@RenderSection("scripts", required: false)
+	@Html.ReactInitJavaScript()
 	
 	<!-- Prompt IE 6 and 7 users to install Chrome Frame -->
 	<!--[if lt IE 8]>
