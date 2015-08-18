@@ -87,7 +87,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		public virtual ActionResult Projects()
 		{
-			return RedirectToActionPermanent("Index", "Projects");
+			return RedirectToActionPermanent("Index", "Project");
 		}
 	}
 }
