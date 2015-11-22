@@ -207,7 +207,7 @@ namespace Daniel15.Web.Controllers
 			}
 
 			// Set last-modified date based on the date of the post
-			Response.Headers.Set("Last-Modified", post.Date.ToUniversalTime().ToString("R"));
+			Response.Headers["Last-Modified"] = post.Date.ToUniversalTime().ToString("R");
 
 			return View(new PostViewModel
 			{

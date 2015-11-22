@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using Daniel15.Shared.Extensions;
-using Microsoft.Framework.WebEncoders;
+using Microsoft.Extensions.WebEncoders;
 using Newtonsoft.Json;
 
 namespace Daniel15.Data.Entities.Blog

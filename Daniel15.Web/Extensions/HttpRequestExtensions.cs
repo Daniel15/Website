@@ -16,7 +16,9 @@ namespace Daniel15.Web.Extensions
 		/// <returns><c>true</c> if this request can redirect to FeedBurner</returns>
 		public static bool ShouldRedirectToFeedburner(this HttpRequest request)
 		{
-			var userAgent = (request.Headers.Get("User-Agent") ?? string.Empty).ToLower();
+			var userAgent = request.Headers["User-Agent"].Count > 0
+				? request.Headers["User-Agent"][0].ToLower()
+				: string.Empty;
 			return
 				!userAgent.Contains("feedburner")
 				&& !userAgent.Contains("feedvalidator")

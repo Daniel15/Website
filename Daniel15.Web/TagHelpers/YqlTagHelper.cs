@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNet.Http.Extensions;
-using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Razor.TagHelpers;
 
 namespace Daniel15.Web.TagHelpers
 {
@@ -27,7 +27,7 @@ namespace Daniel15.Web.TagHelpers
 	    public override void Process(TagHelperContext context, TagHelperOutput output)
 	    {
 			output.TagName = "script";
-		    output.SelfClosing = false;
+		    output.TagMode = TagMode.StartTagAndEndTag;
 			output.Attributes.Add("async", true);
 			output.Attributes.Add("defer", true);
 

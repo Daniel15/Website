@@ -2,6 +2,7 @@
 using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Error;
 using Microsoft.AspNet.Diagnostics;
+using Microsoft.AspNet.Http.Features;
 using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Controllers
@@ -40,7 +41,7 @@ namespace Daniel15.Web.Controllers
 		{
 			var view = View(new ErrorViewModel
 			{
-				Exception = Context.GetFeature<IErrorHandlerFeature>()?.Error,
+				Exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error,
 			});
 			view.StatusCode = (int)HttpStatusCode.InternalServerError;
 			return view;

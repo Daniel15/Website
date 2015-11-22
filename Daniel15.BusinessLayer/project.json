@@ -6,11 +6,11 @@
     "projectUrl": "",
     "licenseUrl": "",
 
-    "dependencies": {
-        "Daniel15.Data": "1.0.0-*",
-        "MarkdownDeep.NET": "1.5.0",
-        "Microsoft.AspNet.Http.Extensions": "1.0.0-beta6"
-    },
+  "dependencies": {
+    "Daniel15.Data": "1.0.0-*",
+    "MarkdownDeep.NET": "1.5.0",
+    "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final",
+  },
 
     "frameworks": {
         "dnx451": {

@@ -6,16 +6,17 @@
     "projectUrl": "",
     "licenseUrl": "",
 
-    "dependencies": {
-        "Daniel15.BusinessLayer": "1.0.0-*",
-        "Daniel15.Infrastructure": "1.0.0-*",
-        "Daniel15.Data": "1.0.0-*",
-        "Microsoft.Framework.DependencyInjection": "1.0.0-beta6",
-        "Microsoft.Framework.Configuration": "1.0.0-beta6",
-        "Microsoft.Framework.Runtime.Abstractions": "1.0.0-beta6",
-        "Microsoft.Framework.Configuration.Json": "1.0.0-beta6",
-        "Microsoft.Framework.Configuration.EnvironmentVariables": "1.0.0-beta6"
-    },
+  "dependencies": {
+    "Daniel15.BusinessLayer": "1.0.0-*",
+    "Daniel15.Infrastructure": "1.0.0-*",
+    "Daniel15.Data": "1.0.0-*",
+    "Microsoft.Extensions.DependencyInjection": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc1-final",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc1-final",
+    "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final"
+  },
 
     "commands": {
         "Daniel15.Cron": "Daniel15.Cron"

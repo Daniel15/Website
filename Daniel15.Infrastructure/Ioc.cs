@@ -6,9 +6,9 @@ using Daniel15.Data;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Repositories.EntityFramework;
 using Daniel15.Shared.Configuration;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.OptionsModel;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.OptionsModel;
 
 namespace Daniel15.Infrastructure
 {
@@ -38,13 +38,13 @@ namespace Daniel15.Infrastructure
 		public static void AddDaniel15Config(this IServiceCollection services, IConfiguration config)
 		{
 			services.AddSingleton(_ => config);
-			services.Configure<SiteConfiguration>(config.GetConfigurationSection("Site"));
-			services.Configure<GalleryConfiguration>(config.GetConfigurationSection("Gallery"));
+			services.Configure<SiteConfiguration>(config.GetSection("Site"));
+			services.Configure<GalleryConfiguration>(config.GetSection("Gallery"));
 			services.AddSingleton<ISiteConfiguration>(
-				provider => provider.GetRequiredService<IOptions<SiteConfiguration>>().Options
+				provider => provider.GetRequiredService<IOptions<SiteConfiguration>>().Value
 			);
 			services.AddSingleton<IGalleryConfiguration>(
-				provider => provider.GetRequiredService<IOptions<GalleryConfiguration>>().Options
+				provider => provider.GetRequiredService<IOptions<GalleryConfiguration>>().Value
 			);
 		}
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.AspNet.Hosting;
+using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 
 namespace Daniel15.Web.Extensions

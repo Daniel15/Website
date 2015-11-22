@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using Daniel15.Web.ViewModels.Shared;
 using Microsoft.AspNet.Html.Abstractions;
 using Microsoft.AspNet.Mvc.Rendering;
-using Microsoft.AspNet.Mvc.Rendering.Expressions;
+using Microsoft.AspNet.Mvc.ViewFeatures;
 
 namespace Daniel15.Web.Extensions
 {

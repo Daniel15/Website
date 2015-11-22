@@ -131,7 +131,7 @@ namespace Daniel15.Web.Controllers
 			// Set last-modified date based on the date of the newest post
 			if (posts.Count > 0)
 			{
-				Response.Headers.Set("Last-Modified", posts[0].Date.ToString("R"));
+				Response.Headers["Last-Modified"] = posts[0].Date.ToString("R");
 			}
 
 			var categories = _blogRepository.CategoriesForPosts(posts);

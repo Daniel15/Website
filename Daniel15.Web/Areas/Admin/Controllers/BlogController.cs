@@ -7,7 +7,7 @@ using Daniel15.Web.Areas.Admin.ViewModels.Blog;
 using Daniel15.Web.Extensions;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Framework.WebEncoders;
+using Microsoft.Extensions.WebEncoders;
 
 namespace Daniel15.Web.Areas.Admin.Controllers
 {
