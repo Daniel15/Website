@@ -15,10 +15,6 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// Base URL for Twitter share URLs
 		/// </summary>
 		private const string SHARE_URL = "https://twitter.com/intent/tweet";
-		/// <summary>
-		/// URL to retrieve sharing count
-		/// </summary>
-		private const string COUNT_URL = "http://urls.api.twitter.com/1/urls/count.json";
 
 		/// <summary>
 		/// Gets the internal ID of this social network
@@ -59,20 +55,9 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <returns>Share count for this post</returns>
 		public int GetShareCount(PostModel post, string url, string shortUrl)
 		{
-			var countUrl = COUNT_URL + new QueryBuilder
-			{
-				{"url", url},
-			};
-
-			using (var client = new WebClient())
-			{
-				var rawResponse = client.DownloadString(countUrl);
-				dynamic response = JObject.Parse(rawResponse);
-				if (response == null || response.count == null)
-					return 0;
-
-				return Convert.ToInt32(response.count);
-			}
+			// No longer supported :(
+			// https://blog.twitter.com/2015/hard-decisions-for-a-sustainable-platform
+			return 0;
 		}
 		#endregion
 	}

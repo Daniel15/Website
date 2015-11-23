@@ -8,7 +8,10 @@
 			<li class="@kvp.SocialNetwork.Id">
 				<a href="@kvp.Url" title="Share on @kvp.SocialNetwork.Name">
 					<span class="name">@kvp.SocialNetwork.Name</span>
-					<span class="count">@kvp.Count</span>
+					@if (kvp.Count > 0)
+					{
+						<span class="count">@kvp.Count</span>
+					}
 				</a>
 			</li>
 		}
