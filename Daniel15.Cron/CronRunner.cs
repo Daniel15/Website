@@ -9,14 +9,8 @@ namespace Daniel15.Cron
 {
 	public class Program
 	{
-		private readonly IApplicationEnvironment _appEnv;
 		private readonly IServiceCollection _serviceCollection = new ServiceCollection();
 		private IServiceProvider _serviceProvider;
-
-		public Program(IApplicationEnvironment appEnv)
-		{
-			_appEnv = appEnv;
-		}
 
 		public void Main(string[] args)
 		{
@@ -24,31 +18,44 @@ namespace Daniel15.Cron
 			var builder = new ConfigurationBuilder()
 				// This is extremely ugly, but the paths differ in dev vs in prod. 
 				// Need to figure out a nicer way of doing this.
-				.AddJsonFile("..\\Daniel15.Web\\config.json", optional: true)
+				.AddJsonFile("..\\Daniel15.Web\\config.Development.json", optional: true)
 				.AddJsonFile("../../../../../../site/approot/packages/Daniel15.Web/1.0.0/root/config.Production.json", optional: true)
 				.AddEnvironmentVariables();
 			_serviceCollection.AddDaniel15Config(builder.Build());
 			_serviceCollection.AddOptions();
 			_serviceProvider = _serviceCollection.BuildServiceProvider();
 
+			if (args.Length == 0)
+			{
+				// No argument, so run everything
+				RunProjects();
+				RunSocial();
+				RunDisqus();
+				return;
+			}
+
 			var operation = args[0];
 			switch (operation)
 			{
 				case "-disqus":
-					_serviceProvider.GetRequiredService<IDisqusComments>().Sync();
+					RunDisqus();
 					break;
 
 				case "-social":
-					ActivatorUtilities.CreateInstance<SocialShareUpdater>(_serviceProvider).Run();
+					RunSocial();
 					break;
 
 				case "-projects":
-					ActivatorUtilities.CreateInstance<ProjectUpdater>(_serviceProvider).Run();
+					RunProjects();
 					break;
 
 				default:
 					throw new Exception("Invalid operation '" + operation + "'");
 			}
 		}
+
+		private void RunDisqus() => _serviceProvider.GetRequiredService<IDisqusComments>().Sync();
+		private void RunSocial() => ActivatorUtilities.CreateInstance<SocialShareUpdater>(_serviceProvider).Run();
+		private void RunProjects() => ActivatorUtilities.CreateInstance<ProjectUpdater>(_serviceProvider).Run();
 	}
 }
