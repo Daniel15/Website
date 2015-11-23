@@ -89,10 +89,15 @@
 	</div>
 	<!-- Now for the JS -->
 	<script 
-		src="http://fb.me/react-0.12.1.min.js"
-		asp-fallback-src="~/Content/js/lib/react-0.12.1.min.js"
+		src="https://fb.me/react-0.14.3.min.js"
+		asp-fallback-src="~/Content/js/lib/react-0.14.3.min.js"
 		asp-fallback-test="window.React">
     </script>
+	<script 
+		src="https://fb.me/react-dom-0.14.3.min.js"
+		asp-fallback-src="~/Content/js/lib/react-dom-0.14.3.min.js"
+		asp-fallback-test="window.ReactDOM">
+	</script>
 	<environment names="Development">
 		<script src="~/cache/main.js"></script>
 		<script>Events.initPage();</script>

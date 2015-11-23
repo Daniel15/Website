@@ -71,7 +71,7 @@
 		/**
 		 * Load the data for the lifestream
 		 */
-		_loadNextPage: function() {
+		_loadNextPage: function(evt) {
 			this.setState({ loading: true });
 			var data =
 			{
@@ -89,7 +89,7 @@
 				data: data
 			}).send();
 
-			return false;
+			evt.preventDefault();
 		},
 		/**
 		 * Called when the AJAX request is successful
