@@ -1,11 +1,13 @@
 ﻿@using System.Globalization
+@using System.Threading.Tasks
 @using Daniel15.Web.ViewModels.Blog
 @model Daniel15.Web.ViewModels.Blog.SidebarViewModel
+@inject Daniel15.Shared.Configuration.ISiteConfiguration Config
 
 <ul>
 	<li>
 		<p>
-			<a href="http://feeds.d15.biz/daniel15" style="display: inline-block"><img src="http://feeds.d15.biz/~fc/daniel15?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" style="display: inline-block" /></a>
+			<a href="@Config.FeedBurnerUrl" style="display: inline-block"><img src="http://feeds.feedburner.com/~fc/daniel15?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" style="display: inline-block" /></a>
 			<a href="http://twitter.com/Daniel15" style="display: inline-block"><img src="http://twittercounter.com/counter/?username=Daniel15" alt="TwitterCounter for Daniel15" width="88" height="26" border="0" /></a>
 		</p>
 	</li>
