@@ -22,7 +22,7 @@ Page.Site.Index =
 		$('email_address').set('innerHTML', '&#100;&#097;&#110;&#105;&#101;&#108;&#049;&#053;&#115;&#105;&#116;&#101;&#064;&#100;&#097;&#110;&#046;&#099;&#120;');
 		$('gtalk_address').set('innerHTML', '&#100;&#097;&#110;&#105;&#101;&#108;&#064;&#100;&#049;&#053;&#046;&#098;&#105;&#122;');
 		
-		React.renderComponent(
+		ReactDOM.render(
 			<SocialFeed
 				count={10}
 				className="minifeed"
