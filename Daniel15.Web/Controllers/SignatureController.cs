@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Daniel15.Data.Repositories;
 using Daniel15.Shared;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Controllers
 {

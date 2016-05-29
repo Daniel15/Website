@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using Daniel15.Shared.Extensions;
-using Microsoft.Extensions.WebEncoders;
 using Newtonsoft.Json;
 
 namespace Daniel15.Data.Entities.Blog
@@ -110,7 +110,7 @@ namespace Daniel15.Data.Entities.Blog
 				if (match.Groups["attributes"].Value.Contains(ESCAPED_PRE_ATTRIBUTE))
 					return match.Value.Replace(ESCAPED_PRE_ATTRIBUTE, "");
 
-				return "<pre" + match.Groups["attributes"] + ">" + HtmlEncoder.Default.HtmlEncode(match.Groups["content"].Value) + "</pre>";
+				return "<pre" + match.Groups["attributes"] + ">" + HtmlEncoder.Default.Encode(match.Groups["content"].Value) + "</pre>";
 			});
 
 			return content;

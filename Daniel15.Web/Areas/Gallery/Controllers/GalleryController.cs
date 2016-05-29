@@ -8,7 +8,7 @@ using Daniel15.Shared.Configuration;
 using Daniel15.Shared.Extensions;
 using Daniel15.Web.Areas.Gallery.Models;
 using Daniel15.Web.Areas.Gallery.ViewModels;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Areas.Gallery.Controllers
 {
@@ -69,7 +69,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 			// Don't allow access to thumbnail directory
 			if (path == THUMBNAIL_DIR)
 			{
-				return HttpNotFound();
+				return NotFound();
 			}
 
 			// Directory? Return a directory listing.
@@ -85,7 +85,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 			else
 			{
 				// Neither a directory or file - Bail out!
-				return HttpNotFound();
+				return NotFound();
 			}
 		}
 

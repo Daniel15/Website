@@ -3,7 +3,7 @@ using Daniel15.Data;
 using Daniel15.Data.Entities.Projects;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.ViewModels.Project;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Controllers
 {
@@ -49,7 +49,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the project doesn't exist
-				return HttpNotFound();
+				return NotFound();
 			}
 
 			// If there's no readme, just redirect to the project site itself

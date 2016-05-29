@@ -1,22 +1,23 @@
-﻿using Daniel15.Infrastructure;
+﻿using System.IO;
+using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
 using Daniel15.Web.Extensions;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.PlatformAbstractions;
 using React.AspNet;
 
 namespace Daniel15.Web
 {
 	public class Startup
 	{
-		public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+		public Startup(IHostingEnvironment env)
 		{
 			var builder = new ConfigurationBuilder()
+				.SetBasePath(env.ContentRootPath)
 				.AddJsonFile("config.json")
 				.AddJsonFile("config.generated.json", optional: true)
 				.AddJsonFile($"config.{env.EnvironmentName}.json", optional: true)
@@ -24,7 +25,7 @@ namespace Daniel15.Web
 			Configuration = builder.Build();
 		}
 
-		public IConfiguration Configuration { get; set; }
+		public IConfigurationRoot Configuration { get; set; }
 
 		public void ConfigureServices(IServiceCollection services)
 		{
@@ -32,7 +33,6 @@ namespace Daniel15.Web
 				.AddSimpleIdentity<SimpleIdentityUser>(Configuration.GetSection("Auth"))
 				.AddDefaultTokenProviders();
 
-			services.AddCaching();
 			services.AddSession();
 			services.AddMvc();
 			services.AddReact();
@@ -42,7 +42,7 @@ namespace Daniel15.Web
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
 		{
-			app.UseIISPlatformHandler();
+			loggerFactory.AddDebug();
 
 			if (env.IsDevelopment())
 			{
@@ -75,7 +75,16 @@ namespace Daniel15.Web
 			UrlHelperExtensions.HttpContextAccessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
 		}
 
-		// Entry point for the application.
-		public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+		public static void Main(string[] args)
+		{
+			var host = new WebHostBuilder()
+				.UseKestrel()
+				.UseContentRoot(Directory.GetCurrentDirectory())
+				.UseIISIntegration()
+				.UseStartup<Startup>()
+				.Build();
+
+			host.Run();
+		}
 	}
 }

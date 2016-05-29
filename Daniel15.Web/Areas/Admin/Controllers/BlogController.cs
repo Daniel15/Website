@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Text.Encodings.Web;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.Areas.Admin.ViewModels.Blog;
 using Daniel15.Web.Extensions;
-using Microsoft.AspNet.Authorization;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.WebEncoders;
 
 namespace Daniel15.Web.Areas.Admin.Controllers
@@ -133,7 +134,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 			TempData["topMessage"] = string.Format(
 				"{0}: Saved changes to {1}. <a href=\"{2}\" target=\"_blank\">View post</a>.",
 				DateTime.Now.ToLongTimeString(),
-				HtmlEncoder.Default.HtmlEncode(post.Title), Url.BlogPost(post)
+				HtmlEncoder.Default.Encode(post.Title), Url.BlogPost(post)
 			);
 			return Redirect(Url.BlogPostEdit(post));
 		}

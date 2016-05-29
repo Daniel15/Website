@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 using Daniel15.SimpleIdentity;
 using Daniel15.Web.ViewModels.Account;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Controllers
 {

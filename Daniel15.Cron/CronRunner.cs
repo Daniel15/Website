@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -9,10 +10,10 @@ namespace Daniel15.Cron
 {
 	public class Program
 	{
-		private readonly IServiceCollection _serviceCollection = new ServiceCollection();
-		private IServiceProvider _serviceProvider;
+		private static IServiceCollection _serviceCollection = new ServiceCollection();
+		private static IServiceProvider _serviceProvider;
 
-		public void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			_serviceCollection.AddDaniel15();
 			var builder = new ConfigurationBuilder()
@@ -54,8 +55,8 @@ namespace Daniel15.Cron
 			}
 		}
 
-		private void RunDisqus() => _serviceProvider.GetRequiredService<IDisqusComments>().Sync();
-		private void RunSocial() => ActivatorUtilities.CreateInstance<SocialShareUpdater>(_serviceProvider).Run();
-		private void RunProjects() => ActivatorUtilities.CreateInstance<ProjectUpdater>(_serviceProvider).Run();
+		private static void RunDisqus() => _serviceProvider.GetRequiredService<IDisqusComments>().Sync();
+		private static void RunSocial() => ActivatorUtilities.CreateInstance<SocialShareUpdater>(_serviceProvider).Run();
+		private static void RunProjects() => ActivatorUtilities.CreateInstance<ProjectUpdater>(_serviceProvider).Run();
 	}
 }

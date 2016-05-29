@@ -1,59 +1,84 @@
 {
-  "webroot": "wwwroot",
   "version": "1.0.0-*",
-  "compilationOptions": {
-    "emitEntryPoint": true
+  "buildOptions": {
+    "emitEntryPoint": true,
+    "preserveCompilationContext": true
   },
 
   "dependencies": {
-    "Daniel15.BusinessLayer": "1.0.0-*",
-    "Daniel15.Data": "1.0.0-*",
-    "Daniel15.Infrastructure": "1.0.0-*",
-    "Daniel15.Shared": "1.0.0-*",
-    "Microsoft.AspNet.Diagnostics": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Diagnostics.Abstractions": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Http.Abstractions": "1.0.0-rc1-final",
-    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc1-final",
-    "Microsoft.AspNet.Mvc": "6.0.0-rc1-final",
-    "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-rc1-final",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc1-final",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc1-final",
-    "Microsoft.Extensions.Logging.Console": "1.0.0-rc1-final",
-    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc1-final",
-    "Microsoft.AspNet.Mvc.TagHelpers": "6.0.0-rc1-final",
-    "Microsoft.AspNet.Session": "1.0.0-rc1-final",
-    "Daniel15.SimpleIdentity": "1.0.1",
-    "Microsoft.AspNet.Tooling.Razor": "1.0.0-rc1-final",
-    "React.AspNet": "2.1.1",
-    "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final"
+    "Daniel15.BusinessLayer": {
+      "target": "project"
+    },
+    "Daniel15.Data": {
+      "target": "project"
+    },
+    "Daniel15.Infrastructure": {
+      "target": "project"
+    },
+    "Daniel15.Shared": {
+      "target": "project"
+    },
+    "Microsoft.AspNetCore.Diagnostics": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Diagnostics.Abstractions": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Http.Abstractions": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Razor.Tools": {
+      "version": "1.0.0-preview1-final",
+      "type": "build"
+    },
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.StaticFiles": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
+    "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0-rc2-final",
+    "Microsoft.AspNetCore.Mvc.TagHelpers": "1.0.0-rc2-final",
+    "Microsoft.AspNetCore.Session": "1.0.0-rc2-final",
+    "Daniel15.SimpleIdentity": "1.1.0",
+    "React.AspNet": "2.4.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final"
   },
 
-  "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel",
-    "web-live": "Microsoft.AspNet.Server.Kestrel --server.urls http://unix:/run/dan-live.sock",
-    "web-staging": "Microsoft.AspNet.Server.Kestrel --server.urls http://unix:/run/dan-staging.sock"
-  },
-
-  "frameworks": {
-    "dnx451": {
-      "dependencies": { },
-      "frameworkAssemblies": {
-        "System.Drawing": "4.0.0.0"
-      }
+  "tools": {
+    "Microsoft.AspNetCore.Razor.Tools": {
+      "version": "1.0.0-preview1-final",
+      "imports": "portable-net45+win8+dnxcore50"
+    },
+    "Microsoft.AspNetCore.Server.IISIntegration.Tools": {
+      "version": "1.0.0-preview1-final",
+      "imports": "portable-net45+win8+dnxcore50"
     }
   },
 
-  "publishExclude": [
-    "node_modules",
-    "bower_components",
-    "**.xproj",
-    "**.user",
-    "**.vspscc"
-  ],
-  "exclude": [
-    "wwwroot",
-    "node_modules",
-    "bower_components"
-  ]
+  "commands": {
+    "web": "Microsoft.AspNetCore.Server.Kestrel",
+    "web-live": "Microsoft.AspNetCore.Server.Kestrel --server.urls http://unix:/run/dan-live.sock",
+    "web-staging": "Microsoft.AspNetCore.Server.Kestrel --server.urls http://unix:/run/dan-staging.sock"
+  },
+
+  "frameworks": {
+    "net451": {
+      "dependencies": { },
+      "frameworkAssemblies": {
+        "System.Drawing": "4.0.0.0"
+      },
+      "imports": [
+        ".NetFramework 3.5,Version=v0.0"
+      ]
+    }
+  },
+
+  "runtimeOptions": {
+    "gcServer": true
+  },
+
+  "publishOptions": {
+    "include": [
+      "wwwroot",
+      "Views",
+      "appsettings.json",
+      "web.config"
+    ]
+  }
 }

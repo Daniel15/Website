@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Daniel15.Web.Models.Shared;
 using Daniel15.Web.ViewModels;
-using Microsoft.AspNet.Html.Abstractions;
-using Microsoft.AspNet.Mvc.Rendering;
+using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Daniel15.Web.Extensions
 {

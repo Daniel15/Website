@@ -15,7 +15,7 @@ var concat = require('gulp-concat'),
 	urlAdjuster = require('gulp-css-url-adjuster'),
 	project = require('./project.json');
 
-var webroot = './' + project.webroot + '/';
+var webroot = './wwwroot/';
 var paths = {
 	webroot: webroot,
 	css: webroot + 'Content/css/',

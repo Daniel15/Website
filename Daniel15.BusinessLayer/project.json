@@ -1,22 +1,22 @@
 {
-    "version": "1.0.0-*",
-    "description": "Daniel15.BusinessLayer Class Library",
-    "authors": [ "Daniel Lo Nigro" ],
-    "tags": [ "" ],
-    "projectUrl": "",
-    "licenseUrl": "",
+  "version": "1.0.0-*",
 
   "dependencies": {
-    "Daniel15.Data": "1.0.0-*",
+    "Daniel15.Data": {
+      "target": "project"
+    },
     "MarkdownDeep.NET": "1.5.0",
-    "Microsoft.AspNet.Http.Extensions": "1.0.0-rc1-final",
+    "Microsoft.AspNetCore.Http.Extensions": "1.0.0-rc2-final"
   },
 
     "frameworks": {
-        "dnx451": {
-            "frameworkAssemblies": {
-                "System.Net": "4.0.0.0"
-            }
+        "net451": {
+          "frameworkAssemblies": {
+            "System.Net": "4.0.0.0"
+          },
+          "imports": [
+            ".NetFramework 3.5,Version=v0.0"
+          ]
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Error;
-using Microsoft.AspNet.Diagnostics;
-using Microsoft.AspNet.Http.Features;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Controllers
 {
@@ -15,7 +15,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="code">HTTP error code</param>
 		[Route("/Error/Status{code:int}", Order = 2)]
-		public IActionResult StatusCode(int code)
+		public new IActionResult StatusCode(int code)
 		{
 			return View(new StatusCodeViewModel
 			{
