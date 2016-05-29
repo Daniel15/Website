@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{64A266F1-8387-4B9D-B594-FB6E84F1510A}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,8 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc stuff", "Misc stuff", 
 		.editorconfig = .editorconfig
 		.gitignore = .gitignore
 		deploy.bat = deploy.bat
-		deploy.proj = deploy.proj
-		elmah.sql = elmah.sql
 		README.md = README.md
 		schema.sql = schema.sql
 	EndProjectSection

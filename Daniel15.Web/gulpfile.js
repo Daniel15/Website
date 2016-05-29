@@ -120,9 +120,8 @@ gulp.task('build:config', function(cb) {
 });
 
 function publish(subDir) {
-	var extraOptions = subDir === 'site' ? '--wwwroot-out "wwwroot"' : '';
 	return shell(
-		'dnu publish "<%= file.path %>" --out "' + paths.tempPublish + subDir + '" --configuration Release --no-source ' + extraOptions
+		'dotnet publish "<%= file.path %>" -o "' + paths.tempPublish + subDir + '" -c Release -r debian-x64'
 	);
 }
 

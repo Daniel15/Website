@@ -37,7 +37,8 @@
     "Daniel15.SimpleIdentity": "1.1.0",
     "React.AspNet": "2.4.0",
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final"
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Configuration.CommandLine": "1.0.0-rc2-final"
   },
 
   "tools": {
@@ -77,7 +78,9 @@
     "include": [
       "wwwroot",
       "Views",
-      "appsettings.json",
+      "config.json",
+      "config.Development.json",
+      "config.generated.json",
       "web.config"
     ]
   }
