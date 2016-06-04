@@ -1,7 +1,12 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "emitEntryPoint": true
+    "emitEntryPoint": true,
+    "copyToOutput": {
+      "mappings": {
+        "config.json": "../Daniel15.Web/config.Development.json"
+      }
+    }
   },
 
   "dependencies": {

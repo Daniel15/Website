@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -17,10 +18,8 @@ namespace Daniel15.Cron
 		{
 			_serviceCollection.AddDaniel15();
 			var builder = new ConfigurationBuilder()
-				// This is extremely ugly, but the paths differ in dev vs in prod. 
-				// Need to figure out a nicer way of doing this.
-				.AddJsonFile("..\\Daniel15.Web\\config.Development.json", optional: true)
-				.AddJsonFile("../../../../../../site/approot/packages/Daniel15.Web/1.0.0/root/config.Production.json", optional: true)
+				.SetBasePath(PlatformServices.Default.Application.ApplicationBasePath)
+				.AddJsonFile("config.json")
 				.AddEnvironmentVariables();
 			_serviceCollection.AddDaniel15Config(builder.Build());
 			_serviceCollection.AddOptions();
