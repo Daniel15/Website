@@ -9,7 +9,7 @@ using Daniel15.Data.Repositories;
 using Daniel15.Web.Extensions;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.ViewModels.Blog;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Controllers
 {
@@ -67,7 +67,7 @@ namespace Daniel15.Web.Controllers
 			var pages = (int)Math.Ceiling((double)count / ITEMS_PER_PAGE);
 
 			if (page > pages)
-				return HttpNotFound();
+				return NotFound();
 
 			viewModel.Posts = posts.Select(post => new PostViewModel
 			{
@@ -116,7 +116,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the category doesn't exist
-				return HttpNotFound();
+				return NotFound();
 			}
 
 			// If the category has a parent category, ensure it's in the URL
@@ -156,7 +156,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the category doesn't exist
-				return HttpNotFound();
+				return NotFound();
 			}
 
 			var count = _blogRepository.PublishedCount(tag);
@@ -197,7 +197,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the post doesn't exist
-				return HttpNotFound();
+				return NotFound();
 			}
 
 			// Check the URL was actually correct (year and month), redirect if not.
@@ -234,9 +234,9 @@ namespace Daniel15.Web.Controllers
 			{
 				post = _blogRepository.Get(id);
 			}
-			catch (Exception)
+			catch (EntityNotFoundException)
 			{
-				return HttpNotFound();
+				return NotFound();
 			}
 
 			return RedirectPermanent(Url.BlogPost(post));

@@ -8,7 +8,7 @@ using Daniel15.Shared.Configuration;
 using Daniel15.Web.Extensions;
 using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.ViewModels.Feed;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 
 namespace Daniel15.Web.Controllers
@@ -57,7 +57,7 @@ namespace Daniel15.Web.Controllers
 				Tags = _blogRepository.Tags(),
 				Projects = _projectRepository.All()
 			});
-			view.ContentType = MediaTypeHeaderValue.Parse("text/xml");
+			view.ContentType = "text/xml";
 			return view;
 		}
 
@@ -100,7 +100,7 @@ namespace Daniel15.Web.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the category doesn't exist
-				return HttpNotFound();
+				return NotFound();
 			}
 
 			// If the category has a parent category, ensure it's in the URL

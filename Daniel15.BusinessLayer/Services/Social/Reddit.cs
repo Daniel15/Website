@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 using Daniel15.Data.Entities.Blog;
-using Microsoft.AspNet.Http.Extensions;
+using Microsoft.AspNetCore.Http.Extensions;
 using Newtonsoft.Json.Linq;
 
 namespace Daniel15.BusinessLayer.Services.Social

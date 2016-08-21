@@ -13,7 +13,7 @@
 @section sidebar
 {
 	<cache expires-after="TimeSpan.FromDays(1)">
-		@Component.Invoke("BlogSidebar")
+		@await Component.InvokeAsync("BlogSidebar")
 	</cache>
 }
 

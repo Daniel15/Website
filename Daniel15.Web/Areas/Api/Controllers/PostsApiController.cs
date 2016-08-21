@@ -4,7 +4,7 @@ using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.Areas.Api.Models.Blog;
 using Daniel15.Web.Extensions;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Areas.Api.Controllers
 {
@@ -46,7 +46,7 @@ namespace Daniel15.Web.Areas.Api.Controllers
 			catch (EntityNotFoundException)
 			{
 				// Throw a 404 if the post doesn't exist
-				return HttpNotFound();
+				return NotFound();
 			}
 
 			return new ObjectResult(new PostUrlsModel

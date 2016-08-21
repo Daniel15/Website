@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNet.Http.Extensions;
-using Microsoft.AspNet.Razor.TagHelpers;
+﻿using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 
 namespace Daniel15.Web.TagHelpers
 {
@@ -19,7 +19,7 @@ namespace Daniel15.Web.TagHelpers
 		public string Callback { get; set; }
 
 	    /// <summary>
-	    /// Synchronously executes the <see cref="T:Microsoft.AspNet.Razor.Runtime.TagHelpers.TagHelper"/> with the given <paramref name="context"/> and
+	    /// Synchronously executes the <see cref="T:Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelper"/> with the given <paramref name="context"/> and
 	    ///             <paramref name="output"/>.
 	    /// </summary>
 	    /// <param name="context">Contains information associated with the current HTML tag.</param>

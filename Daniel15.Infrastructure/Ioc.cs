@@ -8,7 +8,7 @@ using Daniel15.Data.Repositories.EntityFramework;
 using Daniel15.Shared.Configuration;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.OptionsModel;
+using Microsoft.Extensions.Options;
 
 namespace Daniel15.Infrastructure
 {

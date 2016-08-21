@@ -2,8 +2,8 @@
 using Daniel15.Data.Repositories;
 using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Site;
-using Microsoft.AspNet.Http.Extensions;
-using Microsoft.AspNet.Mvc;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 
 namespace Daniel15.Web.Controllers

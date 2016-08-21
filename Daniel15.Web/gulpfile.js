@@ -15,7 +15,7 @@ var concat = require('gulp-concat'),
 	urlAdjuster = require('gulp-css-url-adjuster'),
 	project = require('./project.json');
 
-var webroot = './' + project.webroot + '/';
+var webroot = './wwwroot/';
 var paths = {
 	webroot: webroot,
 	css: webroot + 'Content/css/',
@@ -120,9 +120,8 @@ gulp.task('build:config', function(cb) {
 });
 
 function publish(subDir) {
-	var extraOptions = subDir === 'site' ? '--wwwroot-out "wwwroot"' : '';
 	return shell(
-		'dnu publish "<%= file.path %>" --out "' + paths.tempPublish + subDir + '" --configuration Release --no-source ' + extraOptions
+		'dotnet publish "<%= file.path %>" -o "' + paths.tempPublish + subDir + '" -c Release -r debian-x64'
 	);
 }
 

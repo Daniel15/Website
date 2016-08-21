@@ -68,7 +68,7 @@
 </ul>
 
 @Html.Partial("_LatestPosts", Model.LatestPosts)
-@Component.Invoke("TumblrPosts")
+@await Component.InvokeAsync("TumblrPosts")
 
 @section sidebar
 {
