@@ -4,12 +4,12 @@
   "dependencies": {
     "Daniel15.BusinessLayer": "1.0.0-*",
     "Daniel15.Data": "1.0.0-*",
-    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0-rc2-final"
+    "Microsoft.Extensions.DependencyInjection.Abstractions": "1.0.0",
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0"
   },
 
     "frameworks": {
-      "net451": {
+      "net452": {
         "imports": [
           ".NetFramework 3.5,Version=v0.0"
         ]

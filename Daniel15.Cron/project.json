@@ -19,12 +19,12 @@
     "Daniel15.Data": {
       "target": "project"
     },
-    "Microsoft.Extensions.DependencyInjection": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Configuration": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final",
-    "Microsoft.Extensions.PlatformAbstractions": "1.0.0-rc2-final",
-    "Microsoft.AspNetCore.Http.Extensions": "1.0.0-rc2-final"
+    "Microsoft.Extensions.DependencyInjection": "1.0.0",
+    "Microsoft.Extensions.Configuration": "1.0.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
+    "Microsoft.Extensions.PlatformAbstractions": "1.0.0",
+    "Microsoft.AspNetCore.Http.Extensions": "1.0.0"
   },
 
   "commands": {
@@ -32,7 +32,7 @@
   },
 
   "frameworks": {
-    "net451": {
+    "net452": {
       "imports": [
         ".NetFramework 3.5,Version=v0.0"
       ]

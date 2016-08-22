@@ -18,7 +18,7 @@ namespace Daniel15.Web
 		{
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(env.ContentRootPath)
-				.AddJsonFile("config.json")
+				.AddJsonFile("config.json", optional: false, reloadOnChange: true)
 				.AddJsonFile("config.generated.json", optional: true)
 				.AddJsonFile($"config.{env.EnvironmentName}.json", optional: true)
 				.AddEnvironmentVariables();
