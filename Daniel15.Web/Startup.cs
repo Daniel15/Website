@@ -1,10 +1,14 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Linq;
 using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
 using Daniel15.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Server.Kestrel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -88,6 +92,15 @@ namespace Daniel15.Web
 				.UseIISIntegration()
 				.UseStartup<Startup>()
 				.Build();
+
+			// Delete UNIX pipe if it exists at startup (eg. previous process crashed before cleaning it up)
+			var addressFeature = host.ServerFeatures.Get<IServerAddressesFeature>();
+			var url = ServerAddress.FromUrl(addressFeature.Addresses.First());
+			if (url.IsUnixPipe && File.Exists(url.UnixPipePath))
+			{
+				Console.WriteLine("UNIX pipe {0} already existed, deleting it.", url.UnixPipePath);
+				File.Delete(url.UnixPipePath);
+			}
 
 			host.Run();
 		}
