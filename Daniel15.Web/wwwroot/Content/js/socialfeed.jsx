@@ -2,7 +2,6 @@
  * dan.cx JavaScript (revision 2) - By Daniel15, 2011-2014
  * "Social feed" / lifestream
  * Feel free to use any of this, but please link back to my site
- * @jsx React.DOM
  */
 
 (function(global) {
@@ -89,7 +88,9 @@
 				data: data
 			}).send();
 
-			evt.preventDefault();
+			if (evt) {
+				evt.preventDefault();
+			}
 		},
 		/**
 		 * Called when the AJAX request is successful
