@@ -66,7 +66,9 @@
       "config.json",
       "config.Development.json",
       "config.generated.json",
-      "web.config"
+      "web.config",
+      "supervisord.conf",
+      "nginx.conf"
     ]
   }
 }
