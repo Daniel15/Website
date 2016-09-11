@@ -62,7 +62,8 @@
     "include": [
       "wwwroot",
       "Views",
-      "Areas/**/Views",
+      "Areas/Admin/Views",
+      "Areas/Gallery/Views",
       "config.json",
       "config.Development.json",
       "config.generated.json",
