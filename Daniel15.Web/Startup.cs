@@ -50,7 +50,6 @@ namespace Daniel15.Web
 
 			if (env.IsDevelopment())
 			{
-				app.UseBrowserLink();
 				app.UseDeveloperExceptionPage();
 				loggerFactory.AddConsole(LogLevel.Information);
 			}
