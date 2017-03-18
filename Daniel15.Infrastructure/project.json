@@ -5,7 +5,7 @@
     "Daniel15.BusinessLayer": "1.0.0-*",
     "Daniel15.Data": "1.0.0-*",
     "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.0",
-    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0"
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.1"
   },
 
     "frameworks": {
