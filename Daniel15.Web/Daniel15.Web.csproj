@@ -6,7 +6,6 @@
     <AssemblyName>Daniel15.Web</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>Daniel15.Web</PackageId>
-    <PackageTargetFallback>$(PackageTargetFallback);.NetFramework 3.5,Version=v0.0</PackageTargetFallback>
     <MvcRazorCompileOnPublish>true</MvcRazorCompileOnPublish>
   </PropertyGroup>
 

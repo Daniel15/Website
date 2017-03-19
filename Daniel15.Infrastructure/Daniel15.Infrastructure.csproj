@@ -4,7 +4,6 @@
     <TargetFramework>net452</TargetFramework>
     <AssemblyName>Daniel15.Infrastructure</AssemblyName>
     <PackageId>Daniel15.Infrastructure</PackageId>
-    <PackageTargetFallback>$(PackageTargetFallback);.NetFramework 3.5,Version=v0.0</PackageTargetFallback>
   </PropertyGroup>
 
   <ItemGroup>
