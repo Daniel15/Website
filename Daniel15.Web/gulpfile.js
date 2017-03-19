@@ -12,8 +12,7 @@ var concat = require('gulp-concat'),
     rename = require('gulp-rename'),
 	shell = require('gulp-shell'),
     uglify = require('gulp-uglify'),
-	urlAdjuster = require('gulp-css-url-adjuster'),
-	project = require('./project.json');
+	urlAdjuster = require('gulp-css-url-adjuster');
 
 var webroot = './wwwroot/';
 var paths = {
@@ -119,21 +118,10 @@ gulp.task('build:config', function(cb) {
 	});
 });
 
-function publish(subDir) {
-	return shell(
-		'dotnet publish "<%= file.path %>" -o "' + paths.tempPublish + subDir + '" -c Release -r debian-x64'
-	);
-}
-
-gulp.task('package:site', ['build'], function() {
-	return gulp.src('.').pipe(publish('site'));
+// TODO: Move this into an MSBuild script, there's no need for it to be in Gulp
+gulp.task('package', function () {
+	return gulp.src('.').pipe(shell('publishToTemp.bat', {cwd: '..'}));
 });
-
-gulp.task('package:cron', function () {
-	return gulp.src('../Daniel15.Cron').pipe(publish('cron'));
-});
-
-gulp.task('package', ['package:site', 'package:cron']);
 
 function deploy(remoteDir) {
 	return gulp.src(paths.tempPublish)
