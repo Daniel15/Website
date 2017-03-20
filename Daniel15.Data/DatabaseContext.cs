@@ -12,16 +12,10 @@ namespace Daniel15.Data
 	/// </summary>
 	public class DatabaseContext : DbContext
 	{
-		//private readonly IConfiguration _config;
-
 		/// <summary>
 		/// Prefix for boolean fields in the database
 		/// </summary>
 		private const string BOOLEAN_PREFIX = "Is_";
-		/// <summary>
-		/// Suffix for model classes
-		/// </summary>
-		private const string MODEL_SUFFIX = "Model";
 		/// <summary>
 		/// Prefix for "raw" fields, used when the database representation is different (ie. EF doesn't
 		/// support a particular field format)
@@ -35,15 +29,7 @@ namespace Daniel15.Data
 		/// <summary>
 		/// Creates a new instance of <see cref="DatabaseContext"/>.
 		/// </summary>
-		/*public DatabaseContext(IConfiguration config)
-		{
-			_config = config;
-		}*/
-
-		public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
-		{
-			
-		}
+		public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) {}
 
 		/// <summary>
 		/// Projects in the database.
@@ -70,12 +56,6 @@ namespace Daniel15.Data
 		/// </summary>
 		public virtual DbSet<DisqusCommentModel> DisqusComments { get; set; }
 
-		/*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-		{
-			optionsBuilder.UseMySql(_config["Data:DefaultConnection:ConnectionString"]);
-			base.OnConfiguring(optionsBuilder);
-		}*/
-
 		/// <summary>
 		/// Initialises the Entity Framework model
 		/// </summary>
@@ -99,7 +79,9 @@ namespace Daniel15.Data
 				.Ignore(x => x.Children);
 
 			// Backwards compatibility with old DB - Dates as UNIX times
-			modelBuilder.Entity<PostModel>().Ignore(x => x.Date);
+			modelBuilder.Entity<PostModel>()
+				.Ignore(x => x.Date)
+				.Ignore(x => x.ShareCounts);
 			modelBuilder.Entity<PostModel>().Property(x => x.UnixDate).HasColumnName("date");
 
 			// Entity Framework hacks - Data types like enums that need backing fields
@@ -115,26 +97,20 @@ namespace Daniel15.Data
 		/// <param name="modelBuilder">EF model builder</param>
 		private void ConfigureConventions(ModelBuilder modelBuilder)
 		{
-			// TODO
-			// Remove "Model" suffix for models ("ProjectModel" -> "projects")
-			/*var pluralizationService = DbConfiguration.DependencyResolver.GetService<IPluralizationService>();
-			modelBuilder.Types().Configure(config =>
+			foreach (var entity in modelBuilder.Model.GetEntityTypes())
 			{
-				var cleanName = config.ClrType.Name.Replace(MODEL_SUFFIX, string.Empty).ToLowerInvariant();
-				config.ToTable(pluralizationService.Pluralize(cleanName));
-			});*/
-
-			/*modelBuilder.Properties().Configure(config =>
-			{
-				// Use underscores for column names (eg. "AuthorProfileUrl" -> "author_profile_url"
-				var name = _camelCaseRegex.Replace(
-					config.ClrPropertyInfo.Name,
-					match => match.Value[0] + "_" + match.Value[1]
-				);
-				// Remove "is" prefix (eg. "IsPrimary" -> "Primary") and "Raw" prefix (eg. "RawTechnologies" => "Technologies")
-				name = name.TrimStart(BOOLEAN_PREFIX).TrimStart(RAW_PREFIX).ToLowerInvariant();
-				config.HasColumnName(name);
-			});*/
+				foreach (var property in entity.GetProperties())
+				{
+					// Use underscores for column names (eg. "AuthorProfileUrl" -> "author_profile_url"
+					var name = _camelCaseRegex.Replace(
+						property.Name,
+						match => match.Value[0] + "_" + match.Value[1]
+					);
+					// Remove "is" prefix (eg. "IsPrimary" -> "Primary") and "Raw" prefix (eg. "RawTechnologies" => "Technologies")
+					name = name.TrimStart(BOOLEAN_PREFIX).TrimStart(RAW_PREFIX).ToLowerInvariant();
+					property.Relational().ColumnName = name;
+				}
+			}
 		}
 
 		/// <summary>
