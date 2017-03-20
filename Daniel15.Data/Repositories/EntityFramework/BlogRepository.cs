@@ -35,6 +35,8 @@ namespace Daniel15.Data.Repositories.EntityFramework
 			return Context.Posts
 				.Include(post => post.MainCategory)
 				.Include(post => post.MainCategory.Parent)
+				.Include(post => post.PostCategories).ThenInclude(x => x.Category)
+				.Include(post => post.PostTags).ThenInclude(x => x.Tag)
 				.FirstOrThrow(post => post.Slug == slug);
 		}
 
@@ -47,7 +49,7 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		{
 			return post == null || post.Id == 0
 				? new List<CategoryModel>() 
-				: Context.Posts.Find(post.Id).Categories.ToList();
+				: Context.Posts.Find(post.Id).PostCategories.Select(x => x.Category).ToList();
 		}
 
 		/// <summary>
@@ -64,11 +66,11 @@ namespace Daniel15.Data.Repositories.EntityFramework
 
 			// This is optimised to only perform a single query to get all categories
 			var categories = Context.Categories
-				.Where(cat => cat.Posts.Any(post => postIDs.Contains(post.Id)))
+				.Where(cat => cat.PostCategories.Any(x => postIDs.Contains(x.PostId)))
 				.Select(cat => new
 				{
 					Category = cat,
-					PostIDs = cat.Posts.Select(post => post.Id)
+					PostIDs = cat.PostCategories.Select(x => x.PostId)
 				});
 
 			// Group the categories by post ID
@@ -101,7 +103,7 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		{
 			return post == null || post.Id == 0 
 				? new List<TagModel>()
-				: Context.Posts.Find(post.Id).Tags.ToList();
+				: Context.Posts.Find(post.Id).PostTags.Select(x => x.Tag).ToList();
 		}
 
 		/// <summary>
@@ -131,7 +133,11 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns>Latest blog posts</returns>
 		public List<PostModel> LatestPosts(CategoryModel category, int count = 10, int offset = 0)
 		{
-			return LatestPosts(category.Posts.AsQueryable(), count, offset);
+			return LatestPosts(
+				category.PostCategories.Select(x => x.Post).AsQueryable(),
+				count,
+				offset
+			);
 		}
 
 		/// <summary>
@@ -143,7 +149,11 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns>Latest blog posts</returns>
 		public List<PostModel> LatestPosts(TagModel tag, int count = 10, int offset = 0)
 		{
-			return LatestPosts(tag.Posts.AsQueryable(), count, offset);
+			return LatestPosts(
+				tag.PostTags.Select(x => x.Post).AsQueryable(),
+				count,
+				offset
+			);
 		}
 
 		/// <summary>
@@ -228,6 +238,12 @@ ORDER BY year DESC, month DESC");
 		{
 			return Context.Categories
 				.Include(cat => cat.Parent)
+				.Include(cat => cat.PostCategories)
+					.ThenInclude(x => x.Post)
+						.ThenInclude(x => x.MainCategory)
+				.Include(cat => cat.PostCategories)
+					.ThenInclude(x => x.Post)
+						.ThenInclude(x => x.MainCategory.Parent)
 				.FirstOrThrow(x => x.Slug == slug);
 		}
 
@@ -238,7 +254,14 @@ ORDER BY year DESC, month DESC");
 		/// <returns>The tag</returns>
 		public TagModel GetTag(string slug)
 		{
-			return Context.Tags.FirstOrThrow(x => x.Slug == slug);
+			return Context.Tags
+				.Include(tag => tag.PostTags)
+					.ThenInclude(x => x.Post)
+						.ThenInclude(post => post.MainCategory)
+				.Include(tag => tag.PostTags)
+					.ThenInclude(x => x.Post)
+						.ThenInclude(post => post.MainCategory.Parent)
+				.FirstOrThrow(x => x.Slug == slug);
 		}
 
 		/// <summary>
@@ -256,7 +279,7 @@ ORDER BY year DESC, month DESC");
 		/// <returns>Total number of posts in the category</returns>
 		public int PublishedCount(CategoryModel category)
 		{
-			return category.Posts.Count(post => post.Published);
+			return category.PostCategories.Count(x => x.Post.Published);
 		}
 
 		/// <summary>
@@ -265,7 +288,7 @@ ORDER BY year DESC, month DESC");
 		/// <returns>Total number of posts in the tag</returns>
 		public int PublishedCount(TagModel tag)
 		{
-			return tag.Posts.Count(post => post.Published);
+			return tag.PostTags.Count(x => x.Post.Published);
 		}
 
 		/// <summary>
@@ -313,7 +336,7 @@ ORDER BY year DESC, month DESC");
 		public IList<CategoryModel> CategoriesInUse()
 		{
 			return Context.Categories
-				.Where(cat => cat.Posts.Count > 0)
+				.Where(cat => cat.PostCategories.Count > 0)
 				.OrderBy(cat => cat.Title)
 				.ToList();
 		}
@@ -338,10 +361,15 @@ ORDER BY year DESC, month DESC");
 		{
 			var newCategories = Context.Categories.Where(cat => categoryIds.Contains(cat.Id));
 			// Entity Framework is smart enough to work out the adds/deletes here.
-			post.Categories.Clear();
+			post.PostCategories.Clear();
 			foreach (var category in newCategories)
 			{
-				post.Categories.Add(category);
+				// TODO test this
+				post.PostCategories.Add(new PostCategoryModel
+				{
+					Category = category,
+					Post = post,
+				});
 			}
 			Context.SaveChanges();
 		}
@@ -354,10 +382,10 @@ ORDER BY year DESC, month DESC");
 		public void SetTags(PostModel post, IEnumerable<int> tagIds)
 		{
 			var newTags = Context.Tags.Where(tag => tagIds.Contains(tag.Id));
-			post.Tags.Clear();
+			post.PostTags.Clear();
 			foreach (var tag in newTags)
 			{
-				post.Tags.Add(tag);
+				post.PostTags.Add(new PostTagModel { Post = post, Tag = tag });
 			}
 			Context.SaveChanges();
 		}

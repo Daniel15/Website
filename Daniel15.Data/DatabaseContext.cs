@@ -144,24 +144,26 @@ namespace Daniel15.Data
 		private void ConfigureManyToMany(ModelBuilder modelBuilder)
 		{
 			// Posts to categories many to many
-			// TODO
-			/*modelBuilder.Entity<PostModel>()
-				.HasMany(x => x.Categories)
-				.WithMany(x => x.Posts)
-				.Map(map => map
-					.MapLeftKey("post_id")
-					.MapRightKey("category_id")
-					.ToTable("blog_post_categories")
-				);
-			// Posts to tags many to many
+			modelBuilder.Entity<PostCategoryModel>()
+				.ToTable("blog_post_categories")
+				.HasKey(x => new { x.PostId, x.CategoryId });
 			modelBuilder.Entity<PostModel>()
-				.HasMany(x => x.Tags)
-				.WithMany(x => x.Posts)
-				.Map(map => map
-					.MapLeftKey("post_id")
-					.MapRightKey("tag_id")
-					.ToTable("blog_post_tags")
-				);*/
+				.HasMany(x => x.PostCategories)
+				.WithOne(x => x.Post);
+			modelBuilder.Entity<CategoryModel>()
+				.HasMany(x => x.PostCategories)
+				.WithOne(x => x.Category);
+
+			// Posts to tags many to many
+			modelBuilder.Entity<PostTagModel>()
+				.ToTable("blog_post_tags")
+				.HasKey(x => new { x.PostId, x.TagId });
+			modelBuilder.Entity<PostModel>()
+				.HasMany(x => x.PostTags)
+				.WithOne(x => x.Post);
+			modelBuilder.Entity<TagModel>()
+				.HasMany(x => x.PostTags)
+				.WithOne(x => x.Tag);
 		}
 	}
 }

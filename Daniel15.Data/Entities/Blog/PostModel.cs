@@ -68,11 +68,11 @@ namespace Daniel15.Data.Entities.Blog
 		/// <summary>
 		/// Categories this post is contained in
 		/// </summary>
-		public virtual ICollection<CategoryModel> Categories { get; set; }
+		public virtual List<PostCategoryModel> PostCategories { get; set; }
 		/// <summary>
 		/// Tags this post is tagged with
 		/// </summary>
-		public virtual ICollection<TagModel> Tags { get; set; }
+		public virtual List<PostTagModel> PostTags { get; set; }
 
 		/// <summary>
 		/// Details of how many times this post was shared on social networking sites

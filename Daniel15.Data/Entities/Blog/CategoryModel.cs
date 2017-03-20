@@ -30,6 +30,6 @@ namespace Daniel15.Data.Entities.Blog
 		/// <summary>
 		/// Posts that belong to this category
 		/// </summary>
-		public virtual ICollection<PostModel> Posts { get; set; }
+		public virtual List<PostCategoryModel> PostCategories { get; set; }
 	}
 }
