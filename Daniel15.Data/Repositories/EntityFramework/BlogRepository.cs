@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Extensions;
 using Daniel15.Shared.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Daniel15.Data.Repositories.EntityFramework
 {
@@ -21,7 +21,7 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		public BlogRepository(DatabaseContext context) : base(context) {}
 
 		/// <summary>
-		/// Gets the <see cref="DbSet{T}"/> represented by this repository.
+		/// Gets the <see cref="DbSet{TEntity}"/> represented by this repository.
 		/// </summary>
 		protected override DbSet<PostModel> Set => Context.Posts;
 
@@ -198,7 +198,9 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns>A dictionary of years, which contains a dictionary of months and counts</returns>
 		public IDictionary<int, IDictionary<int, int>> MonthCounts()
 		{
-			var counts = Context.Database.SqlQuery<MonthYearCount>(@"
+			return new Dictionary<int, IDictionary<int, int>>();
+			// TODO
+			/*var counts = Context.Database.SqlQuery<MonthYearCount>(@"
 SELECT MONTH(FROM_UNIXTIME(date)) AS month, YEAR(FROM_UNIXTIME(date)) AS year, COUNT(*) AS count
 FROM blog_posts
 GROUP BY year, month
@@ -214,7 +216,7 @@ ORDER BY year DESC, month DESC");
 				results[count.Year][count.Month] = count.Count;
 			}
 
-			return results;
+			return results;*/
 		}
 
 		/// <summary>

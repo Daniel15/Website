@@ -1,10 +1,8 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure.DependencyResolution;
-using System.Data.Entity.Infrastructure.Pluralization;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Entities.Projects;
 using Daniel15.Shared.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace Daniel15.Data
@@ -12,9 +10,10 @@ namespace Daniel15.Data
 	/// <summary>
 	/// Entity Framework database context
 	/// </summary>
-	[DbConfigurationType(typeof(DatabaseConfiguration))]
 	public class DatabaseContext : DbContext
 	{
+		//private readonly IConfiguration _config;
+
 		/// <summary>
 		/// Prefix for boolean fields in the database
 		/// </summary>
@@ -36,8 +35,15 @@ namespace Daniel15.Data
 		/// <summary>
 		/// Creates a new instance of <see cref="DatabaseContext"/>.
 		/// </summary>
-		public DatabaseContext(IConfiguration config) 
-			: base(config["Data:DefaultConnection:ConnectionString"]) { }
+		/*public DatabaseContext(IConfiguration config)
+		{
+			_config = config;
+		}*/
+
+		public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+		{
+			
+		}
 
 		/// <summary>
 		/// Projects in the database.
@@ -64,11 +70,17 @@ namespace Daniel15.Data
 		/// </summary>
 		public virtual DbSet<DisqusCommentModel> DisqusComments { get; set; }
 
+		/*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			optionsBuilder.UseMySql(_config["Data:DefaultConnection:ConnectionString"]);
+			base.OnConfiguring(optionsBuilder);
+		}*/
+
 		/// <summary>
 		/// Initialises the Entity Framework model
 		/// </summary>
 		/// <param name="modelBuilder">EF model builder</param>
-		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
 			ConfigureConventions(modelBuilder);
@@ -101,17 +113,18 @@ namespace Daniel15.Data
 		/// Configures standard conventions for names of the database tables and fields
 		/// </summary>
 		/// <param name="modelBuilder">EF model builder</param>
-		private void ConfigureConventions(DbModelBuilder modelBuilder)
+		private void ConfigureConventions(ModelBuilder modelBuilder)
 		{
+			// TODO
 			// Remove "Model" suffix for models ("ProjectModel" -> "projects")
-			var pluralizationService = DbConfiguration.DependencyResolver.GetService<IPluralizationService>();
+			/*var pluralizationService = DbConfiguration.DependencyResolver.GetService<IPluralizationService>();
 			modelBuilder.Types().Configure(config =>
 			{
 				var cleanName = config.ClrType.Name.Replace(MODEL_SUFFIX, string.Empty).ToLowerInvariant();
 				config.ToTable(pluralizationService.Pluralize(cleanName));
-			});
+			});*/
 
-			modelBuilder.Properties().Configure(config =>
+			/*modelBuilder.Properties().Configure(config =>
 			{
 				// Use underscores for column names (eg. "AuthorProfileUrl" -> "author_profile_url"
 				var name = _camelCaseRegex.Replace(
@@ -121,17 +134,18 @@ namespace Daniel15.Data
 				// Remove "is" prefix (eg. "IsPrimary" -> "Primary") and "Raw" prefix (eg. "RawTechnologies" => "Technologies")
 				name = name.TrimStart(BOOLEAN_PREFIX).TrimStart(RAW_PREFIX).ToLowerInvariant();
 				config.HasColumnName(name);
-			});
+			});*/
 		}
 
 		/// <summary>
 		/// Configures many to many relationships
 		/// </summary>
 		/// <param name="modelBuilder">EF model builder</param>
-		private void ConfigureManyToMany(DbModelBuilder modelBuilder)
+		private void ConfigureManyToMany(ModelBuilder modelBuilder)
 		{
 			// Posts to categories many to many
-			modelBuilder.Entity<PostModel>()
+			// TODO
+			/*modelBuilder.Entity<PostModel>()
 				.HasMany(x => x.Categories)
 				.WithMany(x => x.Posts)
 				.Map(map => map
@@ -147,7 +161,7 @@ namespace Daniel15.Data
 					.MapLeftKey("post_id")
 					.MapRightKey("tag_id")
 					.ToTable("blog_post_tags")
-				);
+				);*/
 		}
 	}
 }

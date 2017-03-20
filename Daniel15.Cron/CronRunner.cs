@@ -16,12 +16,13 @@ namespace Daniel15.Cron
 
 		public static void Main(string[] args)
 		{
-			_serviceCollection.AddDaniel15();
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(PlatformServices.Default.Application.ApplicationBasePath)
 				.AddJsonFile("config.json")
 				.AddEnvironmentVariables();
-			_serviceCollection.AddDaniel15Config(builder.Build());
+			var config = builder.Build();
+			_serviceCollection.AddDaniel15(config);
+			_serviceCollection.AddDaniel15Config(config);
 			_serviceCollection.AddOptions();
 			_serviceProvider = _serviceCollection.BuildServiceProvider();
 

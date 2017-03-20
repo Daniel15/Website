@@ -1,4 +1,4 @@
-using Daniel15.BusinessLayer;
+﻿using Daniel15.BusinessLayer;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.CodeRepositories;
 using Daniel15.BusinessLayer.Services.Social;
@@ -6,6 +6,7 @@ using Daniel15.Data;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Repositories.EntityFramework;
 using Daniel15.Shared.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -17,7 +18,7 @@ namespace Daniel15.Infrastructure
 	/// </summary>
 	public static class Ioc
 	{
-		public static void AddDaniel15(this IServiceCollection services)
+		public static void AddDaniel15(this IServiceCollection services, IConfiguration config)
 		{
 			// Services
 			services.AddSingleton<IUrlShortener, UrlShortener>();
@@ -32,7 +33,7 @@ namespace Daniel15.Infrastructure
 			services.AddSingleton<Twitter>();
 			services.AddSingleton<Linkedin>();
 
-			InitializeDatabase(services);
+			InitializeDatabase(services, config);
 		}
 
 		public static void AddDaniel15Config(this IServiceCollection services, IConfiguration config)
@@ -51,9 +52,11 @@ namespace Daniel15.Infrastructure
 		/// <summary>
 		/// Initialises the database stuff in the IoC container
 		/// </summary>
-		private static void InitializeDatabase(IServiceCollection services)
+		private static void InitializeDatabase(IServiceCollection services, IConfiguration config)
 		{
-			services.AddScoped<DatabaseContext>();
+			services.AddDbContext<DatabaseContext>(options =>
+				options.UseMySql(config["Data:DefaultConnection:ConnectionString"])
+			);
 			services.AddScoped<IBlogRepository, BlogRepository>();
 			services.AddScoped<IDisqusCommentRepository, DisqusCommentRepository>();
 			services.AddScoped<IProjectRepository, ProjectRepository>();

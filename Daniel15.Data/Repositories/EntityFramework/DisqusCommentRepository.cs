@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using Daniel15.Data.Entities;
 using Daniel15.Data.Entities.Blog;
+using Microsoft.EntityFrameworkCore;
 
 namespace Daniel15.Data.Repositories.EntityFramework
 {
