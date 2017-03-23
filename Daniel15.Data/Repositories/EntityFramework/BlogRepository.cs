@@ -367,15 +367,18 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <param name="categoryIds">Category IDs</param>
 		public void SetCategories(PostModel post, IEnumerable<int> categoryIds)
 		{
-			var newCategories = Context.Categories.Where(cat => categoryIds.Contains(cat.Id));
-			// Entity Framework is smart enough to work out the adds/deletes here.
-			post.PostCategories.Clear();
-			foreach (var category in newCategories)
+			var newCategories = new HashSet<int>(categoryIds);
+			var oldCategories = new HashSet<int>(post.PostCategories.Select(x => x.CategoryId));
+
+			// Remove categories that aren't set any more
+			post.PostCategories = post.PostCategories.FindAll(x => newCategories.Contains(x.CategoryId));
+
+			// Add categories that were newly-added
+			foreach (var categoryId in newCategories.Where(id => !oldCategories.Contains(id)))
 			{
-				// TODO test this
 				post.PostCategories.Add(new PostCategoryModel
 				{
-					Category = category,
+					CategoryId = categoryId,
 					Post = post,
 				});
 			}
@@ -389,11 +392,20 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <param name="tagIds">Tag IDs</param>
 		public void SetTags(PostModel post, IEnumerable<int> tagIds)
 		{
-			var newTags = Context.Tags.Where(tag => tagIds.Contains(tag.Id));
-			post.PostTags.Clear();
-			foreach (var tag in newTags)
+			var newTags = new HashSet<int>(tagIds);
+			var oldTags = new HashSet<int>(post.PostTags.Select(x => x.TagId));
+
+			// Remove tags that aren't set any more
+			post.PostTags = post.PostTags.FindAll(x => newTags.Contains(x.TagId));
+
+			// Add categories that were newly-added
+			foreach (var tagId in newTags.Where(id => !oldTags.Contains(id)))
 			{
-				post.PostTags.Add(new PostTagModel { Post = post, Tag = tag });
+				post.PostTags.Add(new PostTagModel
+				{
+					TagId = tagId,
+					Post = post,
+				});
 			}
 			Context.SaveChanges();
 		}
