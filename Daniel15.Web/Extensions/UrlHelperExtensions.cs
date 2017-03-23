@@ -9,8 +9,6 @@ namespace Daniel15.Web.Extensions
 	/// </summary>
 	public static class UrlHelperExtensions
 	{
-		public static IHttpContextAccessor HttpContextAccessor { get; set; }
-
 		/// <summary>
 		/// Gets the URL to the specified JavaScript file
 		/// </summary>
@@ -41,7 +39,7 @@ namespace Daniel15.Web.Extensions
 		/// <returns>Absoute URL</returns>
 		public static string Absolute(this IUrlHelper urlHelper, string uri)
 		{
-			var request = HttpContextAccessor.HttpContext.Request;
+			var request = urlHelper.ActionContext.HttpContext.Request;
 			var hostAndPort = request.Host.Value.Split(':');
             var builder = new UriBuilder
 			{

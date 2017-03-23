@@ -1,10 +1,9 @@
-Daniel15
+﻿Daniel15
 ========
 
-This is the code that powers [my personal website](http://dan.cx/) and blog. It is in the process of
-being rewritten in .NET (old version was in PHP) so some of this is out-of-date.
+This is the code that powers [my personal website](https://dan.cx/) and blog. It uses C# and the ASP.NET Core MVC framework, with some older bits in PHP.
 
-The live site is currently running on [Mono](http://www.mono-project.com/) 3.0.2.
+The live site is currently running on [Mono](http://www.mono-project.com/) 3.8.0.
 
 Blog
 ====

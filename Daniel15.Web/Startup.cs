@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Server.Kestrel;
 using Microsoft.Extensions.Configuration;
@@ -65,6 +66,12 @@ namespace Daniel15.Web
 				loggerFactory.AddConsole(LogLevel.Warning);
 			}
 
+			// Handle X-Fowarded-Proto to know Nginx is using HTTPS
+			app.UseForwardedHeaders(new ForwardedHeadersOptions
+			{
+				ForwardedHeaders = ForwardedHeaders.XForwardedProto,
+			});
+
 			app.UseReact(config =>
 			{
 				config
@@ -77,10 +84,6 @@ namespace Daniel15.Web
 			app.UseSession();
 			// All real routes are defined using attributes.
 			app.UseMvcWithDefaultRoute();
-
-			// This is really not ideal, need to figure out a better way to do this.
-			// Based off http://stackoverflow.com/a/30762664/210370
-			UrlHelperExtensions.HttpContextAccessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
 		}
 
 		public static void Main(string[] args)

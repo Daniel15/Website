@@ -31,7 +31,7 @@ namespace Daniel15.Web.TagHelpers
 			output.Attributes.Add("async", true);
 			output.Attributes.Add("defer", true);
 
-		    var url = "http://query.yahooapis.com/v1/public/yql" + new QueryBuilder
+		    var url = "https://query.yahooapis.com/v1/public/yql" + new QueryBuilder
 		    {
 			    {"q", Query},
 			    {"format", "json"},

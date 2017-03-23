@@ -64,7 +64,7 @@ namespace Daniel15.Cron
 		private UrlResponse GetBlogUrl(PostModel post)
 		{
 			// TODO: Remove hard-coded URL from here
-			var urlApi = $"http://dan.cx/api/posts/{post.Id}/url";
+			var urlApi = $"https://dan.cx/api/posts/{post.Id}/url";
 			using (var client = new WebClient())
 			{
 				var rawResponse = client.DownloadString(urlApi);
