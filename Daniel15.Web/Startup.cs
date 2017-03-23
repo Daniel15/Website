@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Server.Kestrel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using React.AspNet;
 
@@ -42,6 +44,9 @@ namespace Daniel15.Web
 			services.AddReact();
 			services.AddDaniel15();
 			services.AddDaniel15Config(Configuration);
+
+			// Temporary workaround for https://github.com/aspnet/Routing/issues/391
+			services.Replace(ServiceDescriptor.Transient<IApplicationModelProvider, BugfixApplicationModelProvider>());
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
