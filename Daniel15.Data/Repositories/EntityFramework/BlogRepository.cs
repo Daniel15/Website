@@ -208,25 +208,33 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns>A dictionary of years, which contains a dictionary of months and counts</returns>
 		public IDictionary<int, IDictionary<int, int>> MonthCounts()
 		{
-			return new Dictionary<int, IDictionary<int, int>>();
-			// TODO
-			/*var counts = Context.Database.SqlQuery<MonthYearCount>(@"
-SELECT MONTH(FROM_UNIXTIME(date)) AS month, YEAR(FROM_UNIXTIME(date)) AS year, COUNT(*) AS count
-FROM blog_posts
-GROUP BY year, month
-ORDER BY year DESC, month DESC");
-
-			IDictionary<int, IDictionary<int, int>> results = new Dictionary<int, IDictionary<int, int>>();
-
-			foreach (var count in counts)
+			using (var command = Context.Database.GetDbConnection().CreateCommand())
 			{
-				if (!results.ContainsKey(count.Year))
-					results[count.Year] = new Dictionary<int, int>();
+				command.CommandText = @"
+					SELECT MONTH(FROM_UNIXTIME(date)) AS month, YEAR(FROM_UNIXTIME(date)) AS year, COUNT(*) AS count
+					FROM blog_posts
+					GROUP BY year, month
+					ORDER BY year DESC, month DESC";
+				Context.Database.OpenConnection();
 
-				results[count.Year][count.Month] = count.Count;
+				// This is pretty ugly as it's using raw ADO.NET, it'll do for now though.
+				using (var reader = command.ExecuteReader())
+				{
+					IDictionary<int, IDictionary<int, int>> results = new Dictionary<int, IDictionary<int, int>>();
+					while (reader.Read())
+					{
+						var month = reader.GetInt32(0);
+						var year = reader.GetInt32(1);
+						var count = reader.GetInt32(2);
+						if (!results.ContainsKey(year))
+						{
+							results[year] = new Dictionary<int, int>();
+						}
+						results[year][month] = count;
+					}
+					return results;
+				}
 			}
-
-			return results;*/
 		}
 
 		/// <summary>
@@ -388,15 +396,6 @@ ORDER BY year DESC, month DESC");
 				post.PostTags.Add(new PostTagModel { Post = post, Tag = tag });
 			}
 			Context.SaveChanges();
-		}
-
-		[SuppressMessage("ReSharper", "ClassNeverInstantiated.Local")]
-		[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-		private class MonthYearCount
-		{
-			public int Month { get; set; }
-			public int Year { get; set; }
-			public int Count { get; set; }
 		}
 	}
 }
