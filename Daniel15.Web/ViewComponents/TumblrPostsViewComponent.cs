@@ -18,7 +18,7 @@ namespace Daniel15.Web.ViewComponents
 		public IViewComponentResult Invoke()
 		{
 			var posts = _microblogRepository.LatestPosts();
-			return View("../../../Site/_TumblrPosts", posts);
+			return View(posts);
 		}
     }
 }

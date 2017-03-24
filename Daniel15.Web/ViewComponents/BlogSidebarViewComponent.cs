@@ -21,7 +21,7 @@ namespace Daniel15.Web.ViewComponents
 				.GroupBy(x => x.ParentId)
 				.ToDictionary(x => x.Key ?? 0, x => x.ToList());
 
-			return View("../../_Sidebar", new SidebarViewModel
+			return View(new SidebarViewModel
 			{
 				Counts = _blogRepository.MonthCounts(),
 				Categories = groupedCategories
