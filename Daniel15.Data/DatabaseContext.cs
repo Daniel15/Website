@@ -99,6 +99,9 @@ namespace Daniel15.Data
 		{
 			foreach (var entity in modelBuilder.Model.GetEntityTypes())
 			{
+				// Lowercase table names
+				entity.Relational().TableName = entity.Relational().TableName.ToLowerInvariant();
+
 				foreach (var property in entity.GetProperties())
 				{
 					// Use underscores for column names (eg. "AuthorProfileUrl" -> "author_profile_url"
