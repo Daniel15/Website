@@ -12,6 +12,6 @@ namespace Daniel15.Data.Entities.Blog
 		/// <summary>
 		/// Posts that are tagged with this tag
 		/// </summary>
-		public virtual ICollection<PostModel> Posts { get; set; }
+		public virtual List<PostTagModel> PostTags { get; set; }
 	}
 }

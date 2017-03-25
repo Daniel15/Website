@@ -43,7 +43,7 @@ namespace Daniel15.Web
 			services.AddSession();
 			services.AddMvc();
 			services.AddReact();
-			services.AddDaniel15();
+			services.AddDaniel15(Configuration);
 			services.AddDaniel15Config(Configuration);
 
 			// Temporary workaround for https://github.com/aspnet/Routing/issues/391

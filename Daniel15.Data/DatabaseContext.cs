@@ -1,10 +1,8 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure.DependencyResolution;
-using System.Data.Entity.Infrastructure.Pluralization;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Entities.Projects;
 using Daniel15.Shared.Extensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace Daniel15.Data
@@ -12,17 +10,12 @@ namespace Daniel15.Data
 	/// <summary>
 	/// Entity Framework database context
 	/// </summary>
-	[DbConfigurationType(typeof(DatabaseConfiguration))]
 	public class DatabaseContext : DbContext
 	{
 		/// <summary>
 		/// Prefix for boolean fields in the database
 		/// </summary>
 		private const string BOOLEAN_PREFIX = "Is_";
-		/// <summary>
-		/// Suffix for model classes
-		/// </summary>
-		private const string MODEL_SUFFIX = "Model";
 		/// <summary>
 		/// Prefix for "raw" fields, used when the database representation is different (ie. EF doesn't
 		/// support a particular field format)
@@ -36,8 +29,7 @@ namespace Daniel15.Data
 		/// <summary>
 		/// Creates a new instance of <see cref="DatabaseContext"/>.
 		/// </summary>
-		public DatabaseContext(IConfiguration config) 
-			: base(config["Data:DefaultConnection:ConnectionString"]) { }
+		public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) {}
 
 		/// <summary>
 		/// Projects in the database.
@@ -68,7 +60,7 @@ namespace Daniel15.Data
 		/// Initialises the Entity Framework model
 		/// </summary>
 		/// <param name="modelBuilder">EF model builder</param>
-		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
 			ConfigureConventions(modelBuilder);
@@ -87,7 +79,9 @@ namespace Daniel15.Data
 				.Ignore(x => x.Children);
 
 			// Backwards compatibility with old DB - Dates as UNIX times
-			modelBuilder.Entity<PostModel>().Ignore(x => x.Date);
+			modelBuilder.Entity<PostModel>()
+				.Ignore(x => x.Date)
+				.Ignore(x => x.ShareCounts);
 			modelBuilder.Entity<PostModel>().Property(x => x.UnixDate).HasColumnName("date");
 
 			// Entity Framework hacks - Data types like enums that need backing fields
@@ -101,53 +95,54 @@ namespace Daniel15.Data
 		/// Configures standard conventions for names of the database tables and fields
 		/// </summary>
 		/// <param name="modelBuilder">EF model builder</param>
-		private void ConfigureConventions(DbModelBuilder modelBuilder)
+		private void ConfigureConventions(ModelBuilder modelBuilder)
 		{
-			// Remove "Model" suffix for models ("ProjectModel" -> "projects")
-			var pluralizationService = DbConfiguration.DependencyResolver.GetService<IPluralizationService>();
-			modelBuilder.Types().Configure(config =>
+			foreach (var entity in modelBuilder.Model.GetEntityTypes())
 			{
-				var cleanName = config.ClrType.Name.Replace(MODEL_SUFFIX, string.Empty).ToLowerInvariant();
-				config.ToTable(pluralizationService.Pluralize(cleanName));
-			});
+				// Lowercase table names
+				entity.Relational().TableName = entity.Relational().TableName.ToLowerInvariant();
 
-			modelBuilder.Properties().Configure(config =>
-			{
-				// Use underscores for column names (eg. "AuthorProfileUrl" -> "author_profile_url"
-				var name = _camelCaseRegex.Replace(
-					config.ClrPropertyInfo.Name,
-					match => match.Value[0] + "_" + match.Value[1]
-				);
-				// Remove "is" prefix (eg. "IsPrimary" -> "Primary") and "Raw" prefix (eg. "RawTechnologies" => "Technologies")
-				name = name.TrimStart(BOOLEAN_PREFIX).TrimStart(RAW_PREFIX).ToLowerInvariant();
-				config.HasColumnName(name);
-			});
+				foreach (var property in entity.GetProperties())
+				{
+					// Use underscores for column names (eg. "AuthorProfileUrl" -> "author_profile_url"
+					var name = _camelCaseRegex.Replace(
+						property.Name,
+						match => match.Value[0] + "_" + match.Value[1]
+					);
+					// Remove "is" prefix (eg. "IsPrimary" -> "Primary") and "Raw" prefix (eg. "RawTechnologies" => "Technologies")
+					name = name.TrimStart(BOOLEAN_PREFIX).TrimStart(RAW_PREFIX).ToLowerInvariant();
+					property.Relational().ColumnName = name;
+				}
+			}
 		}
 
 		/// <summary>
 		/// Configures many to many relationships
 		/// </summary>
 		/// <param name="modelBuilder">EF model builder</param>
-		private void ConfigureManyToMany(DbModelBuilder modelBuilder)
+		private void ConfigureManyToMany(ModelBuilder modelBuilder)
 		{
 			// Posts to categories many to many
+			modelBuilder.Entity<PostCategoryModel>()
+				.ToTable("blog_post_categories")
+				.HasKey(x => new { x.PostId, x.CategoryId });
 			modelBuilder.Entity<PostModel>()
-				.HasMany(x => x.Categories)
-				.WithMany(x => x.Posts)
-				.Map(map => map
-					.MapLeftKey("post_id")
-					.MapRightKey("category_id")
-					.ToTable("blog_post_categories")
-				);
+				.HasMany(x => x.PostCategories)
+				.WithOne(x => x.Post);
+			modelBuilder.Entity<CategoryModel>()
+				.HasMany(x => x.PostCategories)
+				.WithOne(x => x.Category);
+
 			// Posts to tags many to many
+			modelBuilder.Entity<PostTagModel>()
+				.ToTable("blog_post_tags")
+				.HasKey(x => new { x.PostId, x.TagId });
 			modelBuilder.Entity<PostModel>()
-				.HasMany(x => x.Tags)
-				.WithMany(x => x.Posts)
-				.Map(map => map
-					.MapLeftKey("post_id")
-					.MapRightKey("tag_id")
-					.ToTable("blog_post_tags")
-				);
+				.HasMany(x => x.PostTags)
+				.WithOne(x => x.Post);
+			modelBuilder.Entity<TagModel>()
+				.HasMany(x => x.PostTags)
+				.WithOne(x => x.Tag);
 		}
 	}
 }

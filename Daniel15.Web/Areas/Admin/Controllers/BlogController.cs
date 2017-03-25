@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using Daniel15.BusinessLayer.Services;
@@ -107,7 +108,11 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 
 			// If slug is not specified, we're creating a new post
 			var post = string.IsNullOrEmpty(slug)
-				? new PostModel()
+				? new PostModel
+				{
+					PostCategories = new List<PostCategoryModel>(),
+					PostTags = new List<PostTagModel>(),
+				}
 				: _blogRepository.GetBySlug(slug);
 
 			// Valid, so save the post using a whitelist of fields allowed to be updated from the UI

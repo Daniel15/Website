@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Extensions;
 using Daniel15.Shared.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Daniel15.Data.Repositories.EntityFramework
 {
@@ -21,7 +21,7 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		public BlogRepository(DatabaseContext context) : base(context) {}
 
 		/// <summary>
-		/// Gets the <see cref="DbSet{T}"/> represented by this repository.
+		/// Gets the <see cref="DbSet{TEntity}"/> represented by this repository.
 		/// </summary>
 		protected override DbSet<PostModel> Set => Context.Posts;
 
@@ -35,6 +35,8 @@ namespace Daniel15.Data.Repositories.EntityFramework
 			return Context.Posts
 				.Include(post => post.MainCategory)
 				.Include(post => post.MainCategory.Parent)
+				.Include(post => post.PostCategories).ThenInclude(x => x.Category)
+				.Include(post => post.PostTags).ThenInclude(x => x.Tag)
 				.FirstOrThrow(post => post.Slug == slug);
 		}
 
@@ -47,7 +49,7 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		{
 			return post == null || post.Id == 0
 				? new List<CategoryModel>() 
-				: Context.Posts.Find(post.Id).Categories.ToList();
+				: Context.Posts.Find(post.Id).PostCategories.Select(x => x.Category).ToList();
 		}
 
 		/// <summary>
@@ -64,11 +66,11 @@ namespace Daniel15.Data.Repositories.EntityFramework
 
 			// This is optimised to only perform a single query to get all categories
 			var categories = Context.Categories
-				.Where(cat => cat.Posts.Any(post => postIDs.Contains(post.Id)))
+				.Where(cat => cat.PostCategories.Any(x => postIDs.Contains(x.PostId)))
 				.Select(cat => new
 				{
 					Category = cat,
-					PostIDs = cat.Posts.Select(post => post.Id)
+					PostIDs = cat.PostCategories.Select(x => x.PostId)
 				});
 
 			// Group the categories by post ID
@@ -101,7 +103,7 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		{
 			return post == null || post.Id == 0 
 				? new List<TagModel>()
-				: Context.Posts.Find(post.Id).Tags.ToList();
+				: Context.Posts.Find(post.Id).PostTags.Select(x => x.Tag).ToList();
 		}
 
 		/// <summary>
@@ -131,7 +133,11 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns>Latest blog posts</returns>
 		public List<PostModel> LatestPosts(CategoryModel category, int count = 10, int offset = 0)
 		{
-			return LatestPosts(category.Posts.AsQueryable(), count, offset);
+			return LatestPosts(
+				category.PostCategories.Select(x => x.Post).AsQueryable(),
+				count,
+				offset
+			);
 		}
 
 		/// <summary>
@@ -143,7 +149,11 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns>Latest blog posts</returns>
 		public List<PostModel> LatestPosts(TagModel tag, int count = 10, int offset = 0)
 		{
-			return LatestPosts(tag.Posts.AsQueryable(), count, offset);
+			return LatestPosts(
+				tag.PostTags.Select(x => x.Post).AsQueryable(),
+				count,
+				offset
+			);
 		}
 
 		/// <summary>
@@ -198,23 +208,33 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns>A dictionary of years, which contains a dictionary of months and counts</returns>
 		public IDictionary<int, IDictionary<int, int>> MonthCounts()
 		{
-			var counts = Context.Database.SqlQuery<MonthYearCount>(@"
-SELECT MONTH(FROM_UNIXTIME(date)) AS month, YEAR(FROM_UNIXTIME(date)) AS year, COUNT(*) AS count
-FROM blog_posts
-GROUP BY year, month
-ORDER BY year DESC, month DESC");
-
-			IDictionary<int, IDictionary<int, int>> results = new Dictionary<int, IDictionary<int, int>>();
-
-			foreach (var count in counts)
+			using (var command = Context.Database.GetDbConnection().CreateCommand())
 			{
-				if (!results.ContainsKey(count.Year))
-					results[count.Year] = new Dictionary<int, int>();
+				command.CommandText = @"
+					SELECT MONTH(FROM_UNIXTIME(date)) AS month, YEAR(FROM_UNIXTIME(date)) AS year, COUNT(*) AS count
+					FROM blog_posts
+					GROUP BY year, month
+					ORDER BY year DESC, month DESC";
+				Context.Database.OpenConnection();
 
-				results[count.Year][count.Month] = count.Count;
+				// This is pretty ugly as it's using raw ADO.NET, it'll do for now though.
+				using (var reader = command.ExecuteReader())
+				{
+					IDictionary<int, IDictionary<int, int>> results = new Dictionary<int, IDictionary<int, int>>();
+					while (reader.Read())
+					{
+						var month = reader.GetInt32(0);
+						var year = reader.GetInt32(1);
+						var count = reader.GetInt32(2);
+						if (!results.ContainsKey(year))
+						{
+							results[year] = new Dictionary<int, int>();
+						}
+						results[year][month] = count;
+					}
+					return results;
+				}
 			}
-
-			return results;
 		}
 
 		/// <summary>
@@ -226,6 +246,12 @@ ORDER BY year DESC, month DESC");
 		{
 			return Context.Categories
 				.Include(cat => cat.Parent)
+				.Include(cat => cat.PostCategories)
+					.ThenInclude(x => x.Post)
+						.ThenInclude(x => x.MainCategory)
+				.Include(cat => cat.PostCategories)
+					.ThenInclude(x => x.Post)
+						.ThenInclude(x => x.MainCategory.Parent)
 				.FirstOrThrow(x => x.Slug == slug);
 		}
 
@@ -236,7 +262,14 @@ ORDER BY year DESC, month DESC");
 		/// <returns>The tag</returns>
 		public TagModel GetTag(string slug)
 		{
-			return Context.Tags.FirstOrThrow(x => x.Slug == slug);
+			return Context.Tags
+				.Include(tag => tag.PostTags)
+					.ThenInclude(x => x.Post)
+						.ThenInclude(post => post.MainCategory)
+				.Include(tag => tag.PostTags)
+					.ThenInclude(x => x.Post)
+						.ThenInclude(post => post.MainCategory.Parent)
+				.FirstOrThrow(x => x.Slug == slug);
 		}
 
 		/// <summary>
@@ -254,7 +287,7 @@ ORDER BY year DESC, month DESC");
 		/// <returns>Total number of posts in the category</returns>
 		public int PublishedCount(CategoryModel category)
 		{
-			return category.Posts.Count(post => post.Published);
+			return category.PostCategories.Count(x => x.Post.Published);
 		}
 
 		/// <summary>
@@ -263,7 +296,7 @@ ORDER BY year DESC, month DESC");
 		/// <returns>Total number of posts in the tag</returns>
 		public int PublishedCount(TagModel tag)
 		{
-			return tag.Posts.Count(post => post.Published);
+			return tag.PostTags.Count(x => x.Post.Published);
 		}
 
 		/// <summary>
@@ -311,7 +344,7 @@ ORDER BY year DESC, month DESC");
 		public IList<CategoryModel> CategoriesInUse()
 		{
 			return Context.Categories
-				.Where(cat => cat.Posts.Count > 0)
+				.Where(cat => cat.PostCategories.Count > 0)
 				.OrderBy(cat => cat.Title)
 				.ToList();
 		}
@@ -334,12 +367,20 @@ ORDER BY year DESC, month DESC");
 		/// <param name="categoryIds">Category IDs</param>
 		public void SetCategories(PostModel post, IEnumerable<int> categoryIds)
 		{
-			var newCategories = Context.Categories.Where(cat => categoryIds.Contains(cat.Id));
-			// Entity Framework is smart enough to work out the adds/deletes here.
-			post.Categories.Clear();
-			foreach (var category in newCategories)
+			var newCategories = new HashSet<int>(categoryIds);
+			var oldCategories = new HashSet<int>(post.PostCategories.Select(x => x.CategoryId));
+
+			// Remove categories that aren't set any more
+			post.PostCategories = post.PostCategories.FindAll(x => newCategories.Contains(x.CategoryId));
+
+			// Add categories that were newly-added
+			foreach (var categoryId in newCategories.Where(id => !oldCategories.Contains(id)))
 			{
-				post.Categories.Add(category);
+				post.PostCategories.Add(new PostCategoryModel
+				{
+					CategoryId = categoryId,
+					Post = post,
+				});
 			}
 			Context.SaveChanges();
 		}
@@ -351,22 +392,22 @@ ORDER BY year DESC, month DESC");
 		/// <param name="tagIds">Tag IDs</param>
 		public void SetTags(PostModel post, IEnumerable<int> tagIds)
 		{
-			var newTags = Context.Tags.Where(tag => tagIds.Contains(tag.Id));
-			post.Tags.Clear();
-			foreach (var tag in newTags)
+			var newTags = new HashSet<int>(tagIds);
+			var oldTags = new HashSet<int>(post.PostTags.Select(x => x.TagId));
+
+			// Remove tags that aren't set any more
+			post.PostTags = post.PostTags.FindAll(x => newTags.Contains(x.TagId));
+
+			// Add categories that were newly-added
+			foreach (var tagId in newTags.Where(id => !oldTags.Contains(id)))
 			{
-				post.Tags.Add(tag);
+				post.PostTags.Add(new PostTagModel
+				{
+					TagId = tagId,
+					Post = post,
+				});
 			}
 			Context.SaveChanges();
-		}
-
-		[SuppressMessage("ReSharper", "ClassNeverInstantiated.Local")]
-		[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-		private class MonthYearCount
-		{
-			public int Month { get; set; }
-			public int Year { get; set; }
-			public int Count { get; set; }
 		}
 	}
 }
