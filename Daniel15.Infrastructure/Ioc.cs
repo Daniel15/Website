@@ -6,10 +6,10 @@ using Daniel15.Data;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Repositories.EntityFramework;
 using Daniel15.Shared.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using MySQL.Data.EntityFrameworkCore.Extensions;
 
 namespace Daniel15.Infrastructure
 {
@@ -55,7 +55,7 @@ namespace Daniel15.Infrastructure
 		private static void InitializeDatabase(IServiceCollection services, IConfiguration config)
 		{
 			services.AddDbContext<DatabaseContext>(options =>
-				options.UseMySQL(config["Data:DefaultConnection:ConnectionString"])
+				options.UseMySql(config["Data:DefaultConnection:ConnectionString"])
 			);
 			services.AddScoped<IBlogRepository, BlogRepository>();
 			services.AddScoped<IDisqusCommentRepository, DisqusCommentRepository>();
