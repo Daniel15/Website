@@ -202,7 +202,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 				RelativePath = relativePath,
 				Url = type == GalleryFileModel.FileType.File 
 					? ImageUrl(gallery, relativeUri) 
-					: Url.Action("Index", "Gallery", new { area = "Gallery", galleryName = gallery.Name, path = relativeUri }),
+					: Url.GalleryDirectory(gallery.Name, relativeUri),
 				ThumbnailUrl = ThumbnailUrl(gallery, relativeUri),
 				Type = type
 			};
