@@ -156,7 +156,8 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 				}	
 			}
 
-			return File(cachePath, "image/png");
+			// Redirect back to the thumbnail URL; Nginx will serve it.
+			return Redirect(ThumbnailUrl(gallery, path) + "?generated");
 		}
 
 		/// <summary>
