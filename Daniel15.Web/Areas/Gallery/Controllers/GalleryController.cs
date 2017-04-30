@@ -98,7 +98,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 		/// <returns>Directory listing</returns>
 		private ActionResult Directory(Shared.Configuration.Gallery gallery, string path, string fullPath)
 		{
-			var dirBlacklist = new HashSet<string> { THUMBNAIL_DIR, "cgi-bin" };
+			var dirBlacklist = new HashSet<string> { THUMBNAIL_DIR, "cgi-bin", ".well-known" };
 
 			var directories = System.IO.Directory.EnumerateDirectories(fullPath)
 				// Ignore thumbnail directory
