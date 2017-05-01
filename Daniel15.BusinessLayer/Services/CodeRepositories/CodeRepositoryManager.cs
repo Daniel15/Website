@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Daniel15.BusinessLayer.Services.CodeRepositories
 {
@@ -23,9 +24,9 @@ namespace Daniel15.BusinessLayer.Services.CodeRepositories
 		/// </summary>
 		/// <param name="repositoryUrl">URL to the repository</param>
 		/// <returns>Information on the repository</returns>
-		public RepositoryInfo GetRepositoryInfo(Uri repositoryUrl)
+		public async Task<RepositoryInfo> GetRepositoryInfoAsync(Uri repositoryUrl)
 		{
-			return FindHandlerFor(repositoryUrl).GetRepositoryInfo(repositoryUrl);
+			return await FindHandlerFor(repositoryUrl).GetRepositoryInfoAsync(repositoryUrl);
 		}
 
 		/// <summary>

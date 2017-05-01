@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Daniel15.Data.Entities.Blog;
 
 namespace Daniel15.BusinessLayer.Services.Social
@@ -44,7 +45,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Share count for this post</returns>
-		public IDictionary<ISocialNetwork, int> ShareCounts(PostModel post, string url, string shortUrl)
+		public async Task<IDictionary<ISocialNetwork, int>> ShareCountsAsync(PostModel post, string url, string shortUrl)
 		{
 			IDictionary<ISocialNetwork, int> results = new Dictionary<ISocialNetwork, int>(_socialShares.Count);
 			var legacyUrl = GetLegacyUrl(post, url);
@@ -54,8 +55,9 @@ namespace Daniel15.BusinessLayer.Services.Social
 				int count;
 				try
 				{
-					count = sharer.GetShareCount(post, url, shortUrl);
-					count += sharer.GetShareCount(post, legacyUrl, string.Empty);
+					// TODO: This can be parallelised
+					count = await sharer.GetShareCountAsync(post, url, shortUrl);
+					count += await sharer.GetShareCountAsync(post, legacyUrl, string.Empty);
 				}
 				catch (Exception ex)
 				{

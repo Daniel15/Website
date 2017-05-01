@@ -1,4 +1,4 @@
-﻿{
+{
   "profiles": {
     "Disqus": {
       "commandName": "Project",
@@ -11,6 +11,9 @@
     "Projects": {
       "commandName": "Project",
       "commandLineArgs": "-projects"
+    },
+    "All": {
+      "commandName": "Project"
     }
   }
 }

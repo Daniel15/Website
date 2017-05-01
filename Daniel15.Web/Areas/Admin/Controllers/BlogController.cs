@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
@@ -145,9 +146,9 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 		}
 
 		[Route("synccomments")]
-		public virtual ActionResult SyncComments()
+		public virtual async Task<ActionResult> SyncComments()
 		{
-			_comments.Sync();
+			await _comments.SyncAsync();
 			TempData["topMessage"] = "All done!";
 			return RedirectToAction("Index");
 		}

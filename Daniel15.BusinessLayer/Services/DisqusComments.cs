@@ -1,11 +1,11 @@
 ﻿using System;
-using System.IO;
-using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Shared.Configuration;
+using Daniel15.Shared.Extensions;
 using Microsoft.AspNetCore.Http.Extensions;
-using Newtonsoft.Json.Linq;
 
 namespace Daniel15.BusinessLayer.Services
 {
@@ -25,22 +25,24 @@ namespace Daniel15.BusinessLayer.Services
 
 		private readonly IDisqusCommentRepository _commentRepository;
 		private readonly ISiteConfiguration _siteConfiguration;
+		private readonly HttpClient _client;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="DisqusComments" /> class.
 		/// </summary>
 		/// <param name="commentRepository">The comment database repository.</param>
 		/// <param name="siteConfiguration">The site configuration.</param>
-		public DisqusComments(IDisqusCommentRepository commentRepository, ISiteConfiguration siteConfiguration)
+		public DisqusComments(IDisqusCommentRepository commentRepository, ISiteConfiguration siteConfiguration, HttpClient client)
 		{
 			_commentRepository = commentRepository;
 			_siteConfiguration = siteConfiguration;
+			_client = client;
 		}
 
 		/// <summary>
 		/// Synchronise all comments on Disqus into the local database
 		/// </summary>
-		public void Sync()
+		public async Task SyncAsync()
 		{
 			string cursor = string.Empty;
 			bool hasMore;
@@ -52,16 +54,11 @@ namespace Daniel15.BusinessLayer.Services
 				dynamic data;
 				try
 				{
-					using (var client = new WebClient())
-					{
-						var result = client.DownloadString(url);
-						data = JArray.Parse(result);
-					}
+					data = await _client.GetDynamicJsonAsync(url);
 				}
-				catch (WebException	ex)
+				catch (HttpRequestException ex)
 				{
-					var errorText = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
-					throw new Exception("Retrieving Disqus comments failed with: " + errorText, ex);
+					throw new Exception("Retrieving Disqus comments failed!", ex);
 				}
 
 				foreach (var comment in data.response)
@@ -81,7 +78,7 @@ namespace Daniel15.BusinessLayer.Services
 		private void SyncComment(dynamic comment)
 		{
 			// Check if this comment already exists
-			DisqusCommentModel dbComment = _commentRepository.GetOrDefault(comment.id);
+			DisqusCommentModel dbComment = _commentRepository.GetOrDefault((string)comment.id);
 			var isNew = dbComment == null;
 			if (isNew)
 				dbComment = new DisqusCommentModel();
@@ -92,13 +89,13 @@ namespace Daniel15.BusinessLayer.Services
 			dbComment.AuthorProfileUrl = comment.author.profileUrl;
 			dbComment.AuthorImage = comment.author.avatar.permalink;
 			dbComment.Content = comment.message;
-			dbComment.Date = DateTime.Parse(comment.createdAt);
+			dbComment.Date = DateTime.Parse((string)comment.createdAt);
 
 			// This is an int in the Disqus API (even though comment ID is a string!)
 			dbComment.ParentCommentId = comment.parent != null ? comment.parent.ToString() : null;
 
 			// We expect comments to only have one thread identifier
-			if (comment.thread.identifiers.Length != 1)
+			if (comment.thread.identifiers.Count != 1)
 				throw new Exception(string.Format("Expected 1 thread identifier, but thread '{0}' has {1}", dbComment.Id, comment.thread.identifiers.Length));
 
 			dbComment.ThreadId = comment.thread.id;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,11 @@ namespace Daniel15.Cron
 
 		public static void Main(string[] args)
 		{
+			MainAsync(args).GetAwaiter().GetResult();
+		}
+
+		private static async Task MainAsync(string[] args)
+		{
 			var builder = new ConfigurationBuilder()
 				.SetBasePath(PlatformServices.Default.Application.ApplicationBasePath)
 				.AddJsonFile("config.json")
@@ -29,9 +35,9 @@ namespace Daniel15.Cron
 			if (args.Length == 0)
 			{
 				// No argument, so run everything
-				RunProjects();
-				RunSocial();
-				RunDisqus();
+				await RunProjectsAsync();
+				await RunSocialAsync();
+				await RunDisqusAsync();
 				return;
 			}
 
@@ -39,15 +45,15 @@ namespace Daniel15.Cron
 			switch (operation)
 			{
 				case "-disqus":
-					RunDisqus();
+					await RunDisqusAsync();
 					break;
 
 				case "-social":
-					RunSocial();
+					await RunSocialAsync();
 					break;
 
 				case "-projects":
-					RunProjects();
+					await RunProjectsAsync();
 					break;
 
 				default:
@@ -55,8 +61,8 @@ namespace Daniel15.Cron
 			}
 		}
 
-		private static void RunDisqus() => _serviceProvider.GetRequiredService<IDisqusComments>().Sync();
-		private static void RunSocial() => ActivatorUtilities.CreateInstance<SocialShareUpdater>(_serviceProvider).Run();
-		private static void RunProjects() => ActivatorUtilities.CreateInstance<ProjectUpdater>(_serviceProvider).Run();
+		private static Task RunDisqusAsync() => _serviceProvider.GetRequiredService<IDisqusComments>().SyncAsync();
+		private static Task RunSocialAsync() => ActivatorUtilities.CreateInstance<SocialShareUpdater>(_serviceProvider).RunAsync();
+		private static Task RunProjectsAsync() => ActivatorUtilities.CreateInstance<ProjectUpdater>(_serviceProvider).RunAsync();
 	}
 }

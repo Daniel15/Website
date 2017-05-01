@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Daniel15.Data.Entities.Blog;
 using Microsoft.AspNetCore.Http.Extensions;
 using Newtonsoft.Json.Linq;
@@ -20,6 +21,8 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// </summary>
 		private const string API_COUNT_URL = "http://www.linkedin.com/countserv/count/share";
 
+		private readonly HttpClient _client;
+
 		/// <summary>
 		/// Gets the internal ID of this social network
 		/// </summary>
@@ -29,6 +32,11 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// Gets the friendly name of this social network
 		/// </summary>
 		public string Name => "LinkedIn";
+
+		public Linkedin(HttpClient client)
+		{
+			_client = client;
+		}
 
 		#region Implementation of ISocialShare
 		/// <summary>
@@ -56,26 +64,23 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Share count for this post</returns>
-		public int GetShareCount(PostModel post, string url, string shortUrl)
+		public async Task<int> GetShareCountAsync(PostModel post, string url, string shortUrl)
 		{
 			var apiUrl = API_COUNT_URL + new QueryBuilder
 			{
 				{"url", url}
 			};
 
-			using (var client = new WebClient())
-			{
-				var responseText = client.DownloadString(apiUrl);
-				// Ugly hack to get JSON data from the JavaScript method call
-				// This API call is usually used client-side via JSONP...
-				responseText = responseText.Replace("IN.Tags.Share.handleCount(", "").Replace(");", "");
-				dynamic response = JObject.Parse(responseText);
+			var responseText = await _client.GetStringAsync(apiUrl);
+			// Ugly hack to get JSON data from the JavaScript method call
+			// This API call is usually used client-side via JSONP...
+			responseText = responseText.Replace("IN.Tags.Share.handleCount(", "").Replace(");", "");
+			dynamic response = JObject.Parse(responseText);
 
-				if (response == null || response.count == null)
-					return 0;
+			if (response == null || response.count == null)
+				return 0;
 
-				return Convert.ToInt32(response.count);
-			}
+			return Convert.ToInt32(response.count);
 		}
 		#endregion
 	}

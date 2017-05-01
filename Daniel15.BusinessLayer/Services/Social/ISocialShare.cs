@@ -1,4 +1,5 @@
-﻿using Daniel15.Data.Entities.Blog;
+﻿using System.Threading.Tasks;
+using Daniel15.Data.Entities.Blog;
 
 namespace Daniel15.BusinessLayer.Services.Social
 {
@@ -23,6 +24,6 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Share count for this post</returns>
-		int GetShareCount(PostModel post, string url, string shortUrl);
+		Task<int> GetShareCountAsync(PostModel post, string url, string shortUrl);
 	}
 }

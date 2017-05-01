@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Daniel15.BusinessLayer.Services.CodeRepositories
 {
@@ -14,6 +15,6 @@ namespace Daniel15.BusinessLayer.Services.CodeRepositories
 		/// </summary>
 		/// <param name="repositoryUrl">URL to the repository</param>
 		/// <returns>Information on the repository</returns>
-		RepositoryInfo GetRepositoryInfo(Uri repositoryUrl);
+		Task<RepositoryInfo> GetRepositoryInfoAsync(Uri repositoryUrl);
 	}
 }

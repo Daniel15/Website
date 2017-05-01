@@ -1,10 +1,11 @@
-﻿using System.Net;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
 using Daniel15.Data.Repositories;
+using Daniel15.Shared.Extensions;
 using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Site;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
 
 namespace Daniel15.Web.Controllers
 {
@@ -20,14 +21,16 @@ namespace Daniel15.Web.Controllers
 		private const int ONE_HOUR = 3600;
 
 		private readonly IBlogRepository _blogRepository;
+		private readonly HttpClient _client;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SiteController" /> class.
 		/// </summary>
 		/// <param name="blogRepository">The blog post repository.</param>
-		public SiteController(IBlogRepository blogRepository)
+		public SiteController(IBlogRepository blogRepository, HttpClient client)
 		{
 			_blogRepository = blogRepository;
+			_client = client;
 		}
 
 		/// <summary>
@@ -57,7 +60,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <returns></returns>
 		// ReSharper disable once InconsistentNaming - Backwards compatibility with old URL
-		public virtual ActionResult SocialFeed(int count = 25, int? before_date = null)
+		public virtual async Task<ActionResult> SocialFeed(int count = 25, int? before_date = null)
 		{
 			// Currently just proxies to the PHP page - This needs to be rewritten in C#
 			var url = "http://dan.cx/socialfeed/loadjson.php" + new QueryBuilder
@@ -65,9 +68,10 @@ namespace Daniel15.Web.Controllers
 				{"count", count.ToString()},
 				{"before_date", before_date.ToString()}
 			};
-			var responseText = new WebClient().DownloadString(url);
-			dynamic response = JArray.Parse(responseText);
-			return View("SocialFeed", new SocialFeedViewModel { Data = response });
+
+			var response = await _client.GetAsync(url);
+			dynamic content = await response.Content.ReadAsJArrayAsync();
+			return View("SocialFeed", new SocialFeedViewModel { Data = content });
 		}
 
 		/// <summary>

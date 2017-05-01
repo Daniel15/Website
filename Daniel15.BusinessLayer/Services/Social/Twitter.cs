@@ -1,8 +1,6 @@
-﻿using System;
-using System.Net;
+﻿using System.Threading.Tasks;
 using Daniel15.Data.Entities.Blog;
 using Microsoft.AspNetCore.Http.Extensions;
-using Newtonsoft.Json.Linq;
 
 namespace Daniel15.BusinessLayer.Services.Social
 {
@@ -53,11 +51,11 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Share count for this post</returns>
-		public int GetShareCount(PostModel post, string url, string shortUrl)
+		public Task<int> GetShareCountAsync(PostModel post, string url, string shortUrl)
 		{
 			// No longer supported :(
 			// https://blog.twitter.com/2015/hard-decisions-for-a-sustainable-platform
-			return 0;
+			return Task.FromResult(0);
 		}
 		#endregion
 	}

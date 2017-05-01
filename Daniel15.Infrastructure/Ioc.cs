@@ -1,4 +1,5 @@
-﻿using Daniel15.BusinessLayer;
+﻿using System.Net.Http;
+using Daniel15.BusinessLayer;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.CodeRepositories;
 using Daniel15.BusinessLayer.Services.Social;
@@ -32,6 +33,11 @@ namespace Daniel15.Infrastructure
 			services.AddSingleton<Reddit>();
 			services.AddSingleton<Twitter>();
 			services.AddSingleton<Linkedin>();
+
+			// HttpClient should be reused wherever possible.
+			// https://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/
+			// https://stackoverflow.com/questions/11178220/is-httpclient-safe-to-use-concurrently
+			services.AddSingleton<HttpClient>();
 
 			InitializeDatabase(services, config);
 		}

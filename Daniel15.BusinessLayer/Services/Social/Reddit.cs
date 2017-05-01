@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Daniel15.Data.Entities.Blog;
+using Daniel15.Shared.Extensions;
 using Microsoft.AspNetCore.Http.Extensions;
-using Newtonsoft.Json.Linq;
 
 namespace Daniel15.BusinessLayer.Services.Social
 {
@@ -20,6 +21,8 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// </summary>
 		private const string API_URL = "http://www.reddit.com/api/info.json";
 
+		private readonly HttpClient _client;
+
 		/// <summary>
 		/// Gets the internal ID of this social network
 		/// </summary>
@@ -29,6 +32,11 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// Gets the friendly name of this social network
 		/// </summary>
 		public string Name => "Reddit";
+
+		public Reddit(HttpClient client)
+		{
+			_client = client;
+		}
 
 		#region Implementation of ISocialShare
 		/// <summary>
@@ -54,7 +62,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Share count for this post</returns>
-		public int GetShareCount(PostModel post, string url, string shortUrl)
+		public async Task<int> GetShareCountAsync(PostModel post, string url, string shortUrl)
 		{
 			var total = 0;
 			var apiUrl = API_URL + new QueryBuilder
@@ -62,21 +70,17 @@ namespace Daniel15.BusinessLayer.Services.Social
 				{"url", url}
 			};
 
-			using (var client = new WebClient())
+			dynamic data = await _client.GetDynamicJsonAsync(apiUrl);
+			if (data == null || data.data == null || data.data.children == null)
+				return 0;
+
+			// Need to add up the points in every submission of this URL
+			foreach (var child in data.data.children)
 			{
-				var rawData = client.DownloadString(apiUrl);
-				dynamic data = JObject.Parse(rawData);
-				if (data == null || data.data == null || data.data.children == null)
-					return 0;
-
-				// Need to add up the points in every submission of this URL
-				foreach (var child in data.data.children)
-				{
-					total += Convert.ToInt32(child.data.score);
-				}
-
-				return total;
+				total += Convert.ToInt32(child.data.score);
 			}
+
+			return total;
 		}
 		#endregion
 	}

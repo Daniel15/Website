@@ -1,3 +1,5 @@
+﻿using System.Threading.Tasks;
+
 namespace Daniel15.BusinessLayer.Services
 {
 	/// <summary>
@@ -8,6 +10,6 @@ namespace Daniel15.BusinessLayer.Services
 		/// <summary>
 		/// Synchronise all comments on Disqus into the local database
 		/// </summary>
-		void Sync();
+		Task SyncAsync();
 	}
 }

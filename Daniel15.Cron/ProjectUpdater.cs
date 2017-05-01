@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Daniel15.BusinessLayer;
 using Daniel15.Data.Repositories;
 
@@ -26,13 +27,14 @@ namespace Daniel15.Cron
 		/// <summary>
 		/// Runs the project updater task. Updates cached information for all projects in the database.
 		/// </summary>
-		public void Run()
+		public async Task RunAsync()
 		{
 			var projects = _projectRepository.All();
 			foreach (var project in projects)
 			{
 				Console.Write("Updating '{0}'... ", project.Name);
-				_projectUpdater.UpdateProject(project);
+				// TODO: This can be parallelised
+				await _projectUpdater.UpdateProjectAsync(project);
 				Console.WriteLine("Done.");
 			}
 		}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Xml.Linq;
 using Daniel15.Data.Entities.Blog;
 using Microsoft.AspNetCore.Http.Extensions;
@@ -57,7 +58,7 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Share count for this post</returns>
-		public int GetShareCount(PostModel post, string url, string shortUrl)
+		public Task<int> GetShareCountAsync(PostModel post, string url, string shortUrl)
 		{
 			// Get the count using FQL. Returns *both* like count and share count.
 			var query = string.Format(LINK_QUERY, url);
@@ -71,10 +72,10 @@ namespace Daniel15.BusinessLayer.Services.Social
 
 			var linkStat = xml.Root?.Element(ns + "link_stat");
 			if (linkStat == null)
-				return 0;
+				return Task.FromResult(0);
 
 			var totalCount = linkStat.Element(ns + "total_count");
-			return totalCount == null ? 0 : Convert.ToInt32(totalCount.Value);
+			return Task.FromResult(totalCount == null ? 0 : Convert.ToInt32(totalCount.Value));
 		}
 		#endregion
 	}

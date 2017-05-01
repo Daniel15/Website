@@ -1,4 +1,5 @@
-﻿using Daniel15.Data.Entities.Projects;
+﻿using System.Threading.Tasks;
+using Daniel15.Data.Entities.Projects;
 
 namespace Daniel15.BusinessLayer
 {
@@ -11,6 +12,6 @@ namespace Daniel15.BusinessLayer
 		/// Update cached details for the specified project
 		/// </summary>
 		/// <param name="project">Project to update</param>
-		void UpdateProject(ProjectModel project);
+		Task UpdateProjectAsync(ProjectModel project);
 	}
 }

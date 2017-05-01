@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Net;
-using System.Text;
-using Newtonsoft.Json.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Daniel15.Shared.Extensions;
 
 namespace Daniel15.BusinessLayer.Services.CodeRepositories
 {
@@ -16,6 +16,13 @@ namespace Daniel15.BusinessLayer.Services.CodeRepositories
 		/// URL to the Github API endpoint to get repository details
 		/// </summary>
 		private const string API_REPO = API_BASE + "repos/{0}/{1}";
+
+		private readonly HttpClient _client;
+
+		public GithubCodeRepository(HttpClient client)
+		{
+			_client = client;
+		}
 
 		/// <summary>
 		/// Determines whether this implementation can handle the specified repository
@@ -44,7 +51,7 @@ namespace Daniel15.BusinessLayer.Services.CodeRepositories
 		/// </summary>
 		/// <param name="repositoryUrl">URL to the repository</param>
 		/// <returns>Information on the repository</returns>
-		public RepositoryInfo GetRepositoryInfo(Uri repositoryUrl)
+		public async Task<RepositoryInfo> GetRepositoryInfoAsync(Uri repositoryUrl)
 		{
 			// Split repository URI into username and repository
 			// Also trim the ".git" off the end.
@@ -54,21 +61,20 @@ namespace Daniel15.BusinessLayer.Services.CodeRepositories
 
 			// Get repository details via API
 			var apiUrl = string.Format(API_REPO, user, repos);
-			using (var client = new WebClient())
+
+			var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
+			request.Headers.Add("User-Agent", "Daniel15-Website/1.0 (http://dan.cx/)");
+
+			var rawResponse = await _client.SendAsync(request);
+			dynamic response = await rawResponse.Content.ReadAsDynamicJsonAsync();
+			return new RepositoryInfo
 			{
-				client.Encoding = Encoding.UTF8;
-				client.Headers["User-Agent"] = "Daniel15-Website/1.0 (http://dan.cx/)";
-				var responseText = client.DownloadString(apiUrl);
-				dynamic response = JObject.Parse(responseText);
-				return new RepositoryInfo
-				{
-					Created = response.created_at,
-					Updated = response.updated_at,
-					Forks = response.forks,
-					Watchers = response.watchers,
-					OpenIssues = response.open_issues,
-				};
-			}
+				Created = response.created_at,
+				Updated = response.updated_at,
+				Forks = response.forks,
+				Watchers = response.watchers,
+				OpenIssues = response.open_issues,
+			};
 		}
 	}
 }

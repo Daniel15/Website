@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Net;
-using System.Text;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.CodeRepositories;
 using Daniel15.Data.Entities.Projects;
@@ -26,31 +27,38 @@ namespace Daniel15.BusinessLayer
 		/// </summary>
 		private readonly ICodeRepositoryManager _repositoryManager;
 
+		private readonly HttpClient _client;
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ProjectCacheUpdater" /> class.
 		/// </summary>
 		/// <param name="markdown">The markdown processor</param>
 		/// <param name="projectRepository">The project repository.</param>
 		/// <param name="repositoryManager">The code repository manager</param>
-		public ProjectCacheUpdater(IMarkdownProcessor markdown, IProjectRepository projectRepository, ICodeRepositoryManager repositoryManager)
+		/// <param name="client">HTTP client for loading readmes and other network content</param>
+		public ProjectCacheUpdater(IMarkdownProcessor markdown, IProjectRepository projectRepository, ICodeRepositoryManager repositoryManager, HttpClient client)
 		{
 			_markdown = markdown;
 			_projectRepository = projectRepository;
 			_repositoryManager = repositoryManager;
+			_client = client;
 		}
 
 		/// <summary>
 		/// Update cached details for the specified project
 		/// </summary>
 		/// <param name="project">Project to update</param>
-		public void UpdateProject(ProjectModel project)
+		public async Task UpdateProjectAsync(ProjectModel project)
 		{
-			bool dirty = false;
-			dirty |= UpdateReadme(project);
-			dirty |= UpdateRepository(project);
+			var updates = await Task.WhenAll(
+				UpdateReadmeAsync(project),
+				UpdateRepositoryAsync(project)
+			);
 
-			if (dirty)
+			if (updates.Any(x => x))
+			{
 				_projectRepository.Save(project);
+			}
 		}
 
 		/// <summary>
@@ -58,31 +66,27 @@ namespace Daniel15.BusinessLayer
 		/// </summary>
 		/// <param name="project">The project to update</param>
 		/// <returns><c>true</c> if any data was updated</returns>
-		private bool UpdateReadme(ProjectModel project)
+		private async Task<bool> UpdateReadmeAsync(ProjectModel project)
 		{
 			if (string.IsNullOrWhiteSpace(project.ReadmeUrl))
 				return false;
 
-			using (var client = new WebClient())
-			{
-				client.Encoding = Encoding.UTF8;
-				var readmeSource = client.DownloadString(project.ReadmeUrl);
-				project.Readme = _markdown.Parse(readmeSource);
-				return true;
-			}
+			var readmeSource = await _client.GetStringAsync(project.ReadmeUrl);
+			project.Readme = _markdown.Parse(readmeSource);
+			return true;
 		}
 
 		/// <summary>
 		/// Updates the repository information for the specified project
 		/// </summary>
 		/// <param name="project">The project to update</param>
-		private bool UpdateRepository(ProjectModel project)
+		private async Task<bool> UpdateRepositoryAsync(ProjectModel project)
 		{
 			if (string.IsNullOrWhiteSpace(project.RepositoryUrl))
 				return false;
 
 			var uri = new Uri(project.RepositoryUrl);
-			var info = _repositoryManager.GetRepositoryInfo(uri);
+			var info = await _repositoryManager.GetRepositoryInfoAsync(uri);
 			// TODO: Use AutoMapper here
 			project.Created = info.Created;
 			project.Updated = info.Updated;

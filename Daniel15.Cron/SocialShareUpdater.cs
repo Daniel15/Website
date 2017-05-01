@@ -2,9 +2,12 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
+using Daniel15.Shared.Extensions;
 using Newtonsoft.Json;
 
 namespace Daniel15.Cron
@@ -16,27 +19,29 @@ namespace Daniel15.Cron
 	{
 		private readonly ISocialManager _socialManager;
 		private readonly IBlogRepository _blogRepository;
+		private readonly HttpClient _client;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SocialShareUpdater" /> class.
 		/// </summary>
 		/// <param name="socialManager">The social manager.</param>
 		/// <param name="blogRepository">The blog repository.</param>
-		public SocialShareUpdater(ISocialManager socialManager, IBlogRepository blogRepository)
+		public SocialShareUpdater(ISocialManager socialManager, IBlogRepository blogRepository, HttpClient client)
 		{
 			_socialManager = socialManager;
 			_blogRepository = blogRepository;
+			_client = client;
 		}
 
 		/// <summary>
 		/// Updates the social media sharing counts of all blog posts
 		/// </summary>
-		public void Run()
+		public async Task RunAsync()
 		{
 			var posts = _blogRepository.LatestPosts(10000);
 			foreach (var post in posts)
 			{
-				UpdatePost(post);
+				await UpdatePostAsync(post);
 			}
 		}
 
@@ -44,12 +49,16 @@ namespace Daniel15.Cron
 		/// Updates the social media sharing counts of the specified post
 		/// </summary>
 		/// <param name="post">Post to update</param>
-		private void UpdatePost(PostModel post)
+		private async Task UpdatePostAsync(PostModel post)
 		{
 			// TODO: Move this elsewhere (Business Layer)
-			var urls = GetBlogUrl(post);
-			var counts = _socialManager.ShareCounts(post, urls.Url, urls.ShortUrl).ToDictionary(x => x.Key.Id, x => x.Value);
-			post.ShareCounts = counts;
+			var urls = await GetBlogUrlAsync(post);
+			var counts = await _socialManager.ShareCountsAsync(
+				post, 
+				urls.Url, 
+				urls.ShortUrl
+			);
+			post.ShareCounts = counts.ToDictionary(x => x.Key.Id, x => x.Value);
 			_blogRepository.Save(post);
 
 			var total = counts.Sum(x => x.Value);
@@ -61,15 +70,11 @@ namespace Daniel15.Cron
 		/// </summary>
 		/// <param name="post">Blog post to get URL of</param>
 		/// <returns>URL of the blog post</returns>
-		private UrlResponse GetBlogUrl(PostModel post)
+		private async Task<UrlResponse> GetBlogUrlAsync(PostModel post)
 		{
 			// TODO: Remove hard-coded URL from here
 			var urlApi = $"https://dan.cx/api/posts/{post.Id}/url";
-			using (var client = new WebClient())
-			{
-				var rawResponse = client.DownloadString(urlApi);
-				return JsonConvert.DeserializeObject<UrlResponse>(rawResponse);
-			}
+			return await _client.GetJsonAsync<UrlResponse>(urlApi);
 			
 		}
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Daniel15.Data.Entities.Blog;
 
 namespace Daniel15.BusinessLayer.Services.Social
@@ -24,6 +25,6 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <param name="url">Full URL to this post</param>
 		/// <param name="shortUrl">Short URL to this post</param>
 		/// <returns>Share count for this post</returns>
-		IDictionary<ISocialNetwork, int> ShareCounts(PostModel post, string url, string shortUrl);
+		Task<IDictionary<ISocialNetwork, int>> ShareCountsAsync(PostModel post, string url, string shortUrl);
 	}
 }
