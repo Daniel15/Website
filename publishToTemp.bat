@@ -3,9 +3,9 @@
 ::: for Windows, then building again for Debian, then copying across the view assembly.
 dotnet restore
 dotnet publish Daniel15.Web -o "C:\TempPublish\site_win" -c Release
-dotnet restore -r debian-x64
-dotnet publish Daniel15.Web -o "C:\TempPublish\site" -c Release -r debian-x64 /p:MvcRazorCompileOnPublish=false
-dotnet publish Daniel15.Cron -o "C:\TempPublish\cron" -c Release -r debian-x64
+dotnet restore -r debian.8-x64
+dotnet publish Daniel15.Web -o "C:\TempPublish\site" -c Release -r debian.8-x64 /p:MvcRazorCompileOnPublish=false
+dotnet publish Daniel15.Cron -o "C:\TempPublish\cron" -c Release -r debian.8-x64
 
 copy c:\TempPublish\site_win\Daniel15.Web.PrecompiledViews.dll c:\TempPublish\site\
 rd /s /q c:\TempPublish\site\Views
