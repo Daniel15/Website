@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using Daniel15.Shared.Configuration;
-using Daniel15.Shared.Extensions;
 using Daniel15.Web.Areas.Gallery.Models;
 using Daniel15.Web.Areas.Gallery.ViewModels;
+using Daniel15.Web.Extensions;
+using ImageSharp;
+using ImageSharp.Processing;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Areas.Gallery.Controllers
@@ -149,15 +149,20 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 			{
 				System.IO.Directory.CreateDirectory(Path.GetDirectoryName(cachePath));
 
-				using (var sourceImg = new Bitmap(fullPath))
-				using (var thumb = sourceImg.GenerateThumbnail(MAX_THUMBNAIL_SIZE))
+				using (var sourceImg = Image.Load(fullPath))
 				{
-					thumb.Save(cachePath, ImageFormat.Png);
-				}	
+					var resizedImage = sourceImg.Resize(new ResizeOptions
+					{
+						Size = new Size(MAX_THUMBNAIL_SIZE, MAX_THUMBNAIL_SIZE),
+						Mode = ResizeMode.Max,
+						Sampler = new Lanczos3Resampler(),
+					});
+					resizedImage.Save(cachePath);
+					return resizedImage.ToActionResult();
+				}
 			}
-
-			// Redirect back to the thumbnail URL; Nginx will serve it.
-			return Redirect(ThumbnailUrl(gallery, path) + "?generated");
+			var mimeType = "image/" + Path.GetExtension(path).TrimStart('.').ToLowerInvariant();
+			return PhysicalFile(cachePath, mimeType);
 		}
 
 		/// <summary>
