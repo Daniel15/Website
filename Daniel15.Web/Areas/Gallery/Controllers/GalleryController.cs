@@ -6,9 +6,10 @@ using Daniel15.Shared.Configuration;
 using Daniel15.Web.Areas.Gallery.Models;
 using Daniel15.Web.Areas.Gallery.ViewModels;
 using Daniel15.Web.Extensions;
-using ImageSharp;
-using ImageSharp.Processing;
 using Microsoft.AspNetCore.Mvc;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
+using SixLabors.Primitives;
 
 namespace Daniel15.Web.Areas.Gallery.Controllers
 {
@@ -149,16 +150,16 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 			{
 				System.IO.Directory.CreateDirectory(Path.GetDirectoryName(cachePath));
 
-				using (var sourceImg = Image.Load(fullPath))
+				using (var img = Image.Load(fullPath))
 				{
-					var resizedImage = sourceImg.Resize(new ResizeOptions
+					img.Mutate(x => x.Resize(new ResizeOptions
 					{
 						Size = new Size(MAX_THUMBNAIL_SIZE, MAX_THUMBNAIL_SIZE),
 						Mode = ResizeMode.Max,
 						Sampler = new Lanczos3Resampler(),
-					});
-					resizedImage.Save(cachePath);
-					return resizedImage.ToActionResult();
+					}));
+					img.Save(cachePath);
+					return img.ToActionResult();
 				}
 			}
 			var mimeType = "image/" + Path.GetExtension(path).TrimStart('.').ToLowerInvariant();

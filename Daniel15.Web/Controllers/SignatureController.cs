@@ -3,10 +3,9 @@ using System.Linq;
 using System.Numerics;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.Extensions;
-using ImageSharp;
-using ImageSharp.PixelFormats;
 using Microsoft.AspNetCore.Mvc;
 using SixLabors.Fonts;
+using SixLabors.ImageSharp;
 
 namespace Daniel15.Web.Controllers
 {
@@ -50,14 +49,13 @@ namespace Daniel15.Web.Controllers
 		/// <returns>PNG image</returns>
 		private ActionResult RenderText(string text)
 		{
-			var family = FontCollection.SystemFonts.Find("Segoe UI");
+			var family = SystemFonts.Find("Segoe UI");
 			var font = new Font(family, 13);
-			var measurer = new TextMeasurer();
-			var size = measurer.MeasureText(text, font, 72);
+			var size = TextMeasurer.Measure(text, new RendererOptions(font, 72));
 
-			using (var image = new Image((int)Math.Ceiling(size.Width) + PADDING, (int)Math.Ceiling(size.Height) + PADDING))
+			using (var image = new Image<Rgba32>((int)Math.Ceiling(size.Width) + PADDING, (int)Math.Ceiling(size.Height) + PADDING))
 			{
-				image.DrawText(text, font, Rgba32.Black, new Vector2(0, 0));
+				image.Mutate(x => x.DrawText(text, font, Rgba32.Black, new Vector2(0, 0)));
 				return image.ToActionResult();
 			}
 		}

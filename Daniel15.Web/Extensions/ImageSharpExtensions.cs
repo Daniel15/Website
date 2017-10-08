@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using ImageSharp;
-using ImageSharp.PixelFormats;
 using Microsoft.AspNetCore.Mvc;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
 
 namespace Daniel15.Web.Extensions
 {

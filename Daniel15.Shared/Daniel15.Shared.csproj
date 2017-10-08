@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ImageSharp" Version="1.0.0-alpha8-00061" />
-    <PackageReference Include="ImageSharp.Drawing" Version="1.0.0-alpha8-00061" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0001" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0001" />
     <PackageReference Include="System.Net.Http" Version="4.3.1" />
 	<!--https://github.com/JimBobSquarePants/ImageSharp/issues/211-->
 	<PackageReference Include="runtime.native.System.IO.Compression" Version="4.3.0" />
