@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>netstandard20</TargetFramework>
     <AssemblyName>Daniel15.BusinessLayer</AssemblyName>
     <PackageId>Daniel15.BusinessLayer</PackageId>
   </PropertyGroup>
