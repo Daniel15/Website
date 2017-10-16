@@ -1,4 +1,4 @@
-﻿@model Daniel15.Web.ViewModels.Shared.PaginationModel
+@model Daniel15.Web.ViewModels.Shared.PaginationModel
 
 @* Don't even show anything if there's only one page *@
 @if (Model.TotalPages == 1)
@@ -17,15 +17,15 @@
 		<a href="@Model.UrlGenerator(Model.CurrentPage - 1)" rel="prev">Previous</a>
 	}
 	
-	@for (var page = 1; page <= Model.TotalPages; page++)
+	@for (var pageNum = 1; pageNum <= Model.TotalPages; pageNum++)
 	{
-		if (page == Model.CurrentPage)
+		if (pageNum == Model.CurrentPage)
 		{
-			<strong>@page</strong>
+			<strong>@pageNum</strong>
 		}
 		else
 		{
-			<a href="@Model.UrlGenerator(page)">@page</a>
+			<a href="@Model.UrlGenerator(pageNum)">@pageNum</a>
 		}	
 	}
 	

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Daniel15.BusinessLayer.Services;
@@ -52,11 +52,11 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="posts">Posts to be displayed</param>
 		/// <param name="count">Number of posts being displayed</param>
-		/// <param name="page">Page number of the current page</param>
+		/// <param name="pageNum">Page number of the current pageNum</param>
 		/// <param name="viewName">Name of the view to render</param>
 		/// <param name="viewModel">View model to pass to the view</param>
 		/// <returns>Post listing</returns>
-		private ActionResult Listing(IEnumerable<PostModel> posts, int count, int page, string viewName = null, ListingViewModel viewModel = null)
+		private ActionResult Listing(IEnumerable<PostModel> posts, int count, int pageNum, string viewName = null, ListingViewModel viewModel = null)
 		{
 			if (viewName == null)
 				viewName = "Index";
@@ -66,7 +66,7 @@ namespace Daniel15.Web.Controllers
 
 			var pages = (int)Math.Ceiling((double)count / ITEMS_PER_PAGE);
 
-			if (page > pages)
+			if (pageNum > pages)
 				return NotFound();
 
 			viewModel.Posts = posts.Select(post => new PostViewModel
@@ -76,7 +76,7 @@ namespace Daniel15.Web.Controllers
 				SocialNetworks = GetSocialNetworks(post)
 			});
 			viewModel.TotalCount = count;
-			viewModel.Page = page;
+			viewModel.Page = pageNum;
 			viewModel.TotalPages = pages;
 			return View(viewName, viewModel);
 		}
@@ -86,27 +86,27 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		[ResponseCache(Location = ResponseCacheLocation.Any, Duration = ONE_HOUR)]
 		[Route("blog", Order = 1, Name = "BlogHome")]
-		[Route("blog/page-{page:int}", Order = 2, Name= "BlogHomePage")]
-		public virtual ActionResult Index(int page = 1)
+		[Route("blog/page-{pageNum:int}", Order = 2, Name= "BlogHomePage")]
+		public virtual ActionResult Index(int pageNum = 1)
 		{
 			var count = _blogRepository.PublishedCount();
-			var posts = _blogRepository.LatestPosts(ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
-			return Listing(posts, count, page, "Index");
+			var posts = _blogRepository.LatestPosts(ITEMS_PER_PAGE, (pageNum - 1) * ITEMS_PER_PAGE);
+			return Listing(posts, count, pageNum, "Index");
 		}
 
 		/// <summary>
 		/// Viewing a category listing
 		/// </summary>
 		/// <param name="slug">Category slug</param>
-		/// <param name="page">Page number to view</param>
+		/// <param name="pageNum">Page number to view</param>
 		/// <param name="parentSlug">Slug of the category's parent</param>
 		/// <returns>Posts in this category</returns>
 		/// <remarks>These must be ordered AFTER the RSS rules in FeedController!</remarks>
 		[Route("category/{slug}", Order = 5, Name = "BlogCategory")]
-		[Route("category/{slug}/page-{page:int}", Order = 6, Name = "BlogCategoryPage")]
+		[Route("category/{slug}/page-{pageNum:int}", Order = 6, Name = "BlogCategoryPage")]
 		[Route("category/{parentSlug}/{slug}", Order = 7, Name = "BlogSubCategory")]
-		[Route("category/{parentSlug}/{slug}/page-{page:int}", Order = 8, Name = "BlogSubCategoryPage")]
-		public virtual ActionResult Category(string slug, int page = 1, string parentSlug = null)
+		[Route("category/{parentSlug}/{slug}/page-{pageNum:int}", Order = 8, Name = "BlogSubCategoryPage")]
+		public virtual ActionResult Category(string slug, int pageNum = 1, string parentSlug = null)
 		{
 			CategoryModel category;
 			try
@@ -122,12 +122,12 @@ namespace Daniel15.Web.Controllers
 			// If the category has a parent category, ensure it's in the URL
 			if (category.Parent != null && string.IsNullOrEmpty(parentSlug))
 			{
-				return RedirectPermanent(Url.BlogCategory(category, page));
+				return RedirectPermanent(Url.BlogCategory(category, pageNum));
 			}
 
 			var count = _blogRepository.PublishedCount(category);
-			var posts = _blogRepository.LatestPosts(category, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
-			return Listing(posts, count, page, "Category", new CategoryListingViewModel
+			var posts = _blogRepository.LatestPosts(category, ITEMS_PER_PAGE, (pageNum - 1) * ITEMS_PER_PAGE);
+			return Listing(posts, count, pageNum, "Category", new CategoryListingViewModel
 			{
 				Category = category,
 				RssUrl = Url.Action("BlogCategory", "Feed", new
@@ -142,11 +142,11 @@ namespace Daniel15.Web.Controllers
 		/// Viewing a listing of all posts tagged by a particular tag
 		/// </summary>
 		/// <param name="slug">Tag slug</param>
-		/// <param name="page">Page number to view</param>
+		/// <param name="pageNum">Page number to view</param>
 		/// <returns>Posts tagged with this tag</returns>
 		[Route("tag/{slug}", Order = 1, Name = "BlogTag")]
-		[Route("tag/{slug}/page-{page:int}", Order = 2, Name = "BlogTagPage")]
-		public virtual ActionResult Tag(string slug, int page = 1)
+		[Route("tag/{slug}/page-{pageNum:int}", Order = 2, Name = "BlogTagPage")]
+		public virtual ActionResult Tag(string slug, int pageNum = 1)
 		{
 			TagModel tag;
 			try
@@ -160,8 +160,8 @@ namespace Daniel15.Web.Controllers
 			}
 
 			var count = _blogRepository.PublishedCount(tag);
-			var posts = _blogRepository.LatestPosts(tag, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
-			return Listing(posts, count, page, "Tag", new TagListingViewModel { Tag = tag });
+			var posts = _blogRepository.LatestPosts(tag, ITEMS_PER_PAGE, (pageNum - 1) * ITEMS_PER_PAGE);
+			return Listing(posts, count, pageNum, "Tag", new TagListingViewModel { Tag = tag });
 		}
 
 		/// <summary>
@@ -169,14 +169,14 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="year">Year to get posts for</param>
 		/// <param name="month">Month to get posts for</param>
-		/// <param name="page">Page number to view</param>
+		/// <param name="pageNum">Page number to view</param>
 		/// <returns>Posts from this month</returns>
 		[Route("{year:int:length(4)}/{month:int:length(2)}")]
-		public virtual ActionResult Archive(int year, int month, int page = 1)
+		public virtual ActionResult Archive(int year, int month, int pageNum = 1)
 		{
 			var count = _blogRepository.PublishedCountForMonth(year, month);
-			var posts = _blogRepository.LatestPostsForMonth(year, month, ITEMS_PER_PAGE, (page - 1) * ITEMS_PER_PAGE);
-			return Listing(posts, count, page, "Index");
+			var posts = _blogRepository.LatestPostsForMonth(year, month, ITEMS_PER_PAGE, (pageNum - 1) * ITEMS_PER_PAGE);
+			return Listing(posts, count, pageNum, "Index");
 		}
 
 		/// <summary>

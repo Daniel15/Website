@@ -1,4 +1,4 @@
-﻿using Daniel15.Data.Entities.Blog;
+using Daniel15.Data.Entities.Blog;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Extensions
@@ -53,13 +53,13 @@ namespace Daniel15.Web.Extensions
 		/// Gets the URL to the index of the blog
 		/// </summary>
 		/// <param name="urlHelper">The URL helper</param>
-		/// <param name="page">Page number to link to</param>
+		/// <param name="pageNum">Page number to link to</param>
 		/// <returns>The URL</returns>
-		public static string BlogIndex(this IUrlHelper urlHelper, int page = 1)
+		public static string BlogIndex(this IUrlHelper urlHelper, int pageNum = 1)
 		{
-			return page == 1 
+			return pageNum == 1 
 				? urlHelper.RouteUrl("BlogHome") 
-				: urlHelper.RouteUrl("BlogHomePage", new { page });
+				: urlHelper.RouteUrl("BlogHomePage", new { pageNum });
 		}
 		
 		/// <summary>
@@ -67,11 +67,11 @@ namespace Daniel15.Web.Extensions
 		/// </summary>
 		/// <param name="urlHelper">The URL helper</param>
 		/// <param name="category">Category to link to</param>
-		/// <param name="page">Page number to link to</param>
+		/// <param name="pageNum">Page number to link to</param>
 		/// <returns>The URL</returns>
-		public static string BlogCategory(this IUrlHelper urlHelper, CategoryModel category, int page = 1)
+		public static string BlogCategory(this IUrlHelper urlHelper, CategoryModel category, int pageNum = 1)
 		{
-			return BlogCategory(urlHelper, "Category", category.Slug, category.Parent?.Slug, page);
+			return BlogCategory(urlHelper, "Category", category.Slug, category.Parent?.Slug, pageNum);
 		}
 
 		/// <summary>
@@ -90,25 +90,25 @@ namespace Daniel15.Web.Extensions
 		/// </summary>
 		/// <param name="urlHelper">The URL helper</param>
 		/// <param name="parentSlug">Slug of the parent</param>
-		/// <param name="page">Page number to link to</param>
+		/// <param name="pageNum">Page number to link to</param>
 		/// <param name="routeType">Route type to link to (eg. "Category" or "CategoryFeed")</param>
 		/// <param name="slug">Slug of the category</param>
 		/// <returns>The URL</returns>
-		public static string BlogCategory(this IUrlHelper urlHelper, string routeType, string slug, string parentSlug, int page = 1)
+		public static string BlogCategory(this IUrlHelper urlHelper, string routeType, string slug, string parentSlug, int pageNum = 1)
 		{
 			// It's safer to explicitly use the correct route here, instead of relying on the ASP.NET 
 			// routing engine to choose it.
 			if (string.IsNullOrEmpty(parentSlug))
 			{
-				return page == 1
+				return pageNum == 1
 					? urlHelper.RouteUrl("Blog" + routeType, new { slug })
-					: urlHelper.RouteUrl("Blog" + routeType + "Page", new { slug, page });
+					: urlHelper.RouteUrl("Blog" + routeType + "Page", new { slug, pageNum });
 			}
 			else
 			{
-				return page == 1
+				return pageNum == 1
 					? urlHelper.RouteUrl("BlogSub" + routeType, new { slug, parentSlug })
-					: urlHelper.RouteUrl("BlogSub" + routeType + "Page", new { slug, parentSlug, page });
+					: urlHelper.RouteUrl("BlogSub" + routeType + "Page", new { slug, parentSlug, pageNum });
 			}
 		}
 
@@ -117,11 +117,11 @@ namespace Daniel15.Web.Extensions
 		/// </summary>
 		/// <param name="urlHelper">The URL helper</param>
 		/// <param name="tag">Tag to link to</param>
-		/// <param name="page">Page number to link to</param>
+		/// <param name="pageNum">Page number to link to</param>
 		/// <returns>The URL</returns>
-		public static string BlogTag(this IUrlHelper urlHelper, TagModel tag, int page = 1)
+		public static string BlogTag(this IUrlHelper urlHelper, TagModel tag, int pageNum = 1)
 		{
-			return urlHelper.BlogTag(tag.Slug, page);
+			return urlHelper.BlogTag(tag.Slug, pageNum);
 		}
 
 		/// <summary>
@@ -129,13 +129,13 @@ namespace Daniel15.Web.Extensions
 		/// </summary>
 		/// <param name="urlHelper">The URL helper</param>
 		/// <param name="slug">Slug of the tag</param>
-		/// <param name="page">Page number to link to</param>
+		/// <param name="pageNum">Page number to link to</param>
 		/// <returns>The URL</returns>
-		public static string BlogTag(this IUrlHelper urlHelper, string slug, int page = 1)
+		public static string BlogTag(this IUrlHelper urlHelper, string slug, int pageNum = 1)
 		{
-			return page == 1
+			return pageNum == 1
 				? urlHelper.RouteUrl("BlogTag", new { slug })
-				: urlHelper.RouteUrl("BlogTagPage", new { slug, page });
+				: urlHelper.RouteUrl("BlogTagPage", new { slug, pageNum });
 		}
 	}
 }
