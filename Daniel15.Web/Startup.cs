@@ -41,6 +41,9 @@ namespace Daniel15.Web
 
 			// Temporary workaround for https://github.com/aspnet/Routing/issues/391
 			services.Replace(ServiceDescriptor.Transient<IApplicationModelProvider, BugfixApplicationModelProvider>());
+
+			// For https://github.com/reactjs/React.NET/issues/433
+			return services.BuildServiceProvider();
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
