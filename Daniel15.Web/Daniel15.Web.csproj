@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Daniel15.SimpleIdentity" Version="1.2.0" />
+    <PackageReference Include="Daniel15.SimpleIdentity" Version="2.0.0" />
     <PackageReference Include="React.AspNet" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.ViewCompilation" Version="2.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="2.0.0" />

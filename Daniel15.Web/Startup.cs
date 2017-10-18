@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
@@ -76,7 +77,7 @@ namespace Daniel15.Web
 			});
 
 			app.UseStaticFiles();
-			app.UseIdentity();
+			app.UseAuthentication();
 			app.UseSession();
 			// All real routes are defined using attributes.
 			app.UseMvcWithDefaultRoute();
