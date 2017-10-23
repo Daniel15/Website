@@ -1,16 +1,16 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
-using Daniel15.Web.Extensions;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
-using Microsoft.AspNetCore.Server.Kestrel;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -21,20 +21,14 @@ namespace Daniel15.Web
 {
 	public class Startup
 	{
-		public Startup(IHostingEnvironment env)
+		public Startup(IConfiguration configuration)
 		{
-			var builder = new ConfigurationBuilder()
-				.SetBasePath(env.ContentRootPath)
-				.AddJsonFile("config.json", optional: false, reloadOnChange: true)
-				.AddJsonFile("config.generated.json", optional: true)
-				.AddJsonFile($"config.{env.EnvironmentName}.json", optional: true)
-				.AddEnvironmentVariables();
-			Configuration = builder.Build();
+			Configuration = configuration;
 		}
 
-		public IConfigurationRoot Configuration { get; set; }
+		public IConfiguration Configuration { get; set; }
 
-		public void ConfigureServices(IServiceCollection services)
+		public IServiceProvider ConfigureServices(IServiceCollection services)
 		{
 			services.AddIdentity<SimpleIdentityUser, SimpleIdentityRole>()
 				.AddSimpleIdentity<SimpleIdentityUser>(Configuration.GetSection("Auth"))
@@ -48,6 +42,9 @@ namespace Daniel15.Web
 
 			// Temporary workaround for https://github.com/aspnet/Routing/issues/391
 			services.Replace(ServiceDescriptor.Transient<IApplicationModelProvider, BugfixApplicationModelProvider>());
+
+			// For https://github.com/reactjs/React.NET/issues/433
+			return services.BuildServiceProvider();
 		}
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -80,7 +77,7 @@ namespace Daniel15.Web
 			});
 
 			app.UseStaticFiles();
-			app.UseIdentity();
+			app.UseAuthentication();
 			app.UseSession();
 			// All real routes are defined using attributes.
 			app.UseMvcWithDefaultRoute();
@@ -88,17 +85,7 @@ namespace Daniel15.Web
 
 		public static void Main(string[] args)
 		{
-			var config = new ConfigurationBuilder()
-				.AddCommandLine(args)
-				.Build();
-
-			var host = new WebHostBuilder()
-				.UseKestrel()
-				.UseConfiguration(config)
-				.UseContentRoot(Directory.GetCurrentDirectory())
-				.UseIISIntegration()
-				.UseStartup<Startup>()
-				.Build();
+			var host = BuildWebHost(args);
 
 			// Delete UNIX pipe if it exists at startup (eg. previous process crashed before cleaning it up)
 			var addressFeature = host.ServerFeatures.Get<IServerAddressesFeature>();
@@ -110,6 +97,20 @@ namespace Daniel15.Web
 			}
 
 			host.Run();
+		}
+
+		public static IWebHost BuildWebHost(string[] args)
+		{
+			return WebHost.CreateDefaultBuilder(args)
+				.UseStartup<Startup>()
+				.ConfigureAppConfiguration((hostContext, config) =>
+				{
+					config
+						.AddJsonFile("config.json", optional: false, reloadOnChange: true)
+						.AddJsonFile("config.generated.json", optional: true)
+						.AddJsonFile($"config.{hostContext.HostingEnvironment.EnvironmentName}.json", optional: true);
+				})
+				.Build();
 		}
 	}
 }
