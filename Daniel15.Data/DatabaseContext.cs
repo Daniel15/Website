@@ -1,9 +1,7 @@
-﻿using System.Text.RegularExpressions;
-using Daniel15.Data.Entities.Blog;
+﻿using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Entities.Projects;
-using Daniel15.Shared.Extensions;
+using Daniel15.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Daniel15.Data
 {
@@ -12,20 +10,6 @@ namespace Daniel15.Data
 	/// </summary>
 	public class DatabaseContext : DbContext
 	{
-		/// <summary>
-		/// Prefix for boolean fields in the database
-		/// </summary>
-		private const string BOOLEAN_PREFIX = "Is_";
-		/// <summary>
-		/// Prefix for "raw" fields, used when the database representation is different (ie. EF doesn't
-		/// support a particular field format)
-		/// </summary>
-		private const string RAW_PREFIX = "Raw_";
-		/// <summary>
-		/// Regular expression matching segments in a camelcase string
-		/// </summary>
-		private static readonly Regex _camelCaseRegex = new Regex(".[A-Z]");
-
 		/// <summary>
 		/// Creates a new instance of <see cref="DatabaseContext"/>.
 		/// </summary>
@@ -63,7 +47,7 @@ namespace Daniel15.Data
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
-			ConfigureConventions(modelBuilder);
+			modelBuilder.ConfigureConventions();
 			ConfigureManyToMany(modelBuilder);
 
 			// Special cases
@@ -89,31 +73,6 @@ namespace Daniel15.Data
 				.Ignore(x => x.ProjectType)
 				.Ignore(x => x.Technologies);
 			modelBuilder.Entity<ProjectModel>().Property(x => x.RawProjectType).HasColumnName("type");
-		}
-
-		/// <summary>
-		/// Configures standard conventions for names of the database tables and fields
-		/// </summary>
-		/// <param name="modelBuilder">EF model builder</param>
-		private void ConfigureConventions(ModelBuilder modelBuilder)
-		{
-			foreach (var entity in modelBuilder.Model.GetEntityTypes())
-			{
-				// Lowercase table names
-				entity.Relational().TableName = entity.Relational().TableName.ToLowerInvariant();
-
-				foreach (var property in entity.GetProperties())
-				{
-					// Use underscores for column names (eg. "AuthorProfileUrl" -> "author_profile_url"
-					var name = _camelCaseRegex.Replace(
-						property.Name,
-						match => match.Value[0] + "_" + match.Value[1]
-					);
-					// Remove "is" prefix (eg. "IsPrimary" -> "Primary") and "Raw" prefix (eg. "RawTechnologies" => "Technologies")
-					name = name.TrimStart(BOOLEAN_PREFIX).TrimStart(RAW_PREFIX).ToLowerInvariant();
-					property.Relational().ColumnName = name;
-				}
-			}
 		}
 
 		/// <summary>

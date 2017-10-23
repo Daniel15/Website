@@ -6,6 +6,7 @@ using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Repositories.EntityFramework;
+using Daniel15.Data.Zurl;
 using Daniel15.Shared.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -67,6 +68,11 @@ namespace Daniel15.Infrastructure
 			services.AddScoped<IDisqusCommentRepository, DisqusCommentRepository>();
 			services.AddScoped<IProjectRepository, ProjectRepository>();
 			services.AddScoped<IMicroblogRepository, MicroblogRepository>();
+
+			services.AddDbContext<ZurlDatabaseContext>(options => 
+				options.UseMySql(config.GetConnectionString("Zurl"))
+			);
+			services.AddScoped<IUrlRepository, UrlRepository>();
 		}
 	}
 }
