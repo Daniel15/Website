@@ -80,7 +80,7 @@ namespace Daniel15.Web
 			app.UseAuthentication();
 			app.UseSession();
 			// All real routes are defined using attributes.
-			app.UseMvcWithDefaultRoute();
+			app.UseMvc();
 		}
 
 		public static void Main(string[] args)

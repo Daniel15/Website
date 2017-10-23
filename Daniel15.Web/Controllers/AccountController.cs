@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Daniel15.SimpleIdentity;
 using Daniel15.Web.ViewModels.Account;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +9,7 @@ namespace Daniel15.Web.Controllers
 	/// <summary>
 	/// Handles logging in and out
 	/// </summary>
+	[Route("account")]
 	public partial class AccountController : Controller
 	{
 		private readonly SignInManager<SimpleIdentityUser> _signInManager;
@@ -23,6 +24,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <param name="returnUrl">URL to return to after logging in</param>
 		/// <returns></returns>
+		[Route("login")]
 		public virtual ActionResult Login(string returnUrl)
 		{
 			return View(new LoginViewModel { ReturnUrl = returnUrl });
@@ -34,7 +36,7 @@ namespace Daniel15.Web.Controllers
 		/// <param name="model">Login model</param>
 		/// <param name="returnUrl">URL to return to after logging in</param>
 		/// <returns></returns>
-		[HttpPost]
+		[HttpPost("login")]
 		[ValidateAntiForgeryToken]
 		public virtual async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
 		{
