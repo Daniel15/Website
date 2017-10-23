@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
@@ -152,7 +152,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns>The short URL</returns>
 		private string ShortUrl(PostModel post)
 		{
-			return Url.Action("ShortUrl", "Blog", new { alias = _urlShortener.Shorten(post) }, Request.Scheme);
+			return Url.Action("Blog", "ShortUrl", new { alias = _urlShortener.Shorten(post) }, Request.Scheme);
 		}
 	}
 }
