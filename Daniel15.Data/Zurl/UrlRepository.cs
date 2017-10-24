@@ -1,5 +1,8 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Daniel15.Data.Zurl.Entities;
+using Daniel15.Shared.Extensions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Daniel15.Data.Zurl
 {
@@ -30,6 +33,22 @@ namespace Daniel15.Data.Zurl
 					(x.Type == "domain_custom" && x.CustomAlias == alias) ||
 					(maybeId != null && x.Type == "domain" && x.DomainUrlId == maybeId)
 				);
+		}
+
+		/// <summary>
+		/// Saves data about a hit to a short URL
+		/// </summary>
+		/// <param name="hit">Hit to save</param>
+		public async Task AddHitAsync(ShortenedUrlHit hit)
+		{
+			await _context.Hits.AddAsync(hit);
+			await _context.Database.ExecuteSqlCommandAsync(
+				"UPDATE urls SET last_hit = {0}, hits = hits + 1 WHERE id = {1}", 
+				hit.Date.ToUnix(),
+				hit.Url.Id
+			);
+
+			await _context.SaveChangesAsync();
 		}
 	}
 }

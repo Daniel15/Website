@@ -1,4 +1,4 @@
-﻿using Daniel15.Data.Extensions;
+using Daniel15.Data.Extensions;
 using Daniel15.Data.Zurl.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +16,7 @@ namespace Daniel15.Data.Zurl
 			: base(options) {}
 
 		public virtual DbSet<ShortenedUrl> Urls { get; set; }
+		public virtual DbSet<ShortenedUrlHit> Hits { get; set; }
 
 		/// <summary>
 		/// Initialises the Entity Framework model
