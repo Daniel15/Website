@@ -1,15 +1,11 @@
 using System;
-using System.IO;
 using System.Threading.Tasks;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Zurl;
-using Daniel15.Data.Zurl.Entities;
 using Daniel15.Web.Extensions;
-using MaxMind.GeoIP2;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Controllers
@@ -21,14 +17,14 @@ namespace Daniel15.Web.Controllers
 	    private readonly IUrlShortener _urlShortener;
 	    private readonly IBlogRepository _blogRepository;
 	    private readonly IUrlRepository _urlRepository;
-	    private readonly IHostingEnvironment _hostingEnv;
+	    private readonly IShortUrlLogger _shortUrlLogger;
 
-	    public ShortUrlController(IUrlShortener urlShortener, IBlogRepository blogRepository, IUrlRepository urlRepository, IHostingEnvironment hostingEnv)
+	    public ShortUrlController(IUrlShortener urlShortener, IBlogRepository blogRepository, IUrlRepository urlRepository, IShortUrlLogger shortUrlLogger)
 	    {
 		    _urlShortener = urlShortener;
 		    _blogRepository = blogRepository;
 		    _urlRepository = urlRepository;
-		    _hostingEnv = hostingEnv;
+		    _shortUrlLogger = shortUrlLogger;
 	    }
 
 
@@ -76,60 +72,13 @@ namespace Daniel15.Web.Controllers
 			}
 			
 			var shortenedUrl = _urlRepository.TryGetByAlias("dl.vc", uri, id);
-			if (shortenedUrl != null)
+			if (shortenedUrl == null)
 			{
-				var hit = CreateHit(shortenedUrl);
-				await _urlRepository.AddHitAsync(hit);
-
-				return Content("URL = " + shortenedUrl.Url);
+				return NotFound();
 			}
-
-			return NotFound();
+			
+			await _shortUrlLogger.LogHitAsync(shortenedUrl.Id, HttpContext);
+			return Content("URL = " + shortenedUrl.Url);
 		}
-
-	    private ShortenedUrlHit CreateHit(ShortenedUrl shortenedUrl)
-	    {
-		    var ip = HttpContext.Connection.RemoteIpAddress;
-			var hit = new ShortenedUrlHit
-		    {
-			    Url = shortenedUrl,
-			    Date = DateTime.Now,
-			    UserAgent = Request.Headers["User-Agent"].ToString(),
-			    IpAddress = ip.ToString(),
-
-				// DB should really take nulls for these :(
-				ReferrerDomain = "",
-				Browser = "",
-			    BrowserVersion = "",
-				Country = "",
-			};
-
-			// Parse user-agent
-			if (!string.IsNullOrWhiteSpace(hit.UserAgent))
-		    {
-			    var parser = UAParser.Parser.GetDefault();
-			    var parsedUserAgent = parser.ParseUserAgent(hit.UserAgent);
-			    hit.Browser = parsedUserAgent.Family;
-			    hit.BrowserVersion = parsedUserAgent.Major + "." + parsedUserAgent.Minor + "." + parsedUserAgent.Patch;
-		    }
-
-			// Determine GeoIP country
-		    using (var geoIp = new DatabaseReader(Path.Combine(_hostingEnv.ContentRootPath, "GeoLite2-Country.mmdb")))
-		    {
-			    if (geoIp.TryCountry(ip, out var geoIpResponse))
-			    {
-				    hit.Country = geoIpResponse.Country.IsoCode;
-			    }
-		    }
-
-			// Parse domain from referrer
-		    if (Uri.TryCreate(Request.Headers["Referer"].ToString(), UriKind.Absolute, out var referrerUri))
-		    {
-			    hit.Referrer = referrerUri;
-			    hit.ReferrerDomain = referrerUri.Host.Replace("www.", string.Empty);
-		    }
-
-		    return hit;
-	    }
 	}
 }

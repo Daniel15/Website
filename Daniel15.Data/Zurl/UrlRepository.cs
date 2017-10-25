@@ -29,6 +29,7 @@ namespace Daniel15.Data.Zurl
 		{
 			return _context.Urls
 				.Where(x => x.Domain.Domain == domain)
+				.OrderBy(x => x.Id)
 				.FirstOrDefault(x => 
 					(x.Type == "domain_custom" && x.CustomAlias == alias) ||
 					(maybeId != null && x.Type == "domain" && x.DomainUrlId == maybeId)
@@ -45,7 +46,7 @@ namespace Daniel15.Data.Zurl
 			await _context.Database.ExecuteSqlCommandAsync(
 				"UPDATE urls SET last_hit = {0}, hits = hits + 1 WHERE id = {1}", 
 				hit.Date.ToUnix(),
-				hit.Url.Id
+				hit.UrlId
 			);
 
 			await _context.SaveChangesAsync();
