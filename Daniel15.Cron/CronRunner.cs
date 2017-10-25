@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -6,6 +6,7 @@ using Daniel15.BusinessLayer.Services;
 using Daniel15.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Daniel15.Cron
@@ -27,6 +28,13 @@ namespace Daniel15.Cron
 				.AddJsonFile("config.json")
 				.AddEnvironmentVariables();
 			var config = builder.Build();
+
+			_serviceCollection.AddLogging(logging =>
+			{
+				logging.AddConfiguration(config.GetSection("Logging"));
+				logging.AddConsole();
+				logging.AddDebug();
+			});
 			_serviceCollection.AddDaniel15(config);
 			_serviceCollection.AddDaniel15Config(config);
 			_serviceCollection.AddOptions();

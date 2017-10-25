@@ -53,20 +53,16 @@ namespace Daniel15.Web
 			return services.BuildServiceProvider();
 		}
 
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
-			loggerFactory.AddDebug();
-
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-				loggerFactory.AddConsole(LogLevel.Information);
 			}
 			else
 			{
 				app.UseStatusCodePagesWithReExecute("/Error/Status{0}");
 				app.UseExceptionHandler("/Error");
-				loggerFactory.AddConsole(LogLevel.Warning);
 			}
 
 			// Handle X-Fowarded-Proto to know Nginx is using HTTPS
