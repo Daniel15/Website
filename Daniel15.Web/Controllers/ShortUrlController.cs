@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
@@ -6,6 +7,7 @@ using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Zurl;
 using Daniel15.Web.Extensions;
+using Daniel15.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Controllers
@@ -18,13 +20,21 @@ namespace Daniel15.Web.Controllers
 	    private readonly IBlogRepository _blogRepository;
 	    private readonly IUrlRepository _urlRepository;
 	    private readonly IShortUrlLogger _shortUrlLogger;
+	    private readonly IBackgroundTaskQueue _taskQueue;
 
-	    public ShortUrlController(IUrlShortener urlShortener, IBlogRepository blogRepository, IUrlRepository urlRepository, IShortUrlLogger shortUrlLogger)
+	    public ShortUrlController(
+			IUrlShortener urlShortener, 
+			IBlogRepository blogRepository, 
+			IUrlRepository urlRepository, 
+			IShortUrlLogger shortUrlLogger, 
+			IBackgroundTaskQueue taskQueue
+		)
 	    {
 		    _urlShortener = urlShortener;
 		    _blogRepository = blogRepository;
 		    _urlRepository = urlRepository;
 		    _shortUrlLogger = shortUrlLogger;
+		    _taskQueue = taskQueue;
 	    }
 
 
@@ -56,7 +66,7 @@ namespace Daniel15.Web.Controllers
 		/// <param name="uri">URL alias</param>
 		/// <returns>Redirect, or 404 error if nothing matches</returns>
 		[Route(@"{uri:regex(^[[0-9A-Za-z\-_]]+$)}", Order = 999)]
-	    public async Task<ActionResult> Index(string uri)
+		public ActionResult Index(string uri)
 		{
 			int? id = null;
 			if (uri.Length <= MAX_SHORT_URL_LENGTH)
@@ -70,14 +80,21 @@ namespace Daniel15.Web.Controllers
 					// Not a short URL by ID... Maybe it's one with a custom alias, or it's not a short URL at all.
 				}
 			}
-			
+
 			var shortenedUrl = _urlRepository.TryGetByAlias("dl.vc", uri, id);
 			if (shortenedUrl == null)
 			{
 				return NotFound();
 			}
-			
-			await _shortUrlLogger.LogHitAsync(shortenedUrl.Id, HttpContext);
+
+			var ip = HttpContext.Connection.RemoteIpAddress;
+			var userAgent = Request.Headers["User-Agent"].ToString();
+			var referrer = Request.Headers["Referer"].ToString();
+			_taskQueue.QueueBackgroundWorkItem(
+				async token => await _shortUrlLogger.LogHitAsync(shortenedUrl.Id, ip, userAgent, referrer, token)
+			);
+
+			// TODO: redirect
 			return Content("URL = " + shortenedUrl.Url);
 		}
 	}

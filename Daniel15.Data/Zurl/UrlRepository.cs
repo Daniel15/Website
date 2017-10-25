@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Daniel15.Data.Zurl.Entities;
 using Daniel15.Shared.Extensions;
@@ -40,16 +41,14 @@ namespace Daniel15.Data.Zurl
 		/// Saves data about a hit to a short URL
 		/// </summary>
 		/// <param name="hit">Hit to save</param>
-		public async Task AddHitAsync(ShortenedUrlHit hit)
+		public async Task AddHitAsync(ShortenedUrlHit hit, CancellationToken token = default(CancellationToken))
 		{
-			await _context.Hits.AddAsync(hit);
+			await _context.Hits.AddAsync(hit, token);
 			await _context.Database.ExecuteSqlCommandAsync(
-				"UPDATE urls SET last_hit = {0}, hits = hits + 1 WHERE id = {1}", 
-				hit.Date.ToUnix(),
-				hit.UrlId
+				$"UPDATE urls SET last_hit = {hit.Date.ToUnix()}, hits = hits + 1 WHERE id = {hit.UrlId}",
+				token
 			);
-
-			await _context.SaveChangesAsync();
+			await _context.SaveChangesAsync(token);
 		}
 	}
 }

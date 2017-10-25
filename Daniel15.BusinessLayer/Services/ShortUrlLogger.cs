@@ -1,5 +1,6 @@
 using System;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using Daniel15.Data.Zurl;
 using Daniel15.Data.Zurl.Entities;
@@ -30,13 +31,14 @@ namespace Daniel15.BusinessLayer.Services
 		/// </summary>
 		/// <param name="urlId">Shortened URL that was hit</param>
 		/// <param name="httpContext">HTTP context of the request</param>
-		public async Task LogHitAsync(int urlId, HttpContext httpContext)
+		public async Task LogHitAsync(int urlId, HttpContext httpContext, CancellationToken token = default(CancellationToken))
 		{
 			await LogHitAsync(
 				urlId,
 				httpContext.Connection.RemoteIpAddress,
 				httpContext.Request.Headers["User-Agent"].ToString(),
-				httpContext.Request.Headers["Referer"].ToString()
+				httpContext.Request.Headers["Referer"].ToString(),
+				token
 			);
 		}
 
@@ -47,10 +49,10 @@ namespace Daniel15.BusinessLayer.Services
 		/// <param name="ip">IP the hit came from</param>
 		/// <param name="userAgent">User-Agent the hit came from</param>
 		/// <param name="referrer">HTTP Referrer the hit came from</param>
-		public async Task LogHitAsync(int urlId, IPAddress ip, string userAgent, string referrer)
+		public async Task LogHitAsync(int urlId, IPAddress ip, string userAgent, string referrer, CancellationToken token = default(CancellationToken))
 		{
 			var hit = CreateHit(urlId, ip, userAgent, referrer);
-			await _urlRepository.AddHitAsync(hit);
+			await _urlRepository.AddHitAsync(hit, token);
 		}
 
 		/// <summary>
