@@ -40,6 +40,12 @@ namespace Daniel15.Web
 			services.AddDaniel15(Configuration);
 			services.AddDaniel15Config(Configuration);
 
+			services.AddMiniProfiler(options =>
+			{
+				options.ResultsAuthorize = options.ResultsListAuthorize = 
+					request => request.HttpContext.User.Identity.IsAuthenticated;
+			}).AddEntityFramework();
+
 			// Temporary workaround for https://github.com/aspnet/Routing/issues/391
 			services.Replace(ServiceDescriptor.Transient<IApplicationModelProvider, BugfixApplicationModelProvider>());
 
@@ -79,6 +85,7 @@ namespace Daniel15.Web
 			app.UseStaticFiles();
 			app.UseAuthentication();
 			app.UseSession();
+			app.UseMiniProfiler();
 			// All real routes are defined using attributes.
 			app.UseMvc();
 		}
