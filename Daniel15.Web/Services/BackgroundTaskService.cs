@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -10,12 +11,14 @@ namespace Daniel15.Web.Services
 	public class BackgroundTaskService : IHostedService
 	{
 		private readonly ILogger<BackgroundTaskService> _logger;
+		private readonly IServiceProvider _serviceProvider;
 		private readonly CancellationTokenSource _shutdown = new CancellationTokenSource();
 		private Task _backgroundTask;
 
-		public BackgroundTaskService(IBackgroundTaskQueue taskQueue, ILogger<BackgroundTaskService> logger)
+		public BackgroundTaskService(IBackgroundTaskQueue taskQueue, ILogger<BackgroundTaskService> logger, IServiceProvider serviceProvider)
 		{
 			_logger = logger;
+			_serviceProvider = serviceProvider;
 			TaskQueue = taskQueue ?? throw new ArgumentNullException(nameof(taskQueue));
 		}
 
@@ -29,19 +32,22 @@ namespace Daniel15.Web.Services
 
 		private async Task BackgroundProcessing()
 		{
-			while (!_shutdown.IsCancellationRequested)
+			using (var scope = _serviceProvider.CreateScope())
 			{
-				var workItem = await TaskQueue.DequeueAsync(_shutdown.Token);
+				while (!_shutdown.IsCancellationRequested)
+				{
+					var workItem = await TaskQueue.DequeueAsync(_shutdown.Token);
 
-				try
-				{
-					_logger.LogInformation("Starting background task");
-					await workItem(_shutdown.Token);
-					_logger.LogInformation("Completed background task");
-				}
-				catch (Exception ex)
-				{
-					_logger.LogError(ex, "Error while running background job");
+					try
+					{
+						_logger.LogInformation("Starting background task");
+						await workItem(scope.ServiceProvider, _shutdown.Token);
+						_logger.LogInformation("Completed background task");
+					}
+					catch (Exception ex)
+					{
+						_logger.LogError(ex, "Error while running background job");
+					}
 				}
 			}
 		}

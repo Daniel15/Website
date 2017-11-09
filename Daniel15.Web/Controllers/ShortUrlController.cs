@@ -9,6 +9,7 @@ using Daniel15.Data.Zurl;
 using Daniel15.Web.Extensions;
 using Daniel15.Web.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Daniel15.Web.Controllers
 {
@@ -90,8 +91,14 @@ namespace Daniel15.Web.Controllers
 			var ip = HttpContext.Connection.RemoteIpAddress;
 			var userAgent = Request.Headers["User-Agent"].ToString();
 			var referrer = Request.Headers["Referer"].ToString();
-			_taskQueue.QueueBackgroundWorkItem(
-				async token => await _shortUrlLogger.LogHitAsync(shortenedUrl.Id, ip, userAgent, referrer, token)
+			_taskQueue.QueueBackgroundWorkItem(async (provider, token) => 
+				await provider.GetRequiredService<IShortUrlLogger>().LogHitAsync(
+					shortenedUrl.Id,
+					ip,
+					userAgent,
+					referrer,
+					token
+				)
 			);
 
 			// TODO: redirect
