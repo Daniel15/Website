@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
+using JavaScriptEngineSwitcher.ChakraCore;
+using JavaScriptEngineSwitcher.Core;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +38,7 @@ namespace Daniel15.Web
 
 			services.AddSession();
 			services.AddMvc();
+			JsEngineSwitcher.Instance.EngineFactories.Add(new ChakraCoreJsEngineFactory());
 			services.AddReact();
 			services.AddDaniel15(Configuration);
 			services.AddDaniel15Config(Configuration);
