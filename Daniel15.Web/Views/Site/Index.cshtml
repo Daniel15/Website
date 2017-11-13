@@ -1,4 +1,4 @@
-﻿@using System.Threading.Tasks
+@using System.Threading.Tasks
 @model Daniel15.Web.ViewModels.Site.IndexViewModel
 @{
 	var age = (DateTime.Now - new DateTime(1990, 06, 01)).Years();
@@ -40,10 +40,7 @@
 <ul id="contact-me">
 	<!-- Yeah, this is ugly, but it's a really simple method for spambot prevention >_< -->
 	<li><strong>Email</strong> &mdash; <span id="email_address"></span></li>
-	<li id="gtalk" class="presence offline">
-		<strong>Google Talk / Jabber</strong> &mdash; <span id="gtalk_address" class="address"></span>.
-		I'm currently <span id="gtalk_status">Offline</span>.
-	</li>
+	<li><strong>Google Talk / Jabber</strong> &mdash; <span id="gtalk_address" class="address"></span>.</li>
 	<li id="skype" class="presence offline">
 		<strong>Skype</strong> &mdash; <span id="skype_address" class="address">daniel15au</span>.
 		I'm currently <span id="skype_status">Offline</span>.
@@ -83,6 +80,5 @@
 }
 
 @section scripts {
-	<script async defer src="http://mystatus.im/daniel.json?callback=Page.Site.Index.initGoogleTalk"></script>
 	<yql query="SELECT * FROM skype.user.status WHERE user='daniel15au'" callback="Page.Site.Index.initSkype" />	
 }
