@@ -45,7 +45,7 @@ namespace Daniel15.Web
 
 			services.AddMiniProfiler(options =>
 			{
-				options.ResultsAuthorize = options.ResultsListAuthorize = 
+				options.ShouldProfile = options.ResultsAuthorize = options.ResultsListAuthorize = 
 					request => request.HttpContext.User.Identity.IsAuthenticated;
 			}).AddEntityFramework();
 
