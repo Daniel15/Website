@@ -26,6 +26,7 @@
     <PackageReference Include="Daniel15.SimpleIdentity" Version="2.0.0" />
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore" Version="2.4.10" />
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.debian-x64" Version="2.4.6" />
+    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x64" Version="2.4.6" />
     <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.0.0-alpha9-00202" />
     <PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.0.0-alpha9-00202" />
     <PackageReference Include="React.AspNet" Version="3.1.0" />
