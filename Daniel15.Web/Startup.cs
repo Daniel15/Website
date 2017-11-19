@@ -77,7 +77,7 @@ namespace Daniel15.Web
 			// Handle X-Fowarded-Proto to know Nginx is using HTTPS
 			app.UseForwardedHeaders(new ForwardedHeadersOptions
 			{
-				ForwardedHeaders = ForwardedHeaders.XForwardedProto,
+				ForwardedHeaders = ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedFor,
 			});
 
 			app.UseReact(config =>
