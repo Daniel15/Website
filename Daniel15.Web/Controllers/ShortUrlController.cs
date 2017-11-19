@@ -1,6 +1,4 @@
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
@@ -20,21 +18,18 @@ namespace Daniel15.Web.Controllers
 	    private readonly IUrlShortener _urlShortener;
 	    private readonly IBlogRepository _blogRepository;
 	    private readonly IUrlRepository _urlRepository;
-	    private readonly IShortUrlLogger _shortUrlLogger;
 	    private readonly IBackgroundTaskQueue _taskQueue;
 
 	    public ShortUrlController(
 			IUrlShortener urlShortener, 
 			IBlogRepository blogRepository, 
 			IUrlRepository urlRepository, 
-			IShortUrlLogger shortUrlLogger, 
 			IBackgroundTaskQueue taskQueue
 		)
 	    {
 		    _urlShortener = urlShortener;
 		    _blogRepository = blogRepository;
 		    _urlRepository = urlRepository;
-		    _shortUrlLogger = shortUrlLogger;
 		    _taskQueue = taskQueue;
 	    }
 
@@ -101,8 +96,7 @@ namespace Daniel15.Web.Controllers
 				)
 			);
 
-			// TODO: redirect
-			return Content("URL = " + shortenedUrl.Url);
+			return Redirect(shortenedUrl.Url);
 		}
 	}
 }
