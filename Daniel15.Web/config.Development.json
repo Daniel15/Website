@@ -14,6 +14,9 @@
       "ConnectionString": "Server=localhost; Database=daniel15_site; Uid=dev; Pwd=password;"
     }
   },
+  "ConnectionStrings": {
+    "Zurl": "Server=localhost; Database=zurl; Uid=dev; Pwd=password;"
+  },
   "Auth": {
     "Users": {
       "USER@EXAMPLE.COM": {

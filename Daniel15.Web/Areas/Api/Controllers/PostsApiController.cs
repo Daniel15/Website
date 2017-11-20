@@ -1,4 +1,4 @@
-﻿using Daniel15.BusinessLayer.Services;
+using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
@@ -52,7 +52,7 @@ namespace Daniel15.Web.Areas.Api.Controllers
 			return new ObjectResult(new PostUrlsModel
 			{
 				Url = Url.BlogPostAbsolute(post),
-				ShortUrl = Url.Action("ShortUrl", "Blog", new { alias = _urlShortener.Shorten(post) }, Request.Scheme),
+				ShortUrl = Url.Action("Blog", "ShortUrl", new { alias = _urlShortener.Shorten(post) }, Request.Scheme),
 			});
 		}
 	}

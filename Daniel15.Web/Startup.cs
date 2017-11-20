@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
+using Daniel15.Web.Services;
 using JavaScriptEngineSwitcher.ChakraCore;
 using JavaScriptEngineSwitcher.Core;
 using Microsoft.AspNetCore;
@@ -16,6 +17,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using React.AspNet;
 
@@ -52,6 +54,10 @@ namespace Daniel15.Web
 			// Temporary workaround for https://github.com/aspnet/Routing/issues/391
 			services.Replace(ServiceDescriptor.Transient<IApplicationModelProvider, BugfixApplicationModelProvider>());
 
+			// Registered here rather than in AddDaniel15() as it's web-specific
+			services.AddSingleton<IHostedService, BackgroundTaskService>();
+			services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
+
 			// For https://github.com/reactjs/React.NET/issues/433
 			return services.BuildServiceProvider();
 		}
@@ -71,7 +77,7 @@ namespace Daniel15.Web
 			// Handle X-Fowarded-Proto to know Nginx is using HTTPS
 			app.UseForwardedHeaders(new ForwardedHeadersOptions
 			{
-				ForwardedHeaders = ForwardedHeaders.XForwardedProto,
+				ForwardedHeaders = ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedFor,
 			});
 
 			app.UseReact(config =>

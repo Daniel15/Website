@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+using System.IO;
+using System.Net.Http;
 using Daniel15.BusinessLayer;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.BusinessLayer.Services.CodeRepositories;
@@ -6,7 +7,10 @@ using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Repositories.EntityFramework;
+using Daniel15.Data.Zurl;
 using Daniel15.Shared.Configuration;
+using MaxMind.GeoIP2;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,10 +33,20 @@ namespace Daniel15.Infrastructure
 			services.AddSingleton<IProjectCacheUpdater, ProjectCacheUpdater>();
 			services.AddSingleton<ICodeRepositoryManager, CodeRepositoryManager>();
 			services.AddSingleton<ICodeRepository, GithubCodeRepository>();
+			services.AddSingleton<IShortUrlLogger, ShortUrlLogger>();
 			services.AddSingleton<Facebook>();
 			services.AddSingleton<Reddit>();
 			services.AddSingleton<Twitter>();
 			services.AddSingleton<Linkedin>();
+
+			// Third-party libraries
+			services.AddSingleton(provider => UAParser.Parser.GetDefault());
+			services.AddSingleton<IGeoIP2DatabaseReader>(provider =>
+				new DatabaseReader(Path.Combine(
+					provider.GetRequiredService<IHostingEnvironment>().ContentRootPath, 
+					"GeoLite2-Country.mmdb"
+				))
+			);
 
 			// HttpClient should be reused wherever possible.
 			// https://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/
@@ -67,6 +81,11 @@ namespace Daniel15.Infrastructure
 			services.AddScoped<IDisqusCommentRepository, DisqusCommentRepository>();
 			services.AddScoped<IProjectRepository, ProjectRepository>();
 			services.AddScoped<IMicroblogRepository, MicroblogRepository>();
+
+			services.AddDbContext<ZurlDatabaseContext>(options => 
+				options.UseMySql(config.GetConnectionString("Zurl"))
+			);
+			services.AddScoped<IUrlRepository, UrlRepository>();
 		}
 	}
 }

@@ -214,33 +214,12 @@ namespace Daniel15.Web.Controllers
 				Post = post,
 				PostCategories = _blogRepository.CategoriesForPost(post),
 				PostTags = _blogRepository.TagsForPost(post),
-				ShortUrl = Url.Action("ShortUrl", "Blog", new { Alias = _urlShortener.Shorten(post) }, Request.Scheme),
+				ShortUrl = Url.Action("Blog", "ShortUrl", new { Alias = _urlShortener.Shorten(post) }, Request.Scheme),
 				SocialNetworks = GetSocialNetworks(post),
 				Comments = _commentRepository.GetCommentsTree(post)
 			});
 		}
 
-		/// <summary>
-		/// Short URL redirect - Looks up a short URL and redirects to the post
-		/// </summary>
-		/// <param name="alias">URL alias</param>
-		/// <returns>Redirect to correct post</returns>
-		[Route(@"B{alias:regex(^[[0-9A-Za-z\-_]]+$)}", Order = 999)]
-		public virtual ActionResult ShortUrl(string alias)
-		{
-			var id = _urlShortener.Extend(alias);
-			PostModel post;
-			try
-			{
-				post = _blogRepository.Get(id);
-			}
-			catch (EntityNotFoundException)
-			{
-				return NotFound();
-			}
-
-			return RedirectPermanent(Url.BlogPost(post));
-		}
 
 		/// <summary>
 		/// Gets the short URL for this blog post
@@ -249,7 +228,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns>The short URL</returns>
 		private string ShortUrl(PostModel post)
 		{
-			return Url.Action("ShortUrl", "Blog", new { Alias = _urlShortener.Shorten(post) }, Request.Scheme);
+			return Url.Action("Blog", "ShortUrl", new { Alias = _urlShortener.Shorten(post) }, Request.Scheme);
 		}
 
 		/// <summary>
