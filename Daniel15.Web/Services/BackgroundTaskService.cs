@@ -32,22 +32,23 @@ namespace Daniel15.Web.Services
 
 		private async Task BackgroundProcessing()
 		{
-			using (var scope = _serviceProvider.CreateScope())
+			while (!_shutdown.IsCancellationRequested)
 			{
-				while (!_shutdown.IsCancellationRequested)
-				{
-					var workItem = await TaskQueue.DequeueAsync(_shutdown.Token);
+				var workItem = await TaskQueue.DequeueAsync(_shutdown.Token);
 
-					try
+				try
+				{
+					_logger.LogInformation("Starting background task");
+					using (var scope = _serviceProvider.CreateScope())
 					{
-						_logger.LogInformation("Starting background task");
 						await workItem(scope.ServiceProvider, _shutdown.Token);
-						_logger.LogInformation("Completed background task");
 					}
-					catch (Exception ex)
-					{
-						_logger.LogError(ex, "Error while running background job");
-					}
+
+					_logger.LogInformation("Completed background task");
+				}
+				catch (Exception ex)
+				{
+					_logger.LogError(ex, "Error while running background job");
 				}
 			}
 		}
