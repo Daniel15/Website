@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using React.AspNet;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace Daniel15.Web
 {
@@ -39,7 +41,7 @@ namespace Daniel15.Web
 				.AddDefaultTokenProviders();
 
 			services.AddSession();
-			services.AddMvc();
+			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 			JsEngineSwitcher.Instance.EngineFactories.Add(new ChakraCoreJsEngineFactory());
 			services.AddReact();
 			services.AddDaniel15(Configuration);
@@ -50,9 +52,6 @@ namespace Daniel15.Web
 				options.ShouldProfile = options.ResultsAuthorize = options.ResultsListAuthorize = 
 					request => request.HttpContext.User.Identity.IsAuthenticated;
 			}).AddEntityFramework();
-
-			// Temporary workaround for https://github.com/aspnet/Routing/issues/391
-			services.Replace(ServiceDescriptor.Transient<IApplicationModelProvider, BugfixApplicationModelProvider>());
 
 			// Registered here rather than in AddDaniel15() as it's web-specific
 			services.AddSingleton<IHostedService, BackgroundTaskService>();
@@ -72,6 +71,7 @@ namespace Daniel15.Web
 			{
 				app.UseStatusCodePagesWithReExecute("/Error/Status{0}");
 				app.UseExceptionHandler("/Error");
+				app.UseHsts();
 			}
 
 			// Handle X-Fowarded-Proto to know Nginx is using HTTPS
@@ -97,7 +97,7 @@ namespace Daniel15.Web
 
 		public static void Main(string[] args)
 		{
-			var host = BuildWebHost(args);
+			var host = CreateWebHostBuilder(args).Build();
 
 			// Delete UNIX pipe if it exists at startup (eg. previous process crashed before cleaning it up)
 			var addressFeature = host.ServerFeatures.Get<IServerAddressesFeature>();
@@ -111,7 +111,7 @@ namespace Daniel15.Web
 			host.Run();
 		}
 
-		public static IWebHost BuildWebHost(string[] args)
+		public static IWebHostBuilder CreateWebHostBuilder(string[] args)
 		{
 			return WebHost.CreateDefaultBuilder(args)
 				.UseStartup<Startup>()
@@ -121,8 +121,7 @@ namespace Daniel15.Web
 						.AddJsonFile("config.json", optional: false, reloadOnChange: true)
 						.AddJsonFile("config.generated.json", optional: true)
 						.AddJsonFile($"config.{hostContext.HostingEnvironment.EnvironmentName}.json", optional: true);
-				})
-				.Build();
+				});
 		}
 	}
 }
