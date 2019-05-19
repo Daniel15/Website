@@ -115,6 +115,7 @@ namespace Daniel15.Web
 		{
 			return WebHost.CreateDefaultBuilder(args)
 				.UseStartup<Startup>()
+				.UseLibuv()
 				.ConfigureAppConfiguration((hostContext, config) =>
 				{
 					config

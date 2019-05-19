@@ -28,6 +28,7 @@
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.debian-x64" Version="2.4.6" />
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x64" Version="2.4.6" />
 	<PackageReference Include="MaxMind.GeoIP2" Version="3.0.0" />
+	<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv" Version="2.2.0" />
     <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.0.165" />
     <PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.0.165" />
     <PackageReference Include="React.AspNet" Version="3.1.0" />
