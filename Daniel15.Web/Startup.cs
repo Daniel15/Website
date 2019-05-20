@@ -5,6 +5,7 @@ using Daniel15.Cron;
 using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
 using Hangfire;
+using Hangfire.Dashboard;
 using Hangfire.MySql;
 using JavaScriptEngineSwitcher.ChakraCore;
 using JavaScriptEngineSwitcher.Core;
@@ -98,7 +99,10 @@ namespace Daniel15.Web
 			app.UseAuthentication();
 			app.UseSession();
 			app.UseMiniProfiler();
-			app.UseHangfireDashboard();
+			app.UseHangfireDashboard(options: new DashboardOptions
+			{
+				Authorization = new[] {new DashboardAuthorizationFilter()}
+			});
 			// All real routes are defined using attributes.
 			app.UseMvc();
 
