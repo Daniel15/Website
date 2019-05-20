@@ -1,4 +1,4 @@
-﻿{
+{
   "Gallery": {
     "Galleries": {
       "screenshots": {
@@ -11,7 +11,7 @@
   },
   "Data": {
     "DefaultConnection": {
-      "ConnectionString": "Server=localhost; Database=daniel15_site; Uid=dev; Pwd=password;"
+      "ConnectionString": "Server=localhost; Database=daniel15_site; Uid=dev; Pwd=password; Allow User Variables=True;"
     }
   },
   "ConnectionStrings": {

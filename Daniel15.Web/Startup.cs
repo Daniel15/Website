@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using Daniel15.Cron;
 using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
 using Hangfire;
@@ -100,6 +101,8 @@ namespace Daniel15.Web
 			app.UseHangfireDashboard();
 			// All real routes are defined using attributes.
 			app.UseMvc();
+
+			CronScheduler.ScheduleCronjobs();
 		}
 
 		public static void Main(string[] args)

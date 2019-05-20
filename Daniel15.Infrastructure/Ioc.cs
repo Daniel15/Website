@@ -28,16 +28,17 @@ namespace Daniel15.Infrastructure
 			// Services
 			services.AddSingleton<IUrlShortener, UrlShortener>();
 			services.AddSingleton<ISocialManager, SocialManager>();
-			services.AddSingleton<IDisqusComments, DisqusComments>();
 			services.AddSingleton<IMarkdownProcessor, MarkdownProcessor>();
-			services.AddSingleton<IProjectCacheUpdater, ProjectCacheUpdater>();
 			services.AddSingleton<ICodeRepositoryManager, CodeRepositoryManager>();
 			services.AddSingleton<ICodeRepository, GithubCodeRepository>();
-			services.AddSingleton<IShortUrlLogger, ShortUrlLogger>();
 			services.AddSingleton<Facebook>();
 			services.AddSingleton<Reddit>();
 			services.AddSingleton<Twitter>();
 			services.AddSingleton<Linkedin>();
+
+			services.AddScoped<IProjectCacheUpdater, ProjectCacheUpdater>();
+			services.AddScoped<IShortUrlLogger, ShortUrlLogger>();
+			services.AddScoped<IDisqusComments, DisqusComments>();
 
 			// Third-party libraries
 			services.AddSingleton(provider => UAParser.Parser.GetDefault());

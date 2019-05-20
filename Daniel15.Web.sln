@@ -31,8 +31,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Daniel15.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Daniel15.Data", "Daniel15.Data\Daniel15.Data.csproj", "{8A499FF8-4DB1-458C-BFD5-2D1E4822760D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Daniel15.Cron", "Daniel15.Cron\Daniel15.Cron.csproj", "{7E30DB7D-56D1-47B6-95C7-D032C5300936}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,20 +101,11 @@ Global
 		{8A499FF8-4DB1-458C-BFD5-2D1E4822760D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{8A499FF8-4DB1-458C-BFD5-2D1E4822760D}.Release|x86.ActiveCfg = Release|Any CPU
 		{8A499FF8-4DB1-458C-BFD5-2D1E4822760D}.Release|x86.Build.0 = Release|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Debug|x86.Build.0 = Debug|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Release|x86.ActiveCfg = Release|Any CPU
-		{7E30DB7D-56D1-47B6-95C7-D032C5300936}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E2B72092-6434-4454-B8D5-4F1ECDE1AC63}
 	EndGlobalSection
 EndGlobal

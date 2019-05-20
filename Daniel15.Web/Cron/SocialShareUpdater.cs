@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
@@ -8,6 +8,7 @@ using Daniel15.BusinessLayer.Services.Social;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Shared.Extensions;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Daniel15.Cron
@@ -20,17 +21,24 @@ namespace Daniel15.Cron
 		private readonly ISocialManager _socialManager;
 		private readonly IBlogRepository _blogRepository;
 		private readonly HttpClient _client;
+		private readonly ILogger<SocialShareUpdater> _logger;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SocialShareUpdater" /> class.
 		/// </summary>
 		/// <param name="socialManager">The social manager.</param>
 		/// <param name="blogRepository">The blog repository.</param>
-		public SocialShareUpdater(ISocialManager socialManager, IBlogRepository blogRepository, HttpClient client)
+		public SocialShareUpdater(
+			ISocialManager socialManager,
+			IBlogRepository blogRepository,
+			HttpClient client,
+			ILogger<SocialShareUpdater> logger
+		)
 		{
 			_socialManager = socialManager;
 			_blogRepository = blogRepository;
 			_client = client;
+			_logger = logger;
 		}
 
 		/// <summary>
@@ -62,7 +70,7 @@ namespace Daniel15.Cron
 			_blogRepository.Save(post);
 
 			var total = counts.Sum(x => x.Value);
-			Console.WriteLine("Updated '{0}' ({1} shares in total)", post.Title, total);
+			_logger.LogInformation("Updated '{0}' ({1} shares in total)", post.Title, total);
 		}
 
 		/// <summary>

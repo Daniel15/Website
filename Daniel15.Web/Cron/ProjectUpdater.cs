@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Daniel15.BusinessLayer;
 using Daniel15.Data.Repositories;
+using Microsoft.Extensions.Logging;
 
 namespace Daniel15.Cron
 {
@@ -12,16 +13,18 @@ namespace Daniel15.Cron
 	{
 		private readonly IProjectCacheUpdater _projectUpdater;
 		private readonly IProjectRepository _projectRepository;
+		private readonly ILogger<ProjectUpdater> _logger;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ProjectUpdater" /> class.
 		/// </summary>
 		/// <param name="projectUpdater">The project updater.</param>
 		/// <param name="projectRepository">The project repository.</param>
-		public ProjectUpdater(IProjectCacheUpdater projectUpdater, IProjectRepository projectRepository)
+		public ProjectUpdater(IProjectCacheUpdater projectUpdater, IProjectRepository projectRepository, ILogger<ProjectUpdater> logger)
 		{
 			_projectUpdater = projectUpdater;
 			_projectRepository = projectRepository;
+			_logger = logger;
 		}
 
 		/// <summary>
@@ -32,10 +35,10 @@ namespace Daniel15.Cron
 			var projects = _projectRepository.All();
 			foreach (var project in projects)
 			{
-				Console.Write("Updating '{0}'... ", project.Name);
+				_logger.LogInformation("Updating '{0}'... ", project.Name);
 				// TODO: This can be parallelised
 				await _projectUpdater.UpdateProjectAsync(project);
-				Console.WriteLine("Done.");
+				_logger.LogInformation("Done.");
 			}
 		}
 	}
