@@ -1,0 +1,19 @@
+[Unit]
+Description=Daniel15 Site
+
+[Service]
+WorkingDirectory=/var/www/dan.cx/live/site/
+ExecStart=/usr/bin/dotnet /var/www/dan.cx/live/site/Daniel15.Web.dll
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=daniel15
+User=www-data
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=ASPNETCORE_URLS=http://unix:/run/user/33/dan-live.sock
+# LD_LIBRARY_PATH is a workaround for https://github.com/dotnet/corefx/issues/24891
+# TODO: Not sure if this is still needed
+Environment=LD_LIBRARY_PATH=/usr/local/lib/openssl1.1
+
+[Install]
+WantedBy=multi-user.target
