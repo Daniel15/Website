@@ -1,13 +1,13 @@
 using System;
+using System.Threading;
 using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Zurl;
 using Daniel15.Web.Extensions;
-using Daniel15.Web.Services;
+using Hangfire;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Daniel15.Web.Controllers
 {
@@ -18,19 +18,16 @@ namespace Daniel15.Web.Controllers
 	    private readonly IUrlShortener _urlShortener;
 	    private readonly IBlogRepository _blogRepository;
 	    private readonly IUrlRepository _urlRepository;
-	    private readonly IBackgroundTaskQueue _taskQueue;
 
 	    public ShortUrlController(
 			IUrlShortener urlShortener, 
 			IBlogRepository blogRepository, 
-			IUrlRepository urlRepository, 
-			IBackgroundTaskQueue taskQueue
+			IUrlRepository urlRepository
 		)
 	    {
 		    _urlShortener = urlShortener;
 		    _blogRepository = blogRepository;
 		    _urlRepository = urlRepository;
-		    _taskQueue = taskQueue;
 	    }
 
 
@@ -83,16 +80,15 @@ namespace Daniel15.Web.Controllers
 				return NotFound();
 			}
 
-			var ip = HttpContext.Connection.RemoteIpAddress;
+			var ip = HttpContext.Connection.RemoteIpAddress.ToString();
 			var userAgent = Request.Headers["User-Agent"].ToString();
 			var referrer = Request.Headers["Referer"].ToString();
-			_taskQueue.QueueBackgroundWorkItem(async (provider, token) => 
-				await provider.GetRequiredService<IShortUrlLogger>().LogHitAsync(
+			BackgroundJob.Enqueue<IShortUrlLogger>(logger =>
+				logger.LogHitAsync(
 					shortenedUrl.Id,
 					ip,
 					userAgent,
-					referrer,
-					token
+					referrer
 				)
 			);
 

@@ -22,6 +22,6 @@ namespace Daniel15.Data.Zurl
 		/// Saves data about a hit to a short URL
 		/// </summary>
 		/// <param name="hit">Hit to save</param>
-		Task AddHitAsync(ShortenedUrlHit hit, CancellationToken token = default(CancellationToken));
+		Task AddHitAsync(ShortenedUrlHit hit);
 	}
 }

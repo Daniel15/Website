@@ -24,6 +24,9 @@
 
   <ItemGroup>
     <PackageReference Include="Daniel15.SimpleIdentity" Version="2.0.0" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.2" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.2" />
+    <PackageReference Include="Hangfire.MySqlStorage" Version="2.0.0" />
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore" Version="2.4.10" />
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.debian-x64" Version="2.4.6" />
     <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x64" Version="2.4.6" />

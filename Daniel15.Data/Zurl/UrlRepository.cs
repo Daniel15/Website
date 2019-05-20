@@ -41,14 +41,13 @@ namespace Daniel15.Data.Zurl
 		/// Saves data about a hit to a short URL
 		/// </summary>
 		/// <param name="hit">Hit to save</param>
-		public async Task AddHitAsync(ShortenedUrlHit hit, CancellationToken token = default(CancellationToken))
+		public async Task AddHitAsync(ShortenedUrlHit hit)
 		{
-			await _context.Hits.AddAsync(hit, token);
+			await _context.Hits.AddAsync(hit);
 			await _context.Database.ExecuteSqlCommandAsync(
-				$"UPDATE urls SET last_hit = {hit.Date.ToUnix()}, hits = hits + 1 WHERE id = {hit.UrlId}",
-				token
+				$"UPDATE urls SET last_hit = {hit.Date.ToUnix()}, hits = hits + 1 WHERE id = {hit.UrlId}"
 			);
-			await _context.SaveChangesAsync(token);
+			await _context.SaveChangesAsync();
 		}
 	}
 }

@@ -3,7 +3,8 @@ using System.IO;
 using System.Linq;
 using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
-using Daniel15.Web.Services;
+using Hangfire;
+using Hangfire.MySql;
 using JavaScriptEngineSwitcher.ChakraCore;
 using JavaScriptEngineSwitcher.Core;
 using Microsoft.AspNetCore;
@@ -13,13 +14,9 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using React.AspNet;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
@@ -53,9 +50,18 @@ namespace Daniel15.Web
 					request => request.HttpContext.User.Identity.IsAuthenticated;
 			}).AddEntityFramework();
 
-			// Registered here rather than in AddDaniel15() as it's web-specific
-			services.AddSingleton<IHostedService, BackgroundTaskService>();
-			services.AddSingleton<IBackgroundTaskQueue, BackgroundTaskQueue>();
+			services.AddHangfire(config => config
+				.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+				.UseSimpleAssemblyNameTypeSerializer()
+				.UseRecommendedSerializerSettings()
+				.UseStorage(new MySqlStorage(
+					Configuration["Data:DefaultConnection:ConnectionString"],
+					new MySqlStorageOptions
+					{
+						TablesPrefix = "Hangfire_"
+					}))
+			);
+			services.AddHangfireServer();
 
 			// For https://github.com/reactjs/React.NET/issues/433
 			return services.BuildServiceProvider();
@@ -91,6 +97,7 @@ namespace Daniel15.Web
 			app.UseAuthentication();
 			app.UseSession();
 			app.UseMiniProfiler();
+			app.UseHangfireDashboard();
 			// All real routes are defined using attributes.
 			app.UseMvc();
 		}

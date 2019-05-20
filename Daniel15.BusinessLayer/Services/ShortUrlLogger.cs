@@ -30,29 +30,13 @@ namespace Daniel15.BusinessLayer.Services
 		/// Logs a hit to the specified URL
 		/// </summary>
 		/// <param name="urlId">Shortened URL that was hit</param>
-		/// <param name="httpContext">HTTP context of the request</param>
-		public async Task LogHitAsync(int urlId, HttpContext httpContext, CancellationToken token = default(CancellationToken))
-		{
-			await LogHitAsync(
-				urlId,
-				httpContext.Connection.RemoteIpAddress,
-				httpContext.Request.Headers["User-Agent"].ToString(),
-				httpContext.Request.Headers["Referer"].ToString(),
-				token
-			);
-		}
-
-		/// <summary>
-		/// Logs a hit to the specified URL
-		/// </summary>
-		/// <param name="urlId">Shortened URL that was hit</param>
 		/// <param name="ip">IP the hit came from</param>
 		/// <param name="userAgent">User-Agent the hit came from</param>
 		/// <param name="referrer">HTTP Referrer the hit came from</param>
-		public async Task LogHitAsync(int urlId, IPAddress ip, string userAgent, string referrer, CancellationToken token = default(CancellationToken))
+		public async Task LogHitAsync(int urlId, string ip, string userAgent, string referrer)
 		{
-			var hit = CreateHit(urlId, ip, userAgent, referrer);
-			await _urlRepository.AddHitAsync(hit, token);
+			var hit = CreateHit(urlId, IPAddress.Parse(ip), userAgent, referrer);
+			await _urlRepository.AddHitAsync(hit);
 		}
 
 		/// <summary>
