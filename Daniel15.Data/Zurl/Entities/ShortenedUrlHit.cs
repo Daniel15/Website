@@ -18,24 +18,9 @@ namespace Daniel15.Data.Zurl.Entities
 		public string IpAddress { get; set; }
 		public string Country { get; set; }
 
-		[NotMapped]
-	    public Uri Referrer
-	    {
-		    get
-		    {
-			    Uri.TryCreate(RawReferrer, UriKind.Absolute, out var uri);
-			    return uri;
-		    }
-		    set => RawReferrer = value.ToString();
-	    }
+	    public Uri Referrer { get; set; }
 		public string ReferrerDomain { get; set; }
 
-		/// <summary>
-		/// Entity Framework doesn't support URI fields, so this is the  backing field
-		/// for <see cref="Referrer"/>.
-		/// </summary>
-		public string RawReferrer { get; set; }
-
-	    public DateTime Date { get; set; }
+		public DateTime Date { get; set; }
 	}
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
@@ -39,18 +39,8 @@ namespace Daniel15.Data.Entities.Blog
 		public bool Published { get; set; }
 		public string Summary { get; set; }
 
-		/// <summary>
-		/// UNIX timestamp this blog article was posted at. This is only for backwards compatibility
-		/// with the old database - Use <see cref="Date"/> instead.
-		/// </summary>
-		public long UnixDate { get; set; }
-
 		[Required]
-		public DateTime Date
-		{
-			get { return DateExtensions.FromUnix(UnixDate); }
-			set { UnixDate = value.ToUnix(); }
-		}
+		public DateTime Date { get; set; }
 
 		/// <summary>
 		/// The raw content of this blog post, as retrieved from the database
@@ -77,16 +67,7 @@ namespace Daniel15.Data.Entities.Blog
 		/// <summary>
 		/// Details of how many times this post was shared on social networking sites
 		/// </summary>
-		public IDictionary<string, int> ShareCounts
-		{
-			get { return string.IsNullOrEmpty(RawShareCounts) ? null : JsonConvert.DeserializeObject<IDictionary<string, int>>(RawShareCounts); }
-			set { RawShareCounts = JsonConvert.SerializeObject(value); }
-		}
-
-		/// <summary>
-		/// Raw JSON-encoded blob for <see cref="ShareCounts"/>.
-		/// </summary>
-		public string RawShareCounts { get; set; }
+		public IDictionary<string, int> ShareCounts { get; set; }
 
 		/// <summary>
 		/// Gets the Disqus identifier for this post (currently just the post ID)

@@ -1,4 +1,6 @@
-﻿namespace Daniel15.Shared.Extensions
+using System;
+
+namespace Daniel15.Shared.Extensions
 {
 	/// <summary>
 	/// Extension methods for strings.
@@ -27,6 +29,15 @@
 			return value.StartsWith(prefixToRemove)
 				? value.Substring(prefixToRemove.Length)
 				: value;
+		}
+
+		/// <summary>
+		/// Try to parse the string as a URL. If it's not a valid URL, returns <c>null</c>.
+		/// </summary>
+		public static Uri ParseUriOrNull(this string maybeUri)
+		{
+			Uri.TryCreate(maybeUri, UriKind.Absolute, out var uri);
+			return uri;
 		}
 	}
 }

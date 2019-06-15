@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -168,7 +168,7 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		{
 			return posts
 				.Where(post => post.Published == published)
-				.OrderByDescending(post => post.UnixDate)
+				.OrderByDescending(post => post.Date)
 				.Skip(offset)
 				.Take(count)
 				.Include(post => post.MainCategory)
@@ -186,16 +186,16 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns>Latest blog posts</returns>
 		public List<PostModel> LatestPostsForMonth(int year, int month, int count = 10, int offset = 0)
 		{
-			var firstDate = new DateTime(year, month, day: 1).ToUnix();
-			var lastDate = new DateTime(year, month, day: 1).AddMonths(1).ToUnix();
+			var firstDate = new DateTime(year, month, day: 1);
+			var lastDate = new DateTime(year, month, day: 1).AddMonths(1);
 
 			return Context.Posts
 				.Where(post =>
 					post.Published &&
-					post.UnixDate >= firstDate &&
-					post.UnixDate <= lastDate
+					post.Date >= firstDate &&
+					post.Date <= lastDate
 				)
-				.OrderByDescending(post => post.UnixDate)
+				.OrderByDescending(post => post.Date)
 				.Skip(offset)
 				.Take(count)
 				.Include(post => post.MainCategory)
@@ -316,13 +316,13 @@ namespace Daniel15.Data.Repositories.EntityFramework
 		/// <returns>Total number of posts that were posted in this month</returns>
 		public int PublishedCountForMonth(int year, int month)
 		{
-			var firstDate = new DateTime(year, month, day: 1).ToUnix();
-			var lastDate = new DateTime(year, month, day: 1).AddMonths(1).ToUnix();
+			var firstDate = new DateTime(year, month, day: 1);
+			var lastDate = new DateTime(year, month, day: 1).AddMonths(1);
 
 			return Context.Posts.Count(post =>
 				post.Published && 
-				post.UnixDate >= firstDate &&
-				post.UnixDate <= lastDate
+				post.Date >= firstDate &&
+				post.Date <= lastDate
 			);
 		}
 

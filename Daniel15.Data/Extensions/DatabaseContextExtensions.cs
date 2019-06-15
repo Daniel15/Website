@@ -13,11 +13,6 @@ namespace Daniel15.Data.Extensions
 		/// Prefix for boolean fields in the database
 		/// </summary>
 		private const string BOOLEAN_PREFIX = "Is_";
-		/// <summary>
-		/// Prefix for "raw" fields, used when the database representation is different (ie. EF doesn't
-		/// support a particular field format)
-		/// </summary>
-		private const string RAW_PREFIX = "Raw_";
 
 		/// <summary>
 		/// Regular expression matching segments in a camelcase string
@@ -43,7 +38,7 @@ namespace Daniel15.Data.Extensions
 						match => match.Value[0] + "_" + match.Value[1]
 					);
 					// Remove "is" prefix (eg. "IsPrimary" -> "Primary") and "Raw" prefix (eg. "RawTechnologies" => "Technologies")
-					name = name.TrimStart(BOOLEAN_PREFIX).TrimStart(RAW_PREFIX).ToLowerInvariant();
+					name = name.TrimStart(BOOLEAN_PREFIX).ToLowerInvariant();
 					property.Relational().ColumnName = name;
 				}
 			}

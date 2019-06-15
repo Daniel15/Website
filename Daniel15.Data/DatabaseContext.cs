@@ -1,7 +1,10 @@
-﻿using Daniel15.Data.Entities.Blog;
+using System.Collections.Generic;
+using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Entities.Projects;
 using Daniel15.Data.Extensions;
+using Daniel15.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace Daniel15.Data
 {
@@ -62,17 +65,40 @@ namespace Daniel15.Data
 				.ToTable("disqus_comments")
 				.Ignore(x => x.Children);
 
+			modelBuilder.Entity<PostModel>()
+				.Property(x => x.RawContent)
+				.HasColumnName("content");
+
 			// Backwards compatibility with old DB - Dates as UNIX times
 			modelBuilder.Entity<PostModel>()
-				.Ignore(x => x.Date)
-				.Ignore(x => x.ShareCounts);
-			modelBuilder.Entity<PostModel>().Property(x => x.UnixDate).HasColumnName("date");
+				.Property(x => x.Date)
+				.HasConversion(
+					x => x.ToUnix(),
+					x => DateExtensions.FromUnix(x)
+				);
 
-			// Entity Framework hacks - Data types like enums that need backing fields
+			modelBuilder.Entity<PostModel>()
+				.Property(x => x.ShareCounts)
+				.HasColumnName("share_counts")
+				.HasConversion(
+					x => JsonConvert.SerializeObject(x),
+					x => string.IsNullOrEmpty(x) ? null : JsonConvert.DeserializeObject<IDictionary<string, int>>(x)
+				);
+
 			modelBuilder.Entity<ProjectModel>()
-				.Ignore(x => x.ProjectType)
-				.Ignore(x => x.Technologies);
-			modelBuilder.Entity<ProjectModel>().Property(x => x.RawProjectType).HasColumnName("type");
+				.Property(x => x.ProjectType)
+				.HasColumnName("type")
+				.HasConversion(
+					x => x.ToString(),
+					x => x.FirstUpper().ParseEnum<ProjectType>()
+				);
+
+			modelBuilder.Entity<ProjectModel>()
+				.Property(x => x.Technologies)
+				.HasConversion(
+					x => string.Join(",", x),
+					x => x.Split(',')
+				);
 		}
 
 		/// <summary>

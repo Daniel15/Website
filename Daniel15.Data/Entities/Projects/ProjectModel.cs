@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Daniel15.Shared.Extensions;
 
@@ -50,19 +50,6 @@ namespace Daniel15.Data.Entities.Projects
 		public ProjectType ProjectType { get; set; }
 
 		/// <summary>
-		/// String version of <see cref="ProjectType"/>. Only required because Entity Framework can not
-		/// serialise enums as strings. Use <see cref="ProjectType"/> instead.
-		/// </summary>
-		public string RawProjectType
-		{
-			get { return ProjectType.ToString(); }
-			set
-			{
-				ProjectType = value.FirstUpper().ParseEnum<ProjectType>();
-			}
-		}
-
-		/// <summary>
 		/// Description of this project
 		/// </summary>
 		public string Description { get; set; }
@@ -92,16 +79,6 @@ namespace Daniel15.Data.Entities.Projects
 		/// A list of technologies used during development of this project
 		/// </summary>
 		public IList<string> Technologies { get; set; }
-
-		/// <summary>
-		/// A raw comma-separated list of technologies used during development of this project. Use
-		/// <see cref="Technologies"/> instead.
-		/// </summary>
-		public string RawTechnologies
-		{
-			get { return string.Join(",", Technologies); }
-			set { Technologies = value.Split(','); }
-		}
 
 		/// <summary>
 		/// A number representing where to display this project in the list

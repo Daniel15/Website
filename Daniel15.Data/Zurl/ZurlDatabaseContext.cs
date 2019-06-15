@@ -1,5 +1,6 @@
 using Daniel15.Data.Extensions;
 using Daniel15.Data.Zurl.Entities;
+using Daniel15.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Daniel15.Data.Zurl
@@ -26,6 +27,13 @@ namespace Daniel15.Data.Zurl
 		{
 			base.OnModelCreating(modelBuilder);
 			modelBuilder.ConfigureConventions();
+
+			modelBuilder.Entity<ShortenedUrlHit>()
+				.Property(x => x.Referrer)
+				.HasConversion(
+					x => x.ToString(),
+					x => x.ParseUriOrNull()
+				);
 		}
 	}
 }
