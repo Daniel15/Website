@@ -7,7 +7,7 @@ The live site is currently running on .NET Core 2.0
 
 Blog
 ====
-The blog is a very simple blog. It doesn't really have many fancy features. Things that this blog
+The blog is a very simple blog. It doesn't really have many fancy features. Things that blog
 supported are:
 
  - Browsing monthly archives
