@@ -7,13 +7,13 @@ The live site is currently running on .NET Core 2.0
 
 Blog
 ====
-The blog is a very simple blog. It doesn't really have many fancy features. Things that ARE
+The blog is a very simple blog. It doesn't really have many fancy features. Things that this blog
 supported are:
 
  - Browsing monthly archives
  - Writing comments (now handled with Disqus)
  - Writing new posts
-   - Posting new posts to Facebook and Twitter
+ - Posting new posts to Facebook and Twitter
    
 As it's just for my personal use, I haven't put too much work into polishing the blog administration
 section. 
@@ -33,7 +33,7 @@ Please feel free to use any bits of this code in your own work, but please:
 
 Copyright (C) 2012 Daniel Lo Nigro (Daniel15)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
+Permission is here by granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
 the Software without restriction, including without limitation the rights to
 use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
