@@ -82,10 +82,7 @@ app.UseHangfireDashboard(options: new DashboardOptions
 // All real routes are defined using attributes.
 app.UseRouting();
 app.UseAuthorization();
-app.MapControllerRoute(
-	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}"
-);
+app.MapControllers();
 
 CronScheduler.ScheduleCronjobs();
 app.Run();
