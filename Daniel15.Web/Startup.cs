@@ -1,23 +1,12 @@
-using System;
-using System.IO;
-using System.Linq;
 using Daniel15.Cron;
 using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
 using Hangfire;
 using Hangfire.MySql;
-using JavaScriptEngineSwitcher.ChakraCore;
 using JavaScriptEngineSwitcher.Core;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.AspNetCore.Http;
+using JavaScriptEngineSwitcher.V8;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using React.AspNet;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,7 +21,7 @@ builder.Services.AddIdentity<SimpleIdentityUser, SimpleIdentityRole>()
 	.AddDefaultTokenProviders();
 
 builder.Services.AddSession();
-JsEngineSwitcher.Current.EngineFactories.Add(new ChakraCoreJsEngineFactory());
+JsEngineSwitcher.Current.EngineFactories.Add(new V8JsEngineFactory());
 builder.Services.AddReact();
 builder.Services.AddDaniel15(builder.Configuration);
 builder.Services.AddDaniel15Config(builder.Configuration);
