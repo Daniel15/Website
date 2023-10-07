@@ -6,12 +6,14 @@
     <AssemblyName>Daniel15.Web</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>Daniel15.Web</PackageId>
+	<ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="App.config" />
     <None Update="wwwroot\**\*;Views\**\*;Areas\Admin\Views\**\*;Areas\Gallery\Views\**\*;supervisord.conf;nginx.conf">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
@@ -27,10 +29,10 @@
     <PackageReference Include="Hangfire.AspNetCore" Version="1.8.5" />
     <PackageReference Include="Hangfire.Core" Version="1.8.5" />
     <PackageReference Include="Hangfire.MySqlStorage" Version="2.0.3" />
-    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore" Version="3.21.0" />
-    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.linux-x64" Version="3.21.0" />
-    <PackageReference Include="JavaScriptEngineSwitcher.ChakraCore.Native.win-x64" Version="3.21.0" />
+    <PackageReference Include="JavaScriptEngineSwitcher.V8" Version="3.21.5" />
 	<PackageReference Include="MaxMind.GeoIP2" Version="5.1.0" />
+	<PackageReference Include="Microsoft.ClearScript.V8.Native.linux-x64" Version="7.4.3" />
+	<PackageReference Include="Microsoft.ClearScript.V8.Native.win-x64" Version="7.4.3" />
     <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.3.8" />
     <PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.3.8" />
     <PackageReference Include="React.AspNet" Version="5.2.12" />
@@ -38,6 +40,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="daniel15.service">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="GeoLite2-Country.mmdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
