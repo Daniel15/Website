@@ -3,6 +3,8 @@ Description=Daniel15 Site
 
 [Service]
 WorkingDirectory=/var/www/dan.cx/live/site/
+# Remove any existing socket
+ExecStartPre=-rm /run/user/33/dan-live.sock
 ExecStart=/usr/bin/dotnet /var/www/dan.cx/live/site/Daniel15.Web.dll
 Restart=always
 RestartSec=10
