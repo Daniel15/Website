@@ -1,11 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Daniel15.Web.ViewModels.Shared;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 namespace Daniel15.Web.Extensions
 {
@@ -34,7 +33,8 @@ namespace Daniel15.Web.Extensions
 			Func<TItem, string> labelFunc
 		)
 		{
-			var name = ExpressionHelper.GetExpressionText(expression);
+			return new HtmlContentBuilder().Append("TODO");
+			/*var name = ExpressionHelper.GetExpressionText(expression);
 			var metadata = ExpressionMetadataProvider.FromLambdaExpression(expression, htmlHelper.ViewData, htmlHelper.MetadataProvider);
 
 			// Convert selected items list to hashset for quick lookup
@@ -57,7 +57,7 @@ namespace Daniel15.Web.Extensions
 			{
 				Name = name,
 				Items = checkboxItems
-			});
+			});*/
 		}
 	}
 }

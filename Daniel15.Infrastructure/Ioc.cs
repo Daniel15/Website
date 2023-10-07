@@ -76,7 +76,10 @@ namespace Daniel15.Infrastructure
 		private static void InitializeDatabase(IServiceCollection services, IConfiguration config)
 		{
 			services.AddDbContext<DatabaseContext>(options =>
-				options.UseMySql(config["Data:DefaultConnection:ConnectionString"])
+				options.UseMySql(
+					config["Data:DefaultConnection:ConnectionString"], 
+					ServerVersion.AutoDetect(config["Data:DefaultConnection:ConnectionString"])
+				)
 			);
 			services.AddScoped<IBlogRepository, BlogRepository>();
 			services.AddScoped<IDisqusCommentRepository, DisqusCommentRepository>();
@@ -84,7 +87,10 @@ namespace Daniel15.Infrastructure
 			services.AddScoped<IMicroblogRepository, MicroblogRepository>();
 
 			services.AddDbContext<ZurlDatabaseContext>(options => 
-				options.UseMySql(config.GetConnectionString("Zurl"))
+				options.UseMySql(
+					config.GetConnectionString("Zurl"),
+					ServerVersion.AutoDetect(config.GetConnectionString("Zurl"))
+				)
 			);
 			services.AddScoped<IUrlRepository, UrlRepository>();
 		}

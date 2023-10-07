@@ -44,7 +44,7 @@ namespace Daniel15.Data.Zurl
 		public async Task AddHitAsync(ShortenedUrlHit hit)
 		{
 			await _context.Hits.AddAsync(hit);
-			await _context.Database.ExecuteSqlCommandAsync(
+			await _context.Database.ExecuteSqlAsync(
 				$"UPDATE urls SET last_hit = {hit.Date.ToUnix()}, hits = hits + 1 WHERE id = {hit.UrlId}"
 			);
 			await _context.SaveChangesAsync();

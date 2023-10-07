@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -15,7 +15,7 @@ namespace Daniel15.Web.Extensions
 		/// </summary>
 		/// <param name="image">Image to return</param>
 		/// <returns>ActionResult containing this image</returns>
-		public static ActionResult ToActionResult<T>(this Image<T> image) where T : struct, IPixel<T>
+		public static ActionResult ToActionResult(this Image image)
 		{
 			// Must NOT dispose this stream - The MVC framework disposes it for us.
 			var stream = new MemoryStream();

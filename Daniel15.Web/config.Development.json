@@ -11,18 +11,18 @@
   },
   "Data": {
     "DefaultConnection": {
-      "ConnectionString": "Server=localhost; Database=daniel15_site; Uid=dev; Pwd=password; Allow User Variables=True;"
+      "ConnectionString": "Server=localhost; Database=daniel15_site; Uid=root; Pwd=; Allow User Variables=True;"
     }
   },
   "ConnectionStrings": {
-    "Zurl": "Server=localhost; Database=zurl; Uid=dev; Pwd=password;"
+    "Zurl": "Server=localhost; Database=zurl; Uid=root; Pwd=;"
   },
   "Auth": {
     "Users": {
       "USER@EXAMPLE.COM": {
-        "Email": "user@example.com",
+        "Email": "USER@EXAMPLE.COM",
         "NormalizedUserName": "USER@EXAMPLE.COM",
-        "PasswordHash": "AQAAAAEAACcQAAAAEJOYL0MGZ5CNnERvqzI2Wl9eJLXMsuchKP1EIWGQneZ1GuNCjheC4pD1AWgVy+decQ=="
+        "PasswordHash": "AQAAAAIAAYagAAAAEF2Gza3ARtUXXviKrolkBf1izyRHjs9J/uJKD53ZQxpstW6U0N4ejbS2zKCTZiVZHg=="
       }
     }
   }

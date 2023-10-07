@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +9,6 @@ using Daniel15.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
 
 namespace Daniel15.Web.Areas.Gallery.Controllers
 {
@@ -156,7 +155,7 @@ namespace Daniel15.Web.Areas.Gallery.Controllers
 					{
 						Size = new Size(MAX_THUMBNAIL_SIZE, MAX_THUMBNAIL_SIZE),
 						Mode = ResizeMode.Max,
-						Sampler = new Lanczos3Resampler(),
+						Sampler = KnownResamplers.Lanczos3,
 					}));
 					img.Save(cachePath);
 					return img.ToActionResult();

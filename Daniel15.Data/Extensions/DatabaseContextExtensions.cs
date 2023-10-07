@@ -28,7 +28,7 @@ namespace Daniel15.Data.Extensions
 			foreach (var entity in modelBuilder.Model.GetEntityTypes())
 			{
 				// Lowercase table names
-				entity.Relational().TableName = entity.Relational().TableName.ToLowerInvariant();
+				entity.SetTableName(entity.GetTableName().ToLowerInvariant());
 
 				foreach (var property in entity.GetProperties())
 				{
@@ -39,7 +39,7 @@ namespace Daniel15.Data.Extensions
 					);
 					// Remove "is" prefix (eg. "IsPrimary" -> "Primary") and "Raw" prefix (eg. "RawTechnologies" => "Technologies")
 					name = name.TrimStart(BOOLEAN_PREFIX).ToLowerInvariant();
-					property.Relational().ColumnName = name;
+					property.SetColumnName(name);
 				}
 			}
 		}

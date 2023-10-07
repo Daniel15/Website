@@ -1,15 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard20</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>Daniel15.Shared</AssemblyName>
     <PackageId>Daniel15.Shared</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0001" />
-    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta0001" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.0.2" />
+    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="2.0.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
 	<!--https://github.com/JimBobSquarePants/ImageSharp/issues/211-->
 	<PackageReference Include="runtime.native.System.IO.Compression" Version="4.3.2" />

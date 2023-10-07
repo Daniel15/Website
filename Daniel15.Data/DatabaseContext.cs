@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Entities.Projects;
@@ -97,7 +98,7 @@ namespace Daniel15.Data
 				.Property(x => x.Technologies)
 				.HasConversion(
 					x => string.Join(",", x),
-					x => x.Split(',')
+					x => x.Split(',',StringSplitOptions.None)
 				);
 		}
 
