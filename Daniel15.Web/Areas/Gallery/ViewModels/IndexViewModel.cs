@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Daniel15.Web.Areas.Gallery.Models;
 using Daniel15.Web.ViewModels;
 
@@ -12,7 +12,7 @@ namespace Daniel15.Web.Areas.Gallery.ViewModels
 		/// <summary>
 		/// Details on the gallery
 		/// </summary>
-		public Shared.Configuration.Gallery Gallery { get; set; }
+		public Configuration.Gallery Gallery { get; set; }
 		/// <summary>
 		/// Path to the gallery listing
 		/// </summary>

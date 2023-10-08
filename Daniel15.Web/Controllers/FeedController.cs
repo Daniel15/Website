@@ -1,7 +1,7 @@
 using Daniel15.Web.Services;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Repositories;
-using Daniel15.Shared.Configuration;
+using Daniel15.Web.Configuration;
 using Daniel15.Web.Exceptions;
 using Daniel15.Web.Extensions;
 using Daniel15.Web.ViewModels.Blog;

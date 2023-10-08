@@ -1,8 +1,5 @@
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Daniel15.Web.Models.Blog;
-using Daniel15.Shared.Extensions;
+using Daniel15.Web.Extensions;
 using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Daniel15.Web.Services.Social

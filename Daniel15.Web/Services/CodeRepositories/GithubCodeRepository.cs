@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Daniel15.Shared.Extensions;
+using Daniel15.Web.Extensions;
 
 namespace Daniel15.Web.Services.CodeRepositories
 {

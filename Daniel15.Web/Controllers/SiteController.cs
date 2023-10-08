@@ -1,7 +1,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Daniel15.Web.Repositories;
-using Daniel15.Shared.Extensions;
+using Daniel15.Web.Extensions;
 using Daniel15.Web.Models;
 using Daniel15.Web.ViewComponents;
 using Daniel15.Web.ViewModels;

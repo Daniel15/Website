@@ -13,7 +13,7 @@ using Daniel15.Web.Repositories.EntityFramework;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.Zurl;
 using Microsoft.EntityFrameworkCore;
-using Daniel15.Shared.Configuration;
+using Daniel15.Web.Configuration;
 using Daniel15.Web;
 using Microsoft.Extensions.Options;
 

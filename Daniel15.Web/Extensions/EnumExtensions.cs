@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Daniel15.Shared.Extensions
+namespace Daniel15.Web.Extensions
 {
 	/// <summary>
 	/// Extension methods relating to enums

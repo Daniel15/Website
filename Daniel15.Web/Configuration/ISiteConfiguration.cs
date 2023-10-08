@@ -1,4 +1,4 @@
-﻿namespace Daniel15.Shared.Configuration
+﻿namespace Daniel15.Web.Configuration
 {
 	/// <summary>
 	/// Represents configuration details for the site.

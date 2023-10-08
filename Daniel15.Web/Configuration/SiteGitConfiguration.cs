@@ -1,4 +1,4 @@
-﻿namespace Daniel15.Shared.Configuration
+﻿namespace Daniel15.Web.Configuration
 {
 	/// <summary>
 	/// Information about the Git commit the site is running on

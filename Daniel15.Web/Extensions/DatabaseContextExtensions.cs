@@ -1,5 +1,5 @@
 using System.Text.RegularExpressions;
-using Daniel15.Shared.Extensions;
+using Daniel15.Web.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Daniel15.Web.Extensions

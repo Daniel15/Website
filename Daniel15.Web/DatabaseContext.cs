@@ -1,7 +1,7 @@
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Models.Projects;
 using Daniel15.Web.Extensions;
-using Daniel15.Shared.Extensions;
+using Daniel15.Web.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 

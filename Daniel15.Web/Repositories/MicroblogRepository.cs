@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Daniel15.Web.Models.Blog;
-using Daniel15.Shared.Configuration;
+using Daniel15.Web.Configuration;
 
 namespace Daniel15.Web.Repositories
 {
