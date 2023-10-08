@@ -1,11 +1,11 @@
 using System;
 using System.Threading;
-using Daniel15.BusinessLayer.Services;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Data.Zurl;
 using Daniel15.Web.Extensions;
+using Daniel15.Web.Services;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 

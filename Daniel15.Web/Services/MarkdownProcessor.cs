@@ -1,7 +1,7 @@
-﻿using Daniel15.BusinessLayer.MarkdownExtensions;
+﻿using Daniel15.Web.MarkdownExtensions;
 using Markdig;
 
-namespace Daniel15.BusinessLayer.Services
+namespace Daniel15.Web.Services
 {
 	/// <summary>
 	/// Service that converts Markdown to HTML using MarkdownDeep. Supports some Github Markdown

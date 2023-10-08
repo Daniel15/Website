@@ -1,4 +1,4 @@
-﻿namespace Daniel15.BusinessLayer.Services.Social
+﻿namespace Daniel15.Web.Services.Social
 {
 	/// <summary>
 	/// Represents general details of a social network

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Daniel15.Data.Entities.Blog;
 
-namespace Daniel15.BusinessLayer.Services.Social
+namespace Daniel15.Web.Services.Social
 {
 	/// <summary>
 	/// Used to share posts on all available social networks

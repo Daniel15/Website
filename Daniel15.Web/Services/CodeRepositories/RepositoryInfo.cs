@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Daniel15.BusinessLayer.Services.CodeRepositories
+namespace Daniel15.Web.Services.CodeRepositories
 {
 	// TODO: Move to DTO assembly
 	/// <summary>

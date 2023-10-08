@@ -1,4 +1,4 @@
-﻿using Daniel15.BusinessLayer.Services.Social;
+﻿using Daniel15.Web.Services.Social;
 
 namespace Daniel15.Web.Models.Blog
 {

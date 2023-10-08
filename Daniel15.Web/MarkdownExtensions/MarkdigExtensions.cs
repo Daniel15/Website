@@ -1,7 +1,6 @@
-﻿using System;
 using Markdig.Renderers;
 
-namespace Daniel15.BusinessLayer.MarkdownExtensions
+namespace Daniel15.Web.MarkdownExtensions
 {
 	/// <summary>
 	/// Extension methods for Markdig

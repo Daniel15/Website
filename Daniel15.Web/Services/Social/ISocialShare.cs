@@ -1,7 +1,6 @@
-﻿using System.Threading.Tasks;
 using Daniel15.Data.Entities.Blog;
 
-namespace Daniel15.BusinessLayer.Services.Social
+namespace Daniel15.Web.Services.Social
 {
 	/// <summary>
 	/// Represents a social network that can be used by users to share posts

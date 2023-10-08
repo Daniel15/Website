@@ -1,6 +1,6 @@
 ﻿using Daniel15.Data.Entities.Blog;
 
-namespace Daniel15.BusinessLayer.Services
+namespace Daniel15.Web.Services
 {
 	public interface IUrlShortener
 	{

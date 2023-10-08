@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Daniel15.BusinessLayer.Services
+namespace Daniel15.Web.Services
 {
 	/// <summary>
 	/// Handles synchronisation of comments between Disqus and the local database.

@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Daniel15.BusinessLayer.Services
+namespace Daniel15.Web.Services
 {
 	/// <summary>
 	/// Handles logging hits to short URLs

@@ -1,5 +1,5 @@
 ﻿@using System.Threading.Tasks
-@using Daniel15.BusinessLayer.Services.CodeRepositories
+@using Daniel15.Web.Services.CodeRepositories
 @model Daniel15.Web.ViewModels.Project.ProjectViewModel
 
 <li class="@(string.Join(" ", Model.Project.Technologies.Select(tech => "uses-" + tech)))">

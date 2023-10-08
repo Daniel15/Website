@@ -1,4 +1,4 @@
-using Daniel15.BusinessLayer.Services;
+using Daniel15.Web.Services;
 using Hangfire;
 
 namespace Daniel15.Cron

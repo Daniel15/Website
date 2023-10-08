@@ -8,7 +8,7 @@ using MaxMind.GeoIP2;
 using Microsoft.AspNetCore.Http;
 using UAParser;
 
-namespace Daniel15.BusinessLayer.Services
+namespace Daniel15.Web.Services
 {
 	/// <summary>
 	/// Handles logging hits to short URLs

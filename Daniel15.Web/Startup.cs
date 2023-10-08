@@ -1,6 +1,6 @@
-using Daniel15.BusinessLayer.Services.CodeRepositories;
-using Daniel15.BusinessLayer.Services.Social;
-using Daniel15.BusinessLayer.Services;
+using Daniel15.Web.Services.CodeRepositories;
+using Daniel15.Web.Services.Social;
+using Daniel15.Web.Services;
 using Daniel15.Cron;
 using Daniel15.SimpleIdentity;
 using Hangfire;

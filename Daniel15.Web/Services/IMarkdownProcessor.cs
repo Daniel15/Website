@@ -1,4 +1,4 @@
-﻿namespace Daniel15.BusinessLayer.Services
+﻿namespace Daniel15.Web.Services
 {
 	/// <summary>
 	/// Service that converts Markdown to HTML

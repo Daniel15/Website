@@ -1,9 +1,9 @@
-﻿using Markdig;
+using Markdig;
 using Markdig.Renderers;
 using Markdig.Renderers.Html;
 using Markdig.Syntax;
 
-namespace Daniel15.BusinessLayer.MarkdownExtensions
+namespace Daniel15.Web.MarkdownExtensions
 {
 	/// <summary>
 	/// Temporary hack. Moves all headings down a level (h1 to h2, h2 to h3, etc).

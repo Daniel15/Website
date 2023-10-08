@@ -1,16 +1,15 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using Daniel15.BusinessLayer.Services;
+using Daniel15.Web.Services;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Web.Areas.Admin.ViewModels.Blog;
 using Daniel15.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.WebEncoders;
 
 namespace Daniel15.Web.Areas.Admin.Controllers
 {

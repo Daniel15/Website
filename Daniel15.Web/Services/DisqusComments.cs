@@ -1,13 +1,10 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;
 using Daniel15.Shared.Configuration;
 using Daniel15.Shared.Extensions;
 using Microsoft.AspNetCore.Http.Extensions;
 
-namespace Daniel15.BusinessLayer.Services
+namespace Daniel15.Web.Services
 {
 	/// <summary>
 	/// Handles synchronisation of comments between Disqus and the local database.

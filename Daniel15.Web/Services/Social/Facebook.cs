@@ -4,7 +4,7 @@ using System.Xml.Linq;
 using Daniel15.Data.Entities.Blog;
 using Microsoft.AspNetCore.Http.Extensions;
 
-namespace Daniel15.BusinessLayer.Services.Social
+namespace Daniel15.Web.Services.Social
 {
 	/// <summary>
 	/// Support for sharing posts on Facebook

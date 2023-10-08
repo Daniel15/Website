@@ -2,38 +2,38 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Daniel15.Data.Entities.Blog;
-using Daniel15.Shared.Extensions;
 using Microsoft.AspNetCore.Http.Extensions;
+using Newtonsoft.Json.Linq;
 
-namespace Daniel15.BusinessLayer.Services.Social
+namespace Daniel15.Web.Services.Social
 {
 	/// <summary>
-	/// Support for sharing posts on Reddit
+	/// Support for sharing posts on LinkedIn
 	/// </summary>
-	public class Reddit : ISocialShare
+	public class Linkedin : ISocialShare
 	{
 		/// <summary>
-		/// Base URL for Reddit share URLs
+		/// Base URL for LinkedIn share URLs
 		/// </summary>
-		private const string SHARE_URL = "http://reddit.com/submit";
+		private const string SHARE_URL = "http://www.linkedin.com/shareArticle";
 		/// <summary>
-		/// URL to retrieve sharing count
+		/// API URL to get sharing counts
 		/// </summary>
-		private const string API_URL = "http://www.reddit.com/api/info.json";
+		private const string API_COUNT_URL = "http://www.linkedin.com/countserv/count/share";
 
 		private readonly HttpClient _client;
 
 		/// <summary>
 		/// Gets the internal ID of this social network
 		/// </summary>
-		public string Id => "reddit";
+		public string Id => "linkedin";
 
 		/// <summary>
 		/// Gets the friendly name of this social network
 		/// </summary>
-		public string Name => "Reddit";
+		public string Name => "LinkedIn";
 
-		public Reddit(HttpClient client)
+		public Linkedin(HttpClient client)
 		{
 			_client = client;
 		}
@@ -50,8 +50,10 @@ namespace Daniel15.BusinessLayer.Services.Social
 		{
 			return SHARE_URL + new QueryBuilder
 			{
+				{"mini", "true"},
 				{"url", url},
-				{"title", post.Title}
+				{"title", post.Title},
+				{"source", "Daniel15"},
 			};
 		}
 
@@ -64,23 +66,21 @@ namespace Daniel15.BusinessLayer.Services.Social
 		/// <returns>Share count for this post</returns>
 		public async Task<int> GetShareCountAsync(PostModel post, string url, string shortUrl)
 		{
-			var total = 0;
-			var apiUrl = API_URL + new QueryBuilder
+			var apiUrl = API_COUNT_URL + new QueryBuilder
 			{
 				{"url", url}
 			};
 
-			dynamic data = await _client.GetDynamicJsonAsync(apiUrl);
-			if (data == null || data.data == null || data.data.children == null)
+			var responseText = await _client.GetStringAsync(apiUrl);
+			// Ugly hack to get JSON data from the JavaScript method call
+			// This API call is usually used client-side via JSONP...
+			responseText = responseText.Replace("IN.Tags.Share.handleCount(", "").Replace(");", "");
+			dynamic response = JObject.Parse(responseText);
+
+			if (response == null || response.count == null)
 				return 0;
 
-			// Need to add up the points in every submission of this URL
-			foreach (var child in data.data.children)
-			{
-				total += Convert.ToInt32(child.data.score);
-			}
-
-			return total;
+			return Convert.ToInt32(response.count);
 		}
 		#endregion
 	}

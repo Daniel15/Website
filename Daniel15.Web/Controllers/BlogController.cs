@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Daniel15.BusinessLayer.Services;
-using Daniel15.BusinessLayer.Services.Social;
+using Daniel15.Web.Services;
+using Daniel15.Web.Services.Social;
 using Daniel15.Data;
 using Daniel15.Data.Entities.Blog;
 using Daniel15.Data.Repositories;

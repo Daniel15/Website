@@ -1,9 +1,9 @@
-﻿using Markdig;
+using Markdig;
 using Markdig.Renderers;
 using Markdig.Renderers.Html;
 using Markdig.Syntax;
 
-namespace Daniel15.BusinessLayer.MarkdownExtensions
+namespace Daniel15.Web.MarkdownExtensions
 {
 	/// <summary>
 	/// Replaces Markdig's built-in code block renderer with one that renders HTML suitable for

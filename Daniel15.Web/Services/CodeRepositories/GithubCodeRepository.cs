@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Daniel15.Shared.Extensions;
 
-namespace Daniel15.BusinessLayer.Services.CodeRepositories
+namespace Daniel15.Web.Services.CodeRepositories
 {
 	public class GithubCodeRepository : ICodeRepository
 	{

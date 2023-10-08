@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Daniel15.BusinessLayer.Services.CodeRepositories
+namespace Daniel15.Web.Services.CodeRepositories
 {
 	/// <summary>
 	/// Handles getting information about a code repository by delegating the request to the correct
