@@ -1,10 +1,21 @@
+using Daniel15.BusinessLayer.Services.CodeRepositories;
+using Daniel15.BusinessLayer.Services.Social;
+using Daniel15.BusinessLayer.Services;
 using Daniel15.Cron;
-using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
 using Hangfire;
 using Hangfire.MySql;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Daniel15.BusinessLayer;
+using MaxMind.GeoIP2;
+using Daniel15.Data.Repositories.EntityFramework;
+using Daniel15.Data.Repositories;
+using Daniel15.Data.Zurl;
+using Daniel15.Data;
+using Microsoft.EntityFrameworkCore;
+using Daniel15.Shared.Configuration;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -12,33 +23,96 @@ builder.Configuration
 	.AddJsonFile("config.generated.json", optional: true)
 	.AddJsonFile($"config.{builder.Environment.EnvironmentName}.json", optional: true);
 
-builder.Services.AddControllersWithViews();
-builder.Services.AddIdentity<SimpleIdentityUser, SimpleIdentityRole>()
-	.AddSimpleIdentity<SimpleIdentityUser>(builder.Configuration.GetSection("Auth"))
+var services = builder.Services;
+var config = builder.Configuration;
+services.AddControllersWithViews();
+services.AddIdentity<SimpleIdentityUser, SimpleIdentityRole>()
+	.AddSimpleIdentity<SimpleIdentityUser>(config.GetSection("Auth"))
 	.AddDefaultTokenProviders();
 
-builder.Services.AddSession();
-builder.Services.AddDaniel15(builder.Configuration);
-builder.Services.AddDaniel15Config(builder.Configuration);
+services.AddSession();
 
-builder.Services.AddMiniProfiler(options =>
+// Services
+services.AddSingleton<IUrlShortener, UrlShortener>();
+services.AddSingleton<ISocialManager, SocialManager>();
+services.AddSingleton<IMarkdownProcessor, MarkdownProcessor>();
+services.AddSingleton<ICodeRepositoryManager, CodeRepositoryManager>();
+services.AddSingleton<ICodeRepository, GithubCodeRepository>();
+services.AddSingleton<Facebook>();
+services.AddSingleton<Reddit>();
+services.AddSingleton<Twitter>();
+services.AddSingleton<Linkedin>();
+
+services.AddScoped<IProjectCacheUpdater, ProjectCacheUpdater>();
+services.AddScoped<IShortUrlLogger, ShortUrlLogger>();
+services.AddScoped<IDisqusComments, DisqusComments>();
+
+// Third-party libraries
+services.AddSingleton(provider => UAParser.Parser.GetDefault());
+services.AddSingleton<IGeoIP2DatabaseReader>(provider =>
+{
+	var path = builder.Environment.IsEnvironment("Production")
+		? "/var/lib/GeoIP"
+		: builder.Environment.ContentRootPath;
+	return new DatabaseReader(
+		Path.Combine(path, "GeoLite2-Country.mmdb")
+	);
+});
+
+// HttpClient should be reused wherever possible.
+// https://aspnetmonsters.com/2016/08/2016-08-27-httpclientwrong/
+// https://stackoverflow.com/questions/11178220/is-httpclient-safe-to-use-concurrently
+services.AddSingleton<HttpClient>();
+
+// Database
+services.AddDbContext<DatabaseContext>(options =>
+	options.UseMySql(
+		config["Data:DefaultConnection:ConnectionString"],
+		ServerVersion.AutoDetect(config["Data:DefaultConnection:ConnectionString"])
+	)
+);
+services.AddScoped<IBlogRepository, BlogRepository>();
+services.AddScoped<IDisqusCommentRepository, DisqusCommentRepository>();
+services.AddScoped<IProjectRepository, ProjectRepository>();
+services.AddScoped<IMicroblogRepository, MicroblogRepository>();
+
+services.AddDbContext<ZurlDatabaseContext>(options =>
+	options.UseMySql(
+		config.GetConnectionString("Zurl"),
+		ServerVersion.AutoDetect(config.GetConnectionString("Zurl"))
+	)
+);
+services.AddScoped<IUrlRepository, UrlRepository>();
+
+// Config
+services.AddSingleton(_ => config);
+services.Configure<SiteConfiguration>(config.GetSection("Site"));
+services.Configure<GalleryConfiguration>(config.GetSection("Gallery"));
+services.AddSingleton<ISiteConfiguration>(
+	provider => provider.GetRequiredService<IOptions<SiteConfiguration>>().Value
+);
+services.AddSingleton<IGalleryConfiguration>(
+	provider => provider.GetRequiredService<IOptions<GalleryConfiguration>>().Value
+);
+
+services.AddMiniProfiler(options =>
 {
 	options.ShouldProfile = options.ResultsAuthorize = options.ResultsListAuthorize = 
 		request => request.HttpContext.User.Identity.IsAuthenticated;
 }).AddEntityFramework();
 
-builder.Services.AddHangfire(config => config
+services.AddHangfire(hangfireConfig => hangfireConfig
 	.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
 	.UseSimpleAssemblyNameTypeSerializer()
 	.UseRecommendedSerializerSettings()
 	.UseStorage(new MySqlStorage(
-		builder.Configuration["Data:DefaultConnection:ConnectionString"],
+		config["Data:DefaultConnection:ConnectionString"],
 		new MySqlStorageOptions
 		{
 			TablesPrefix = "Hangfire_"
 		}))
 );
-builder.Services.AddHangfireServer();
+services.AddHangfireServer();
 
 var app = builder.Build();
 

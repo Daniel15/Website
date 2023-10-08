@@ -20,7 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Daniel15.BusinessLayer\Daniel15.BusinessLayer.csproj" />
     <ProjectReference Include="..\Daniel15.Data\Daniel15.Data.csproj" />
-    <ProjectReference Include="..\Daniel15.Infrastructure\Daniel15.Infrastructure.csproj" />
     <ProjectReference Include="..\Daniel15.Shared\Daniel15.Shared.csproj" />
   </ItemGroup>
 
