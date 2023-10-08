@@ -1,7 +1,6 @@
 /**
  * dan.cx JavaScript (revision 2) - By Daniel15, 2011-2014
  * Feel free to use any of this, but please link back to my site
- * @jsx React.DOM
  */
 
 /**
@@ -17,19 +16,14 @@ Page.Site.Index =
 	/**
 	 * Initialise the index page
 	 */
-	init: function()
+	init: async function()
 	{
 		$('email_address').set('innerHTML', '&#100;&#064;&#100;&#046;&#115;&#098;');
 		$('gtalk_address').set('innerHTML', '&#100;&#097;&#110;&#105;&#101;&#108;&#064;&#100;&#049;&#053;&#046;&#098;&#105;&#122;');
-		
-		ReactDOM.render(
-			<SocialFeed
-				count={10}
-				className="minifeed"
-				showLoadMore={false}
-			/>,
-			document.getElementById('minifeed')
-		);
+
+		await Page.Site.Socialfeed.loadAndInsertItems('/socialfeed.htm?count=10&showDescription=false');
+		const loadingPlaceholder = document.querySelector('.minifeed-loading');
+		loadingPlaceholder.parentElement.removeChild(loadingPlaceholder);
 	},
 	/**
 	 * Load Google Talk status via AJAX request
@@ -80,6 +74,46 @@ Page.Site.Index =
 		$('skype').removeClass('offline').addClass(cssClass);
 		$('skype_address').set('title', status);
 		$('skype_status').set('innerHTML', status);
+	}
+};
+
+Page.Site.Socialfeed = 
+{
+	init: function()
+	{
+		const showMoreLink = document.getElementById('show-more');
+		showMoreLink.addEventListener('click', evt => 
+		{
+			Page.Site.Socialfeed.loadMore(showMoreLink);
+			evt.preventDefault();	
+		})
+	},
+
+	loadMore: async function(showMoreLink)
+	{
+		showMoreLink.textContent = 'Loading...';
+
+		const url = showMoreLink.getAttribute('href');
+		const doc = await Page.Site.Socialfeed.loadAndInsertItems(url);
+
+		// Replace "show more" link with new one containing new URL.
+		const newShowMoreLink = doc.querySelector('#show-more');
+		showMoreLink.replaceWith(newShowMoreLink);
+		Page.Site.Socialfeed.init();
+	},
+
+	loadAndInsertItems: async function(url)
+	{
+		const response = await fetch(`${url}&partial=true`);
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(await response.text(), 'text/html');
+		const items = doc.querySelectorAll('li.feeditem');
+
+		const feed = document.querySelector('ul.socialfeed') || document.querySelector('ul.minifeed');
+		for (const item of items) {
+			feed.appendChild(item);
+		}
+		return doc;
 	}
 };
 

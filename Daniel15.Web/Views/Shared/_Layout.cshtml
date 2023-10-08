@@ -88,16 +88,6 @@
 		</footer>
 	</div>
 	<!-- Now for the JS -->
-	<script 
-		src="https://fb.me/react-0.14.3.min.js"
-		asp-fallback-src="~/Content/js/lib/react-0.14.3.min.js"
-		asp-fallback-test="window.React">
-    </script>
-	<script 
-		src="https://fb.me/react-dom-0.14.3.min.js"
-		asp-fallback-src="~/Content/js/lib/react-dom-0.14.3.min.js"
-		asp-fallback-test="window.ReactDOM">
-	</script>
 	<environment names="Development">
 		<script src="~/cache/main.js"></script>
 		<script>Events.initPage();</script>
@@ -109,7 +99,6 @@
 		<script src="cache/syntaxHighlighter.min.js"  asp-append-version="true"></script>
 	</environment>
 	@RenderSection("scripts", required: false)
-	@Html.ReactInitJavaScript()
 	
 	<!-- Prompt IE 6 and 7 users to install Chrome Frame -->
 	<!--[if lt IE 8]>

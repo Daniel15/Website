@@ -1,7 +1,13 @@
-﻿namespace Daniel15.Web.ViewModels.Site
+using Daniel15.Web.Models;
+
+namespace Daniel15.Web.ViewModels.Site
 {
 	public class SocialFeedViewModel : ViewModelBase
 	{
-		public dynamic Data { get; set; }
+		public IEnumerable<SocialFeedItem> Items { get; set; }
+
+		public bool Partial { get; set; }
+
+		public bool ShowDescription { get; set; }
 	}
 }

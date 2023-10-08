@@ -1,11 +1,14 @@
-﻿using System.Net.Http;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Daniel15.Data.Repositories;
 using Daniel15.Shared.Extensions;
+using Daniel15.Web.Models;
+using Daniel15.Web.ViewComponents;
 using Daniel15.Web.ViewModels;
 using Daniel15.Web.ViewModels.Site;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using StackExchange.Profiling;
 
 namespace Daniel15.Web.Controllers
 {
@@ -59,19 +62,39 @@ namespace Daniel15.Web.Controllers
 		/// A feed of all the stuff I've done on the interwebs.
 		/// </summary>
 		/// <returns></returns>
-		// ReSharper disable once InconsistentNaming - Backwards compatibility with old URL
-		public virtual async Task<ActionResult> SocialFeed(int count = 25, int? before_date = null)
+		[Route("~/socialfeed.htm")]
+		public virtual async Task<ActionResult> SocialFeed(
+			int count = 25,
+			// ReSharper disable once InconsistentNaming - Backwards compatibility with old URL
+			int? before_date = null,
+			bool partial = false,
+			bool showDescription = false
+		)
 		{
 			// Currently just proxies to the PHP page - This needs to be rewritten in C#
-			var url = "http://dan.cx/socialfeed/loadjson.php" + new QueryBuilder
+			var queryBuilder = new QueryBuilder
 			{
 				{"count", count.ToString()},
-				{"before_date", before_date.ToString()}
 			};
+			if (before_date != null)
+			{
+				queryBuilder.Add("before_date", before_date.ToString());
+			}
 
-			var response = await _client.GetAsync(url);
-			dynamic content = await response.Content.ReadAsJArrayAsync();
-			return View("SocialFeed", new SocialFeedViewModel { Data = content });
+			var url = "http://dan.cx/socialfeed/loadjson.php" + queryBuilder;
+			IEnumerable<SocialFeedItem> content;
+			using (MiniProfiler.Current.Step("Loading SocialFeed"))
+			{
+				var response = await _client.GetAsync(url);
+				content = await response.Content.ReadFromJsonAsync<IEnumerable<SocialFeedItem>>();
+			}
+
+			return View(new SocialFeedViewModel
+			{
+				Items = content,
+				ShowDescription = showDescription,
+				Partial = partial,
+			});
 		}
 
 		/// <summary>

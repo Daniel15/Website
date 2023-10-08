@@ -1,12 +1,34 @@
-﻿@model Daniel15.Web.ViewModels.Site.SocialFeedViewModel
-
+@model Daniel15.Web.ViewModels.Site.SocialFeedViewModel
 @{
-	Model.Title = "What I've Been Doing";
+    if (Model.Partial)
+    {
+        Layout = null;
+    }
 }
 
-@Html.React("SocialFeed", new
-{
-	initialData = Model.Data,
-	count = 25,
-	showDescription = true
-})
+<ul class="socialfeed">
+    @foreach (var item in Model.Items)
+    {
+        <li class="feeditem source-@item.Type">
+            <div class="icon"></div>
+            @Html.Raw(item.Text)
+            @if (Model.ShowDescription && !string.IsNullOrWhiteSpace(item.Description))
+            {
+                <blockquote>@Html.Raw(item.Description)</blockquote>
+            }
+            <ul class="meta" title="Via @item.Type">
+                <li class="date">@item.RelativeDate</li>
+                @if (!string.IsNullOrWhiteSpace(item.SubText))
+                {
+                    <li class="subtext">@Html.Raw(item.SubText)</li>
+                }
+                @if (!string.IsNullOrWhiteSpace(item.Url))
+                {
+                    <li><a href="@item.Url" target="_blank">View</a></li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
+
+<a id="show-more" href="@Url.Action("SocialFeed", new { before_date = @Model.Items.Last().Date })">Show more!</a>

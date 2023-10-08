@@ -3,11 +3,8 @@ using Daniel15.Infrastructure;
 using Daniel15.SimpleIdentity;
 using Hangfire;
 using Hangfire.MySql;
-using JavaScriptEngineSwitcher.Core;
-using JavaScriptEngineSwitcher.V8;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
-using React.AspNet;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -21,8 +18,6 @@ builder.Services.AddIdentity<SimpleIdentityUser, SimpleIdentityRole>()
 	.AddDefaultTokenProviders();
 
 builder.Services.AddSession();
-JsEngineSwitcher.Current.EngineFactories.Add(new V8JsEngineFactory());
-builder.Services.AddReact();
 builder.Services.AddDaniel15(builder.Configuration);
 builder.Services.AddDaniel15Config(builder.Configuration);
 
@@ -62,13 +57,6 @@ else
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
 	ForwardedHeaders = ForwardedHeaders.XForwardedProto | ForwardedHeaders.XForwardedFor,
-});
-
-app.UseReact(config =>
-{
-	config
-		.AddScript("~/Content/js/socialfeed.jsx")
-		.SetReuseJavaScriptEngines(false);
 });
 
 app.UseStaticFiles();

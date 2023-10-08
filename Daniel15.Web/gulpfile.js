@@ -1,4 +1,4 @@
-﻿/// <binding AfterBuild='build' Clean='clean' />
+/// <binding AfterBuild='build' Clean='clean' />
 
 var concat = require('gulp-concat'),
 	del = require('del'),
@@ -8,7 +8,6 @@ var concat = require('gulp-concat'),
     lazypipe = require('lazypipe'),
     less = require('gulp-less'),
     minifyCSS = require('gulp-minify-css'),
-	react = require('gulp-react'),
     rename = require('gulp-rename'),
 	shell = require('gulp-shell'),
     uglify = require('gulp-uglify'),
@@ -45,9 +44,12 @@ gulp.task('build:css', function() {
 });
 
 var buildJS = lazypipe()
-	.pipe(react, { harmony: true })
 	.pipe(gulp.dest, paths.concatRoot)
-	.pipe(uglify, { preserveComments: 'some' })
+	.pipe(uglify, { 
+		output: {
+			comments: 'some'
+		}
+	})
 	.pipe(rename, { extname: '.min.js' })
 	.pipe(gulp.dest, paths.concatRoot);
 
@@ -62,9 +64,8 @@ gulp.task('build:js:main', function() {
 
 			// Site scripts
 			paths.js + 'core.js',
-			paths.js + 'site.jsx',
+			paths.js + 'site.js',
 			paths.js + 'blog.js',
-			paths.js + 'socialfeed.jsx'
 			])
 		.pipe(concat('main.js'))
 		.pipe(buildJS());
