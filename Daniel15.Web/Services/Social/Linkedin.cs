@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Daniel15.Data.Entities.Blog;
+using Daniel15.Web.Models.Blog;
 using Microsoft.AspNetCore.Http.Extensions;
 using Newtonsoft.Json.Linq;
 

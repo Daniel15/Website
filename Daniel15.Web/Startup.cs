@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Daniel15.BusinessLayer;
 using MaxMind.GeoIP2;
-using Daniel15.Data.Repositories.EntityFramework;
-using Daniel15.Data.Repositories;
-using Daniel15.Data.Zurl;
-using Daniel15.Data;
+using Daniel15.Web.Repositories.EntityFramework;
+using Daniel15.Web.Repositories;
+using Daniel15.Web.Zurl;
 using Microsoft.EntityFrameworkCore;
 using Daniel15.Shared.Configuration;
+using Daniel15.Web;
 using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);

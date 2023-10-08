@@ -18,8 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Daniel15.Data\Daniel15.Data.csproj" />
-    <ProjectReference Include="..\Daniel15.Shared\Daniel15.Shared.csproj" />
+	  <ProjectReference Include="..\Daniel15.Shared\Daniel15.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,8 +28,13 @@
     <PackageReference Include="Hangfire.MySqlStorage" Version="2.0.3" />
     <PackageReference Include="Markdig" Version="0.33.0" />
 	<PackageReference Include="MaxMind.GeoIP2" Version="5.1.0" />
+	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
     <PackageReference Include="MiniProfiler.AspNetCore.Mvc" Version="4.3.8" />
     <PackageReference Include="MiniProfiler.EntityFrameworkCore" Version="4.3.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="7.0.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="7.0.0" />
     <PackageReference Include="UAParser" Version="3.1.47" />
   </ItemGroup>
 

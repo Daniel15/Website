@@ -1,5 +1,5 @@
-﻿
-using Daniel15.Data.Entities.Blog;
+
+using Daniel15.Web.Models.Blog;
 
 namespace Daniel15.Web.ViewModels.Blog
 {

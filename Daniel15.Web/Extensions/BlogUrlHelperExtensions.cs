@@ -1,4 +1,4 @@
-using Daniel15.Data.Entities.Blog;
+using Daniel15.Web.Models.Blog;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Extensions

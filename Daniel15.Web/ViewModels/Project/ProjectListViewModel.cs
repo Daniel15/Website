@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Daniel15.Data.Entities.Projects;
+using System.Collections.Generic;
+using Daniel15.Web.Models.Projects;
 
 namespace Daniel15.Web.ViewModels.Project
 {

@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 using System.Numerics;
-using Daniel15.Data.Repositories;
+using Daniel15.Web.Repositories;
 using Daniel15.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using SixLabors.Fonts;

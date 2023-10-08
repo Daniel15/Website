@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Daniel15.Data.Repositories;
+using Daniel15.Web.Repositories;
 using Daniel15.Web.ViewModels.Blog;
 using Microsoft.AspNetCore.Mvc;
 

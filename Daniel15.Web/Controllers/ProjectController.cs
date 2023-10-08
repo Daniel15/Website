@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using Daniel15.Data;
-using Daniel15.Data.Entities.Projects;
-using Daniel15.Data.Repositories;
+using Daniel15.Web.Exceptions;
+using Daniel15.Web.Models.Projects;
+using Daniel15.Web.Repositories;
 using Daniel15.Web.ViewModels.Project;
 using Microsoft.AspNetCore.Mvc;
 

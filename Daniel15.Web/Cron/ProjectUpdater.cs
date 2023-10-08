@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Daniel15.BusinessLayer;
-using Daniel15.Data.Repositories;
+using Daniel15.Web.Repositories;
 using Microsoft.Extensions.Logging;
 
 namespace Daniel15.Cron

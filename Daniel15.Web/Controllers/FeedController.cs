@@ -1,15 +1,12 @@
-using System.Collections.Generic;
-using System.Linq;
 using Daniel15.Web.Services;
-using Daniel15.Data;
-using Daniel15.Data.Entities.Blog;
-using Daniel15.Data.Repositories;
+using Daniel15.Web.Models.Blog;
+using Daniel15.Web.Repositories;
 using Daniel15.Shared.Configuration;
+using Daniel15.Web.Exceptions;
 using Daniel15.Web.Extensions;
 using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.ViewModels.Feed;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Net.Http.Headers;
 
 namespace Daniel15.Web.Controllers
 {

@@ -1,8 +1,8 @@
 using Daniel15.Web.Services;
-using Daniel15.Data;
-using Daniel15.Data.Entities.Blog;
-using Daniel15.Data.Repositories;
+using Daniel15.Web.Models.Blog;
+using Daniel15.Web.Repositories;
 using Daniel15.Web.Areas.Api.Models.Blog;
+using Daniel15.Web.Exceptions;
 using Daniel15.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 

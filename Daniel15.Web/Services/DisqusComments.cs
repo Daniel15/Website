@@ -1,5 +1,5 @@
-using Daniel15.Data.Entities.Blog;
-using Daniel15.Data.Repositories;
+using Daniel15.Web.Models.Blog;
+using Daniel15.Web.Repositories;
 using Daniel15.Shared.Configuration;
 using Daniel15.Shared.Extensions;
 using Microsoft.AspNetCore.Http.Extensions;

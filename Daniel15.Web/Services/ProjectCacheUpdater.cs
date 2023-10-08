@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Daniel15.Web.Services;
 using Daniel15.Web.Services.CodeRepositories;
-using Daniel15.Data.Entities.Projects;
-using Daniel15.Data.Repositories;
+using Daniel15.Web.Models.Projects;
+using Daniel15.Web.Repositories;
 
 namespace Daniel15.BusinessLayer
 {

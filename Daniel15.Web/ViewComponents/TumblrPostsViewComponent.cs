@@ -1,4 +1,4 @@
-﻿using Daniel15.Data.Repositories;
+﻿using Daniel15.Web.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.ViewComponents

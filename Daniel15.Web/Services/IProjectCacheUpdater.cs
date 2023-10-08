@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using Daniel15.Data.Entities.Projects;
+using System.Threading.Tasks;
+using Daniel15.Web.Models.Projects;
 
 namespace Daniel15.BusinessLayer
 {
