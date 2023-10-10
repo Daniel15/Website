@@ -1,7 +1,7 @@
 ﻿Daniel15
 ========
 
-This is the code that powers [my personal website](https://dan.cx/) and blog. It uses C# and the ASP.NET Core MVC framework, with some older bits in PHP.
+This is the Amazing code that powers [my personal website](https://dan.cx/) and blog. It uses C# and the ASP.NET Core MVC framework, with some older bits in PHP.
 
 The live site is currently running on .NET Core 2.0
 
@@ -13,7 +13,7 @@ supported are:
  - Browsing monthly archives
  - Writing comments (now handled with Disqus)
  - Writing new posts
-   - Posting new posts to Facebook and Twitter
+   - Posting new posts to Facebook, Twitter and also instagram
    
 As it's just for my personal use, I haven't put too much work into polishing the blog administration
 section. 
@@ -27,7 +27,7 @@ Licence
 Please feel free to use any bits of this code in your own work, but please:
 
 1. Link to my site somewhere
-2. Don't steal my site design, use your own. :)
+2. Don't steal my site design, use and create your own. :)
 
 (The MIT licence)
 
