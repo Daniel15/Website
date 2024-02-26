@@ -45,16 +45,6 @@
 	<link rel="alternate" type="application/rss+xml" title="@Config.BlogName - RSS Feed" href="@Config.FeedBurnerUrl" />
 	<script>
 		document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
-		// Google Analytics
-		var _gaq = [['_setAccount', '@Config.GoogleAnalyticsAccount'], ['_trackPageview']];
-		(function (d, t)
-		{
-			var g = d.createElement(t),
-				s = d.getElementsByTagName(t)[0];
-			g.src = '//www.google-analytics.com/ga.js';
-			g.async = true;
-			s.parentNode.insertBefore(g, s);
-		}(document, 'script'));
 	</script>
 	@RenderSection("extraHead", required: false)
 

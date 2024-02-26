@@ -43,6 +43,12 @@ gulp.task('build:css', function() {
 		.pipe(gulp.dest(paths.concatRoot));
 });
 
+gulp.task('build:js:analytics', function() {
+	return gulp
+		.src([paths.js + 'analytics.js'])
+		.pipe(shell('node_modules\\.bin\\parcel build <%= file.path %> --dist-dir wwwroot\\cache'));
+});
+
 var buildJS = lazypipe()
 	.pipe(gulp.dest, paths.concatRoot)
 	.pipe(uglify, { 
@@ -53,7 +59,9 @@ var buildJS = lazypipe()
 	.pipe(rename, { extname: '.min.js' })
 	.pipe(gulp.dest, paths.concatRoot);
 
-gulp.task('build:js:main', function(cb) {
+// TODO: Figure out why build:js:analytics doesn't work as a dependency of this
+// TODO: Migrate all JS build to something more modern
+gulp.task('build:js:main', /*gulp.series(['build:js:analytics']),*/ function(cb) {
 	return gulp
 		.src([
 			// Framework
@@ -66,7 +74,8 @@ gulp.task('build:js:main', function(cb) {
 			paths.js + 'core.js',
 			paths.js + 'site.js',
 			paths.js + 'blog.js',
-			])
+			paths.concatRoot + 'analytics.js',
+		])
 		.pipe(concat('main.js'))
 		.pipe(buildJS())
 		// https://stackoverflow.com/a/40101404
