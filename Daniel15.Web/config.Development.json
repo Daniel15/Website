@@ -9,6 +9,9 @@
       }
     }
   },
+  "Sentry": {
+    "Debug": true
+  },
   "Data": {
     "DefaultConnection": {
       "ConnectionString": "Server=localhost; Database=daniel15_site; Uid=root; Pwd=; Allow User Variables=True;"

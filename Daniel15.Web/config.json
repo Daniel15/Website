@@ -11,6 +11,12 @@
       "RevisionUrl": "https://github.com/Daniel15/Website/commit/{0}"
     }
   },
+  "Sentry": {
+    "MaxRequestBodySize": "medium",
+    "SendDefaultPii": true,
+    "Dsn": "CHANGEME",
+    "TracesSampleRate": 1.0
+  },
   "Gallery": {
     "Galleries": {
       "screenshots": {

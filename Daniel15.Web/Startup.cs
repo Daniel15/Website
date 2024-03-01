@@ -16,8 +16,11 @@ using Microsoft.EntityFrameworkCore;
 using Daniel15.Web.Configuration;
 using Daniel15.Web;
 using Microsoft.Extensions.Options;
+using Sentry.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost
+	.UseSentry();
 builder.Configuration
 	.AddJsonFile("config.json", optional: false, reloadOnChange: true)
 	.AddJsonFile("config.generated.json", optional: true)
