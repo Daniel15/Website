@@ -1,4 +1,3 @@
-﻿using System.Threading.Tasks;
 using Daniel15.Web.Models.Blog;
 using Microsoft.AspNetCore.Http.Extensions;
 
@@ -42,20 +41,6 @@ namespace Daniel15.Web.Services.Social
 				{"via", "Daniel15"},
 				{"related", "Daniel15"}
 			};
-		}
-
-		/// <summary>
-		/// Gets the number of times this URL has been shared on this social network.
-		/// </summary>
-		/// <param name="post">The blog post</param>
-		/// <param name="url">Full URL to this post</param>
-		/// <param name="shortUrl">Short URL to this post</param>
-		/// <returns>Share count for this post</returns>
-		public Task<int> GetShareCountAsync(PostModel post, string url, string shortUrl)
-		{
-			// No longer supported :(
-			// https://blog.twitter.com/2015/hard-decisions-for-a-sustainable-platform
-			return Task.FromResult(0);
 		}
 		#endregion
 	}

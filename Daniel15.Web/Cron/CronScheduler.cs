@@ -13,12 +13,6 @@ namespace Daniel15.Cron
 				Hangfire.Cron.Hourly(20)
 			);
 
-			RecurringJob.AddOrUpdate<SocialShareUpdater>(
-				"social-shares",
-				x => x.RunAsync(),
-				Hangfire.Cron.Hourly(20)
-			);
-
 			RecurringJob.AddOrUpdate<ProjectUpdater>(
 				"projects",
 				x => x.RunAsync(),
