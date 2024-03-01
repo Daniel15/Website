@@ -2,6 +2,7 @@
 @model Daniel15.Web.ViewModels.Site.IndexViewModel
 @{
 	var age = (DateTime.Now - new DateTime(1990, 06, 01)).Years();
+	var reactExperienceYears = (DateTime.Now - new DateTime(2013, 10, 01)).Years();
 	
 	Model.SidebarType = SidebarType.Right;
 	Model.Heading = "Daniel15";
@@ -20,19 +21,27 @@
 
 <h2>Welcome</h2>
 <p>
-	Hi, I'm Daniel! I'm a @age-year-old guy, originally from Melbourne, Australia but now living in 
-	Mountain View, California. I work at <a href="http://www.facebook.com/">Facebook</a> as a frontend 
-	developer. I enjoy web development, including both frontend (including HTML5, CSS3 and JavaScript) 
-	and backend (including ASP.NET MVC, PHP and Node.js) development. I love exploring new technologies, 
-	and creating websites or applications implementing these technologies.
+	Hi, I'm Daniel! I'm a @age-year-old guy, originally from Melbourne, Australia but now living in
+	the San Francisco Bay Area. I'm a software developer with over 20 years of experience, focusing
+	primarily on front-end development. I have @reactExperienceYears years of experience using
+    React and a strong focus on crafting delightful user experiences. My expertise extends beyond
+	front-end technologies, including development in C# and Hacklang, data pipelines with Presto and Apache 
+	Airflow, Debian Linux server administration, etc. 
+	I currently work at <a href="https://www.meta.com/" rel="nofollow">Meta</a>.
 </p>
 <p>
-	This should really have a better introduction on who I am... I'll complete it one day. For now you can 
-	<a href="http://facebook.com/daaniel">find me on Facebook</a>, I guess.
-</p>
-<p>
-	I've also got a list of <a asp-controller="Project" asp-action="Index">projects I've worked on</a>. I'm probably most well known 
-	as "the guy that wrote a lot of Simple Machines Forum modifications", or "the guy that wrote the ATAR Calculator" :-)
+	I'm a big advocate of open-source software and released 
+	<a href="https://github.com/Daniel15/DanPHPSupport/">my first piece of open source software</a> in 2005.
+	Some notable open source software I've worked on include React, Babel, ASP.NET Core, and Yarn v1.
+	I've also got a list of <a asp-controller="Project" asp-action="Index">other projects I've worked on</a>
+    (but it's a bit outdated at the moment).
+	<!--ul>
+		<li>React: Built the <a href="https://github.com/facebook/react/pull/691">first HTML to JSX conversion tool</a> in 2013.</li>
+		<li>Babel: Built <a href="https://github.com/babel/babel-standalone">the original version of <tt>@@babel/standalone</tt></a> and implemented <a href="https://github.com/babel/website/pulls?q=is%3Apr+sort%3Aupdated-desc+author%3ADaniel15+is%3Aclosed">the REPL for Babel 6 and 7</a>.</li>
+		<li>ASP.NET Core: Implemented UNIX socket support</li>
+		<li>Yarn v1: Built the release infrastructure, Windows (MSI/Chocolatey) and Linux (DEB/RPM) packaging, Debian repository, E2E tests, and node-gyp support.</li>
+		<li>ASTExplorer: Added support for ESLint rules</li>
+	</ul-->
 </p>
 				
 <h2>Contacting me</h2>
@@ -40,11 +49,6 @@
 <ul id="contact-me">
 	<!-- Yeah, this is ugly, but it's a really simple method for spambot prevention >_< -->
 	<li><strong>Email</strong> &mdash; <span id="email_address"></span></li>
-	<li><strong>Google Talk / Jabber</strong> &mdash; <span id="gtalk_address" class="address"></span>.</li>
-	<li id="skype" class="presence offline">
-		<strong>Skype</strong> &mdash; <span id="skype_address" class="address">daniel15au</span>.
-		I'm currently <span id="skype_status">Offline</span>.
-	</li>
 	<li class="social">
 		<strong>Social networking (and other) sites:</strong>
 						
@@ -61,7 +65,6 @@
 			<li class="tumblr"><a title="Tumblr" href="http://daaniel.com/" rel="me">Tumblr</a></li>
 			<li class="lastfm"><a title="Last.fm" href="http://last.fm/user/daniel_1515" rel="me">Last.fm</a></li>
 			<li class="steam"><a title="Steam" href="http://steamcommunity.com/id/daniel15" rel="me">Steam</a></li>
-			<li class="gplus"><a title="Google+" href="http://dl.vc/gplus" rel="me">Google+</a></li>
 		</ul>
 	</li>
 </ul>
