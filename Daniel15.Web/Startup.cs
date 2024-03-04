@@ -71,7 +71,6 @@ services.AddDbContext<DatabaseContext>(options =>
 services.AddScoped<IBlogRepository, BlogRepository>();
 services.AddScoped<IDisqusCommentRepository, DisqusCommentRepository>();
 services.AddScoped<IProjectRepository, ProjectRepository>();
-services.AddScoped<IMicroblogRepository, MicroblogRepository>();
 
 services.AddDbContext<ZurlDatabaseContext>(options =>
 	options.UseMySql(

@@ -1,11 +1,12 @@
-﻿@model List<Daniel15.Web.Models.Blog.PostModel>
+@model List<Daniel15.Web.Models.Blog.PostModel>
 
 <div id="blog-posts" class="blog-posts">
-	<h2>@Html.ActionLink("Recent Blog Posts", "Index", "Blog")</h2>
+    <h2><a asp-controller="Blog" asp-action="Index">Recent Blog Posts</a></h2>
 	<ul>
 		@foreach (var post in Model)
 		{
 			<li><time datetime="@post.Date.ToString("s")">@post.Date.ToStringWithOrdinal("d{0} MMM yyyy")</time> <a href="@Url.BlogPost(post)">@post.Title</a></li>
 		}
+        <li><a asp-controller="Blog" asp-action="Index">Read More</a></li>
 	</ul>
 </div>

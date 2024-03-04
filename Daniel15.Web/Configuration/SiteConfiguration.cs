@@ -1,4 +1,4 @@
-﻿namespace Daniel15.Web.Configuration
+namespace Daniel15.Web.Configuration
 {
 	/// <summary>
 	/// An implementation of <see cref="ISiteConfiguration"/>.
@@ -40,11 +40,6 @@
 		/// Gets the Disqus category ID (used for syncing comments)
 		/// </summary>
 		public int DisqusCategory { get; set; }
-
-		/// <summary>
-		/// Gets the URL to the microblog (Tumblr) feed
-		/// </summary>
-		public string MicroblogFeedUrl { get; set; }
 
 		/// <summary>
 		/// Gets information about the Git commit the site is running on
