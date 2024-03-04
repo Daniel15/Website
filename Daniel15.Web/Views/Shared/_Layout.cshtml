@@ -37,8 +37,6 @@
 	<environment names="Staging,Production">
 		<link rel="stylesheet" href="cache/main.min.css" asp-append-version="true"/>
 	</environment>
-	
-	<!--[if lt IE 9]><script src="@Url.Js("lib/IE9.js")"></script><![endif]-->
 
 	<!-- Other stuff -->
 	<link rel="start" href="/" title="Home" />
@@ -88,12 +86,9 @@
 		<script>Events.initPage();</script>
 		<script src="cache/syntaxHighlighter.min.js"  asp-append-version="true"></script>
 	</environment>
-	<!-- Prompt IE 6 and 7 users to install Chrome Frame -->
 	@await RenderSectionAsync("scripts", required: false)
 
 	<!--[if lt IE 8]>
-		<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
-		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 		<div id="ie-sucks">I no longer fully support Internet Explorer 6 and 7, and stuff may be broken for you. Consider <a href="http://browsehappy.com/">updating your browser</a> :)</div>
 	<![endif]-->
 
