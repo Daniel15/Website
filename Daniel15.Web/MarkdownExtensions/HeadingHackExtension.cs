@@ -31,7 +31,6 @@ namespace Daniel15.Web.MarkdownExtensions
 
 					Column = heading.Column,
 					HeaderChar = heading.HeaderChar,
-					Inline = heading.Inline,
 					IsBreakable = heading.IsBreakable,
 					IsOpen = heading.IsOpen,
 					Line = heading.Line,
