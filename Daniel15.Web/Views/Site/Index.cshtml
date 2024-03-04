@@ -1,32 +1,23 @@
 @using System.Threading.Tasks
 @model Daniel15.Web.ViewModels.Site.IndexViewModel
 @{
-	var age = (DateTime.Now - new DateTime(1990, 06, 01)).Years();
-	var reactExperienceYears = (DateTime.Now - new DateTime(2013, 10, 01)).Years();
+	var devExperienceYears = (DateTime.Now - new DateTime(1998, 01, 01)).Years();
+	var reactExperienceYears = (DateTime.Now - new DateTime(2013, 08, 01)).Years();
 	
 	Model.SidebarType = SidebarType.Right;
 	Model.Heading = "Daniel15";
-	Model.Description = "Website of Daniel15 (Daniel Lo Nigro), a " + age + "-year-old guy from Melbourne Australia. Here I blog about things important to me, and also link to the various other projects I'm working on.";
-}
-
-@section extraHead
-{
-	<!-- OpenID -->
-	<link rel="openid.server" href="https://www.startssl.com/id.ssl" />
-	<link rel="openid.delegate" href="https://daniel15.startssl.com/" />
-	<link rel="openid2.provider" href="https://www.startssl.com/id.ssl" />
-	<link rel="openid2.local_id" href="https://daniel15.startssl.com/" />
-	<meta http-equiv="X-XRDS-Location" content="https://daniel15.startssl.com/xrds/" />
+	Model.Description = "Website of Daniel15 (Daniel Lo Nigro). Here I blog about things important to me, and also link to the various other projects I'm working on.";
 }
 
 <h2>Welcome</h2>
 <p>
-	Hi, I'm Daniel! I'm a @age-year-old guy, originally from Melbourne, Australia but now living in
-	the San Francisco Bay Area. I'm a software developer with over 20 years of experience, focusing
-	primarily on front-end development. I have @reactExperienceYears years of experience using
-    React and a strong focus on crafting delightful user experiences. My expertise extends beyond
-	front-end technologies, including development in C# and Hacklang, data pipelines with Presto and Apache 
-	Airflow, Debian Linux server administration, etc. 
+	Hi, I'm Daniel! I'm a software developer with @devExperienceYears years of experience, 
+	originally from Melbourne Australia but now living in the San Francisco Bay Area. 
+	I primarily focus on front-end development, where I have @reactExperienceYears years of 
+	experience using React, a deep understanding of DOM and browser APIs, and a strong focus 
+	on crafting delightful user experiences. My expertise extends beyond front-end technologies,
+	including development in C# and Hacklang, data pipelines with Presto and Apache Airflow, 
+	Debian Linux server administration, and more. 
 	I currently work at <a href="https://www.meta.com/" rel="nofollow">Meta</a>.
 </p>
 <p>
