@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Daniel15.Web.Services;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Repositories;
@@ -22,14 +18,14 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 	public partial class BlogController : Controller
 	{
 		private readonly IBlogRepository _blogRepository;
-		private readonly IDisqusComments _comments;
+		private readonly DisqusComments _comments;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="BlogController" /> class.
 		/// </summary>
 		/// <param name="blogRepository">The blog repository.</param>
 		/// <param name="comments">Disqus comments service</param>
-		public BlogController(IBlogRepository blogRepository, IDisqusComments comments)
+		public BlogController(IBlogRepository blogRepository, DisqusComments comments)
 		{
 			_blogRepository = blogRepository;
 			_comments = comments;
@@ -147,7 +143,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 		[Route("synccomments")]
 		public virtual async Task<ActionResult> SyncComments()
 		{
-			await _comments.SyncAsync();
+			await _comments.Invoke();
 			TempData["topMessage"] = "All done!";
 			return RedirectToAction("Index");
 		}

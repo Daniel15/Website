@@ -1,13 +1,11 @@
+using Coravel;
 using Daniel15.Web.Services.CodeRepositories;
 using Daniel15.Web.Services.Social;
 using Daniel15.Web.Services;
 using Daniel15.Cron;
 using Daniel15.SimpleIdentity;
-using Hangfire;
-using Hangfire.MySql;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
-using Daniel15.BusinessLayer;
 using MaxMind.GeoIP2;
 using Daniel15.Web.Repositories.EntityFramework;
 using Daniel15.Web.Repositories;
@@ -16,7 +14,6 @@ using Microsoft.EntityFrameworkCore;
 using Daniel15.Web.Configuration;
 using Daniel15.Web;
 using Microsoft.Extensions.Options;
-using Sentry.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost
@@ -41,14 +38,11 @@ services.AddSingleton<ISocialManager, SocialManager>();
 services.AddSingleton<IMarkdownProcessor, MarkdownProcessor>();
 services.AddSingleton<ICodeRepositoryManager, CodeRepositoryManager>();
 services.AddSingleton<ICodeRepository, GithubCodeRepository>();
+services.AddSingleton<IExceptionHandler, ExceptionHandler>();
 services.AddSingleton<Facebook>();
 services.AddSingleton<Reddit>();
 services.AddSingleton<Twitter>();
 services.AddSingleton<Linkedin>();
-
-services.AddScoped<IProjectCacheUpdater, ProjectCacheUpdater>();
-services.AddScoped<IShortUrlLogger, ShortUrlLogger>();
-services.AddScoped<IDisqusComments, DisqusComments>();
 
 // Third-party libraries
 services.AddSingleton(provider => UAParser.Parser.GetDefault());
@@ -104,18 +98,13 @@ services.AddMiniProfiler(options =>
 		request => request.HttpContext.User.Identity.IsAuthenticated;
 }).AddEntityFramework();
 
-services.AddHangfire(hangfireConfig => hangfireConfig
-	.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
-	.UseSimpleAssemblyNameTypeSerializer()
-	.UseRecommendedSerializerSettings()
-	.UseStorage(new MySqlStorage(
-		config["Data:DefaultConnection:ConnectionString"],
-		new MySqlStorageOptions
-		{
-			TablesPrefix = "Hangfire_"
-		}))
-);
-services.AddHangfireServer();
+services.AddScheduler();
+services.AddQueue();
+
+// Scheduler/queue jobs
+services.AddScoped<ProjectUpdater>();
+services.AddScoped<ShortUrlLogger>();
+services.AddScoped<DisqusComments>();
 
 var app = builder.Build();
 
@@ -140,14 +129,27 @@ app.UseStaticFiles();
 app.UseAuthentication();
 app.UseSession();
 app.UseMiniProfiler();
-app.UseHangfireDashboard(options: new DashboardOptions
-{
-	Authorization = new[] {new DashboardAuthorizationFilter()}
-});
+
 // All real routes are defined using attributes.
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
 
-CronScheduler.ScheduleCronjobs();
+app.Services.UseScheduler(scheduler =>
+{
+	scheduler.Schedule<ProjectUpdater>()
+		.HourlyAt(20)
+		.PreventOverlapping(nameof(ProjectUpdater))
+		.RunOnceAtStart();
+
+	scheduler.Schedule<DisqusComments>()
+		.HourlyAt(20)
+		.PreventOverlapping(nameof(DisqusComments))
+		.RunOnceAtStart();
+})
+	.OnError(ex => app.Services.GetRequiredService<IExceptionHandler>().Handle(ex));
+
+app.Services.ConfigureQueue()
+	.OnError(ex => app.Services.GetRequiredService<IExceptionHandler>().Handle(ex));
+
 app.Run();

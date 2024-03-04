@@ -1,3 +1,4 @@
+using Coravel.Invocable;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.Configuration;
@@ -9,7 +10,7 @@ namespace Daniel15.Web.Services
 	/// <summary>
 	/// Handles synchronisation of comments between Disqus and the local database.
 	/// </summary>
-	public class DisqusComments : IDisqusComments
+	public class DisqusComments : IInvocable
 	{
 		/// <summary>
 		/// Base URL for Disqus API
@@ -39,7 +40,7 @@ namespace Daniel15.Web.Services
 		/// <summary>
 		/// Synchronise all comments on Disqus into the local database
 		/// </summary>
-		public async Task SyncAsync()
+		public async Task Invoke()
 		{
 			string cursor = string.Empty;
 			bool hasMore;

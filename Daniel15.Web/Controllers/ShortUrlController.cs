@@ -1,10 +1,10 @@
+using Coravel.Queuing.Interfaces;
 using Daniel15.Web.Exceptions;
 using Daniel15.Web.Models.Blog;
 using Daniel15.Web.Repositories;
 using Daniel15.Web.Zurl;
 using Daniel15.Web.Extensions;
 using Daniel15.Web.Services;
-using Hangfire;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Daniel15.Web.Controllers
@@ -16,16 +16,19 @@ namespace Daniel15.Web.Controllers
 	    private readonly IUrlShortener _urlShortener;
 	    private readonly IBlogRepository _blogRepository;
 	    private readonly IUrlRepository _urlRepository;
+	    private readonly IQueue _queue;
 
 	    public ShortUrlController(
 			IUrlShortener urlShortener, 
 			IBlogRepository blogRepository, 
-			IUrlRepository urlRepository
+			IUrlRepository urlRepository,
+			IQueue queue
 		)
 	    {
 		    _urlShortener = urlShortener;
 		    _blogRepository = blogRepository;
 		    _urlRepository = urlRepository;
+		    _queue = queue;
 	    }
 
 
@@ -78,17 +81,13 @@ namespace Daniel15.Web.Controllers
 				return NotFound();
 			}
 
-			var ip = HttpContext.Connection.RemoteIpAddress.ToString();
-			var userAgent = Request.Headers["User-Agent"].ToString();
-			var referrer = Request.Headers["Referer"].ToString();
-			BackgroundJob.Enqueue<IShortUrlLogger>(logger =>
-				logger.LogHitAsync(
-					shortenedUrl.Id,
-					ip,
-					userAgent,
-					referrer
-				)
-			);
+			_queue.QueueInvocableWithPayload<ShortUrlLogger, ShortUrlLogger.Input>(new ShortUrlLogger.Input
+			{
+				Ip = HttpContext.Connection.RemoteIpAddress.ToString(),
+				Referrer = Request.Headers["Referer"].ToString(),
+				UrlId = shortenedUrl.Id,
+				UserAgent = Request.Headers["User-Agent"].ToString(),
+			});
 
 			return Redirect(shortenedUrl.Url);
 		}

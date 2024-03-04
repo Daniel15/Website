@@ -1,11 +1,8 @@
-using System;
 using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
+using Coravel.Invocable;
 using Daniel15.Web.Zurl;
 using Daniel15.Web.Zurl.Entities;
 using MaxMind.GeoIP2;
-using Microsoft.AspNetCore.Http;
 using UAParser;
 
 namespace Daniel15.Web.Services
@@ -13,7 +10,7 @@ namespace Daniel15.Web.Services
 	/// <summary>
 	/// Handles logging hits to short URLs
 	/// </summary>
-	public class ShortUrlLogger : IShortUrlLogger
+	public class ShortUrlLogger : IInvocable, IInvocableWithPayload<ShortUrlLogger.Input>
 	{
 		private readonly IUrlRepository _urlRepository;
 		private readonly IGeoIP2DatabaseReader _geoIp;
@@ -26,16 +23,19 @@ namespace Daniel15.Web.Services
 			_uaParser = uaParser;
 		}
 
+		public Input Payload { get; set; }
+
 		/// <summary>
 		/// Logs a hit to the specified URL
 		/// </summary>
-		/// <param name="urlId">Shortened URL that was hit</param>
-		/// <param name="ip">IP the hit came from</param>
-		/// <param name="userAgent">User-Agent the hit came from</param>
-		/// <param name="referrer">HTTP Referrer the hit came from</param>
-		public async Task LogHitAsync(int urlId, string ip, string userAgent, string referrer)
+		public async Task Invoke()
 		{
-			var hit = CreateHit(urlId, IPAddress.Parse(ip), userAgent, referrer);
+			var hit = CreateHit(
+				Payload.UrlId,
+				IPAddress.Parse(Payload.Ip),
+				Payload.UserAgent,
+				Payload.Referrer
+			);
 			await _urlRepository.AddHitAsync(hit);
 		}
 
@@ -86,5 +86,19 @@ namespace Daniel15.Web.Services
 
 			return hit;
 		}
+
+		/// <summary>
+		/// Data to log a hit to a short URL
+		/// </summary>
+		/// <param name="UrlId">Shortened URL that was hit</param>
+		/// <param name="Ip">IP the hit came from</param>
+		/// <param name="UserAgent">User-Agent the hit came from</param>
+		/// <param name="Referrer">HTTP Referrer the hit came from</param>
+		public readonly record struct Input(
+			int UrlId,
+			string Ip,
+			string UserAgent,
+			string Referrer
+		);
 	}
 }
