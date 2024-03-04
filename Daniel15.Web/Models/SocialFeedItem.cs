@@ -4,7 +4,7 @@ namespace Daniel15.Web.Models;
 /// Represents an item on the social feed page
 /// </summary>
 public record SocialFeedItem(
-	string Id,
+	int Id,
 	string Text,
 	string? Description,
 	string Url,

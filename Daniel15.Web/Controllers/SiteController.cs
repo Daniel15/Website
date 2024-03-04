@@ -81,7 +81,7 @@ namespace Daniel15.Web.Controllers
 				queryBuilder.Add("before_date", before_date.ToString());
 			}
 
-			var url = "http://dan.cx/socialfeed/loadjson.php" + queryBuilder;
+			var url = "https://d.sb/socialfeed/loadjson.php" + queryBuilder;
 			IEnumerable<SocialFeedItem> content;
 			using (MiniProfiler.Current.Step("Loading SocialFeed"))
 			{
