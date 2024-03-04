@@ -1,4 +1,4 @@
-﻿@model ViewModelBase
+@model ViewModelBase
 
 @{
 	// "Inherit" from the base layout
@@ -19,7 +19,7 @@
 	<environment names="Staging,Production">
 		<link rel="stylesheet" href="cache/blogadmin.min.css" asp-append-version="true" />
 	</environment>
-	@RenderSection("extraHead", required: false)
+	@await RenderSectionAsync("extraHead", required: false)
 }
 
 @section extraFoot
@@ -30,5 +30,5 @@
 	<environment names="Staging,Production">
 		<script src="cache/blogadmin.min.js" asp-append-version="true"></script>
 	</environment>
-	@RenderSection("extraFoot", required: false)
+	@await RenderSectionAsync("extraFoot", required: false)
 }

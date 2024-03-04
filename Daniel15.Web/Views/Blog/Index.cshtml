@@ -1,4 +1,4 @@
-﻿@using Daniel15.Web.Configuration
+@using Daniel15.Web.Configuration
 @model Daniel15.Web.ViewModels.Blog.ListingViewModel
 @inject ISiteConfiguration Config
 
@@ -13,4 +13,4 @@
 		: $"Page {Model.Page} — {Config.BlogName}";
 }
 
-@Html.Partial("_Posts", Model)
+<partial name="_Posts" model="Model" />

@@ -1,14 +1,17 @@
-﻿@using Daniel15.Web.ViewModels.Shared
+@using Daniel15.Web.ViewModels.Shared
 @model Daniel15.Web.ViewModels.Blog.ListingViewModel
 
 @foreach (var post in Model.Posts)
 {
-	@Html.Partial("_PostBrief", post)
+	<partial name="_PostBrief" model="post" />
 }
 
-@Html.Partial("_Pagination", new PaginationModel
-{
-	CurrentPage = Model.Page, 
-	TotalPages = Model.TotalPages, 
-	UrlGenerator = Model.PageUrlGenerator
-})
+<partial 
+	name="_Pagination"
+	model="new PaginationModel
+	{
+		CurrentPage = Model.Page,
+		TotalPages = Model.TotalPages,
+		UrlGenerator = Model.PageUrlGenerator
+	}"
+/>

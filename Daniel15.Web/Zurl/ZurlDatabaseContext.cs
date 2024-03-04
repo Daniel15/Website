@@ -1,6 +1,5 @@
 using Daniel15.Web.Extensions;
 using Daniel15.Web.Zurl.Entities;
-using Daniel15.Web.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Daniel15.Web.Zurl

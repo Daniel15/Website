@@ -1,4 +1,3 @@
-﻿@using System.Threading.Tasks
 @using Daniel15.Web.ViewModels.Project
 @using Newtonsoft.Json
 @model Daniel15.Web.ViewModels.Project.IndexViewModel
@@ -24,11 +23,14 @@
 <div id="active_projects">
 	<h2>Active Projects</h2>
 	<p>These are all the projects I'm working on at the moment.</p>
-	@Html.Partial("_ProjectList", new ProjectListViewModel
-	{
-		Projects = Model.CurrentProjects,
-		Technologies = Model.Technologies
-	})
+	<partial 
+		name="_ProjectList" 
+		model="new ProjectListViewModel
+		{
+			Projects = Model.CurrentProjects,
+			Technologies = Model.Technologies
+		}"
+	/>
 					
 </div>
 				
@@ -38,11 +40,14 @@
 		This section lists all the projects I have completed, as well as projects that I was 
 		previously working on but don't update any more due to time constraints.
 	</p>
-	@Html.Partial("_ProjectList", new ProjectListViewModel
-	{
-		Projects = Model.PreviousProjects,
-		Technologies = Model.Technologies
-	})
+	<partial 
+		name="_ProjectList" 
+		model="new ProjectListViewModel
+		{
+			Projects = Model.PreviousProjects,
+			Technologies = Model.Technologies
+		}"
+	/>
 </div>
 				
 <!-- I guess this is kinda ugly, but it's better than doing a separate request per tech when you click it -->

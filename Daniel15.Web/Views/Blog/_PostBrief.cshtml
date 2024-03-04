@@ -1,10 +1,10 @@
-﻿@model Daniel15.Web.ViewModels.Blog.PostViewModel
+@model Daniel15.Web.ViewModels.Blog.PostViewModel
 @{
 	bool showMoreLink;
 }
 
 <article id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting">
-	@Html.Partial("_PostHeader", Model)
+	<partial name="_PostHeader" model="Model" />
 		@Html.Raw(Model.Post.Intro(out showMoreLink))
 		@if (showMoreLink)
 		{
@@ -12,7 +12,7 @@
 		}
 	</div>
 	<footer>
-		@Html.Partial("_ShareLinks", Model)
+		<partial name="_ShareLinks" model="Model" />
 		<a href="@Url.BlogPost(Model.Post)#disqus_comments" itemprop="discussionUrl">Comments &raquo;</a>
 	</footer>
 </article>

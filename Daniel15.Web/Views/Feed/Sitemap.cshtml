@@ -1,4 +1,4 @@
-﻿@using Daniel15.Web.ViewModels.Feed
+@using Daniel15.Web.ViewModels.Feed
 @using Microsoft.AspNetCore.Html
 @model SitemapViewModel
 <?xml version="1.0" encoding="UTF-8"?>
@@ -8,36 +8,36 @@
 }
 
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-	@SitemapUrl(Url.Action("Index", "Site", new {}, scheme), null, "weekly", 1.0)
-	@SitemapUrl(Url.Action("Index", "Project", new {}, scheme), null, "weekly", 0.9)
-	@SitemapUrl(Url.Action("SocialFeed", "Site", new {}, scheme).ToLower(), null, "daily", 0.7)
-	@SitemapUrl(Url.Absolute(Url.BlogIndex()), null, "daily", 0.9)
+    @await SitemapUrlAsync(Url.Action("Index", "Site", new { }, scheme), null, "weekly", 1.0)
+    @await SitemapUrlAsync(Url.Action("Index", "Project", new { }, scheme), null, "weekly", 0.9)
+    @await SitemapUrlAsync(Url.Action("SocialFeed", "Site", new { }, scheme).ToLower(), null, "daily", 0.7)
+    @await SitemapUrlAsync(Url.Absolute(Url.BlogIndex()), null, "daily", 0.9)
 
 	@foreach (var post in Model.Posts)
 	{
-		@SitemapUrl(Url.BlogPostAbsolute(post), post.Date, "monthly", 0.8)
+		@await SitemapUrlAsync(Url.BlogPostAbsolute(post), post.Date, "monthly", 0.8)
 	}
 
 	@foreach (var project in Model.Projects)
 	{
-		@SitemapUrl(Url.Action("Detail", "Project", new {slug = project.Slug}, scheme), null, "monthly", 0.8)
+		@await SitemapUrlAsync(Url.Action("Detail", "Project", new { slug = project.Slug }, scheme), null, "monthly", 0.8)
 	}
 
 	@foreach (var category in Model.Categories)
 	{
-		@SitemapUrl(Url.Absolute(Url.BlogCategory(category)), null, "weekly", 0.7)
+		@await SitemapUrlAsync(Url.Absolute(Url.BlogCategory(category)), null, "weekly", 0.7)
 	}
 
 	@foreach (var tag in Model.Tags)
 	{
-		@SitemapUrl(Url.Absolute(Url.BlogTag(tag)), null, "weekly", 0.7)
+        @await SitemapUrlAsync(Url.Absolute(Url.BlogTag(tag)), null, "weekly", 0.7)
 	}
 </urlset>
 
 @functions {
-	IHtmlContent SitemapUrl(string url, DateTime? lastModified = null, string changeFreq = null, double? priority = null)
+	Task<IHtmlContent> SitemapUrlAsync(string url, DateTime? lastModified = null, string changeFreq = null, double? priority = null)
 	{
-		return Html.Partial("_SitemapUrl", new SitemapUrlModel
+		return Html.PartialAsync("_SitemapUrl", new SitemapUrlModel
 		{
 			ChangeFrequency = changeFreq,
 			Priority = priority,

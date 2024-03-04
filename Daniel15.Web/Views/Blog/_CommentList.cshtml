@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Daniel15.Web.Models.Blog.DisqusCommentModel>
+@model IEnumerable<Daniel15.Web.Models.Blog.DisqusCommentModel>
 
 <ol>
 	@foreach (var comment in Model)
@@ -19,7 +19,7 @@
 			</article>
 			@if (comment.Children != null && comment.Children.Count > 0)
 			{
-				@Html.Partial("_CommentList", comment.Children)
+				<partial name="_CommentList" model="comment.Children" />
 			}
 		</li>	
 	}

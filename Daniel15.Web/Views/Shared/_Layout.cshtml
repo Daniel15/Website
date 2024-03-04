@@ -29,7 +29,7 @@
 		<meta name="Date" content="@Model.LastModified.Value.ToString("yyyy-MM-dd")" />
 		<meta name="DC.Date" content="@Model.LastModified.Value.ToString("yyyy-MM-dd")" />
 	}
-	@RenderSection("extraMeta", required: false)
+	@await RenderSectionAsync("extraMeta", required: false)
 
 	<environment names="Development">
 		<link rel="stylesheet" href="~/cache/main.css" />
@@ -46,13 +46,13 @@
 	<script>
 		document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
 	</script>
-	@RenderSection("extraHead", required: false)
+	@await RenderSectionAsync("extraHead", required: false)
 
 </head>
 <body id="@Html.BodyId()" class="@Html.BodyClass()">
 	<div id="main-container">
 		<header>
-			@Html.Menu()
+			@await Html.MenuAsync()
 
 			<h1><a href="/" title="Daniel15 is awesome">@(Model.Heading ?? Model.Title)</a></h1>
 		</header>
@@ -63,14 +63,14 @@
 			@if (IsSectionDefined("sidebar"))
 			{
 				<aside id="sidebar">
-					@RenderSection("sidebar", required: false)
+					@await RenderSectionAsync("sidebar", required: false)
 				</aside>
 			}
 
 		</div></div>
 		<footer>
-			&copy;2008&ndash;2023 <a href="https://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.<br/>
-			@Html.Partial("_FooterVersion")
+			&copy;2008&ndash;2024 <a href="https://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.<br/>
+            <partial name="_FooterVersion" />
 			@if (Model.LastModified.HasValue)
 			{
 				<text>This page last modified @Model.LastModified.Value.ToString("d MMM yyyy")</text>
@@ -88,16 +88,16 @@
 		<script>Events.initPage();</script>
 		<script src="cache/syntaxHighlighter.min.js"  asp-append-version="true"></script>
 	</environment>
-	@RenderSection("scripts", required: false)
-	
 	<!-- Prompt IE 6 and 7 users to install Chrome Frame -->
+	@await RenderSectionAsync("scripts", required: false)
+
 	<!--[if lt IE 8]>
 		<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
 		<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 		<div id="ie-sucks">I no longer fully support Internet Explorer 6 and 7, and stuff may be broken for you. Consider <a href="http://browsehappy.com/">updating your browser</a> :)</div>
 	<![endif]-->
-	
-	@RenderSection("extraFoot", required: false)
+
+	@await RenderSectionAsync("extraFoot", required: false)
 	<mini-profiler />
 </body>
 </html>

@@ -1,4 +1,3 @@
-﻿using System.Collections.Generic;
 using Daniel15.Web.Models.Shared;
 using Daniel15.Web.ViewModels;
 using Microsoft.AspNetCore.Html;
@@ -52,7 +51,7 @@ namespace Daniel15.Web.Extensions
 		/// </summary>
 		/// <param name="htmlHelper">The HTML helper.</param>
 		/// <returns>Text for the top menu</returns>
-		public static IHtmlContent Menu(this IHtmlHelper htmlHelper)
+		public static Task<IHtmlContent> MenuAsync(this IHtmlHelper htmlHelper)
 		{
 			var routeData = htmlHelper.ViewContext.RouteData;
 			var controller = ((string)routeData.Values["controller"]).ToLower();
@@ -88,7 +87,7 @@ namespace Daniel15.Web.Extensions
 				},
 			};
 
-			return htmlHelper.Partial("_Menu", menuItems);
+			return htmlHelper.PartialAsync("_Menu", menuItems);
 		}
 	}
 }

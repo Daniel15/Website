@@ -1,13 +1,16 @@
-﻿@using Daniel15.Web.ViewModels.Project
+@using Daniel15.Web.ViewModels.Project
 @model Daniel15.Web.ViewModels.Project.ProjectListViewModel
 
 <ul class="projects">
 	@foreach (var project in Model.Projects)
 	{
-		@Html.Partial("_Project", new ProjectViewModel
-		{
-			Project = project,
-			Technologies = project.Technologies.Select(slug => Model.Technologies[slug]),
-		});
+		<partial
+			name="_Project"
+			model="new ProjectViewModel
+			{
+				Project = project,
+				Technologies = project.Technologies.Select(slug => Model.Technologies[slug]),
+			}"
+		/>
 	}
 </ul>

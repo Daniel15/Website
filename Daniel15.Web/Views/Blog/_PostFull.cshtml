@@ -1,10 +1,10 @@
-﻿@model Daniel15.Web.ViewModels.Blog.PostViewModel
+@model Daniel15.Web.ViewModels.Blog.PostViewModel
 
 <article id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting">
-	@Html.Partial("_PostHeader", Model)
+    <partial name="_PostHeader" model="Model" />
 		@Html.Raw(Model.Post.Content())
 	</div>
-	@Html.Partial("_ShareLinks", Model)
+    <partial name="_ShareLinks" model="Model" />
 	
 	@if (Model.PostTags != null && Model.PostTags.Count > 0)
 	{

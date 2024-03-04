@@ -1,4 +1,4 @@
-﻿@model Daniel15.Web.ViewModels.Blog.PostViewModel
+@model Daniel15.Web.ViewModels.Blog.PostViewModel
 
 @{
 	Model.Title = Model.Post.Title;
@@ -18,5 +18,5 @@
 	<link rel="shortlink" href="@Model.ShortUrl" />
 }
 
-@Html.Partial("_PostFull", Model)
-@Html.Partial("_Comments", Model)
+<partial name="_PostFull" model="Model" />
+<partial name="_Comments" model="Model" />

@@ -1,18 +1,10 @@
-﻿@using System.Globalization
-@using System.Threading.Tasks
+@using System.Globalization
 @using Daniel15.Web.ViewModels.Blog
 @model Daniel15.Web.ViewModels.Blog.SidebarViewModel
-@inject Daniel15.Web.Configuration.ISiteConfiguration Config
 
 <ul>
 	<li>
-		<p>
-			<a href="@Config.FeedBurnerUrl" style="display: inline-block"><img src="https://feeds.feedburner.com/~fc/daniel15?bg=99CCFF&amp;fg=444444&amp;anim=0" height="26" width="88" style="border:0" alt="" style="display: inline-block" /></a>
-			<a href="https://twitter.com/Daniel15" style="display: inline-block"><img src="https://button.twittercounter.com/static/?username=Daniel15" alt="TwitterCounter for Daniel15" width="88" height="26" border="0" /></a>
-		</p>
-	</li>
-	<li>
-		@Html.Partial("_Search")
+        <partial name="_Search" />
 	</li>
 	<li>
 		<h2>Archives</h2>
@@ -33,10 +25,13 @@
 	</li>
 	<li>
 		<h2>Categories</h2>
-		@Html.Partial("_SidebarCategories", new SidebarCategoriesViewModel
-		{
-			CategoryTree = Model.Categories,
-			Categories = Model.Categories[0],	
-		})
+		<partial
+			name="_SidebarCategories"
+			model="new SidebarCategoriesViewModel
+			{
+				CategoryTree = Model.Categories,
+				Categories = Model.Categories[0],	
+			}"
+		/>
 	</li>
 </ul>

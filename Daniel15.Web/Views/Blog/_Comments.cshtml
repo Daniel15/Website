@@ -1,4 +1,4 @@
-﻿@using Daniel15.Web.Configuration
+@using Daniel15.Web.Configuration
 @using Newtonsoft.Json
 @model Daniel15.Web.ViewModels.Blog.PostViewModel
 @inject ISiteConfiguration Config
@@ -6,7 +6,7 @@
 <div id="comments">
 	<div id="disqus_thread">
 		<h3>Comments</h3>
-		@Html.Partial("_CommentList", Model.Comments)
+		<partial name="_CommentList" model="Model.Comments" />
 	</div>
 </div>
 

@@ -1,4 +1,4 @@
-﻿@using Daniel15.Web.Configuration
+@using Daniel15.Web.Configuration
 @model ViewModelBase
 @inject ISiteConfiguration Config
 
@@ -20,11 +20,11 @@
 @section extraHead
 {
 	<link rel="index" title="@Config.BlogName" href="@Url.Action("Index")" />
-	@RenderSection("extraHead", required: false)
+	@await RenderSectionAsync("extraHead", required: false)
 }
 
 @section extraFoot
 {
-	@Html.Partial("_DisqusCount")
-	@RenderSection("extraFoot", required: false)
+	<partial name="_DisqusCount" />
+	@await RenderSectionAsync("extraFoot", required: false)
 }
