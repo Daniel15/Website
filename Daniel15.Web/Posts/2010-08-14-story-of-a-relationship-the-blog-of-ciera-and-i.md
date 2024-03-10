@@ -11,6 +11,7 @@ categories:
 
 ---
 
-<p>Ciera and I have created a new blog, and I will be posting posts about us to that blog as opposed to this one. We're aiming on posting a new post every week! Check it out, post some comments and tell us what you think of it! :)</p>
-<p><a href="http://storyofarelationship.com/">http://storyofarelationship.com/</a></p>
+Ciera and I have created a new blog, and I will be posting posts about us to that blog as opposed to this one. We're aiming on posting a new post every week! Check it out, post some comments and tell us what you think of it! :)
+
+http://storyofarelationship.com/
 

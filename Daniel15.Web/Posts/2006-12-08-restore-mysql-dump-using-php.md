@@ -10,8 +10,10 @@ categories:
 
 ---
 
-<p>The other day, I was looking for an easy way to restore a MySQL dump (or backup, whatever you like to call it) in PHP. I've previously used a segment of the code from <a href="http://www.absoft-my.com/pondok/backup.php">PHP MySQL Backup V 2.2</a> for this, but it didn't seem to support FULLTEXT indicies that well. So, I searched around, but couldn't find anything. I even asked on the PHP IRC channel, and they suggested to use shell_exec to call mysql (unfortunately, I've disabled shell_exec for  security reasons). Looking closer, I noticed that this was actually quite easy to do. <!--more-->Here's the code I wrote to restore a phpMyAdmin MySQL dump (not sure if it works with mysqldump dumps):</p>
-<p><pre class="brush: php">
+The other day, I was looking for an easy way to restore a MySQL dump (or backup, whatever you like to call it) in PHP. I've previously used a segment of the code from [PHP MySQL Backup V 2.2](http://www.absoft-my.com/pondok/backup.php) for this, but it didn't seem to support FULLTEXT indicies that well. So, I searched around, but couldn't find anything. I even asked on the PHP IRC channel, and they suggested to use shell_exec to call mysql (unfortunately, I've disabled shell_exec for  security reasons). Looking closer, I noticed that this was actually quite easy to do. <!--more-->
+Here's the code I wrote to restore a phpMyAdmin MySQL dump (not sure if it works with mysqldump dumps):
+
+```php
 < ?php
 /*
  * Restore MySQL dump using PHP
@@ -65,7 +67,9 @@ foreach ($lines as $line)
 }
 
 ?>
-</pre></p>
-<p>See? How easy is that? :D</p>
-<p><strong>Update:</strong> This also works for mysqldump dumps :)</p>
+```
+
+See? How easy is that? :D
+
+**Update:** This also works for mysqldump dumps :)
 

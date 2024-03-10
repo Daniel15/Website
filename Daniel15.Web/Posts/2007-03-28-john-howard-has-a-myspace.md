@@ -10,5 +10,5 @@ categories:
 
 ---
 
-<p>I recently discovered that John Howard (the Prime Minister of Australia) has a MySpace account at <a href="http://www.myspace.com/johnwinstonhoward">http://www.myspace.com/johnwinstonhoward</a>. What I found funny is that he has 5980 "friends", including George W. Bush and Peter Costello :P</p>
+I recently discovered that John Howard (the Prime Minister of Australia) has a MySpace account at http://www.myspace.com/johnwinstonhoward. What I found funny is that he has 5980 "friends", including George W. Bush and Peter Costello :P
 

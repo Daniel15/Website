@@ -9,6 +9,7 @@ categories:
 
 ---
 
-<p>Hey look, I changed the blog so it now uses WordPress! That MKPortal Blog thingy was getting annoying...</p>
-<p>So... Yeah... That's all for now :)</p>
+Hey look, I changed the blog so it now uses WordPress! That MKPortal Blog thingy was getting annoying...
+
+So... Yeah... That's all for now :)
 

@@ -9,5 +9,5 @@ categories:
 
 ---
 
-<p>Yesterday, I completed my last exam. This means that school is now over for this year, and I'll have more time to work on other things :D</p>
+Yesterday, I completed my last exam. This means that school is now over for this year, and I'll have more time to work on other things :D
 

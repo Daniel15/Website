@@ -9,6 +9,7 @@ categories:
 
 ---
 
-<p>OMG, I finally got my cheque from my ICT Fellowship! Now I can finally buy a Laptop! Even though I <em>used to</em> think that Dell computers were bad, their laptops seem quite good (well, the Laptops that don't use Sony batteries, anyways :P). </p>
-<p>I'm considering purchasing an <a href='http://www1.ap.dell.com/content/products/productdetails.aspx/inspn_6400_au?c=au&l=en&s=dhs'>Inspiron 6400</a> with the graphics card upgraded to an ATI Radeon X1400 :). However, I still need to wait for my cheque to clear (which gives me some time to consider other laptops)</p>
+OMG, I finally got my cheque from my ICT Fellowship! Now I can finally buy a Laptop! Even though I *used to* think that Dell computers were bad, their laptops seem quite good (well, the Laptops that don't use Sony batteries, anyways :P). 
+
+I'm considering purchasing an [Inspiron 6400](http://www1.ap.dell.com/content/products/productdetails.aspx/inspn_6400_au?c=au&l=en&s=dhs) with the graphics card upgraded to an ATI Radeon X1400 :). However, I still need to wait for my cheque to clear (which gives me some time to consider other laptops)
 

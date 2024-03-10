@@ -9,8 +9,11 @@ categories:
 
 ---
 
-<p><strong>Update: I've found someone to take over. No more emails about this, please :)</strong></p>
-<p>Hey everyone,<br />
-I'm still looking for someone to take over development of my Facebook "Flash Embed" application. It allows you to embed animations, games, and videos (eg. YouTube videos) on your Facebook profile. I don't have time to develop it, and am looking for someone to take over development and make the app work properly with the "new" Facebook layout. The app is written in PHP and uses a MySQL database.</p>
-<p>Please contact me if you're interested.</p>
+**Update: I've found someone to take over. No more emails about this, please :)**
+
+Hey everyone,  
+
+I'm still looking for someone to take over development of my Facebook "Flash Embed" application. It allows you to embed animations, games, and videos (eg. YouTube videos) on your Facebook profile. I don't have time to develop it, and am looking for someone to take over development and make the app work properly with the "new" Facebook layout. The app is written in PHP and uses a MySQL database.
+
+Please contact me if you're interested.
 

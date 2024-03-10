@@ -9,8 +9,11 @@ categories:
 
 ---
 
-<p>I've added a "Microblog" section to this blog, which I'll basically (try to) use to post things when I'm out and about. Kinda like Twitter, but maybe with longer posts. Like a... microblog, or tumbleblog (Tumblr, etc.)</p>
-<p>Ciera gets here tomorrow morning! EPIC excitedness! I can't wait!!! :D</p>
-<p>Until next time,<br />
- &mdash; Daniel</p>
+I've added a "Microblog" section to this blog, which I'll basically (try to) use to post things when I'm out and about. Kinda like Twitter, but maybe with longer posts. Like a... microblog, or tumbleblog (Tumblr, etc.)
+
+Ciera gets here tomorrow morning! EPIC excitedness! I can't wait!!! :D
+
+Until next time,  
+
+ — Daniel
 

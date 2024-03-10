@@ -10,5 +10,5 @@ categories:
 
 ---
 
-<p>Just today, Akismet has blocked over 500 attempts to add comment spam to this blog. Don't these spammers have any life?</p>
+Just today, Akismet has blocked over 500 attempts to add comment spam to this blog. Don't these spammers have any life?
 

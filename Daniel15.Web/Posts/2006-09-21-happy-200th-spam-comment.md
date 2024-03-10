@@ -9,5 +9,5 @@ categories:
 
 ---
 
-<p>Well, probably not happy, but <a href="http://www.akismet.com/">Akismet</a> has successfully blocked 200 spam comments from my blog. Geez, when will spammers learn? :D</p>
+Well, probably not happy, but [Akismet](http://www.akismet.com/) has successfully blocked 200 spam comments from my blog. Geez, when will spammers learn? :D
 

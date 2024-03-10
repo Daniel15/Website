@@ -53,26 +53,30 @@ internal class Program(IBlogRepository blogRepository)
 	{
 		Directory.CreateDirectory(BASE_DIR);
 
+		// Test with just one post
+		// await RunForPostAsync(blogRepository.GetBySlug("restore-mysql-dump-using-php"));
+
 		var allPosts = blogRepository.All();
 		Console.WriteLine($"{allPosts.Count} blog posts found.");
 		foreach (var post in allPosts)
 		{
-			await RunForPost(post);
+			await RunForPostAsync(post);
 		}
 	}
 
-	public async Task RunForPost(PostModel postWithoutSomeData)
+	public async Task RunForPostAsync(PostModel postWithoutSomeData)
 	{
 		// .GetBySlug() gets some fields that .All() doesn't... :/
 		var post = blogRepository.GetBySlug(postWithoutSomeData.Slug);
 		Console.WriteLine($"Processing {post.Title} ({post.Id})");
 
-		var contents = $@"---
-{BuildFrontMatter(post)}
----
+		var contents = $"""
+		                ---
+		                {BuildFrontMatter(post)}
+		                ---
 
-{ConvertToMarkdown(post.RawContent)}
-";
+		                {await HtmlToMarkdown.ConvertAsync(post.RawContent)}
+		                """;
 
 		var filename = $"{post.Date:yyyy-MM-dd}-{post.Slug}.md";
 		await File.WriteAllTextAsync(Path.Combine(BASE_DIR, filename), contents);
@@ -103,11 +107,5 @@ internal class Program(IBlogRepository blogRepository)
 
 		// Remove blank summary if present
 		return _blankSummaryRegex.Replace(yaml, string.Empty);
-	}
-
-	private string ConvertToMarkdown(string post)
-	{
-		// TODO
-		return post;
 	}
 }
