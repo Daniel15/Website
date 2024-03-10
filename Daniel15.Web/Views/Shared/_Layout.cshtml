@@ -3,11 +3,7 @@
 @using Daniel15.Web.Configuration
 @model ViewModelBase
 <!DOCTYPE html>
-<!--[if lt IE 7 ]> <html lang="en" class="no-js ie ie6 ielt8 ielt9"> <![endif]-->
-<!--[if IE 7 ]>    <html lang="en" class="no-js ie ie7 ielt8 ielt9"> <![endif]-->
-<!--[if IE 8 ]>    <html lang="en" class="no-js ie ie8 ielt9"> <![endif]-->
-<!--[if IE 9 ]>    <html lang="en" class="no-js ie ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js non-ie"> <!--<![endif]-->
+<html lang="en" class="no-js non-ie">
 <head>
 	<title>@(string.IsNullOrEmpty(Model.Title) ? string.Empty : Model.Title + " — ")Daniel15</title>
 	<base href="@Url.ContentAbsolute("~/")" />
@@ -87,11 +83,6 @@
 		<script src="cache/syntaxHighlighter.min.js"  asp-append-version="true"></script>
 	</environment>
 	@await RenderSectionAsync("scripts", required: false)
-
-	<!--[if lt IE 8]>
-		<div id="ie-sucks">I no longer fully support Internet Explorer 6 and 7, and stuff may be broken for you. Consider <a href="http://browsehappy.com/">updating your browser</a> :)</div>
-	<![endif]-->
-
 	@await RenderSectionAsync("extraFoot", required: false)
 	<mini-profiler />
 </body>
