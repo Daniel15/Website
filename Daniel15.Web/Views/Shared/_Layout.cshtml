@@ -75,12 +75,10 @@
 	<environment names="Development">
 		<script src="~/cache/main.js"></script>
 		<script>Events.initPage();</script>
-		<script src="~/cache/syntaxHighlighter.js"></script>
 	</environment>
 	<environment names="Staging,Production">
 		<script src="cache/main.min.js" asp-append-version="true"></script>
 		<script>Events.initPage();</script>
-		<script src="cache/syntaxHighlighter.min.js"  asp-append-version="true"></script>
 	</environment>
 	@await RenderSectionAsync("scripts", required: false)
 	@await RenderSectionAsync("extraFoot", required: false)

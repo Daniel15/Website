@@ -1,5 +1,6 @@
-﻿using Daniel15.Web.MarkdownExtensions;
+using Daniel15.Web.MarkdownExtensions;
 using Markdig;
+using Markdown.ColorCode;
 
 namespace Daniel15.Web.Services
 {
@@ -18,7 +19,7 @@ namespace Daniel15.Web.Services
 		{
 			_pipeline = new MarkdownPipelineBuilder()
 				.UseAdvancedExtensions()
-				.Use<HighlightCodeBlockExtension>()
+				.UseColorCode(HtmlFormatterType.Css)
 				.Use<HeadingHackExtension>()
 				.Build();
 		}
@@ -30,7 +31,7 @@ namespace Daniel15.Web.Services
 		/// <returns>HTML output</returns>
 		public string Parse(string markdown)
 		{
-			return Markdown.ToHtml(markdown, _pipeline);
+			return Markdig.Markdown.ToHtml(markdown, _pipeline);
 		}
 	}
 }

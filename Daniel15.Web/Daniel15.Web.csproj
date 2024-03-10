@@ -21,6 +21,7 @@
     <PackageReference Include="Coravel" Version="5.0.3" />
     <PackageReference Include="Daniel15.SimpleIdentity" Version="3.0.0" />
     <PackageReference Include="Markdig" Version="0.35.0" />
+    <PackageReference Include="Markdown.ColorCode" Version="2.2.1" />
 	<PackageReference Include="MaxMind.GeoIP2" Version="5.2.0" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.2" />
 	<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />

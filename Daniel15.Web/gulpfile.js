@@ -82,24 +82,6 @@ gulp.task('build:js:main', /*gulp.series(['build:js:analytics']),*/ function(cb)
 		.on('end', cb);
 });
 
-gulp.task('build:js:syntaxHighlighter', function(cb) {
-	return gulp
-		.src([
-			paths.js + 'lib/syntaxhighlighter/shCore.js',
-			paths.js + 'lib/syntaxhighlighter/shBrushJScript.js',
-			paths.js + 'lib/syntaxhighlighter/shBrushPhp.js',
-			paths.js + 'lib/syntaxhighlighter/shBrushCSharp.js',
-			paths.js + 'lib/syntaxhighlighter/shBrushXml.js',
-			paths.js + 'lib/syntaxhighlighter/shBrushDelphi.js',
-			paths.js + 'lib/syntaxhighlighter/shBrushPlain.js',
-			paths.js + 'lib/syntaxhighlighter/shBrushCss.js',
-			paths.js + 'syntaxhighlighter.js'
-		])
-		.pipe(concat('syntaxHighlighter.js'))
-		.pipe(buildJS())
-		.on('end', cb);
-});
-
 gulp.task('build:js:blogadmin', function (cb) {
 	return gulp
 		.src(paths.js + 'blogadmin.js')
@@ -127,7 +109,6 @@ gulp.task('build:config', function(cb) {
 gulp.task('build', gulp.series([
 	'build:css',
 	'build:js:main',
-	'build:js:syntaxHighlighter',
 	'build:js:blogadmin',
 	'build:config'
 ]));
