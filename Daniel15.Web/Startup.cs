@@ -1,4 +1,5 @@
 using Coravel;
+using Coravel.Queuing.Interfaces;
 using Daniel15.Web.Services.CodeRepositories;
 using Daniel15.Web.Services.Social;
 using Daniel15.Web.Services;
@@ -104,6 +105,7 @@ services.AddQueue();
 services.AddScoped<ProjectUpdater>();
 services.AddScoped<ShortUrlLogger>();
 services.AddScoped<DisqusComments>();
+services.AddScoped<BlogMarkdownImporter>();
 
 var app = builder.Build();
 
@@ -150,5 +152,9 @@ app.Services.UseScheduler(scheduler =>
 
 app.Services.ConfigureQueue()
 	.OnError(ex => app.Services.GetRequiredService<IExceptionHandler>().Handle(ex));
+
+// Queue Markdown import to run in the background
+app.Services.GetRequiredService<IQueue>()
+	.QueueInvocable<BlogMarkdownImporter>();
 
 app.Run();

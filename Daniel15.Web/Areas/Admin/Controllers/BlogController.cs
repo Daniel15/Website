@@ -119,7 +119,7 @@ namespace Daniel15.Web.Areas.Admin.Controllers
 			post.Slug = viewModel.Post.Slug;
 			post.Date = viewModel.Post.Date;
 			post.Published = viewModel.Post.Published;
-			post.RawContent = viewModel.Post.RawContent;
+			post.Content = viewModel.Post.Content;
 			post.MainCategoryId = viewModel.Post.MainCategoryId;
 			post.Summary = viewModel.Post.Summary;
 

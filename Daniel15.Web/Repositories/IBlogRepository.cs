@@ -87,6 +87,13 @@ namespace Daniel15.Web.Repositories
 		CategoryModel GetCategory(string slug);
 
 		/// <summary>
+		/// Gets categories by title
+		/// </summary>
+		/// <param name="titles">Titles of the categories</param>
+		/// <returns>The categories</returns>
+		IList<CategoryModel> GetCategoriesByTitle(IEnumerable<string> titles);
+
+		/// <summary>
 		/// Gets a tag by slug
 		/// </summary>
 		/// <param name="slug">Slug of the tag</param>

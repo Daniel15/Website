@@ -11,9 +11,9 @@ public class PostFrontMatter
 
 	public bool Published { get; set; }
 
-	public DateTime? PublishedDate { get; set; }
+	public DateTime PublishedDate { get; set; }
 
-	public DateTime? LastModifiedDate { get; set; }
+	public DateTime LastModifiedDate { get; set; }
 
 	public string Summary { get; set; }
 

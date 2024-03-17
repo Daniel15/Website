@@ -1,4 +1,4 @@
-﻿@model Daniel15.Web.ViewModels.Blog.FeedViewModel
+@model Daniel15.Web.ViewModels.Blog.FeedViewModel
 <?xml version="1.0" encoding="UTF-8"?>
 @{
 	Layout = null;
@@ -31,7 +31,7 @@
 				<pubDate>@post.Post.Date.ToRfc822String()</pubDate>
 				<dc:creator>Daniel15</dc:creator>
 				<description>@post.Post.PlainTextIntro()</description>
-				<content:encoded>@post.Post.Content()</content:encoded>
+				<content:encoded>@post.Post.Content</content:encoded>
 				<guid isPermaLink="false">Daniel15-@Model.FeedGuidBase-@post.Post.Id</guid>
 				@foreach (var category in post.PostCategories)
 				{

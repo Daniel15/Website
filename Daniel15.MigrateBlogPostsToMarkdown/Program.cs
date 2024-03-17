@@ -75,7 +75,7 @@ internal class Program(IBlogRepository blogRepository)
 		                {BuildFrontMatter(post)}
 		                ---
 
-		                {await HtmlToMarkdown.ConvertAsync(post.RawContent)}
+		                {await HtmlToMarkdown.ConvertAsync(post.Content)}
 		                """;
 
 		var filename = $"{post.Date:yyyy-MM-dd}-{post.Slug}.md";

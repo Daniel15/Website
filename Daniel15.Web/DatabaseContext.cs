@@ -63,10 +63,6 @@ namespace Daniel15.Web
 				.ToTable("disqus_comments")
 				.Ignore(x => x.Children);
 
-			modelBuilder.Entity<PostModel>()
-				.Property(x => x.RawContent)
-				.HasColumnName("content");
-
 			// Backwards compatibility with old DB - Dates as UNIX times
 			modelBuilder.Entity<PostModel>()
 				.Property(x => x.Date)

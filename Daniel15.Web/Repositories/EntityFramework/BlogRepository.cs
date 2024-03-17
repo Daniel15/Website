@@ -239,6 +239,28 @@ namespace Daniel15.Web.Repositories.EntityFramework
 		/// <returns>The category</returns>
 		public CategoryModel GetCategory(string slug)
 		{
+			return GetCategoryQuery().FirstOrThrow(x => x.Slug == slug);
+		}
+
+		/// <summary>
+		/// Gets categories by title
+		/// </summary>
+		/// <param name="titles">Titles of the categories</param>
+		/// <returns>The categories</returns>
+		public IList<CategoryModel> GetCategoriesByTitle(IEnumerable<string> titles)
+		{
+			return GetCategoryQuery()
+				.Where(x => titles.Contains(x.Title))
+				.ToList();
+		}
+
+		/// <summary>
+		/// Gets a category by slug
+		/// </summary>
+		/// <param name="slug">Slug of the category</param>
+		/// <returns>The category</returns>
+		private IQueryable<CategoryModel> GetCategoryQuery()
+		{
 			return Context.Categories
 				.Include(cat => cat.Parent)
 				.Include(cat => cat.PostCategories)
@@ -246,8 +268,7 @@ namespace Daniel15.Web.Repositories.EntityFramework
 						.ThenInclude(x => x.MainCategory)
 				.Include(cat => cat.PostCategories)
 					.ThenInclude(x => x.Post)
-						.ThenInclude(x => x.MainCategory.Parent)
-				.FirstOrThrow(x => x.Slug == slug);
+						.ThenInclude(x => x.MainCategory.Parent);
 		}
 
 		/// <summary>

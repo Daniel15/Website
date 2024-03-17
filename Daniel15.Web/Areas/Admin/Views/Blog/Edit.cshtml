@@ -1,4 +1,4 @@
-﻿@model Daniel15.Web.Areas.Admin.ViewModels.Blog.EditViewModel
+@model Daniel15.Web.Areas.Admin.ViewModels.Blog.EditViewModel
 
 @{
 	Model.Title = "Edit Post";
@@ -28,8 +28,8 @@
 			@Html.LabelFor(x => x.Post.Published)
 		</p>
 		<p>
-			@Html.LabelFor(x => x.Post.RawContent, "Post (wrap paragraphs in <p> tags):")<br />
-			@Html.TextAreaFor(x => x.Post.RawContent, rows: 15, columns: 100, htmlAttributes: new { })
+			@Html.LabelFor(x => x.Post.Content, "Post (wrap paragraphs in <p> tags):")<br />
+			@Html.TextAreaFor(x => x.Post.Content, rows: 15, columns: 100, htmlAttributes: new { })
 		</p>
 		<p>
 			@Html.LabelFor(x => x.Post.Summary, "Summary:")<br />

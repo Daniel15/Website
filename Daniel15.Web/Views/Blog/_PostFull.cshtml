@@ -2,7 +2,7 @@
 
 <article id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting">
     <partial name="_PostHeader" model="Model" />
-		@Html.Raw(Model.Post.Content())
+		@Html.Raw(Model.Post.Content)
 	</div>
     <partial name="_ShareLinks" model="Model" />
 	
