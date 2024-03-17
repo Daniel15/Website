@@ -2,6 +2,8 @@ using Markdig;
 using Markdig.Renderers;
 using Markdig.Renderers.Html;
 using Markdig.Syntax;
+using Markdig.Syntax.Inlines;
+using System.ComponentModel;
 
 namespace Daniel15.Web.MarkdownExtensions
 {
@@ -24,6 +26,17 @@ namespace Daniel15.Web.MarkdownExtensions
 		{
 			protected override void Write(HtmlRenderer renderer, HeadingBlock heading)
 			{
+				// Clone the inline contents
+				var inline = new ContainerInline();
+				var child = heading.Inline.FirstChild;
+				while (child != null)
+				{
+					var next = child.NextSibling;
+					child.Remove();
+					inline.AppendChild(child);
+					child = next;
+				}
+
 				// Clone the heading block, and increment the level
 				var hackHeading = new HeadingBlock(heading.Parser)
 				{
@@ -32,6 +45,7 @@ namespace Daniel15.Web.MarkdownExtensions
 					Column = heading.Column,
 					HeaderChar = heading.HeaderChar,
 					IsBreakable = heading.IsBreakable,
+					Inline = inline,
 					IsOpen = heading.IsOpen,
 					Line = heading.Line,
 					Lines = heading.Lines,
