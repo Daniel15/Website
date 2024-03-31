@@ -7,7 +7,7 @@ namespace Daniel15.Web.Models.Blog
 	{
 		public const string READ_MORE_COMMENT = "<!--more-->";
 		public const string READ_MORE_HTML_MARKER = "<span id=\"read-more\"></span>";
-		public const string POST_ATTRIBUTION_PREFIX = "This post is originally from Daniel15's Blog at";
+		public const string POST_ATTRIBUTION_PREFIX = "This post is originally from Daniel15's Blog at ";
 
 		/// <summary>
 		/// Length of the summary of posts (in characters) for the RSS feed

@@ -1,3 +1,4 @@
+@using Daniel15.Web.Models.Blog
 @model Daniel15.Web.ViewModels.Blog.FeedViewModel
 <?xml version="1.0" encoding="UTF-8"?>
 @{
@@ -23,6 +24,10 @@
 		
 		@foreach (var post in Model.Posts)
 		{
+			var contentWithAttribution = PostModel.POST_ATTRIBUTION_PREFIX + 
+                 Url.BlogPostAbsolute(post.Post) + 
+                 "<br /><br />" + 
+                 post.Post.Content;
 			<item>
 				<title>@post.Post.Title</title>
 				@* Hack for Razor's handling of <link> tags: http://stackoverflow.com/questions/12711507/using-razor-2-to-write-rss-fails-on-the-link-element *@
@@ -31,7 +36,7 @@
 				<pubDate>@post.Post.Date.ToRfc822String()</pubDate>
 				<dc:creator>Daniel15</dc:creator>
 				<description>@post.Post.PlainTextIntro()</description>
-				<content:encoded>@post.Post.Content</content:encoded>
+				<content:encoded>@contentWithAttribution</content:encoded>
 				<guid isPermaLink="false">Daniel15-@Model.FeedGuidBase-@post.Post.Id</guid>
 				@foreach (var category in post.PostCategories)
 				{
