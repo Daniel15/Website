@@ -27,6 +27,10 @@ builder.Configuration
 var services = builder.Services;
 var config = builder.Configuration;
 services.AddControllersWithViews();
+services.AddOutputCache(options =>
+{
+	options.AddBasePolicy(x => x.Expire(TimeSpan.FromHours(1)));
+});
 services.AddIdentity<SimpleIdentityUser, SimpleIdentityRole>()
 	.AddSimpleIdentity<SimpleIdentityUser>(config.GetSection("Auth"))
 	.AddDefaultTokenProviders();
@@ -134,6 +138,7 @@ app.UseMiniProfiler();
 // All real routes are defined using attributes.
 app.UseRouting();
 app.UseAuthorization();
+app.UseOutputCache();
 app.MapControllers();
 
 app.Services.UseScheduler(scheduler =>

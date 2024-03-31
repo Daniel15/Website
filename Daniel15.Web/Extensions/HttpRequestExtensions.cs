@@ -9,24 +9,6 @@ namespace Daniel15.Web.Extensions
 	public static class HttpRequestExtensions
 	{
 		/// <summary>
-		/// Determines if the specified request should redirect to FeedBurner. This is the case when
-		/// a user accesses an RSS feed directly. Allows explicit access to the feed by adding a
-		/// feedburner_override GET parameter. 
-		/// </summary>
-		/// <param name="request">The request</param>
-		/// <returns><c>true</c> if this request can redirect to FeedBurner</returns>
-		public static bool ShouldRedirectToFeedburner(this HttpRequest request)
-		{
-			var userAgent = request.Headers["User-Agent"].Count > 0
-				? request.Headers["User-Agent"][0].ToLower()
-				: string.Empty;
-			return
-				!userAgent.Contains("feedburner")
-				&& !userAgent.Contains("feedvalidator")
-				&& !request.Query.ContainsKey("feedburner_override");
-		}
-
-		/// <summary>
 		/// Send a GET to the sepecified URI and return the response body as a JArray (dynamic 
 		/// JSON array)
 		/// </summary>

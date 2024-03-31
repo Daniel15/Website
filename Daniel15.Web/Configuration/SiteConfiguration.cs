@@ -7,11 +7,6 @@ namespace Daniel15.Web.Configuration
 	public class SiteConfiguration : ISiteConfiguration
 	{
 		/// <summary>
-		/// Gets the Google Analytics account to use for the site
-		/// </summary>
-		public string GoogleAnalyticsAccount { get; set; }
-
-		/// <summary>
 		/// Gets the name of the blog
 		/// </summary>
 		public string BlogName { get; set; }
@@ -20,11 +15,6 @@ namespace Daniel15.Web.Configuration
 		/// Gets the description of the blog
 		/// </summary>
 		public string BlogDescription { get; set; }
-
-		/// <summary>
-		/// Gets the FeedBurner URL for the blog feed
-		/// </summary>
-		public string FeedBurnerUrl { get; set; }
 
 		/// <summary>
 		/// Gets the Disqus shortname used by the blog comments

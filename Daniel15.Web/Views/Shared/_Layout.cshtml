@@ -36,7 +36,7 @@
 
 	<!-- Other stuff -->
 	<link rel="start" href="/" title="Home" />
-	<link rel="alternate" type="application/rss+xml" title="@Config.BlogName - RSS Feed" href="@Config.FeedBurnerUrl" />
+	<link rel="alternate" type="application/rss+xml" title="@Config.BlogName - RSS Feed" href="@Url.Absolute(Url.Action("BlogLatest", "Feed"))" />
 	<script>
 		document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
 	</script>

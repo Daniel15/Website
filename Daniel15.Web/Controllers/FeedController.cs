@@ -7,6 +7,7 @@ using Daniel15.Web.Extensions;
 using Daniel15.Web.ViewModels.Blog;
 using Daniel15.Web.ViewModels.Feed;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace Daniel15.Web.Controllers
 {
@@ -45,6 +46,7 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <returns>Sitemap XML</returns>
 		[Route("sitemap.xml")]
+		[OutputCache]
 		public virtual ActionResult Sitemap()
 		{
 			var view = View(new SitemapViewModel
@@ -63,18 +65,16 @@ namespace Daniel15.Web.Controllers
 		/// </summary>
 		/// <returns>RSS feed</returns>
 		[Route("blog/feed")]
+		[OutputCache]
 		public virtual ActionResult BlogLatest()
 		{
-			if (Request.ShouldRedirectToFeedburner())
-				return Redirect(_siteConfig.FeedBurnerUrl);
-
 			var posts = _blogRepository.LatestPosts(ITEMS_IN_FEED);
 			return RenderFeed(posts, new FeedViewModel
 			{
 				FeedGuidBase = "Latest",
 				Title = _siteConfig.BlogName,
 				Description = _siteConfig.BlogDescription,
-				FeedUrl = _siteConfig.FeedBurnerUrl,
+				FeedUrl = Url.Absolute(Url.Action("BlogLatest")),
 				SiteUrl = Url.Action("Index", "Blog", null, Request.Scheme),
 			});
 		}
@@ -87,6 +87,7 @@ namespace Daniel15.Web.Controllers
 		/// <returns>RSS feed</returns>
 		[Route("category/{parentSlug}/{slug}.rss", Order = 1, Name = "BlogSubCategoryFeed")]
 		[Route("category/{slug}.rss", Order = 2, Name = "BlogCategoryFeed")]
+		[OutputCache]
 		public virtual ActionResult BlogCategory(string slug, string parentSlug = null)
 		{
 			CategoryModel category;
