@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/06/ict-fellowship-end
+
+---
+
 Well, I've just finished my ICT Fellowship. I must say, it was a great thing for me to do; it gave me something to do over the holidays :). I made some macros in Excel (which was not all that difficult, because I used to work with macros when I was younger)
 
 Anyways, I did learn a few things... Some of the things I learnt were:

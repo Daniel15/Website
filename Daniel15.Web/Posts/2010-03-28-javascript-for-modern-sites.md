@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2010/03/javascript-for-modern-sites
+
+---
+
 In this post, I'll discuss some of the techniques that I personally write JavaScript. There's no right or wrong, this is all **my opinion** (still, feel free to flame me if you feel it's necessary :P). This post is aimed at people that understand basic JavaScript and HTML techniques, and want to see how I code my JavaScript. I will talk about the JavaScript of the past, how it's changed, and some techniques used in modern JavaScript development. This will probably be a multi-part series if I ever get around to writing more posts :P <!--more-->
 
 ## The Bad Old Days

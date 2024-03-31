@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2012/05/custom-strongly-typed-htmlhelpers-in-asp-net-mvc
+
+---
+
 The original release of ASP.NET MVC used HTML helpers with a syntax like the following:
 
 ```csharp

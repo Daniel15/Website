@@ -11,6 +11,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/09/laptop-linux-and-compiz
+
+---
+
 Update: Since I made this post in September 2006, things have changed. Compiz-Quinn has changed its name to Beryl, and up-to-date installation instructions are available for [Ubuntu Edgy](http://wiki.beryl-project.org/wiki/Install_Beryl_on_Ubuntu_Edgy_with_XGL) and [Ubuntu Feisty](http://wiki.beryl-project.org/wiki/Install_Beryl_on_Ubuntu_Feisty_with_XGL){style="color: red"}
 
 Well, I got my laptop on Friday (15th September). I must say, the Inspiron 6400 was definately a good choice. The only thing I don't really like about it is the reflectiveness of the TrueLife screen, but I suppose I'll get used to it (the colours are definately more vivid, and it has better contrast... The screen looks absolutely awesome when playing games!). Anyways, one of the first things I did was partition the drive, and install Ubuntu Linux :). Once I did this, the first thing I did was install i8kutils and Gkrellm (so that I could control the speed of the fan, to make sure it doesn't overheat), and then install the ATI Drivers for the X1400 (called 'FGLRX'). Everything was working excellently (see screenshot)  

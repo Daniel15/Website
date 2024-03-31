@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/11/linux-vserver-debian-etch
+
+---
+
 In this tutorial, I'll show you how to install Linux-Vserver on Debian Testing (Etch), the easy way. This was the first tutorial I posted to HowtoForge.com, so please tell me if you like it or not. You may find it a bit verbose, as I try to explain things in enough detail so that everyone understands what I mean :-) 
 
 What is Linux-Vserver, you ask? It's simple. Basically, Linux-Vserver is an open-source system used to separate a single physical server into multiple virtual servers. From the Linux-Vserver website:

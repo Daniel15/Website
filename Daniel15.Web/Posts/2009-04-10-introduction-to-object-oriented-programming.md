@@ -11,6 +11,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2009/04/introduction-to-object-oriented-programming
+
+---
+
 Well, back to posting coding-related blog posts, for now anyways :P. Seeing as a lot of people seem to be confused by Object Oriented Programming, I thought I'd post a quick (or maybe not so quick) post about what OOP is, the main features, and how it can benefit you. This is paraphrased from an assignment I had on OOP last semester at university. I use C# code examples throughout this, but the concepts are very similar in other languages. Note that in this post, I assume you know the basics of programming, and just want to learn more about object orientation.
 
 Now, let's begin looking at what OOP actually means. At its core, the Object Oriented paradigm consists of **classes** and **objects**. A class is a “thing” or entity that has a purpose, and an **object** is an instance of this entity. For example, a Car would be a class, and **my car** would be an object (instance of the Car class).  

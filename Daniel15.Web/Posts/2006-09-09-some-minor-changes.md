@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/09/some-minor-changes
+
+---
+
 Well, I did some minor changes to this blog today. Some of the main changes:
 
 * Changed the theme from the default WordPress one to the nice [K2 theme](http://www.getk2.com/)

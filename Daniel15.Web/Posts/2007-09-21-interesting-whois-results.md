@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2007/09/interesting-whois-results
+
+---
+
 Recently, I was working on some DNS tools, including DNS lookup and WHOIS tools. Needing to test the WHOIS tool, I used google.com as a test domain (as I usually do). The WHOIS lookup returned some rather interesting results:  
 
 Hostnames like "GOOGLE.COM.IS.HOSTED.ON.PROFITHOSTING.NET", "GOOGLE.COM.PLZ.GIVE.A.PR8.TO.AUDIOTRACKER.NET", GOOGLE.COM.ZOMBIED.AND.HACKED.BY.WWW.WEB-HACK.CO and " GOOGLE.COM.SUCKS.FIND.CRACKZ.WITH.SEARCH.GULLI.COM" are listed.  

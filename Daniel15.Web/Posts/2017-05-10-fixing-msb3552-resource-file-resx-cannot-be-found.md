@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2017/05/fixing-msb3552-resource-file-resx-cannot-be-found
+
+---
+
 Recently I was upgrading one of my projects from Visual Studio 2015 to Visual Studio 2017 (including converting from project.json and .xproj to .csproj), when I hit an error like this:
 
 ```

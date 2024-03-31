@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2012/09/ios-6-safari-caches-ajax-post-requests
+
+---
+
 Back when IE 9 came out, it was the first major browser to start caching redirects to improve performance. The IE team [wrote a detailed blog post about it](http://blogs.msdn.com/b/ie/archive/2010/07/14/caching-improvements-in-internet-explorer-9.aspx), but they still got some backlash (mainly from people that didn't set correct no-cache headers on redirects with side effects, like login pages).
 
 The recently released version of Safari for iOS 6 has [started caching AJAX POST requests](http://stackoverflow.com/questions/12506897/ios6-safari-caching-ajax-results), with no notification to developers at all. Not only is this unexpected, but it goes against [the HTTP 1.1 standard](http://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html), which states:

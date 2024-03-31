@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2009/10/eminem-vs-vengaboys-mashup
+
+---
+
 Well, I got bored, so I decided to create a mashup of *We Like to Party* by the Vengaboys, and *Without Me* by Eminem. This is the first mashup I've ever done, so it's probably not too good :P  
 
 Have a listen here:  

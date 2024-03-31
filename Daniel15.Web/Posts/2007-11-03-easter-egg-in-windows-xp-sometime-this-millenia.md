@@ -11,6 +11,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2007/11/easter-egg-in-windows-xp-sometime-this-millenia
+
+---
+
 A funny easter egg I recently came across in Windows XP, relating to files created in the future:
 
 1. Set your system clock to a date in the future (something far in the future; eg December 2030).

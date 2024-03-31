@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/05/now-running-wordpress
+
+---
+
 Hey look, I changed the blog so it now uses WordPress! That MKPortal Blog thingy was getting annoying...
 
 So... Yeah... That's all for now :)

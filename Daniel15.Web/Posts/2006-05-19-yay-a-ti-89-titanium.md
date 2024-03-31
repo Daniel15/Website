@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/05/yay-a-ti-89-titanium
+
+---
+
 Well, after bidding for 6 different TI-89 Titanium calculators on eBay, I finally got a TI-89 Titanium! I'm so happy now :D
 
 I bought this one from my local [Cash Converters](http://www.cashconverters.com.au/) :P.  

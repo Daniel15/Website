@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2009/02/another-myspace-security-hole-what-to-do
+
+---
+
 As you might have read on my blog, I [recently reported a security issue to MySpace](http://d15.biz/blog/2009/02/myspace-deleted-me-after-reporting-security-issue/). Instead of getting a "thank you for informing us of this problem" (which was all I wanted... I was aiming for MySpace to make their site safer, not for any publicity or anything :P), they **deleted my account**. The security hole I reported was patched though, so I guess that's good. I'm still annoyed at the deletion though. All my test accounts got deleted, but suprisingly my [music account](http://www.myspace.com/daniel15music) wasn't.
 
 Anyways, I've found another security hole today. Not another XSS hole, this is a different security hole with some privacy implications. So, the way that I see it, I have a few options regarding what I can do at this point:

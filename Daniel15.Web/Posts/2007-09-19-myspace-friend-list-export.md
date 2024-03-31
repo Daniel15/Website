@@ -11,6 +11,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2007/09/myspace-friend-list-export
+
+---
+
 **Update 2010-03-28: MySpaceTools.ws is no longer available, due to MySpace blocking my server from accessing it.**
 
 ---

@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/11/amigaos-still-used
+
+---
+
 Well, I was looking at last month's statistics for Daniel15.com, and I happened to notice something interesting in the list of browsers people are using:  
 
 ![Browsers used to visit site - October 2006](http://www.daniel15.com/blog/wp-content/uploads/2006/11/stats-2.PNG)  

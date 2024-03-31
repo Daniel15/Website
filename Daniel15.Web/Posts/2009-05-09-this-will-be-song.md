@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2009/05/this-will-be-song
+
+---
+
 Another song that I liked but couldn't find the lyrics to... Actually this one was from a mix, I've clipped it out and so I could have it as a separate MP3 file.
 
 As for normal blogging, I'll resume eventually. Once I get university assignments and such sorted out, I guess.

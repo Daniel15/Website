@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/06/server-broken
+
+---
+
 Well, I was working on my Linux testing server, and it stopped working for some reason... I tried to restart, but the computer wouldn't even boot (even from a CD). Upon unplugging all the IDE devices, and only leaving a CD drive in (a different one, in case it was faulty for whatever reason), it still wouldn't boot :(. I guess I won't be using that for a while...
 
 Anyways, I'm [buying a new server on eBay](http://cgi.ebay.com.au/ws/eBayISAPI.dll?ViewItem&item=260000403990), so it isn't that bad (all I need to do is wait for it to get shipped to me).

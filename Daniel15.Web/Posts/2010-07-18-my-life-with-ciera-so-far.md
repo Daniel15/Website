@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2010/07/my-life-with-ciera-so-far
+
+---
+
 So as you'd already know, Ciera [came back to Australia three weeks ago](http://dan.cx/blog/2010/07/cieras-here/), which is why I haven't really been on messenger much recently :P. Things have been excellent so far, it's been really enjoyable. Last week, we made some [delicious rainbow cookies](http://dan.cx/blog/2010/07/rainbow-cookies/). They were pretty much just plain lemon cookies based on a recipe from a $4 book we bought at Go-Lo, WITH A DIFFERENCE! We made them awesome by colouring them all different colours (and even made some multi-colour, which was my idea :D). They were delicious **and** colourful and made with 100% awesomesauce. Next time we make some, we'll make them all rainbow I think xD.
 
 Yesterday (Saturday), we went to [Scienceworks](http://museumvictoria.com.au/scienceworks/), which is a science museum here in Melbourne. Well, we got there eventually. We had a few minor issues along the way. Firstly, we got off at Parliament Train Station (as the Metlink journey planner said to), and the platform that the train we needed usually comes to was closed, and there was a notice to go to Southern Cross Station. So, we went back to the platform we came from, and caught another train to Southern Cross. When we got to Southern Cross, the train took aaaages to come (then again, it's the Weribee line so it's kinda expected I guess :P). And then there was another complication — The train terminated at Footscray and we had to take a replacement bus the rest of the way. However, once we caught that bus, we finally got there. Entry is free if you're a student, so that's definitely a bonus.

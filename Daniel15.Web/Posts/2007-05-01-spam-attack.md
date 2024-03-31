@@ -10,5 +10,9 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2007/05/spam-attack
+
+---
+
 Just today, Akismet has blocked over 500 attempts to add comment spam to this blog. Don't these spammers have any life?
 

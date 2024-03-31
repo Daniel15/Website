@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2010/10/javascript-for-modern-sites-2
+
+---
+
 In this post, I'll discuss more of my opinions regarding JavaScript development. Please read [the first post in the series](http://dan.cx/blog/2010/03/javascript-for-modern-sites/) if you haven't already. In this post, I'll cover some relatively important language features that don't seem to be covered in a lot of basic JavaScript guides. I'm assuming you have a basic knowledge of JavaScript. Let's begin.
 
 ## Functions are variables

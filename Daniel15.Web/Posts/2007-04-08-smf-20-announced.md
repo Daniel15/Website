@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2007/04/smf-20-announced
+
+---
+
 The next major version of SMF, SMF 2.0, has been [announced on the Simple Machines Community Forum](http://www.simplemachines.org/community/index.php?topic=163438). This new version is a significant step forward from SMF 1.1, and has been in development alongside it since December 2005.
 
 Some of the features annouced so far include (quoted from the post linked above):

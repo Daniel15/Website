@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2007/04/ubuntu-704-feisty-fawn-has-officially-been-released
+
+---
+
 The beta and the wait is over. Ubuntu 7.04 has been released and is available for immediate download.
 
 [read more](http://releases.ubuntu.com/7.04/) | [digg story](http://digg.com/linux_unix/Ubuntu_7_04_Feisty_Fawn_has_officially_been_released)

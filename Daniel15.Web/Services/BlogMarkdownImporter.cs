@@ -13,6 +13,8 @@ public class BlogMarkdownImporter(
 	IMarkdownProcessor markdown
 ) : IInvocable
 {
+	private const string END_OF_ATTRIBUTION = "<hr />";
+
 	public async Task Invoke()
 	{
 		logger.LogInformation("Starting Markdown importer.");
@@ -63,6 +65,16 @@ public class BlogMarkdownImporter(
 		// Replace "more" comment with marker <span>.
 		// TODO: The Markdown parser should probably do this.
 		content = content.Replace(PostModel.READ_MORE_COMMENT, PostModel.READ_MORE_HTML_MARKER);
+
+		// Get rid of attribution at the top of the post. This is used so that anyone viewing
+		// the raw Markdown file is directed to the blog site.
+		if (content.Contains(PostModel.POST_ATTRIBUTION_PREFIX))
+		{
+			var endOfAttributionPos = content.IndexOf(END_OF_ATTRIBUTION, StringComparison.Ordinal) +
+			    END_OF_ATTRIBUTION.Length;
+			content = content[endOfAttributionPos..].Trim();
+		}
+
 		post.Content = content;
 
 		blogRepository.Save(post);

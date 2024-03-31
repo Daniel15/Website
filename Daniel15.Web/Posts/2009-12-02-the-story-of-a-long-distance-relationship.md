@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2009/12/the-story-of-a-long-distance-relationship
+
+---
+
 Well, I haven't blogged for a while (seems to happen to me quite often). I was pretty busy with university work, exams, arranging a work placement for next year for IBL, and other stuff. I get my exam results in about one and a half weeks, hopefully I did alright on them. We'll see I guess...
 
 Many of you know about my girlfriend. If not, her name is [Ciera](http://ciera.name/), and she's absolutely **amazing** :D. We met online on MySpace (haha) towards the end of September 2008. I had broken up with my ex-girlfriend after a short and hopeless relationship in August 2008. I was rather upset after my ex broke up with me (to be honest, I really have no idea why, looking back at it now), and was just looking for people to talk to, to make me feel better. I was browsing MySpace one of those days, and was looking through [Tom](http://profile.myspace.com/tom)'s (you know, the guy with the pretend friends) blog, where Ciera had posted a comment on one of the posts. There was something about her in particular (the way she wrote? Her picture? I really don't know) that made me click on her and take a look at her profile. Now, I don't know **why** this happened (even today, neither me nor her know why things happened the way they did), but I'm glad it did. Reading her profile made me realise that we had so much in common! I sent a friend request right away, wondering if she'd accept and become my friend. I really wanted to get to know her more.

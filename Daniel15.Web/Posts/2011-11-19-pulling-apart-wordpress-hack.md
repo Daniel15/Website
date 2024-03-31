@@ -11,6 +11,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2011/11/pulling-apart-wordpress-hack
+
+---
+
 Over the past few months, there have been a few vulnerabilies in PHP scripts utilised by various WordPress themes. One of the largest hacks was back in August, when a Remote File Inclusion (RFI) vulnerability was [found in TimThumb](http://wpcandy.com/reports/timthumb-security-vulnerability-discovered), a thumbnail generation script used by a lot of WordPress themes. This vulnerability allowed attackers to run **any** PHP code on vulnerable sites. As a result of this, [thousands of sites were hacked](http://www.theregister.co.uk/2011/11/02/wordpress_mass_compromise/).
 
 The most common result of your site being hacked through like this is having some sort of malicious code added to your PHP files. This is often invisible, and people don't notice that their site has malicious code lurking in it until much later. However, sometimes the hacked code does have errors in it. One particular payload is being referred to as the "['Cannot redeclare' hack](http://digwp.com/2011/11/clean-up-cannot-redeclare-hack/)", as it causes an error like the following to appear in your site's footer:

@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2007/02/setting-up-a-serial-console-on-linux
+
+---
+
 This tutorial will show you how to set up a serial console on a Linux system, and connect to it via a null modem cable. This is quite useful if your Linux server is in a headless configuration (no keyboard or monitor), as it allows you to easily get a console on the system if there are any problems with it (especially network problems, when SSH is not available). In the end, the GRUB menu will appear over the serial link, as will the bootup messages (output when booting the system). I'm using Debian Etch on the server and Ubuntu Edgy on my client, although this should work on any Linux distribution. 
 
 <!--more-->

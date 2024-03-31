@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2007/11/survivor-english-exam-edition
+
+---
+
 Around 46,000 students did their English exam today, me being one of them. The English exam sucks; I'm so bad at writing essays :( . It was alright, but I screwed up a bit of it. Basically, we have to write four essays — Two text response essays (essays based on texts we read in class), a language analysis piece (analyse the ways language is used in some articles), and a persuasive/opinionative piece. I spent too long on the analysis and persuasive pieces (as these are what I'm good at). I completed one of the text response essays and then noticed I only had like 25 minutes or so to do the last one. So it was horribly rushed and probably quite incoherent :P
 
 So yeah, I'm soooo glad that exam is now over; it was the one exam I was really dreading. The exams I have left are:

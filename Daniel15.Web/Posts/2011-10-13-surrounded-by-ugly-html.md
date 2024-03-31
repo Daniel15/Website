@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2011/10/surrounded-by-ugly-html
+
+---
+
 Am I the only person that cringes when I see HTML like this?
 
 ```html

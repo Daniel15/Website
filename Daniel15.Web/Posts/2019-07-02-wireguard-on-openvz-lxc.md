@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2019/07/wireguard-on-openvz-lxc
+
+---
+
 [WireGuard](https://www.wireguard.com/){rel=nofollow} is an exciting, new, extremely simple VPN system that uses state-of-the-art cryptography. Its Linux implementation runs in the kernel, which provides a significant performance boost compared to traditional userspace VPN implementations
 
 The WireGuard kernel module is great, but sometimes you might not be able to install new kernel modules. One example scenario is on a VPS that uses OpenVZ or LXC. For these cases, we can use [wireguard-go](https://git.zx2c4.com/wireguard-go/about/){rel=nofollow}, a userspace implementation of WireGuard. This is the same implementation used on MacOS, Windows, and the WireGuard mobile apps. This implementation is slower than the kernel module, but still plenty fast.

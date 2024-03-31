@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2010/01/two-types-of-developers
+
+---
+
 So, I'm not sure how many people agree with me (I haven't really searched around to see if anyone has the same opinion), but I'm starting to form the opinion that there are two different types of developers: Those that can develop an application but don't really understand the concepts behind it, and those that have a relatively deep knowledge of how their code works and all fits together. Or, in other words, those think it's alright (and perhaps have it as a job), but are not very passionate, versus those that are very passionate about programming. Generally, I guess something like the following could be said:
 
 People in the first group:

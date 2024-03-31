@@ -12,6 +12,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2010/09/integrating-facebook-logins-into-your-php-website-easily
+
+---
+
 A lot of sites now use OpenID. This is great, as you can use the one account on multiple sites. Unfortunately, Facebook accounts can not yet be used as OpenIDs :(. However, using Facebook logins isn't too hard, as they support using OAuth 2.0. OpenID and OAuth are fundamentally for different things (OpenID is authentication, OAuth is authorization), but it still works well in this situation. 
 
 Firstly, sign up for a Facebook application at the [Facebook developer website](http://facebook.com/developer/).  You'll have to correctly set the site URL and site domain. Copy the application ID and application secret as shown on the Web Site section of the settings, as you will need them later. <!--more-->

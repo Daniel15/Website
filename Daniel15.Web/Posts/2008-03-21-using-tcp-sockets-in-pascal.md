@@ -11,6 +11,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2008/03/using-tcp-sockets-in-pascal
+
+---
+
 TCP sockets in Pascal are generally hard to use; Free Pascal doesn't come with any high-level socket libraries by default, only a relatively low-level `socket` library. Some external libraries are available to make using sockets with Pascal easier, and one of these libraries is **Synapse**. Synapse is an easy-to-use socket library for Pascal, and in this blog post I'll try to show how to use Synapse to connect to a remote server and send/receive data from it. 
 
 <!--more-->

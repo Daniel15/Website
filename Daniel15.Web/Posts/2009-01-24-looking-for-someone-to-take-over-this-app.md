@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2009/01/looking-for-someone-to-take-over-this-app
+
+---
+
 **Update: I've found someone to take over. No more emails about this, please :)**
 
 Hey everyone,  

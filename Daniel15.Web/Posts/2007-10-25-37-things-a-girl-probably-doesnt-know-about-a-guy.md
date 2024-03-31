@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2007/10/37-things-a-girl-probably-doesnt-know-about-a-guy
+
+---
+
 Saw this in a MySpace bulletin... And it's mostly so true. Except for 11 and 13, which I kinda disagree with :P  
 
 <!--more-->

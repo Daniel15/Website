@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/11/stupidest-ebay-auction-ever
+
+---
+
 Sure, there's been some stupid eBay auctions in the past, but this has got to be the stupidest eBay auction ever! Someone was trying to sell *contact information* of a person who has a PlayStation 3... Here's the description that was posted:
 
 > You are bidding on the contact information for my friend who acquired a PS3 by waiting in line outside Best Buy for two days in advance. I was there with him the entire time, but already sold mine. He has in his posession a PS3, extra controller, extra charger, three games (Resistance, Madden, and Ridge Racer), and a 2 year product replacement plan. Keep in mind that you are not bidding on an actual system, but only the information where you might obtain one. You will be able to contact him and he is very willing to sell if the price is right. The unit is in the Atlanta, GA area and he would be willing to deliver in person if close by. PayPal is the only payment form accepted.

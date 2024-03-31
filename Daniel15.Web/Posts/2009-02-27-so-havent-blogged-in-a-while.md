@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2009/02/so-havent-blogged-in-a-while
+
+---
+
 So, umm, yeah, I don't blog often. You've probably noticed. Seriously, look at the "Archives" widget on the right (or left, depending on what stylesheet you've chosen for this site) and you'll see there's basically nothing since 2007. I really just don't have much to write, haha. I eventually want to write a page about me for the homepage here, but I guess my MySpace and Facebook profiles are serving that purpose right now. In any case, my [sister has a blog](http://wordsaboutsomething.com/), which you should all go read. Unlike me, she has a talent for writing, and I promise you that her blog is a lot more exciting than mine. Go subscribe to her too. And send her lots of spam (well, okay, maybe not the spam, but do all the other things. :P ). Also, check out my friend [Ben](http://www.benstoneonline.com/)'s new blog "[EpicToast.com](http://epictoast.com/)."
 
 While I'm on the topic of blogs (including this one), it's interesting thing to note, my "[37 things a girl probably doesn’t know about a guy](http://d15.biz/blog/2007/10/37-things-a-girl-probably-doesnt-know-about-a-guy/)" blog post is still by far the most popular/accessed. And it wasn't even mine, it was just copied and pasted from a MySpace bulletin. Maybe one day I'll write something similar, with my own thoughts on it. I guess. Speaking of random stuff that gets passed around, I keep getting tagged in those "12/20/38/50/100/whatever Things About Me" notes on Facebook, haven't done any yet though. I suppose I might do one of those one day. It's hard to think of that many things about myself, though. And I also try to avoid those chain things anyways. But one day someone will be like "OMG DANIEL YOU HAVEN'T DONE THOSE ANNOYING CHAIN THINGS, I HATE YOU LALALALALALA RAWRRRRRR" and I'll be like "OH FINE >_<" and do it. :P

@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2010/04/favourite-web-development-blogs
+
+---
+
 I thought I'd give some link love to some of the lesser-known web development blogs I enjoy reading. This post was prompted by a [post about my site at GiveUpInternet.com](http://giveupinternet.com/2010/04/22/daniels-dan-cx-a-nice-web-development-blog/). I didn't expect the link (as I don't think my blog is very good for web development stuff), but I do appreciate it heaps! This blog hasn't really focused too much on web development, perhaps I should post more web development articles :)
 
 * [GiveUpInternet.com](http://giveupinternet.com/) — As it says on the site, "*Give Up Internet is a Humor Blog for Internet People and Developers.*" While it's technically not a web development blog, I love the posts on this site. Unlike a lot of other "humour" sites that post stupid things a lot of the time, it's got actual funny posts. It's one of the only humour blogs that I'm subscribed to.

@@ -11,6 +11,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/09/yay-laptop
+
+---
+
 Well, last Friday I finally ordered my Dell laptop... I'm so happy :)
 
 I ended up ordering an Inspiron 6400, with these specifications:

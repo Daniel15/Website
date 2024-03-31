@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2013/04/goodbye-windows-live-messenger
+
+---
+
 I've been using instant messaging for as long as I've had Internet access. The very first instant messaging program I used was Windows Live Messenger, back when it was called MSN Messenger. Over the last few years, I've watched their official Messenger client get progressively worse and more bloated, and more and more people moving away from it to other IM platforms such as Google Talk (which uses Jabber/XMPP, an open protocol). Now an era is coming to an end. Tomorrow is the day that Microsoft finally retires Windows Live Messenger and begins forcing all users to use Skype. This does make sense from a business perspective - They're getting rid of the old network that they make barely any money from, and moving everything to the one [they acquired for $8.5 billion in 2011](http://gigaom.com/2011/05/09/why-microsoft-is-buying-skype-for-8-billion/) and has [55 million users online concurrently](http://skypenumerology.blogspot.com.au/2013/04/55-million-concurrent-people-online.html).
 
 However, from a technology perspective, this is definitely a huge step backwards. They're referring to the [WLM to Skype migration as an "upgrade"](http://blogs.skype.com/2013/03/06/upgrading-from-windows-live-messenger-to-skype/), I guess in the same way that moving from a mansion to a one-bedroom unit is also an "upgrade". The truth is that Skype really feels like a voice/video chat app with basic instant messaging capabilities added as an afterthought, probably because that's **exactly what it is**. Don't get me wrong, Skype is great for voice and video chats, but for instant messaging it's nowhere near as good as Windows Live Messenger. Skype is lacking a **lot** of features that are present in Windows Live Messenger, some of which include:

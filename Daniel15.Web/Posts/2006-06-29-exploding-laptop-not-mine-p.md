@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/06/exploding-laptop-not-mine-p
+
+---
+
 I used to think Dell was just stupid, but now I think even less of them:
 
 > AN INQUIRER READER attending a conference in Japan was sat just feet away from a laptop computer that suddenly exploded into flames, in what could have been a deadly accident. Gaston, our astonished reader reports: "The damn thing was on fire and produced several explosions for more than five minutes". Should you witness such an event, his advice is, "Don't try anything courageous/stupid, stay away, away, away!"

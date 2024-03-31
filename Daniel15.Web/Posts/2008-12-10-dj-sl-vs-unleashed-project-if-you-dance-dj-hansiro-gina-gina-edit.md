@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2008/12/dj-sl-vs-unleashed-project-if-you-dance-dj-hansiro-gina-gina-edit
+
+---
+
 Because I couldn't find the lyrics of this song anywhere, I typed it up myself. :P
 
 Here's the song:  

@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2010/03/vaserv-rant
+
+---
+
 A while ago, I used to use a VPS from a company called [FSCKVPS](http://fsckvps.com){rel=nofollow}, mainly for storing backups offsite (in case something bad happens to my server one day), and secondary DNS (so in case my server is ever down, I can still get emails, as my emails are hosted using Google Apps). In June 2009, their parent company VAServ had a massive hack attack, with news websites reporting that [as many as 100,000 websites were wiped out by the hack](http://www.theregister.co.uk/2009/06/08/webhost_attack/){title="TheRegister.co.uk article about VAServ / FSCKVPS hack" rel=nofollow}, and the [WebHostingTalk thread about the outage](http://www.webhostingtalk.com/showthread.php?t=867100){rel=nofollow} ended up being one of the longest ones I've seen, at 177 pages long. Some people's VPSes survived, but [mine was one of the ones that was totally lost](http://www.webhostingtalk.com/showpost.php?p=6223507&postcount=562) (luckily, as it was only for backups, it didn't have anything too important in it). They offered [two months free as compensation](http://www.webhostingtalk.com/showpost.php?p=6227951&postcount=1792), so I waited patiently for them to provision me a new VPS, and lived without offsite backups for a while.
 
 After the two free months, they were still having issues — My VPS kept breaking, and they still hadn't given me a secondary IP address as I had requested. I kept giving them the benefit of the doubt, but eventually I decided that enough was enough (two months should have been enough to sort out things), so I moved to another provider. When a company can't even work out how to spell its own company name (sometimes they write "VAServ", other times they write "VAServ**e**"), it's probably time to give up on them. I asked them to politely remove me from their mailing list so I'd no longer get any emails from them. I thought this'd be the end of it, but last week, I received the following email from them:

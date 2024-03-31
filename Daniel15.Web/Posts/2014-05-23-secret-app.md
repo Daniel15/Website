@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2014/05/secret-app
+
+---
+
 ![](http://dan.cx/blog-content/2014/05/secret-turtles.jpg){style="width: 270px !important; float: right; margin-left: 0.5em" width=270}
 The Secret app for Android came out recently, I was intrigued so I thought I'd give it a go.
 

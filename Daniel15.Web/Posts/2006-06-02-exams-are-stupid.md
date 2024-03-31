@@ -11,6 +11,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/06/exams-are-stupid
+
+---
+
 Well, my mid-year exams are now all done. I think that exams are the stupidest thing ever... Whoever invented them should be shot... in the foot :P
 
 ...erm... Yeah, anyway..... For our maths exams (Specialist Maths, and Maths Methods), we have a 2-hour exam where we can use a calculator, and a 1-hour calculator-free exam.

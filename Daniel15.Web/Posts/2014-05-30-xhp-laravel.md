@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2014/05/xhp-laravel
+
+---
+
 In this post I'll cover the basics of using XHP along with the [Laravel](http://laravel.com/) PHP framework, but most of the information is framework-agnostic and applies to other frameworks too.
 
 ## What is XHP and Why Should I Use It?

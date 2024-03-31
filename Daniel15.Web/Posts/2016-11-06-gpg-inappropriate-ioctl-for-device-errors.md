@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2016/11/gpg-inappropriate-ioctl-for-device-errors
+
+---
+
 Recently I moved all my sites onto a new server. I use Duplicity and Backupninja to perform weekly backups of my server. While configuring backups on the new server, I kept encountering a strange error:
 
 ```plain

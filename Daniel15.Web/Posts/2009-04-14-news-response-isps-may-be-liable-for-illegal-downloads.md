@@ -12,6 +12,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2009/04/news-response-isps-may-be-liable-for-illegal-downloads
+
+---
+
 So, I was reading the news today, and came across [this story](http://www.australianit.news.com.au/story/0,20589,25337473-15306,00.html). It states:
 
 > THE NSW Federal Court has not ruled out the possibility that an ISP could be in direct breach of copyright laws if **it provides internet service to individuals that illegally share files on peer-to-peer networks**.  

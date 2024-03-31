@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2009/02/myspace-layout-that-looks-like-facebook
+
+---
+
 [![MySpace Facebook layout screenshot](http://d15.biz/blog/wp-content/uploads/2009/02/myspace-fb-layout-screenshot-224x300.png){title="MySpace Facebook layout screenshot" width=224 height=300 class="alignright size-medium wp-image-98"}](http://d15.biz/blog/wp-content/uploads/2009/02/myspace-fb-layout-screenshot.png)  
 
 Hey everyone,  

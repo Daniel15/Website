@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/04/the-ict-fellowship
+
+---
+
 Well, I though I'd better write a post about how the ICT Fellowship went (which was about 3 weeks ago)
 
 It was quite good actually, I learned a bit about Blender (a 3D application) as well as some things about software development (I already knew quite a lot though, as you would probably know). A few of the other things I learned were:

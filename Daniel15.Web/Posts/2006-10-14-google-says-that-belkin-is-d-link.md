@@ -11,6 +11,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/10/google-says-that-belkin-is-d-link
+
+---
+
 I was recently searching for some Belkin stuff in Google, but accidentally mistyped Belkin as Belkikn. Strangely enough, Google's spell checker produced an interesting result:  
 
 ![Google - Belkin = D-Link](http://www.daniel15.com/blog/wp-content/uploads/2006/10/google-belkin-dlink.PNG)

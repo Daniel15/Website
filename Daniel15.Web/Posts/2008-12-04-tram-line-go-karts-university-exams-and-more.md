@@ -11,6 +11,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2008/12/tram-line-go-karts-university-exams-and-more
+
+---
+
 So, I haven't blogged for a while... Mainly due to real-life getting in the way. Yeah, real life gets like that sometimes, it's rather annoying :P . That, and the fact that I'm lazy - I won't really do anything unless I'm forced to (or force myself to). Well actually, most people are like this, it's just very few seem to admit it. And realisation is the first step to admitting you have a problem, right? :P . And I haven't really had anything to blog about either. Aaaand this blog has approximately 0 readers. I don't think anyone is even reading what I'm writing right now. If you're one of the 0 readers, then HELLOOOOOOOO TO YOOOOOOUUUUUU!!! I have a cookie for you, come and get it before I eat it.
 
 Well anyways, enough of my stupid rambling... my first year of University is finally over, and geez did the time pass quickly :| !  It was generally enjoyable, way way more so than high school was. University life is completely different to high school, in a sense it's a lot more relaxed. Some people take advantage of this and try to breeze through Uni without studying... And end up dropping out :P.  I tried concentrating in class (moreso than last year at high school), but in the end I just ended up not paying attention at all, and rushing all my last assignments (isn't this the case with everyone?). Results day is **13th December 2008**, so I guess I'll be worrying about my results until then. There's one... no, wait, two things I really hated though:

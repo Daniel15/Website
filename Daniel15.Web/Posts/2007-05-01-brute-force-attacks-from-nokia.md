@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2007/05/brute-force-attacks-from-nokia
+
+---
+
 I checked my email inbox this morning, and guess what I found? The firewall ([ConfigServer Security and Firewall](http://configserver.com/cp/csf.html)) on a server I help run blocked a brute-force attack from Nokia:
 
 > Time:     Tue May  1 02:28:18 2007  

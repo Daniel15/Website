@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/11/furby-in-microwave
+
+---
+
 I got bored today, so I decided to search around on [YouTube](http://www.youtube.com/)...
 
 This video made my day: "Furby in Microwave"  

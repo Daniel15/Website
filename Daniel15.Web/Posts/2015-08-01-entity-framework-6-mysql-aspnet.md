@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2015/08/entity-framework-6-mysql-aspnet
+
+---
+
 Visual Studio 2015 was recently released, and with it came a newer beta of ASP.NET 5 (formerly referred to as "ASP.NET vNext"). ASP.NET 5 is a complete rewrite of ASP.NET, focusing on being lightweight, composible, and cross-platform. It also includes an alpha version of Entity Framework 7. However, EF7 is not yet production-ready and does not support all features of EF6. One feature that is missing from EF6 is support for other database providers - Only SQL Server and SQLite are supported at this time.
 
 

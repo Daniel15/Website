@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/04/my-dynamic-signature
+
+---
+
 Well, some people have been asking me about my signature image... In case you haven't seen it, here you go:  
 
 ![](http://www.daniel15.be/sig/sig.png)  

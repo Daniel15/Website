@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2017/03/reusing-job-dsl-config
+
+---
+
 [Job DSL](https://github.com/jenkinsci/job-dsl-plugin/wiki) is an excellent plugin for Jenkins, allowing you to configure your Jenkins jobs through code rather than through the Jenkins UI. This allows you to more easily track changes to your Jenkins jobs, and revert to old versions in case of any issues. As an example, for the [Yarn project](https://yarnpkg.com/), we have a Jenkins job to publish a [Chocolatey](https://chocolatey.org/) package whenever a new stable Yarn version is out. The configuration for a Jenkins job to do that might look something like this:
 
 ```plain

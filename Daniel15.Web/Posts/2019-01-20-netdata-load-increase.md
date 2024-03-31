@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2019/01/netdata-load-increase
+
+---
+
 So I recently encountering a strange issue on two of my servers. I noticed that the load average was increasing approximately every 20 minutes:
 
 ![Load average graph](/blog-content/2019/high-load-avg.png)

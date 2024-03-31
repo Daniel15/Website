@@ -12,6 +12,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/09/vista-rc1-build-5728-installed-without-dvd
+
+---
+
 Recently, heaps of people have been going crazy over the new Vista RC1 release. I decided to dowload Vista, and try it myself. Unfortunately, I didn't have any blank DVD's at hand. Nevertheless, I discovered that you *can* install Vista without burning it onto DVD. Here's how you do it:
 
 * Partition your hard drive. Resize your Windows partition to leave at least 15-20GB available for Vista. You can do this through utilities like [PartitionMagic](http://www.symantec.com/home_homeoffice/products/overview.jsp?pcid=sp&pvid=pm80), or through a boot CD such as the free [Ultimate Boot CD](http://www.ultimatebootcd.com/). If you don't know how to partition a drive, you're probably not the kind of person who should be installing Vista.

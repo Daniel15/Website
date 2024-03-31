@@ -9,6 +9,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2006/11/exams-again
+
+---
+
 Well, it's that time of year again: Exam time. Because of this, I won't have much time to work on my websites.  
 
 Anyways, the exams I'm having are:

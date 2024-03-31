@@ -10,6 +10,10 @@ categories:
 
 ---
 
+# This post is originally from Daniel15's Blog at https://d.sb/2007/09/weirdest-thing-ive-seen-in-a-while
+
+---
+
 Dutch clip + Misheard English = Weirdest thing I've seen in a while. Seriously, this is just strange:  
 
 ![youtube.com](http://www.collegehumor.com/moogaloop/moogaloop.swf?clip_id=1774933&fullscreen=1)
