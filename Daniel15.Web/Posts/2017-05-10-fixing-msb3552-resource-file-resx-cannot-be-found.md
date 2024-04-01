@@ -22,7 +22,7 @@ Microsoft.Common.CurrentVersion.targets(2867,5): error MSB3552: Resource file "*
 
 It turns out this is caused by a long-standing MSBuild bug: [Wildcard expansion is silently disabled when a wildcard includes a file over MAX_PATH](https://github.com/Microsoft/msbuild/issues/406){rel=nofollow}. The `Microsoft.NET.Sdk.DefaultItems.props` file bundled with .NET Core includes a section that looks like this:
 
-```
+```xml
 <EmbeddedResource 
   Include="**/*.resx" 
   Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)"

@@ -67,7 +67,7 @@ public class MyDbConfiguration : DbConfiguration
 The first part of the configuration is a hack to register the ADO.NET provider at runtime, by dynamically adding a new configuration entry to the `system.data` section. The second part registers the Entity Framework provider. We also need to modify the configuration file to include the connection string. You can use any configuration provider supported by ASP.NET 5, I'm using `config.json` here because it's the default provider.
 
 
-```js
+```json
 {
   "Data": {
     "DefaultConnection": {
