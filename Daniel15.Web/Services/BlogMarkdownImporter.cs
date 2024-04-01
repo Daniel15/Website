@@ -57,6 +57,7 @@ public class BlogMarkdownImporter(
 		post.Slug = slug;
 		post.Summary = metadata.Summary;
 		post.Title = metadata.Title;
+		post.Published = metadata.Published;
 
 		var categories = blogRepository.GetCategoriesByTitle(metadata.Categories);
 		post.MainCategory = categories[0];
