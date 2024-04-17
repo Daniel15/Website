@@ -6,17 +6,13 @@ var concat = require('gulp-concat'),
 	git = require('gulp-git'),
     gulp = require('gulp'),
     lazypipe = require('lazypipe'),
-    less = require('gulp-less'),
-    minifyCSS = require('gulp-minify-css'),
     rename = require('gulp-rename'),
 	shell = require('gulp-shell'),
-    uglify = require('gulp-uglify'),
-	urlAdjuster = require('gulp-css-url-adjuster');
+    uglify = require('gulp-uglify');
 
 var webroot = './wwwroot/';
 var paths = {
 	webroot: webroot,
-	css: webroot + 'Content/css/',
 	js: webroot + 'Content/js/',
 	concatRoot: webroot + 'cache/',
 	// Located in the drive root, otherwise the paths get too long :/
@@ -28,19 +24,6 @@ gulp.task('clean', function(cb) {
 		paths.concatRoot + '/*',
 		paths.tempPublish + '/*'
 	], { force: true }, cb);
-});
-
-gulp.task('build:css', function() {
-	return gulp
-		.src([paths.css + 'main.less'])
-		.pipe(less())
-		.pipe(urlAdjuster({
-			replace: ['../', '/Content/']
-		}))
-		.pipe(gulp.dest(paths.concatRoot))
-		.pipe(rename({ extname: '.min.css' }))
-		.pipe(minifyCSS())
-		.pipe(gulp.dest(paths.concatRoot));
 });
 
 gulp.task('build:js:analytics', function() {
@@ -100,7 +83,6 @@ gulp.task('build:config', function(cb) {
 });
 
 gulp.task('build', gulp.series([
-	'build:css',
 	'build:js:main',
 	'build:config'
 ]));
