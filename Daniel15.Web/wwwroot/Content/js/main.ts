@@ -1,3 +1,5 @@
 import '../css/main.less';
 
-// TODO
+import './analytics';
+
+import '../not_an_easter_egg/secret';
