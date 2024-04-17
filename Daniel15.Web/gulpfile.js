@@ -46,7 +46,7 @@ gulp.task('build:css', function() {
 gulp.task('build:js:analytics', function() {
 	return gulp
 		.src([paths.js + 'analytics.js'])
-		.pipe(shell('node_modules\\.bin\\parcel build <%= file.path %> --dist-dir wwwroot\\cache'));
+		.pipe(shell('node build.mjs'));
 });
 
 var buildJS = lazypipe()
