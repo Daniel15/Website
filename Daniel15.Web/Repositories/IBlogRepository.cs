@@ -41,9 +41,8 @@ namespace Daniel15.Web.Repositories
 		/// </summary>
 		/// <param name="count">Number of posts to return</param>
 		/// <param name="offset">Post to start at</param>
-		/// <param name="published">Whether to return published or unpublished posts</param>
 		/// <returns>Latest blog posts</returns>
-		List<PostModel> LatestPosts(int count = 10, int offset = 0, bool published = true);
+		List<PostModel> LatestPosts(int count = 10, int offset = 0);
 
 		/// <summary>
 		/// Gets the latest blog posts in this category
@@ -117,12 +116,6 @@ namespace Daniel15.Web.Repositories
 		/// </summary>
 		/// <returns>Total number of posts in the tag</returns>
 		int PublishedCount(TagModel tag);
-
-		/// <summary>
-		/// Get the total number of posts that are not yet published
-		/// </summary>
-		/// <returns>Total number of posts that have not yet been published</returns>
-		int UnpublishedCount();
 
 		/// <summary>
 		/// Get the total number of posts that are published in this month and year

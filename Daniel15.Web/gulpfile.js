@@ -32,7 +32,7 @@ gulp.task('clean', function(cb) {
 
 gulp.task('build:css', function() {
 	return gulp
-		.src([paths.css + 'main.less', paths.css + 'blogadmin.less'])
+		.src([paths.css + 'main.less'])
 		.pipe(less())
 		.pipe(urlAdjuster({
 			replace: ['../', '/Content/']
@@ -82,13 +82,6 @@ gulp.task('build:js:main', /*gulp.series(['build:js:analytics']),*/ function(cb)
 		.on('end', cb);
 });
 
-gulp.task('build:js:blogadmin', function (cb) {
-	return gulp
-		.src(paths.js + 'blogadmin.js')
-		.pipe(buildJS())
-		.on('end', cb);
-});
-
 gulp.task('build:config', function(cb) {
 	git.revParse({ args: 'HEAD' }, function(err, revision) {
 		git.exec({ args: 'log --pretty=format:%ad --date=iso -n 1' }, function(err, stdout) {
@@ -109,7 +102,6 @@ gulp.task('build:config', function(cb) {
 gulp.task('build', gulp.series([
 	'build:css',
 	'build:js:main',
-	'build:js:blogadmin',
 	'build:config'
 ]));
 

@@ -106,15 +106,13 @@ namespace Daniel15.Web.Repositories.EntityFramework
 		/// </summary>
 		/// <param name="count">Number of posts to return</param>
 		/// <param name="offset">Post to start at</param>
-		/// <param name="published">Whether to return published or unpublished posts</param>
 		/// <returns>Latest blog posts</returns>
-		public List<PostModel> LatestPosts(int count = 10, int offset = 0, bool published = true)
+		public List<PostModel> LatestPosts(int count = 10, int offset = 0)
 		{
 			return LatestPosts(
 				Context.Posts,
 				count,
-				offset,
-				published
+				offset
 			);
 
 		}
@@ -157,12 +155,11 @@ namespace Daniel15.Web.Repositories.EntityFramework
 		/// <param name="posts">Data source for blog posts</param>
 		/// <param name="count">Number of posts to return</param>
 		/// <param name="offset">Post to start at</param>
-		/// <param name="published">Whether to return published posts (<c>true</c> to show published or <c>false</c> to show unpublished)</param>
 		/// <returns>Latest blog posts</returns>
-		private List<PostModel> LatestPosts(IQueryable<PostModel> posts, int count, int offset, bool published = true)
+		private List<PostModel> LatestPosts(IQueryable<PostModel> posts, int count, int offset)
 		{
 			return posts
-				.Where(post => post.Published == published)
+				.Where(post => post.Published)
 				.OrderByDescending(post => post.Date)
 				.Skip(offset)
 				.Take(count)
@@ -313,15 +310,6 @@ namespace Daniel15.Web.Repositories.EntityFramework
 		public int PublishedCount(TagModel tag)
 		{
 			return tag.PostTags.Count(x => x.Post.Published);
-		}
-
-		/// <summary>
-		/// Get the total number of posts that are not yet published
-		/// </summary>
-		/// <returns>Total number of posts that have not yet been published</returns>
-		public int UnpublishedCount()
-		{
-			return Context.Posts.Count(post => !post.Published);
 		}
 
 		/// <summary>
