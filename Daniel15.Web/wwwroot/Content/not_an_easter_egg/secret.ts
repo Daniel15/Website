@@ -15,9 +15,9 @@ const KEY_SEQUENCE = [
 ];
 let step = 0;
 
-window.addEventListener('keydown', e => {
+window.addEventListener('keydown', evt => {
 	// If incorrect key is pressed, start again!
-	if (e.key.toLowerCase() !== KEY_SEQUENCE[step]) {
+	if (evt.key.toLowerCase() !== KEY_SEQUENCE[step]) {
 		step = 0;
 		return;
 	}
