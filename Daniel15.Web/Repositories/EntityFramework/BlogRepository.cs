@@ -388,30 +388,5 @@ namespace Daniel15.Web.Repositories.EntityFramework
 			}
 			Context.SaveChanges();
 		}
-
-		/// <summary>
-		/// Set the tags this blog post is tagged with
-		/// </summary>
-		/// <param name="post">The post</param>
-		/// <param name="tagIds">Tag IDs</param>
-		public void SetTags(PostModel post, IEnumerable<int> tagIds)
-		{
-			var newTags = new HashSet<int>(tagIds);
-			var oldTags = new HashSet<int>(post.PostTags.Select(x => x.TagId));
-
-			// Remove tags that aren't set any more
-			post.PostTags = post.PostTags.FindAll(x => newTags.Contains(x.TagId));
-
-			// Add categories that were newly-added
-			foreach (var tagId in newTags.Where(id => !oldTags.Contains(id)))
-			{
-				post.PostTags.Add(new PostTagModel
-				{
-					TagId = tagId,
-					Post = post,
-				});
-			}
-			Context.SaveChanges();
-		}
 	}
 }

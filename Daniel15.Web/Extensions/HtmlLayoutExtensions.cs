@@ -79,12 +79,6 @@ namespace Daniel15.Web.Extensions
 					Title = "Blog", 
 					Active = controller == "blog"
 				},
-				new MenuItemModel
-				{
-					Url = "http://daaniel.com/", 
-					Title = "Thoughts", 
-					Active = false
-				},
 			};
 
 			return htmlHelper.PartialAsync("_Menu", menuItems);
