@@ -2,6 +2,11 @@
 @using System.Threading.Tasks
 @using Daniel15.Web.Configuration
 @model ViewModelBase
+@{
+	var routeData = ViewContext.RouteData;
+	var controller = ((string)routeData.Values["controller"]).ToLower();
+	var action = ((string)routeData.Values["action"]).ToLower();
+}
 <!DOCTYPE html>
 <html lang="en" class="no-js non-ie">
 <head>
@@ -43,7 +48,7 @@
 	@await RenderSectionAsync("extraHead", required: false)
 
 </head>
-<body id="@Html.BodyId()" class="@Html.BodyClass()">
+<body id="@Html.BodyId()" class="@Html.BodyClass()" data-controller="@controller" data-action="@action">
 	<div id="main-container">
 		<header>
 			@await Html.MenuAsync()
