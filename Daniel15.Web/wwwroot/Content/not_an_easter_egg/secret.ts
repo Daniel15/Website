@@ -15,7 +15,7 @@ const KEY_SEQUENCE = [
 ];
 let step = 0;
 
-window.addEventListener('keydown', evt => {
+function checkKonamiCode(evt: KeyboardEvent): void {
 	// If incorrect key is pressed, start again!
 	if (evt.key.toLowerCase() !== KEY_SEQUENCE[step]) {
 		step = 0;
@@ -34,4 +34,8 @@ window.addEventListener('keydown', evt => {
 		newCSS.setAttribute('type', 'text/css');
 		head.appendChild(newCSS);
 	}
-});
+}
+
+export function attachKonamiCodeListener(): void {
+	window.addEventListener('keydown', checkKonamiCode);
+}

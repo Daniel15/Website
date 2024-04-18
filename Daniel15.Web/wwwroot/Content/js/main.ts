@@ -1,22 +1,39 @@
 import '../css/main.less';
 
+import {initBlog} from './pages/blog';
 import {initIndex} from './pages/home';
 import {initProjects} from './pages/projects';
 import {initSocialFeed} from './pages/socialfeed';
 
-import './analytics';
-import '../not_an_easter_egg/secret';
+import {trackPageview} from './analytics';
+import {attachKonamiCodeListener} from '../not_an_easter_egg/secret';
 
-switch (document.body.id) {
-	case 'site-index':
-		initIndex();
-		break;
+function initPage(): void {
+	const controller = document.body.dataset.controller;
+	const action = document.body.dataset.action;
+	switch (controller) {
+		case 'blog':
+			initBlog();
+			break;
 
-	case 'site-socialfeed':
-		initSocialFeed();
-		break;
+		case 'projects':
+			initProjects();
+			break;
 
-	case 'project-index':
-		initProjects();
-		break;
+		case 'site':
+			switch (action) {
+				case 'index':
+					initIndex();
+					break;
+
+				case 'socialfeed':
+					initSocialFeed();
+					break;
+			}
+			break;
+	}
 }
+
+trackPageview();
+initPage();
+attachKonamiCodeListener();
