@@ -26,7 +26,7 @@ Licence
 =======
 Please feel free to use any bits of this code in your own work, but please:
 
-1. Link to my site somewhere
+1. Link to my site s
 2. Don't steal my site design, use your own. :)
 
 (The MIT licence)
