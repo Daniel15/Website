@@ -10,7 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="App.config" />
     <None Update="wwwroot\**\*;Views\**\*;Areas\Gallery\Views\**\*;supervisord.conf;nginx.conf">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
