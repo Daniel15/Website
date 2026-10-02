@@ -32,12 +32,8 @@
 	}
 	@await RenderSectionAsync("extraMeta", required: false)
 
-	<environment names="Development">
-		<link rel="stylesheet" href="~/cache/main.css" />
-	</environment>
-	<environment names="Staging,Production">
-		<link rel="stylesheet" href="cache/main.min.css" asp-append-version="true"/>
-	</environment>
+	<link rel="stylesheet" vite-href="~/Content/js/main.ts" />
+	<script type="module" vite-src="~/Content/js/main.ts"></script>
 
 	<!-- Other stuff -->
 	<link rel="start" href="/" title="Home" />
@@ -76,13 +72,6 @@
 			}
 		</footer>
 	</div>
-	<!-- Now for the JS -->
-	<environment names="Development">
-		<script src="~/cache/main.js"></script>
-	</environment>
-	<environment names="Staging,Production">
-		<script src="cache/main.min.js" asp-append-version="true"></script>
-	</environment>
 	@await RenderSectionAsync("scripts", required: false)
 	@await RenderSectionAsync("extraFoot", required: false)
 	<mini-profiler />
