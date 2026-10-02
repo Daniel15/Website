@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Daniel15.Web.Configuration;
 using Daniel15.Web;
 using Microsoft.Extensions.Options;
+using Vite.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost
@@ -27,6 +28,11 @@ builder.Configuration
 var services = builder.Services;
 var config = builder.Configuration;
 services.AddControllersWithViews();
+services.AddViteServices(options =>
+{
+	options.Base = builder.Environment.IsDevelopment() ? null : "cache";
+	options.Manifest = ".vite/manifest.json";
+});
 services.AddOutputCache(options =>
 {
 	options.AddBasePolicy(x => x.Expire(TimeSpan.FromHours(1)));
@@ -115,6 +121,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
+	app.UseViteDevelopmentServer();
 	app.UseDeveloperExceptionPage();
 }
 else
