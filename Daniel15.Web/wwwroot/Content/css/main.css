@@ -1,11 +1,14 @@
 /*! Daniel15 v5 - 27th September 2026
  * (c) 2026 Daniel15.
+ *
+ * Reset inspired by:
+ *  - https://frontendmasters.com/blog/the-coyier-css-starter/
+ *  - https://piccalil.li/blog/a-more-modern-css-reset/
  */
 
 @layer layout, page, components, utilities, accessibility;
 
 @import './variables.css' layer(layout);
-@import './reset.css' layer(layout);
 @import './style.css' layer(layout);
 @import './utilities.css' layer(utilities);
 @import './accessibility.css' layer(accessibility);
