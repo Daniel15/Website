@@ -1,0 +1,44 @@
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/hanken-grotesk';
+@import '@fontsource-variable/jetbrains-mono';
+
+:root {
+	/* Every colour is tinted from this hue */
+	--hue: 225;
+
+	/**
+	 * Accents: matching lightness and chroma, spread around the hue wheel
+	 * https://copicmarkers.com/blogs/educational/analogous-complimentary-and-split-complementary-color-schemes
+	 */
+	--color-primary: oklch(80% 0.09 var(--hue));
+	--color-analogous-1: oklch(80% 0.09 calc(var(--hue) - 50));
+	--color-analogous-2: oklch(80% 0.09 calc(var(--hue) + 50));
+	--color-complement: oklch(77% 0.135 calc(var(--hue) - 190));
+	--color-split-complement: oklch(86% 0.135 calc(var(--hue) - 140));
+
+	/* Neutrals: low-chroma tints of the base hue */
+	--color-background: oklch(21% 0.02 var(--hue));
+	--color-surface: oklch(26% 0.025 var(--hue));
+	--color-overlay: oklch(31% 0.03 var(--hue));
+	--color-aside: oklch(70% 0.032 var(--hue));
+	--color-text: oklch(94% 0.011 var(--hue));
+
+	/* Semantic accents */
+	--color-heading: var(--color-primary);
+	--color-highlight-noun: var(--color-analogous-2);
+	--color-link: var(--color-analogous-1);
+	--color-number: var(--color-split-complement);
+
+	--font-heading: 'Bricolage Grotesque Variable',
+		'Bricolage Grotesque Variable fallback';
+	/* TODO: Consider 'Atkinson Hyperlegible Next' instead */
+	--font-body: 'Hanken Grotesk Variable', 'Hanken Grotesk Variable fallback';
+	--font-mono: 'JetBrains Mono Variable', 'JetBrains Mono Variable fallback';
+
+	--small-text: 0.9rem;
+	--xsmall-text: 0.8rem;
+
+	--radius-pill: 999px;
+
+	--ease: cubic-bezier(0.16, 1, 0.3, 1);
+}

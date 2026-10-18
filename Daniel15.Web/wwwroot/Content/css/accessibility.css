@@ -1,0 +1,44 @@
+.screenreader-only:not(:focus):not(:active) {
+	clip: rect(0 0 0 0);
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+/* "Skip to content" link */
+.skip {
+	position: absolute;
+	left: 50%;
+	top: 0;
+	transform: translate(-50%, -140%);
+	background: var(--color-overlay);
+	padding: 0.7rem 1.2rem;
+	border-radius: var(--radius-pill);
+	z-index: 50;
+	text-decoration: none;
+	transition: transform 220ms var(--ease);
+
+	&:focus-visible {
+		transform: translate(-50%, 0.75rem);
+	}
+}
+
+/* Remove animations when reducing motion */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	::before,
+	::after {
+		/* 0.01ms instead of 0 so that `transitionend` events still fire */
+		animation-duration: 0.01ms;
+		animation-iteration-count: 1;
+		transition-duration: 0.01ms;
+		scroll-behavior: auto;
+	}
+
+	@view-transition {
+		navigation: none;
+	}
+}

@@ -1,0 +1,144 @@
+html {
+	background-color: var(--color-background);
+	color-scheme: only dark;
+	scrollbar-color: var(--color-overlay) var(--color-background);
+	scrollbar-gutter: stable;
+	scrollbar-width: thin;
+}
+
+body {
+	color: var(--color-text);
+	font-family: var(--font-body);
+	font-size: 1.0625rem;
+	font-synthesis-weight: none;
+	max-inline-size: 78rem;
+	line-height: 1.65;
+	margin: 0 auto;
+	overflow-x: clip;
+	padding: 0 5vh 5vh 5vh;
+	text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--color-heading);
+	font-family: var(--font-heading);
+	font-variation-settings: 'opsz' 96;
+	font-weight: 600;
+	letter-spacing: -0.035em;
+	line-height: 1.02;
+
+	a {
+		color: inherit;
+	}
+}
+
+h2 {
+	font-size: 1.875rem;
+	margin-block: 3rem 1rem;
+}
+
+p {
+	margin-block-start: 1.35rem;
+}
+
+a {
+	color: var(--color-link);
+	text-decoration-line: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 0.18em;
+	text-decoration-color: color-mix(in oklch, currentColor 40%, transparent);
+	transition:
+		text-decoration-color 180ms var(--ease),
+		color 180ms var(--ease);
+
+	&:hover,
+	&:focus {
+		text-decoration-color: currentColor;
+	}
+}
+
+code,
+pre,
+.monospace {
+	font-family: var(--font-mono);
+	font-variant-numeric: tabular-nums;
+	font-feature-settings: 'ss02' on;
+}
+
+#main-header {
+	align-items: center;
+	display: flex;
+	gap: 4vw;
+	padding-block: 3.5vh;
+
+	h1 {
+		margin-block-end: 0;
+		view-transition-name: wordmark;
+
+		a {
+			font-size: 1.375rem;
+			font-weight: 700;
+			letter-spacing: -0.045em;
+			text-decoration: none;
+		}
+	}
+
+	nav {
+		ul {
+			display: flex;
+			gap: 1.6rem;
+			list-style: none;
+		}
+
+		li {
+			a {
+				color: var(--color-aside);
+				font-size: 0.9375rem;
+				text-decoration: none;
+
+				&:hover {
+					color: var(--color-text);
+				}
+			}
+
+			&.selected a {
+				color: var(--color-complement);
+			}
+		}
+	}
+}
+
+#main-footer {
+	color: var(--color-aside);
+	font-size: var(--small-text);
+	justify-content: space-between;
+	margin-block-start: 8vh;
+}
+
+.hero {
+	padding-block-start: 5vh;
+
+	h1 {
+		/*font-size: clamp(1.875rem, 5.1vw, 3.75rem);*/
+		font-size: clamp(3rem, 10vw, 6rem);
+		margin-block-end: 1rem;
+	}
+
+	h1,
+	h2 {
+		color: var(--color-text);
+	}
+}
+
+.highlight-noun {
+	color: var(--color-highlight-noun);
+}
+
+.highlight-number {
+	color: var(--color-number);
+}

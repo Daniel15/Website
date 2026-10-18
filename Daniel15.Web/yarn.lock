@@ -2,6 +2,62 @@
 # yarn lockfile v1
 
 
+"@capsizecss/unpack@^4.0.0":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@capsizecss/unpack/-/unpack-4.0.1.tgz#5fc5f3a371a93a69d764e81a09badf0143381739"
+  integrity sha512-CuNiSqg7+e1cO/GjffyMOm5Tt2jUF9CWHHnvQ/UkqvtkGfHdgwEC0wpmq7fkN3gxwpRnrAN0WzO3vREKmNolMQ==
+  dependencies:
+    fontkitten "^1.0.3"
+
+"@fontsource-variable/bricolage-grotesque@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/bricolage-grotesque/-/bricolage-grotesque-5.3.0.tgz#9734016f851d1790bf49c095f59a5e8447814d00"
+  integrity sha512-TLi9Q4hJjS2UvoTMRSS2nHu6c4R56lAw60NR9QYtVRCHn0XtsFpiEhNffZ8Glsoxu6wEEwLKBP8lb94J52PNBA==
+
+"@fontsource-variable/hanken-grotesk@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/hanken-grotesk/-/hanken-grotesk-5.3.0.tgz#9f4d3ac87244a44a578ce58c9ae8fab44df9357f"
+  integrity sha512-DOd0FqL+3cH2dfNy0JtSq9tUfxBz5mLmHMjTU0DOr3E9Zo6wxuatCl53DIPNrSPgCsnuKyM739BTIG5glCLirw==
+
+"@fontsource-variable/jetbrains-mono@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/jetbrains-mono/-/jetbrains-mono-5.3.0.tgz#5738dedd3af40606b0d9b7626f4ba7c4586cb39b"
+  integrity sha512-F32xpS2NsGYoQi2ADSkKTgpJj7ozajsGgDJ8woTnqjmIB+dxDIqImjl4pXZVEExu8UFZ2ndhmX18EBS/hdz3Lw==
+
+"@jridgewell/gen-mapping@^0.3.5":
+  version "0.3.13"
+  resolved "https://registry.yarnpkg.com/@jridgewell/gen-mapping/-/gen-mapping-0.3.13.tgz#6342a19f44347518c93e43b1ac69deb3c4656a1f"
+  integrity sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==
+  dependencies:
+    "@jridgewell/sourcemap-codec" "^1.5.0"
+    "@jridgewell/trace-mapping" "^0.3.24"
+
+"@jridgewell/remapping@^2.3.5":
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/@jridgewell/remapping/-/remapping-2.3.5.tgz#375c476d1972947851ba1e15ae8f123047445aa1"
+  integrity sha512-LI9u/+laYG4Ds1TDKSJW2YPrIlcVYOwi2fUC6xB43lueCjgxV4lffOCZCtYFiH6TNOX+tQKXx97T4IKHbhyHEQ==
+  dependencies:
+    "@jridgewell/gen-mapping" "^0.3.5"
+    "@jridgewell/trace-mapping" "^0.3.24"
+
+"@jridgewell/resolve-uri@^3.1.0":
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/@jridgewell/resolve-uri/-/resolve-uri-3.1.2.tgz#7a0ee601f60f99a20c7c7c5ff0c80388c1189bd6"
+  integrity sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==
+
+"@jridgewell/sourcemap-codec@^1.4.14", "@jridgewell/sourcemap-codec@^1.5.0", "@jridgewell/sourcemap-codec@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.6.0.tgz#f4c663e862f06dc98ca4d453862c46902789a18d"
+  integrity sha512-T7jf+5zgsZHwNJ4lvQ7/aezbyk0nNX+zJVWpmHA7VYsEx7a7qr5Rg5IbtJFqkgze5Y2sruq1RUY8Q837Od7iFw==
+
+"@jridgewell/trace-mapping@^0.3.24":
+  version "0.3.31"
+  resolved "https://registry.yarnpkg.com/@jridgewell/trace-mapping/-/trace-mapping-0.3.31.tgz#db15d6781c931f3a251a3dac39501c98a6082fd0"
+  integrity sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==
+  dependencies:
+    "@jridgewell/resolve-uri" "^3.1.0"
+    "@jridgewell/sourcemap-codec" "^1.4.14"
+
 "@oxc-project/types@=0.151.0":
   version "0.151.0"
   resolved "https://registry.yarnpkg.com/@oxc-project/types/-/types-0.151.0.tgz#37206ed3fdebb8c4c5fc49ae20d53d9b4eed2bfe"
@@ -547,6 +603,14 @@ core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.3.tgz#a6042d3634c2b27e9328f837b965fac83808db85"
   integrity sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==
 
+css-tree@^3.1.0:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/css-tree/-/css-tree-3.2.1.tgz#86cac7011561272b30e6b1e042ba6ce047aa7518"
+  integrity sha512-X7sjQzceUhu1u7Y/ylrRZFU2FS6LRiFVp6rKLPg23y3x3c3DOKAwuXGDp+PAGjh6CSnCjYeAul8pcT8bAl+lSA==
+  dependencies:
+    mdn-data "2.27.1"
+    source-map-js "^1.2.1"
+
 d@1, d@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/d/-/d-1.0.1.tgz#8698095372d58dbee346ffd0c7093f99f8f9eb5a"
@@ -900,6 +964,23 @@ flush-write-stream@^1.0.2:
   dependencies:
     inherits "^2.0.3"
     readable-stream "^2.3.6"
+
+fontaine@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/fontaine/-/fontaine-1.0.0.tgz#8a86119f986df3d84cc87ee14cc6b22b500f66eb"
+  integrity sha512-bFJk8HxdHxTh8vzVyF2pTO0CnqaI/ToMqP0GvU5RifLehv19zYyQVDc6JAxq1aWZyPcLPROvu4rIUEKDDJeyDQ==
+  dependencies:
+    "@capsizecss/unpack" "^4.0.0"
+    css-tree "^3.1.0"
+    magic-string "^1.0.0"
+    unplugin "^3.0.0"
+
+fontkitten@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/fontkitten/-/fontkitten-1.0.3.tgz#bbafdeddbb1e054967f0846fdc757accab88bb68"
+  integrity sha512-Wp1zXWPVUPBmfoa3Cqc9ctaKuzKAV6uLstRqlR56kSjplf5uAce+qeyYym7F+PHbGTk+tCEdkCW6RD7DX/gBZw==
+  dependencies:
+    tiny-inflate "^1.0.3"
 
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
@@ -1689,6 +1770,13 @@ lodash.templatesettings@^4.0.0:
   dependencies:
     lodash._reinterpolate "^3.0.0"
 
+magic-string@^1.0.0:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-1.4.2.tgz#508aef4aac7319496dc074ec60ea511c49daf138"
+  integrity sha512-vG+rjFRj1PqdIBozIxAGMjPlOhaVe+GXpbttY/iSK7rGcJRMlwNJO7dcUwmUqkymsFLJiNGI06t4D7Fr7yRC9g==
+  dependencies:
+    "@jridgewell/sourcemap-codec" "^1.6.0"
+
 make-dir@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-5.1.0.tgz#59b2d9acf7ffa543d14238617a697458fa8dd5c9"
@@ -1722,6 +1810,11 @@ matchdep@^2.0.0:
     micromatch "^3.0.4"
     resolve "^1.4.0"
     stack-trace "0.0.10"
+
+mdn-data@2.27.1:
+  version "2.27.1"
+  resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.27.1.tgz#e37b9c50880b75366c4d40ac63d9bbcacdb61f0e"
+  integrity sha512-9Yubnt3e8A0OKwxYSXyhLymGW4sCufcLG6VdiDdUGVkPhpqLxlvP5vl1983gQjJl3tqbrM731mjaZaP68AgosQ==
 
 micromatch@^3.0.4, micromatch@^3.1.10, micromatch@^3.1.4:
   version "3.1.10"
@@ -2642,6 +2735,11 @@ time-stamp@^1.0.0:
   resolved "https://registry.yarnpkg.com/time-stamp/-/time-stamp-1.1.0.tgz#764a5a11af50561921b133f3b44e618687e0f5c3"
   integrity sha512-gLCeArryy2yNTRzTGKbZbloctj64jkZ57hj5zdraXue6aFgd6PmvVtEyiUU+hvU0v7q08oVv8r8ev0tRo6bvgw==
 
+tiny-inflate@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/tiny-inflate/-/tiny-inflate-1.0.3.tgz#122715494913a1805166aaf7c93467933eea26c4"
+  integrity sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==
+
 tinyglobby@^0.2.17:
   version "0.2.17"
   resolved "https://registry.yarnpkg.com/tinyglobby/-/tinyglobby-0.2.17.tgz#562a9a6c9eb2b3b123d39719f9af5bb44fcd7631"
@@ -2764,6 +2862,15 @@ unique-stream@^2.0.2:
     json-stable-stringify-without-jsonify "^1.0.1"
     through2-filter "^3.0.0"
 
+unplugin@^3.0.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/unplugin/-/unplugin-3.4.0.tgz#c3e19efdb040222f1e767ec07233410995e29275"
+  integrity sha512-9skdIFlCsPdFV7wUfZxNsFInlW+7nJmGu2gkTu0OUhF56aXGsHab9x52/QhdJ4lC7ZDPWTxbiC4ANqVlsuaW3w==
+  dependencies:
+    "@jridgewell/remapping" "^2.3.5"
+    picomatch "^4.0.7"
+    webpack-virtual-modules "^0.6.2"
+
 unset-value@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unset-value/-/unset-value-1.0.0.tgz#8376873f7d2335179ffb1e6fc3a8ed0dfc8ab559"
@@ -2880,6 +2987,11 @@ vite@^8.3.1:
     tinyglobby "^0.2.17"
   optionalDependencies:
     fsevents "~2.3.3"
+
+webpack-virtual-modules@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/webpack-virtual-modules/-/webpack-virtual-modules-0.6.2.tgz#057faa9065c8acf48f24cb57ac0e77739ab9a7e8"
+  integrity sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==
 
 which-module@^1.0.0:
   version "1.0.0"

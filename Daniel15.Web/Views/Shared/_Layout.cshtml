@@ -45,33 +45,32 @@
 
 </head>
 <body id="@Html.BodyId()" class="@Html.BodyClass()" data-controller="@controller" data-action="@action">
-	<div id="main-container">
-		<header>
-			@await Html.MenuAsync()
-
-			<h1><a href="/" title="Daniel15 is awesome">@(Model.Heading ?? Model.Title)</a></h1>
-		</header>
-		<div id="colmask"><div id="colright">
-			<div id="content_wrap"><div id="content" role="main">
-				@RenderBody()
-			</div></div>	  
-			@if (IsSectionDefined("sidebar"))
-			{
-				<aside id="sidebar">
-					@await RenderSectionAsync("sidebar", required: false)
-				</aside>
-			}
-
-		</div></div>
-		<footer>
-			&copy;2008&ndash;2024 <a href="https://dan.cx/">Daniel15 (Daniel Lo Nigro)</a>.<br/>
-            <partial name="_FooterVersion" />
+	<a class="skip" href="#content">Skip to content</a>
+	<header id="main-header">
+		<h1><a href="/" title="Daniel15 is awesome">@(Model.Heading ?? Model.Title)</a></h1>
+		@await Html.MenuAsync()
+	</header>
+	<main id="content" role="main">
+		@RenderBody()
+	</main>
+	@if (IsSectionDefined("sidebar"))
+	{
+		<aside id="sidebar">
+			@await RenderSectionAsync("sidebar", required: false)
+		</aside>
+	}
+	<footer id="main-footer" class="left-right">
+		<span>
+			&copy;<span class="highlight-number">2008</span>&ndash;<span class="highlight-number">2026</span>
+			Daniel Lo Nigro.
 			@if (Model.LastModified.HasValue)
 			{
-				<text>This page last modified @Model.LastModified.Value.ToString("d MMM yyyy")</text>
+				<text>This page last modified @Model.LastModified.Value.ToString("d MMM yyyy").</text>
 			}
-		</footer>
-	</div>
+		</span>
+		<partial name="_FooterVersion" />
+	</footer>
+	@* TODO: Remove? *@
 	@await RenderSectionAsync("scripts", required: false)
 	@await RenderSectionAsync("extraFoot", required: false)
 	<mini-profiler />

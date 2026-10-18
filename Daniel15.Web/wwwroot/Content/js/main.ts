@@ -1,4 +1,4 @@
-import '../css/main.less';
+import '../css/main.css';
 
 import {initBlog} from './pages/blog';
 import {initIndex} from './pages/home';

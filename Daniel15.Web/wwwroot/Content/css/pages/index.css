@@ -1,0 +1,185 @@
+/******************************** Index page **********************************/
+
+.blog-posts {
+	ul {
+		padding: 0;
+
+		li {
+			container-type: inline-size;
+			list-style-type: none;
+		}
+
+		a {
+			--radius: 16px;
+			align-items: center;
+			border-radius: var(--radius);
+			color: var(--color-text);
+			column-gap: 1.25rem;
+			display: grid;
+			grid-template-columns: 6.5rem 1fr auto auto;
+			margin: 0 0 0 -0.75rem;
+			padding: 0.75rem;
+			text-decoration: none;
+			transition: background 0.22s var(--ease);
+
+			&:hover,
+			&:focus-visible {
+				background-color: oklch(from var(--color-category) l c h / 0.1);
+
+				.post-arrow {
+					opacity: 1;
+					transform: none;
+				}
+			}
+
+			@supports (corner-shape: squircle) {
+				corner-shape: squircle;
+				border-radius: calc(var(--radius) * 1.4);
+			}
+
+			@container (width <= 46rem) {
+				grid-template-columns: 1fr auto;
+			}
+		}
+	}
+
+	time {
+		color: var(--color-number);
+		font-size: var(--small-text);
+		text-align: right;
+
+		.date-year {
+			color: color-mix(
+				in oklch increasing hue,
+				currentColor 80%,
+				var(--color-aside)
+			);
+		}
+
+		@container (width <= 46rem) {
+			text-align: left;
+			order: 1;
+			grid-column: 1;
+		}
+	}
+
+	.post-title {
+		font-family: var(--font-heading);
+		font-size: clamp(1.0625rem, 1.6vw, 1.1875rem);
+		font-weight: 550;
+		text-wrap: balance;
+
+		@container (width <= 46rem) {
+			order: 3;
+			grid-column: 1 / -1;
+		}
+	}
+
+	.post-arrow {
+		color: var(--color-category);
+		opacity: 0;
+		transform: translateX(-6px);
+		transition:
+			opacity 0.22s var(--ease),
+			transform 0.34s var(--ease);
+
+		@container (width <= 46rem) {
+			display: none;
+		}
+	}
+
+	.category {
+		@container (width <= 46rem) {
+			order: 2;
+			grid-column: 2;
+			grid-row: 1;
+		}
+	}
+}
+
+.contact-pills {
+	display: flex;
+	flex-wrap: wrap;
+	list-style-type: none;
+	gap: 0.5rem;
+
+	.contact-username {
+		color: var(--color-aside);
+		font-size: var(--xsmall-text);
+		transition: color 0.2s var(--ease);
+	}
+
+	.contact-icon {
+		aspect-ratio: 1;
+		color: var(--color-aside);
+		transition: color 0.2s var(--ease);
+		width: 16px;
+
+		/* Hide element if there's no icon */
+		&:not(:has(svg)) {
+			display: none;
+		}
+	}
+
+	a {
+		--color-brand-highlight: oklch(
+			from var(--color-brand) clamp(0.72, l, 0.84) min(c, 0.15) h
+		);
+		align-items: center;
+		background-color: var(--color-surface);
+		border-radius: var(--radius-pill);
+		display: inline-flex;
+		font-size: var(--small-text);
+		gap: 0.5rem;
+		padding: 0.5rem 1rem;
+		text-decoration: none;
+		transition:
+			background 0.2s var(--ease),
+			transform 0.3s var(--ease);
+
+		&:hover {
+			/* background-color: var(--color-overlay); */
+			background-color: oklch(from var(--color-brand) 0.31 0.04 h);
+			transform: translateY(-2px);
+
+			.contact-icon,
+			.contact-username {
+				color: var(--color-brand-highlight);
+			}
+		}
+	}
+}
+
+/* Brand colours */
+[data-brand='Facebook'] {
+	--color-brand: #0866ff;
+}
+[data-brand='GitHub'] {
+	/* --color-brand: #181717; */
+	--color-brand: var(--color-text);
+}
+[data-brand='Last.fm'] {
+	--color-brand: #d51007;
+}
+[data-brand='Lemmy'] {
+	--color-brand: var(--color-text);
+}
+[data-brand='Mastodon'] {
+	--color-brand: #6364ff;
+}
+[data-brand='Reddit'] {
+	--color-brand: #ff4500;
+}
+[data-brand='Stack Overflow'] {
+	--color-brand: #f58025;
+}
+[data-brand='Steam'] {
+	/* --color-brand: #000000; */
+	--color-brand: #66c0f4;
+}
+[data-brand='Tumblr'] {
+	--color-brand: #36465d;
+}
+[data-brand='Twitter'] {
+	--color-brand: #1d9bf0;
+}

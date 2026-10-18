@@ -3,9 +3,11 @@
 
 @if (!string.IsNullOrEmpty(Config.Git?.Revision))
 {
-	@:Running revision
-	<a href="@string.Format(Config.Git.RevisionUrl, Config.Git.Revision)">
-		@Config.Git.Revision.Substring(0, 6)
-		(@DateExtensions.FromUnix(Config.Git.Date).ToString("yyyy-MM-dd"))
-	</a>
+	<span>
+		Running revision
+		<a href="@string.Format(Config.Git.RevisionUrl, Config.Git.Revision)">
+			@Config.Git.Revision.Substring(0, 6)
+			(@DateExtensions.FromUnix(Config.Git.Date).ToString("yyyy-MM-dd"))
+		</a>
+	</span>
 }

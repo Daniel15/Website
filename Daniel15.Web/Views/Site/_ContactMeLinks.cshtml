@@ -1,0 +1,32 @@
+@using Daniel15.Web.ViewModels.Site
+@{
+	var links = new List<ContactMeLinkViewModel>
+	{
+		new("GitHub", "Daniel15", "https://github.com/Daniel15"),
+		new("Facebook", "daaniel", "https://www.facebook.com/daaniel"),
+		new("Lemmy", "@dan@upvote.au", "https://upvote.au/u/dan"),
+		new("Mastodon", "@dan@toot.d.sb", "https://toot.d.sb/@dan"),
+		new("Reddit", "daniel15", "https://reddit.com/user/daniel15"),
+		new("LinkedIn", "Daniel15", "https://linkedin.com/in/Daniel15"),
+		new("Stack Overflow", "Daniel Lo Nigro", "https://stackoverflow.com/users/210370/daniel-lo-nigro"),
+		new("Tumblr", "daaniel", "https://daaniel.com/"),
+		new("Last.fm", "daniel_1515", "https://last.fm/user/daniel_1515"),
+		new("Steam", "daniel15", "https://steamcommunity.com/id/daniel15"),
+		new("Twitter", "@daniel15", "https://www.twitter.com/daniel15"),
+	};
+}
+
+<ul class="contact-pills">
+	@foreach (var link in links)
+	{
+		<li>
+			<a data-brand="@link.ServiceName" href="@link.Url" rel="me">
+				<span class="contact-icon">
+					<partial name="Icons/@link.ServiceName"/>
+				</span>
+				<span>@link.ServiceName</span>
+				<span class="contact-username monospace">@link.Username</span>
+			</a>
+		</li>
+	}
+</ul>

@@ -121,7 +121,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseViteDevelopmentServer();
+	app.UseWebSockets();
+	app.UseViteDevelopmentServer(useMiddleware: true);
 	app.UseDeveloperExceptionPage();
 }
 else
