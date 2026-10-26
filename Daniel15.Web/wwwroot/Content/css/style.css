@@ -30,10 +30,12 @@ html {
 body {
 	color: var(--color-text);
 	font-family: var(--font-body);
-	font-size: 1.0625rem;
+	/* font-size: 1.0625rem; */
+	font-size: 1.125rem;
 	font-synthesis-weight: none;
-	max-inline-size: 78rem;
-	line-height: 1.65;
+	max-inline-size: var(--max-width-body);
+	/* line-height: 1.65; */
+	line-height: 1.72;
 	margin: 0 auto;
 	overflow-x: clip;
 	padding: 0 5vh 5vh 5vh;
@@ -60,6 +62,10 @@ h6 /* FUTURE :heading */ {
 	}
 }
 
+h1 {
+	color: var(--color-text);
+}
+
 h1,
 h2,
 h3 {
@@ -68,8 +74,12 @@ h3 {
 
 h1,
 h2 {
-	font-weight: 900;
+	/* font-weight: 900; */
 	letter-spacing: -0.02rem;
+}
+
+h1 {
+	font-size: clamp(1.75rem, 4.4vw, 3rem);
 }
 
 h2 {
@@ -273,6 +283,7 @@ caption {
 	padding-block: 3.5vh;
 
 	h1 {
+		color: var(--color-heading);
 		margin-block-end: 0;
 		view-transition-name: wordmark;
 
