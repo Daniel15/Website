@@ -1,3 +1,10 @@
+/* Focus rings */
+:focus-visible {
+	border-radius: var(--radius-list-item);
+	outline: 3px solid var(--color-primary);
+	outline-offset: 3px;
+}
+
 .screenreader-only:not(:focus):not(:active) {
 	clip: rect(0 0 0 0);
 	clip-path: inset(50%);
