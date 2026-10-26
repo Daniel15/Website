@@ -1,0 +1,45 @@
+.brand-icon {
+	aspect-ratio: 1;
+	/* color: var(--color-aside); */
+	transition: color 0.2s var(--ease);
+	width: 16px;
+
+	/* Hide element if there's no icon */
+	&:not(:has(svg)) {
+		display: none;
+	}
+}
+
+/* Brand colours */
+[data-brand='Facebook'] {
+	--color-brand: #0866ff;
+}
+[data-brand='GitHub'] {
+	/* --color-brand: #181717; */
+	--color-brand: var(--color-text);
+}
+[data-brand='Last.fm'] {
+	--color-brand: #d51007;
+}
+[data-brand='Lemmy'] {
+	--color-brand: var(--color-text);
+}
+[data-brand='Mastodon'] {
+	--color-brand: #6364ff;
+}
+[data-brand='Reddit'] {
+	--color-brand: #ff4500;
+}
+[data-brand='Stack Overflow'] {
+	--color-brand: #f58025;
+}
+[data-brand='Steam'] {
+	/* --color-brand: #000000; */
+	--color-brand: #66c0f4;
+}
+[data-brand='Tumblr'] {
+	--color-brand: #36465d;
+}
+[data-brand='Twitter'] {
+	--color-brand: #1d9bf0;
+}
