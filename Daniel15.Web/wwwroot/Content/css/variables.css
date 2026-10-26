@@ -38,7 +38,14 @@
 	--small-text: 0.9rem;
 	--xsmall-text: 0.8rem;
 
+	--radius-list-item: 16px;
+	--radius-card: 24px;
 	--radius-pill: 999px;
 
 	--ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+	--box-shadow-lift-1: 0 2px 4px -2px rgb(0 0 0 / 0.5),
+		0 8px 18px -10px rgb(0 0 0 / 0.65);
+	--box-shadow-lift-2: 0 3px 7px -3px rgb(0 0 0 / 0.55),
+		0 16px 34px -14px rgb(0 0 0 / 0.75);
 }

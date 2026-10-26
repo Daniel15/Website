@@ -1,5 +1,54 @@
 /******************************** Index page **********************************/
 
+ul.minifeed {
+	display: flex;
+	flex-direction: column;
+	font-size: var(--small-text);
+	font-weight: 500;
+	gap: 0.3rem;
+	/* Pull list into card padding a bit */
+	margin: 0.15rem -0.75rem 0;
+
+	li {
+		list-style-type: none;
+	}
+
+	a.feeditem-link {
+		border-radius: var(--radius-list-item);
+		color: var(--color-text);
+		display: block;
+		padding: 0.5rem 0.6rem;
+		text-decoration: none;
+		transition: background 0.22s var(--ease);
+
+		@supports (corner-shape: squircle) {
+			corner-shape: squircle;
+			border-radius: calc(var(--radius-list-item) * 1.4);
+		}
+
+		&:hover,
+		&:focus-visible {
+			/* TODO fix */
+			background-color: color-mix(in oklch, var(--color-link) 12%, transparent);
+
+			.feeditem-text {
+				color: var(--color-primary);
+			}
+		}
+	}
+
+	.brand-name {
+		background: color-mix(in oklch, currentColor 14%, transparent);
+		border-radius: var(--radius-pill);
+		color: var(--color-highlight-noun);
+		padding: 0.15rem 0.55rem;
+	}
+
+	.feeditem-text {
+		display: block;
+	}
+}
+
 .blog-posts {
 	ul {
 		padding: 0;
@@ -44,17 +93,7 @@
 	}
 
 	time {
-		color: var(--color-number);
-		font-size: var(--small-text);
 		text-align: right;
-
-		.date-year {
-			color: color-mix(
-				in oklch increasing hue,
-				currentColor 80%,
-				var(--color-aside)
-			);
-		}
 
 		@container (width <= 46rem) {
 			text-align: left;
@@ -97,28 +136,30 @@
 	}
 }
 
+.contact-section {
+	display: grid;
+	grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+	margin-block-start: 3rem;
+
+	h2 {
+		margin-block-start: 0;
+	}
+}
+
 .contact-pills {
 	display: flex;
 	flex-wrap: wrap;
 	list-style-type: none;
 	gap: 0.5rem;
 
+	.brand-name {
+		color: var(--color-link);
+	}
+
 	.contact-username {
 		color: var(--color-aside);
 		font-size: var(--xsmall-text);
 		transition: color 0.2s var(--ease);
-	}
-
-	.contact-icon {
-		aspect-ratio: 1;
-		color: var(--color-aside);
-		transition: color 0.2s var(--ease);
-		width: 16px;
-
-		/* Hide element if there's no icon */
-		&:not(:has(svg)) {
-			display: none;
-		}
 	}
 
 	a {
@@ -128,6 +169,7 @@
 		align-items: center;
 		background-color: var(--color-surface);
 		border-radius: var(--radius-pill);
+		color: var(--color-aside);
 		display: inline-flex;
 		font-size: var(--small-text);
 		gap: 0.5rem;
@@ -148,38 +190,4 @@
 			}
 		}
 	}
-}
-
-/* Brand colours */
-[data-brand='Facebook'] {
-	--color-brand: #0866ff;
-}
-[data-brand='GitHub'] {
-	/* --color-brand: #181717; */
-	--color-brand: var(--color-text);
-}
-[data-brand='Last.fm'] {
-	--color-brand: #d51007;
-}
-[data-brand='Lemmy'] {
-	--color-brand: var(--color-text);
-}
-[data-brand='Mastodon'] {
-	--color-brand: #6364ff;
-}
-[data-brand='Reddit'] {
-	--color-brand: #ff4500;
-}
-[data-brand='Stack Overflow'] {
-	--color-brand: #f58025;
-}
-[data-brand='Steam'] {
-	/* --color-brand: #000000; */
-	--color-brand: #66c0f4;
-}
-[data-brand='Tumblr'] {
-	--color-brand: #36465d;
-}
-[data-brand='Twitter'] {
-	--color-brand: #1d9bf0;
 }

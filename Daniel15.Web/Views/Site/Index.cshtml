@@ -25,20 +25,19 @@
 </div>
 
 <partial name="_LatestPosts" model="Model.LatestPosts" />
-				
-<h2>Elsewhere</h2>
-<partial name="_ContactMeLinks" />
 
-@section sidebar
-{
-	<h2><a href="socialfeed.htm">What I've Been Doing</a></h2>
-	<div id="minifeed">
+<section class="contact-section">
+	<div>
+		<h2>Elsewhere</h2>
+		<partial name="_ContactMeLinks"/>
+	</div>
+
+	<div class="card">
+		<h2>What I've been doing</h2>
 		<ul class="minifeed">
 			<li class="minifeed-loading">Loading...</li>
 		</ul>
-	</div>
 
-	<ul>
-		<li><a href="socialfeed.htm">See more...</a></li>
-	</ul>
-}
+		<a class="minifeed-more" href="socialfeed.htm">See more...</a>
+	</div>
+</section>

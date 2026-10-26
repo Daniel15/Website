@@ -1,0 +1,15 @@
+.card {
+	background: var(--color-overlay);
+	border-radius: var(--radius-card);
+	box-shadow: var(--box-shadow-lift-2);
+	padding: clamp(1.25rem, 2.5vw, 1.75rem);
+
+	h2 {
+		margin-block-start: 0;
+	}
+
+	@supports (corner-shape: squircle) {
+		corner-shape: squircle;
+		border-radius: calc(var(--radius-card) * 1.35);
+	}
+}

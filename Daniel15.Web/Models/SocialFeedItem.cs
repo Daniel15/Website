@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Daniel15.Web.Models;
 
 /// <summary>
@@ -8,7 +10,8 @@ public record SocialFeedItem(
 	string Text,
 	string? Description,
 	string Url,
-	int Date,
+	[property: JsonConverter(typeof(UnixTimestampDateTimeConverter))]
+	DateTime Date,
 	string Type,
 	string RelativeDate,
 	string SubText
