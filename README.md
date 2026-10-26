@@ -7,13 +7,13 @@ The live site is currently running on .NET Core 2.0
 
 Blog
 ====
-The blog is a very simple blog. It doesn't really have many fancy features. Things that ARE
+This blog is a very simple blog. It doesn't really have many fancy features. Things that ARE
 supported are:
 
  - Browsing monthly archives
  - Writing comments (now handled with Disqus)
  - Writing new posts
-   - Posting new posts to Facebook and Twitter
+ - Posting new posts to Facebook and Twitter
    
 As it's just for my personal use, I haven't put too much work into polishing the blog administration
 section. 
