@@ -21,10 +21,8 @@
 	{
 		<li>
 			<a data-brand="@link.ServiceName" href="@link.Url" rel="me">
-				<span class="contact-icon">
-					<partial name="Icons/@link.ServiceName"/>
-				</span>
-				<span>@link.ServiceName</span>
+				<partial name="_BrandIcon" model="@link.ServiceName" />
+				<span class="brand-name">@link.ServiceName</span>
 				<span class="contact-username monospace">@link.Username</span>
 			</a>
 		</li>
