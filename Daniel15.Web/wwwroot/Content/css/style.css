@@ -214,11 +214,15 @@ samp,
 	font-feature-settings: 'ss02' on;
 }
 
-pre {
-	white-space: pre-wrap;
-	background: CanvasText;
-	color: Canvas;
-	padding: 1.5rem;
+code,
+kbd,
+samp {
+	background: var(--color-surface);
+	border-radius: 0.55em;
+	color: var(--color-analogous-1);
+	font-size: var(--small-text);
+	padding: 0.18em 0.48em;
+	white-space: nowrap;
 }
 
 hr {

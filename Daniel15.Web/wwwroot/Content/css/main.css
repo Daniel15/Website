@@ -18,4 +18,5 @@
 @import './components/brand-icon.css' layer(components);
 @import './components/card.css' layer(components);
 @import './components/category.css' layer(components);
+@import './components/syntax-highlighting.css' layer(layout);
 @import './components/timestamp.css' layer(components);

@@ -1,0 +1,251 @@
+:root {
+	--color-comment: var(--color-aside);
+	--color-constant: var(--color-split-complement);
+	--color-function: var(--color-primary);
+	--color-keyword: var(--color-complement);
+	--color-operator: var(--color-aside-muted);
+	--color-string: var(--color-analogous-1);
+	--color-type: var(--color-analogous-2);
+}
+
+pre {
+	background-color: var(--color-overlay);
+	border-radius: var(--radius-card);
+	font-size: 0.855rem;
+	padding: 1.35rem 1.4rem;
+	white-space: pre-wrap;
+
+	@supports (corner-shape: squircle) {
+		border-radius: calc(var(--radius-card) * 1.35);
+	}
+
+	.htmlServerSideScript {
+		color: #ffff00;
+	}
+
+	.htmlComment {
+		color: var(--color-comment);
+	}
+
+	.htmlTagDelimiter {
+		color: #808080;
+	}
+
+	.htmlElementName {
+		color: var(--color-type);
+	}
+
+	.htmlAttributeName {
+		color: var(--color-constant);
+	}
+
+	.htmlAttributeValue {
+		color: var(--color-string);
+	}
+
+	.htmlOperator {
+		color: var(--color-operator);
+	}
+
+	.comment {
+		color: var(--color-comment);
+	}
+
+	.xmlDocTag {
+		color: #608b4e;
+	}
+
+	.xmlDocComment {
+		color: #608b4e;
+	}
+
+	.string {
+		color: var(--color-string);
+	}
+
+	.stringCSharpVerbatim {
+		color: #d69d85;
+	}
+
+	.keyword {
+		color: var(--color-keyword);
+	}
+
+	.preprocessorKeyword {
+		color: #569cd6;
+	}
+
+	.htmlEntity {
+		color: #00a0a0;
+	}
+
+	.jsonKey {
+		color: var(--color-function);
+	}
+
+	.jsonString {
+		color: var(--color-string);
+	}
+
+	.jsonNumber {
+		color: #00d700;
+	}
+
+	.jsonConst {
+		color: #af87ff;
+	}
+
+	.xmlAttribute {
+		color: var(--color-constant);
+	}
+
+	.xmlAttributeQuotes {
+		color: var(--color-string);
+	}
+
+	.xmlAttributeValue {
+		color: var(--color-string);
+	}
+
+	.xmlCDataSection {
+		color: #c0d088;
+	}
+
+	.xmlComment {
+		color: #57a64a;
+	}
+
+	.xmlDelimiter {
+		color: var(--color-operator);
+	}
+
+	.xmlName {
+		color: var(--color-operator);
+	}
+
+	.className {
+		color: #4ec9b0;
+	}
+
+	.cssSelector {
+		color: var(--color-constant);
+	}
+
+	.cssPropertyName {
+		color: #8be9fd;
+	}
+
+	.cssPropertyValue {
+		color: #f8f8f2;
+	}
+
+	.sqlSystemFunction {
+		color: #ff00ff;
+	}
+
+	.powershellAttribute {
+		color: #b0e0e6;
+	}
+
+	.powershellOperator {
+		color: #9b9b9b;
+	}
+
+	.powershellType {
+		color: #008080;
+	}
+
+	.powershellVariable {
+		color: #ff4500;
+	}
+
+	.powershellCommand {
+		color: #ffff00;
+	}
+
+	.powershellParameter {
+		color: #9b9b9b;
+	}
+
+	.type {
+		color: #008080;
+	}
+
+	.typeVariable {
+		color: #008080;
+		font-style: italic;
+	}
+
+	.namespace {
+		color: #000080;
+	}
+
+	.constructor {
+		color: #800080;
+	}
+
+	.predefined {
+		color: #000080;
+	}
+
+	.pseudoKeyword {
+		color: #000080;
+	}
+
+	.stringEscape {
+		color: #9b9b9b;
+	}
+
+	.controlKeyword {
+		color: #569cd6;
+	}
+
+	.number {
+		color: var(--color-constant);
+	}
+
+	.operator {
+	}
+
+	.delimiter {
+	}
+
+	.markdownHeader {
+		color: #569cd6;
+		font-weight: bold;
+	}
+
+	.markdownCode {
+		color: #d69d85;
+	}
+
+	.markdownListItem {
+		font-weight: bold;
+	}
+
+	.italic {
+		font-style: italic;
+	}
+
+	.bold {
+		font-weight: bold;
+	}
+
+	.builtinFunction {
+		color: #6b8e23;
+		font-weight: bold;
+	}
+
+	.builtinValue {
+		color: #556b2f;
+		font-weight: bold;
+	}
+
+	.attribute {
+		color: #008b8b;
+		font-style: italic;
+	}
+
+	.specialChar {
+	}
+}

@@ -20,6 +20,7 @@
 	--color-background: oklch(21% 0.02 var(--hue));
 	--color-surface: oklch(26% 0.025 var(--hue));
 	--color-overlay: oklch(31% 0.03 var(--hue));
+	--color-aside-muted: oklch(66% 0.032 var(--hue));
 	--color-aside: oklch(70% 0.032 var(--hue));
 	--color-text: oklch(94% 0.011 var(--hue));
 
