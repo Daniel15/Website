@@ -1,6 +1,6 @@
 @model Daniel15.Web.ViewModels.Blog.PostViewModel
 
-<article id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting">
+<article id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting" data-category="@Model.Post.MainCategory.Slug">
     <partial name="_PostHeader" model="Model" />
 		@Html.Raw(Model.Post.Content)
 	</div>

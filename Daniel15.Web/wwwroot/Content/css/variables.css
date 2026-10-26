@@ -2,6 +2,8 @@
 @import '@fontsource-variable/hanken-grotesk';
 @import '@fontsource-variable/jetbrains-mono';
 
+/* Variable name convention: --[type]-[name] (e.g. --color-foo, --font-foo, etc.) */
+
 :root {
 	/* Every colour is tinted from this hue */
 	--hue: 225;
@@ -36,12 +38,20 @@
 	--font-body: 'Hanken Grotesk Variable', 'Hanken Grotesk Variable fallback';
 	--font-mono: 'JetBrains Mono Variable', 'JetBrains Mono Variable fallback';
 
+	/* TODO: Rename to --font-size-small and --font-size-xsmall */
 	--small-text: 0.9rem;
 	--xsmall-text: 0.8rem;
 
 	--radius-list-item: 16px;
 	--radius-card: 24px;
 	--radius-pill: 999px;
+
+	/* 
+	 * Reference: https://ladsmedia.com/the-best-screen-layout-width-for-modern-websites/
+	 * 78rem is ~1248px given the base font size.
+	 * Width is reduced on content-heavy pages (e.g. blog posts) for readability.
+	 */
+	--max-width-body: 78rem;
 
 	--ease: cubic-bezier(0.16, 1, 0.3, 1);
 

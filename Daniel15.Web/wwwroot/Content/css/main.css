@@ -14,6 +14,7 @@
 @import './accessibility.css' layer(accessibility);
 
 @import './pages/home.css' layer(page);
+@import './pages/blog.css' layer(page);
 
 @import './components/brand-icon.css' layer(components);
 @import './components/card.css' layer(components);

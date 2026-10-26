@@ -1,0 +1,10 @@
+#blog-view {
+	--max-width-body: 53rem;
+}
+
+/* Post meta data */
+ul.postmetadata {
+	li {
+		list-style-type: none;
+	}
+}

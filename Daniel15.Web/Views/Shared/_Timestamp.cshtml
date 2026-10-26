@@ -1,6 +1,6 @@
 @model Daniel15.Web.ViewModels.Shared.TimestampViewModel
 
-<time datetime="@Model.DateTime.ToString("s")">
+<time datetime="@Model.DateTime.ToString("s")" itemprop="@Model.ItemProp">
 	@Model.DateTime.ToStringWithOrdinal("d{0} MMM")
 	@if (Model.ShowYear)
 	{
