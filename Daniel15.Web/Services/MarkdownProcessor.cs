@@ -1,4 +1,3 @@
-using Daniel15.Web.MarkdownExtensions;
 using Markdig;
 using Markdig.Extensions.Yaml;
 using Markdig.Syntax;
@@ -23,7 +22,6 @@ namespace Daniel15.Web.Services
 			.UseYamlFrontMatter()
 			.UseEmojiAndSmiley()
 			.UseColorCode(HtmlFormatterType.Css)
-			.Use<HeadingHackExtension>()
 			.Build();
 
 		/// <summary>
