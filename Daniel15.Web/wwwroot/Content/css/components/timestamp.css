@@ -1,0 +1,12 @@
+time {
+	color: var(--color-number);
+	font-size: var(--small-text);
+
+	.date-year {
+		color: color-mix(
+			in oklch increasing hue,
+			currentColor 80%,
+			var(--color-aside)
+		);
+	}
+}

@@ -16,3 +16,4 @@
 @import './pages/index.css' layer(page);
 
 @import './components/category.css' layer(components);
+@import './components/timestamp.css' layer(components);

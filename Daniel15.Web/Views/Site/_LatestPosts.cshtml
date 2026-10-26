@@ -1,3 +1,4 @@
+@using Daniel15.Web.ViewModels.Shared
 @model List<Daniel15.Web.Models.Blog.PostModel>
 
 <div id="blog-posts" class="blog-posts">
@@ -10,10 +11,7 @@
 		{
 			<li data-category="@post.MainCategory.Slug">
 				<a href="@Url.BlogPost(post)">
-					<time datetime="@post.Date.ToString("s")">
-						@post.Date.ToStringWithOrdinal("d{0} MMM")
-						<span class="date-year">@post.Date.ToString("yyyy")</span>
-					</time>
+					<partial name="_Timestamp" model="@new TimestampViewModel(post.Date)" />
 					<span class="post-title">@post.Title</span>
 					<span class="category">@post.MainCategory.Title</span>
 					<svg
@@ -26,7 +24,7 @@
 						stroke-width="2"
 						stroke-linecap="round"
 						stroke-linejoin="round">
-						<path d="M4 9h10M9.5 4.5 14 9l-4.5 4.5" />
+						<path d="M4 9h10M9.5 4.5 14 9l-4.5 4.5"/>
 					</svg>
 				</a>
 			</li>
