@@ -11,12 +11,14 @@
 pre {
 	background-color: var(--color-overlay);
 	border-radius: var(--radius-card);
+	box-shadow: var(--box-shadow-lift-2);
 	font-size: 0.855rem;
 	padding: 1.35rem 1.4rem;
 	white-space: pre-wrap;
 
 	@supports (corner-shape: squircle) {
 		border-radius: calc(var(--radius-card) * 1.35);
+		corner-shape: squircle;
 	}
 
 	.htmlServerSideScript {
@@ -128,7 +130,7 @@ pre {
 	}
 
 	.cssSelector {
-		color: var(--color-constant);
+		color: var(--color-type);
 	}
 
 	.cssPropertyName {
