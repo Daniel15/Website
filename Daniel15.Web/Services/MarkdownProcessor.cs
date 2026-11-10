@@ -1,3 +1,4 @@
+using Daniel15.Web.MarkdownExtensions;
 using Markdig;
 using Markdig.Extensions.Yaml;
 using Markdig.Syntax;
@@ -21,7 +22,11 @@ namespace Daniel15.Web.Services
 			.UseAdvancedExtensions()
 			.UseYamlFrontMatter()
 			.UseEmojiAndSmiley()
-			.UseColorCode(HtmlFormatterType.Css)
+			.UseColorCode(
+				HtmlFormatterType.Css,
+				additionalLanguages: [new PlainTextLanguage()],
+				defaultLanguageId: "plain"
+			)
 			.Build();
 
 		/// <summary>
