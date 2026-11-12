@@ -89,7 +89,7 @@ h2 {
 
 p {
 	break-inside: avoid;
-	margin-block-start: 1.35rem;
+	margin-block: 1.35rem;
 }
 
 p,
@@ -348,4 +348,9 @@ caption {
 
 .highlight-number {
 	color: var(--color-number);
+}
+
+.aside {
+	color: var(--color-aside);
+	font-size: 0.9375rem;
 }
