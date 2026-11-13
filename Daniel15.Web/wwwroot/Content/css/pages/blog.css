@@ -1,0 +1,83 @@
+#blog-view {
+	--max-width-body: 53rem;
+}
+
+/* Post meta data */
+ul.postmetadata {
+	display: flex;
+	flex-direction: row;
+	gap: 0.75rem;
+
+	li {
+		list-style-type: none;
+	}
+}
+
+/* Progress indicator at top of page */
+.post-progress {
+	display: none;
+}
+
+@supports (animation-timeline: --post) and (view-timeline-name: --post) and
+	(timeline-scope: --post) and (animation-range: contain) {
+	.post {
+		timeline-scope: --post;
+	}
+
+	.post-content {
+		view-timeline: --post block;
+		view-timeline-inset: 0;
+	}
+
+	.post-progress {
+		/* TWO animations:
+		 * 1. Width of the progress bar.
+		 * 2. Fade it out once we've scrolled past the post.
+	   */
+		animation:
+			post-progress linear both,
+			post-progress-hide linear both;
+		animation-timeline: --post;
+		animation-range:
+			contain 0% exit 100%,
+			exit 100% exit calc(100% + 150px);
+		background: linear-gradient(
+			90deg,
+			var(--color-complement),
+			var(--color-analogous-2),
+			var(--color-primary),
+			var(--color-analogous-1)
+		);
+		border-radius: var(--radius-pill);
+		display: block;
+		position: fixed;
+		height: 3px;
+		inset: 0 0 auto 0;
+		transform-origin: 0 50%;
+		z-index: 40;
+	}
+}
+
+@keyframes post-progress {
+	from {
+		transform: scaleX(0);
+	}
+	to {
+		transform: scaleX(1);
+	}
+}
+
+@keyframes post-progress-hide {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.progress {
+		display: none;
+	}
+}

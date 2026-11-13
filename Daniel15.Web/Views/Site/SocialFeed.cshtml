@@ -1,3 +1,5 @@
+@using System.Text.RegularExpressions
+@using Daniel15.Web.ViewModels.Shared
 @model Daniel15.Web.ViewModels.Site.SocialFeedViewModel
 @{
     if (Model.Partial)
@@ -5,29 +7,31 @@
         Layout = null;
     }
 }
+@functions {
+	private Regex _linkRegex = new Regex("<a[^>]*>([^<]+)</a>", RegexOptions.Compiled);
+}
 
 <ul class="socialfeed">
     @foreach (var item in Model.Items)
     {
-        <li class="feeditem source-@item.Type">
-            <div class="icon"></div>
-            @Html.Raw(item.Text)
-            @if (Model.ShowDescription && !string.IsNullOrWhiteSpace(item.Description))
-            {
-                <blockquote>@Html.Raw(item.Description)</blockquote>
-            }
-            <ul class="meta" title="Via @item.Type">
-                <li class="date">@item.RelativeDate</li>
-                @if (!string.IsNullOrWhiteSpace(item.SubText))
-                {
-                    <li class="subtext">@Html.Raw(item.SubText)</li>
-                }
-                @if (!string.IsNullOrWhiteSpace(item.Url))
-                {
-                    <li><a href="@item.Url" target="_blank">View</a></li>
-                }
-            </ul>
-        </li>
+	    /*
+	     * TODO: Figure out which sources still use item.SubText and item.Description (if any) and
+	     * if it's still needed
+	     */
+	    
+	    // Since we now render the whole SocialFeed item as a link, they can't contain links any more.
+	    // This is SUPER HACKY but it'll do for now.
+	    // TODO: Revisit this once SocialFeeds is rewritten in C#
+	    var text = _linkRegex.Replace(item.Text, """<span class="highlight-noun">$1</span>""");
+
+	    <li class="feeditem source-@item.Type">
+		    <a class="feeditem-link" href="@item.Url" target="_blank">
+			    @* TODO: Show brand logo here *@
+			    <partial name="_Timestamp" model="@new TimestampViewModel(item.Date, ShowYear: false)"/>
+			    <span class="brand-name">@item.Type</span>
+			    <span class="feeditem-text">@Html.Raw(text)</span>
+		    </a>
+	    </li>
     }
 </ul>
 

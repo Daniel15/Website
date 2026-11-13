@@ -22,8 +22,11 @@ namespace Daniel15.Web.Services
 			.UseAdvancedExtensions()
 			.UseYamlFrontMatter()
 			.UseEmojiAndSmiley()
-			.UseColorCode(HtmlFormatterType.Css)
-			.Use<HeadingHackExtension>()
+			.UseColorCode(
+				HtmlFormatterType.Css,
+				additionalLanguages: [new PlainTextLanguage()],
+				defaultLanguageId: "plain"
+			)
 			.Build();
 
 		/// <summary>

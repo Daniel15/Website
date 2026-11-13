@@ -17,6 +17,7 @@ namespace Daniel15.Web.ViewModels
 		public string Heading { get; set; }
 		/// <summary>
 		/// Type of sidebar to use
+		/// TODO: Remove
 		/// </summary>
 		public SidebarType SidebarType { get; set; }
 		/// <summary>

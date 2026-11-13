@@ -1,0 +1,23 @@
+/*! Daniel15 v5 - 27th September 2026
+ * (c) 2026 Daniel15.
+ *
+ * Reset inspired by:
+ *  - https://frontendmasters.com/blog/the-coyier-css-starter/
+ *  - https://piccalil.li/blog/a-more-modern-css-reset/
+ */
+
+@layer layout, page, components, utilities, accessibility;
+
+@import './variables.css' layer(layout);
+@import './style.css' layer(layout);
+@import './utilities.css' layer(utilities);
+@import './accessibility.css' layer(accessibility);
+
+@import './pages/home.css' layer(page);
+@import './pages/blog.css' layer(page);
+
+@import './components/brand-icon.css' layer(components);
+@import './components/card.css' layer(components);
+@import './components/category.css' layer(components);
+@import './components/syntax-highlighting.css' layer(layout);
+@import './components/timestamp.css' layer(components);

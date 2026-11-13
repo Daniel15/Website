@@ -1,0 +1,25 @@
+:root {
+	--color-category: var(--color-split-complement);
+}
+
+/* Category pills */
+.category {
+	align-self: center;
+	background: color-mix(in oklch, currentColor 14%, transparent);
+	border-radius: var(--radius-pill);
+	color: var(--color-category);
+	font-size: var(--xsmall-text);
+	letter-spacing: 0.04em;
+	padding: 0.2rem 0.6rem;
+	text-align: right;
+	white-space: nowrap;
+}
+[data-category='linux'] {
+	--color-category: var(--color-analogous-1);
+}
+[data-category='programming'] {
+	--color-category: var(--color-complement);
+}
+[data-category='web-development'] {
+	--color-category: var(--color-primary);
+}

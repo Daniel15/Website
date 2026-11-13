@@ -1,10 +1,10 @@
 @model Daniel15.Web.ViewModels.Blog.PostViewModel
 
-<article id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="post" id="post-@Model.Post.Id" itemscope itemtype="http://schema.org/BlogPosting" data-category="@Model.Post.MainCategory.Slug">
+	<div class="post-progress" aria-hidden="true"></div>
     <partial name="_PostHeader" model="Model" />
 		@Html.Raw(Model.Post.Content)
 	</div>
-    <partial name="_ShareLinks" model="Model" />
 	
 	@if (Model.PostTags != null && Model.PostTags.Count > 0)
 	{
@@ -14,10 +14,10 @@
 		</p>
 	}
 	
-	<footer>
-		Short URL for sharing: @Model.ShortUrl. This entry was posted on @Model.Post.Date.ToStringWithOrdinal("d{0} MMMM yyyy") and is filed under
-		@Html.Raw(string.Join(", ", Model.PostCategories.Select(cat => $"<a href=\"{Url.BlogCategory(cat)}\">{Html.Encode(cat.Title)}</a>"))). 
-		You can <a href="@Url.BlogPost(Model.Post)#leave-comment" itemprop="discussionUrl">leave a comment</a> 
-		if you'd like to, or subscribe to the RSS feed to keep up-to-date with all my latest blog posts! 
+	<footer class="aside">
+		Filed under
+		@Html.Raw(string.Join(", ", Model.PostCategories.Select(cat => $"<a href=\"{Url.BlogCategory(cat)}\">{Html.Encode(cat.Title)}</a>"))).
+		on @Model.Post.Date.ToStringWithOrdinal("d{0} MMMM yyyy").
+		Short link: @Model.ShortUrl
 	</footer>
 </article>
